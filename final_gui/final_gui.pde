@@ -19,7 +19,7 @@ import java.io.*;
 int maxnode = 10; //number of max expected number of connected nodes, change this value depending of the size of the network
 
 //some objects to control animations and communications
-
+//first change
 Graph myGraph;  //the graph object, it shows links and edges in the network, each node has a corresponding color reference
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
