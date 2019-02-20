@@ -20,6 +20,8 @@ int maxnode = 10; //number of max expected number of connected nodes, change thi
 
 //some objects to control animations and communications
 //first change
+//second change
+//third cahnge :)
 Graph myGraph;  //the graph object, it shows links and edges in the network, each node has a corresponding color reference
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
@@ -1078,6 +1080,3 @@ void node_off (int node_id)
   ms[node_id].hide = true;
 }
 
-
-
-//second change
