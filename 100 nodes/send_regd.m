@@ -16,7 +16,7 @@ function regd = send_regd(P,d1,d2,d3,d4)
 %      disp('condition 3')
  else 
      regd = 1.0;
-%      disp('condition 4')
+%%      disp('condition 4')
  end
  disp('regulation signal sent to aggregator');
  disp(regd);
