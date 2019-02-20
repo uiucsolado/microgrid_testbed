@@ -23,4 +23,5 @@ function regd = send_regd(P,d1,d2,d3,d4)
  pause(0.5);
  fprintf(s , '%f\n', regd);
  fclose(s);
+ %making a local change - SN
 end
