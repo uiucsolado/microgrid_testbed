@@ -72,6 +72,7 @@ int node_timer = 0; //timer used to check status of nodes
 int init_time = 0; //initial time used to estimate time elapsed in the timer
 float consensus_timer = 0;
 float init_c_time = 0;
+Timer system_timer;
 
 // plot data management 
 
@@ -196,6 +197,7 @@ void setup()
 
     //Time at start
     init_time = int(second() + 60*minute() + 3600*hour());
+    system_timer = new Timer();
 
 }
 
@@ -312,6 +314,7 @@ void draw()
   else if (indata == true)
   {
     node_timer = 0; //restart timer
+    system_timer.restart();
     init_time = int(second() + 60*minute() + 3600*hour()); //register initial time for the timer
 
     if (val != null)
@@ -345,6 +348,7 @@ void draw()
           delay(50);
           myPort[i].write("C"); //ready to receive data from next node
           start_timer = true; 
+          system_timer.start();
           checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         }
       }

@@ -95,6 +95,7 @@ int node_timer = 0; //timer used to check status of nodes
 int init_time = 0; //initial time used to estimate time elapsed in the timer
 float consensus_timer = 0;
 float init_c_time = 0;
+Timer system_timer;
 
 // plot data management 
 
@@ -174,7 +175,7 @@ public void setup()
     //Control P5 init
     cp5 = new ControlP5(this);
   
-    //init parameters of the plot of the Ratio Consensus (RC)
+    //init parameters of the plot of the Ratio Consensus (RC) executions
     setChartSettings();
   
     //build x axis values for the line graph (samples or time)
@@ -219,6 +220,7 @@ public void setup()
 
     //Time at start
     init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour());
+    system_timer = new Timer();
 
 }
 
@@ -335,6 +337,7 @@ public void draw()
   else if (indata == true)
   {
     node_timer = 0; //restart timer
+    system_timer.start();
     init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour()); //register initial time for the timer
 
     if (val != null)
@@ -934,12 +937,14 @@ public void node_off (int node_id)
 }
 
 
+//Functions to control the GUI tabs and actions
+
 public void set_GUItabs()
 {
 
 	//this font is used in the text of the buttons
     ControlFont cf1 = new ControlFont(createFont("Arial",20));
-    
+
 	cp5.addButton("RatioConsensus") //Plot mode button
     .setPosition(50,50)
     .setSize(300,40)
@@ -1634,7 +1639,47 @@ class MessageSystem
     }
   }
 }
-// message object of comunnication between two nodes (link)
+//Class used to create timer objects to be used for control of communications in GUI
+
+class Timer 
+{
+  int init_time; //indicates the starting point of the timer based on the system time
+  boolean running;
+  float time_elapsed; //time elapsed in seconds
+  
+  Timer() 
+  {
+  	init_time = 0;
+    running = false;
+  }
+  
+  public void start() 
+  {
+  	if (running == false)
+  	{
+  		init_time = millis();
+  		running = true;
+  	}
+  }
+
+  public void stop()
+  {
+  	if (running == true)
+  	{
+  		running = false;
+  	}
+  }
+  
+  public void update() 
+  {
+  	if (running == true)
+  	{
+    	time_elapsed = (millis() - init_time)/1000;
+    }
+  }
+  
+}
+// message class of comunnication between two nodes (link)
 
 class Message 
 {
