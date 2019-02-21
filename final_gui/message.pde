@@ -1,4 +1,4 @@
-// message object of comunnication between two nodes (link)
+// message class of comunnication between two nodes (link)
 
 class Message 
 {
