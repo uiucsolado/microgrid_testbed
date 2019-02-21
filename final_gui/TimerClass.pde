@@ -2,7 +2,7 @@
 
 class Timer 
 {
-  int init_time; //indicates the starting point of the timer based on the system time
+  float init_time; //indicates the starting point of the timer based on the system time
   boolean running;
   float time_elapsed; //time elapsed in seconds
   
@@ -26,6 +26,7 @@ class Timer
   	if (running == true)
   	{
   		running = false;
+  		time_elapsed = 0;
   	}
   }
 
@@ -34,6 +35,7 @@ class Timer
   	if (running == true)
   	{
   		init_time = millis();
+  		time_elapsed = 0;
   	}
   }
   

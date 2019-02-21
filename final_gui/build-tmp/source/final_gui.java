@@ -93,7 +93,7 @@ boolean run = false; //flag used for start button
 boolean start_timer = false; //triggers the initialization of timer to connect to controllers
 int node_timer = 0; //timer used to check status of nodes
 int init_time = 0; //initial time used to estimate time elapsed in the timer
-float consensus_timer = 0;
+Timer consensus_timer;
 float init_c_time = 0;
 Timer system_timer;
 
@@ -221,6 +221,7 @@ public void setup()
     //Time at start
     init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour());
     system_timer = new Timer();
+    consensus_timer = new Timer();
 
 }
 
@@ -337,7 +338,7 @@ public void draw()
   else if (indata == true)
   {
     node_timer = 0; //restart timer
-    system_timer.start();
+    system_timer.restart();
     init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour()); //register initial time for the timer
 
     if (val != null)
@@ -371,6 +372,7 @@ public void draw()
           delay(50);
           myPort[i].write("C"); //ready to receive data from next node
           start_timer = true; 
+          system_timer.start();
           checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         }
       }
@@ -651,7 +653,7 @@ public void serialEvent( Serial myPort)
           if (getregd == true)
           {
             println("new regd signal");
-            init_c_time = millis();
+            consensus_timer.start();
             ignorenext = false;
           }  
           else
@@ -672,8 +674,9 @@ public void serialEvent( Serial myPort)
 
         else if (val.equals("end"))
         {
-          consensus_timer = (millis() - init_c_time)/1000;
-          println("Initial response time: " + consensus_timer + "s");
+          consensus_timer.update();
+          println("Initial response time: " + consensus_timer.time_elapsed + "s");
+          consensus_timer.stop();
         }
 
         else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from node i
@@ -1643,7 +1646,7 @@ class MessageSystem
 
 class Timer 
 {
-  int init_time; //indicates the starting point of the timer based on the system time
+  float init_time; //indicates the starting point of the timer based on the system time
   boolean running;
   float time_elapsed; //time elapsed in seconds
   
@@ -1667,6 +1670,16 @@ class Timer
   	if (running == true)
   	{
   		running = false;
+  		time_elapsed = 0;
+  	}
+  }
+
+  public void restart()
+  {
+  	if (running == true)
+  	{
+  		init_time = millis();
+  		time_elapsed = 0;
   	}
   }
   
