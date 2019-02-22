@@ -67,12 +67,8 @@ boolean run = false; //flag used for start button
 
 //timer control
 
-boolean start_timer = false; //triggers the initialization of timer to connect to controllers
-int node_timer = 0; //timer used to check status of nodes
-int init_time = 0; //initial time used to estimate time elapsed in the timer
-Timer consensus_timer;
-float init_c_time = 0;
-Timer system_timer;
+Timer consensus_timer; //timer used to measure initial response time
+Timer system_timer; //timer used to control communications with cyber nodes
 
 // plot data management 
 
@@ -195,8 +191,7 @@ void setup()
     myGraph.fixColor = true; //do not allow the user to change the color during runtime
     myGraph.createRelations = false; //do not allow the user to add edges during runtime 
 
-    //Time at start
-    init_time = int(second() + 60*minute() + 3600*hour());
+    //Initiate timers
     system_timer = new Timer();
     consensus_timer = new Timer();
 
@@ -277,7 +272,7 @@ void draw()
     newconnection = false; //flag is switched
   }
     
-  //case a node is sending links data
+  //case a node is sending links data at start of system
     
   else if (newrequest == true)
   {
@@ -314,9 +309,7 @@ void draw()
     
   else if (indata == true)
   {
-    node_timer = 0; //restart timer
-    system_timer.restart();
-    init_time = int(second() + 60*minute() + 3600*hour()); //register initial time for the timer
+    system_timer.start(); //start system timer
 
     if (val != null)
     {
@@ -341,16 +334,15 @@ void draw()
            LineGraph.yMin=int(lineGraphValues_buffer[0][0] - 1);
           }
 
-          start_timer = false; //timer is off until a new consensus is reached
+          system_timer.stop();
         }  
 
         else 
         {
           delay(50);
           myPort[i].write("C"); //ready to receive data from next node
-          start_timer = true; 
           system_timer.start();
-          checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
+          checkGraph = true; //flag to indicate in-neighbors vector of next node must be checked 
         }
       }
 
@@ -369,11 +361,11 @@ void draw()
         
         else  
         {
-          if (float(val) <= 1 && float(val) >= 0) //this is used to filter out regD signals when the system is not ready
+          if (float(val) <= 1 && float(val) >= 0) //this is used to filter out regD signals when the system is not ready (*NOT COMPLETELY WORKING*)
           {
             println("l 474");
           } 
-          else //
+          else 
           {
             writeBuffer(i - 1, val); //input consensus results in the plot buffer
           }
@@ -386,10 +378,10 @@ void draw()
   }
 
 
-  if (start_timer == true) //timer was started
+  if (system_timer.running == true) //timer is running
   {
-    node_timer = int(second() + 60*minute() + 3600*hour()) - init_time; //timer = current time - initial time
-    if (node_timer > 25) //more than 5 seconds with no answer means the node is eaither down or offline
+    system_timer.update();
+    if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
     {
       println("node " + i + " is offline");
       if ((checkNode(i) == false) && (myGraphMatrix[i-1][i-1] == 2)) //means node is down or was reconnected, but port is closed
@@ -409,14 +401,13 @@ void draw()
       i++; //continue with next node
       if (i < maxnode + 1)
       {
-        node_timer = 0; //restart timer
-        init_time = int(second() + 60*minute() + 3600*hour());
+        system_timer.restart();
       }
 
       else 
       {
         i = 1; //back to node 1 (leader)
-        start_timer = false; //stop timer
+        system_timer.stop();
         stack = true; //ready to plot
 
         if ((lineGraphValues_buffer[0][0] > LineGraph.yMax || lineGraphValues_buffer[0][0] < LineGraph.yMin) && capture == false) //change scale to notice consensus differences
@@ -426,17 +417,14 @@ void draw()
         }
       }
 
-      node_timer = 0; //restart timer
-      init_time = int(second() + 60*minute() + 3600*hour());
-
+      system_timer.restart();
       myPort[i].write("C"); //notify node
       checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         
     }
-
   }
 
-  //grey background
+  //make the background color gray
 
   background(211, 211, 211);
 
@@ -479,6 +467,7 @@ void draw()
   if (reset == true)
   {
     reset_connection();
+    system_timer.stop();
   }
 
   //case the user clicks start button
@@ -492,7 +481,7 @@ void draw()
 
 }
 
-//interruption from serial communication, this is called each time a package is received
+//main function for serial communication control, this is called each time a package is received 
 
 public void serialEvent( Serial myPort) 
 {
@@ -547,10 +536,6 @@ public void serialEvent( Serial myPort)
         else
         {
           //if we've already established contact with node i, obtain the node id
-          if (int(val) == 1) //leader node's id
-          {
-           init_time = int(second() + 60*minute() + 3600*hour()); //for starting the timer once the leader nodes starts communication
-          }
           println(val);
           newconnection = true; //flag to register the node in the graph
           com = false; //flag to wait for connection of next node

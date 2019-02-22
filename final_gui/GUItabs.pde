@@ -1,4 +1,4 @@
-//Functions to control the GUI tabs and actions
+//Functions to control the GUI tabs actions
 
 void set_GUItabs()
 {
