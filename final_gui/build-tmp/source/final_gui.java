@@ -136,28 +136,8 @@ public void setup()
     topSketchPath = sketchPath;
     plotterConfigJSON = loadJSONObject(topSketchPath+"/plotter_config.json"); //last saved configuration of the plot area
     
-    //saves the coordinates of the controllers in the animation
-    for (int i = 1; i < 6; i++)
-    {
-      rad = (650*450)/(sqrt(pow(650*sin(radians(90 - 30*i)),2) + pow(450*cos(radians(90 - 30*i)), 2))); 
-      
-      xPos = rad*cos(radians(90 - 30*i));
-      xPos2 = pow(xPos,2);
-      
-      if (i < 4)
-      {
-        yPos = 535 - 450*sqrt(1 - (xPos2)/(650*650));
-      } 
-      else
-      {
-        yPos = 535 + 450*sqrt(1 - (xPos2)/(650*650));
-      }
-      
-      coordinates [2*i - 2][0] = 1100 - xPos; //node 2i-1 position x
-      coordinates [2*i - 2][1] = yPos; //node 2i-1 position y
-      coordinates [2*i - 1][0] = 1100 + xPos; //node 2i position x
-      coordinates [2*i - 1][1] = yPos; //node 2i position y
-    }
+    //saves the coordinates of the nodes in the animation
+    setAnimationCoordinates();
     
     //graph matrix init
     for (int i = 0; i<maxnode; i++)
@@ -201,7 +181,7 @@ public void setup()
       ms[i] = new MessageSystem();
     }    
     
-    // Create the font used in other parts of the GUI
+    // Create the font used in some parts of the GUI
 
     f = createFont("Times New Roman Bold", 24);
     textFont(f);
@@ -244,7 +224,7 @@ public void draw()
       ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
       ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
       ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
-      node_pos = node_pos + 160; //update initial x position
+      node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
       i++; //i = current node trying to conect
       
@@ -400,8 +380,9 @@ public void draw()
     indata = false; //flag is switched
   }
 
+  //system timer is running
 
-  if (system_timer.running == true) //timer is running
+  if (system_timer.running == true) 
   {
     system_timer.update();
     if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
@@ -687,9 +668,30 @@ public void serialEvent( Serial myPort)
 }
 
 
-
-
-//FUNCTIONS
+public void setAnimationCoordinates()
+{
+  for (int i = 1; i < 6; i++)
+  {
+    rad = (650*450)/(sqrt(pow(650*sin(radians(90 - 30*i)),2) + pow(450*cos(radians(90 - 30*i)), 2))); 
+    
+    xPos = rad*cos(radians(90 - 30*i));
+    xPos2 = pow(xPos,2);
+    
+    if (i < 4)
+    {
+      yPos = 535 - 450*sqrt(1 - (xPos2)/(650*650));
+    } 
+    else
+    {
+      yPos = 535 + 450*sqrt(1 - (xPos2)/(650*650));
+    }
+    
+    coordinates [2*i - 2][0] = 1100 - xPos; //node 2i-1 position x
+    coordinates [2*i - 2][1] = yPos; //node 2i-1 position y
+    coordinates [2*i - 1][0] = 1100 + xPos; //node 2i position x
+    coordinates [2*i - 1][1] = yPos; //node 2i position y
+  }
+}
 
 public void setChartSettings() 
 {
@@ -742,8 +744,7 @@ public void writeBuffer(int index, String data)
 }
 
 
-      
-/////////////////// Handle GUI actions ///////////////////////////////
+//This triggers when the user changes parameters in the plot object
 
 public void controlEvent(ControlEvent theEvent) 
 {
@@ -925,7 +926,7 @@ public void node_off (int node_id)
 }
 
 
-//Functions to control the GUI tabs actions
+//Functions to handle the GUI tabs actions
 
 public void set_GUItabs()
 {
@@ -1559,7 +1560,7 @@ public void reset_connection()
  
 // A class to describe a group of messages
 // An ArrayList is used to manage the list of messages
-// Every MessageSystem object corresponds to a node, each node as a group of links called Messages
+// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
 
 class MessageSystem 
 {
