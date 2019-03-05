@@ -47,6 +47,7 @@ Graph myGraph;  //the graph object, it shows links and edges in the network, eac
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
 MessageSystem[] ms = new MessageSystem[maxnode]; //array of message systems, 1 message system corresponds to 1 node in the network, each message system has links to other message systems (based on the links in the network)
+CyberNode[] cyber_nodes = new CyberNode[maxnode]; //array of cyber node objects, these objects have information of the current state of the cyber nodes
 
 //global variables and arrays
 
@@ -181,6 +182,12 @@ public void setup()
       ms[i] = new MessageSystem();
     }    
     
+    //every cyber node object corresponds to a real node in the system
+    for (int i=0; i < maxnode; i++)
+    {
+      cyber_nodes[i] = new CyberNode();
+    } 
+
     // Create the font used in some parts of the GUI
 
     f = createFont("Times New Roman Bold", 24);
@@ -224,6 +231,8 @@ public void draw()
       ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
       ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
       ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
+      cyber_nodes[nodecount].id = PApplet.parseInt(val);
+      cyber_nodes[nodecount].down = false;
       node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
       i++; //i = current node trying to conect
@@ -281,6 +290,8 @@ public void draw()
   {
     if (nextconnection == false) //meaning node i sent links information
     {
+      cyber_nodes[i-1].offline = false;
+      cyber_nodes[i-1].in_neighbors = val;
       enterVector(i - 1, val); //enter in-neighbors vector from node i
       println(val);
     }
@@ -1164,6 +1175,91 @@ public void reset_connection()
      start_animation = false;
      nextconnection = false;
 }
+// A class to describe a group of messages
+// An ArrayList is used to manage the list of messages
+// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
+
+class MessageSystem 
+{
+  ArrayList<Message> messages;
+  PVector origin;
+  PVector destiny;
+  int c;
+  int k; //variable to control delay in between arrows
+  boolean hide = false;
+  int id;
+  int node_count = 0;
+
+  MessageSystem() 
+  {
+    messages = new ArrayList<Message>();
+  }
+
+  public void addLink(PVector target, int node_id) 
+  {
+    id = node_id;
+    destiny = target.get();
+    
+    while (node_count<id)
+    {
+      messages.add(new Message(origin, destiny, c));
+      node_count++;
+    }
+    Message m = messages.get(id - 1);
+    m.hide = false;
+  }
+
+  public void show() 
+  {
+    if (hide == false)
+    {
+      strokeWeight(1);
+      fill(c);
+      ellipse(origin.x, origin.y, 30, 30); 
+    }
+  }
+
+  public void run() 
+  {
+    {
+      for (int i = messages.size()-1; i >= 0; i--) 
+      {
+        Message m = messages.get(i);
+
+        if (hide == false) //if true it means that the node is down
+        {
+          m.run();
+          if (m.isDead()) 
+          {
+            m.restart();
+          }
+        }
+      }
+
+      //add circle to simbolize node
+      strokeWeight(1);
+      fill(c);
+      ellipse(origin.x, origin.y, 30, 30);
+      
+      k = 0;
+    }
+  }
+}
+class CyberNode
+{
+	int id;
+	String in_neighbors;
+	boolean down;
+	boolean offline;
+
+	CyberNode()
+	{
+		id = 0;
+		down = true;
+		offline = true;
+		in_neighbors = "";
+	}
+}
   
 /*   =================================================================================       
      The Graph class contains functions and variables that have been created to draw 
@@ -1558,76 +1654,6 @@ public void reset_connection()
     }
     
  
-// A class to describe a group of messages
-// An ArrayList is used to manage the list of messages
-// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
-
-class MessageSystem 
-{
-  ArrayList<Message> messages;
-  PVector origin;
-  PVector destiny;
-  int c;
-  int k; //variable to control delay in between arrows
-  boolean hide = false;
-  int id;
-  int node_count = 0;
-
-  MessageSystem() 
-  {
-    messages = new ArrayList<Message>();
-  }
-
-  public void addLink(PVector target, int node_id) 
-  {
-    id = node_id;
-    destiny = target.get();
-    
-    while (node_count<id)
-    {
-      messages.add(new Message(origin, destiny, c));
-      node_count++;
-    }
-    Message m = messages.get(id - 1);
-    m.hide = false;
-  }
-
-  public void show() 
-  {
-    if (hide == false)
-    {
-      strokeWeight(1);
-      fill(c);
-      ellipse(origin.x, origin.y, 30, 30); 
-    }
-  }
-
-  public void run() 
-  {
-    {
-      for (int i = messages.size()-1; i >= 0; i--) 
-      {
-        Message m = messages.get(i);
-
-        if (hide == false) //if true it means that the node is down
-        {
-          m.run();
-          if (m.isDead()) 
-          {
-            m.restart();
-          }
-        }
-      }
-
-      //add circle to simbolize node
-      strokeWeight(1);
-      fill(c);
-      ellipse(origin.x, origin.y, 30, 30);
-      
-      k = 0;
-    }
-  }
-}
 //Class used to create timer objects to be used for control of communications in GUI
 
 class Timer 

@@ -24,6 +24,7 @@ Graph myGraph;  //the graph object, it shows links and edges in the network, eac
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
 MessageSystem[] ms = new MessageSystem[maxnode]; //array of message systems, 1 message system corresponds to 1 node in the network, each message system has links to other message systems (based on the links in the network)
+CyberNode[] cyber_nodes = new CyberNode[maxnode]; //array of cyber node objects, these objects have information of the current state of the cyber nodes
 
 //global variables and arrays
 
@@ -158,6 +159,12 @@ void setup()
       ms[i] = new MessageSystem();
     }    
     
+    //every cyber node object corresponds to a real node in the system
+    for (int i=0; i < maxnode; i++)
+    {
+      cyber_nodes[i] = new CyberNode();
+    } 
+
     // Create the font used in some parts of the GUI
 
     f = createFont("Times New Roman Bold", 24);
@@ -201,6 +208,8 @@ void draw()
       ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
       ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
       ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
+      cyber_nodes[nodecount].id = int(val);
+      cyber_nodes[nodecount].down = false;
       node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
       i++; //i = current node trying to conect
@@ -258,6 +267,8 @@ void draw()
   {
     if (nextconnection == false) //meaning node i sent links information
     {
+      cyber_nodes[i-1].offline = false;
+      cyber_nodes[i-1].in_neighbors = val;
       enterVector(i - 1, val); //enter in-neighbors vector from node i
       println(val);
     }
