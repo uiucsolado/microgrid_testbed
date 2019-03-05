@@ -215,6 +215,8 @@ void reset_connection()
 {
 	 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
      {
+       cyber_nodes[j-1].down = true;
+       cyber_nodes[j-1].offline = true;	
        myPort[j].stop();
      }
     

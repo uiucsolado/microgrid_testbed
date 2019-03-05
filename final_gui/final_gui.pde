@@ -238,6 +238,8 @@ void draw()
     
     else //in case the user requested a reconnection and resync
     {
+      cyber_nodes[nodecount-1].down = false;
+      cyber_nodes[nodecount-1].offline = false;
       i++; //i = current node trying to conect
       
       if (i < maxnode + 1)
@@ -508,9 +510,9 @@ public void serialEvent( Serial myPort)
       }
     }
     
-    else if (all_nodes == false) //true after application gets answer from all the nodes
+    else if (all_nodes == false) //true after GUI gets answer from all the nodes
     {
-      if (com == false) //if contact is established with node i or MATLAB
+      if (com == false) //if contact is established with node i
       {
         if (val.equals("A")) //look for 'A' char to start the communication
         {
@@ -536,10 +538,9 @@ public void serialEvent( Serial myPort)
       delay(100); //wait to get next serial interruption
     }
     
-    else //all nodes detected and saved
+    else 
     {
-      //println(val);
-      if (nextconnection == false) //sync procedure and links information, at this point "nextconnection" will be true until all the edges and links information has been received 
+      if (nextconnection == false) //true after sync procedure is succesful and GUI gets in-neighbors data
       {
         if (val.equals("s")) //leader wants to start sync
         {
@@ -548,7 +549,7 @@ public void serialEvent( Serial myPort)
           println("Requesting synchronization...");
         }
 
-        else if (val.equals("d")) // sync successful now send some data
+        else if (val.equals("d")) // sync successful
         {
           println("All nodes are synced!");
           myPort.clear();
@@ -565,8 +566,6 @@ public void serialEvent( Serial myPort)
           {
             myPort.write("B"); //ready to start sending information about in-neighbors, this is sent to leader node
           }
-          //init_time = int(second() + 60*minute() + 3600*hour());
-          //j = 0;
         }
 
         else if (val.equals("B")) //it gets B when node i request action from PC
@@ -575,7 +574,7 @@ public void serialEvent( Serial myPort)
           newrequest = true;
         }
 
-        else //data about in-neighbors 
+        else // "val" is vector of in-neighbors 
         {
           newrequest = true;
         }
@@ -594,7 +593,7 @@ public void serialEvent( Serial myPort)
           myPort.write("D");
         }
 
-        else if (str(val.charAt(0)).equals("R"))
+        else if (str(val.charAt(0)).equals("R")) //meaning the node reconnected
         {
           println("node reconnected");  
           updateNode = true;
@@ -602,7 +601,7 @@ public void serialEvent( Serial myPort)
         }
 
         
-        else if (val.equals("D")) //reg D signal will be sent by RTO
+        else if (val.equals("D")) //letter "D" is received before getting regd signal from external application (f.e. MATLAB)
         {
           if (getregd == true)
           {
@@ -621,12 +620,12 @@ public void serialEvent( Serial myPort)
           indata = true; 
         }
 
-        else if ((ignorenext == true) && (float(val) <= 1 && float(val) >= 0)) //reg D signal received but ignored
+        else if ((ignorenext == true) && (float(val) <= 1 && float(val) >= 0)) //reg D signal received but ignored (not sent to leader node)
         {
           ignorenext = false;
         }
 
-        else if (val.equals("end"))
+        else if (val.equals("end")) //leader node indicates the end of concensus round
         {
           consensus_timer.update();
           println("Initial response time: " + consensus_timer.time_elapsed + "s");
@@ -640,10 +639,9 @@ public void serialEvent( Serial myPort)
             updateVector(i - 1, val); //update vector
             updateAnimation(i - 1);
           }
-          checkGraph = false;
         }
 
-        else //ratio consensus values received from node i
+        else //"val" = string of ratio concensus results for
         {
           indata = true; 
         }
