@@ -1,6 +1,6 @@
 // A class to describe a group of messages
 // An ArrayList is used to manage the list of messages
-// Every MessageSystem object corresponds to a node, each node as a group of links called Messages
+// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
 
 class MessageSystem 
 {

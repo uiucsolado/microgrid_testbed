@@ -90,11 +90,8 @@ boolean run = false; //flag used for start button
 
 //timer control
 
-boolean start_timer = false; //triggers the initialization of timer to connect to controllers
-int node_timer = 0; //timer used to check status of nodes
-int init_time = 0; //initial time used to estimate time elapsed in the timer
-float consensus_timer = 0;
-float init_c_time = 0;
+Timer consensus_timer; //timer used to measure initial response time
+Timer system_timer; //timer used to control communications with cyber nodes
 
 // plot data management 
 
@@ -139,28 +136,8 @@ public void setup()
     topSketchPath = sketchPath;
     plotterConfigJSON = loadJSONObject(topSketchPath+"/plotter_config.json"); //last saved configuration of the plot area
     
-    //saves the coordinates of the controllers in the animation
-    for (int i = 1; i < 6; i++)
-    {
-      rad = (650*450)/(sqrt(pow(650*sin(radians(90 - 30*i)),2) + pow(450*cos(radians(90 - 30*i)), 2))); 
-      
-      xPos = rad*cos(radians(90 - 30*i));
-      xPos2 = pow(xPos,2);
-      
-      if (i < 4)
-      {
-        yPos = 535 - 450*sqrt(1 - (xPos2)/(650*650));
-      } 
-      else
-      {
-        yPos = 535 + 450*sqrt(1 - (xPos2)/(650*650));
-      }
-      
-      coordinates [2*i - 2][0] = 1100 - xPos; //node 2i-1 position x
-      coordinates [2*i - 2][1] = yPos; //node 2i-1 position y
-      coordinates [2*i - 1][0] = 1100 + xPos; //node 2i position x
-      coordinates [2*i - 1][1] = yPos; //node 2i position y
-    }
+    //saves the coordinates of the nodes in the animation
+    setAnimationCoordinates();
     
     //graph matrix init
     for (int i = 0; i<maxnode; i++)
@@ -174,7 +151,7 @@ public void setup()
     //Control P5 init
     cp5 = new ControlP5(this);
   
-    //init parameters of the plot of the Ratio Consensus (RC)
+    //init parameters of the plot of the Ratio Consensus (RC) executions
     setChartSettings();
   
     //build x axis values for the line graph (samples or time)
@@ -195,96 +172,8 @@ public void setup()
     img = loadImage("visiogray.png");
     img.resize(100,136);
     
-    //this font is used in the text of the buttons
-    ControlFont cf1 = new ControlFont(createFont("Arial",20));
-    
-    /////////////////////////////////GUI buttons///////////////////////////////////////////
-
-    cp5.addButton("RatioConsensus") //Plot mode button
-    .setPosition(50,50)
-    .setSize(300,40)
-    ;
-    
-    cp5.getController("RatioConsensus")
-     .getCaptionLabel()
-     .setFont(cf1)
-     .setSize(12)
-     .setText("Ratio Consensus") 
-     ;
-    
-    cp5.addButton("Communication") //Animation mode button
-    .setPosition(50,100)
-    .setSize(300,40)
-    ;
-    
-    cp5.getController("Communication")
-     .getCaptionLabel()
-     .setFont(cf1)
-     .setSize(12)
-     .setText("Communication")
-     ;
-    
-    cp5.addButton("Graph") //Graph mode button
-    .setPosition(50,150)
-    .setSize(300,40)
-    ;
-    
-    cp5.getController("Graph")
-     .getCaptionLabel()
-     .setFont(cf1)
-     .setSize(12)
-     .setText("Graph")
-     ;
-     
-    cp5.addButton("ResetConnection") //Reset controllers button
-    .setPosition(50,200)
-    .setSize(300,40)
-    ;
-    
-    cp5.getController("ResetConnection")
-     .getCaptionLabel()
-     .setFont(cf1)
-     .setSize(12)
-     .setText("Reset Connection")
-     ;
-
-     cp5.addButton("Run") //Start control button
-    .setPosition(50,250)
-    .setSize(300,40)
-    ;
-    
-    cp5.getController("Run")
-     .getCaptionLabel()
-     .setFont(cf1)
-     .setSize(12)
-     .setText("Start")
-    ;
-
-   clock = cp5.addTextarea("Clock") //clock text box
-    .setPosition(50,1000)
-    .setSize(120,45)
-    .setFont(createFont("arial",22))
-    //.setLineHeight(14)
-    .setColor(color(255,255,255))
-    .setColorBackground(color(0,0,255))
-    //.setColorForeground(color(255,100));
-    ;
-     
-    b = cp5.addButton("Capture") //Capture plot button
-    .setPosition(1750,1015)
-    .setSize(100,40)
-    ;
-    
-    cp5.getController("Capture")
-     .getCaptionLabel()
-     .setFont(cf1)
-     .setSize(10)
-     .setText("Capture")
-    ;
-    
-    cp5.get("Capture").hide();
-     
-    //////////////////////////////////////////////////////////////////////////////////////
+    //setup the GUI tabs
+    set_GUItabs();
 
     //every message system object corresponds to a different node in the system
     for (int i=0; i < maxnode; i++)
@@ -292,7 +181,7 @@ public void setup()
       ms[i] = new MessageSystem();
     }    
     
-    // Create the font used in other parts of the GUI
+    // Create the font used in some parts of the GUI
 
     f = createFont("Times New Roman Bold", 24);
     textFont(f);
@@ -305,22 +194,14 @@ public void setup()
     myGraph.fixColor = true; //do not allow the user to change the color during runtime
     myGraph.createRelations = false; //do not allow the user to add edges during runtime 
 
-    //Time at start
-    init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour());
+    //Initiate timers
+    system_timer = new Timer();
+    consensus_timer = new Timer();
 
 }
 
 public void draw()
 {
-
-  //case the user clicks start button
-
-  if (run == true)
-  {
-    i=1;
-    myPort[i] = new Serial(this, serial_list[i], 38400);
-    run = false;
-  }
 
   //case a node was offline and is trying to reconnect
 
@@ -343,7 +224,7 @@ public void draw()
       ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
       ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
       ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
-      node_pos = node_pos + 160; //update initial x position
+      node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
       i++; //i = current node trying to conect
       
@@ -394,7 +275,7 @@ public void draw()
     newconnection = false; //flag is switched
   }
     
-  //case a node is sending links data
+  //case a node is sending links data at start of system
     
   else if (newrequest == true)
   {
@@ -431,8 +312,7 @@ public void draw()
     
   else if (indata == true)
   {
-    node_timer = 0; //restart timer
-    init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour()); //register initial time for the timer
+    system_timer.start(); //start system timer
 
     if (val != null)
     {
@@ -457,15 +337,15 @@ public void draw()
            LineGraph.yMin=PApplet.parseInt(lineGraphValues_buffer[0][0] - 1);
           }
 
-          start_timer = false; //timer is off until a new consensus is reached
+          system_timer.stop();
         }  
 
         else 
         {
           delay(50);
           myPort[i].write("C"); //ready to receive data from next node
-          start_timer = true; 
-          checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
+          system_timer.start();
+          checkGraph = true; //flag to indicate in-neighbors vector of next node must be checked 
         }
       }
 
@@ -484,11 +364,11 @@ public void draw()
         
         else  
         {
-          if (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0) //this is used to filter out regD signals when the system is not ready
+          if (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0) //this is used to filter out regD signals when the system is not ready (*NOT COMPLETELY WORKING*)
           {
             println("l 474");
           } 
-          else //
+          else 
           {
             writeBuffer(i - 1, val); //input consensus results in the plot buffer
           }
@@ -500,11 +380,12 @@ public void draw()
     indata = false; //flag is switched
   }
 
+  //system timer is running
 
-  if (start_timer == true) //timer was started
+  if (system_timer.running == true) 
   {
-    node_timer = PApplet.parseInt(second() + 60*minute() + 3600*hour()) - init_time; //timer = current time - initial time
-    if (node_timer > 25) //more than 5 seconds with no answer means the node is eaither down or offline
+    system_timer.update();
+    if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
     {
       println("node " + i + " is offline");
       if ((checkNode(i) == false) && (myGraphMatrix[i-1][i-1] == 2)) //means node is down or was reconnected, but port is closed
@@ -524,14 +405,13 @@ public void draw()
       i++; //continue with next node
       if (i < maxnode + 1)
       {
-        node_timer = 0; //restart timer
-        init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour());
+        system_timer.restart();
       }
 
       else 
       {
         i = 1; //back to node 1 (leader)
-        start_timer = false; //stop timer
+        system_timer.stop();
         stack = true; //ready to plot
 
         if ((lineGraphValues_buffer[0][0] > LineGraph.yMax || lineGraphValues_buffer[0][0] < LineGraph.yMin) && capture == false) //change scale to notice consensus differences
@@ -541,22 +421,25 @@ public void draw()
         }
       }
 
-      node_timer = 0; //restart timer
-      init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour());
-
+      system_timer.restart();
       myPort[i].write("C"); //notify node
       checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         
     }
-
   }
 
-  //grey background
+  //make the background color gray
+
   background(211, 211, 211);
 
-  //Start of GUI tabs
+  //print clock
+
+  clock.setText("  "+str(hour())+":"+str(minute())+":"+str(second())); //real time clock
+
+  //////////////GUI tabs///////////////////
 
   //case the plot mode button was pressed
+
   if (ratio == true)
   {
     cp5.get("Capture").show(); //show capture waveform button
@@ -572,68 +455,7 @@ public void draw()
 
   if (animation == true) 
   {
-  
-    for (int i = 1; i < 6; i++) //creates an ellipse pattern of the controllers 
-    {
-      rad = (650*450)/(sqrt(pow(650*sin(radians(90 - 30*i)),2) + pow(450*cos(radians(90 - 30*i)), 2))); 
-      
-      xPos = rad*cos(radians(90 - 30*i));
-      xPos2 = pow(xPos,2);
-      
-      if (i < 4)
-      {
-        yPos = 535 - 450*sqrt(1 - (xPos2)/(650*650));
-      } 
-      else
-      {
-        yPos = 535 + 450*sqrt(1 - (xPos2)/(650*650));
-      }
-      
-      imageMode(CENTER);
-      image(img, 1100 - xPos, yPos); //print image
-      image(img, 1100 + xPos, yPos); 
-      
-      textAlign(CENTER);textSize(30); 
-      fill(0, 45, 90); //color for text
-      text(2*i - 1, 1020 - xPos, yPos + 10); //print text
-      text(2*i, 1180 + xPos, yPos + 10);
-         
-    }
-    
-    if (create_animation == true) //this is triggered once the nodes are synced and animation can be created
-    {
-      for (int i=0; i<nodecount; i++) //it goes through all the positions in the graph matrix
-      {
-        {
-          for (int j=0; j<maxnode; j++)
-          {
-            if (myGraphMatrix[connected_nodes[i]-1][j] == 2 && (connected_nodes[i] - 1) != j) //check for links
-            {
-              ms[i].addLink(new PVector(coordinates[j][0], coordinates[j][1]), j+1); //create a link in node i
-            }
-          }
-        }        
-      }
-      create_animation = false; //switch flag
-    }
-
-    else //just show the nodes as they connect with the application  
-    {
-      for (int i=0; i < nodecount; i++)
-      {
-        ms[i].show();
-      }
-    }
-    
-    fill(246, 225, 65);  
-    
-    if (start_animation == true) //ready to show animation 
-    {
-      for (int i=0; i < maxnode; i++)
-      {
-        ms[i].run(); //show the moving triangles for the links
-      }
-    }
+    print_animation();
   }
   
   //case graph mode button is pressed 
@@ -648,37 +470,22 @@ public void draw()
 
   if (reset == true)
   {
-     
-     for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
-     {
-       myPort[j].stop();
-     }
-    
-     delay(1000);
-     
-     i = 1;
-     nodecount = 1; //serial communication started with one of the nodes
-     myPort[i] = new Serial(this, serial_list[i], 38400); 
-     myPort[i].bufferUntil('\n'); 
-     
-     delay(500);
-    
-     reconnection = true;
-
-     //reset all control variables 
-     indata = false;      
-     reset = false;
-     com = false;
-     start_animation = false;
-     nextconnection = false;
-
+    reset_connection();
+    system_timer.stop();
   }
-  
-  clock.setText("  "+str(hour())+":"+str(minute())+":"+str(second())); //real time clock
+
+  //case the user clicks start button
+
+  if (run == true)
+  {
+    i=1;
+    myPort[i] = new Serial(this, serial_list[i], 38400);
+    run = false;
+  }
 
 }
 
-//interruption from serial communication, this is called each time a package is received
+//main function for serial communication control, this is called each time a package is received 
 
 public void serialEvent( Serial myPort) 
 {
@@ -733,10 +540,6 @@ public void serialEvent( Serial myPort)
         else
         {
           //if we've already established contact with node i, obtain the node id
-          if (PApplet.parseInt(val) == 1) //leader node's id
-          {
-           init_time = PApplet.parseInt(second() + 60*minute() + 3600*hour()); //for starting the timer once the leader nodes starts communication
-          }
           println(val);
           newconnection = true; //flag to register the node in the graph
           com = false; //flag to wait for connection of next node
@@ -816,7 +619,7 @@ public void serialEvent( Serial myPort)
           if (getregd == true)
           {
             println("new regd signal");
-            init_c_time = millis();
+            consensus_timer.start();
             ignorenext = false;
           }  
           else
@@ -837,8 +640,9 @@ public void serialEvent( Serial myPort)
 
         else if (val.equals("end"))
         {
-          consensus_timer = (millis() - init_c_time)/1000;
-          println("Initial response time: " + consensus_timer + "s");
+          consensus_timer.update();
+          println("Initial response time: " + consensus_timer.time_elapsed + "s");
+          consensus_timer.stop();
         }
 
         else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from node i
@@ -864,9 +668,30 @@ public void serialEvent( Serial myPort)
 }
 
 
-
-
-//FUNCTIONS
+public void setAnimationCoordinates()
+{
+  for (int i = 1; i < 6; i++)
+  {
+    rad = (650*450)/(sqrt(pow(650*sin(radians(90 - 30*i)),2) + pow(450*cos(radians(90 - 30*i)), 2))); 
+    
+    xPos = rad*cos(radians(90 - 30*i));
+    xPos2 = pow(xPos,2);
+    
+    if (i < 4)
+    {
+      yPos = 535 - 450*sqrt(1 - (xPos2)/(650*650));
+    } 
+    else
+    {
+      yPos = 535 + 450*sqrt(1 - (xPos2)/(650*650));
+    }
+    
+    coordinates [2*i - 2][0] = 1100 - xPos; //node 2i-1 position x
+    coordinates [2*i - 2][1] = yPos; //node 2i-1 position y
+    coordinates [2*i - 1][0] = 1100 + xPos; //node 2i position x
+    coordinates [2*i - 1][1] = yPos; //node 2i position y
+  }
+}
 
 public void setChartSettings() 
 {
@@ -919,8 +744,7 @@ public void writeBuffer(int index, String data)
 }
 
 
-      
-/////////////////// Handle GUI actions ///////////////////////////////
+//This triggers when the user changes parameters in the plot object
 
 public void controlEvent(ControlEvent theEvent) 
 {
@@ -1102,6 +926,99 @@ public void node_off (int node_id)
 }
 
 
+//Functions to handle the GUI tabs actions
+
+public void set_GUItabs()
+{
+
+	//this font is used in the text of the buttons
+    ControlFont cf1 = new ControlFont(createFont("Arial",20));
+
+	cp5.addButton("RatioConsensus") //Plot mode button
+    .setPosition(50,50)
+    .setSize(300,40)
+    ;
+    
+    cp5.getController("RatioConsensus")
+     .getCaptionLabel()
+     .setFont(cf1)
+     .setSize(12)
+     .setText("Ratio Consensus") 
+     ;
+    
+    cp5.addButton("Communication") //Animation mode button
+    .setPosition(50,100)
+    .setSize(300,40)
+    ;
+    
+    cp5.getController("Communication")
+     .getCaptionLabel()
+     .setFont(cf1)
+     .setSize(12)
+     .setText("Communication")
+     ;
+    
+    cp5.addButton("Graph") //Graph mode button
+    .setPosition(50,150)
+    .setSize(300,40)
+    ;
+    
+    cp5.getController("Graph")
+     .getCaptionLabel()
+     .setFont(cf1)
+     .setSize(12)
+     .setText("Graph")
+     ;
+     
+    cp5.addButton("ResetConnection") //Reset controllers button
+    .setPosition(50,200)
+    .setSize(300,40)
+    ;
+    
+    cp5.getController("ResetConnection")
+     .getCaptionLabel()
+     .setFont(cf1)
+     .setSize(12)
+     .setText("Reset Connection")
+     ;
+
+     cp5.addButton("Run") //Start control button
+    .setPosition(50,250)
+    .setSize(300,40)
+    ;
+    
+    cp5.getController("Run")
+     .getCaptionLabel()
+     .setFont(cf1)
+     .setSize(12)
+     .setText("Start")
+    ;
+
+   clock = cp5.addTextarea("Clock") //clock text box
+    .setPosition(50,1000)
+    .setSize(120,45)
+    .setFont(createFont("arial",22))
+    //.setLineHeight(14)
+    .setColor(color(255,255,255))
+    .setColorBackground(color(0,0,255))
+    //.setColorForeground(color(255,100));
+    ;
+     
+    b = cp5.addButton("Capture") //Capture plot button
+    .setPosition(1750,1015)
+    .setSize(100,40)
+    ;
+    
+    cp5.getController("Capture")
+     .getCaptionLabel()
+     .setFont(cf1)
+     .setSize(10)
+     .setText("Capture")
+    ;
+    
+    cp5.get("Capture").hide();
+}
+
 public void print_ratio()
 {
 	LineGraph.DrawAxis(); //draws the main axis of the plot
@@ -1155,6 +1072,97 @@ public void print_ratio()
 	    LineGraph.LineGraph(lineGraphSampleNumbers, lineGraphValues[i]); //assign plot matrix
 	  }
 	}  
+}
+
+public void print_animation()
+{
+	for (int i = 1; i < 6; i++) //creates an ellipse pattern of the controllers 
+	{
+	  rad = (650*450)/(sqrt(pow(650*sin(radians(90 - 30*i)),2) + pow(450*cos(radians(90 - 30*i)), 2))); 
+	  
+	  xPos = rad*cos(radians(90 - 30*i));
+	  xPos2 = pow(xPos,2);
+	  
+	  if (i < 4)
+	  {
+	    yPos = 535 - 450*sqrt(1 - (xPos2)/(650*650));
+	  } 
+	  else
+	  {
+	    yPos = 535 + 450*sqrt(1 - (xPos2)/(650*650));
+	  }
+	  
+	  imageMode(CENTER);
+	  image(img, 1100 - xPos, yPos); //print image
+	  image(img, 1100 + xPos, yPos); 
+	  
+	  textAlign(CENTER);textSize(30); 
+	  fill(0, 45, 90); //color for text
+	  text(2*i - 1, 1020 - xPos, yPos + 10); //print text
+	  text(2*i, 1180 + xPos, yPos + 10);
+	     
+	}
+
+	if (create_animation == true) //this is triggered once the nodes are synced and animation can be created
+	{
+	  for (int i=0; i<nodecount; i++) //it goes through all the positions in the graph matrix
+	  {
+	    {
+	      for (int j=0; j<maxnode; j++)
+	      {
+	        if (myGraphMatrix[connected_nodes[i]-1][j] == 2 && (connected_nodes[i] - 1) != j) //check for links
+	        {
+	          ms[i].addLink(new PVector(coordinates[j][0], coordinates[j][1]), j+1); //create a link in node i
+	        }
+	      }
+	    }        
+	  }
+	  create_animation = false; //switch flag
+	}
+
+	else //just show the nodes as they connect with the application  
+	{
+	  for (int i=0; i < nodecount; i++)
+	  {
+	    ms[i].show();
+	  }
+	}
+
+	fill(246, 225, 65);  
+
+	if (start_animation == true) //ready to show animation 
+	{
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    ms[i].run(); //show the moving triangles for the links
+	  }
+	}
+}
+
+public void reset_connection()
+{
+	 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
+     {
+       myPort[j].stop();
+     }
+    
+     delay(1000);
+     
+     i = 1;
+     nodecount = 1; //serial communication started with one of the nodes
+     myPort[i] = new Serial(this, serial_list[i], 38400); 
+     myPort[i].bufferUntil('\n'); 
+     
+     delay(500);
+    
+     reconnection = true;
+
+     //reset all control variables 
+     indata = false;      
+     reset = false;
+     com = false;
+     start_animation = false;
+     nextconnection = false;
 }
   
 /*   =================================================================================       
@@ -1552,7 +1560,7 @@ public void print_ratio()
  
 // A class to describe a group of messages
 // An ArrayList is used to manage the list of messages
-// Every MessageSystem object corresponds to a node, each node as a group of links called Messages
+// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
 
 class MessageSystem 
 {
@@ -1620,7 +1628,57 @@ class MessageSystem
     }
   }
 }
-// message object of comunnication between two nodes (link)
+//Class used to create timer objects to be used for control of communications in GUI
+
+class Timer 
+{
+  float init_time; //indicates the starting point of the timer based on the system time
+  boolean running;
+  float time_elapsed; //time elapsed in seconds
+  
+  Timer() 
+  {
+  	init_time = 0;
+    running = false;
+  }
+  
+  public void start() 
+  {
+  	if (running == false)
+  	{
+  		init_time = millis();
+  		running = true;
+  	}
+  }
+
+  public void stop()
+  {
+  	if (running == true)
+  	{
+  		running = false;
+  		time_elapsed = 0;
+  	}
+  }
+
+  public void restart()
+  {
+  	if (running == true)
+  	{
+  		init_time = millis();
+  		time_elapsed = 0;
+  	}
+  }
+  
+  public void update() 
+  {
+  	if (running == true)
+  	{
+    	time_elapsed = (millis() - init_time)/1000;
+    }
+  }
+  
+}
+// message class of comunnication between two nodes (link)
 
 class Message 
 {
