@@ -214,7 +214,14 @@ public void draw()
 
   if (updateNode == true)
   {
-    myGraphMatrix[PApplet.parseInt(str(val.charAt(1))) - 1][PApplet.parseInt(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    //myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    for (int j = 0; j < maxnode; j++)
+    {
+      if (cyber_nodes[j].id == PApplet.parseInt(str(val.charAt(1))))
+      {
+        cyber_nodes[j].down = false;
+      }
+    }
     updateNode = false;
   }
   
@@ -227,12 +234,11 @@ public void draw()
       myGraph.put("Node " + val, new Node(400 + node_pos, 540, 35, 70, graphColors[nodecount])); //creates a new node in the graph in graph mode, new Node(x position, y position, siez, size, color)
       connected_nodes[nodecount] = PApplet.parseInt(val); //registers the id of the node connecting with the application
       nodes[nodecount] ="Node " + val;
-      myGraphMatrix[PApplet.parseInt(val)-1][PApplet.parseInt(val)-1] = 2; //the graph matrix is updated
-      ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
-      ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
-      ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
-      cyber_nodes[nodecount].id = PApplet.parseInt(val);
-      cyber_nodes[nodecount].down = false;
+      // myGraphMatrix[int(val)-1][int(val)-1] = 2; //the graph matrix is updated
+      // ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
+      // ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
+      // ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
+      cyber_nodes[nodecount].init(PApplet.parseInt(val), graphColors[nodecount], coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1], maxnode);
       node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
       i++; //i = current node trying to conect
@@ -262,7 +268,6 @@ public void draw()
     else //in case the user requested a reconnection and resync
     {
       cyber_nodes[nodecount-1].down = false;
-      cyber_nodes[nodecount-1].offline = false;
       i++; //i = current node trying to conect
       
       if (i < maxnode + 1)
@@ -286,7 +291,7 @@ public void draw()
     newconnection = false; //flag is switched
   }
     
-  //case a node is sending links data at start of system
+  //case nodes are synced and are sending links data for first time
     
   else if (newrequest == true)
   {
@@ -400,7 +405,8 @@ public void draw()
     system_timer.update();
     if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
     {
-      println("node " + i + " is offline");
+      println("node " + connected_nodes[i-1] + " is offline");
+      cyber_nodes[i-1].offline = true;
       if ((checkNode(i) == false) && (myGraphMatrix[i-1][i-1] == 2)) //means node is down or was reconnected, but port is closed
       { 
         try //if the node is up
@@ -412,6 +418,7 @@ public void draw()
         catch (Exception e) //if the node is down
         {
           //updateNodeAnimation(i);
+          cyber_nodes[i-1].down = true;
         }
       }
 
@@ -657,11 +664,16 @@ public void serialEvent( Serial myPort)
 
         else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from node i
         {
-          if (checkGraphMatrix(i - 1, val) == false) //check if in-neighbors vector of node i changed since last round 
+          /*if (checkGraphMatrix(i - 1, val) == false) //check if in-neighbors vector of node i changed since last round 
           {
             updateVector(i - 1, val); //update vector
             updateAnimation(i - 1);
+          }*/
+          if (cyber_nodes[i].in_neighbors != val)
+          {
+            cyber_nodes[i].in_neighbors = val; //update in_neighbors vector 
           }
+          checkGraph = false;
         }
 
         else //"val" = string of ratio concensus results for
@@ -773,7 +785,6 @@ public void enterVector(int index, String vector)
 {
   for (int j = 0; j < maxnode; j++)
   {
-    myGraphMatrix[connected_nodes[index]-1][j] = PApplet.parseInt(str(vector.charAt(j))); //status data of in-neighbor
     if (str(vector.charAt(j)).equals("2")) myGraph.get("Node " + (j+1)).addEdge(myGraph.get(nodes[index]), 1f);
   } 
 }
@@ -1114,9 +1125,9 @@ public void print_animation()
 
 	if (create_animation == true) //this is triggered once the nodes are synced and animation can be created
 	{
-	  for (int i=0; i<nodecount; i++) //it goes through all the positions in the graph matrix
+	  for (int i=0; i<maxnode; i++) //it goes through all the positions in the graph matrix
 	  {
-	    {
+	    /*{
 	      for (int j=0; j<maxnode; j++)
 	      {
 	        if (myGraphMatrix[connected_nodes[i]-1][j] == 2 && (connected_nodes[i] - 1) != j) //check for links
@@ -1124,16 +1135,18 @@ public void print_animation()
 	          ms[i].addLink(new PVector(coordinates[j][0], coordinates[j][1]), j+1); //create a link in node i
 	        }
 	      }
-	    }        
+	    }*/
+	    cyber_nodes[i].SetLinks(coordinates, graphColors);
 	  }
 	  create_animation = false; //switch flag
 	}
 
 	else //just show the nodes as they connect with the application  
 	{
-	  for (int i=0; i < nodecount; i++)
+	  for (int i=0; i < maxnode; i++)
 	  {
-	    ms[i].show();
+	    //ms[i].show();
+	    cyber_nodes[i].show();
 	  }
 	}
 
@@ -1143,7 +1156,8 @@ public void print_animation()
 	{
 	  for (int i=0; i < maxnode; i++)
 	  {
-	    ms[i].run(); //show the moving triangles for the links
+	    //ms[i].run(); //show the moving triangles for the links
+	    cyber_nodes[i].run();
 	  }
 	}
 }
@@ -1247,18 +1261,104 @@ class MessageSystem
 }
 class CyberNode
 {
+	ArrayList<Message> messages;
+  	PVector origin;
+  	PVector destiny;
+  	PVector local_coordinates; //node local coordinates
+  	int c;
 	int id;
+	int node_count = 0;
+	int total_nodes = 0;
 	String in_neighbors;
 	boolean down;
 	boolean offline;
+	Message m;
 
 	CyberNode()
-	{
+	{	
 		id = 0;
 		down = true;
 		offline = true;
 		in_neighbors = "";
+		messages = new ArrayList<Message>();
 	}
+
+	public void init(int index, int col, float x_pos, float y_pos, int num_nodes)
+	{	
+		total_nodes = num_nodes;
+		down = false;
+		id = index;
+		c = col; //set node color
+		local_coordinates = new PVector(x_pos, y_pos);
+	}
+
+	public void SetLinks(float [][] coordinates, int[] nodesColors)
+	{
+		destiny = new PVector(local_coordinates.x, local_coordinates.y); // get node local coordinates
+		for (int i = 0; i < total_nodes; i++)
+		{
+			if (PApplet.parseInt(str(in_neighbors.charAt(i))) != 0)
+			{
+				origin = new PVector(coordinates[i][0], coordinates[i][1]); //get in-neighbor coordinates
+				messages.add(new Message(origin, destiny, nodesColors[i])); //add in-neighbor link
+			}
+		}
+	}
+
+	public void show() 
+  	{
+    	if (down == false)
+    	{
+      		strokeWeight(1);
+      		fill(c);
+      		ellipse(local_coordinates.x, local_coordinates.y, 30, 30); 
+    	}
+  	}
+
+  	public void run() 
+  	{
+    	if (offline == false)
+    	{
+	      	for (int i = 0; i < total_nodes; i++)
+	      	{
+
+	        	if (PApplet.parseInt(str(in_neighbors.charAt(i))) != 0)
+	        	{
+	        		m = messages.get(node_count);
+	        		if (PApplet.parseInt(str(in_neighbors.charAt(i))) == 2)
+	        		{
+	        			m.hide = false;
+	        		}
+	        		else //this means it is equal to 1
+	        		{
+	        			m.hide = true;
+	        		}
+	        		m.run();
+	          		if (m.isDead()) 
+	          		{
+	            		m.restart();
+	          		}
+	          		node_count++;
+	        	} 
+	    
+	      	}
+	      	node_count = 0;
+	    }
+      	
+	    /*if (down == false)
+	    {
+	      	//add circle to simbolize node
+	      	strokeWeight(1);	
+	      	fill(c);
+	      	ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
+	    }*/
+
+	    //add circle to simbolize node
+	    strokeWeight(1);	
+	    fill(c);
+	    ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
+    	
+  	}
 }
   
 /*   =================================================================================       

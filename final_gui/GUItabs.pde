@@ -177,9 +177,9 @@ void print_animation()
 
 	if (create_animation == true) //this is triggered once the nodes are synced and animation can be created
 	{
-	  for (int i=0; i<nodecount; i++) //it goes through all the positions in the graph matrix
+	  for (int i=0; i<maxnode; i++) //it goes through all the positions in the graph matrix
 	  {
-	    {
+	    /*{
 	      for (int j=0; j<maxnode; j++)
 	      {
 	        if (myGraphMatrix[connected_nodes[i]-1][j] == 2 && (connected_nodes[i] - 1) != j) //check for links
@@ -187,16 +187,18 @@ void print_animation()
 	          ms[i].addLink(new PVector(coordinates[j][0], coordinates[j][1]), j+1); //create a link in node i
 	        }
 	      }
-	    }        
+	    }*/
+	    cyber_nodes[i].SetLinks(coordinates, graphColors);
 	  }
 	  create_animation = false; //switch flag
 	}
 
 	else //just show the nodes as they connect with the application  
 	{
-	  for (int i=0; i < nodecount; i++)
+	  for (int i=0; i < maxnode; i++)
 	  {
-	    ms[i].show();
+	    //ms[i].show();
+	    cyber_nodes[i].show();
 	  }
 	}
 
@@ -206,7 +208,8 @@ void print_animation()
 	{
 	  for (int i=0; i < maxnode; i++)
 	  {
-	    ms[i].run(); //show the moving triangles for the links
+	    //ms[i].run(); //show the moving triangles for the links
+	    cyber_nodes[i].run();
 	  }
 	}
 }

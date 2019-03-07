@@ -191,7 +191,14 @@ void draw()
 
   if (updateNode == true)
   {
-    myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    //myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    for (int j = 0; j < maxnode; j++)
+    {
+      if (cyber_nodes[j].id == int(str(val.charAt(1))))
+      {
+        cyber_nodes[j].down = false;
+      }
+    }
     updateNode = false;
   }
   
@@ -204,12 +211,11 @@ void draw()
       myGraph.put("Node " + val, new Node(400 + node_pos, 540, 35, 70, graphColors[nodecount])); //creates a new node in the graph in graph mode, new Node(x position, y position, siez, size, color)
       connected_nodes[nodecount] = int(val); //registers the id of the node connecting with the application
       nodes[nodecount] ="Node " + val;
-      myGraphMatrix[int(val)-1][int(val)-1] = 2; //the graph matrix is updated
-      ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
-      ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
-      ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
-      cyber_nodes[nodecount].id = int(val);
-      cyber_nodes[nodecount].down = false;
+      // myGraphMatrix[int(val)-1][int(val)-1] = 2; //the graph matrix is updated
+      // ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
+      // ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
+      // ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
+      cyber_nodes[nodecount].init(int(val), graphColors[nodecount], coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1], maxnode);
       node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
       i++; //i = current node trying to conect
@@ -239,7 +245,6 @@ void draw()
     else //in case the user requested a reconnection and resync
     {
       cyber_nodes[nodecount-1].down = false;
-      cyber_nodes[nodecount-1].offline = false;
       i++; //i = current node trying to conect
       
       if (i < maxnode + 1)
@@ -263,7 +268,7 @@ void draw()
     newconnection = false; //flag is switched
   }
     
-  //case a node is sending links data at start of system
+  //case nodes are synced and are sending links data for first time
     
   else if (newrequest == true)
   {
@@ -377,7 +382,8 @@ void draw()
     system_timer.update();
     if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
     {
-      println("node " + i + " is offline");
+      println("node " + connected_nodes[i-1] + " is offline");
+      cyber_nodes[i-1].offline = true;
       if ((checkNode(i) == false) && (myGraphMatrix[i-1][i-1] == 2)) //means node is down or was reconnected, but port is closed
       { 
         try //if the node is up
@@ -389,6 +395,7 @@ void draw()
         catch (Exception e) //if the node is down
         {
           //updateNodeAnimation(i);
+          cyber_nodes[i-1].down = true;
         }
       }
 
@@ -634,11 +641,16 @@ public void serialEvent( Serial myPort)
 
         else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from node i
         {
-          if (checkGraphMatrix(i - 1, val) == false) //check if in-neighbors vector of node i changed since last round 
+          /*if (checkGraphMatrix(i - 1, val) == false) //check if in-neighbors vector of node i changed since last round 
           {
             updateVector(i - 1, val); //update vector
             updateAnimation(i - 1);
+          }*/
+          if (cyber_nodes[i].in_neighbors != val)
+          {
+            cyber_nodes[i].in_neighbors = val; //update in_neighbors vector 
           }
+          checkGraph = false;
         }
 
         else //"val" = string of ratio concensus results for
@@ -750,7 +762,6 @@ void enterVector(int index, String vector)
 {
   for (int j = 0; j < maxnode; j++)
   {
-    myGraphMatrix[connected_nodes[index]-1][j] = int(str(vector.charAt(j))); //status data of in-neighbor
     if (str(vector.charAt(j)).equals("2")) myGraph.get("Node " + (j+1)).addEdge(myGraph.get(nodes[index]), 1f);
   } 
 }
