@@ -193,15 +193,6 @@ void print_animation()
 	  create_animation = false; //switch flag
 	}
 
-	else //just show the nodes as they connect with the application  
-	{
-	  for (int i=0; i < maxnode; i++)
-	  {
-	    //ms[i].show();
-	    cyber_nodes[i].show();
-	  }
-	}
-
 	fill(246, 225, 65);  
 
 	if (start_animation == true) //ready to show animation 
@@ -210,6 +201,21 @@ void print_animation()
 	  {
 	    //ms[i].run(); //show the moving triangles for the links
 	    cyber_nodes[i].run();
+	  }
+
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
+	  }
+	}
+
+	else //just show the nodes as they connect with the application  
+	{
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
 	  }
 	}
 }

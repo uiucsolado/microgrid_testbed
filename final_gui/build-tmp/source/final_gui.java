@@ -1141,15 +1141,6 @@ public void print_animation()
 	  create_animation = false; //switch flag
 	}
 
-	else //just show the nodes as they connect with the application  
-	{
-	  for (int i=0; i < maxnode; i++)
-	  {
-	    //ms[i].show();
-	    cyber_nodes[i].show();
-	  }
-	}
-
 	fill(246, 225, 65);  
 
 	if (start_animation == true) //ready to show animation 
@@ -1158,6 +1149,21 @@ public void print_animation()
 	  {
 	    //ms[i].run(); //show the moving triangles for the links
 	    cyber_nodes[i].run();
+	  }
+
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
+	  }
+	}
+
+	else //just show the nodes as they connect with the application  
+	{
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
 	  }
 	}
 }
@@ -1345,18 +1351,13 @@ class CyberNode
 	      	node_count = 0;
 	    }
       	
-	    /*if (down == false)
+	    if (down == false)
 	    {
 	      	//add circle to simbolize node
 	      	strokeWeight(1);	
 	      	fill(c);
 	      	ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
-	    }*/
-
-	    //add circle to simbolize node
-	    strokeWeight(1);	
-	    fill(c);
-	    ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
+	    }
     	
   	}
 }
