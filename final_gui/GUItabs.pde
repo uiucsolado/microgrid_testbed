@@ -231,10 +231,10 @@ void reset_connection()
     
      delay(1000);
      
-     i = 1;
+     controller = 1;
      nodecount = 1; //serial communication started with one of the nodes
-     myPort[i] = new Serial(this, serial_list[i], 38400); 
-     myPort[i].bufferUntil('\n'); 
+     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
+     myPort[controller].bufferUntil('\n'); 
      
      delay(500);
     
