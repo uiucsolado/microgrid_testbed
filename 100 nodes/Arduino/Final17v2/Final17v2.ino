@@ -15,7 +15,6 @@ int max_node = NUM_REMOTE_VERTICES;
 
 char val; // Data received from the serial port
 float value;
-int8_t direction = 10;
 int counter = 0; //tracks if the computer is logged off
 String neighbors = ""; //vector with information of in-neighbors (0 - not in-neighbor, 1 - is in-neighbor but is not online, 2 - is in-neighbor and is online)
 String rrequest = ""; 

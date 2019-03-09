@@ -47,6 +47,7 @@ Graph myGraph;  //the graph object, it shows links and edges in the network, eac
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
 MessageSystem[] ms = new MessageSystem[maxnode]; //array of message systems, 1 message system corresponds to 1 node in the network, each message system has links to other message systems (based on the links in the network)
+CyberNode[] cyber_nodes = new CyberNode[maxnode]; //array of cyber node objects, these objects have information of the current state of the cyber nodes
 
 //global variables and arrays
 
@@ -56,7 +57,7 @@ int[] connected_nodes = new int[maxnode]; //array of connected controllers refer
 String [] nodes = new String[maxnode];
 int node_pos = 0; //used to initially locate the nodes in graph mode in different positions
 int nodecount = 0; //records the number of controllers connected to the network, the leader node is assumed to be always connected, this variable changes at the initialization of the network depending of how many controllers initially respond
-int i = 0; //this global variable always references to the controller that is currently communicating serially with the application
+int controller = 0; //this global variable always references to the controller that is currently communicating serially with the application
 String val; //string with information obtained via serial communication
 String[] serial_list = {"COM3","COM53","COM54","COM52","COM55","COM51","COM56","COM50","COM16","COM15","COM46"}; //list of serial COM ports in the network
 int[] graphColors = {color(255,0,0),color(255,127,0),color(255,255,0),color(0,255,0),color(0,0,255),color(75,0,130),color(148,0,211),color(218,165,32),color(255,20,147),color(0,255,255)}; //list of refernce color for the nodes
@@ -181,6 +182,12 @@ public void setup()
       ms[i] = new MessageSystem();
     }    
     
+    //every cyber node object corresponds to a real node in the system
+    for (int i=0; i < maxnode; i++)
+    {
+      cyber_nodes[i] = new CyberNode();
+    } 
+
     // Create the font used in some parts of the GUI
 
     f = createFont("Times New Roman Bold", 24);
@@ -207,7 +214,14 @@ public void draw()
 
   if (updateNode == true)
   {
-    myGraphMatrix[PApplet.parseInt(str(val.charAt(1))) - 1][PApplet.parseInt(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    //myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    for (int j = 0; j < maxnode; j++)
+    {
+      if (cyber_nodes[j].id == PApplet.parseInt(str(val.charAt(1))))
+      {
+        cyber_nodes[j].down = false;
+      }
+    }
     updateNode = false;
   }
   
@@ -220,19 +234,16 @@ public void draw()
       myGraph.put("Node " + val, new Node(400 + node_pos, 540, 35, 70, graphColors[nodecount])); //creates a new node in the graph in graph mode, new Node(x position, y position, siez, size, color)
       connected_nodes[nodecount] = PApplet.parseInt(val); //registers the id of the node connecting with the application
       nodes[nodecount] ="Node " + val;
-      myGraphMatrix[PApplet.parseInt(val)-1][PApplet.parseInt(val)-1] = 2; //the graph matrix is updated
-      ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
-      ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
-      ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
+      cyber_nodes[nodecount].init(PApplet.parseInt(val), graphColors[nodecount], coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1], maxnode);
       node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
-      i++; //i = current node trying to conect
+      controller++; 
       
-      if (i < maxnode + 1) //maxnode + MATLAB = number of serial connections 
+      if (controller < maxnode + 1) //maxnode + external application  = number of serial connections 
       {
         try
         {
-          myPort[i] = new Serial(this, serial_list[i], 38400); //initialize new serial port and set the baud rate to 38400
+          myPort[controller] = new Serial(this, serial_list[controller], 38400); //initialize new serial port and set the baud rate to 38400
         }
 
         catch (RuntimeException e)
@@ -242,9 +253,9 @@ public void draw()
 
       else //all nodes registered
       {
-        i = 1; //back to node 1 (leader)
-        myPort[i].clear();
-        myPort[i].write("B"); //signal the leader node so it starts syncing procedure
+        controller = 1; //back to node 1 (leader)
+        myPort[controller].clear();
+        myPort[controller].write("B"); //signal the leader node so it starts syncing procedure
         println("Start of sync procedure"); 
         all_nodes = true; //all nodes were initially registered
       }
@@ -252,19 +263,20 @@ public void draw()
     
     else //in case the user requested a reconnection and resync
     {
-      i++; //i = current node trying to conect
+      cyber_nodes[nodecount-1].down = false;
+      controller++; //current node trying to conect
       
-      if (i < maxnode + 1)
+      if (controller < maxnode + 1)
       {
-        myPort[i] = new Serial(this, serial_list[i], 38400); //initialize new serial port and set the baud rate to 38400
+        myPort[controller] = new Serial(this, serial_list[controller], 38400); //initialize new serial port and set the baud rate to 38400
         nodecount++; //update number of registered nodes
       }
       
       else 
       {
-        i = 1; //back to node 1 (leader)
-        myPort[i].clear();
-        myPort[i].write("B"); //signal the leader node so it starts syncing procedure
+        controller = 1; //back to node 1 (leader)
+        myPort[controller].clear();
+        myPort[controller].write("B"); //signal the leader node so it starts syncing procedure
         println("Start of sync procedure");
         reconnection = false;
         reconnected = true;
@@ -275,30 +287,32 @@ public void draw()
     newconnection = false; //flag is switched
   }
     
-  //case a node is sending links data at start of system
+  //case nodes are synced and are sending links data for first time
     
   else if (newrequest == true)
   {
-    if (nextconnection == false) //meaning node i sent links information
+    if (nextconnection == false) //meaning current node sent links information
     {
-      enterVector(i - 1, val); //enter in-neighbors vector from node i
+      cyber_nodes[controller - 1].offline = false;
+      cyber_nodes[controller - 1].in_neighbors = val;
+      enterVector(controller - 1, val); //enter in-neighbors vector from current controller
       println(val);
     }
     else //in-neighbors vector registered and now talk to next node in the graph
     {
-      i++;
-      if (i < nodecount + 1)
+      controller++;
+      if (controller < nodecount + 1)
       {
-        myPort[i].clear();
-        myPort[i].write("B"); //request in-neighbors information from node i
+        myPort[controller].clear();
+        myPort[controller].write("B"); //request in-neighbors information from current controller
         println("Requesting edge info");
-        nextconnection = false; //ready to start getting links info from node i + 1
+        nextconnection = false; //ready to start getting links info from next controller
       }
         
       else //all the information of the graph was obtained 
       { 
         println("Ready for regd signal"); //ready to get first regD signal
-        i = 1; //back to node 1 (leader)
+        controller = 1; //back to node 1 (leader)
         getregd = true; //ready for regd signal
         create_animation = true; //create animation
         start_animation = true; //ready to show animation and activate timer
@@ -318,15 +332,16 @@ public void draw()
     {
       if (val.equals("send")) //signal from leader node only, meaning is requesting a regD signal
       {
-         myPort[i].write(str(regDval)); //send the last registered regD signal to the leader node
+         myPort[controller].write(str(regDval)); //send the last registered regD signal to the leader node
       }
     
       else if (val.equals("next")) //ready to receive information from next node
       {  
-        i++;
-        if (i == maxnode + 1) //ready to plug the data into the plot
+        println(controller);
+        controller++;
+        if (controller == maxnode + 1) //ready to plug the data into the plot
         {
-          i = 1;
+          controller = 1;
           stack = true; //buffer is full, so data can be transfered to plot
           getregd = true; //ready to get a new regulation signal
           println("here");
@@ -343,7 +358,7 @@ public void draw()
         else 
         {
           delay(50);
-          myPort[i].write("C"); //ready to receive data from next node
+          myPort[controller].write("C"); //ready to receive data from next node
           system_timer.start();
           checkGraph = true; //flag to indicate in-neighbors vector of next node must be checked 
         }
@@ -359,21 +374,21 @@ public void draw()
           getregd = false; //ignore next coming regD signals until control system is ready
           checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked (next node is the leader node) 
           delay(50);
-          myPort[i].write("C"); //this goes to leader node to acknowledge the most recent regD signal was registered  
+          myPort[controller].write("C"); //this goes to leader node to acknowledge the most recent regD signal was registered  
         }
         
         else  
         {
           if (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0) //this is used to filter out regD signals when the system is not ready (*NOT COMPLETELY WORKING*)
           {
-            println("l 474");
+            println("l 361");
           } 
           else 
           {
-            writeBuffer(i - 1, val); //input consensus results in the plot buffer
+            writeBuffer(controller - 1, val); //input consensus results in the plot buffer
           }
         }
-      }
+     }
        
     } 
 
@@ -387,30 +402,31 @@ public void draw()
     system_timer.update();
     if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
     {
-      println("node " + i + " is offline");
-      if ((checkNode(i) == false) && (myGraphMatrix[i-1][i-1] == 2)) //means node is down or was reconnected, but port is closed
+      println("node " + connected_nodes[controller-1] + " is offline");
+      cyber_nodes[controller-1].offline = true;
+      if ((checkNode(controller) == false) && (myGraphMatrix[controller-1][controller-1] == 2)) //means node is down or was reconnected, but port is closed
       { 
         try //if the node is up
         {
-          myPort[i].stop(); //this closes the port
-          myPort[i] = new Serial(this, serial_list[i], 38400); //opens port back
-          myPort[i].bufferUntil('\n'); 
+          myPort[controller].stop(); //this closes the port
+          myPort[controller] = new Serial(this, serial_list[controller], 38400); //opens port back
+          myPort[controller].bufferUntil('\n'); 
         }
         catch (Exception e) //if the node is down
         {
-          //updateNodeAnimation(i);
+          cyber_nodes[controller-1].down = true;
         }
       }
 
-      i++; //continue with next node
-      if (i < maxnode + 1)
+      controller++; //continue with next node
+      if (controller < maxnode + 1)
       {
         system_timer.restart();
       }
 
       else 
       {
-        i = 1; //back to node 1 (leader)
+        controller = 1; //back to node 1 (leader)
         system_timer.stop();
         stack = true; //ready to plot
 
@@ -422,7 +438,7 @@ public void draw()
       }
 
       system_timer.restart();
-      myPort[i].write("C"); //notify node
+      myPort[controller].write("C"); //notify node
       checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         
     }
@@ -478,8 +494,8 @@ public void draw()
 
   if (run == true)
   {
-    i=1;
-    myPort[i] = new Serial(this, serial_list[i], 38400);
+    controller=1;
+    myPort[controller] = new Serial(this, serial_list[controller], 38400);
     run = false;
   }
 
@@ -493,6 +509,8 @@ public void serialEvent( Serial myPort)
   //the '\n' is our end delimiter indicating the end of a complete packet
   val = myPort.readStringUntil('\n');
   
+  //try
+  //{
   if (val != null) //make sure package isn't empty before continuing
   {
     val = trim(val); //trim whitespace and formatting characters (like carriage return)
@@ -505,7 +523,7 @@ public void serialEvent( Serial myPort)
         if (val.equals("A")) //look for our 'A' char to start the communication
         {
           myPort.clear();
-          com = true; //a controller is requesting reconnected
+          com = true; //a controller is requesting reconnection
           myPort.write("D");
           println("contact");
         }
@@ -515,19 +533,19 @@ public void serialEvent( Serial myPort)
         if (str(val.charAt(0)).equals("R"))
         {
           newconnection = true; //a controller was reconnected
-          com = false; //to wait for connection of node i + 1
+          com = false; //to wait for connection of next controller
         }
       }
     }
     
-    else if (all_nodes == false) //true after application gets answer from all the nodes
+    else if (all_nodes == false) //true after GUI gets answer from all the nodes
     {
-      if (com == false) //if contact is established with node i or MATLAB
+      if (com == false) //if contact is established with controller
       {
         if (val.equals("A")) //look for 'A' char to start the communication
         {
           com = true;
-          println("contact with node " + i);
+          println("contact with node " + controller);
           myPort.write("A");
           myPort.clear();
         }
@@ -539,7 +557,7 @@ public void serialEvent( Serial myPort)
         }
         else
         {
-          //if we've already established contact with node i, obtain the node id
+          //if we've already established contact with controller, obtain the node id
           println(val);
           newconnection = true; //flag to register the node in the graph
           com = false; //flag to wait for connection of next node
@@ -548,10 +566,9 @@ public void serialEvent( Serial myPort)
       delay(100); //wait to get next serial interruption
     }
     
-    else //all nodes detected and saved
+    else 
     {
-      //println(val);
-      if (nextconnection == false) //sync procedure and links information, at this point "nextconnection" will be true until all the edges and links information has been received 
+      if (nextconnection == false) //true after sync procedure is succesful and GUI gets in-neighbors data
       {
         if (val.equals("s")) //leader wants to start sync
         {
@@ -560,7 +577,7 @@ public void serialEvent( Serial myPort)
           println("Requesting synchronization...");
         }
 
-        else if (val.equals("d")) // sync successful now send some data
+        else if (val.equals("d")) // sync successful
         {
           println("All nodes are synced!");
           myPort.clear();
@@ -577,17 +594,15 @@ public void serialEvent( Serial myPort)
           {
             myPort.write("B"); //ready to start sending information about in-neighbors, this is sent to leader node
           }
-          //init_time = int(second() + 60*minute() + 3600*hour());
-          //j = 0;
         }
 
-        else if (val.equals("B")) //it gets B when node i request action from PC
+        else if (val.equals("B")) //it gets B when the controller request action from PC
         {
           nextconnection = true;
           newrequest = true;
         }
 
-        else //data about in-neighbors 
+        else // "val" is vector of in-neighbors 
         {
           newrequest = true;
         }
@@ -606,7 +621,7 @@ public void serialEvent( Serial myPort)
           myPort.write("D");
         }
 
-        else if (str(val.charAt(0)).equals("R"))
+        else if (str(val.charAt(0)).equals("R")) //meaning the node reconnected
         {
           println("node reconnected");  
           updateNode = true;
@@ -614,7 +629,7 @@ public void serialEvent( Serial myPort)
         }
 
         
-        else if (val.equals("D")) //reg D signal will be sent by RTO
+        else if (val.equals("D")) //letter "D" is received before getting regd signal from external application (f.e. MATLAB)
         {
           if (getregd == true)
           {
@@ -633,31 +648,35 @@ public void serialEvent( Serial myPort)
           indata = true; 
         }
 
-        else if ((ignorenext == true) && (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0)) //reg D signal received but ignored
+        else if ((ignorenext == true) && (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0)) //reg D signal received but ignored (not sent to leader node)
         {
           ignorenext = false;
         }
 
-        else if (val.equals("end"))
+        else if (val.equals("end")) //leader node indicates the end of concensus round
         {
           consensus_timer.update();
           println("Initial response time: " + consensus_timer.time_elapsed + "s");
           consensus_timer.stop();
         }
 
-        else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from node i
+        else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from controller
         {
-          if (checkGraphMatrix(i - 1, val) == false) //check if in-neighbors vector of node i changed since last round 
+          if (cyber_nodes[controller].in_neighbors != val)
           {
-            updateVector(i - 1, val); //update vector
-            updateAnimation(i - 1);
+            cyber_nodes[controller].in_neighbors = val; //update in_neighbors vector 
           }
           checkGraph = false;
         }
 
-        else //ratio consensus values received from node i
+        else if (val.equals("next"))//"val" = string of ratio concensus results for
         {
-          indata = true; 
+          indata = true;
+        }
+
+        else  
+        {
+          indata = true;
         }
 
         //println("here");
@@ -665,6 +684,12 @@ public void serialEvent( Serial myPort)
       }
     }
   }
+  //}
+
+  //catch (Exception e)
+  //{
+
+  //}
 }
 
 
@@ -764,7 +789,6 @@ public void enterVector(int index, String vector)
 {
   for (int j = 0; j < maxnode; j++)
   {
-    myGraphMatrix[connected_nodes[index]-1][j] = PApplet.parseInt(str(vector.charAt(j))); //status data of in-neighbor
     if (str(vector.charAt(j)).equals("2")) myGraph.get("Node " + (j+1)).addEdge(myGraph.get(nodes[index]), 1f);
   } 
 }
@@ -1105,9 +1129,9 @@ public void print_animation()
 
 	if (create_animation == true) //this is triggered once the nodes are synced and animation can be created
 	{
-	  for (int i=0; i<nodecount; i++) //it goes through all the positions in the graph matrix
+	  for (int i=0; i<maxnode; i++) //it goes through all the positions in the graph matrix
 	  {
-	    {
+	    /*{
 	      for (int j=0; j<maxnode; j++)
 	      {
 	        if (myGraphMatrix[connected_nodes[i]-1][j] == 2 && (connected_nodes[i] - 1) != j) //check for links
@@ -1115,17 +1139,10 @@ public void print_animation()
 	          ms[i].addLink(new PVector(coordinates[j][0], coordinates[j][1]), j+1); //create a link in node i
 	        }
 	      }
-	    }        
+	    }*/
+	    cyber_nodes[i].SetLinks(coordinates, graphColors);
 	  }
 	  create_animation = false; //switch flag
-	}
-
-	else //just show the nodes as they connect with the application  
-	{
-	  for (int i=0; i < nodecount; i++)
-	  {
-	    ms[i].show();
-	  }
 	}
 
 	fill(246, 225, 65);  
@@ -1134,7 +1151,23 @@ public void print_animation()
 	{
 	  for (int i=0; i < maxnode; i++)
 	  {
-	    ms[i].run(); //show the moving triangles for the links
+	    //ms[i].run(); //show the moving triangles for the links
+	    cyber_nodes[i].run();
+	  }
+
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
+	  }
+	}
+
+	else //just show the nodes as they connect with the application  
+	{
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
 	  }
 	}
 }
@@ -1143,15 +1176,17 @@ public void reset_connection()
 {
 	 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
      {
+       cyber_nodes[j-1].down = true;
+       cyber_nodes[j-1].offline = true;	
        myPort[j].stop();
      }
     
      delay(1000);
      
-     i = 1;
+     controller = 1;
      nodecount = 1; //serial communication started with one of the nodes
-     myPort[i] = new Serial(this, serial_list[i], 38400); 
-     myPort[i].bufferUntil('\n'); 
+     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
+     myPort[controller].bufferUntil('\n'); 
      
      delay(500);
     
@@ -1163,6 +1198,173 @@ public void reset_connection()
      com = false;
      start_animation = false;
      nextconnection = false;
+}
+// A class to describe a group of messages
+// An ArrayList is used to manage the list of messages
+// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
+
+class MessageSystem 
+{
+  ArrayList<Message> messages;
+  PVector origin;
+  PVector destiny;
+  int c;
+  int k; //variable to control delay in between arrows
+  boolean hide = false;
+  int id;
+  int node_count = 0;
+
+  MessageSystem() 
+  {
+    messages = new ArrayList<Message>();
+  }
+
+  public void addLink(PVector target, int node_id) 
+  {
+    id = node_id;
+    destiny = target.get();
+    
+    while (node_count<id)
+    {
+      messages.add(new Message(origin, destiny, c));
+      node_count++;
+    }
+    Message m = messages.get(id - 1);
+    m.hide = false;
+  }
+
+  public void show() 
+  {
+    if (hide == false)
+    {
+      strokeWeight(1);
+      fill(c);
+      ellipse(origin.x, origin.y, 30, 30); 
+    }
+  }
+
+  public void run() 
+  {
+    {
+      for (int i = messages.size()-1; i >= 0; i--) 
+      {
+        Message m = messages.get(i);
+
+        if (hide == false) //if true it means that the node is down
+        {
+          m.run();
+          if (m.isDead()) 
+          {
+            m.restart();
+          }
+        }
+      }
+
+      //add circle to simbolize node
+      strokeWeight(1);
+      fill(c);
+      ellipse(origin.x, origin.y, 30, 30);
+      
+      k = 0;
+    }
+  }
+}
+class CyberNode
+{
+	ArrayList<Message> messages;
+  	PVector origin;
+  	PVector destiny;
+  	PVector local_coordinates; //node local coordinates
+  	int c;
+	int id;
+	int node_count = 0;
+	int total_nodes = 0;
+	String in_neighbors;
+	boolean down;
+	boolean offline;
+	Message m;
+
+	CyberNode()
+	{	
+		id = 0;
+		down = true;
+		offline = true;
+		in_neighbors = "";
+		messages = new ArrayList<Message>();
+	}
+
+	public void init(int index, int col, float x_pos, float y_pos, int num_nodes)
+	{	
+		total_nodes = num_nodes;
+		down = false;
+		id = index;
+		c = col; //set node color
+		local_coordinates = new PVector(x_pos, y_pos);
+	}
+
+	public void SetLinks(float [][] coordinates, int[] nodesColors)
+	{
+		destiny = new PVector(local_coordinates.x, local_coordinates.y); // get node local coordinates
+		for (int i = 0; i < total_nodes; i++)
+		{
+			if (PApplet.parseInt(str(in_neighbors.charAt(i))) != 0)
+			{
+				origin = new PVector(coordinates[i][0], coordinates[i][1]); //get in-neighbor coordinates
+				messages.add(new Message(origin, destiny, nodesColors[i])); //add in-neighbor link
+			}
+		}
+	}
+
+	public void show() 
+  	{
+    	if (down == false)
+    	{
+      		strokeWeight(2);
+      		fill(c);
+      		ellipse(local_coordinates.x, local_coordinates.y, 30, 30); 
+    	}
+  	}
+
+  	public void run() 
+  	{
+    	if (offline == false)
+    	{
+	      	for (int i = 0; i < total_nodes; i++)
+	      	{
+
+	        	if (PApplet.parseInt(str(in_neighbors.charAt(i))) != 0)
+	        	{
+	        		m = messages.get(node_count);
+	        		if (PApplet.parseInt(str(in_neighbors.charAt(i))) == 2)
+	        		{	
+	        			m.hide = false;
+	        		}
+	        		else //this means it is equal to 1
+	        		{
+	        			m.hide = true;
+	        		}
+	        		m.run();
+	          		if (m.isDead()) 
+	          		{
+	            		m.restart();
+	          		}
+	          		node_count++;
+	        	} 
+	    
+	      	}
+	      	node_count = 0;
+	    }
+
+      	
+	    if (down == false)
+	    {
+	      	//add circle to simbolize node
+	      	strokeWeight(2);	
+	      	fill(c);
+	      	ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
+	    }
+    	
+  	}
 }
   
 /*   =================================================================================       
@@ -1558,76 +1760,6 @@ public void reset_connection()
     }
     
  
-// A class to describe a group of messages
-// An ArrayList is used to manage the list of messages
-// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
-
-class MessageSystem 
-{
-  ArrayList<Message> messages;
-  PVector origin;
-  PVector destiny;
-  int c;
-  int k; //variable to control delay in between arrows
-  boolean hide = false;
-  int id;
-  int node_count = 0;
-
-  MessageSystem() 
-  {
-    messages = new ArrayList<Message>();
-  }
-
-  public void addLink(PVector target, int node_id) 
-  {
-    id = node_id;
-    destiny = target.get();
-    
-    while (node_count<id)
-    {
-      messages.add(new Message(origin, destiny, c));
-      node_count++;
-    }
-    Message m = messages.get(id - 1);
-    m.hide = false;
-  }
-
-  public void show() 
-  {
-    if (hide == false)
-    {
-      strokeWeight(1);
-      fill(c);
-      ellipse(origin.x, origin.y, 30, 30); 
-    }
-  }
-
-  public void run() 
-  {
-    {
-      for (int i = messages.size()-1; i >= 0; i--) 
-      {
-        Message m = messages.get(i);
-
-        if (hide == false) //if true it means that the node is down
-        {
-          m.run();
-          if (m.isDead()) 
-          {
-            m.restart();
-          }
-        }
-      }
-
-      //add circle to simbolize node
-      strokeWeight(1);
-      fill(c);
-      ellipse(origin.x, origin.y, 30, 30);
-      
-      k = 0;
-    }
-  }
-}
 //Class used to create timer objects to be used for control of communications in GUI
 
 class Timer 
