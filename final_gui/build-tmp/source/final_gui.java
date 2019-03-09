@@ -370,6 +370,7 @@ public void draw()
           } 
           else 
           {
+            println(i);
             writeBuffer(i - 1, val); //input consensus results in the plot buffer
           }
         }
