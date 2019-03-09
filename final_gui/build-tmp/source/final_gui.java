@@ -234,10 +234,6 @@ public void draw()
       myGraph.put("Node " + val, new Node(400 + node_pos, 540, 35, 70, graphColors[nodecount])); //creates a new node in the graph in graph mode, new Node(x position, y position, siez, size, color)
       connected_nodes[nodecount] = PApplet.parseInt(val); //registers the id of the node connecting with the application
       nodes[nodecount] ="Node " + val;
-      // myGraphMatrix[int(val)-1][int(val)-1] = 2; //the graph matrix is updated
-      // ms[nodecount].origin = new PVector(coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1]); //creates a new node in the graph in animation mode
-      // ms[nodecount].c = graphColors[nodecount]; //asigns a color to the node in animation mode
-      // ms[nodecount].hide = false; //the node is hidden until all the nodes in the graph are registered and synced
       cyber_nodes[nodecount].init(PApplet.parseInt(val), graphColors[nodecount], coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1], maxnode);
       node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
       nodecount++; //update number of registered nodes
@@ -341,8 +337,9 @@ public void draw()
     
       else if (val.equals("next")) //ready to receive information from next node
       {  
+        println(controller);
         controller++;
-        if (controller == maxnode) //ready to plug the data into the plot
+        if (controller == maxnode + 1) //ready to plug the data into the plot
         {
           controller = 1;
           stack = true; //buffer is full, so data can be transfered to plot
@@ -384,7 +381,7 @@ public void draw()
         {
           if (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0) //this is used to filter out regD signals when the system is not ready (*NOT COMPLETELY WORKING*)
           {
-            println("l 474");
+            println("l 361");
           } 
           else 
           {
@@ -512,8 +509,8 @@ public void serialEvent( Serial myPort)
   //the '\n' is our end delimiter indicating the end of a complete packet
   val = myPort.readStringUntil('\n');
   
-  try
-  {
+  //try
+  //{
   if (val != null) //make sure package isn't empty before continuing
   {
     val = trim(val); //trim whitespace and formatting characters (like carriage return)
@@ -526,7 +523,7 @@ public void serialEvent( Serial myPort)
         if (val.equals("A")) //look for our 'A' char to start the communication
         {
           myPort.clear();
-          com = true; //a controller is requesting reconnected
+          com = true; //a controller is requesting reconnection
           myPort.write("D");
           println("contact");
         }
@@ -672,9 +669,14 @@ public void serialEvent( Serial myPort)
           checkGraph = false;
         }
 
-        else //"val" = string of ratio concensus results for
+        else if (val.equals("next"))//"val" = string of ratio concensus results for
         {
-          indata = true; 
+          indata = true;
+        }
+
+        else  
+        {
+          indata = true;
         }
 
         //println("here");
@@ -682,12 +684,12 @@ public void serialEvent( Serial myPort)
       }
     }
   }
-  }
+  //}
 
-  catch (Exception e)
-  {
+  //catch (Exception e)
+  //{
 
-  }
+  //}
 }
 
 
@@ -1317,7 +1319,7 @@ class CyberNode
   	{
     	if (down == false)
     	{
-      		strokeWeight(1);
+      		strokeWeight(2);
       		fill(c);
       		ellipse(local_coordinates.x, local_coordinates.y, 30, 30); 
     	}
@@ -1334,7 +1336,7 @@ class CyberNode
 	        	{
 	        		m = messages.get(node_count);
 	        		if (PApplet.parseInt(str(in_neighbors.charAt(i))) == 2)
-	        		{
+	        		{	
 	        			m.hide = false;
 	        		}
 	        		else //this means it is equal to 1
@@ -1352,11 +1354,12 @@ class CyberNode
 	      	}
 	      	node_count = 0;
 	    }
+
       	
 	    if (down == false)
 	    {
 	      	//add circle to simbolize node
-	      	strokeWeight(1);	
+	      	strokeWeight(2);	
 	      	fill(c);
 	      	ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
 	    }

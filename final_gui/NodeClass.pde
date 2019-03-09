@@ -48,7 +48,7 @@ class CyberNode
   	{
     	if (down == false)
     	{
-      		strokeWeight(1);
+      		strokeWeight(2);
       		fill(c);
       		ellipse(local_coordinates.x, local_coordinates.y, 30, 30); 
     	}
@@ -65,7 +65,7 @@ class CyberNode
 	        	{
 	        		m = messages.get(node_count);
 	        		if (int(str(in_neighbors.charAt(i))) == 2)
-	        		{
+	        		{	
 	        			m.hide = false;
 	        		}
 	        		else //this means it is equal to 1
@@ -83,11 +83,12 @@ class CyberNode
 	      	}
 	      	node_count = 0;
 	    }
+
       	
 	    if (down == false)
 	    {
 	      	//add circle to simbolize node
-	      	strokeWeight(1);	
+	      	strokeWeight(2);	
 	      	fill(c);
 	      	ellipse(local_coordinates.x, local_coordinates.y, 30, 30);
 	    }
