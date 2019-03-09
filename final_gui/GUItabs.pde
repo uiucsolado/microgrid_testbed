@@ -177,9 +177,9 @@ void print_animation()
 
 	if (create_animation == true) //this is triggered once the nodes are synced and animation can be created
 	{
-	  for (int i=0; i<nodecount; i++) //it goes through all the positions in the graph matrix
+	  for (int i=0; i<maxnode; i++) //it goes through all the positions in the graph matrix
 	  {
-	    {
+	    /*{
 	      for (int j=0; j<maxnode; j++)
 	      {
 	        if (myGraphMatrix[connected_nodes[i]-1][j] == 2 && (connected_nodes[i] - 1) != j) //check for links
@@ -187,17 +187,10 @@ void print_animation()
 	          ms[i].addLink(new PVector(coordinates[j][0], coordinates[j][1]), j+1); //create a link in node i
 	        }
 	      }
-	    }        
+	    }*/
+	    cyber_nodes[i].SetLinks(coordinates, graphColors);
 	  }
 	  create_animation = false; //switch flag
-	}
-
-	else //just show the nodes as they connect with the application  
-	{
-	  for (int i=0; i < nodecount; i++)
-	  {
-	    ms[i].show();
-	  }
 	}
 
 	fill(246, 225, 65);  
@@ -206,7 +199,23 @@ void print_animation()
 	{
 	  for (int i=0; i < maxnode; i++)
 	  {
-	    ms[i].run(); //show the moving triangles for the links
+	    //ms[i].run(); //show the moving triangles for the links
+	    cyber_nodes[i].run();
+	  }
+
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
+	  }
+	}
+
+	else //just show the nodes as they connect with the application  
+	{
+	  for (int i=0; i < maxnode; i++)
+	  {
+	    //ms[i].show();
+	    cyber_nodes[i].show();
 	  }
 	}
 }
@@ -215,15 +224,17 @@ void reset_connection()
 {
 	 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
      {
+       cyber_nodes[j-1].down = true;
+       cyber_nodes[j-1].offline = true;	
        myPort[j].stop();
      }
     
      delay(1000);
      
-     i = 1;
+     controller = 1;
      nodecount = 1; //serial communication started with one of the nodes
-     myPort[i] = new Serial(this, serial_list[i], 38400); 
-     myPort[i].bufferUntil('\n'); 
+     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
+     myPort[controller].bufferUntil('\n'); 
      
      delay(500);
     

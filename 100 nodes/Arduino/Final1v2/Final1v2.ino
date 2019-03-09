@@ -49,8 +49,8 @@ unsigned long end_time;
 
 MgsModbus Mb;
 // Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB2 };
-IPAddress ip(192, 168, 2, 2);
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB1 };
+IPAddress ip(192, 168, 2, 1);
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
 uint16_t regd_high;
@@ -65,6 +65,7 @@ int fc;
 int ref;
 int count;
 int pos;
+int server_ip = 20;
 
 uint8_t rounds  = 0;
 
@@ -92,8 +93,8 @@ void setup()
   g.addInNeighbor(0x4174F186);  // node 2
   //g.addInNeighbor(0x4151C692);   // node 3
   g.addInNeighbor(0x4151C48B);  // node 4
-  g.addInNeighbor(0x4151C688); // node 5
-  g.addInNeighbor(0x4151C6AB); // node 6
+  //g.addInNeighbor(0x4151C688); // node 5
+  //g.addInNeighbor(0x4151C6AB); // node 6
   //g.addInNeighbor(0x4151C6CB); // node 7
   //g.addInNeighbor(0x4151C6AC); // node 8
   digitalWrite(cPin,LOW);
@@ -105,9 +106,14 @@ void setup()
   {
      Mb.MbData[i] = 0;
   }
-  sendConsensusResults();                      //initialize to zero
-  
+
   establishContact();             //establish contact with computer processing code
+  
+  for (int i = 0; i <=10 ; i++)
+  {
+    sendConsensusResults(server_ip + i); //initialize registers to zero
+    sendConsensusResults(server_ip + i);
+  }
 
 }
 
@@ -148,7 +154,7 @@ void loop()
                 Serial.println("d");
                 digitalWrite(sPin,HIGH);
                 delay(500);
-                a.leaderFairSplitRatioConsensus(0,50,150); //this is just a first round to get information about in-neighbors in the graph
+                a.leaderFairSplitRatioConsensus(0,10,150); //this is just a first round to get information about in-neighbors in the graph
               }
               else
               {
@@ -191,7 +197,7 @@ void loop()
           regd_base = regd*base;
         }
         
-        a.leaderFairSplitRatioConsensus(regd_base,50,150); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50);
+        a.leaderFairSplitRatioConsensus(regd_base,10,150); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50);
       
         regd1 = a.getbufferdata(0);
         
@@ -204,9 +210,15 @@ void loop()
         regd_high = (n >> 16) & 0x0000FFFF;
         regd_low = n & 0x0000FFFF;
         Mb.MbData[0] =  regd_high;                    
-        Mb.MbData[1] = regd_low;     
+        Mb.MbData[1] = regd_low;
+
+        Serial.println("end");
               
-        sendConsensusResults();
+        for (int i = 0; i <=10 ; i++)
+        {
+          sendConsensusResults(server_ip + i); //initialize registers to zero
+          sendConsensusResults(server_ip + i);
+        }
 
         a.resync();
 
@@ -222,18 +234,20 @@ void loop()
         delay(100);
         cresults = "";
          
-        for (int j = 3; j < 53; j++)
+       for (int j = 3; j < 13; j++)
         {
           value = a.getbufferdata(j);
-            
+
+          /*
           if (value >= 0)
           { 
-            cresults = cresults + (value*(35000.0000 - 1000.0000) + 1000.0000) + ";" ;
+            cresults = cresults + (value*(20000.0000 - 0.0000) + 0.0000) + ";" ;
           } 
           else
           {
-            cresults = cresults + (value*(1000.0000 - 0.0000) + 1000.0000) + ";" ;
-          }
+            cresults = cresults + (value*(0.0000 - (-20000.0000)) + 0.0000) + ";" ;
+          }*/
+          cresults = cresults + value*1000 + ";" ;
         }
         
         Serial.println(cresults);
@@ -250,23 +264,12 @@ void loop()
      delay(20);
     }
            
-    /*else 
-    {
-      delay(10);
-      counter++;
-      if (counter == 10000)
-      {
-        establishContact(); //if computer goes off
-        counter = 0;
-      }
-    }*/
 }
 
-void sendConsensusResults()
+void sendConsensusResults(int ip)
 {
-  //VARIABLES NOT BEING USED////////////////////////////////////
   fc = 16;                                 //function code to write to multiple registers
-  ref = 0;                                 //starting address of register at server end (Typhoon) which we are writing to in this case
+  ref = 0;                                //starting address of node 2 registers is 10
   Ref_high = uint8_t(ref >> 8 && 0x00FF);
   Ref_low = uint8_t(ref & 0x0FF);
   count = 2;                              //in this case we want to write to 2 registers on the server(typhoon)
@@ -274,17 +277,9 @@ void sendConsensusResults()
   Count_low = uint8_t(count & 0x0FF);
   pos = 0;                              //position of the registers on the client(arduino) we want to read
   Pos_high = uint8_t(pos >> 8 && 0x00FF);
-  Pos_low = uint8_t(pos & 0x0FF); 
-  //Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low);
-  //Serial.println("Sent Request Packet");
-  ////////////////////////////////////////////////////////////////
-  
-  int node1_ip = 41; //part of ip address for node 1 on the HIL side 
-  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node1_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)
+  Pos_low = uint8_t(pos & 0x0FF);
+  Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low,ip);
   Mb.MbmRun();
-  //Serial.println("Received Response");
-  
-  
 }
 
 void establishContact()
