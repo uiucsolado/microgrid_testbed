@@ -662,9 +662,9 @@ public void serialEvent( Serial myPort)
 
         else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from controller
         {
-          if (cyber_nodes[controller].in_neighbors != val)
+          if (cyber_nodes[controller-1].in_neighbors != val)
           {
-            cyber_nodes[controller].in_neighbors = val; //update in_neighbors vector 
+            cyber_nodes[controller-1].in_neighbors = val; //update in_neighbors vector 
           }
           checkGraph = false;
         }
