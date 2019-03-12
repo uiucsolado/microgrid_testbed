@@ -240,10 +240,11 @@ void reset_connection()
     
      reconnection = true;
 
-     //reset all control variables 
-     indata = false;      
+     //reset all control variables      
      reset = false;
      com = false;
      start_animation = false;
-     nextconnection = false;
+     serial_flag_1 = false;
+     serial_flag_2 = false;
+     serial_flag_3 = false;
 }

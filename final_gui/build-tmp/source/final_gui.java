@@ -39,7 +39,7 @@ Serial communication with Arduino and MATLAB
  //library containing functions for serial communication with controlers
 
 
-int maxnode = 10; //number of max expected number of connected nodes, change this value depending of the size of the network
+int maxnode = 4; //number of max expected number of connected nodes, change this value depending of the size of the network
 
 //some objects to control animations and communications
 
@@ -66,16 +66,18 @@ float regDval = 0; //current reg D value to be sent to leader node
 //boolean flags used to control the flow of serial communication and GUI
 
 boolean com = false; //flag that informs of a new controller communicating during the initialization
-boolean newconnection = false; //flag that informs of a new node connecting with the application
-boolean all_nodes = false; //flag that informs that all edges in the graph have been registered
-boolean newrequest = false; //flag that informs of a new link to be added to an edge
-boolean nextconnection = false; //flag that informs that all the links information from an edge have been registered
+boolean serial_flag_1 = false; //flag that informs of a new node connecting with the application
+boolean all_nodes = false; //flag that informs that all nodes in the graph have been registered
+boolean serial_flag_2 = false; //flag that informs of a new link to be added to an edge
+boolean enter_in_neighbors = false; //flag to indicate that in-neighbors data was sent 
+boolean all_links = false; //flag that informs that all links in the graph have been registered
 boolean create_animation = false; //flag used to start the animation that represents the graph of the network
-boolean indata = false; //flag to indicate some information is coming from a node
+boolean serial_flag_3 = false; //flag to indicate some information is coming from a node
 boolean checkGraph = false; //flag to indicate that the graph must be checked for changes 
-boolean updateNode = false; //flag to indicate a node es requesting reconnection 
+boolean serial_flag_4 = false; //flag to indicate a node es requesting reconnection 
 boolean getregd = false; //flag to indicate that system is available to get a new regulation signal
 boolean ignorenext = false; //flag to indicate that a regd signal value must be ignored
+boolean serial_flag_5 = false;
 boolean start_animation = false; //flag to indicate the animation is ready to be started
 boolean reconnection = false; //true when user requests reconnecting the arduino devices
 boolean reconnected = false; //true when a reconnection took place in the system but it hasn't synced
@@ -210,24 +212,9 @@ public void setup()
 public void draw()
 {
 
-  //case a node was offline and is trying to reconnect
-
-  if (updateNode == true)
-  {
-    //myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
-    for (int j = 0; j < maxnode; j++)
-    {
-      if (cyber_nodes[j].id == PApplet.parseInt(str(val.charAt(1))))
-      {
-        cyber_nodes[j].down = false;
-      }
-    }
-    updateNode = false;
-  }
-  
   //case a node is requesting connection with the application
 
-  if (newconnection == true) 
+  if (serial_flag_1 == true) 
   {
     if (reconnection == false) //meaning it is the first time the control is initialized
     {
@@ -284,18 +271,18 @@ public void draw()
       }
     } 
     
-    newconnection = false; //flag is switched
+    serial_flag_1 = false; //flag is switched
   }
     
   //case nodes are synced and are sending links data for first time
     
-  else if (newrequest == true)
+  else if (serial_flag_2 == true)
   {
-    if (nextconnection == false) //meaning current node sent links information
+    if (enter_in_neighbors == true) //meaning current node sent links information
     {
       cyber_nodes[controller - 1].offline = false;
       cyber_nodes[controller - 1].in_neighbors = val;
-      enterVector(controller - 1, val); //enter in-neighbors vector from current controller
+      enterVector(controller - 1, val); //enter in-neighbors vector from current controller to the graph object
       println(val);
     }
     else //in-neighbors vector registered and now talk to next node in the graph
@@ -306,7 +293,7 @@ public void draw()
         myPort[controller].clear();
         myPort[controller].write("B"); //request in-neighbors information from current controller
         println("Requesting edge info");
-        nextconnection = false; //ready to start getting links info from next controller
+        enter_in_neighbors = false; //ready to start getting links info from next controller
       }
         
       else //all the information of the graph was obtained 
@@ -317,88 +304,91 @@ public void draw()
         create_animation = true; //create animation
         start_animation = true; //ready to show animation and activate timer
         checkGraph = true; //check for in-neighbors vector changes in leader node
+        all_links = true;
       }
     }
-    newrequest = false; //flag is switched
+    serial_flag_2 = false; //flag is switched
+  }
+
+  else if (serial_flag_3 == true)
+  {
+    regDval = PApplet.parseFloat(val); //assign received value
+    checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked (next node is the leader node) 
+    delay(50);
+    myPort[controller].write("C"); //this goes to leader node to acknowledge the most recent regD signal was registered
+    getregd = false; //ignore next coming regD signals until control system is ready
+
+    serial_flag_3 = false;
   }
 
   //case the application received in-neighbors data, consensus results or a regD signal
     
-  else if (indata == true)
+  else if (serial_flag_4 == true)
   {
     system_timer.start(); //start system timer
 
-    if (val != null)
+    if (val.equals("send")) //signal from leader node only, meaning is requesting a regD signal
     {
-      if (val.equals("send")) //signal from leader node only, meaning is requesting a regD signal
+       myPort[controller].write(str(regDval)); //send the last registered regD signal to the leader node
+    }
+  
+    else if (val.equals("next")) //ready to receive information from next node
+    {  
+      println(controller);
+      controller++;
+      if (controller == maxnode + 1) //ready to plug the data into the plot
       {
-         myPort[controller].write(str(regDval)); //send the last registered regD signal to the leader node
-      }
-    
-      else if (val.equals("next")) //ready to receive information from next node
-      {  
-        println(controller);
-        controller++;
-        if (controller == maxnode + 1) //ready to plug the data into the plot
-        {
-          controller = 1;
-          stack = true; //buffer is full, so data can be transfered to plot
-          getregd = true; //ready to get a new regulation signal
-          println("here");
+        controller = 1;
+        stack = true; //buffer is full, so data can be transfered to plot
+        getregd = true; //ready to get a new regulation signal
+        println("here");
 
-          if ((lineGraphValues_buffer[0][0] > LineGraph.yMax || lineGraphValues_buffer[0][0] < LineGraph.yMin) && capture == false) //change scale to notice consensus differences
-          {         
-           LineGraph.yMax=PApplet.parseInt(lineGraphValues_buffer[0][0] + 1); 
-           LineGraph.yMin=PApplet.parseInt(lineGraphValues_buffer[0][0] - 1);
-          }
-
-          system_timer.stop();
-        }  
-
-        else 
-        {
-          delay(50);
-          myPort[controller].write("C"); //ready to receive data from next node
-          system_timer.start();
-          checkGraph = true; //flag to indicate in-neighbors vector of next node must be checked 
+        if ((lineGraphValues_buffer[0][0] > LineGraph.yMax || lineGraphValues_buffer[0][0] < LineGraph.yMin) && capture == false) //change scale to notice consensus differences
+        {         
+         LineGraph.yMax=PApplet.parseInt(lineGraphValues_buffer[0][0] + 1); 
+         LineGraph.yMin=PApplet.parseInt(lineGraphValues_buffer[0][0] - 1);
         }
-      }
 
-      else
+        system_timer.stop();
+      }  
+
+      else 
       {
-        println(PApplet.parseFloat(val));
-        if (getregd == true) //if system is ready for new regD signal, value was received serially 
-        {
-          //println("l 462");
-          regDval = PApplet.parseFloat(val); //assign received value
-          getregd = false; //ignore next coming regD signals until control system is ready
-          checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked (next node is the leader node) 
-          delay(50);
-          myPort[controller].write("C"); //this goes to leader node to acknowledge the most recent regD signal was registered  
-        }
-        
-        else  
-        {
-          if (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0) //this is used to filter out regD signals when the system is not ready (*NOT COMPLETELY WORKING*)
-          {
-            println("l 361");
-          } 
-          else 
-          {
-            writeBuffer(controller - 1, val); //input consensus results in the plot buffer
-          }
-        }
-     }
-       
-    } 
+        delay(50);
+        myPort[controller].write("C"); //ready to receive data from next node
+        system_timer.start();
+        checkGraph = true; //flag to indicate in-neighbors vector of next node must be checked 
+      }
+    }
 
-    indata = false; //flag is switched
+    else
+    {
+      println(PApplet.parseFloat(val));
+      writeBuffer(controller - 1, val); //input consensus results in the plot buffer
+    }
+    serial_flag_4 = false; //flag is switched
+  }
+
+  //case a node was offline and is trying to reconnect
+
+  if (serial_flag_5 == true)
+  {
+    //myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
+    for (int j = 0; j < maxnode; j++)
+    {
+      if (cyber_nodes[j].id == PApplet.parseInt(str(val.charAt(1))))
+      {
+        cyber_nodes[j].down = false;
+      }
+    }
+    serial_flag_5 = false;
   }
 
   //system timer is running
 
   if (system_timer.running == true) 
   {
+    cyber_nodes[controller-1].offline = true;
     system_timer.update();
     if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
     {
@@ -442,7 +432,12 @@ public void draw()
       checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         
     }
-  }
+
+    else 
+    {
+      cyber_nodes[controller-1].offline = false;
+    }
+  } 
 
   //make the background color gray
 
@@ -508,9 +503,7 @@ public void serialEvent( Serial myPort)
   //put the incoming data into a String 
   //the '\n' is our end delimiter indicating the end of a complete packet
   val = myPort.readStringUntil('\n');
-  
-  //try
-  //{
+
   if (val != null) //make sure package isn't empty before continuing
   {
     val = trim(val); //trim whitespace and formatting characters (like carriage return)
@@ -532,7 +525,7 @@ public void serialEvent( Serial myPort)
       {
         if (str(val.charAt(0)).equals("R"))
         {
-          newconnection = true; //a controller was reconnected
+          serial_flag_1 = true; //a controller was reconnected
           com = false; //to wait for connection of next controller
         }
       }
@@ -559,137 +552,121 @@ public void serialEvent( Serial myPort)
         {
           //if we've already established contact with controller, obtain the node id
           println(val);
-          newconnection = true; //flag to register the node in the graph
+          serial_flag_1 = true; //flag to register the node in the graph
           com = false; //flag to wait for connection of next node
         }
       }
       delay(100); //wait to get next serial interruption
     }
-    
-    else 
+
+    else if (all_links == false) //true after sync procedure is succesful and GUI gets in-neighbors data
     {
-      if (nextconnection == false) //true after sync procedure is succesful and GUI gets in-neighbors data
+      if (val.equals("s")) //leader wants to start sync
       {
-        if (val.equals("s")) //leader wants to start sync
-        {
-          myPort.clear();
-          myPort.write("s");
-          println("Requesting synchronization...");
-        }
-
-        else if (val.equals("d")) // sync successful
-        {
-          println("All nodes are synced!");
-          myPort.clear();
-          if (reconnected == true) //it's true when the system just got reconnected and synced
-          {
-            reconnected = false;
-            println("Ready for regd signal"); //ready to get first regD signal
-            getregd = true; //ready for regd signal
-            newrequest = false;
-            nextconnection = true;
-            start_animation = true; //start the animation in plot mode back
-          }
-          else
-          {
-            myPort.write("B"); //ready to start sending information about in-neighbors, this is sent to leader node
-          }
-        }
-
-        else if (val.equals("B")) //it gets B when the controller request action from PC
-        {
-          nextconnection = true;
-          newrequest = true;
-        }
-
-        else // "val" is vector of in-neighbors 
-        {
-          newrequest = true;
-        }
-
-        delay(100);
+        myPort.clear();
+        myPort.write("s");
+        println("Requesting synchronization...");
       }
-      
+
+      else if (val.equals("d")) // sync successful
+      {
+        println("All nodes are synced!");
+        myPort.clear();
+        if (reconnected == true) //it's true when the system just got reconnected and synced
+        {
+          reconnected = false;
+          println("Ready for regd signal"); //ready to get first regD signal
+          getregd = true; //ready for regd signal
+          //newrequest = false;
+          all_links = true;
+          start_animation = true; //start the animation in plot mode back
+        }
+        else
+        {
+          myPort.write("B"); //ready to start getting in-neighbors data, this is sent to leader node
+        }
+      }
+
+      else if (val.equals("B")) //it gets B when the controller request action from PC
+      {
+        enter_in_neighbors = false;
+        serial_flag_2 = true;
+      }
+
       else
       {
-        println(val);
-        
-        if (val.equals("A")) //meaning the node restarted
-        {
-          delay(50);
-          myPort.clear();
-          myPort.write("D");
-        }
-
-        else if (str(val.charAt(0)).equals("R")) //meaning the node reconnected
-        {
-          println("node reconnected");  
-          updateNode = true;
-          //myGraphMatrix[int(val.charAt(1)) - 1][int(val.charAt(1)) - 1] = 1; //node connected but not recognized
-        }
-
-        
-        else if (val.equals("D")) //letter "D" is received before getting regd signal from external application (f.e. MATLAB)
-        {
-          if (getregd == true)
-          {
-            println("new regd signal");
-            consensus_timer.start();
-            ignorenext = false;
-          }  
-          else
-          {
-            ignorenext = true;
-          }
-        }
-
-        else if (getregd == true) //reg D signal received
-        {
-          indata = true; 
-        }
-
-        else if ((ignorenext == true) && (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= 0)) //reg D signal received but ignored (not sent to leader node)
-        {
-          ignorenext = false;
-        }
-
-        else if (val.equals("end")) //leader node indicates the end of concensus round
-        {
-          consensus_timer.update();
-          println("Initial response time: " + consensus_timer.time_elapsed + "s");
-          consensus_timer.stop();
-        }
-
-        else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from controller
-        {
-          if (cyber_nodes[controller-1].in_neighbors != val)
-          {
-            cyber_nodes[controller-1].in_neighbors = val; //update in_neighbors vector 
-          }
-          checkGraph = false;
-        }
-
-        else if (val.equals("next"))//"val" = string of ratio concensus results for
-        {
-          indata = true;
-        }
-
-        else  
-        {
-          indata = true;
-        }
-
-        //println("here");
-        delay(10);
+        enter_in_neighbors = true;
+        serial_flag_2 = true;
       }
+      delay(100);
+    }
+    
+    else
+    {
+      println(val);
+      
+      if (val.equals("A")) //meaning the node restarted
+      {
+        delay(50);
+        myPort.clear();
+        myPort.write("D");
+      }
+
+      else if (str(val.charAt(0)).equals("R")) //meaning the node reconnected
+      {
+        println("node reconnected");  
+        serial_flag_5 = true;
+      }
+
+      
+      else if (val.equals("D")) //letter "D" is received before getting regd signal from external application (for example MATLAB)
+      {
+        if (getregd == true)
+        {
+          println("new regd signal");
+          consensus_timer.start();
+          ignorenext = false;
+        }  
+        else
+        {
+          ignorenext = true; //ignore next value regd value obtained serially
+        }
+      }
+
+      else if (getregd == true) //reg D signal received and system is ready
+      {
+        serial_flag_3 = true;
+      }
+
+      else if ((ignorenext == true) && (PApplet.parseFloat(val) <= 1 && PApplet.parseFloat(val) >= -1)) //reg D signal received but ignored (not sent to leader node)
+      {
+        ignorenext = false;
+      }
+
+      else if (val.equals("end")) //leader node indicates the end of concensus round
+      {
+        consensus_timer.update();
+        println("Initial response time: " + consensus_timer.time_elapsed + "s");
+        consensus_timer.stop();
+      }
+
+      else if (checkGraph == true && val.equals("send") == false) //in-neighbors information received from controller
+      {
+        if (cyber_nodes[controller-1].in_neighbors != val)
+        {
+          cyber_nodes[controller-1].in_neighbors = val; //update in_neighbors vector 
+        }
+        checkGraph = false;
+      }
+
+      else  
+      {
+        serial_flag_4 = true;
+      }
+
+      delay(10);
     }
   }
-  //}
-
-  //catch (Exception e)
-  //{
-
-  //}
 }
 
 
@@ -1192,12 +1169,13 @@ public void reset_connection()
     
      reconnection = true;
 
-     //reset all control variables 
-     indata = false;      
+     //reset all control variables      
      reset = false;
      com = false;
      start_animation = false;
-     nextconnection = false;
+     serial_flag_1 = false;
+     serial_flag_2 = false;
+     serial_flag_3 = false;
 }
 // A class to describe a group of messages
 // An ArrayList is used to manage the list of messages
@@ -1314,6 +1292,15 @@ class CyberNode
 			}
 		}
 	}
+
+	/*void NodeOffline()
+	{
+		offline = true;
+		for (int i = 0; i < total_nodes; i++)
+		{
+			if (int(str(in_neighbors.charAt(i))) == 2)
+		}
+	}*/
 
 	public void show() 
   	{

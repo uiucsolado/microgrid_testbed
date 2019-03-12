@@ -91,8 +91,8 @@ void setup()
   xbee.setSerial(Serial3);
  //g.addInNeighbor(0x4174F1AA);   // node 1
   g.addInNeighbor(0x4174F186);  // node 2
-  //g.addInNeighbor(0x4151C692);   // node 3
-  g.addInNeighbor(0x4151C48B);  // node 4
+  g.addInNeighbor(0x4151C692);   // node 3
+  //g.addInNeighbor(0x4151C48B);  // node 4
   //g.addInNeighbor(0x4151C688); // node 5
   //g.addInNeighbor(0x4151C6AB); // node 6
   //g.addInNeighbor(0x4151C6CB); // node 7
@@ -212,6 +212,8 @@ void loop()
         Mb.MbData[0] =  regd_high;                    
         Mb.MbData[1] = regd_low;
 
+        a.resync();
+
         Serial.println("end");
               
         for (int i = 0; i <=10 ; i++)
@@ -220,7 +222,6 @@ void loop()
           sendConsensusResults(server_ip + i);
         }
 
-        a.resync();
 
         delay(500);  //to account for the time it takes to send the reference signal through modbus
 
