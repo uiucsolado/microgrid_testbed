@@ -43,6 +43,7 @@ float regDval = 0; //current reg D value to be sent to leader node
 //boolean flags used to control the flow of serial communication and GUI
 
 boolean com = false; //flag that informs of a new controller communicating during the initialization
+boolean started = false;
 boolean serial_flag_1 = false; //flag that informs of a new node connecting with the application
 boolean all_nodes = false; //flag that informs that all nodes in the graph have been registered
 boolean serial_flag_2 = false; //flag that informs of a new link to be added to an edge
@@ -58,6 +59,7 @@ boolean serial_flag_5 = false;
 boolean start_animation = false; //flag to indicate the animation is ready to be started
 boolean reconnection = false; //true when user requests reconnecting the arduino devices
 boolean reconnected = false; //true when a reconnection took place in the system but it hasn't synced
+boolean serial_flag_6 = false;
 
 //boolean variables to control display
 
@@ -193,61 +195,7 @@ void draw()
 
   if (serial_flag_1 == true) 
   {
-    if (reconnection == false) //meaning it is the first time the control is initialized
-    {
-      myGraph.put("Node " + val, new Node(400 + node_pos, 540, 35, 70, graphColors[nodecount])); //creates a new node in the graph in graph mode, new Node(x position, y position, siez, size, color)
-      connected_nodes[nodecount] = int(val); //registers the id of the node connecting with the application
-      nodes[nodecount] ="Node " + val;
-      cyber_nodes[nodecount].init(int(val), graphColors[nodecount], coordinates[connected_nodes[nodecount]-1][0], coordinates[connected_nodes[nodecount]-1][1], maxnode);
-      node_pos = node_pos + 160; //update initial x position for the nodes in graph mode
-      nodecount++; //update number of registered nodes
-      controller++; 
-      
-      if (controller < maxnode + 1) //maxnode + external application  = number of serial connections 
-      {
-        try
-        {
-          myPort[controller] = new Serial(this, serial_list[controller], 38400); //initialize new serial port and set the baud rate to 38400
-        }
-
-        catch (RuntimeException e)
-        {
-        }
-      }
-
-      else //all nodes registered
-      {
-        controller = 1; //back to node 1 (leader)
-        myPort[controller].clear();
-        myPort[controller].write("B"); //signal the leader node so it starts syncing procedure
-        println("Start of sync procedure"); 
-        all_nodes = true; //all nodes were initially registered
-      }
-    }
-    
-    else //in case the user requested a reconnection and resync
-    {
-      cyber_nodes[nodecount-1].down = false;
-      controller++; //current node trying to conect
-      
-      if (controller < maxnode + 1)
-      {
-        myPort[controller] = new Serial(this, serial_list[controller], 38400); //initialize new serial port and set the baud rate to 38400
-        nodecount++; //update number of registered nodes
-      }
-      
-      else 
-      {
-        controller = 1; //back to node 1 (leader)
-        myPort[controller].clear();
-        myPort[controller].write("B"); //signal the leader node so it starts syncing procedure
-        println("Start of sync procedure");
-        reconnection = false;
-        reconnected = true;
-        all_nodes = true; //all nodes were initially registered
-      }
-    } 
-    
+    serial_case_1(reconnection); 
     serial_flag_1 = false; //flag is switched
   }
     
@@ -255,46 +203,13 @@ void draw()
     
   else if (serial_flag_2 == true)
   {
-    if (enter_in_neighbors == true) //meaning current node sent links information
-    {
-      cyber_nodes[controller - 1].offline = false;
-      cyber_nodes[controller - 1].in_neighbors = val;
-      enterVector(controller - 1, val); //enter in-neighbors vector from current controller to the graph object
-      println(val);
-    }
-    else //in-neighbors vector registered and now talk to next node in the graph
-    {
-      controller++;
-      if (controller < nodecount + 1)
-      {
-        myPort[controller].clear();
-        myPort[controller].write("B"); //request in-neighbors information from current controller
-        println("Requesting edge info");
-        enter_in_neighbors = false; //ready to start getting links info from next controller
-      }
-        
-      else //all the information of the graph was obtained 
-      { 
-        println("Ready for regd signal"); //ready to get first regD signal
-        controller = 1; //back to node 1 (leader)
-        getregd = true; //ready for regd signal
-        create_animation = true; //create animation
-        start_animation = true; //ready to show animation and activate timer
-        checkGraph = true; //check for in-neighbors vector changes in leader node
-        all_links = true;
-      }
-    }
+    serial_case_2();
     serial_flag_2 = false; //flag is switched
   }
 
   else if (serial_flag_3 == true)
   {
-    regDval = float(val); //assign received value
-    checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked (next node is the leader node) 
-    delay(50);
-    myPort[controller].write("C"); //this goes to leader node to acknowledge the most recent regD signal was registered
-    getregd = false; //ignore next coming regD signals until control system is ready
-
+    serial_case_3();
     serial_flag_3 = false;
   }
 
@@ -302,97 +217,76 @@ void draw()
     
   else if (serial_flag_4 == true)
   {
-    system_timer.start(); //start system timer
-
-    if (val.equals("send")) //signal from leader node only, meaning is requesting a regD signal
-    {
-       myPort[controller].write(str(regDval)); //send the last registered regD signal to the leader node
-    }
-  
-    else if (val.equals("next")) //ready to receive information from next node
-    {  
-      println(controller);
-      controller++;
-      if (controller == maxnode + 1) //ready to plug the data into the plot
-      {
-        controller = 1;
-        stack = true; //buffer is full, so data can be transfered to plot
-        getregd = true; //ready to get a new regulation signal
-        println("here");
-
-        if ((lineGraphValues_buffer[0][0] > LineGraph.yMax || lineGraphValues_buffer[0][0] < LineGraph.yMin) && capture == false) //change scale to notice consensus differences
-        {         
-         LineGraph.yMax=int(lineGraphValues_buffer[0][0] + 1); 
-         LineGraph.yMin=int(lineGraphValues_buffer[0][0] - 1);
-        }
-
-        system_timer.stop();
-      }  
-
-      else 
-      {
-        delay(50);
-        myPort[controller].write("C"); //ready to receive data from next node
-        system_timer.start();
-        checkGraph = true; //flag to indicate in-neighbors vector of next node must be checked 
-      }
-    }
-
-    else
-    {
-      println(float(val));
-      writeBuffer(controller - 1, val); //input consensus results in the plot buffer
-    }
+    serial_case_4();
     serial_flag_4 = false; //flag is switched
   }
 
   //case a node was offline and is trying to reconnect
 
-  if (serial_flag_5 == true)
+  else if (serial_flag_5 == true)
   {
-    //myGraphMatrix[int(str(val.charAt(1))) - 1][int(str(val.charAt(1))) - 1] = 1; //node connected but not recognized
-    for (int j = 0; j < maxnode; j++)
-    {
-      if (cyber_nodes[j].id == int(str(val.charAt(1))))
-      {
-        cyber_nodes[j].down = false;
-      }
-    }
+    serial_case_5();
     serial_flag_5 = false;
+  }
+
+  else if (serial_flag_6 == true)
+  {
+    serial_case_6();
+    serial_flag_6 = false;
   }
 
   //system timer is running
 
   if (system_timer.running == true) 
   {
-    cyber_nodes[controller-1].offline = true;
     system_timer.update();
-    if (system_timer.time_elapsed > 25) //more than 25 seconds with no answer means the node is either down or offline
+    if (system_timer.time_elapsed > 5) //more than 5 seconds with no answer means the node is either down or offline
     {
       println("node " + connected_nodes[controller-1] + " is offline");
-      cyber_nodes[controller-1].offline = true;
-      if ((checkNode(controller) == false) && (myGraphMatrix[controller-1][controller-1] == 2)) //means node is down or was reconnected, but port is closed
+      if ((checkNode(controller) == false) && ((cyber_nodes[controller-1].down == false) && (cyber_nodes[controller-1].offline == false)))
       { 
         try //if the node is up
         {
           myPort[controller].stop(); //this closes the port
           myPort[controller] = new Serial(this, serial_list[controller], 38400); //opens port back
           myPort[controller].bufferUntil('\n'); 
+          cyber_nodes[controller-1].down = false;
+          cyber_nodes[controller-1].offline = true;
         }
-        catch (Exception e) //if the node is down
+        catch (Exception e) //if the node is down, the serial function gets an error
         {
+          println("node " + connected_nodes[controller-1] + " is down");
           cyber_nodes[controller-1].down = true;
+          cyber_nodes[controller-1].offline = true;
+        }
+      }
+
+      else if (cyber_nodes[controller-1].down == true)
+      {
+        println("restarting node");
+        try //if the node is up
+        {
+          myPort[controller].stop(); //this closes the port
+          myPort[controller] = new Serial(this, serial_list[controller], 38400); //opens port back
+          myPort[controller].bufferUntil('\n'); 
+          cyber_nodes[controller-1].down = false;
+        }
+        catch (Exception e) //if the node is down, the serial function gets an error
+        {
+          println("node " + connected_nodes[controller-1] + " is down");
         }
       }
 
       controller++; //continue with next node
       if (controller < maxnode + 1)
       {
-        system_timer.restart();
+        myPort[controller].write("C"); //notify node
+        checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
       }
 
       else 
       {
+        getregd = true;
         controller = 1; //back to node 1 (leader)
         system_timer.stop();
         stack = true; //ready to plot
@@ -405,14 +299,7 @@ void draw()
       }
 
       system_timer.restart();
-      myPort[controller].write("C"); //notify node
-      checkGraph = true; //flag to indicate that in-neighbors vector of next node must be checked 
         
-    }
-
-    else 
-    {
-      cyber_nodes[controller-1].offline = false;
     }
   } 
 
@@ -464,11 +351,12 @@ void draw()
 
   //case the user clicks start button
 
-  if (run == true)
+  if (run == true & started == false)
   {
     controller=1;
     myPort[controller] = new Serial(this, serial_list[controller], 38400);
     run = false;
+    started = true;
   }
 
 }
@@ -578,7 +466,7 @@ public void serialEvent( Serial myPort)
       delay(100);
     }
     
-    else
+    else //this conditions runs continously at every execution of the ratio-concensus algortihm
     {
       println(val);
       
@@ -595,7 +483,6 @@ public void serialEvent( Serial myPort)
         serial_flag_5 = true;
       }
 
-      
       else if (val.equals("D")) //letter "D" is received before getting regd signal from external application (for example MATLAB)
       {
         if (getregd == true)
@@ -632,13 +519,26 @@ public void serialEvent( Serial myPort)
         if (cyber_nodes[controller-1].in_neighbors != val)
         {
           cyber_nodes[controller-1].in_neighbors = val; //update in_neighbors vector 
+          cyber_nodes[controller-1].offline = false; //acknowledge that the node is online
         }
         checkGraph = false;
       }
 
-      else  
+      else if (val.equals("send")) //signal from leader node only, meaning is requesting a regD signal
+      {
+        delay(50);
+        myPort.clear();
+        myPort.write(str(regDval)); //send the last registered regD signal to the leader node
+      }
+
+      else if (val.equals("next"))
       {
         serial_flag_4 = true;
+      }
+
+      else //last conditions possible is data of ratio-concensus from a node  
+      {
+        serial_flag_6 = true;
       }
 
       delay(10);
@@ -776,7 +676,7 @@ boolean checkNode(int index)
 {
   for (int j = 0; j < maxnode; j++)
   {
-    if ((myGraphMatrix[j][index - 1] == 1) && j != index - 1)
+    if ((int(str(cyber_nodes[j].in_neighbors.charAt(index-1))) == 1) && j != index - 1)
     {
         return false;
     }
