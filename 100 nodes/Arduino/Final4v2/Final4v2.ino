@@ -81,9 +81,9 @@ void setup()
   digitalWrite(cPin,HIGH);
   
   xbee.setSerial(Serial3);
-  g.addInNeighbor(0x4174F1AA);   // node 1
-  //g.addInNeighbor(0x4174F186);  // node 2
-  //g.addInNeighbor(0x4151C692);   // node 3
+  //g.addInNeighbor(0x4174F1AA);   // node 1
+  g.addInNeighbor(0x4174F186);  // node 2
+  g.addInNeighbor(0x4151C692);   // node 3
   //g.addInNeighbor(0x4151C48B);  // node 4
   //g.addInNeighbor(0x4151C688); // node 5
   g.addInNeighbor(0x4151C6AB); // node 6
@@ -126,14 +126,14 @@ void loop()
     regd_low = n & 0x0000FFFF;
     Mb.MbData[0] =  regd_high;
     Mb.MbData[1] = regd_low;
-      
+
+    a.resync();
+    
     for (int i = 0; i <=10 ; i++)
     {
       sendConsensusResults(server_ip + i); //initialize registers to zero
       sendConsensusResults(server_ip + i);
     }
-
-    a.resync();
 
     if (reconnected == true)
     {
