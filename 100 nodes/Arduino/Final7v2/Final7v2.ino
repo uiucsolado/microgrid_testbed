@@ -84,14 +84,14 @@ void setup()
  //g.addInNeighbor(0x4174F186);  // node 2
  //g.addInNeighbor(0x4151C692);   // node 3
   //g.addInNeighbor(0x4151C48B);  // node 4
-  //g.addInNeighbor(0x4151C688); // node 5
+  g.addInNeighbor(0x4151C688); // node 5
   //g.addInNeighbor(0x4151C6AB); // node 6
   //g.addInNeighbor(0x4151C6CB); // node 7
   g.addInNeighbor(0x4151C6AC); // node 8
   //g.addInNeighbor(0x415786E1); // node 9
   //g.addInNeighbor(0x415786D3); // node 10
-  //g.addInNeighbor(0x415DB683); // node 17
-  g.addInNeighbor(0x41516F1B); // node 18
+  g.addInNeighbor(0x415DB683); // node 17
+  //g.addInNeighbor(0x41516F1B); // node 18
   //g.addInNeighbor(0x41516F0B); // node 20
   digitalWrite(sPin,LOW);
   digitalWrite(cPin,LOW);
@@ -131,14 +131,14 @@ void loop()
     regd_low = n & 0x0000FFFF;
     Mb.MbData[0] =  regd_high;
     Mb.MbData[1] = regd_low;
+
+    a.resync();
       
     for (int i = 0; i <=10 ; i++)
     {
       sendConsensusResults(server_ip + i); //initialize registers to zero
       sendConsensusResults(server_ip + i);
     } 
-
-    a.resync();
 
     if (reconnected == true)
     {

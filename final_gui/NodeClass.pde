@@ -44,6 +44,15 @@ class CyberNode
 		}
 	}
 
+	/*void NodeOffline()
+	{
+		offline = true;
+		for (int i = 0; i < total_nodes; i++)
+		{
+			if (int(str(in_neighbors.charAt(i))) == 2)
+		}
+	}*/
+
 	void show() 
   	{
     	if (down == false)
