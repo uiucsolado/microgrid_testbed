@@ -17,7 +17,7 @@ class Message
   {
     acceleration = new PVector (0, 0.05);
     //velocity = new PVector(random(-1, 1), random(-1, 0));
-    velocity_i = new PVector(0,0); //initial velocity, *DIRECTION SHOULD BE MODIFIED DEPENDING OF ORIGIN AND DESTINY (-1,1)
+    velocity_i = new PVector(0,0); //initial velocity
     velocity = velocity_i;
     location = l.get();
     origin = l.get();
