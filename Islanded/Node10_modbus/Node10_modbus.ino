@@ -11,7 +11,8 @@
 //Node 10
 
 long base = 10000;  // not using floating points so need a base number
-long D_base = 100000000;
+//long D_base = 100000000;
+long D_base = 10000;
 long base_value = 10000000;
 long regd_base;
 long capacity = 25000;  //DER capacity limit
@@ -20,8 +21,8 @@ Dyno d = Dyno();
 XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786D3,0,0.679*D_base,-1.5*base,0.5*base,5,D_base,10);
-//OLocalVertex s = OLocalVertex(0x415786D3,0,0,-1.5*base,0.5*base,5,D_base,10);
+//OLocalVertex s = OLocalVertex(0x415786D3,0,0.679*D_base,-1.5*base,0.5*base,5,D_base,10);
+OLocalVertex s = OLocalVertex(0x415786D3,0,0,-1.5*base,0.5*base,5,D_base,10);
 OGraph g = OGraph(&s);
 OAgent a = OAgent(&xbee,&rx,&g,false,true);
 
@@ -64,6 +65,15 @@ int fc;
 int ref;
 int count;
 int pos;
+
+float value;
+float valueY;
+float valueZ;
+String neighbors;
+String cresults;
+String cresultsY;
+String cresultsZ;
+
 
 void setup()  {
   //delay(5000);  
@@ -121,20 +131,42 @@ void loop() {
   } 
    else {
     if(a.isSynced()) {
+      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);
       a.nonleaderFairSplitRatioConsensus(base*state);
-      //a.nonleaderFairSplitRatioConsensus(1*D_base);
-      state1 = a.getbufferdata(0);
+      */
+      a.nonleaderFairSplitRatioConsensus(0*D_base);
+      //state1 = a.getbufferdata(0);
+      a.resync();
+      cresults = "";
+        for (int j = 3; j < 13; j++)
+        {
+          value = a.getbufferdata(j);
+          valueY = a.getbufferdataY(j);
+          valueZ = a.getbufferdataZ(j);
+          cresults = cresults + value*1000 + ";" ;
+          cresultsY = cresultsY + valueY*1000 + ";" ;
+          cresultsZ = cresultsZ + valueZ*1000 + ";" ;
+        }
         
+      //state1 = a.getbufferdata(0);
+      
+          
+       //Serial.println("Typhoon Data");
+       //Serial.println(state);
+       Serial.println("ratio consensus result");
+       Serial.println(cresults);  
+       Serial.println(cresultsY);  
+       Serial.println(cresultsZ);  
         
       //Serial.println("Typhoon Data");
       //Serial.println(state); 
-      Serial.println("ratio consensus result");
-      Serial.println(state1,4); 
-       // Controller code
+      //Serial.println("ratio consensus result");
+      //Serial.println(state1,4); 
+       /* Controller code
        r=r+1;
        if(r>2)
        { 
@@ -145,7 +177,7 @@ void loop() {
        Mb.MbData[1]=base*u;
        sendConsensusResults();
        // Controller code over    
-      
+      */
       
 //      n = state*base_value; //multiply by base value  to change to non-decimal
 //      state_high = (n >> 16) & 0x000FFFF;

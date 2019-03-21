@@ -11,7 +11,8 @@
 //Node 8
 
 long base = 10000;  // not using floating points so need a base number
-long D_base = 100000000;
+//long D_base = 100000000;
+long D_base = 10000;
 long base_value = 1000;
 long regd_base;
 long capacity = 25000;  //DER capacity limit
@@ -20,8 +21,8 @@ Dyno d = Dyno();
 XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x4151C6AC,0,0.0479*D_base,-1.5*base,0.5*base,5,D_base,8);
-//OLocalVertex s = OLocalVertex(0x4151C6AC,0,0,-1.5*base,0.5*base,5,D_base,8);
+//OLocalVertex s = OLocalVertex(0x4151C6AC,0,0.0479*D_base,-1.5*base,0.5*base,5,D_base,8);
+OLocalVertex s = OLocalVertex(0x4151C6AC,0,0,-1.5*base,0.5*base,5,D_base,8);
 OGraph g = OGraph(&s);
 OAgent a = OAgent(&xbee,&rx,&g,false,true);
 
@@ -58,6 +59,11 @@ int fc;
 int ref;
 int count;
 int pos;
+
+float value;
+String neighbors;
+String cresults;
+
 
 void setup()  {
  Serial.begin(38400);
@@ -113,19 +119,36 @@ void loop() {
   } 
    else {
     if(a.isSynced()) {
+    /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);
       a.nonleaderFairSplitRatioConsensus(-1*base*state);
-      //a.nonleaderFairSplitRatioConsensus(1*D_base);
-      state1 = a.getbufferdata(0);
+      */
+      a.nonleaderFairSplitRatioConsensus(0*D_base);
+      a.resync();
+      cresults = "";
+        for (int j = 3; j < 13; j++)
+        {
+          value = a.getbufferdata(j);
+          cresults = cresults + value*1000 + ";" ;
+        }
+        
+      //state1 = a.getbufferdata(0);
+      
+          
+       //Serial.println("Typhoon Data");
+       //Serial.println(state);
+       Serial.println("ratio consensus result");
+       Serial.println(cresults);
+      //state1 = a.getbufferdata(0);
 
        
       //Serial.println("Typhoon Data");
       //Serial.println(state);
-      Serial.println("ratio consensus result");
-      Serial.println(state1,4);  
+      //Serial.println("ratio consensus result");
+      //Serial.println(state1,4);  
        /* Controller code
        r=r+1;
        if(r>2)

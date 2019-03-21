@@ -14,16 +14,16 @@ XBeeAddress64 braddress = XBeeAddress64(0x0,BR_ADDRESS);
 
 int network = 6; // SN Frequency rengulation 6 node case
 long base = 10000;  // use base to increase precision of results
-long D_base = 100000000;
-
+//long D_base = 100000000;
+long D_base = 1000000;
 Dyno d = Dyno(); //what is this?
 XBee xbee = XBee();
 XBee* _xbee = &xbee;
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786E1,0,0.225*D_base,-2.1667*base,0.1667*base,5,D_base,9); //changed Dout to 1, OLocalVertex(0x404980AE,-0.1*base,0.05*base,-2.1667*base,0.1667*base,1,base); //SN The Xbee address  needs to be changed here right? Also  figure out how to assign the 
-//OLocalVertex s = OLocalVertex(0x415786E1,0,1*D_base,-2.1667*base,0.1667*base,5,D_base,9); //changed Dout to 1, OLocalVertex(0x404980AE,-0.1*base,0.05*base,-2.1667*base,0.1667*base,1,base); //SN The Xbee address  needs to be changed here right? Also  figure out how to assign the 
+//OLocalVertex s = OLocalVertex(0x415786E1,0,0.225*D_base,-2.1667*base,0.1667*base,5,D_base,9); //changed Dout to 1, OLocalVertex(0x404980AE,-0.1*base,0.05*base,-2.1667*base,0.1667*base,1,base); //SN The Xbee address  needs to be changed here right? Also  figure out how to assign the 
+OLocalVertex s = OLocalVertex(0x415786E1,0,1*D_base,-2.1667*base,0.1667*base,5,D_base,9); //changed Dout to 1, OLocalVertex(0x404980AE,-0.1*base,0.05*base,-2.1667*base,0.1667*base,1,base); //SN The Xbee address  needs to be changed here right? Also  figure out how to assign the 
 OGraph g = OGraph(&s);
 OAgent a = OAgent(&xbee,&rx,&g,true,true); // argument rx?
 
@@ -72,6 +72,13 @@ int pos;
 uint8_t rounds  = 0;
 float regd1;
 
+float value;
+float valueY;
+float valueZ;
+String neighbors;
+String cresults;
+String cresultsY;
+String cresultsZ;
 
 void setup()  {
   //delay(5000);  
@@ -166,22 +173,35 @@ void loop() {
     {
       rounds = rounds + 1; 
       Serial.println(rounds);
+      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);
       a.leaderFairSplitRatioConsensus(base*state,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
-      //a.leaderFairSplitRatioConsensus(1*D_base,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
-      //Serial.println("Out");
-      state1 = a.getbufferdata(0);
+      */
+      a.leaderFairSplitRatioConsensus(1*D_base,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
+      a.resync();
+        cresults = "";
+        for (int j = 3; j < 13; j++)
+        {
+          value = a.getbufferdata(j);
+          valueY = a.getbufferdataY(j);
+          valueZ = a.getbufferdataZ(j);
+          cresults = cresults + value*1000 + ";" ;
+          cresultsY = cresultsY + valueY*1000 + ";" ;
+          cresultsZ = cresultsZ + valueZ*1000 + ";" ;
+        }
+        
+      //state1 = a.getbufferdata(0);
       
           
        //Serial.println("Typhoon Data");
        //Serial.println(state);
        Serial.println("ratio consensus result");
-       Serial.println(state1,4);
+       Serial.println(cresults);
 
-       // Controller code
+       /* Controller code
        r=r+1;
        if(r>2)
        { 
@@ -193,7 +213,7 @@ void loop() {
        sendConsensusResults();
        // Controller code over
     
-       
+       */
        //SerialUSB.println("printed the state");
        
 //       n = state*base_value;            //multiply by base value  to change to non-decimal  
