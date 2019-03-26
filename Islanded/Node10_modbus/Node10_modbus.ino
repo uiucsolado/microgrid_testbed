@@ -73,6 +73,7 @@ String neighbors;
 String cresults;
 String cresultsY;
 String cresultsZ;
+long offset;
 
 
 void setup()  {
@@ -141,7 +142,11 @@ void loop() {
       a.nonleaderFairSplitRatioConsensus(0*D_base);
       //state1 = a.getbufferdata(0);
       a.resync();
+      offset=a.getoffsetdata();
+      Serial.println(offset);
       cresults = "";
+      cresultsY = "";
+      cresultsZ = "";
         for (int j = 3; j < 13; j++)
         {
           value = a.getbufferdata(j);

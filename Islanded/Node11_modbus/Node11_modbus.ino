@@ -67,8 +67,13 @@ int count;
 int pos;
 
 float value;
+float valueY;
+float valueZ;
 String neighbors;
 String cresults;
+String cresultsY;
+String cresultsZ;
+long offset;
 
 
 void setup()  {
@@ -135,11 +140,19 @@ void loop() {
       a.nonleaderFairSplitRatioConsensus(0*D_base);
       //state1 = a.getbufferdata(0);
       a.resync();
+      offset=a.getoffsetdata();
+      Serial.println(offset);
         cresults = "";
+        cresultsY = "";
+        cresultsZ = "";
         for (int j = 3; j < 13; j++)
         {
-          value = a.getbufferdata(j);
+           value = a.getbufferdata(j);
+          valueY = a.getbufferdataY(j);
+          valueZ = a.getbufferdataZ(j);
           cresults = cresults + value*1000 + ";" ;
+          cresultsY = cresultsY + valueY*1000 + ";" ;
+          cresultsZ = cresultsZ + valueZ*1000 + ";" ;
         }
         
       //state1 = a.getbufferdata(0);
@@ -147,8 +160,10 @@ void loop() {
           
        //Serial.println("Typhoon Data");
        //Serial.println(state);
-       Serial.println("ratio consensus result");
-       Serial.println(cresults);
+      Serial.println("ratio consensus result");
+       Serial.println(cresults);  
+       Serial.println(cresultsY);  
+       Serial.println(cresultsZ);
        
       //Serial.println("Typhoon Data");
       //Serial.println(state);
