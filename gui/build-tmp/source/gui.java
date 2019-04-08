@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream; 
 import java.io.IOException; 
 
-public class final_gui extends PApplet {
+public class gui extends PApplet {
 
 /**************************************************************************
 
@@ -46,7 +46,6 @@ int maxnode = 4; //number of max expected number of connected nodes, change this
 Graph myGraph;  //the graph object, it shows links and edges in the network, each node has a corresponding color reference
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
-MessageSystem[] ms = new MessageSystem[maxnode]; //array of message systems, 1 message system corresponds to 1 node in the network, each message system has links to other message systems (based on the links in the network)
 CyberNode[] cyber_nodes = new CyberNode[maxnode]; //array of cyber node objects, these objects have information of the current state of the cyber nodes
 
 //global variables and arrays
@@ -178,13 +177,7 @@ public void setup()
     img.resize(100,136);
     
     //setup the GUI tabs
-    set_GUItabs();
-
-    //every message system object corresponds to a different node in the system
-    for (int i=0; i < maxnode; i++)
-    {
-      ms[i] = new MessageSystem();
-    }    
+    set_GUItabs();   
     
     //every cyber node object corresponds to a real node in the system
     for (int i=0; i < maxnode; i++)
@@ -707,33 +700,6 @@ public boolean checkNode(int index)
   return true;
 }
 
-public void updateAnimation(int index)
-{
-  for (int j = 0; j < maxnode; j++)
-  {
-    if (myGraphMatrix[connected_nodes[index]-1][j] == 1)
-    {
-      ms[connected_nodes[j]-1].hide = true;
-      Message m = ms[connected_nodes[index]-1].messages.get(j);
-      if (m.hide == false) //meaning there was a previous link active
-      {
-        m.hide = true; //hide the link
-        //myGraph.get("Node " + (j+1)).getEdge(index).visible = false;
-      }
-    }
-
-    else if (myGraphMatrix[connected_nodes[index]-1][j] == 2)
-    {
-      myGraphMatrix[j][j] = 2; //update node status to up and synced
-      ms[connected_nodes[j]-1].hide = false;
-      Message m = ms[connected_nodes[index]-1].messages.get(j);
-      if (m.hide == true) //meaning the link was hidden due to disconnection of node
-      {
-        m.hide = false; //show link again
-      }
-    }
-  }
-}
 
 public void RatioConsensus() 
 {
@@ -816,15 +782,6 @@ public String getPlotterConfigString(String id)
   return r;
 }
 
-public void node_down (int node_id)
-{
-  ms[node_id].hide = true;
-}
-
-public void node_off (int node_id)
-{
-  ms[node_id].hide = true;
-}
 
 
 //Functions to handle the GUI tabs actions
@@ -844,7 +801,7 @@ public void set_GUItabs()
      .getCaptionLabel()
      .setFont(cf1)
      .setSize(12)
-     .setText("Ratio Consensus") 
+     .setText("Plot") 
      ;
     
     cp5.addButton("Communication") //Animation mode button
@@ -1050,100 +1007,135 @@ public void print_animation()
 }
 
 public void reset_connection()
-{
-	 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
-     {
-       cyber_nodes[j-1].down = true;
-       cyber_nodes[j-1].offline = true;	
-       myPort[j].stop();
-     }
-    
-     delay(1000);
-     
-     controller = 1;
-     nodecount = 1; //serial communication started with one of the nodes
-     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
-     myPort[controller].bufferUntil('\n'); 
-     
-     delay(500);
-    
-     reconnection = true;
+{	if (start_animation == true)
+	{
+		 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
+	     {
+	       cyber_nodes[j-1].down = true;
+	       cyber_nodes[j-1].offline = true;	
+	       myPort[j].stop();
+	     }
+	    
+	     delay(1000);
+	     
+	     controller = 1;
+	     nodecount = 1; //serial communication started with one of the nodes
+	     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
+	     myPort[controller].bufferUntil('\n'); 
+	     
+	     delay(500);
+	    
+	     reconnection = true;
 
-     //reset all control variables      
-     reset = false;
-     com = false;
-     start_animation = false;
-     serial_flag_1 = false;
-     serial_flag_2 = false;
-     serial_flag_3 = false;
+	     //reset all control variables      
+	     reset = false;
+	     com = false;
+	     start_animation = false;
+	     serial_flag_1 = false;
+	     serial_flag_2 = false;
+	     serial_flag_3 = false;
+ 	}
 }
-// A class to describe a group of messages
-// An ArrayList is used to manage the list of messages
-// Every MessageSystem object corresponds to a node, each node has a group of links called Messages
+// message class of comunnication between two nodes (link)
 
-class MessageSystem 
+class Message 
 {
-  ArrayList<Message> messages;
   PVector origin;
+  PVector location;
   PVector destiny;
-  int c;
-  int k; //variable to control delay in between arrows
-  boolean hide = false;
-  int id;
-  int node_count = 0;
-
-  MessageSystem() 
+  PVector velocity;
+  PVector velocity_i;
+  PVector acceleration;
+  float r;
+  float topspeed;
+  int col;
+  boolean hide = true;
+  
+  Message(PVector l, PVector d, int c) 
   {
-    messages = new ArrayList<Message>();
+    acceleration = new PVector (0, 0.05f);
+    //velocity = new PVector(random(-1, 1), random(-1, 0));
+    velocity_i = new PVector(0,0); //initial velocity
+    velocity = velocity_i;
+    location = l.get();
+    origin = l.get();
+    destiny = d.get();
+    r = 5.0f; // size of the triangle
+    topspeed = 7; //to accelerate until certain point
+    col = c; 
   }
-
-  public void addLink(PVector target, int node_id) 
-  {
-    id = node_id;
-    destiny = target.get();
-    
-    while (node_count<id)
-    {
-      messages.add(new Message(origin, destiny, c));
-      node_count++;
-    }
-    Message m = messages.get(id - 1);
-    m.hide = false;
-  }
-
-  public void show() 
+  
+  public void run() 
   {
     if (hide == false)
     {
-      strokeWeight(1);
-      fill(c);
-      ellipse(origin.x, origin.y, 30, 30); 
+      update();
+      display();
     }
   }
-
-  public void run() 
+  
+  // Method to update position
+  public void update() 
   {
+    // Compute a vector that points from location to destiny
+    PVector acceleration = PVector.sub(destiny,location);
+
+    // Set magnitude of acceleration
+    acceleration.setMag(0.2f);
+    
+    // Velocity changes according to acceleration
+    velocity.add(acceleration);
+
+    // Limit the velocity by topspeed
+    velocity.limit(topspeed);
+
+    // Location changes by velocity
+    location.add(velocity);
+
+    //add line that unifies two nodes 
+    stroke(110, 110, 110);
+    strokeWeight(0.5f);
+    line(origin.x, origin.y, destiny.x - 15*sin(velocity.heading2D() + radians(90)), destiny.y + 15*cos(velocity.heading2D() + radians(90)));
+    
+  }
+  
+  // Method to display
+  public void display() 
+  {
+    
+    // Draw a triangle rotated in the direction of velocity, this triangle is the "message"
+    float theta = velocity.heading2D() + radians(90);
+    stroke(0);
+    fill(col); 
+    pushMatrix();
+    translate(location.x, location.y);
+    rotate(theta);
+    beginShape(TRIANGLES);
+    vertex(0, -r*2);
+    vertex(-r, r*2);
+    vertex(r, r*2);
+    endShape();
+    popMatrix();
+
+  }
+  
+  //once the message reaches the point, the movement is restarted to initial point
+  public void restart() 
+  {
+    location = origin.get();
+    velocity = velocity_i;
+  } 
+  
+  // The message reached the final point
+  public boolean isDead() 
+  {
+    if (location.x > destiny.x - 30 && location.x < destiny.x + 30 && location.y > destiny.y - 30 && location.y < destiny.y + 30) 
     {
-      for (int i = messages.size()-1; i >= 0; i--) 
-      {
-        Message m = messages.get(i);
-
-        if (hide == false) //if true it means that the node is down
-        {
-          m.run();
-          if (m.isDead()) 
-          {
-            m.restart();
-          }
-        }
-      }
-
-      //add circle to simbolize node
-      strokeWeight(1);
-      fill(c);
-      ellipse(origin.x, origin.y, 30, 30);
-      
-      k = 0;
+      return true;
+    } 
+    else 
+    {
+      return false;
     }
   }
 }
@@ -1192,15 +1184,6 @@ class CyberNode
 			}
 		}
 	}
-
-	/*void NodeOffline()
-	{
-		offline = true;
-		for (int i = 0; i < total_nodes; i++)
-		{
-			if (int(str(in_neighbors.charAt(i))) == 2)
-		}
-	}*/
 
 	public void show() 
   	{
@@ -1844,111 +1827,8 @@ class Timer
   }
   
 }
-// message class of comunnication between two nodes (link)
-
-class Message 
-{
-  PVector origin;
-  PVector location;
-  PVector destiny;
-  PVector velocity;
-  PVector velocity_i;
-  PVector acceleration;
-  float r;
-  float topspeed;
-  int col;
-  boolean hide = true;
-  
-  Message(PVector l, PVector d, int c) 
-  {
-    acceleration = new PVector (0, 0.05f);
-    //velocity = new PVector(random(-1, 1), random(-1, 0));
-    velocity_i = new PVector(0,0); //initial velocity, *DIRECTION SHOULD BE MODIFIED DEPENDING OF ORIGIN AND DESTINY (-1,1)
-    velocity = velocity_i;
-    location = l.get();
-    origin = l.get();
-    destiny = d.get();
-    r = 5.0f; // size of the triangle
-    topspeed = 7; //to accelerate until certain point
-    col = c; 
-  }
-  
-  public void run() 
-  {
-    if (hide == false)
-    {
-      update();
-      display();
-    }
-  }
-  
-  // Method to update position
-  public void update() 
-  {
-    // Compute a vector that points from location to destiny
-    PVector acceleration = PVector.sub(destiny,location);
-
-    // Set magnitude of acceleration
-    acceleration.setMag(0.2f);
-    
-    // Velocity changes according to acceleration
-    velocity.add(acceleration);
-
-    // Limit the velocity by topspeed
-    velocity.limit(topspeed);
-
-    // Location changes by velocity
-    location.add(velocity);
-
-    //add line that unifies two nodes 
-    stroke(110, 110, 110);
-    strokeWeight(0.5f);
-    line(origin.x, origin.y, destiny.x - 15*sin(velocity.heading2D() + radians(90)), destiny.y + 15*cos(velocity.heading2D() + radians(90)));
-    
-  }
-  
-  // Method to display
-  public void display() 
-  {
-    
-    // Draw a triangle rotated in the direction of velocity, this triangle is the "message"
-    float theta = velocity.heading2D() + radians(90);
-    stroke(0);
-    fill(col); 
-    pushMatrix();
-    translate(location.x, location.y);
-    rotate(theta);
-    beginShape(TRIANGLES);
-    vertex(0, -r*2);
-    vertex(-r, r*2);
-    vertex(r, r*2);
-    endShape();
-    popMatrix();
-
-  }
-  
-  //once the message reaches the point, the movement is restarted to initial point
-  public void restart() 
-  {
-    location = origin.get();
-    velocity = velocity_i;
-  } 
-  
-  // The message reached the final point
-  public boolean isDead() 
-  {
-    if (location.x > destiny.x - 30 && location.x < destiny.x + 30 && location.y > destiny.y - 30 && location.y < destiny.y + 30) 
-    {
-      return true;
-    } 
-    else 
-    {
-      return false;
-    }
-  }
-}
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "--full-screen", "--bgcolor=#666666", "--stop-color=#cccccc", "final_gui" };
+    String[] appletArgs = new String[] { "--full-screen", "--bgcolor=#666666", "--stop-color=#cccccc", "gui" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {

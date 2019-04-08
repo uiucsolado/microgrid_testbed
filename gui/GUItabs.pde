@@ -15,7 +15,7 @@ void set_GUItabs()
      .getCaptionLabel()
      .setFont(cf1)
      .setSize(12)
-     .setText("Ratio Consensus") 
+     .setText("Plot") 
      ;
     
     cp5.addButton("Communication") //Animation mode button
@@ -221,30 +221,32 @@ void print_animation()
 }
 
 void reset_connection()
-{
-	 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
-     {
-       cyber_nodes[j-1].down = true;
-       cyber_nodes[j-1].offline = true;	
-       myPort[j].stop();
-     }
-    
-     delay(1000);
-     
-     controller = 1;
-     nodecount = 1; //serial communication started with one of the nodes
-     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
-     myPort[controller].bufferUntil('\n'); 
-     
-     delay(500);
-    
-     reconnection = true;
+{	if (start_animation == true)
+	{
+		 for (int j=1; j < maxnode + 1; j++) //stop all serial communication, this will restart the controllers
+	     {
+	       cyber_nodes[j-1].down = true;
+	       cyber_nodes[j-1].offline = true;	
+	       myPort[j].stop();
+	     }
+	    
+	     delay(1000);
+	     
+	     controller = 1;
+	     nodecount = 1; //serial communication started with one of the nodes
+	     myPort[controller] = new Serial(this, serial_list[controller], 38400); 
+	     myPort[controller].bufferUntil('\n'); 
+	     
+	     delay(500);
+	    
+	     reconnection = true;
 
-     //reset all control variables      
-     reset = false;
-     com = false;
-     start_animation = false;
-     serial_flag_1 = false;
-     serial_flag_2 = false;
-     serial_flag_3 = false;
+	     //reset all control variables      
+	     reset = false;
+	     com = false;
+	     start_animation = false;
+	     serial_flag_1 = false;
+	     serial_flag_2 = false;
+	     serial_flag_3 = false;
+ 	}
 }

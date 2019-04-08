@@ -23,7 +23,6 @@ int maxnode = 4; //number of max expected number of connected nodes, change this
 Graph myGraph;  //the graph object, it shows links and edges in the network, each node has a corresponding color reference
 ControlP5 cp5; //GUI object to create graphic elements
 Serial[] myPort = new Serial[maxnode + 1];  //array of serial objects, this handles serial communication with Arduino devices and MATLAB
-MessageSystem[] ms = new MessageSystem[maxnode]; //array of message systems, 1 message system corresponds to 1 node in the network, each message system has links to other message systems (based on the links in the network)
 CyberNode[] cyber_nodes = new CyberNode[maxnode]; //array of cyber node objects, these objects have information of the current state of the cyber nodes
 
 //global variables and arrays
@@ -155,13 +154,7 @@ void setup()
     img.resize(100,136);
     
     //setup the GUI tabs
-    set_GUItabs();
-
-    //every message system object corresponds to a different node in the system
-    for (int i=0; i < maxnode; i++)
-    {
-      ms[i] = new MessageSystem();
-    }    
+    set_GUItabs();   
     
     //every cyber node object corresponds to a real node in the system
     for (int i=0; i < maxnode; i++)
@@ -684,33 +677,6 @@ boolean checkNode(int index)
   return true;
 }
 
-void updateAnimation(int index)
-{
-  for (int j = 0; j < maxnode; j++)
-  {
-    if (myGraphMatrix[connected_nodes[index]-1][j] == 1)
-    {
-      ms[connected_nodes[j]-1].hide = true;
-      Message m = ms[connected_nodes[index]-1].messages.get(j);
-      if (m.hide == false) //meaning there was a previous link active
-      {
-        m.hide = true; //hide the link
-        //myGraph.get("Node " + (j+1)).getEdge(index).visible = false;
-      }
-    }
-
-    else if (myGraphMatrix[connected_nodes[index]-1][j] == 2)
-    {
-      myGraphMatrix[j][j] = 2; //update node status to up and synced
-      ms[connected_nodes[j]-1].hide = false;
-      Message m = ms[connected_nodes[index]-1].messages.get(j);
-      if (m.hide == true) //meaning the link was hidden due to disconnection of node
-      {
-        m.hide = false; //show link again
-      }
-    }
-  }
-}
 
 public void RatioConsensus() 
 {
@@ -793,14 +759,5 @@ String getPlotterConfigString(String id)
   return r;
 }
 
-void node_down (int node_id)
-{
-  ms[node_id].hide = true;
-}
-
-void node_off (int node_id)
-{
-  ms[node_id].hide = true;
-}
 
 
