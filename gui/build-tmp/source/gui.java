@@ -79,7 +79,7 @@ boolean getregd = false; //flag to indicate that system is available to get a ne
 boolean ignorenext = false; //flag to indicate that a regd signal value must be ignored
 boolean serial_flag_5 = false;
 boolean start_animation = false; //flag to indicate the animation is ready to be started
-boolean reconnection = false; //true when user requests reconnecting the arduino devices
+boolean reconnection = false; //true when user requests reconnecting the controllers
 boolean reconnected = false; //true when a reconnection took place in the system but it hasn't synced
 boolean serial_flag_6 = false;
 
@@ -353,8 +353,7 @@ public void draw()
 
   if (graph == true)
   {
-    textSize(20);
-    myGraph.render(); //just plot the graph
+    print_graph();
   }
   
   //case reset button is pressed 
@@ -369,10 +368,7 @@ public void draw()
 
   if (run == true & started == false)
   {
-    controller=1;
-    myPort[controller] = new Serial(this, serial_list[controller], 38400);
-    run = false;
-    started = true;
+    run();
   }
 
 }
@@ -932,6 +928,12 @@ public void print_ratio()
 	}  
 }
 
+public void print_graph()
+{
+	textSize(20);
+	myGraph.render(); //just plot the graph
+}
+
 public void print_animation()
 {
 	for (int i = 1; i < 6; i++) //creates an ellipse pattern of the controllers 
@@ -1035,6 +1037,14 @@ public void reset_connection()
 	     serial_flag_2 = false;
 	     serial_flag_3 = false;
  	}
+}
+
+public void run()
+{
+	controller=1;
+    myPort[controller] = new Serial(this, serial_list[controller], 38400);
+    run = false;
+    started = true;
 }
 // message class of comunnication between two nodes (link)
 

@@ -146,6 +146,12 @@ void print_ratio()
 	}  
 }
 
+void print_graph()
+{
+	textSize(20);
+	myGraph.render(); //just plot the graph
+}
+
 void print_animation()
 {
 	for (int i = 1; i < 6; i++) //creates an ellipse pattern of the controllers 
@@ -249,4 +255,12 @@ void reset_connection()
 	     serial_flag_2 = false;
 	     serial_flag_3 = false;
  	}
+}
+
+void run()
+{
+	controller=1;
+    myPort[controller] = new Serial(this, serial_list[controller], 38400);
+    run = false;
+    started = true;
 }
