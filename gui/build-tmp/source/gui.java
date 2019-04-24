@@ -50,15 +50,14 @@ CyberNode[] cyber_nodes = new CyberNode[maxnode]; //array of cyber node objects,
 
 //global variables and arrays
 
-float [][] coordinates = new float[10][2]; //matrix that registers the coordinates of the nodes in the animation, coordinates[node id][x,y coordinates]
-int[][] myGraphMatrix = new int[maxnode][maxnode]; //matrix that registers the graph, e.g. myGraphMatrix[0] --> (2, 0, 2, 1) indicates that node "1" is connected to node "3" and "4", not connected to node "2" and that node "4" is offline 
+float [][] coordinates = new float[10][2]; //matrix that registers the coordinates of the nodes in the animation, coordinates[node id][x,y coordinates] 
 int[] connected_nodes = new int[maxnode]; //array of connected controllers reference indexes 
 String [] nodes = new String[maxnode];
 int node_pos = 0; //used to initially locate the nodes in graph mode in different positions
 int nodecount = 0; //records the number of controllers connected to the network, the leader node is assumed to be always connected, this variable changes at the initialization of the network depending of how many controllers initially respond
 int controller = 0; //this global variable always references to the controller that is currently communicating serially with the application
 String val; //string with information obtained via serial communication
-String[] serial_list = {"COM3","COM53","COM54","COM52","COM55","COM51","COM56","COM50","COM16","COM15","COM46"}; //list of serial COM ports in the network
+String[] serial_list = {"COM3","COM51","COM54","COM52","COM55","COM51","COM56","COM50","COM16","COM15","COM46"}; //list of serial COM ports in the network
 int[] graphColors = {color(255,0,0),color(255,127,0),color(255,255,0),color(0,255,0),color(0,0,255),color(75,0,130),color(148,0,211),color(218,165,32),color(255,20,147),color(0,255,255)}; //list of refernce color for the nodes
 float regDval = 0; //current reg D value to be sent to leader node
 
@@ -77,11 +76,11 @@ boolean checkGraph = false; //flag to indicate that the graph must be checked fo
 boolean serial_flag_4 = false; //flag to indicate a node es requesting reconnection 
 boolean getregd = false; //flag to indicate that system is available to get a new regulation signal
 boolean ignorenext = false; //flag to indicate that a regd signal value must be ignored
-boolean serial_flag_5 = false;
+boolean serial_flag_5 = false; //flag to indicate a node restarted
 boolean start_animation = false; //flag to indicate the animation is ready to be started
 boolean reconnection = false; //true when user requests reconnecting the controllers
 boolean reconnected = false; //true when a reconnection took place in the system but it hasn't synced
-boolean serial_flag_6 = false;
+boolean serial_flag_6 = false; //flag to indicate a node sent ratio-consensus data
 
 //boolean variables to control display
 
@@ -142,15 +141,6 @@ public void setup()
     
     //saves the coordinates of the nodes in the animation
     setAnimationCoordinates();
-    
-    //graph matrix init
-    for (int i = 0; i<maxnode; i++)
-    {
-      for (int j = 0; j<maxnode; j++)
-      {
-        myGraphMatrix[i][j] = 0;
-      }
-    }
     
     //Control P5 init
     cp5 = new ControlP5(this);
@@ -659,30 +649,6 @@ public void enterVector(int index, String vector)
   } 
 }
 
-public void updateVector(int index, String vector)
-{
-  for (int j = 0; j < maxnode; j++)
-  {
-    myGraphMatrix[connected_nodes[index]-1][j] = PApplet.parseInt(str(vector.charAt(j))); //status data of in-neighbor
-  } 
-}
-
-public void updateNodeStatus(String data)
-{
-  myGraphMatrix[PApplet.parseInt(data.charAt(1)) - 1][PApplet.parseInt(data.charAt(1)) - 1] = 1; //node connected but not recognized
-}
-
-public boolean checkGraphMatrix(int index, String vector)
-{
-  for (int j = 0; j < maxnode; j++)
-    {
-      if (myGraphMatrix[connected_nodes[index]-1][j] != PApplet.parseInt(str(vector.charAt(j)))) //compare current vector to previous vector
-      {
-        return false;
-      }
-    }
-    return true;
-}
 
 public boolean checkNode(int index)
 {
