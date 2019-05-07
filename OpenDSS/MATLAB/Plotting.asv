@@ -26,7 +26,7 @@ plot(time, tieLineRealA/1000,'b','LineWidth', 3);
 title('Real Power at 69kV Tie Line (Phase A), OpenDSS Cosimulation');
 ylabel('Real Power (MW)');
 plot(time,powerCalc/1000,'r','LineWidth',2);
-set(gca,'Xtick',0:20:240);
+xticks([20 5 10)
 % errorbar(errorTimeAdj, errorPowerAdj,errorAdj,'-r','LineWidth', 2);
 xlim([10 250]);
 xlabel('Time(s)');
