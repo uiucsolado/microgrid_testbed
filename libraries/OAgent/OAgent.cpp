@@ -22,23 +22,20 @@ OAgent::OAgent() {
     ZBRxResponse temp2 = ZBRxResponse();
     OGraph temp3 = OGraph();
     _prepareOAgent(&temp1,&temp2,&temp3);
-    setRS(0);
 }
 
 OAgent::OAgent(XBee * xbee, OGraph * G, bool leader, bool quiet) {
      ZBRxResponse temp = ZBRxResponse();
     _prepareOAgent(xbee,&temp,G,leader,quiet);
-    setRS(0);
 }
 
 OAgent::OAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet) {
     _prepareOAgent(xbee,rx,G,leader,quiet);
-    setRS(0);
 }
 
-OAgent::OAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet, int RS) {
-    _prepareOAgent(xbee,rx,G,leader,quiet);  
-}
+// OAgent::OAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet, int RS) {
+//     _prepareOAgent(xbee,rx,G,leader,quiet,RS);  
+// }
 
 /// End Constructors
 
@@ -1808,6 +1805,7 @@ int OAgent:: getStatusData(int index)
 void OAgent::_prepareOAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet) {
     _xbee = xbee;
     _G = G;
+    //_RS = RS;
     _leader = leader;
     _quiet = quiet;
     _synced = false;

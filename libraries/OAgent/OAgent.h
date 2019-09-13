@@ -51,6 +51,7 @@ class OAgent {
 		OAgent();
         OAgent(XBee * xbee, OGraph * G, bool leader = false, bool quiet = true);
         OAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader = false, bool quiet = true);
+        //OAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader = false, bool quiet = true, int RS = 0);
         
         /// Methods
         inline OGraph * getGraph() { return _G; }
@@ -123,6 +124,8 @@ class OAgent {
         unsigned long _start_millis;
         uint8_t _iterations;
         uint16_t _period;
+
+        //int _RS;
         
         //Sammy's addition to contain iterates
         float _buffer[200];
@@ -243,6 +246,7 @@ class OAgent {
         
         // Constructor helper function
         void _prepareOAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader = false, bool quiet = true);
+        //void _prepareOAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader = false, bool quiet = true, int RS = 0);
 };
 
 #endif // OAgent_h

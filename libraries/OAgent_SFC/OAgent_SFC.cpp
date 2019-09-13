@@ -20,30 +20,30 @@ OAgent_SFC::OAgent_SFC() {
 
     XBee temp1 = XBee();
     ZBRxResponse temp2 = ZBRxResponse();
-    OGraph temp3 = OGraph();
+    OGraph_SFC temp3 = OGraph_SFC();
     _prepareOAgent_SFC(&temp1,&temp2,&temp3);
-    setRS(0);
+    //setRS(0);
 }
 
-OAgent_SFC::OAgent_SFC(XBee * xbee, OGraph * G, bool leader, bool quiet) {
+OAgent_SFC::OAgent_SFC(XBee * xbee, OGraph_SFC * G, bool leader, bool quiet) {
      ZBRxResponse temp = ZBRxResponse();
     _prepareOAgent_SFC(xbee,&temp,G,leader,quiet);
-    setRS(0);
+    //setRS(0);
 }
 
-OAgent_SFC::OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet) {
+OAgent_SFC::OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph_SFC * G, bool leader, bool quiet) {
     _prepareOAgent_SFC(xbee,rx,G,leader,quiet);
-    setRS(0);
+    //setRS(0);
 }
 
-OAgent_SFC::OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet, int RS) {
-    _prepareOAgent_SFC(xbee,rx,G,leader,quiet);  
-}
+// OAgent_SFC::OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph_SFC * G, bool leader, bool quiet, int RS) {
+//     _prepareOAgent_SFC(xbee,rx,G,leader,quiet);  
+// }
 
 /// End Constructors
 
 /// Methods to get private elements
-//OGraph * OAgent_SFC::getGraph() {
+//OGraph_SFC * OAgent_SFC::getGraph() {
 //    return _G;
 //}
 //
@@ -134,9 +134,13 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
                 	//Serial  << _HEX(_rx->getRemoteAddress64().getLsb());
                 	//Serial << "\n";   
                     
-                    long Mudiff = inMu - s->getNuMin(i);
+                    long Mudiff = inMu - s->getNuMin(i); 
                     long sigdiff =  inSigma - s->getTau(i);
-                    
+                        if(k==0)
+                            {
+                                _neighborY0[i] = Mudiff;
+                                _neighborZ0[i] = sigdiff;
+                            }
                     inY += Mudiff;                               // add mu from incoming device and subtract last received value
                     s->setNuMin(i,inMu);                                        // save received mu as new nu (nuMin)
                     inZ += sigdiff;                              // add sigma from incoming device and subtract last received value
@@ -1802,7 +1806,7 @@ int OAgent_SFC:: getStatusData(int index)
 /// End synchronization helper functions
 /// General helper functions
 
-void OAgent_SFC::_prepareOAgent(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader, bool quiet) {
+void OAgent_SFC::_prepareOAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph_SFC * G, bool leader, bool quiet) {
     _xbee = xbee;
     _G = G;
     _leader = leader;

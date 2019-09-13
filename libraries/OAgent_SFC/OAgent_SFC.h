@@ -15,7 +15,7 @@
 //#define VERBOSE
 
 #include "XBee.h"   // Include header for xbee api
-#include "OGraph.h"
+#include "OGraph_SFC.h"
 #include "Dyno.h"
 
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sC
@@ -49,11 +49,12 @@ class OAgent_SFC {
 	public:
         /// Constructors
 		OAgent_SFC();
-        OAgent_SFC(XBee * xbee, OGraph * G, bool leader = false, bool quiet = true);
-        OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader = false, bool quiet = true);
+        OAgent_SFC(XBee * xbee, OGraph_SFC * G, bool leader = false, bool quiet = true);
+        OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph_SFC * G, bool leader = false, bool quiet = true);
+        //OAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph_SFC * G, bool leader = false, bool quiet = true, int RS = 0);
         
         /// Methods
-        inline OGraph * getGraph() { return _G; }
+        inline OGraph_SFC * getGraph() { return _G; }
         //unsigned int getRxAddress();
         //void broadcastTestPacket();
         //bool waitForTestPacket();
@@ -65,6 +66,9 @@ class OAgent_SFC {
         // Get / set quiet directive
         inline void setQuiet(bool quiet) { _quiet = quiet; }
         inline bool isQuiet() { return _quiet; }
+
+        // Set Resilience Strategy for Agent
+        //inline void setRS(int RS) { _RS = RS;}
         
         // Fair splitting methods
         float fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period); 
@@ -112,7 +116,7 @@ class OAgent_SFC {
         uint32_t _availableAgentLsb[8];
         
         /// Graph
-        OGraph * _G;
+        OGraph_SFC * _G;
         
         
         /// Agent properties
@@ -123,6 +127,9 @@ class OAgent_SFC {
         unsigned long _start_millis;
         uint8_t _iterations;
         uint16_t _period;
+
+        //Resilience Strategy Property    
+        //int _RS;
         
         //Sammy's addition to contain iterates
         float _buffer[200];
@@ -131,6 +138,9 @@ class OAgent_SFC {
         float _bufferZ[200];
         //Sid
         long _buffer2;
+        float _neighborY0[NUM_REMOTE_VERTICES];
+        float _neighborZ0[NUM_REMOTE_VERTICES];
+
         int node_counter[NUM_REMOTE_VERTICES]; //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //// Methods
         /// Fair splitting
@@ -242,7 +252,7 @@ class OAgent_SFC {
         uint8_t _addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr);
         
         // Constructor helper function
-        void _prepareOAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph * G, bool leader = false, bool quiet = true);
+        void _prepareOAgent_SFC(XBee * xbee, ZBRxResponse * rx, OGraph_SFC * G, bool leader = false, bool quiet = true);
 };
 
 #endif // OAgent_SFC_h
