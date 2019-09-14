@@ -974,20 +974,14 @@ void OAgent_SFC::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
     uint8_t Dout = s->getOutDegree() + 1;   // store out degree
 
     // added in by Olaolu. If a node i is out, forloop adds (1/Dout_i) of its initial value
-    for (int i=0; i< NUM_REMOTE_VERTICES; i++){	
+    for (int i=0; i< NUM_REMOTE_VERTICES; i++){
     	if ((s->getStatus(i)) == 1){
     		y = y + getneighborY0(i);
+            z = z + getneighborZ0(i);
     	}
     }   
     s->setYMin(y - s->getMin());            // set initial y value (using yMin) [y - min]
-    s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/Dout
-
-    // added in by Olaolu. If a node i is out, forloop adds (1/Dout_i) of its initial value
-    for (int i=0; i< NUM_REMOTE_VERTICES; i++){
-    	if ((s->getStatus(i)) == 1){
-    		z = z + getneighborZ0(i);
-    	}
-    }   
+    s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/
     s->setZ(z - s->getMin());     // set initial z value [z - min]
     s->setSigma(s->getZ()/Dout);            // Initialize sigma = z/Dout
 }
