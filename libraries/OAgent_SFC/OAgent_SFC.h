@@ -102,7 +102,12 @@ class OAgent_SFC {
         inline long getoffsetdata(){ return _offset; }
         //Sid
         inline long getbuffer2() {return _buffer2; }
-        int getStatusData(int index);                               
+        int getStatusData(int index);
+        //Olaolu
+        inline void setneighborY0(int index, float y) { _neighborY0[index] = y; }
+        inline void setneighborZ0(int index, float z) { _neighborZ0[index] = z; }
+        inline float getneighborY0(int index){ return _neighborY0[index]; }
+        inline float getneighborZ0(int index){ return _neighborZ0[index]; }                
 
 	private:
         //// Properties

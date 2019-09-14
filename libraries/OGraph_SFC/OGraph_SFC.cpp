@@ -465,7 +465,7 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, long min, long max, long 
     // set graph out-degree
     _inDegree = 0;
     _outDegree = Dout;
-    //initialize status vector to zero i.e. all otherv nodes are not neighbors
+    //initialize status vector to zero i.e. all other nodes are not neighbors
     for(int i=0; i< NUM_REMOTE_VERTICES; i++)
     {
         _status[i] = 0;

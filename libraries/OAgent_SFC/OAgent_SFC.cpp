@@ -138,8 +138,8 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
                     long sigdiff =  inSigma - s->getTau(i);
                         if(k==0)
                             {
-                                _neighborY0[i] = Mudiff;
-                                _neighborZ0[i] = sigdiff;
+                            	setneighborY0(i, Mudiff);
+                            	setneighborZ0(i, sigdiff);
                             }
                     inY += Mudiff;                               // add mu from incoming device and subtract last received value
                     s->setNuMin(i,inMu);                                        // save received mu as new nu (nuMin)
@@ -972,8 +972,22 @@ unsigned long OAgent_SFC::myMillis() {
 void OAgent_SFC::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
     _G->clearAllStates();                   // clear everything
     uint8_t Dout = s->getOutDegree() + 1;   // store out degree
+
+    // added in by Olaolu. If a node i is out, forloop adds (1/Dout_i) of its initial value
+    for (int i=0; i< NUM_REMOTE_VERTICES; i++){	
+    	if ((s->getStatus(i)) == 1){
+    		y = y + getneighborY0(i);
+    	}
+    }   
     s->setYMin(y - s->getMin());            // set initial y value (using yMin) [y - min]
     s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/Dout
+
+    // added in by Olaolu. If a node i is out, forloop adds (1/Dout_i) of its initial value
+    for (int i=0; i< NUM_REMOTE_VERTICES; i++){
+    	if ((s->getStatus(i)) == 1){
+    		z = z + getneighborZ0(i);
+    	}
+    }   
     s->setZ(z - s->getMin());     // set initial z value [z - min]
     s->setSigma(s->getZ()/Dout);            // Initialize sigma = z/Dout
 }
