@@ -102,7 +102,12 @@ class OAgent_SFC {
         inline long getoffsetdata(){ return _offset; }
         //Sid
         inline long getbuffer2() {return _buffer2; }
-        int getStatusData(int index);                               
+        int getStatusData(int index);
+        //Olaolu
+        inline void setneighborY0(int index, float y) { _neighborY0[index] = y; }
+        inline void setneighborZ0(int index, float z) { _neighborZ0[index] = z; }
+        inline float getneighborY0(int index){ return _neighborY0[index]; }
+        inline float getneighborZ0(int index){ return _neighborZ0[index]; }                
 
 	private:
         //// Properties
@@ -117,8 +122,7 @@ class OAgent_SFC {
         
         /// Graph
         OGraph_SFC * _G;
-        
-        
+
         /// Agent properties
         bool _leader;
         bool _quiet;
@@ -221,6 +225,7 @@ class OAgent_SFC {
         bool _packetACKed(int timeout);
         inline uint16_t _getHeaderFromPacket() { return (uint16_t(_rx->getData(1)) << 8) + _rx->getData(0); }
         inline uint16_t _getIDFromPacket2()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
+        inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
         bool _waitForPacket(uint16_t header, unsigned long &rxTime, bool broadcast = false, int timeout = -1);
         bool _waitForPacket(uint16_t header, bool broadcast = false, int timeout = -1);
         uint16_t _waitForValidPacket(bool broadcast = false, int timeout = -1);

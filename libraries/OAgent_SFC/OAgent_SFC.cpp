@@ -119,6 +119,11 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
                     long inMu = _getMuFromPacket();                             // store incoming value of mu
                     long inSigma = _getSigmaFromPacket();                       // store incoming value of sigma
                     int node_id = _getIDFromPacket2();
+                    int inheritor_id = _getinheritorIDFromPacket();
+
+                    //find out id this node is the inheritor for node i
+
+
 
                     if(s->getStatus(node_id-1) == 1)
                     {
@@ -138,8 +143,8 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
                     long sigdiff =  inSigma - s->getTau(i);
                         if(k==0)
                             {
-                                _neighborY0[i] = Mudiff;
-                                _neighborZ0[i] = sigdiff;
+                            	setneighborY0( i, Mudiff+( Mudiff*(inheritor_id==s->getID()) ) );
+                            	setneighborZ0( i, sigdiff+( sigdiff*(inheritor_id==s->getID()) ) );
                             }
                     inY += Mudiff;                               // add mu from incoming device and subtract last received value
                     s->setNuMin(i,inMu);                                        // save received mu as new nu (nuMin)
@@ -203,7 +208,7 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
                 s->decrementInDegree();
                 uint8_t dout = s->getOutDegree();              //since we assume it is a bidirectional graph, InDegree is equivalent to OutDegree
                 s->setOutDegree(dout - 1); 
-                node_counter[j] = -1;                          //set counter to -1 when limit reached to indicate offline link staus    
+                node_counter[j] = -1;                          //set counter to -1 when limit reached to indicate offline link status    
             }
             node_check[j] = 0;                                 //reset node_check after each iteration
         }
@@ -231,6 +236,10 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
         
         */
     }
+
+    //Update linked list based on updated neghbor status, and choose inheritor
+    l._updateALL();
+    l._setInheritorID();
  
     if(s->getZ() != 0)
         _buffer[0] = float(s->getYMin())/float(s->getZ()); 
@@ -972,17 +981,26 @@ unsigned long OAgent_SFC::myMillis() {
 void OAgent_SFC::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
     _G->clearAllStates();                   // clear everything
     uint8_t Dout = s->getOutDegree() + 1;   // store out degree
+
+    // added in by Olaolu. If a node i is out, forloop adds (1/Dout_i) of its initial value
+    for (int i=0; i< NUM_REMOTE_VERTICES; i++){
+    	if ((s->getStatus(i)) == 1){
+    		y = y + getneighborY0(i);
+            z = z + getneighborZ0(i);
+    	}
+    }   
     s->setYMin(y - s->getMin());            // set initial y value (using yMin) [y - min]
-    s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/Dout
+    s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/
     s->setZ(z - s->getMin());     // set initial z value [z - min]
     s->setSigma(s->getZ()/Dout);            // Initialize sigma = z/Dout
 }
 
 void OAgent_SFC::_broadcastFairSplitPacket(OLocalVertex * s) {   
-    uint16_t payload[6];           
+    uint16_t payload[7];           
     long mu    = s->getMuMin();
     long sigma = s->getSigma();
     uint16_t id = s->getID();
+    uint16_t inheritorID = s->chooseInheritor();
 
     payload[0] = FAIR_SPLITTING_HEADER;
     payload[1] = mu;
@@ -990,6 +1008,7 @@ void OAgent_SFC::_broadcastFairSplitPacket(OLocalVertex * s) {
     payload[3] = sigma;
     payload[4] = sigma >> 16;
     payload[5] = id;
+    payload[6] = inheritorID;   //added in by Olaolu
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp

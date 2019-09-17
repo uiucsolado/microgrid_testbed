@@ -20,6 +20,7 @@
 //#define VERBOSE
 
 #include "../XBee/XBee.h" // Include header for xbee api
+#include "LinkedList.h" //Include header for linked list
 
 class OVertex {
     public:
@@ -131,6 +132,8 @@ class OLocalVertex : public OVertex {
         inline long getBase() { return _base; }
         //nodeID
         inline int getID() {return _nodeID; }
+        //use Linked List _l to choose an inheritor
+        int chooseInheritor();
         //Status
         inline int getStatus(int index) {return _status[index]; }
         inline void setStatus(int index, int status) { _status[index] = status;  } 
@@ -172,6 +175,10 @@ class OLocalVertex : public OVertex {
         long _base;
         //status information based on interaction with other nodes in network; 0 - Not a neighbor, 1 - neighbor but offline link, 2 - neighbor with  online link
         int _status[NUM_REMOTE_VERTICES];
+        //Pointer for node status to be used by choose inheritor function (added in by Olaolu)
+        int *_statusP;
+        // A linked list for IDs of online neghbors (this object will be used by the chooseInheritor function)
+        LinkedList _l;
         // Ratio-consensus states
         long _z;
         long _zIn;
