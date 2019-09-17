@@ -470,9 +470,23 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, long min, long max, long 
     {
         _status[i] = 0;
     }
+    //Linked list declaration
+    _l = LinkedList();
+    _statusP = &_status;
     // set address and lambda_min and lambda_max
     _prepareOVertex(aLsb,_computeLambda(_min),_computeLambda(_max), nodeid);
 }
+
+
+// Inheritor ID selection
+int OLocalVertex::chooseInheritor() {
+    //Update linked list based on updated neghbor status, and choose inheritor
+    _l._updateALL(_statusP);
+    _l._setInheritorID();
+
+    return _l.getInheritorID();
+}
+
 
 // Optimal dispatch functions
 long OLocalVertex::_computeLambda(long limit) {
