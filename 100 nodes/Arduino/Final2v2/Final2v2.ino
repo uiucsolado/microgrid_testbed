@@ -204,16 +204,6 @@ void loop()
         for (int j = 3; j < 13; j++)
         {
           value = a.getbufferdata(j);
-
-          /*
-          if (value >= 0)
-          { 
-            cresults = cresults + (value*(20000.0000 - 0.0000) + 0.0000) + ";" ;
-          } 
-          else
-          {
-            cresults = cresults + (value*(0.0000 - (-20000.0000)) + 0.0000) + ";" ;
-          }*/
           cresults = cresults + value*1000 + ";" ;
         }
         
@@ -272,4 +262,3 @@ void sendConsensusResults(int ip)
   Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low,ip);
   Mb.MbmRun();
 }
-
