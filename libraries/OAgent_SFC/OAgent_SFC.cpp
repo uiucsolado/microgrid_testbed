@@ -237,10 +237,6 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
         */
     }
 
-    //Update linked list based on updated neghbor status, and choose inheritor
-    l._updateALL();
-    l._setInheritorID();
- 
     if(s->getZ() != 0)
         _buffer[0] = float(s->getYMin())/float(s->getZ()); 
 
