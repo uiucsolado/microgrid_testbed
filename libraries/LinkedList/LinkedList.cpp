@@ -14,17 +14,20 @@
 // Constructors
 
 LinkedList::LinkedList() {
-	_prepareALL();
+	_prepareALL(10);
+}
+
+LinkedList::LinkedList(int n) {
+	_prepareALL(n);
 }
 
 
-
 //create a linked list of online neighbors, using their node IDs 
-void LinkedList::_prepareALL() {
+void LinkedList::_prepareALL(int n) {
 	_head = NULL;
 	_tail = NULL;
 	_inheritor = 1;
-	for (int i = 0; i < NUM_REMOTE_VERTICES; i++)
+	for (int i = 0; i < n; i++)
 	{
 		node *tmp = new node;
 		tmp->data = i + 1;
@@ -41,7 +44,7 @@ void LinkedList::_prepareALL() {
 			_tail = tmp;
 		}
 	}
-	_setLLsize (NUM_REMOTE_VERTICES);
+	_setLLsize (n);
 }
 
 
@@ -83,7 +86,7 @@ void LinkedList::_displayALL() {
 	tmp = _pseudoHead;
 	while (tmp != NULL)
 	{
-		cout << tmp->data << ' ';
+		Serial << tmp->data << ' ';
 		tmp = tmp->next;
 	}
 }
@@ -104,7 +107,7 @@ void LinkedList::_setInheritorID() {
 	else
 	{
 		// randomly choose an online neighbor to be inheritor
-		srand (time (0));	
+		srand (getLLsize());	
 		index = rand () % getLLsize ();
 		for (int i = 0; i <= index; i++)
 		{

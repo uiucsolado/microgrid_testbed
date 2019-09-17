@@ -113,11 +113,13 @@ void loop() {
   } 
    else {
     if(a.isSynced()) {
+      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);
       //a.nonleaderFairSplitRatioConsensus(-1*base*state);
+      */
       a.nonleaderFairSplitRatioConsensus(1*D_base,0);
       state1 = a.getbufferdata(0);
 
@@ -156,6 +158,7 @@ void loop() {
 //      int temp =   base*base*state1;                  
 //      Mb.MbData[2] = temp;   
 //      sendConsensusResults();
+        a.resync();
       }
   }
  

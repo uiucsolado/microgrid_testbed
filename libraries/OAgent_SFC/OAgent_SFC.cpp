@@ -87,6 +87,8 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
     for(int i=0; i < NUM_REMOTE_VERTICES; i++)
     {
         node_check[i] = 0;
+        //Serial <<"\n"<<"For Node "<<s->getID()<<", from Node"<<i<<", Y[0]= "<< getneighborY0(i) << "\n ";
+        //Serial <<"\n"<<"For Node "<<s->getID()<<", from Node"<<i<<", Z[0]= "<< getneighborZ0(i) << "\n ";
     }
  
     int frame = 35;
@@ -143,8 +145,10 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
                     long sigdiff =  inSigma - s->getTau(i);
                         if(k==0)
                             {
-                            	setneighborY0( i, Mudiff+( Mudiff*(inheritor_id==s->getID()) ) );
-                            	setneighborZ0( i, sigdiff+( sigdiff*(inheritor_id==s->getID()) ) );
+                            	setneighborY0( (node_id-1), Mudiff+( Mudiff*(inheritor_id==s->getID()) ) );
+                                //Serial <<"\n"<<"Y0 element "<<i<<" is: "<< getneighborY0(i) << "\n ";
+                            	setneighborZ0( (node_id-1), sigdiff+( sigdiff*(inheritor_id==s->getID()) ) );
+                                //Serial <<"\n"<<"Z0 element "<<i<<" is: "<< getneighborZ0(i) << "\n " ;
                             }
                     inY += Mudiff;                               // add mu from incoming device and subtract last received value
                     s->setNuMin(i,inMu);                                        // save received mu as new nu (nuMin)
@@ -986,8 +990,10 @@ void OAgent_SFC::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
     	}
     }   
     s->setYMin(y - s->getMin());            // set initial y value (using yMin) [y - min]
+    //Serial << "\nNode "<<s->getID()<<"'s' Y[0] is: "<<s->getYMin()<<"\n";
     s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/
     s->setZ(z - s->getMin());     // set initial z value [z - min]
+    //Serial << "\nNode "<<s->getID()<<"'s' Z[0] is: "<<s->getZ()<<"\n";
     s->setSigma(s->getZ()/Dout);            // Initialize sigma = z/Dout
 }
 

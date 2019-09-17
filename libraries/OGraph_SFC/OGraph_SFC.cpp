@@ -270,6 +270,116 @@ void OVertex::_prepareOVertex(uint32_t aLsb, long lambdaMin, long lambdaMax, int
 /// End private methods
 //// End OVertex
 
+
+
+// LinkedList
+// Public mthods
+LinkedList::LinkedList() {
+    _prepareALL(NUM_REMOTE_VERTICES);
+}
+
+LinkedList::LinkedList(int n) {
+    _prepareALL(n);
+}
+
+//create a linked list of online neighbors, using their node IDs 
+void LinkedList::_prepareALL(int n) {
+    _head = NULL;
+    _tail = NULL;
+    _inheritor = 1;
+    for (int i = 0; i < n; i++)
+    {
+        node *tmp = new node;
+        tmp->data = i + 1;
+        tmp->mainNext = NULL;
+
+        if (_head == NULL)
+        {
+            _head = tmp;
+            _tail = tmp;
+        }
+        else
+        {
+            _tail->mainNext = tmp;
+            _tail = tmp;
+        }
+    }
+    _setLLsize (n);
+}
+
+//create a linked list of online neighbors, using their node IDs 
+void LinkedList::_updateALL(int *p) {
+    int i=0, j=0;
+    _pseudoHead = NULL;
+    node *tmp;
+    tmp = _head;
+    while (tmp != NULL)
+    {
+        if (*(p+i) == 2)
+        {
+            if (_pseudoHead == NULL)
+            {
+                _pseudoHead = tmp;
+                _pseudoTail = tmp;
+            }
+            else
+            {
+                _pseudoTail->next = tmp;
+                _pseudoTail = tmp;
+            }
+            j++;
+        }
+        tmp = tmp->mainNext;
+        i++;
+    }
+    _pseudoTail->next = NULL;
+    _setLLsize (j);
+}
+
+//display a linked list
+void LinkedList::_displayALL() {
+    node *tmp;
+    tmp = _pseudoHead;
+    while (tmp != NULL)
+    {
+        Serial << tmp->data << ' ';
+        tmp = tmp->next;
+    }
+}
+
+//get node ID of inheritor
+void LinkedList::_setInheritorID() {
+    node *tmp;
+    tmp = _pseudoHead;
+    int ID = 0;
+    int index;
+
+    if (tmp == NULL)
+    {
+        return;
+    }
+    else
+    {
+        // randomly choose an online neighbor to be inheritor
+        srand (getLLsize());   
+        index = rand () % getLLsize ();
+        for (int i = 0; i <= index; i++)
+        {
+            ID = tmp->data;
+            tmp = tmp->next;
+        }
+        _inheritor = ID;
+    }
+}
+
+
+/// End private methods
+//// End LinkedList
+
+
+
+
+
 //// OLocalVertex
 /// Public methods
 // Constructors
@@ -470,9 +580,8 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, long min, long max, long 
     {
         _status[i] = 0;
     }
-    //Linked list declaration
+    _statusP = &_status[0];
     _l = LinkedList();
-    _statusP = &_status;
     // set address and lambda_min and lambda_max
     _prepareOVertex(aLsb,_computeLambda(_min),_computeLambda(_max), nodeid);
 }
