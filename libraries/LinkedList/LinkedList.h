@@ -6,8 +6,8 @@
  *
  */
 
-
-#include "OGraph.h"
+#ifndef NULL
+#define NULL 0
 
 struct node {
 	int data;
@@ -19,7 +19,8 @@ struct node {
 class LinkedList {
 	public:
 	    // Constructor
-	    LinkedList ();
+	    LinkedList();
+	    LinkedList(int n);
 	    //States
 		inline void _setLLsize (int j) {_size = j;}
 		inline int getLLsize() { return _size; }
@@ -28,11 +29,9 @@ class LinkedList {
 		//method to display linked list of online node IDs
 		void _displayALL();
 		//method to prepare the linked list of online node IDs
-		void _prepareALL();
+		void _prepareALL(int n);
 		//method to update the linked list of online node IDs based on neighbor status
 		void _updateALL(int *p);
-		//method to create a linked list of online node IDs
-		void _createALL();
 		//method to set node ID of inheritor
 		void _setInheritorID();
 
@@ -41,3 +40,5 @@ class LinkedList {
 		node *_head, *_pseudoHead, *_tail, *_pseudoTail;
 		int _size, _inheritor;
 };
+
+#endif // LinkedList.h

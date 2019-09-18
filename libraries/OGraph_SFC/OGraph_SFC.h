@@ -14,13 +14,14 @@
 #define NUM_BROADCAST_LAMBDA 3
 #define LONG_ERROR 2147483647
 
-#define NUM_REMOTE_VERTICES 10      //ENSURE THAT THESE PARAMETERS ARE SET APPROPRIATELY BASED ON GRAPH STRUCTURE
+#define NUM_REMOTE_VERTICES 22      //ENSURE THAT THESE PARAMETERS ARE SET APPROPRIATELY BASED ON GRAPH STRUCTURE
 #define NUM_IN_NEIGHBORS 9         //maximum allowed number of neighbors (does not include itself)
+//#define NULL 0
 
 //#define VERBOSE
 
 #include "../XBee/XBee.h" // Include header for xbee api
-#include "LinkedList.h" //Include header for linked list
+//#include "LinkedList.h" //Include header for linked list
 
 class OVertex {
     public:
@@ -112,6 +113,46 @@ class OVertex {
         void _prepareOVertex(uint32_t aLsb, long lambdaMin, long lambdaMax, int nodeid);
 };
 
+
+
+
+
+struct node {
+    int data;
+    node *mainNext;
+    node *next;
+};
+
+
+class LinkedList {
+    public:
+        // Constructor
+        LinkedList();
+        LinkedList(int n);
+        //States
+        inline void _setLLsize (int j) {_size = j;}
+        inline int getLLsize() { return _size; }
+        inline int getInheritorID() { return _inheritor; }
+
+        //method to display linked list of online node IDs
+        void _displayALL();
+        //method to prepare the linked list of online node IDs
+        void _prepareALL(int n);
+        //method to update the linked list of online node IDs based on neighbor status
+        void _updateALL(int *p);
+        //method to set node ID of inheritor
+        void _setInheritorID();
+
+    private:
+        //properties
+        node *_head, *_pseudoHead, *_tail, *_pseudoTail;
+        int _size, _inheritor;
+};
+
+
+
+
+
 class OLocalVertex : public OVertex {
     public:
         // Constructors
@@ -177,7 +218,7 @@ class OLocalVertex : public OVertex {
         int _status[NUM_REMOTE_VERTICES];
         //Pointer for node status to be used by choose inheritor function (added in by Olaolu)
         int *_statusP;
-        // A linked list for IDs of online neghbors (this object will be used by the chooseInheritor function)
+        // A linked list for IDs of online neghbors
         LinkedList _l;
         // Ratio-consensus states
         long _z;
@@ -318,5 +359,6 @@ class OGraph_SFC {
         bool _isRemoteVertex(uint32_t aLsb, uint8_t &i);
         bool _addRemoteVertex(uint32_t aLsb, long lambdaMin, long lambdaMax, bool inNeighbor = false);
 };
+
 
 #endif // OGraph_SFC_h

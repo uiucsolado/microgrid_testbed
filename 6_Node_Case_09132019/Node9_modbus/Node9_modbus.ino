@@ -7,6 +7,7 @@
 #include <SPI.h>
 #include <Ethernet.h>
 
+
 //Node 9
 
 #define BR_ADDRESS 0xffff  
@@ -26,6 +27,7 @@ OLocalVertex s = OLocalVertex(0x415786E1,0,0.225*D_base,-2.1667*base,0.1667*base
 //OLocalVertex s = OLocalVertex(0x415786E1,0,1*D_base,-2.1667*base,0.1667*base,5,D_base,9); //changed Dout to 1, OLocalVertex(0x404980AE,-0.1*base,0.05*base,-2.1667*base,0.1667*base,1,base); //SN The Xbee address  needs to be changed here right? Also  figure out how to assign the 
 OGraph_SFC g = OGraph_SFC(&s);
 OAgent_SFC a = OAgent_SFC(&xbee,&rx,&g,true,true); // argument rx?
+
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
@@ -165,12 +167,14 @@ void loop() {
     ce=true;
     if(ce == true)
     {///*
-      rounds = rounds + 1; 
-      Serial.println(rounds);
+      //rounds = rounds + 1; 
+      //Serial.println(rounds);
+      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);
+      */
       //a.leaderFairSplitRatioConsensus(base*state,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
       a.leaderFairSplitRatioConsensus(1*D_base,1*D_base, 10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
       //Serial.println("Out");
@@ -181,7 +185,7 @@ void loop() {
        //Serial.println(state);
        Serial.println("ratio consensus result");
        Serial.println(state1,4);
-       
+       /*
        // Controller code
        r=r+1;
        if(r>2)
@@ -193,7 +197,7 @@ void loop() {
        Mb.MbData[1]=base*u;
        sendConsensusResults();
        // Controller code over
-    
+    */
        
        //SerialUSB.println("printed the state");
        
@@ -208,7 +212,7 @@ void loop() {
 //       int temp =   base*base*state1;                  
 //       Mb.MbData[2] = temp;                     
 //       sendConsensusResults();
-              
+       a.resync();       
        delay(1000);  //to account for the time it takes to send the reference signal through modbus
 //*/
       /* Modbus Debugging

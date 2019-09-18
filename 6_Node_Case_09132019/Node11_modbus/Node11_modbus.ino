@@ -121,11 +121,13 @@ void loop() {
    else {
     if(a.isSynced()) {
       ///*
+      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);
       //a.nonleaderFairSplitRatioConsensus(base*state);
+      */
       a.nonleaderFairSplitRatioConsensus(1*D_base,0);
       state1 = a.getbufferdata(0);
 
@@ -134,7 +136,7 @@ void loop() {
       //Serial.println(state);
       Serial.println("ratio consensus result");
       Serial.println(state1,4); 
-      
+      /*
        // Controller code
        r=r+1;
        if(r>2)
@@ -147,7 +149,7 @@ void loop() {
        sendConsensusResults();
        
        // Controller code over
-      
+      */
           
 //      n = state*base_value; //multiply by base value  to change to non-decimal
 //      state_high = (n >> 16) & 0x000FFFF;
@@ -173,6 +175,7 @@ void loop() {
       Serial.println(float(state),4);
       Mb.MbData[1] =  state; 
       sendConsensusResults();*/
+      a.resync();
       }
   }/*
    receiveTyphoonData();
