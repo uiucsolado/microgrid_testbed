@@ -254,6 +254,9 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
     return float(s->getYMin())/float(s->getZ());
 }
 
+
+
+
 // long OAgent_SFC::computeFairSplitFinalValue(float gamma) {
 //     OLocalVertex * s = _G->getLocalVertex();
 // 	if(gamma <= 0)
@@ -266,154 +269,6 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
 // }
 
 
-
-// void OAgent_SFC::incrementalLeaderRatioConsensusWithDyno(Dyno &d, uint8_t iterations, uint16_t period, uint8_t &ledPin) {
-//     _start_millis = millis() + 1200;
-// 	OLocalVertex * s = _G->getLocalVertex();
-// 	float base = float(s->getBase());
-//     _broadcastScheduleFairSplitPacket(_start_millis,iterations,period);
-// 	// get the torque command from python
-//     float t = d.getTorqueFloat();
-// 	float tErr = d.getErrorTorqueFloat();
-// 	// scale torque to base and call it initial
-// 	long error = long(tErr*base);
-// 	long current = long(t*base);
-// 	//d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-//     long final = initial;
-//     float gamma = 0;
-//     if(_waitToStart(_start_millis,false,1800)) {
-// 		digitalWrite(ledPin,HIGH);
-//         gamma = incrementalRatioConsensus(initial,iterations,period);
-// 		d.sendShortLogData(LOG_GAMMA_KEY,uint16_t(float(1000)*gamma));
-//         final = computeIncrementalFairSplitValue(gamma);
-// 		
-// 		digitalWrite(ledPin,LOW);
-//     }
-// 	d.setTorque(float(final)/base);
-// }
-
-// void OAgent_SFC::leaderDGC(Dyno &d, float k, int vref, uint8_t epsilon) {
-//     // get pointer to local vertex
-//     OLocalVertex * s = _G->getLocalVertex();
-//     //long base = s->getBase();
-//     long final;
-//     int vError;
-//     do {
-//         // save start time
-//         unsigned long startTime = millis() + 1200;
-//         // broadcast schedule packet
-//         _broadcastScheduleFairSplitPacket(startTime,50,50);
-//         // get current torque command as integer
-//         uint16_t t = d.getTorqueInt();
-//         //uint16_t t = 218;
-//         // get current velocity of dyno
-//         uint16_t v = d.getVelocity();
-//         //uint16_t v = 1203;
-// 		// calculate estimated torque errpr
-// 		long tError = long(k*float(vref-int(v)));
-// 		d.sendLogData(LOG_TORQUE_ERROR_KEY,tError);
-//         // determine initial command for algorithm
-//         long initial = s->getBase()*(tError + long(t));
-// 		d.sendLogData(LOG_INITIAL_TORQUE_KEY,initial);
-//         // save initial value as final value in case _waitToStart times out
-//         final = initial;
-//         // create variable to store ratio
-//         float gamma = 0;
-//         if(_waitToStart(startTime,false,1800)) {
-// 			digitalWrite(48,HIGH);
-//             gamma = fairSplitRatioConsensus(initial,50,50);
-// 			d.sendLogData(LOG_GAMMA_KEY,s->getBase()*gamma);
-//             final = computeFairSplitFinalValue(gamma);
-// 			digitalWrite(48,LOW);
-//         }
-//         // set torque
-//         d.setTorqueInt(uint16_t(float(final)/float(s->getBase())));
-//         delay(500);
-//         // compute speed error
-//         vError = vref - d.getVelocity();
-//     } while(abs(vError) <= epsilon);
-//     delay(7500);
-//     final = leaderOptimalDispatch(final,50,250);
-//     d.setTorqueInt(uint16_t(float(final)/float(s->getBase())));
-// }
-
-// void OAgent_SFC::nonleaderDGC() {
-//     OLocalVertex * s = _G->getLocalVertex();
-//     long initial;
-//     long final;
-//     unsigned long startTime;
-//     uint8_t iterations;
-//     uint16_t period;
-//     uint16_t header = _waitForSchedulePacket(startTime,iterations,period);
-// 	uint8_t cPin = 48;
-// 	uint8_t oPin = 53;
-// 	digitalWrite(cPin,HIGH);
-// 	digitalWrite(oPin,HIGH);
-//     //if(header == SCHEDULE_FAIR_SPLIT_HEADER || header == SCHEDULE_OPTIMAL_DISPATCH_HEADER) {
-//         // get current torque command
-//         //uint16_t t = d.getTorqueInt();
-// 		//float t = 1.81;
-//         //initial = long(t*float(s->getBase()));
-// 		// d.sendLogData(LOG_INITIAL_TORQUE_KEY,initial);
-// 		initial = long(75)*s->getBase();
-//         final = initial;
-//         if(header == SCHEDULE_FAIR_SPLIT_HEADER) {
-// 			digitalWrite(oPin,LOW);
-//             float gamma = 0;
-//             if(_waitToStart(startTime,true,1800)) {
-//                 gamma = fairSplitRatioConsensus(initial,iterations,period);
-// 				//d.sendLogData(LOG_GAMMA_KEY,s->getBase()*gamma);
-//                 final = computeFairSplitFinalValue(gamma);
-//             }
-// 			digitalWrite(cPin,LOW);
-//         } else if(header == SCHEDULE_OPTIMAL_DISPATCH_HEADER) {
-//             digitalWrite(cPin,LOW);
-//             if(_waitToStart(startTime,true,1800)) {
-//                 final = 0;//optimalDispatch(initial,iterations,period);
-//             }
-// 			digitalWrite(oPin,LOW);
-//         }
-// 		//if(final != initial)
-// 		//	d.setTorqueInt(uint16_t(float(final)/float(s->getBase())));
-// 		//}
-// 	digitalWrite(cPin,LOW);
-// 	digitalWrite(oPin,LOW);
-// }
-
-// void OAgent_SFC::reserveDGC(Dyno &d, bool &limit_exceeded) {
-//     OLocalVertex * s = _G->getLocalVertex();
-//     long initial;
-//     long final;
-//     unsigned long startTime;
-//     uint8_t iterations;
-//     uint16_t period;
-//     uint16_t header = _waitForSchedulePacket(startTime,iterations,period);
-//     if(header == SCHEDULE_FAIR_SPLIT_HEADER || header == SCHEDULE_OPTIMAL_DISPATCH_HEADER) {
-//         // get current torque command
-//         uint16_t t = d.getTorqueInt();
-//         initial = long(t)*s->getBase();
-// 		// d.sendLogData(LOG_INITIAL_TORQUE_KEY,initial);
-//         final = initial;
-//         if(header == SCHEDULE_FAIR_SPLIT_HEADER) {
-// 			digitalWrite(48,HIGH);
-//             float gamma = 0;
-//             if(_waitToStart(startTime,true,1800)) {
-//                 gamma = fairSplitRatioConsensus(initial,iterations,period);
-// 				// d.sendLogData(LOG_GAMMA_KEY,s->getBase()*gamma);
-//                 final = computeFairSplitFinalValue(gamma);
-//             }
-// 			digitalWrite(48,LOW);
-//         } else if(header == SCHEDULE_OPTIMAL_DISPATCH_HEADER) {
-//             digitalWrite(51,HIGH);
-//             if(_waitToStart(startTime,true,1800)) {
-//                 final = optimalDispatch(initial,iterations,period);
-//             }
-// 			digitalWrite(51,LOW);
-//         }
-// 		if(final != initial)
-// 			d.setTorqueInt(uint16_t(float(final)/float(s->getBase())));
-//     }
-// }
 
 long OAgent_SFC::leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period) {
     srand(analogRead(7));                    //moved this instruction here from fairSplitRatioConsensus() - Sammy
@@ -428,29 +283,6 @@ long OAgent_SFC::leaderFairSplitRatioConsensus(long y, long z, uint8_t iteration
     }
     return gamma;
 }
-
-// void OAgent_SFC::leaderFairSplitRatioConsensusWithDyno(Dyno &d, uint8_t iterations, uint16_t period, uint8_t &ledPin) {
-//     unsigned long t0 = millis();
-//     _start_millis = t0 + 1750;
-// 	OLocalVertex * s = _G->getLocalVertex();
-// 	float base = float(s->getBase());
-//     _broadcastScheduleFairSplitPacket(_start_millis,iterations,period);
-// 	// get the torque command from python
-//     float t = d.getTorqueFloat();
-// 	// scale torque to base and call it initial
-// 	long initial = long(t*base);
-// 	//d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-//     long final = initial;
-//     float gamma = 0;
-//     if(_waitToStart(_start_millis,false,2000)) {
-// 		digitalWrite(ledPin,HIGH);
-//         gamma = fairSplitRatioConsensus(initial,iterations,period);
-// 		d.sendShortLogData(LOG_GAMMA_KEY,uint16_t(float(1000)*gamma));
-//         final = computeFairSplitFinalValue(gamma);
-// 		digitalWrite(ledPin,LOW);
-//     }
-// 	d.setTorque(float(final)/base);
-// }
 
 long OAgent_SFC::nonleaderFairSplitRatioConsensus(long y, long z) {
     srand(analogRead(7));
@@ -470,90 +302,6 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus(long y, long z) {
     digitalWrite(48,LOW);
     return gamma;
 }
-
-// void OAgent_SFC::nonleaderFairSplitRatioConsensusWithDyno(Dyno &d, uint8_t &ledPin) {
-//     // get pointer to local vertex
-//     OLocalVertex * s = _G->getLocalVertex();
-// 	float base = s->getBase();
-//     uint8_t id = 0; //not used for this case
-//     // wait for schedule packet
-//     _waitForScheduleFairSplitPacket(_start_millis,_iterations,_period,id);
-//     // get current torque command
-// 	float t = d.getTorqueFloat();
-// 	long initial = long(t*base);
-// 	//d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-//     long final = initial;
-//     float gamma = 0;
-//     if(_waitToStart(_start_millis,true,2000)) {
-// 		digitalWrite(ledPin,HIGH);
-//         gamma = fairSplitRatioConsensus(initial,_iterations,_period);
-// 		d.sendShortLogData(LOG_GAMMA_KEY,uint16_t(float(1000)*gamma));
-//         final = computeFairSplitFinalValue(gamma);
-// 		digitalWrite(ledPin,LOW);
-//     }
-// 	d.setTorque(float(final)/base);
-// }
-
-// void OAgent_SFC::reserveFairSplitRatioConsensusWithDyno(Dyno &d, long trueMax, uint8_t &ledPin) {
-//     // get pointer to local vertex
-//     OLocalVertex * s = _G->getLocalVertex();
-// 	float base = s->getBase();
-//     uint8_t id = 0; //not used for this case
-//     // wait for schedule packet
-//     _waitForScheduleFairSplitPacket(_start_millis,_iterations,_period,id);
-//     // get current torque command
-// 	float t = d.getTorqueFloat();
-// 	long initial = long(t*base);
-// 	//d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-//     long final = initial;
-//     float gamma = 0;
-//     if(_waitToStart(_start_millis,true,2000)) {
-// 		digitalWrite(ledPin,HIGH);
-//         gamma = fairSplitRatioConsensus(initial,_iterations,_period);
-// 		d.sendShortLogData(LOG_GAMMA_KEY,uint16_t(float(1000)*gamma));
-//         final = computeFairSplitFinalValue(gamma);
-// 		if(s->getMax() != trueMax && gamma > 1)
-// 			s->setMax(trueMax);
-// 		digitalWrite(ledPin,LOW);
-//     }
-// 	d.setTorque(float(final)/base);
-// }
-
-//void OAgent_SFC::reserveFairSplitRatioConsensusWithDyno(Dyno &d, uint8_t &ledPin) {
-	//     // get pointer to local vertex
-	//     OLocalReserveVertex * s = dynamic_cast<OLocalReserveVertex*> (_G->getLocalVertex());
-	// float base = s->getBase();
-	//     // wait for schedule packet
-	//     _waitForScheduleFairSplitPacket(_start_millis,_iterations,_period);
-	//     // get current torque command
-	// float t = d.getTorqueFloat();
-	// long initial = long(t*base);
-	// d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-	//     long final = initial;
-	//     float gamma = 0;
-	//     if(_waitToStart(_start_millis,true,1800)) {
-	// 	digitalWrite(ledPin,HIGH);
-	//         gamma = fairSplitRatioConsensus(initial,_iterations,_period);
-	// 	d.sendShortLogData(LOG_GAMMA_KEY,uint16_t(float(100)*gamma));
-	// 	final = computeFairSplitFinalValue(gamma);
-	// 	// if gamma is bigger than 1 and the system limit has not been exceeded
-	// 	if(gamma > 1 && s->getLimitExceeded() == false) {
-	// 		// change to true limit
-	// 	}
-	// 	// if the system limit has been exceeded and the limit gamma has not been set, save it
-	// 	if(s->getLimitGamma() == 0 && s->getLimitExceeded() == true)
-	// 		s->setLimitGamma(gamma);
-	// 	// if we are near the limit gamma
-	// 	if(gamma <= (s->getLimitGamma()-0.05) && s->getLimitExceeded() == true) {
-	// 		// reset limit gamma and the limit exceeded flag
-	// 		s->setLimitGamma(0);
-	// 		s->setLimitExceeded(false);
-	// 		// restore to fake limit
-	// 	}	
-	// 	digitalWrite(ledPin,LOW);
-	//     }
-	// d.setTorque(float(final)/base);
-	//}
 
 
 // End fair splitting
@@ -623,137 +371,6 @@ long OAgent_SFC::optimalDispatch(long x, uint8_t iterations, uint16_t period) {
     return s->g(lambdaStar);
 }
 
-// long OAgent_SFC::optimalDispatchWithDyno(long x, uint8_t iterations, uint16_t period, Dyno &d) {
-//  	OLocalVertex * s = _G->getLocalVertex();           // store pointer to local vertex object
-//     uint8_t Dout = s->getOutDegree() + 1;       // store out degree
-//     //Serial << "Out-degree: " << _DEC(Dout) << endl;
-//     _initializeOptimalDispatch(s,x);            // initialize state variables
-//     delay(20);
-//     bool txDone;                                // create variable to keep track of broadcasts
-//     uint16_t txTime = _genTxTime(period,5);     // time to broadcast packet
-//     for(uint8_t k = 0; k < iterations; k++) {
-//         // initialize toggle to keep track of broadcasts
-//         txDone = false;  
-//         // initialize timer   
-//         _start_millis = millis();   
-//         // do for iteration period
-//         while(uint16_t(millis()-_start_millis) < period) {
-//             // look for optimal dispatch packet
-//             if(_optimalDispatchPacketAvailable()) {
-//             	// index of in-neighbor packet received from
-//             	uint8_t i;
-//                 // check if sender is in-neighbor
-//                 uint32_t rv = _rx->getRemoteAddress64().getLsb();
-//                 if(_G->isInNeighbor(rv,i)) {
-//                     // process optimal dispatch packet
-//                     _processOptimalDispatchPacket(s,_G->getRemoteVertex(i)->getIndex());
-//                 }
-//             // check if time to transmit and if transmit has already occured
-//             } else if(_timeToTransmit(_start_millis,txTime) && !txDone) {
-//                 // toggle txDone
-//                 txDone = true; 
-//                 // broadcast optimal dispatch packet
-//                 _broadcastOptimalDispatchPacket(s);
-//             }
-//             delay(5);
-//         }
-// #ifdef VERBOSE
-//         if(!_quiet) {
-//             _printStates(s,k,false);
-//             //delay(30);
-//         } else {
-//             delay(15);
-//         }
-// #endif
-// 		delay(15);
-//         // update all states (z = z/Dout + zIn, etc)
-//         _updateOptimalDispatchStates(s,Dout);
-//         // clear all incoming states before next iteration
-//         _G->clearAllInStates();
-//     }
-// #ifdef VERBOSE
-// 	uint8_t states = 2*(_G->getN());
-//     float ratios[states];
-//     _computeFinalOptimalDispatchRatios(s,ratios);
-//     /if(!_quiet)
-//         _printRatios(ratios,states);
-// #endif
-//     long lambdaStar = _findLambdaStar(s);
-// 	delay(15);
-//     //Serial << _MEM(PSTR("lambda* = ")) << _DEC(lambdaStar) << endl;
-// 	d.sendShortLogData(LOG_LAMBDA_KEY,uint16_t(float(lambdaStar)/float(100)));
-//     return s->g(lambdaStar);
-// }
-
-// long OAgent_SFC::leaderOptimalDispatch(long initial, uint8_t iterations, uint16_t period, uint8_t &ledPin) {
-//     _start_millis = millis() + 1750;
-//     _broadcastScheduleOptimalDispatchPacket(_start_millis,iterations,period);
-// 	long final = initial;
-//     if(_waitToStart(_start_millis,false,2000)) {
-// 		digitalWrite(ledPin,HIGH);
-//         final = optimalDispatch(initial,iterations,period);
-// 		digitalWrite(ledPin,LOW);
-//     }
-// 	return final;
-// }
-
-// void OAgent_SFC::leaderOptimalDispatchWithDyno(Dyno &d, uint8_t iterations, uint16_t period, uint8_t &ledPin) {
-//     _start_millis = millis() + 1750;
-// 	OLocalVertex * s = _G->getLocalVertex();
-// 	// save base as floating point number
-// 	float base = float(s->getBase());
-//      _broadcastScheduleOptimalDispatchPacket(_start_millis,iterations,period);
-// 	// get the torque command from python
-// 	float t = d.getOTorqueFloat();
-// 	//float t = 1.12;
-// 	// scale toruqe to base and call it initial
-// 	//long initial = long(float(s->getBase())*t);
-// 	long initial = long(t*base);
-// 	d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-//     long final = initial;
-//     if(_waitToStart(_start_millis,false,2000)) {
-// 		digitalWrite(ledPin,HIGH);
-// 		//Serial << "initial: " << _DEC(initial) << endl;
-//         final = optimalDispatchWithDyno(initial,iterations,period,d);
-// 		digitalWrite(ledPin,LOW);
-//     }
-// 	d.setTorque(float(final)/base);
-// }
-
-/*
-long OAgent_SFC::nonleaderOptimalDispatch(long initial, uint8_t &ledPin) {
-    uint8_t iterations;
-    uint16_t period;
-    _waitForScheduleOptimalDispatchPacket(_start_millis,iterations,period);
-    //Serial << "start: " << _DEC(startTime) << ", myMillis: " << _DEC(myMillis()) << endl;
-    long final = initial;
-    if(_waitToStart(_start_millis,true,2000)) {
-		digitalWrite(ledPin,HIGH);
-        final = optimalDispatch(initial,iterations,period);
-		digitalWrite(ledPin,LOW);
-    }
-	return final;
-}
-
-void OAgent_SFC::nonleaderOptimalDispatchWithDyno(Dyno &d, uint8_t &ledPin) {	
-    OLocalVertex * s = _G->getLocalVertex();
-	// save base as floating point number
-	float base = float(s->getBase());
-    _waitForScheduleOptimalDispatchPacket(_start_millis,_iterations,_period);
-    // get current torque command
-    float t = d.getTorqueFloat();
-    long initial = long(t*base);
-	d.sendShortLogData(LOG_INITIAL_TORQUE_KEY,uint16_t(t*float(100)));
-    long final = initial;
-    if(_waitToStart(_start_millis,true,2000)) {
-		digitalWrite(ledPin,HIGH);
-		//Serial << "initial: " << _DEC(initial) << endl;
-        final = optimalDispatchWithDyno(initial,_iterations,_period,d);
-		digitalWrite(ledPin,LOW);
-    }
-    d.setTorque(float(final)/base);
-}
-*/
 
 /// End optimal dispatch
 /// Synchronization methods
@@ -953,31 +570,6 @@ unsigned long OAgent_SFC::myMillis() {
 	return millis() - (unsigned long)_offset; 
 }
 
-//bool OAgent_SFC::isSynced() {
-//    return _synced;
-//}
-//
-//unsigned long OAgent_SFC::myMillis() {
-//    return millis() - (unsigned long)_offset;
-//}
-/// End synchronization methods
-//// End public methods
-//// Private Methods
-/// General XBee methods
-
-/// Fair splitting ratio-consensus methods
-//void OAgent_SFC::_waitForScheduleFairSplitPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
-//    _waitForSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,timeout);
-//}
-//
-//void OAgent_SFC::_broadcastScheduleFairSplitPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
-//    _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
-//}
-//
-//bool OAgent_SFC::_fairSplitPacketAvailable() {
-//    return _packetAvailable(FAIR_SPLITTING_HEADER,true);
-//}
-
 void OAgent_SFC::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
     _G->clearAllStates();                   // clear everything
     uint8_t Dout = s->getOutDegree() + 1;   // store out degree
@@ -1029,12 +621,7 @@ long OAgent_SFC::_getSigmaFromPacket() {
     uint8_t ptr = 6;
     return _getUint32_tFromPacket(ptr);
 }
-/*
-long OAgent_SFC::_getpacketcheck() {
-    uint8_t ptr = 10;
-    return _getUint32_tFromPacket(ptr);   
-}
-*/
+
 /// End fair splitting ratio-consensus methods
 
 /// Optimal dispatch methods
@@ -1137,18 +724,6 @@ void OAgent_SFC::_findMinRatioMaxRatio(float ratios[], uint8_t num, float &min, 
             max = ratios[i];
     }
 }
-
-//void OAgent_SFC::_waitForScheduleOptimalDispatchPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
-//    _waitForSchedulePacket(SCHEDULE_OPTIMAL_DISPATCH_HEADER,startTime,iterations,period,timeout);
-//}
-//
-//void OAgent_SFC::_broadcastScheduleOptimalDispatchPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
-//    _broadcastSchedulePacket(SCHEDULE_OPTIMAL_DISPATCH_HEADER,startTime,iterations,period);
-//}
-
-//bool OAgent_SFC::_optimalDispatchPacketAvailable() {
-//    return _packetAvailable(OPTIMAL_DISPATCH_HEADER,true);
-//}
 
 void OAgent_SFC::_broadcastOptimalDispatchPacket(OLocalVertex * s) {
     uint8_t p = _getPayloadSize();
@@ -1532,18 +1107,6 @@ bool OAgent_SFC::_waitToStart(unsigned long startTime, bool useMyMillis, int tim
     }    
 }
 
-//uint32_t OAgent_SFC::_getStartTimeFromPacket() {
-//    return (uint32_t(_rx->getData(5)) << 24) + (uint32_t(_rx->getData(4)) << 16) + (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);
-//}
-//
-//uint8_t OAgent_SFC::_getIterationsFromPacket() {
-//    return _rx->getData(6);
-//}
-//
-//uint16_t OAgent_SFC::_getPeriodFromPacket() {
-//    return (uint16_t(_rx->getData(8)) << 8) + _rx->getData(7);
-//}
-
 /// End general scheduling methods
 /// General coordination helper functions
 
@@ -1813,17 +1376,6 @@ int OAgent_SFC:: getStatusData(int index)
 	 return s->getStatus(index - 1); 
 }
 
-//bool OAgent_SFC::_waitForSyncBeginPacket(unsigned long &rxTime) {
-//	return _waitForPacket(SYNC_BEGIN_HEADER,rxTime,true,-1);
-//}
-//
-//bool OAgent_SFC::_waitForSyncResponsePacket(unsigned long &rxTime) {
-//	return _waitForPacket(SYNC_RESPONSE_HEADER,rxTime,false,SYNC_TIMEOUT);
-//}
-//
-//bool OAgent_SFC::_waitForSyncFinalPacket(int timeout) {
-//	return _waitForPacket(SYNC_FINAL_HEADER,true,timeout);
-//}
 /// End synchronization helper functions
 /// General helper functions
 
