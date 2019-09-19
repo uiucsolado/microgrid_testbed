@@ -39,7 +39,6 @@ boolean ce = false;
 
 //AFE and controller variables
 int state;         // variable to store the read value 
-float state1;
 long n;
 float error = 0;
 float u =0;
@@ -73,6 +72,10 @@ int count;
 int pos;
 uint8_t rounds  = 0;
 float regd1;
+int res_flag=0;
+float state1 = 0 ;
+float state0 = 0; //previous ratio consensus result
+float eps = 0.0628;
 
 
 void setup()  {
@@ -169,35 +172,53 @@ void loop() {
     {///*
       //rounds = rounds + 1; 
       //Serial.println(rounds);
-      /*
+      
       receiveTyphoonData();
       state =  Mb.MbData[0];
+      /*
       Serial.println("Data");
       Serial.println(float(state),4);
       */
-      //a.leaderFairSplitRatioConsensus(base*state,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
-      a.leaderFairSplitRatioConsensus(1*D_base,1*D_base, 10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
+      
+      a.leaderFairSplitRatioConsensus(base*state,0.225*D_base,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
+      //a.leaderFairSplitRatioConsensus(1*D_base,1*D_base, 10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
       //Serial.println("Out");
+      state0 = state1;
       state1 = a.getbufferdata(0);
+      Serial.println("ratio consensus result");
+      Serial.println(state1,4);
+
+      
       
           
        //Serial.println("Typhoon Data");
        //Serial.println(state);
-       Serial.println("ratio consensus result");
-       Serial.println(state1,4);
-       /*
+       //Serial.println("ratio consensus difference");
+       //Serial.println(abs(state1-state0),4);
        // Controller code
        r=r+1;
        if(r>2)
-       { 
-       error=error + -1*0.707*state1;
-       u=u_set+0.7071*error;
-       Serial.println(u,4);
-       }
+       {
+          if((abs(state1-state0)>eps)&&(res_flag==0))
+          {
+             error=error + -1*0.707*state0;
+             u=u_set+0.7071*error;
+             //Serial.println(u,4);
+             res_flag =1;
+          }
+          else
+          {
+           error=error + -1*0.707*state1;
+           u=u_set+0.7071*error;
+           //Serial.println(u,4);
+           res_flag=0;
+          }
+        }
        Mb.MbData[1]=base*u;
+       Serial.println(res_flag);
        sendConsensusResults();
        // Controller code over
-    */
+    
        
        //SerialUSB.println("printed the state");
        

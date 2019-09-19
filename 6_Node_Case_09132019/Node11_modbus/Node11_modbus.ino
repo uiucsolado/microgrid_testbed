@@ -36,7 +36,6 @@ uint8_t sPin = 7;   // synced led
 boolean de = false;
 
 int state;         // variable to store the read value
-float state1;
 long n;
 float error = 0;
 float u =0;
@@ -64,6 +63,11 @@ int fc;
 int ref;
 int count;
 int pos;
+int res_flag=0;
+float state1 = 0 ;
+float state0 = 0; //previous ratio consensus result
+float eps = 0.0628;
+
 
 void setup()  {
   //delay(5000);  
@@ -121,14 +125,16 @@ void loop() {
    else {
     if(a.isSynced()) {
       ///*
-      /*
+      
       receiveTyphoonData();
       state =  Mb.MbData[0];
+      /*
       Serial.println("Data");
       Serial.println(float(state),4);
-      //a.nonleaderFairSplitRatioConsensus(base*state);
       */
-      a.nonleaderFairSplitRatioConsensus(1*D_base,0);
+      a.nonleaderFairSplitRatioConsensus(base*state,0.95*D_base);
+      //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
+      state0 = state1;
       state1 = a.getbufferdata(0);
 
        
@@ -136,20 +142,31 @@ void loop() {
       //Serial.println(state);
       Serial.println("ratio consensus result");
       Serial.println(state1,4); 
-      /*
+      
        // Controller code
        r=r+1;
        if(r>2)
-       { 
-       error=error + -1*0.7071*state1;
-       u=u_set+0.707*error;
-       Serial.println(u,4);
-       }
+       {
+          if((abs(state1-state0)>eps)&&(res_flag==0))
+          {
+             error=error + -1*0.707*state0;
+             u=u_set+0.7071*error;
+             //Serial.println(u,4);
+             res_flag =1;
+          }
+          else
+          {
+           error=error + -1*0.707*state1;
+           u=u_set+0.7071*error;
+           //Serial.println(u,4);
+           res_flag=0;
+          }
+        }
        Mb.MbData[1]=base*u;
-       sendConsensusResults();
+       sendConsensusResults(); 
        
        // Controller code over
-      */
+      
           
 //      n = state*base_value; //multiply by base value  to change to non-decimal
 //      state_high = (n >> 16) & 0x000FFFF;
