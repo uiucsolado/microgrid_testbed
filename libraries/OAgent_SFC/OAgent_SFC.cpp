@@ -1617,8 +1617,10 @@ bool OAgent_SFC::_WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned lo
             _broadcastScheduleFairSplitPacket(startTime,iterations,period);
             restart = millis();
     }
-
-    return false;
+    if (counter==0)
+        return false;
+    else
+        return true;
 }
 
 
