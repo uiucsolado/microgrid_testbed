@@ -254,7 +254,7 @@ float OAgent_SFC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, ui
 }
 
 
-// Resilient Fair splitting (added in by Olaolu)
+// Resilient Fair splitting RC (added in by Olaolu)
 float OAgent_SFC::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period) {  //,uint8_t round
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     float Dout = float(s->getOutDegree() + 1);    // store out degree, the +1 is to account for the self loops
@@ -474,10 +474,11 @@ float OAgent_SFC::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint1
 
 long OAgent_SFC::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     srand(analogRead(7));                    //moved this instruction here from fairSplitRatioConsensus() - Sammy
+    OLocalVertex * s = _G->getLocalVertex();
     int leader_id = s->getleaderID();
     int node_id = s->getID();
 
-    if( ((leader_id==0) || (s->deputy_id==0)) && (getoffsetdata()==0) ) //if leader/deputy ID has not been set and this is the leader node, keep it as the leader node
+    if( ((leader_id==0) || (s->getdeputyID()==0)) && (getoffsetdata()==0) ) //if leader/deputy ID has not been set and this is the leader node, keep it as the leader node
     {
         s->setleaderID(node_id);
         s->setdeputyID(node_id);
@@ -498,6 +499,8 @@ long OAgent_SFC::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations,
 long OAgent_SFC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + 1200;
+    OLocalVertex * s = _G->getLocalVertex();
+    float gamma = 0;
     _broadcastScheduleFairSplitPacket(startTime,iterations,period);
     bool scheduled =_WaitForACKPacket_RSL(ACK_START_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
     if (!scheduled) 
@@ -522,6 +525,7 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t it
     unsigned long startTime = 0;
     OLocalVertex * s = _G->getLocalVertex();
     uint8_t id = s->getID();
+    float gamma = 0;
     bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,SCHEDULE_TIMEOUT);
     if(scheduled)
     {
@@ -1596,6 +1600,7 @@ bool OAgent_SFC::_WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned lo
 { 
     unsigned long start = millis();
     unsigned long restart = start;
+    OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     int nodes = s->getNeighborSize(); //number of online neighbors in the network
     int counter = 0;
     while (uint16_t(millis()-start) < timeout)
