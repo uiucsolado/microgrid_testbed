@@ -122,7 +122,7 @@ void loop() {
       //a.nonleaderFairSplitRatioConsensus(-1*base*state);
       */
       //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
-      a.fairSplitRatioConsensus_RSL(1*D_base,1*D_base, 10,200);
+      a.fairSplitRatioConsensus_RSL(1*D_base,0*D_base, 8,200);
       state1 = a.getbufferdata(0);
 
        

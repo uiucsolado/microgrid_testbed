@@ -587,7 +587,7 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, long min, long max, long 
     //linkedlist for online neighbors
     _l = LinkedList();
     //number of neighbors
-    _neighborSize = 1;
+    _neighborSize = 22;
     // set address and lambda_min and lambda_max
     _prepareOVertex(aLsb,_computeLambda(_min),_computeLambda(_max), nodeid);
 }

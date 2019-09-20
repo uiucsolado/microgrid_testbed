@@ -280,7 +280,7 @@ float OAgent_SFC::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint1
         //Serial <<"\n"<<"For Node "<<s->getID()<<", from Node"<<i<<", Z[0]= "<< getneighborZ0(i) << "\n ";
     }
  
-    int frame = 35;
+    int frame = 30;
     
 
 
@@ -477,20 +477,27 @@ long OAgent_SFC::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations,
     OLocalVertex * s = _G->getLocalVertex();
     int leader_id = s->getleaderID();
     int node_id = s->getID();
+    float gamma = 0;
+    //Serial<<"Leader ID is: "<<leader_id<<"\n";
 
-    if( ((leader_id==0) || (s->getdeputyID()==0)) && (getoffsetdata()==0) ) //if leader/deputy ID has not been set and this is the leader node, keep it as the leader node
+    if( ((leader_id==0) || (s->getdeputyID()==0)) && (isLeader()) ) //if leader/deputy ID has not been set and this is the leader node, keep it as the leader node
     {
         s->setleaderID(node_id);
         s->setdeputyID(node_id);
+        //Serial<<"Node "<<s->getleaderID()<<" is now leader and deputy\n";
     }
-    if(leader_id==node_id)
+    if(s->getleaderID()==node_id)
     {
-        return leaderFairSplitRatioConsensus_RSL(y, z, iterations,period);
+        gamma = leaderFairSplitRatioConsensus_RSL(y, z, iterations,period);
     }
-    if(leader_id!=node_id)
+    else
     {
-        return nonleaderFairSplitRatioConsensus_RSL(y, z, iterations,period);
+        gamma = nonleaderFairSplitRatioConsensus_RSL(y, z, iterations,period);
     }
+    if (gamma!=-1)
+        return gamma;
+    else
+        return 0;
 }
 
 
@@ -498,15 +505,22 @@ long OAgent_SFC::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations,
 
 long OAgent_SFC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     unsigned long t0 = myMillis();
-    unsigned long startTime = t0 + 1200;
+    unsigned long startTime = t0 + RC_DELAY;
     OLocalVertex * s = _G->getLocalVertex();
     float gamma = 0;
     _broadcastScheduleFairSplitPacket(startTime,iterations,period);
     bool scheduled =_WaitForACKPacket_RSL(ACK_START_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
+
+    bool stat = startTime>myMillis();
+
+    //Serial<<"Leader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
+
     if (!scheduled) 
     {
+        //Serial<<"No acknowledgements received from neighbors\n";
         s->setleaderID(s->getdeputyID());
-        gamma = fairSplitRatioConsensus_RSL(y, z, iterations,period);     //in a rare turn of events, this line could lead to a recursion (Olaolu)
+        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        gamma = -1;
     }
     else
     {
@@ -516,8 +530,7 @@ long OAgent_SFC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t itera
         {
             gamma = ratiomaxminConsensus(y, z, iterations,period);
         }
-    }
-        
+    }        
     return gamma;
 }
 
@@ -526,22 +539,30 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t it
     OLocalVertex * s = _G->getLocalVertex();
     uint8_t id = s->getID();
     float gamma = 0;
-    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,SCHEDULE_TIMEOUT);
+    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,SCHEDULE_TIMEOUT*3);
+
+    bool stat = startTime>myMillis();
+    //Serial<<"Startime > Time? "<<stat<<"\n";
+
+    //Serial<<"NonLeader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
+
     if(scheduled)
     {
-        //digitalWrite(48,HIGH);
         float gamma = 0;
         if(_waitToStart(startTime,true,1800)) {
             gamma = ratiomaxminConsensus(y, z, iterations,period);
         }
+        
         //digitalWrite(48,LOW);
-        return gamma;
     }
     else
     {
+        //Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
         s->setleaderID(s->getdeputyID());
-        return fairSplitRatioConsensus_RSL(y, z, iterations,period);     //in a rare turn of events, this line could lead to a recursion (Olaolu)
+        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        gamma = -1;
     }
+    return gamma;
 }
 
 
@@ -653,7 +674,7 @@ long OAgent_SFC::optimalDispatch(long x, uint8_t iterations, uint16_t period) {
 bool OAgent_SFC::sync(uint8_t attempts) {
     
     if(_leader) {
-    	//Serial << "in sync";
+    	//Serial << "Is leader, and is in sync\n";
 		for(uint8_t i = 0; i < attempts; i++) {
 			if(_leaderSync()) {
                 _synced = true;
@@ -703,6 +724,7 @@ bool OAgent_SFC::sync(uint8_t attempts) {
         	uint8_t ptr = 2;
         	long local_offset = _getLongFromPacket(ptr);
 			_offset = global_offset + local_offset;
+            Serial<<"Offset= "<<getoffsetdata()<<"\n";
             //_offset = local_offset; //SN Debug to just see local offset
 			_synced = true;
 			return true;
@@ -1605,7 +1627,7 @@ bool OAgent_SFC::_WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned lo
     int counter = 0;
     while (uint16_t(millis()-start) < timeout)
     {
-            while (uint16_t(millis()-restart) < 250)
+            while (uint16_t(millis()-restart) < timeout*0.125)
             {
                 if(_waitForPacket(header,true,50))
                 {

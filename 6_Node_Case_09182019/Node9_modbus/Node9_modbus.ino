@@ -73,6 +73,7 @@ int count;
 int pos;
 uint8_t rounds  = 0;
 float regd1;
+long t;
 
 
 void setup()  {
@@ -125,7 +126,8 @@ void loop() {
   if(de == false) 
   {
     Serial.println("Inside the loop");
-    Serial.println("Send letter d to sync"); //let computer know you want to sync
+    Serial.println("Send letter s to sync"); //let computer know you want to sync
+    Serial.println("Send letter r to resync"); //let computer know you want to resync
     
   //sendConsensusResults();                      //initialize to zero
   
@@ -139,9 +141,9 @@ void loop() {
       Serial.println("got some letter");
       uint8_t b = Serial.read(); //enter the character 'd'
       Serial.println(b);
-      if (b == 'd') 
+      if (b == 's') 
       {
-        Serial.println("got the d and about to make de true");
+        Serial.println("got the s and about to sync");
         de = true;
         if(a.sync()) {
           Serial.println("Communication Link established");
@@ -157,6 +159,15 @@ void loop() {
           de  = false; //means could not sync 
         }
           
+      }
+      else if(b == 'r')
+      {
+          Serial.println("got the r and about to resync");
+          a.setLeader(0);
+          Serial.print("Leader status is now: ");
+          Serial.println(a.isLeader());
+          a.sync();
+          de = true;
       }
       
     }
@@ -177,7 +188,8 @@ void loop() {
       */
       //a.leaderFairSplitRatioConsensus(base*state,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
       //a.leaderFairSplitRatioConsensus(1*D_base,1*D_base, 10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
-      a.fairSplitRatioConsensus_RSL(1*D_base,1*D_base, 10,200);
+      //t = millis();
+      a.fairSplitRatioConsensus_RSL(1*D_base,1*D_base, 8,200);
       //Serial.println("Out");
       state1 = a.getbufferdata(0);
       
@@ -186,6 +198,8 @@ void loop() {
        //Serial.println(state);
        Serial.println("ratio consensus result");
        Serial.println(state1,4);
+       //Serial.println(millis()-t);
+       
        /*
        // Controller code
        r=r+1;
