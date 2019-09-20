@@ -32,6 +32,8 @@
 #define SYNC_FINAL_HEADER                0x7346	// HRTS sync_final header is ascii sF
 #define SYNC_TIMEOUT                     2500   // time out period to wait for response to HRTS sync_begin broadcast in milliseconds
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
+#define SCHEDULE_TIMEOUT                 750   // time out period (in milliseconds) to wait for schedule packet from leader node
+#define RC_DELAY                         1200   // delay before ratio consensus starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353  // used as the header to indicate the resync process is taking place (1st transaction)
@@ -71,14 +73,19 @@ class OAgent_SFC {
         //inline void setRS(int RS) { _RS = RS;}
         
         // Fair splitting methods
-        float fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period); 
+        float fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period);
         // long computeFairSplitFinalValue(float gamma);
         long leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period);
-        void leaderFairSplitRatioConsensusWithDyno(Dyno &d, uint8_t iterations, uint16_t period, uint8_t &ledPin);
+        long leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
         long nonleaderFairSplitRatioConsensus(long y, long z);
-        void nonleaderFairSplitRatioConsensusWithDyno(Dyno &d, uint8_t &ledPin);
-		void reserveFairSplitRatioConsensusWithDyno(Dyno &d, long trueMax, uint8_t &ledPin);
+        long nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
         
+
+        // Resilient consensus methods
+        long fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period); 
+        float ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period); 
+
+
         // Optimal dispatch Methods
         long optimalDispatch(long x, uint8_t iterations, uint16_t period);
 		long optimalDispatchWithDyno(long x, uint8_t iterations, uint16_t period, Dyno &d);
@@ -151,12 +158,22 @@ class OAgent_SFC {
         inline void _waitForScheduleFairSplitPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout = -1) {
             _waitForSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
         }
+        //Resilient version
+        inline bool _waitForScheduleFairSplitPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout) {
+            return _waitForSchedulePacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
+        }
         inline void _broadcastScheduleFairSplitPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
         }
         inline bool _fairSplitPacketAvailable() { return _packetAvailable(FAIR_SPLITTING_HEADER,true); }
         void _initializeFairSplitting(OLocalVertex * s, long y, long z);
+        //Leader failure-resilient version
+        void _initializeFairSplitting_RSL(OLocalVertex * s, long y, long z);
+
         void _broadcastFairSplitPacket(OLocalVertex * s);
+        //Leader failure-resilient version
+        void _broadcastFairSplitPacket_RSL(OLocalVertex * s);
+
         long _getMuFromPacket();
         long _getSigmaFromPacket();
         long _getpacketcheck();
@@ -224,14 +241,17 @@ class OAgent_SFC {
         bool _packetAvailableHelper(uint16_t header, bool broadcast = false);
         bool _packetACKed(int timeout);
         inline uint16_t _getHeaderFromPacket() { return (uint16_t(_rx->getData(1)) << 8) + _rx->getData(0); }
-        inline uint16_t _getIDFromPacket2()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
+        inline uint16_t _getneighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
         inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
+        inline uint16_t _getleaderIDFromPacket()    { return (uint16_t(_rx->getData(15)) << 8) + _rx->getData(14);  }
+        inline uint16_t _getdeputyIDFromPacket()    { return (uint16_t(_rx->getData(17)) << 8) + _rx->getData(16);  }
         bool _waitForPacket(uint16_t header, unsigned long &rxTime, bool broadcast = false, int timeout = -1);
         bool _waitForPacket(uint16_t header, bool broadcast = false, int timeout = -1);
         uint16_t _waitForValidPacket(bool broadcast = false, int timeout = -1);
         
         // General scheduling methods
-        void _WaitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);
+        void _WaitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);// General scheduling methods
+        bool _WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period );
         inline uint8_t _getIDFromPacket() {  return _rx->getData(2); }
 
         bool _waitToStart(unsigned long startTime, bool useMyMillis, int timeout = -1);
@@ -248,6 +268,7 @@ class OAgent_SFC {
         // General coordination helper functions
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
         void _waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
+        bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
         uint16_t _waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout = - 1);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
         uint32_t _getAvailableAgentLsb(uint8_t i);

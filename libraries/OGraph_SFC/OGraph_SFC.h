@@ -173,8 +173,18 @@ class OLocalVertex : public OVertex {
         inline long getBase() { return _base; }
         //nodeID
         inline int getID() {return _nodeID; }
+        //get leader and deputy ID
+        inline int getleaderID() {return _leaderID; }
+        inline int getdeputyID() {return _deputyID; }
+        //set leader and deputy ID
+        inline void setleaderID(int leaderID) {_leaderID = leaderID; }
+        inline void setdeputyID(int deputyID) {_deputyID = deputyID; }
         //use Linked List _l to choose an inheritor
         int chooseInheritor();
+        //use linked list to set number of neighbors
+        inline void setNeighborSize(int neighborSize) {_neighborSize = neighborSize; }
+        //get number of neighbors
+        inline int getNeighborSize() {return _neighborSize; }
         //Status
         inline int getStatus(int index) {return _status[index]; }
         inline void setStatus(int index, int status) { _status[index] = status;  } 
@@ -218,8 +228,13 @@ class OLocalVertex : public OVertex {
         int _status[NUM_REMOTE_VERTICES];
         //Pointer for node status to be used by choose inheritor function (added in by Olaolu)
         int *_statusP;
+        //leader and deputy ID
+        int _leaderID;
+        int _deputyID;
         // A linked list for IDs of online neghbors
         LinkedList _l;
+        //Number of online neighbors
+        int _neighborSize;
         // Ratio-consensus states
         long _z;
         long _zIn;
