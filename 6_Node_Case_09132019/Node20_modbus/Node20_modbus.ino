@@ -113,14 +113,14 @@ void loop() {
   } 
    else {
     if(a.isSynced()) {
-      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
+      /*
       Serial.println("Data");
       Serial.println(float(state),4);
-      //a.nonleaderFairSplitRatioConsensus(-1*base*state);
       */
-      a.nonleaderFairSplitRatioConsensus(1*D_base,0);
+      a.nonleaderFairSplitRatioConsensus(-1*base*state,0.0479*D_base);
+      //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
       state1 = a.getbufferdata(0);
 
        
