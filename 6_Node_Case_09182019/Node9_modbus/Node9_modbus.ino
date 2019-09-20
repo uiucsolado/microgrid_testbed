@@ -125,7 +125,8 @@ void loop() {
   if(de == false) 
   {
     Serial.println("Inside the loop");
-    Serial.println("Send letter d to sync"); //let computer know you want to sync
+    Serial.println("Send letter s to sync"); //let computer know you want to sync
+    Serial.println("Send letter r to resync"); //let computer know you want to resync
     
   //sendConsensusResults();                      //initialize to zero
   
@@ -139,9 +140,9 @@ void loop() {
       Serial.println("got some letter");
       uint8_t b = Serial.read(); //enter the character 'd'
       Serial.println(b);
-      if (b == 'd') 
+      if (b == 's') 
       {
-        Serial.println("got the d and about to make de true");
+        Serial.println("got the s and about to sync");
         de = true;
         if(a.sync()) {
           Serial.println("Communication Link established");
@@ -157,6 +158,15 @@ void loop() {
           de  = false; //means could not sync 
         }
           
+      }
+      else if(b == 'r')
+      {
+          Serial.println("got the r and about to resync");
+          a.setLeader(0);
+          Serial.print("Leader status is now: ");
+          Serial.println(a.isLeader());
+          a.sync();
+          de = true;
       }
       
     }
