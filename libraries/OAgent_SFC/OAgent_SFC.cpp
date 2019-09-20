@@ -477,6 +477,8 @@ long OAgent_SFC::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations,
     OLocalVertex * s = _G->getLocalVertex();
     int leader_id = s->getleaderID();
     int node_id = s->getID();
+    if (leader_id==node_id)
+    	setLeader(0);
     float gamma = 0;
     //Serial<<"Leader ID is: "<<leader_id<<"\n";
 
@@ -724,7 +726,7 @@ bool OAgent_SFC::sync(uint8_t attempts) {
         	uint8_t ptr = 2;
         	long local_offset = _getLongFromPacket(ptr);
 			_offset = global_offset + local_offset;
-            Serial<<"Offset= "<<getoffsetdata()<<"\n";
+            //Serial<<"Offset= "<<getoffsetdata()<<"\n";
             //_offset = local_offset; //SN Debug to just see local offset
 			_synced = true;
 			return true;
@@ -794,9 +796,9 @@ bool OAgent_SFC::resync(){
             Serial << "\n";
             
             //SN Debug */
-            Serial << "long Local offset \n";
-			Serial << local_offset;
-            Serial << "\n";
+            //Serial << "long Local offset \n";
+			//Serial << local_offset;
+            //Serial << "\n";
             _broadcastResyncFinalPacket(local_offset);
 			return true;	
 		}
