@@ -133,7 +133,10 @@ void loop() {
       Serial.println("Data");
       Serial.println(float(state),4);
       */
-      a.nonleaderFairSplitRatioConsensus(base*state,0.679*D_base);
+      
+      
+      a.fairSplitRatioConsensus_RSL(base*state,0.679*D_base,10,200);
+      //a.nonleaderFairSplitRatioConsensus(base*state,0.679*D_base);
       //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
       state0 = state1;
       state1 = a.getbufferdata(0);

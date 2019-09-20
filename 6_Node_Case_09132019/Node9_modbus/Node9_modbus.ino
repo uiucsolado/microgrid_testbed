@@ -180,8 +180,10 @@ void loop() {
       Serial.println(float(state),4);
       */
       
-      a.leaderFairSplitRatioConsensus(base*state,0.225*D_base,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
+      //a.leaderFairSplitRatioConsensus(base*state,0.225*D_base,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
       //a.leaderFairSplitRatioConsensus(1*D_base,1*D_base, 10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
+      a.fairSplitRatioConsensus_RSL(base*state,0.225*D_base,10,200);
+      
       //Serial.println("Out");
       state0 = state1;
       state1 = a.getbufferdata(0);
