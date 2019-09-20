@@ -132,7 +132,7 @@ void loop() {
       //a.nonleaderFairSplitRatioConsensus(base*state);
       */
       //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
-      t = millis();
+      //t = millis();
       a.fairSplitRatioConsensus_RSL(1*D_base,0*D_base, 8,200);
       state1 = a.getbufferdata(0);
         
@@ -141,7 +141,7 @@ void loop() {
       //Serial.println(state); 
       Serial.println("ratio consensus result");
       Serial.println(state1,4);
-      Serial.println(millis()-t); 
+      //Serial.println(millis()-t); 
       /*
        // Controller code
        r=r+1;
