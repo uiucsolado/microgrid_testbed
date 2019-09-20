@@ -73,6 +73,7 @@ int count;
 int pos;
 uint8_t rounds  = 0;
 float regd1;
+long t;
 
 
 void setup()  {
@@ -187,7 +188,8 @@ void loop() {
       */
       //a.leaderFairSplitRatioConsensus(base*state,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
       //a.leaderFairSplitRatioConsensus(1*D_base,1*D_base, 10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
-      a.fairSplitRatioConsensus_RSL(1*D_base,1*D_base, 10,200);
+      t = millis();
+      a.fairSplitRatioConsensus_RSL(1*D_base,1*D_base, 8,200);
       //Serial.println("Out");
       state1 = a.getbufferdata(0);
       
@@ -196,6 +198,8 @@ void loop() {
        //Serial.println(state);
        Serial.println("ratio consensus result");
        Serial.println(state1,4);
+       Serial.println(millis()-t);
+       
        /*
        // Controller code
        r=r+1;

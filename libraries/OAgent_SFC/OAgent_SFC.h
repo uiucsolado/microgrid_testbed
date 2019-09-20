@@ -33,6 +33,7 @@
 #define SYNC_TIMEOUT                     2500   // time out period to wait for response to HRTS sync_begin broadcast in milliseconds
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
 #define SCHEDULE_TIMEOUT                 750   // time out period (in milliseconds) to wait for schedule packet from leader node
+#define RC_DELAY                         1200   // delay before ratio consensus starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353  // used as the header to indicate the resync process is taking place (1st transaction)

@@ -64,6 +64,7 @@ int fc;
 int ref;
 int count;
 int pos;
+long t;
 
 void setup()  {
   //delay(5000);  
@@ -129,14 +130,16 @@ void loop() {
       //a.nonleaderFairSplitRatioConsensus(base*state);
       */
       //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
-      a.fairSplitRatioConsensus_RSL(1*D_base,0*D_base, 10,200);
+      t = millis();
+      a.fairSplitRatioConsensus_RSL(1*D_base,0*D_base, 8,200);
       state1 = a.getbufferdata(0);
 
        
       //Serial.println("Typhoon Data");
       //Serial.println(state);
       Serial.println("ratio consensus result");
-      Serial.println(state1,4); 
+      Serial.println(state1,4);
+      Serial.println(millis()-t);
       /*
        // Controller code
        r=r+1;
