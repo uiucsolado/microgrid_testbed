@@ -1,5 +1,5 @@
 #include <Streaming.h>
-#include <Dyno.h>
+//#include <Dyno.h>
 #include <XBee.h>
 #include <OGraph_SFC.h>
 #include <OAgent_SFC.h>
@@ -8,44 +8,44 @@
 #include <Ethernet.h>
 
 
-//Node 19
+//Node 10
 
 long base = 10000;  // not using floating points so need a base number
 long D_base = 100000000;
-long base_value = 1000;
-long regd_base;
-long capacity = 25000;  //DER capacity limit
 
-Dyno d = Dyno();
 XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
+
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415DB684,0,0.0679*D_base,-1.5*base,0.5*base,5,D_base,19);
-//OLocalVertex s = OLocalVertex(0x415DB684,0,0,-1.5*base,0.5*base,5,D_base,19);
+OLocalVertex s = OLocalVertex(0x415786D3,0,0.679*D_base,-1.5*base,0.5*base,4,D_base,10);
+//OLocalVertex s = OLocalVertex(0x415786D3,0,0,-1.5*base,0.5*base,5,D_base,10);
 OGraph_SFC g = OGraph_SFC(&s);
 OAgent_SFC a = OAgent_SFC(&xbee,&rx,&g,false,true);
 
-//My own additions
-ZBRxResponse* _rx = &rx;
-XBee* _xbee = &xbee;
-byte *b;
+uint8_t errorPin = 6;  // error led pin
+uint8_t sPin = 7;      // synced led
+uint8_t cPin = 48;     // coordination enabled led pin
 
-uint8_t cPin = 48;  // drive enable led
-uint8_t sPin = 7;   // synced led
-
+//variables for node sync check
 boolean de = false;
 
-int state;         // variable to store the read value
-float state1;
+//AFE and controller variables
+int state;         // variable to store the read value 
 long n;
+float error = 0;
+float u =0;
+float u_set=0.85;
+int r = 0;
 
+//Modbus Communication
 MgsModbus Mb;
 int val;
 // Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB5 };
-IPAddress ip(192, 168, 2, 5);
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB2 };
+IPAddress ip(192, 168, 2, 2);
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
+
 uint16_t state_high;
 uint16_t state_low;
 uint8_t Ref_high;
@@ -58,19 +58,22 @@ int fc;
 int ref;
 int count;
 int pos;
+long t;
+int res_flag=0;
+float state1 = 0 ;
+float state0 = 0; //previous ratio consensus result
+float eps = 0.0628;
+int gen_flag=1;
 float D;
 
 void setup()  {
- Serial.begin(38400);
-  while(!Serial)
-  {
-    ;
-    }
+  Serial.begin(38400);
   Serial3.begin(38400);
   pinMode(sPin, OUTPUT);
   pinMode(cPin, OUTPUT);
   digitalWrite(sPin,HIGH);
   digitalWrite(cPin,HIGH);
+  
   xbee.setSerial(Serial3);
 //Define the Neighboring nodes
   //g.addInNeighbor(0x4174F1AA); // node 1
@@ -81,14 +84,14 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AB); // node 6
   //g.addInNeighbor(0x4151C6CB); // node 7
   g.addInNeighbor(0x4151C6AC); // node 8
-  g.addInNeighbor(0x415786E1); // node 9
-  g.addInNeighbor(0x415786D3); // node 10
+  //g.addInNeighbor(0x415786E1); // node 9
+  //g.addInNeighbor(0x415786D3); // node 10
   g.addInNeighbor(0x415DB670); // node 11
   //g.addInNeighbor(0x415786A9); // node 12
   g.addInNeighbor(0x4157847B); // node 13
   //g.addInNeighbor(0x415DB664); // node 14
   //g.addInNeighbor(0x415DB673); // node 15
-  //g.addInNeighbor(0x415DB684); // node 19
+  g.addInNeighbor(0x415DB684); // node 19
   //g.addInNeighbor(0x41516F0B); // node 20
   
   digitalWrite(sPin,LOW);
@@ -99,12 +102,11 @@ void setup()  {
   for (int i=0;i<12;i++) {
      Mb.MbData[i] = 0;
   }
-  //sendConsensusResults(); //initialize registers to zero
 }
 
 
 void loop() {
-  if(de == false)  
+  if(de == false) 
   {
     if(!(a.isLeader()))
     {
@@ -157,76 +159,64 @@ void loop() {
   }
 
   
-   else {
+   else
+   {
     if(a.isSynced()) {
+      /*
       receiveTyphoonData();
       state =  Mb.MbData[0];
       if(state == 0)
       {
+        gen_flag=0;
         D=0;
       }
       else
       {
-        D=0.0679;
-      }
+        gen_flag=1;
+        D=0.679;
+      }      
       Serial.println("Data");
       Serial.println(float(state),4);
-      //a.nonleaderFairSplitRatioConsensus(-1*base*state);
+      */
+      //a.nonleaderFairSplitRatioConsensus(base*state);
       //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
-      //a.fairSplitRatioConsensus_RSL(D_base*1,1*D_base, 8,200);
-      a.fairSplitRatioConsensus_RSL(base*-state,D*D_base, 8,200);
+      a.fairSplitRatioConsensus_RSL(D_base*1,0*D_base, 20,200);
+      //a.fairSplitRatioConsensus_RSL(base*state,D*D_base,12,200);
       state1 = a.getbufferdata(0);
-
-       
-      //Serial.println("Typhoon Data");
-      //Serial.println(state);
+      
       Serial.println("ratio consensus result");
-      Serial.println(state1,4);  
-       /* Controller code
+      Serial.println(state1,4);
+      /*
+      // Controller code
        r=r+1;
        if(r>2)
        { 
-       error=error + -1*0.707*state1;
-       u=u_set+0.707*error;
-       Serial.println(u,4);
+          if(gen_flag==1)
+          { 
+              if((abs(state1-state0)>eps)&&(res_flag==0))
+              {
+                 error=error + -1*state0;
+                 u=u_set+1*error;
+                 //Serial.println(u,4);
+                 res_flag =1;
+              }
+              else
+              {
+                 error=error + -1*state1;
+                 u=u_set + 1*error;
+                 //Serial.println(u,4);
+                 res_flag=0;
+              }
+          }
+         Mb.MbData[1]=base*u;
+         Serial.println(res_flag);
+         sendConsensusResults();
        }
-       Mb.MbData[1]=10*base*u;
-       sendConsensusResults();
-       
        // Controller code over
       */
-       /*   
-//      n = state*base_value; //multiply by base value  to change to non-decimal
-//      state_high = (n >> 16) & 0x000FFFF;
-//      state_low = n & 0x0000FFFF;
-//      Mb.MbData[1] =  state_high;
-//      Mb.MbData[2] = state_low;
-//      
-//      for(int i = 3;i < 43;i++)
-//      {
-//        Serial.print(a.getbufferdata(i),4);
-//        Serial.print(", ");
-//      }
-//        
-//      Mb.MbData[1] =  state; 
-//      int temp =   base*base*state1;                  
-//      Mb.MbData[2] = temp;   
-//      sendConsensusResults();
-*/
-/*
-      receiveTyphoonData();
-      state =  Mb.MbData[0];
-      Serial.println("Data");
-      Serial.println(float(state),4);*/
       a.resync();
       }
   }
- /*
-      receiveTyphoonData();
-      state =  Mb.MbData[0];
-      Serial.println("Data");
-      Serial.println(float(state),4);
-      delay(1000);*/
 }
 
 void sendConsensusResults()
@@ -245,15 +235,15 @@ void sendConsensusResults()
   //Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low);
   //Serial.println("Sent Request Packet");
   ////////////////////////////////////////////////////////////////
-  int node5_ip = 65; //part of ip address for node 1 on the HIL side 
-  Mb.Req(MB_FC_WRITE_REGISTER,0,1,1,node5_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+  int node2_ip = 62; //part of ip address for node 1 on the HIL side 
+  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,1,node2_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
   Mb.MbmRun();
   //Serial.println("Received Response");
 }
 
 void receiveTyphoonData()
 {
-  int node5_ip = 65; //part of ip address for node 5 on the HIL side 
-  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,1,0,node5_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)
+  int node2_ip = 62; //part of ip address for node 1 on the HIL side 
+  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,1,0,node2_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)
   Mb.MbmRun();
 }

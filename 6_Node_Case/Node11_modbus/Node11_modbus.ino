@@ -1,8 +1,8 @@
 #include <Streaming.h>
 #include <Dyno.h>
 #include <XBee.h>
-#include <OGraph.h>
-#include <OAgent.h>
+#include <OGraph_SFC.h>
+#include <OAgent_SFC.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
@@ -22,8 +22,8 @@ ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
 OLocalVertex s = OLocalVertex(0x415DB670,0,0.95*D_base,-1.5*base,0.5*base,5,D_base,11);
 //OLocalVertex s = OLocalVertex(0x415DB670,0,0,-1.5*base,0.5*base,5,D_base,11);
-OGraph g = OGraph(&s);
-OAgent a = OAgent(&xbee,&rx,&g,false,true);
+OGraph_SFC g = OGraph_SFC(&s);
+OAgent_SFC a = OAgent_SFC(&xbee,&rx,&g,false,true);
 
 //My own additions
 ZBRxResponse* _rx = &rx;
@@ -36,7 +36,6 @@ uint8_t sPin = 7;   // synced led
 boolean de = false;
 
 int state;         // variable to store the read value
-float state1;
 long n;
 float error = 0;
 float u =0;
@@ -64,6 +63,13 @@ int fc;
 int ref;
 int count;
 int pos;
+long t;
+int res_flag=0;
+float state1 = 0 ;
+float state0 = 0; //previous ratio consensus result
+float eps = 0.0628;
+int gen_flag=1;
+float D;
 
 void setup()  {
   //delay(5000);  
@@ -109,45 +115,117 @@ void setup()  {
 
 
 void loop() {
-  if(de == false) {
-   Serial.println("Still trying to sync");
-    if(a.sync()) {
-      de = true;
-      //d.flushSerial()
-      digitalWrite(sPin,HIGH);
-     Serial.println("Synced with Leader Node");
-    }    
-  } 
+  if(de == false)  
+  {
+    if(!(a.isLeader()))
+    {
+      Serial.println("Still trying to sync");
+      if(a.sync()) 
+      {
+        Serial.println("Communication Link established");
+        Serial.println("c");
+        digitalWrite(sPin,HIGH);
+        de = true;
+      }
+      else
+      {
+        de  = false; //means could not sync 
+      }
+    }
+    if (a.isLeader())
+    {
+      Serial.println("Send letter s(r) to sync(resync)"); //let computer know you want to sync
+      while (Serial.available() == 0) 
+      { 
+        //simply makes the arduino wait until commputer sends signal        
+      }
+      if(Serial.available()) 
+      {
+        Serial.println("got some letter");
+        uint8_t b = Serial.read(); //enter the character 's'
+        Serial.println(b);
+        if (b == 'r')
+          {
+            a.setLeader(0);
+          }
+        if ((b == 's')||(b == 'r'))
+        {
+          Serial.println("got the s and about to sync");
+          de = true;
+          if(a.sync()) {
+            Serial.println("Communication Link established");
+            Serial.println("c");
+            digitalWrite(sPin,HIGH);
+            //ce = true;
+          }
+          else
+          {
+            de  = false; //means could not sync 
+          } 
+        }
+      }
+    }
+  }
+
+   
    else {
     if(a.isSynced()) {
       ///*
+      
       receiveTyphoonData();
       state =  Mb.MbData[0];
+      if(state == 0)
+      {
+        gen_flag=0;
+        D=0;
+      }
+      else
+      {
+        gen_flag=1;
+        D=0.95;
+      }
+      
       Serial.println("Data");
       Serial.println(float(state),4);
-      a.nonleaderFairSplitRatioConsensus(base*state);
-      //a.nonleaderFairSplitRatioConsensus(1*D_base);
+      //a.nonleaderFairSplitRatioConsensus(base*state);
+      //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
+      //t = millis();
+      //a.fairSplitRatioConsensus_RSL(D_base*1,1*D_base, 8,200);
+      a.fairSplitRatioConsensus_RSL(base*state,D*D_base,8,200);
       state1 = a.getbufferdata(0);
 
        
       //Serial.println("Typhoon Data");
       //Serial.println(state);
       Serial.println("ratio consensus result");
-      Serial.println(state1,4); 
-      
-       // Controller code
+      Serial.println(state1,4);
+      //Serial.println(millis()-t);
+      // Controller code
        r=r+1;
        if(r>2)
        { 
-       error=error + -1*0.7071*state1;
-       u=u_set+0.707*error;
-       Serial.println(u,4);
+          if(gen_flag==1)
+          { 
+              if((abs(state1-state0)>eps)&&(res_flag==0))
+              {
+                 error=error + -1*0.707*state0;
+                 u=u_set+0.7071*error;
+                 //Serial.println(u,4);
+                 res_flag =1;
+              }
+              else
+              {
+                 error=error + -1*0.707*state1;
+                 u=u_set+0.7071*error;
+                 //Serial.println(u,4);
+                 res_flag=0;
+              }
+          }
+         Mb.MbData[1]=base*u;
+         Serial.println(res_flag);
+         sendConsensusResults();
        }
-       Mb.MbData[1]=base*u;
-       sendConsensusResults();
-       
        // Controller code over
-      
           
 //      n = state*base_value; //multiply by base value  to change to non-decimal
 //      state_high = (n >> 16) & 0x000FFFF;
@@ -173,6 +251,7 @@ void loop() {
       Serial.println(float(state),4);
       Mb.MbData[1] =  state; 
       sendConsensusResults();*/
+      a.resync();
       }
   }/*
    receiveTyphoonData();

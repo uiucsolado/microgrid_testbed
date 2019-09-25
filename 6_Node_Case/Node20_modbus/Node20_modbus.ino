@@ -1,8 +1,8 @@
 #include <Streaming.h>
 #include <Dyno.h>
 #include <XBee.h>
-#include <OGraph.h>
-#include <OAgent.h>
+#include <OGraph_SFC.h>
+#include <OAgent_SFC.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
@@ -22,8 +22,8 @@ ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
 OLocalVertex s = OLocalVertex(0x4151C6AC,0,0.0479*D_base,-1.5*base,0.5*base,5,D_base,8);
 //OLocalVertex s = OLocalVertex(0x4151C6AC,0,0,-1.5*base,0.5*base,5,D_base,8);
-OGraph g = OGraph(&s);
-OAgent a = OAgent(&xbee,&rx,&g,false,true);
+OGraph_SFC g = OGraph_SFC(&s);
+OAgent_SFC a = OAgent_SFC(&xbee,&rx,&g,false,true);
 
 //My own additions
 ZBRxResponse* _rx = &rx;
@@ -58,6 +58,7 @@ int fc;
 int ref;
 int count;
 int pos;
+float D;
 
 void setup()  {
  Serial.begin(38400);
@@ -102,24 +103,77 @@ void setup()  {
 
 
 void loop() {
-  if(de == false) {
-   Serial.println("Still trying to sync");
-    if(a.sync()) {
-      de = true;
-      //d.flushSerial();
-      digitalWrite(sPin,HIGH);
-     Serial.println("Synced with Leader Node");
-    }    
-  } 
+  if(de == false)  
+  {
+    if(!(a.isLeader()))
+    {
+      Serial.println("Still trying to sync");
+      if(a.sync()) 
+      {
+        Serial.println("Communication Link established");
+        Serial.println("c");
+        digitalWrite(sPin,HIGH);
+        de = true;
+      }
+      else
+      {
+        de  = false; //means could not sync 
+      }
+    }
+    if (a.isLeader())
+    {
+      Serial.println("Send letter s(r) to sync(resync)"); //let computer know you want to sync
+      while (Serial.available() == 0) 
+      { 
+        //simply makes the arduino wait until commputer sends signal        
+      }
+      if(Serial.available()) 
+      {
+        Serial.println("got some letter");
+        uint8_t b = Serial.read(); //enter the character 's'
+        Serial.println(b);
+        if (b == 'r')
+          {
+            a.setLeader(0);
+          }
+        if ((b == 's')||(b == 'r'))
+        {
+          Serial.println("got the s and about to sync");
+          de = true;
+          if(a.sync()) {
+            Serial.println("Communication Link established");
+            Serial.println("c");
+            digitalWrite(sPin,HIGH);
+            //ce = true;
+          }
+          else
+          {
+            de  = false; //means could not sync 
+          } 
+        }
+      }
+    }
+  }
+
+  
    else {
     if(a.isSynced()) {
-      ///*
       receiveTyphoonData();
       state =  Mb.MbData[0];
+      if(state == 0)
+      {
+        D=0;
+      }
+      else
+      {
+        D=0.0479;
+      }
       Serial.println("Data");
       Serial.println(float(state),4);
-      a.nonleaderFairSplitRatioConsensus(-1*base*state);
-      //a.nonleaderFairSplitRatioConsensus(1*D_base);
+      //a.nonleaderFairSplitRatioConsensus(-1*base*state);
+      //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
+      //a.fairSplitRatioConsensus_RSL(D_base*1,1*D_base, 8,200);
+      a.fairSplitRatioConsensus_RSL(base*-state,D*D_base,8,200);
       state1 = a.getbufferdata(0);
 
        
@@ -162,6 +216,7 @@ void loop() {
       state =  Mb.MbData[0];
       Serial.println("Data");
       Serial.println(float(state),4);*/
+      a.resync();
       //delay(1000);
       }
   }
