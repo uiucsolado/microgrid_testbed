@@ -511,7 +511,7 @@ long OAgent_SFC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t itera
     OLocalVertex * s = _G->getLocalVertex();
     float gamma = 0;
     bool scheduled =_WaitForACKPacket_RSL(ACK_START_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
-    Serial<<"Schedule done at "<<myMillis()<<"\n";
+    //Serial<<"Schedule done at "<<myMillis()<<"\n";
     //bool stat = startTime>myMillis();
 
     //Serial<<"Leader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
@@ -539,8 +539,8 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t it
     uint8_t id = s->getID();
     float gamma = 0;
     //delay(50);
-    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,SCHEDULE_TIMEOUT+(period*iterations));
-    Serial<<"Schedule done at "<<myMillis()<<"\n";
+    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,(period*iterations*3));
+    //Serial<<"Schedule done at "<<myMillis()<<"\n";
     
     //bool stat = startTime>myMillis();
     //Serial<<"Startime > Time? "<<stat<<"\n";
@@ -1532,6 +1532,7 @@ bool OAgent_SFC::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &star
             uint16_t txtime;
             txtime = rand()%50;    //so that transmission occurs at different points in time per node
             delay(txtime);
+            _broadcastScheduleFairSplitPacket(startTime,iterations,period);
             _broadcastACKPacket(ACK_START_HEADER,id);  
             
         }
