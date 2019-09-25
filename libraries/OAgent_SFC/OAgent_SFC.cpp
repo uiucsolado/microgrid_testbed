@@ -510,24 +510,21 @@ long OAgent_SFC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t itera
     unsigned long startTime = t0 + RC_DELAY;
     OLocalVertex * s = _G->getLocalVertex();
     float gamma = 0;
-    _broadcastScheduleFairSplitPacket(startTime,iterations,period);
     bool scheduled =_WaitForACKPacket_RSL(ACK_START_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
-
-    bool stat = startTime>myMillis();
+    Serial<<"Schedule done at "<<myMillis()<<"\n";
+    //bool stat = startTime>myMillis();
 
     //Serial<<"Leader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
 
     if (!scheduled) 
     {
-        //Serial<<"No acknowledgements received from neighbors\n";
+        //Serial<<"No acknowledgements received from neighbors at t = "<<myMillis()<<"\n";
         s->setleaderID(s->getdeputyID());
-        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
         gamma = -1;
     }
     else
     {
-        float gamma = 0;
-        _buffer[2] = 0;
         if(_waitToStart(startTime,true,1800))
         {
             gamma = ratiomaxminConsensus(y, z, iterations,period);
@@ -541,16 +538,18 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t it
     OLocalVertex * s = _G->getLocalVertex();
     uint8_t id = s->getID();
     float gamma = 0;
-    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,SCHEDULE_TIMEOUT*3);
-
-    bool stat = startTime>myMillis();
+    //delay(50);
+    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,SCHEDULE_TIMEOUT+(period*iterations));
+    Serial<<"Schedule done at "<<myMillis()<<"\n";
+    
+    //bool stat = startTime>myMillis();
     //Serial<<"Startime > Time? "<<stat<<"\n";
 
     //Serial<<"NonLeader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
 
     if(scheduled)
     {
-        float gamma = 0;
+        //Serial<<"Schedule received from Node "<<s->getleaderID()<<"\n";
         if(_waitToStart(startTime,true,1800)) {
             gamma = ratiomaxminConsensus(y, z, iterations,period);
         }
@@ -559,9 +558,9 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t it
     }
     else
     {
-        //Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
+        Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
         s->setleaderID(s->getdeputyID());
-        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
         gamma = -1;
     }
     return gamma;
@@ -1533,8 +1532,7 @@ bool OAgent_SFC::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &star
             uint16_t txtime;
             txtime = rand()%50;    //so that transmission occurs at different points in time per node
             delay(txtime);
-            _broadcastACKPacket(ACK_START_HEADER,id);    
-                
+            _broadcastACKPacket(ACK_START_HEADER,id);  
             
         }
         return true;
@@ -1625,16 +1623,16 @@ bool OAgent_SFC::_WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned lo
     unsigned long start = millis();
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
-    int nodes = s->getNeighborSize(); //number of online neighbors in the network
     int counter = 0;
+    _broadcastScheduleFairSplitPacket(startTime,iterations,period);
     while (uint16_t(millis()-start) < timeout)
     {
             while (uint16_t(millis()-restart) < timeout*0.125)
             {
                 if(_waitForPacket(header,true,50))
-                {
+                {              
                     counter++;
-                    if (counter==nodes)
+                    if (counter==s->getNeighborSize())
                         return true;
                 }
             }
@@ -1642,7 +1640,10 @@ bool OAgent_SFC::_WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned lo
             restart = millis();
     }
     if (counter==0)
-        return false;
+    	{	
+    		//Serial<<"No acknowledgements received from neighbors between "<<mystart<<" and "<<myMillis()<<"\n";
+        	return false;
+        }
     else
         return true;
 }

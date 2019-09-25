@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<net_list>
+    
+   <system_description>
+        <name>bb1c266ebb5711e8bd9c0050b621b179</name>
+        <sw_version>2018.1 SP1</sw_version>
+
+        <hw_settings>
+            <hardware_product_id>HIL402</hardware_product_id>
+            <hardware_revision>3</hardware_revision>
+            <hardware_configuration_id>2</hardware_configuration_id>
+            <hil_device_id>None</hil_device_id>
+            <device_ao_limit_enable>False</device_ao_limit_enable>
+        </hw_settings>
+
+        <solver_settings>
+            <sim_time_step>auto</sim_time_step>
+            <sim_discr_scale>1.0</sim_discr_scale>
+            <sim_method>exact</sim_method>
+            <enb_gds_oversampling>True</enb_gds_oversampling>
+            <show_modes>False</show_modes>
+            <cpl_stb>False</cpl_stb>
+            <enb_dep_sw_detect>False</enb_dep_sw_detect>
+            <enb_pole_shift>True</enb_pole_shift>
+            <ss_calc_method>systematic elimination</ss_calc_method>
+        </solver_settings>
+
+        <system_sp_settings>
+            <sys_sp_rate_1>0.0001</sys_sp_rate_1>
+            <sys_sp_rate_2>0.05</sys_sp_rate_2>
+        </system_sp_settings>
+
+        <user_sp_settings>
+            <code_section>internal memory</code_section>
+            <data_section>internal memory</data_section>
+        </user_sp_settings>
+    </system_description>
+
+    
+    
+    <signal_processing><electric_node_list>
+        
+        </electric_node_list>
+
+        <dsp_node_list>
+        <node>0</node>
+        <node>1</node>
+        <node>2</node>
+        <node>3</node>
+        <node>4</node>
+        <node>5</node>
+        <node>6</node>
+        </dsp_node_list>
+
+
+        <element_list>
+            
+  
+  <component>
+      <type>src_scada_input</type>
+      <name>Input Register IP</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>format</name>
+            <value>real</value>
+        </parameter>
+        <parameter>
+            <name>override_signal_name</name>
+            <value>False</value>
+        </parameter>
+        <parameter>
+            <name>signal_name</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>real</value>
+        </parameter>
+        <parameter>
+            <name>min</name>
+            <value>-1000000.0</value>
+        </parameter>
+        <parameter>
+            <name>max</name>
+            <value>1000000.0</value>
+        </parameter>
+        <parameter>
+            <name>def_value</name>
+            <value>5.0</value>
+        </parameter>
+        <parameter>
+            <name>unit</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>5</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>src_constant</type>
+      <name>Constant3</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>value</name>
+            <value>[0.0]</value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>real</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>0</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_sys_out</type>
+      <name>ModBus Device1.comp_reg_in</name>
+      <parent_type>ModBus Device</parent_type>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>write_method</name>
+            <value>XIo_Out</value>
+        </parameter>
+        <parameter>
+            <name>function</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>5</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>src_sys_in</type>
+      <name>ModBus Device1.comp_holding_out</name>
+      <parent_type>ModBus Device</parent_type>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>dimension</name>
+            <value>1</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>1</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_sys_out</type>
+      <name>ModBus Device1.comp_discrete_in</name>
+      <parent_type>ModBus Device</parent_type>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>write_method</name>
+            <value>XIo_Out</value>
+        </parameter>
+        <parameter>
+            <name>function</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>0</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_probe</type>
+      <name>coil_out3</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>17922</value>
+        </parameter>
+        <parameter>
+            <name>override_signal_name</name>
+            <value>False</value>
+        </parameter>
+        <parameter>
+            <name>signal_name</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>generic</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>5</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_probe</type>
+      <name>holding_out1</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>17920</value>
+        </parameter>
+        <parameter>
+            <name>override_signal_name</name>
+            <value>False</value>
+        </parameter>
+        <parameter>
+            <name>signal_name</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>generic</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>1</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>src_constant</type>
+      <name>Constant4</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>value</name>
+            <value>[0.0]</value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>real</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>3</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_bus_split</type>
+      <name>Bus Split1</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>outputs</name>
+            <value>[1]</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>4</node>
+    </terminal>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>6</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_terminator</type>
+      <name>Termination1</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>6</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>src_scada_input</type>
+      <name>Holding Register IP</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>format</name>
+            <value>int</value>
+        </parameter>
+        <parameter>
+            <name>override_signal_name</name>
+            <value>False</value>
+        </parameter>
+        <parameter>
+            <name>signal_name</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>int</value>
+        </parameter>
+        <parameter>
+            <name>min</name>
+            <value>-1000000.0</value>
+        </parameter>
+        <parameter>
+            <name>max</name>
+            <value>1000000.0</value>
+        </parameter>
+        <parameter>
+            <name>def_value</name>
+            <value>5.0</value>
+        </parameter>
+        <parameter>
+            <name>unit</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>int</signal_type>
+        <node>2</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_probe</type>
+      <name>coil_out2</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>17922</value>
+        </parameter>
+        <parameter>
+            <name>override_signal_name</name>
+            <value>False</value>
+        </parameter>
+        <parameter>
+            <name>signal_name</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>generic</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>int</signal_type>
+        <node>2</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_sys_out</type>
+      <name>ModBus Device1.comp_coil_in</name>
+      <parent_type>ModBus Device</parent_type>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>write_method</name>
+            <value>XIo_Out</value>
+        </parameter>
+        <parameter>
+            <name>function</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>3</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_probe</type>
+      <name>coil_out</name>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>17922</value>
+        </parameter>
+        <parameter>
+            <name>override_signal_name</name>
+            <value>False</value>
+        </parameter>
+        <parameter>
+            <name>signal_name</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>signal_type</name>
+            <value>generic</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>4</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>src_sys_in</type>
+      <name>ModBus Device1.comp_coil_out</name>
+      <parent_type>ModBus Device</parent_type>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>dimension</name>
+            <value>1</value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>out</name>
+        <type>sp</type>
+        <signal_type>real</signal_type>
+        <node>4</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+  <component>
+      <type>gen_sys_out</type>
+      <name>ModBus Device1.comp_holding_in</name>
+      <parent_type>ModBus Device</parent_type>
+      <system_cpu_component>False</system_cpu_component>
+
+      
+    <parameters>
+        <parameter>
+            <name>addr</name>
+            <value>0</value>
+        </parameter>
+        <parameter>
+            <name>write_method</name>
+            <value>XIo_Out</value>
+        </parameter>
+        <parameter>
+            <name>function</name>
+            <value></value>
+        </parameter>
+        <parameter>
+            <name>execution_rate</name>
+            <value>0.0001</value>
+        </parameter>
+    </parameters>
+
+      
+    <terminals>
+    <terminal>
+        <name>in</name>
+        <type>sp</type>
+        <signal_type>int</signal_type>
+        <node>2</node>
+    </terminal>
+
+    </terminals>
+
+  </component>
+        </element_list>
+
+
+    </signal_processing>
+    
+
+</net_list>
