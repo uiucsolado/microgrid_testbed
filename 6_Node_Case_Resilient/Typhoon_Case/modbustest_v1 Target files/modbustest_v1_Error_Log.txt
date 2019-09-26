@@ -1,0 +1,22 @@
+---------- Error Report ----------
+
+** 1 error(s) occurred during runtime **
+Error 1: 
+	 Typhoon Error: 0000 
+	 There is no PE schematic to be compiled. 
+	 Line 68 in function "simulink_introspect_tse" in file "simulink_introspect_tse.m" 
+	 Line 39 in function "Model_Generator" in file "Model_Generator.m" 
+
+
+
+
+---------- Warning Report ----------
+
+
+
+
+
+---------- Messages ----------
+
+Extracting netlist...
+Create circuit structure ... Warning 0000: There is no PE schematic to be compiled.
