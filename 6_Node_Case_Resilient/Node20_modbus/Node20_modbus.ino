@@ -174,16 +174,16 @@ void loop() {
       
         D=0.0479;
       }
-      Serial.println("Data");
-      Serial.println(float(state),4);
+      //Serial.println("Data");
+      //Serial.println(float(state),4);
       //a.nonleaderFairSplitRatioConsensus(-1*base*state);
       //a.nonleaderFairSplitRatioConsensus(1*D_base,0);
-      //a.fairSplitRatioConsensus_RSL(D_base*1,0*D_base, 16,200);
-      a.fairSplitRatioConsensus_RSL(base*-state,D*D_base,16,200);
+      //a.fairSplitRatioConsensus_RSL(D_base*1,0*D_base, 16,160);
+      a.fairSplitRatioConsensus_RSL(-base*state,D*D_base,16,160);
       state1 = a.getbufferdata(0);
 
-      Serial.println("ratio consensus result");
-      Serial.println(state1,4);  
+      //Serial.println("ratio consensus result");
+      //Serial.println(state1,4);  
        /* Controller code
        r=r+1;
        if(r>2)

@@ -520,7 +520,7 @@ long OAgent_SFC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t itera
     {
         //Serial<<"No acknowledgements received from neighbors at t = "<<myMillis()<<"\n";
         s->setleaderID(s->getdeputyID());
-        Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
         gamma = -1;
     }
     else
@@ -558,9 +558,9 @@ long OAgent_SFC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t it
     }
     else
     {
-        Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
+        //Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
         s->setleaderID(s->getdeputyID());
-        Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
         gamma = -1;
     }
     return gamma;
