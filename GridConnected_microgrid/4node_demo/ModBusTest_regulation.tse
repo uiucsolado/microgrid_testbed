@@ -1,0 +1,1325 @@
+version = 4.2
+
+//
+// Saved by sw version: 2019.1
+// Save timestamp: 24-Oct-2019 @ 11:29:27 PM
+//
+
+model "ModBusTest_regulation" {
+    configuration {
+        hil_device = "HIL603"
+        hil_configuration_id = 2
+        simulation_method = trapezoidal
+        simulation_time_step = auto
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        device_ao_limit_enable = True
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "internal memory"
+        data_section = "internal memory"
+        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "default"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "high"
+    }
+
+    component Subsystem Root {
+        component Subsystem Modbus1 {
+            layout = dynamic
+            component gen_probe Probe2 {
+            }
+            [
+                position = 8776, 8000
+            ]
+
+            component src_constant C_u13 {
+                value = "50"
+            }
+            [
+                position = 7920, 7872
+            ]
+
+            component src_constant C_u11 {
+            }
+            [
+                position = 8008, 7720
+            ]
+
+            component gen_terminator Termination1 {
+            }
+            [
+                position = 8392, 7944
+            ]
+
+            component src_constant C_u12 {
+            }
+            [
+                position = 7968, 7800
+            ]
+
+            component gen_probe Probe1 {
+            }
+            [
+                position = 7936, 8080
+            ]
+
+            component "core/ModBus Device" "ModBus Device1" {
+                execution_rate = "Ts"
+            }
+            [
+                position = 8192, 7992
+                size = 184, 184
+            ]
+
+            component gen_probe Probe3 {
+            }
+            [
+                position = 8432, 8024
+            ]
+
+            component gen_probe ProbeX {
+            }
+            [
+                position = 8912, 8008
+            ]
+
+            component gen_bus_join "Bus Join1" {
+                inputs = "3"
+            }
+            [
+                position = 8024, 8160
+                hide_name = True
+            ]
+
+            component gen_gain Gain2 {
+                gain = "scale_const"
+            }
+            [
+                position = 7776, 8160
+                hide_name = True
+            ]
+
+            component gen_c_function "C function2" {
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "sign inherit;in inherit"
+                in_terminal_labels = "[(\'sign\', True), (\'in\', True)]"
+                in_terminal_properties = "inherit sign;inherit in;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "out inherit"
+                out_terminal_labels = "[(\'out\', True)]"
+                output_fnc = "/*Begin code section*/
+out = in*((-2*sign)+1);
+/*End code section*/"
+            }
+            [
+                position = 8656, 8104
+                hide_name = True
+                size = 96, 48
+            ]
+
+            component gen_c_function "C function4" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "high inherit;low inherit"
+                in_terminal_labels = "[(\'high\', True), (\'low\', True)]"
+                in_terminal_properties = "real high;real low;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "regD inherit"
+                out_terminal_labels = "[(\'regD\', True)]"
+                out_terminal_properties = "real regD;"
+                output_fnc = "/*Begin code section*/
+temp = (((int)high << 16) & -65536) | ((int)low & 65535);
+
+if(temp < 1e7 && temp > -1e7)
+    regD = temp;
+else if(temp == 1e7)
+    regD = 1e7;
+else if(temp == -1e7)
+    regD = -1e7;
+else if(temp > 1e7)
+    regD = 2e7;
+else if(temp < -1e7)
+    regD = -2e7;
+/*End code section*/"
+            }
+            [
+                position = 8528, 8120
+                size = 88, 48
+            ]
+
+            component gen_gain Gain1 {
+                gain = "scale_back_const"
+            }
+            [
+                position = 8776, 8104
+                hide_name = True
+            ]
+
+            component gen_bus_split "Bus Split3" {
+                outputs = "3"
+            }
+            [
+                position = 8424, 8112
+            ]
+
+            component gen_c_function "C function5" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit"
+                in_terminal_dimensions_str = "P_nom inherit"
+                in_terminal_labels = "[(\'P_nom\', True)]"
+                in_terminal_properties = "real P_nom;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit;inherit;inherit"
+                out_terminal_dimensions_str = "high inherit;low inherit;sign inherit"
+                out_terminal_labels = "[(\'high\', True), (\'low\', True), (\'sign\', True)]"
+                out_terminal_properties = "int high;int low;int sign;"
+                output_fnc = "/*Begin code section*/
+if (P_nom<0)
+    sign = 1;
+else
+    sign = 0;
+
+high = (((int)temp>>16) & (0x0000FFFF)) ;
+low = (((int)temp) & (0x0000FFFF)) ;
+/*End code section*/"
+                update_fnc = "/*Begin code section*/
+if (P_nom<0)
+    temp = P_nom*-1;
+else
+    temp = P_nom;
+/*End code section*/"
+            }
+            [
+                position = 7888, 8160
+                hide_name = True
+                size = 88, 64
+            ]
+
+            port U1-P1 {
+                position = right:2
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7664, 8112
+                rotation = down
+                scale = -1, 1
+            ]
+
+            port u1 {
+                position = auto:auto
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8896, 8112
+            ]
+
+            junction Junction10 sp
+            [
+                position = 8864, 8104
+            ]
+
+            junction Junction11 sp
+            [
+                position = 8728, 8104
+            ]
+
+            junction Junction12 sp
+            [
+                position = 8384, 8064
+            ]
+
+            junction Junction13 sp
+            [
+                position = 7816, 8160
+            ]
+
+            connect C_u13.out "ModBus Device1.holding_in" as Connection120
+            [
+                breakpoints = 7952, 7968; 8080, 7968
+            ]
+            connect C_u12.out "ModBus Device1.discrete_in" as Connection121
+            [
+                breakpoints = 8000, 8016; 8080, 8016
+            ]
+            connect Termination1.in "ModBus Device1.coil_out" as Connection127
+            connect C_u11.out "ModBus Device1.coil_in" as Connection129
+            [
+                breakpoints = 8072, 7720; 8072, 8064
+            ]
+            connect U1-P1 Gain2.in as Connection205
+            connect "Bus Join1.out" "ModBus Device1.reg_in" as Connection206
+            connect "Bus Split3.out1" "C function4.high" as Connection182
+            connect "Bus Split3.out" "C function2.sign" as Connection185
+            [
+                breakpoints = 8464, 8096; 8464, 8096; 8592, 8096; 8592, 8096
+            ]
+            connect "Bus Split3.out2" "C function4.low" as Connection183
+            connect "C function4.regD" "C function2.in" as Connection184
+            connect Gain1.out Junction10 as Connection213
+            connect Junction10 u1 as Connection214
+            connect ProbeX.in Junction10 as Connection215
+            connect Gain1.in Junction11 as Connection216
+            connect Junction11 "C function2.out" as Connection217
+            [
+                breakpoints = 8728, 8104
+            ]
+            connect Probe2.in Junction11 as Connection218
+            connect "ModBus Device1.holding_out" Junction12 as Connection220
+            connect Junction12 "Bus Split3.in" as Connection221
+            connect Probe3.in Junction12 as Connection222
+            connect "C function5.high" "Bus Join1.in" as Connection223
+            connect "C function5.low" "Bus Join1.in1" as Connection224
+            connect "Bus Join1.in2" "C function5.sign" as Connection225
+            connect Gain2.out Junction13 as Connection227
+            connect Junction13 "C function5.P_nom" as Connection228
+            connect Probe1.in Junction13 as Connection229
+        }
+        [
+            position = 8720, 8160
+            scale = -1, 1
+            size = 64, 80
+        ]
+
+        component Subsystem Modbus2 {
+            layout = dynamic
+            component src_constant C_u13 {
+                value = "50"
+            }
+            [
+                position = 7968, 7888
+            ]
+
+            component src_constant C_u11 {
+            }
+            [
+                position = 7968, 7728
+            ]
+
+            component gen_probe Probe1 {
+            }
+            [
+                position = 8032, 8016
+            ]
+
+            component gen_terminator Termination1 {
+            }
+            [
+                position = 8488, 7824
+            ]
+
+            component src_constant C_u12 {
+            }
+            [
+                position = 7968, 7800
+            ]
+
+            component "core/ModBus Device" "ModBus Device2" {
+                configuration = "config2"
+                execution_rate = "Ts"
+            }
+            [
+                position = 8288, 7912
+                size = 184, 184
+            ]
+
+            component gen_probe Probe3 {
+            }
+            [
+                position = 8856, 7936
+            ]
+
+            component gen_probe Probe4 {
+            }
+            [
+                position = 8560, 7896
+            ]
+
+            component gen_probe ProbeX {
+            }
+            [
+                position = 9016, 7960
+            ]
+
+            component gen_bus_join "Bus Join1" {
+                inputs = "3"
+            }
+            [
+                position = 8040, 8112
+                hide_name = True
+            ]
+
+            component gen_gain Gain2 {
+                gain = "scale_const"
+            }
+            [
+                position = 7792, 8112
+                hide_name = True
+            ]
+
+            component gen_gain Gain1 {
+                gain = "scale_back_const"
+            }
+            [
+                position = 8864, 8040
+                hide_name = True
+            ]
+
+            component gen_bus_split "Bus Split3" {
+                outputs = "3"
+            }
+            [
+                position = 8520, 8048
+            ]
+
+            component gen_c_function "C function2" {
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "sign inherit;in inherit"
+                in_terminal_labels = "[(\'sign\', True), (\'in\', True)]"
+                in_terminal_properties = "inherit sign;inherit in;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "out inherit"
+                out_terminal_labels = "[(\'out\', True)]"
+                output_fnc = "/*Begin code section*/
+out = in*((-2*sign)+1);
+/*End code section*/"
+            }
+            [
+                position = 8744, 8040
+                hide_name = True
+                size = 96, 48
+            ]
+
+            component gen_c_function "C function4" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "high inherit;low inherit"
+                in_terminal_labels = "[(\'high\', True), (\'low\', True)]"
+                in_terminal_properties = "real high;real low;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "regD inherit"
+                out_terminal_labels = "[(\'regD\', True)]"
+                out_terminal_properties = "real regD;"
+                output_fnc = "/*Begin code section*/
+temp = (((int)high << 16) & -65536) | ((int)low & 65535);
+
+if(temp < 1e7 && temp > -1e7)
+    regD = temp;
+else if(temp == 1e7)
+    regD = 1e7;
+else if(temp == -1e7)
+    regD = -1e7;
+else if(temp > 1e7)
+    regD = 2e7;
+else if(temp < -1e7)
+    regD = -2e7;
+/*End code section*/"
+            }
+            [
+                position = 8616, 8056
+                size = 88, 48
+            ]
+
+            component gen_probe ProbeY {
+            }
+            [
+                position = 8208, 8144
+            ]
+
+            component gen_c_function "C function5" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit"
+                in_terminal_dimensions_str = "P_nom inherit"
+                in_terminal_labels = "[(\'P_nom\', True)]"
+                in_terminal_properties = "real P_nom;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit;inherit;inherit"
+                out_terminal_dimensions_str = "high inherit;low inherit;sign inherit"
+                out_terminal_labels = "[(\'high\', True), (\'low\', True), (\'sign\', True)]"
+                out_terminal_properties = "int high;int low;int sign;"
+                output_fnc = "/*Begin code section*/
+if (P_nom<0)
+    sign = 1;
+else
+    sign = 0;
+
+high = (((int)temp>>16) & (0x0000FFFF)) ;
+low = (((int)temp) & (0x0000FFFF)) ;
+/*End code section*/"
+                update_fnc = "/*Begin code section*/
+if (P_nom<0)
+    temp = P_nom*-1;
+else
+    temp = P_nom;
+/*End code section*/"
+            }
+            [
+                position = 7928, 8112
+                hide_name = True
+                size = 88, 64
+            ]
+
+            port U2-P2 {
+                position = right:2
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7656, 8104
+                rotation = down
+                scale = -1, 1
+            ]
+
+            port u2 {
+                position = auto:auto
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8960, 8040
+            ]
+
+            junction Junction16 sp
+            [
+                position = 8912, 8040
+            ]
+
+            junction Junction17 sp
+            [
+                position = 8816, 8040
+            ]
+
+            junction Junction18 sp
+            [
+                position = 8440, 8048
+            ]
+
+            junction Junction19 sp
+            [
+                position = 8128, 8112
+            ]
+
+            junction Junction20 sp
+            [
+                position = 7856, 8112
+            ]
+
+            connect C_u12.out "ModBus Device2.coil_in" as Connection128
+            [
+                breakpoints = 8048, 7800; 8048, 7984; 8112, 7984
+            ]
+            connect "ModBus Device2.holding_in" C_u13.out as Connection130
+            connect C_u11.out "ModBus Device2.discrete_in" as Connection131
+            [
+                breakpoints = 8152, 7728; 8152, 7936
+            ]
+            connect Termination1.in "ModBus Device2.coil_out" as Connection132
+            connect Gain2.in U2-P2 as Connection210
+            connect "Bus Split3.out" "C function2.sign" as Connection185
+            connect "C function4.regD" "C function2.in" as Connection184
+            connect "Bus Split3.out1" "C function4.high" as Connection182
+            connect "Bus Split3.out2" "C function4.low" as Connection183
+            connect Gain1.out Junction16 as Connection217
+            connect Junction16 u2 as Connection218
+            connect ProbeX.in Junction16 as Connection219
+            connect "C function2.out" Junction17 as Connection221
+            connect Junction17 Gain1.in as Connection222
+            connect Probe3.in Junction17 as Connection223
+            connect "Bus Split3.in" Junction18 as Connection225
+            connect Junction18 "ModBus Device2.holding_out" as Connection226
+            connect Probe4.in Junction18 as Connection227
+            [
+                breakpoints = 8440, 7896; 8440, 8040
+            ]
+            connect "Bus Join1.out" Junction19 as Connection228
+            connect Junction19 "ModBus Device2.reg_in" as Connection229
+            connect ProbeY.in Junction19 as Connection230
+            connect "C function5.high" "Bus Join1.in" as Connection231
+            connect "C function5.low" "Bus Join1.in1" as Connection232
+            connect "C function5.sign" "Bus Join1.in2" as Connection233
+            connect "C function5.P_nom" Junction20 as Connection235
+            connect Junction20 Gain2.out as Connection236
+            connect Probe1.in Junction20 as Connection237
+        }
+        [
+            position = 8720, 8264
+            scale = -1, 1
+            size = 56, 80
+        ]
+
+        component Subsystem Modbus3 {
+            layout = dynamic
+            component src_constant C_u13 {
+                value = "50"
+            }
+            [
+                position = 7976, 7936
+            ]
+
+            component gen_probe Probe1 {
+            }
+            [
+                position = 7872, 7944
+            ]
+
+            component src_constant C_u11 {
+            }
+            [
+                position = 7528, 7872
+            ]
+
+            component gen_terminator Termination1 {
+            }
+            [
+                position = 8320, 7760
+            ]
+
+            component src_constant C_u12 {
+            }
+            [
+                position = 7528, 7816
+            ]
+
+            component gen_probe Probe2 {
+            }
+            [
+                position = 8752, 7808
+            ]
+
+            component gen_probe Probe3 {
+            }
+            [
+                position = 8504, 7752
+            ]
+
+            component "core/ModBus Device" "ModBus Device3" {
+                configuration = "config3"
+                execution_rate = "Ts"
+            }
+            [
+                position = 8160, 7920
+                size = 184, 184
+            ]
+
+            component gen_probe ProbeX {
+            }
+            [
+                position = 8840, 7800
+            ]
+
+            component gen_gain Gain2 {
+                gain = "scale_const"
+            }
+            [
+                position = 7696, 8040
+                hide_name = True
+            ]
+
+            component gen_bus_join "Bus Join1" {
+                inputs = "3"
+            }
+            [
+                position = 7944, 8040
+                hide_name = True
+            ]
+
+            component gen_c_function "C function2" {
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "sign inherit;in inherit"
+                in_terminal_labels = "[(\'sign\', True), (\'in\', True)]"
+                in_terminal_properties = "inherit sign;inherit in;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "out inherit"
+                out_terminal_labels = "[(\'out\', True)]"
+                output_fnc = "/*Begin code section*/
+out = in*((-2*sign)+1);
+/*End code section*/"
+            }
+            [
+                position = 8656, 7944
+                hide_name = True
+                size = 96, 48
+            ]
+
+            component gen_bus_split "Bus Split3" {
+                outputs = "3"
+            }
+            [
+                position = 8432, 7952
+            ]
+
+            component gen_gain Gain1 {
+                gain = "scale_back_const"
+            }
+            [
+                position = 8776, 7944
+                hide_name = True
+            ]
+
+            component gen_c_function "C function4" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "high inherit;low inherit"
+                in_terminal_labels = "[(\'high\', True), (\'low\', True)]"
+                in_terminal_properties = "real high;real low;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "regD inherit"
+                out_terminal_labels = "[(\'regD\', True)]"
+                out_terminal_properties = "real regD;"
+                output_fnc = "/*Begin code section*/
+temp = (((int)high << 16) & -65536) | ((int)low & 65535);
+
+if(temp < 1e7 && temp > -1e7)
+    regD = temp;
+else if(temp == 1e7)
+    regD = 1e7;
+else if(temp == -1e7)
+    regD = -1e7;
+else if(temp > 1e7)
+    regD = 2e7;
+else if(temp < -1e7)
+    regD = -2e7;
+/*End code section*/"
+            }
+            [
+                position = 8528, 7960
+                size = 88, 48
+            ]
+
+            component gen_c_function "C function5" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit"
+                in_terminal_dimensions_str = "P_nom inherit"
+                in_terminal_labels = "[(\'P_nom\', True)]"
+                in_terminal_properties = "real P_nom;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit;inherit;inherit"
+                out_terminal_dimensions_str = "high inherit;low inherit;sign inherit"
+                out_terminal_labels = "[(\'high\', True), (\'low\', True), (\'sign\', True)]"
+                out_terminal_properties = "int high;int low;int sign;"
+                output_fnc = "/*Begin code section*/
+if (P_nom<0)
+    sign = 1;
+else
+    sign = 0;
+
+high = (((int)temp>>16) & (0x0000FFFF)) ;
+low = (((int)temp) & (0x0000FFFF)) ;
+/*End code section*/"
+                update_fnc = "/*Begin code section*/
+if (P_nom<0)
+    temp = P_nom*-1;
+else
+    temp = P_nom;
+/*End code section*/"
+            }
+            [
+                position = 7816, 8040
+                hide_name = True
+                size = 88, 64
+            ]
+
+            port u3 {
+                position = auto:auto
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8840, 7912
+            ]
+
+            port U3-P3 {
+                position = right:2
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7536, 8032
+                rotation = down
+                scale = -1, 1
+            ]
+
+            junction Junction17 sp
+            [
+                position = 8352, 7952
+            ]
+
+            junction Junction18 sp
+            [
+                position = 8808, 7912
+            ]
+
+            junction Junction19 sp
+            [
+                position = 8720, 7944
+            ]
+
+            junction Junction20 sp
+            [
+                position = 7736, 8040
+            ]
+
+            connect C_u12.out "ModBus Device3.discrete_in" as Connection172
+            connect C_u11.out "ModBus Device3.coil_in" as Connection173
+            [
+                breakpoints = 7864, 7872; 7864, 7872; 8048, 7872; 8048, 7872
+            ]
+            connect C_u13.out "ModBus Device3.holding_in" as Connection175
+            connect Termination1.in "ModBus Device3.coil_out" as Connection176
+            connect "Bus Join1.out" "ModBus Device3.reg_in" as Connection209
+            connect U3-P3 Gain2.in as Connection210
+            connect "Bus Split3.out2" "C function4.low" as Connection183
+            connect "C function4.regD" "C function2.in" as Connection184
+            connect "Bus Split3.out1" "C function4.high" as Connection182
+            connect "Bus Split3.out" "C function2.sign" as Connection185
+            connect "Bus Split3.in" Junction17 as Connection220
+            connect Junction17 "ModBus Device3.holding_out" as Connection221
+            connect Probe3.in Junction17 as Connection222
+            connect Gain1.out Junction18 as Connection224
+            connect Junction18 u3 as Connection225
+            connect ProbeX.in Junction18 as Connection226
+            connect "C function2.out" Junction19 as Connection227
+            connect Junction19 Gain1.in as Connection228
+            [
+                breakpoints = 8728, 7944; 8728, 7944
+            ]
+            connect Probe2.in Junction19 as Connection229
+            connect "C function5.high" "Bus Join1.in" as Connection230
+            connect "Bus Join1.in1" "C function5.low" as Connection231
+            connect "Bus Join1.in2" "C function5.sign" as Connection232
+            connect "C function5.P_nom" Junction20 as Connection234
+            connect Junction20 Gain2.out as Connection235
+            connect Probe1.in Junction20 as Connection236
+        }
+        [
+            position = 8720, 8368
+            scale = -1, 1
+            size = 56, 72
+        ]
+
+        component gen_probe u1 {
+        }
+        [
+            position = 8624, 8208
+        ]
+
+        component gen_probe u2 {
+        }
+        [
+            position = 8632, 8312
+        ]
+
+        component src_scada_input "Node 1" {
+            unit = ""
+        }
+        [
+            position = 8312, 8144
+        ]
+
+        component src_scada_input "Node 2" {
+            unit = ""
+        }
+        [
+            position = 8312, 8248
+        ]
+
+        component src_scada_input "Node 3" {
+            unit = ""
+        }
+        [
+            position = 8312, 8352
+        ]
+
+        component Subsystem Modbus4 {
+            layout = dynamic
+            component src_constant C_u12 {
+            }
+            [
+                position = 7968, 7800
+            ]
+
+            component src_constant C_u11 {
+            }
+            [
+                position = 8008, 7720
+            ]
+
+            component "core/ModBus Device" "ModBus Device4" {
+                configuration = "config4"
+                execution_rate = "Ts"
+            }
+            [
+                position = 8224, 8192
+                size = 184, 184
+            ]
+
+            component src_constant C_u13 {
+                value = "50"
+            }
+            [
+                position = 7920, 7872
+            ]
+
+            component gen_terminator Termination1 {
+            }
+            [
+                position = 8464, 8120
+            ]
+
+            component gen_probe Probe1 {
+            }
+            [
+                position = 7864, 8176
+            ]
+
+            component gen_probe Probe2 {
+            }
+            [
+                position = 8728, 8216
+            ]
+
+            component gen_probe Probe3 {
+            }
+            [
+                position = 8456, 8192
+            ]
+
+            component gen_probe ProbeX {
+            }
+            [
+                position = 8840, 8160
+            ]
+
+            component gen_gain Gain2 {
+                gain = "scale_const"
+            }
+            [
+                position = 7760, 8272
+                hide_name = True
+            ]
+
+            component gen_bus_join "Bus Join1" {
+                inputs = "3"
+            }
+            [
+                position = 8008, 8272
+                hide_name = True
+            ]
+
+            component gen_c_function "C function4" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "high inherit;low inherit"
+                in_terminal_labels = "[(\'high\', True), (\'low\', True)]"
+                in_terminal_properties = "real high;real low;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "regD inherit"
+                out_terminal_labels = "[(\'regD\', True)]"
+                out_terminal_properties = "real regD;"
+                output_fnc = "/*Begin code section*/
+temp = (((int)high << 16) & -65536) | ((int)low & 65535);
+
+if(temp < 1e7 && temp > -1e7)
+    regD = temp;
+else if(temp == 1e7)
+    regD = 1e7;
+else if(temp == -1e7)
+    regD = -1e7;
+else if(temp > 1e7)
+    regD = 2e7;
+else if(temp < -1e7)
+    regD = -2e7;
+/*End code section*/"
+            }
+            [
+                position = 8520, 8296
+                size = 88, 48
+            ]
+
+            component gen_c_function "C function2" {
+                in_terminal_dimensions = "inherit;inherit"
+                in_terminal_dimensions_str = "sign inherit;in inherit"
+                in_terminal_labels = "[(\'sign\', True), (\'in\', True)]"
+                in_terminal_properties = "inherit sign;inherit in;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit"
+                out_terminal_dimensions_str = "out inherit"
+                out_terminal_labels = "[(\'out\', True)]"
+                output_fnc = "/*Begin code section*/
+out = in*((-2*sign)+1);
+/*End code section*/"
+            }
+            [
+                position = 8648, 8280
+                hide_name = True
+                size = 96, 48
+            ]
+
+            component gen_bus_split "Bus Split3" {
+                outputs = "3"
+            }
+            [
+                position = 8424, 8288
+            ]
+
+            component gen_gain Gain1 {
+                gain = "scale_back_const"
+            }
+            [
+                position = 8768, 8280
+                hide_name = True
+            ]
+
+            component gen_c_function "C function5" {
+                global_variables = "int temp;"
+                in_terminal_dimensions = "inherit"
+                in_terminal_dimensions_str = "P_nom inherit"
+                in_terminal_labels = "[(\'P_nom\', True)]"
+                in_terminal_properties = "real P_nom;"
+                no_feed_inputs = "[\'\']"
+                no_feed_outputs = "[\'\']"
+                out_terminal_dimensions = "inherit;inherit;inherit"
+                out_terminal_dimensions_str = "high inherit;low inherit;sign inherit"
+                out_terminal_labels = "[(\'high\', True), (\'low\', True), (\'sign\', True)]"
+                out_terminal_properties = "int high;int low;int sign;"
+                output_fnc = "/*Begin code section*/
+if (P_nom<0)
+    sign = 1;
+else
+    sign = 0;
+
+high = (((int)temp>>16) & (0x0000FFFF)) ;
+low = (((int)temp) & (0x0000FFFF)) ;
+/*End code section*/"
+                update_fnc = "/*Begin code section*/
+if (P_nom<0)
+    temp = P_nom*-1;
+else
+    temp = P_nom;
+/*End code section*/"
+            }
+            [
+                position = 7872, 8272
+                hide_name = True
+                size = 88, 64
+            ]
+
+            port u4 {
+                position = auto:auto
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8840, 8328
+            ]
+
+            port U4-P4 {
+                position = right:2
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7624, 8240
+                rotation = down
+                scale = -1, 1
+            ]
+
+            junction Junction10 sp
+            [
+                position = 8360, 8288
+            ]
+
+            junction Junction11 sp
+            [
+                position = 8808, 8280
+            ]
+
+            junction Junction12 sp
+            [
+                position = 8720, 8280
+            ]
+
+            junction Junction13 sp
+            [
+                position = 7800, 8272
+            ]
+
+            connect Termination1.in "ModBus Device4.coil_out" as Connection133
+            connect C_u12.out "ModBus Device4.discrete_in" as Connection131
+            [
+                breakpoints = 8080, 7800; 8080, 8216
+            ]
+            connect C_u13.out "ModBus Device4.holding_in" as Connection130
+            [
+                breakpoints = 8104, 7872; 8104, 8160
+            ]
+            connect C_u11.out "ModBus Device4.coil_in" as Connection132
+            [
+                breakpoints = 8056, 7720; 8056, 8264
+            ]
+            connect "Bus Join1.out" "ModBus Device4.reg_in" as Connection205
+            connect Gain2.in U4-P4 as Connection206
+            connect "Bus Split3.out" "C function2.sign" as Connection185
+            connect "Bus Split3.out1" "C function4.high" as Connection182
+            connect "Bus Split3.out2" "C function4.low" as Connection183
+            connect "C function4.regD" "C function2.in" as Connection184
+            connect "Bus Split3.in" Junction10 as Connection214
+            connect Junction10 "ModBus Device4.holding_out" as Connection215
+            connect Probe3.in Junction10 as Connection216
+            [
+                breakpoints = 8360, 8280
+            ]
+            connect Gain1.out Junction11 as Connection218
+            connect Junction11 u4 as Connection219
+            connect ProbeX.in Junction11 as Connection220
+            connect Gain1.in Junction12 as Connection221
+            connect Junction12 "C function2.out" as Connection222
+            [
+                breakpoints = 8720, 8280
+            ]
+            connect Probe2.in Junction12 as Connection223
+            connect "C function5.high" "Bus Join1.in" as Connection224
+            connect "Bus Join1.in1" "C function5.low" as Connection225
+            connect "C function5.sign" "Bus Join1.in2" as Connection226
+            connect "C function5.P_nom" Junction13 as Connection228
+            connect Junction13 Gain2.out as Connection229
+            connect Probe1.in Junction13 as Connection230
+        }
+        [
+            position = 8728, 8480
+            scale = -1, 1
+            size = 56, 72
+        ]
+
+        component src_scada_input "Node 4" {
+            unit = ""
+        }
+        [
+            position = 8320, 8464
+        ]
+
+        component gen_probe u4 {
+        }
+        [
+            position = 8624, 8544
+        ]
+
+        component gen_probe u3 {
+        }
+        [
+            position = 8624, 8416
+        ]
+
+        connect u2.in Modbus2.u2 as Connection1
+        connect u1.in Modbus1.u1 as Connection3
+        connect "Node 1.out" Modbus1.U1-P1 as Connection4
+        connect "Node 2.out" Modbus2.U2-P2 as Connection5
+        connect "Node 3.out" Modbus3.U3-P3 as Connection6
+        connect "Node 4.out" Modbus4.U4-P4 as Connection8
+        connect u4.in Modbus4.u4 as Connection9
+        connect u3.in Modbus3.u3 as Connection10
+    }
+
+    default {
+        gen_bus_join {
+            inputs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_bus_split {
+            outputs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_c_function {
+            in_terminal_properties = "real in;"
+            in_terminal_labels = ""
+            out_terminal_properties = "real out;"
+            out_terminal_labels = ""
+            no_feed_inputs = ""
+            no_feed_outputs = ""
+            in_terminal_dimensions = ""
+            in_terminal_dimensions_str = ""
+            out_terminal_dimensions = ""
+            out_terminal_dimensions_str = ""
+            output_fnc = ""
+            update_fnc = ""
+            init_fnc = ""
+            global_variables = ""
+            parameters = ""
+            execution_rate = "inherit"
+        }
+
+        gen_gain {
+            gain = "1"
+            multiplication = "Element-wise(K.*u)"
+            execution_rate = "inherit"
+        }
+
+        gen_probe {
+            addr = "0"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "generic"
+            streaming_en = "False"
+            streaming_er_idx = "0"
+            execution_rate = "inherit"
+        }
+
+        gen_terminator {
+            execution_rate = "inherit"
+        }
+
+        src_constant {
+            value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+        }
+
+        src_scada_input {
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
+            execution_rate = "100e-6"
+        }
+
+        "core/ModBus Device" {
+            hil_id = "0"
+            configuration = "config1"
+            preview = "Configuration preview"
+            ip_address_port = "False"
+            request_counter_port = "None"
+            defines = ""
+            modbus_sunspec = "False"
+            logging = "False"
+            execution_rate = "100e-6"
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        
+        Ts=100e-6
+        
+        scale_const=10#10e+3
+        scale_back_const=1e-5
+        
+        #Modbus configuration
+        config1 = {
+                                          'port': 502,
+                                          'ip_addr': '192.168.2.61',
+                                          'netmask': '255.255.255.0',
+                                          'slave_id': 1,
+                                          'coil_input_addresses': '',
+                                          'coil_output_addresses': '',
+                                          'discrete_input_addresses': '',
+                                          'holding_register_input_addresses': '3',
+                                          'holding_register_output_addresses': '0,1,2',
+                                          'input_register_adresses': '0i,1i,2i'
+                                        }
+        
+        config2 = {
+                                          'port': 502,
+                                          'ip_addr': '192.168.2.62',
+                                          'netmask': '255.255.255.0',
+                                          'slave_id': 2,
+                                          'coil_input_addresses': '',
+                                          'coil_output_addresses': '',
+                                          'discrete_input_addresses': '',
+                                          'holding_register_input_addresses': '3',
+                                          'holding_register_output_addresses': '0,1,2',
+                                          'input_register_adresses': '0i,1i,2i'
+        }
+        
+        config3 = {
+                                          'port': 502,
+                                          'ip_addr': '192.168.2.63',
+                                          'netmask': '255.255.255.0',
+                                          'slave_id': 3,
+                                          'coil_input_addresses': '',
+                                          'coil_output_addresses': '',
+                                          'discrete_input_addresses': '',
+                                          'holding_register_input_addresses': '3',
+                                          'holding_register_output_addresses': '0,1,2',
+                                          'input_register_adresses': '0i,1i,2i'
+        }
+        
+        config4 = {
+                                          'port': 502,
+                                          'ip_addr': '192.168.2.64',
+                                          'netmask': '255.255.255.0',
+                                          'slave_id': 7,
+                                          'coil_input_addresses': '',
+                                          'coil_output_addresses': '',
+                                          'discrete_input_addresses': '',
+                                          'holding_register_input_addresses': '3',
+                                          'holding_register_output_addresses': '0,1,2',
+                                          'input_register_adresses': '0i,1i,2i'
+        }
+    ENDCODE
+}
