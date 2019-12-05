@@ -1,0 +1,13 @@
+// Initialize AFE ratio consensus
+void OAgent::_initializeFairSplitting(OLocalVertex * s, long x) {
+    _G->clearAllStates();                   // clear everything
+    uint8_t Dout = s->getOutDegree() + 1;   // store out degree
+    s->setYMin(x);            // set initial y value [x]
+    //s->setMuMin(s->getYMin()/Dout);         // Initialize mu = y/Dout
+    //s->setZ(s->getMax() - s->getMin());     // set initial z value [max - min]
+    s->setZ(s->getDi());     // set initial z value [using Inverter Time Constant]
+    s->setSigma(s->getZ()/Dout);            // Initialize sigma = z/Dout
+}
+
+
+//

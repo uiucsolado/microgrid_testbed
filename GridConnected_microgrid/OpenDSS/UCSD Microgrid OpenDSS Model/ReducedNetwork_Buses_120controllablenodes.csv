@@ -1,0 +1,80 @@
+﻿Bus Name,Bus Type,kV,Location
+SDG&E_69kV,Source Bus,69,
+EAST_CAMPUS_1,Load: Aggregated,12.47,
+EAST_CAMPUS_2,Load: Aggregated,12.47,
+EAST_CAMPUS_3,Load: Aggregated,12.47,
+MCSS_MA,Load: Aggregated,12.47,
+MCSS_MB,Load: Aggregated,12.47,
+MCSS_MC,Load: Aggregated,12.47,
+N_CAMPUS_A,Load: Aggregated,12.47,
+N_CAMPUS_B,Load: Aggregated,12.47,
+N_CAMPUS_C,Load: Aggregated,12.47,
+REVELLE_1,Load: Aggregated,12.47,
+REVELLE_2,Load: Aggregated,12.47,
+SIO_1_SUB,Load: Aggregated,12.47,
+SIO_2_SUB,Load: Aggregated,12.47,
+PSA,Load: Aggregated,12.47,
+PSB,Load: Aggregated,12.47,
+SB_B2A,Load: Aggregated,12.47,Muir College
+SS_92_ERC,Load: Aggregated,12.47,ERC (Near Supercomputer Center)
+SS_83_MC_12,Load: Aggregated,12.47,Muir College
+SS_83_MC_15,Load: Aggregated,12.47,Muir College
+BLDG_3B_12KV,Load: Aggregated,12.47,Thurgood Marshall College
+BLDG_3B_15,Load: Aggregated,12.47,Thurgood Marshall College
+SS_30_RC,Load: Aggregated,12.47,Rivelle College (Close to generators)
+SS_31_RC,Load: Aggregated,12.47,Rivelle College (Close to generators)
+SS_82_WC,Load: Aggregated,12.47,Below NC Subsation (Aggregrates EBU3 and CAL IT Loads)
+SS_91_WC,Load: Aggregated,12.47,Below NC Subsation (Aggregrates EBU3 and CAL IT Loads)
+PSA_LINE_TG_1,Generator : Gas Turbine,12.47,
+PSB_LINE_TG_2,Generator : Gas Turbine,12.47,
+SG1_BUS,Generator : Steam Turbine,12.47,
+BIRCH_AQUARIUM,Generator: PV,0.48,
+BIRCH_AQ,Generator: PV,0.48,
+T_171_SEC,Generator: PV,0.48,Campus Services Building
+USS_A,Generator: PV,0.48,Price Center
+EBU2_LAB,Generator: PV,0.48,EBU2
+T_270_SEC,Generator: PV,0.48,ECUP
+GILMAN_PARKING,Generator: PV,0.48,Gilman Parking 
+US_2_HOPKINS,Generator: PV,0.48,Hopkins Parking
+USS_B,Generator: PV,0.48,Price Center
+USS_C_PC,Generator: PV,0.48,Price Center
+SERF_BLDG,Load:Building (Battery location),0.48,SERF 
+CENT_HALL,Load: Building,0.48,Center Hall
+MULT_BLD_SEC,Load: Building,0.48,Pepper Canyon Hall
+STUD_ACAD,Load: Building,0.48,Student Service Center
+CMRR,Load: Building,0.48,CMRR
+T_137_SEC_EBU1,Load: Building,0.48,EBU1
+EBU1_T_138,Load: Building,0.48,EBU1
+GALBRAITH_HALL,Load: Building,0.48,Galbraith Hall
+PHYS_ED_BLDGS,Load: Building,0.48,Main Gym
+CRB_3B,Load: Building,0.48,CRB
+EV_ECUP,Load: EV,0.208,
+EV_HOPKINS_PS,Load: EV,0.208,
+EV_GILMAN_PS,Load: EV,0.208,
+EV_CAROLINES_P001,Load: EV,0.208,
+EV_PD,Load: EV,0.208,
+EV_RADY,Load: EV,0.208,
+SS_36_RC,Load: Aggregated,,
+BIO_MED_SEC,Load: Building,,
+FACULTY_CLUB,Load: Building,,
+GALBRAITH_HALL,Load: Building,,
+HEALTH_CENTER,Load: Building,,
+HI_BAY_PHYSICS,Load: Building,,
+HUBBS_HALL,Load: Building,,
+LA_JOLLA_PLAY,Load: Building,,
+MANDEVILLE_CTR,Load: Building,,
+NC_PARKING_480,Load: Building,,
+POWELL_STRUCT,Load: Building,,
+VISUAL_ARTS,Load: Building,,
+T_179_OCEANVIEW_SEC,Load: Building,,
+SVERDRUP_US1,Load: Building,,
+SHILEY_EYE_CTR,Load: Building,,
+PREUSS_SCHOOL,Load: Building,,
+PHARM_ESA,Load: Building,,
+IGPP_SUB,Load: Building,,
+DANCE_STUDIO,Load: Building,,
+EC_OFFICE_BLDG,Load: Building,,
+US_2_RIMAC,Load: Building,,
+T_259_SEC,Load: Building,,
+T_326_SEC,Load: Building,,
+US_CPB,Load: Building,,
