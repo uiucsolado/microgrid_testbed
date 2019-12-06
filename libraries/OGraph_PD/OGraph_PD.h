@@ -221,6 +221,24 @@ class OLocalVertex : public OVertex {
         inline long getBeta() { return _beta; }
         // Clear temporary states (zIn and sigma)
         inline void clearZInSigma() { _zIn = 0; _sigma = 0; }
+
+        // Get directive for primal dual algorithm
+        inline bool isGenBus() { return _genBus; }
+        inline long getActiveSetpoint() { return _p; }
+        inline long getReactiveSetpoint() { return _q; }
+        inline long getSquareVoltage() { return _sqV; }
+        inline long getMu() { return _mu; }
+        inline long getNu() { return _nu; }
+
+        // Set directive for primal dual algorithm
+        inline void setGenBusStatus(bool genBus) {_genBus = genBus; }
+        inline void setActiveSetpoint(long p) {_p = p; }
+        inline void setReactiveSetpoint(long q) {_q = q; }
+        inline void setSquareVoltage(long sqV) {_sqV = sqV; }
+        inline void setMu(long mu) {_mu = mu; }
+        inline void setNu(long nu) {_nu = nu; }
+
+        
 	protected:
         /// Properties
         long _base;
@@ -253,12 +271,15 @@ class OLocalVertex : public OVertex {
         void _prepareOLocalVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base, int nodeid);
         long _computeLambda(long limit);
 
-        //Primal Dual Algorithm
-        long p;
-        long q;
-        long sq_v;
-        long mu;
-        long nu;
+        //vertex property for primal dual algorithm
+        bool _genBus //bus type (generator bus or load bus)
+
+        //Decision variables for primal dual algorithm
+        long _p; //per-unit active power setpoint
+        long _q; //per-unit active power setpoint
+        long _sqV;  //per-unit voltage magnitude squared
+        long _mu; //lagrange multiplier for active power balance
+        long _nu; //lagrange multiplier for reactive power balance
 };
 
 class OLocalReserveVertex : public OLocalVertex {
@@ -297,6 +318,22 @@ class ORemoteVertex : public OVertex {
         inline bool isInNeighbor() { return _inNeighbor; }
         inline uint8_t getIndex() { return _index; }
         
+        // Get directive for primal dual algorithm
+        inline long getResistance() { return _r; }
+        inline long getReactance() { return _x; }
+        
+        inline long getActiveFlow() { return _fp; }
+        inline long getReactiveFlow() { return _fq; }
+        inline long getLambda() { return _lambda; }
+        
+        // Set directive for primal dual algorithm
+        inline void setResistance(long r) {_r = r; }
+        inline void setReactance(long x) {_x = x; }
+
+        inline void setActiveFlow(long fp) {_fp = fp; }
+        inline void setReactiveFlow(long fq) {_fq = fq; }
+        inline void setLambda(long lambda) {_lambda = lambda; }
+
         inline void clearLambdaMinLambdaMax() { _lambdaMin = 0; _lambdaMax = 0; }
     private:
         /// Properties
@@ -305,6 +342,15 @@ class ORemoteVertex : public OVertex {
         /// Methods
         // Constructor helper
         void _prepareORemoteVertex(uint32_t aLsb = 0x0, long lambdaMin = 0, long lambdaMax = 0, bool inNeighbor = false, uint8_t index = 0, int nodeid = 0);
+
+        //vertex properties for primal dual algorithm
+        long _r //per-unit resistance of electrical link
+        long _x //per-unit reactance of electrical link
+
+        //Decision variables for primal dual algorithm
+        long _fp; //per-unit active flow along electrical link
+        long _fq; //per-unit reactive flow along electrical link
+        long _lambda; //lagrange multiplier for LinDistFlow
 };
 
 class OGraph_PD {
