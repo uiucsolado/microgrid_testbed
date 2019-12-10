@@ -173,6 +173,9 @@ class OLocalVertex : public OVertex {
         inline long getBase() { return _base; }
         //nodeID
         inline int getID() {return _nodeID; }
+        inline int getflow_p() {return p; }
+        inline int getflow_q() {return q; }
+        inline int getlambda_PD() {return lambda_PD; }
         //get leader and deputy ID
         //inline int getleaderID() {return _leaderID; }
         //inline int getdeputyID() {return _deputyID; }
@@ -259,6 +262,7 @@ class OLocalVertex : public OVertex {
         long sq_v;
         long mu;
         long nu;
+        long lambda_PD;
 };
 
 class OLocalReserveVertex : public OLocalVertex {

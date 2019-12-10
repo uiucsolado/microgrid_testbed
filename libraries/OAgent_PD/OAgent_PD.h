@@ -20,6 +20,8 @@
 
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sC
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
+#define PD_PACKET_HEADER                 0x7550 // Unicast Primal-dual header is ascii uP
+#define PD_ACK_PACKET_HEADER			 0x6B50 // Primal-dual acknowledgment header is kP
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
 //#define TEST_PACKET_HEADER               0x7450
@@ -162,10 +164,14 @@ class OAgent_PD {
         inline bool _waitForScheduleFairSplitPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout) {
             return _waitForSchedulePacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
         }
+        inline bool _waitForPacket_PD(unsigned long &startTime, uint16_t id,int timeout) {
+            return _waitForPDPacket(PD_PACKET_HEADER,startTime,id,timeout);
+        }
         inline void _broadcastScheduleFairSplitPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
         }
         inline bool _fairSplitPacketAvailable() { return _packetAvailable(FAIR_SPLITTING_HEADER,true); }
+        inline bool _PDPacketAvailable() { return _packetAvailable(PD_PACKET_HEADER,true); }
         void _initializeFairSplitting(OLocalVertex * s, long y, long z);
         //Leader failure-resilient version
         void _initializeFairSplitting_RSL(OLocalVertex * s, long y, long z);
@@ -173,6 +179,10 @@ class OAgent_PD {
         void _broadcastFairSplitPacket(OLocalVertex * s);
         //Leader failure-resilient version
         void _broadcastFairSplitPacket_RSL(OLocalVertex * s);
+        //Unicast Primal Dual Packet - SN Addition
+        void _unicastPacket_PD(OLocalVertex * s, uint16_t neighbor_id);
+        //Primal Dual Acknowledgement
+        void _unicastACK_PD(OLocalVertex * s);
 
         long _getMuFromPacket();
         long _getSigmaFromPacket();
@@ -242,6 +252,7 @@ class OAgent_PD {
         bool _packetACKed(int timeout);
         inline uint16_t _getHeaderFromPacket() { return (uint16_t(_rx->getData(1)) << 8) + _rx->getData(0); }
         inline uint16_t _getneighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
+        inline uint16_t _getrecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
         //inline uint16_t _getleaderIDFromPacket()    { return (uint16_t(_rx->getData(15)) << 8) + _rx->getData(14);  }
         //inline uint16_t _getdeputyIDFromPacket()    { return (uint16_t(_rx->getData(17)) << 8) + _rx->getData(16);  }
@@ -269,6 +280,7 @@ class OAgent_PD {
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
         void _waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
         bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
+        bool _waitForPDPacket(uint16_t header, unsigned long &startTime, uint16_t id, int timeout);
         uint16_t _waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout = - 1);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
         uint32_t _getAvailableAgentLsb(uint8_t i);

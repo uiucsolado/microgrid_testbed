@@ -959,6 +959,53 @@ void OAgent_PD::_broadcastFairSplitPacket_RSL(OLocalVertex * s) {
 #endif
 }
 
+//unicast PD packet (Siddhartha)
+void OAgent_PD::_unicastPacket_PD(OLocalVertex * s, uint16_t neighbor_id) {   
+    uint16_t payload[9];           
+    long flow_p = s->getflow_p();
+    long flow_q = s->getflow_q();
+    long lambda_PD = s->getlambda_PD();
+    uint16_t id_s = s->getID(); 
+    uint16_t id_r = neighbor_id; // need to define some function or variable for who we are sending it to
+
+    payload[0] = PD_PACKET_HEADER;
+    payload[1] = id_r;
+    payload[2] = flow_p
+    payload[3] = flow_p >> 16;
+    payload[4] = flow_q
+    payload[5] = flow_q >> 16;
+    payload[6] = lambda_PD
+    payload[7] = lambda_PD >> 16;
+    payload[8] = id_s;
+    //payload[6] = inheritorID;   //added in by Olaolu
+    //payload[7] = leaderID;   //added in by Olaolu
+    //payload[8] = deputyID;   //added in by Olaolu
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+#ifdef VERBOSE
+    Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+#endif
+}
+
+//unicast PD acknowledgement (Siddhartha)
+void OAgent_PD::_unicastACK_PD(OLocalVertex * s) {   
+    uint16_t payload[2];           
+    uint16_t id_s = s->getID(); 
+
+    payload[0] = PD_ACK_PACKET_HEADER;
+    payload[1] = id_s;
+    //payload[6] = inheritorID;   //added in by Olaolu
+    //payload[7] = leaderID;   //added in by Olaolu
+    //payload[8] = deputyID;   //added in by Olaolu
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+#ifdef VERBOSE
+    Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+#endif
+}
+
 long OAgent_PD::_getMuFromPacket() {
     uint8_t ptr = 2;
     return _getUint32_tFromPacket(ptr);
@@ -1536,6 +1583,28 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
             _broadcastScheduleFairSplitPacket(startTime,iterations,period);
             _broadcastACKPacket(ACK_START_HEADER,id);  
             
+        }
+        return true;
+    }
+    else
+        return false;
+}
+
+bool OAgent_PD::_waitForPDPacket(uint16_t header, unsigned long &startTime, uint16_t id, int timeout) {
+    if(_waitForPacket(header,true,timeout)) {  //stays in loop until desired packet received
+        if(header == PD_PACKET_HEADER) 
+        {
+            startTime   = _getStartTimeFromPacket();
+            //iterations  = _getIterationsFromPacket();
+            //period      = _getPeriodFromPacket();
+            uint16_t rec_id = _getrecipientIDFromPacket();
+            if(id==rec_id){
+            	uint16_t txtime;
+            	txtime = rand()%50;    //so that transmission occurs at different points in time per node
+            	delay(txtime);
+            	//_broadcastScheduleFairSplitPacket(startTime,iterations,period);
+            	_unicastACK_PD(PD_ACK_PACKET_HEADER,id);  
+            }
         }
         return true;
     }
