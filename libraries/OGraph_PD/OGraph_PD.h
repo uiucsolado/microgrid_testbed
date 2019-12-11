@@ -29,8 +29,7 @@ class OVertex {
         OVertex();
         OVertex(uint32_t aLsb);
         OVertex(XBeeAddress64 a);
-        OVertex(uint32_t aLsb, long lambdaMin, long lambdaMax);
-        OVertex(XBeeAddress64 a, long lambdaMin, long lambdaMax);
+
         // Address
         inline uint32_t getAddressLsb() { return _aLsb; }
         
@@ -74,28 +73,11 @@ class OVertex {
         bool clearNuMinNuMax(uint8_t i);
         void clearAllNuMinNuMax();
 
-        // Lambdas
-        inline void setLambdaMin(long lambdaMin) { _lambdaMin = lambdaMin; }
-        inline void setLambdaMax(long lambdaMax) { _lambdaMax = lambdaMax; }
-        inline void setLambdaMinMax(long lambdaMin, long lambdaMax) { _lambdaMin = lambdaMin; _lambdaMax = lambdaMax; }
-        inline long getLambdaMin() { return _lambdaMin; }
-        inline long getLambdaMax() { return _lambdaMax; }
-        inline void getLambdaMinMax(long &lambdaMin, long &lambdaMax) { lambdaMin = _lambdaMin; lambdaMax = _lambdaMax; }
-        // Keep track of broadcasting lambdas
-        inline void setBroadcastLambda(uint8_t broadcastLambda) { _broadcastLambda = broadcastLambda; }
-        inline void clearBroadcastLambda() { _broadcastLambda = 0; }
-        inline void incrementBroadcastLambda() { _broadcastLambda++; }
-        inline uint8_t getBroadcastLambda() { return _broadcastLambda; }
-        bool unsentValidLambda();
 
     protected:
-        /// Properties
+        // Properties
         uint32_t _aLsb;
-        long _lambdaMin;
-        long _lambdaMax;
-        int _nodeID;
-        // Boolean variable to keep track of broadcasting lambdas
-        uint8_t _broadcastLambda;
+        uint8_t _nodeID;
         // States
         long _yMin;
         long _yMax;
@@ -108,9 +90,9 @@ class OVertex {
         // Previous received values for robust algorithm
         long _nuMin[NUM_IN_NEIGHBORS];
         long _nuMax[NUM_IN_NEIGHBORS];
-        /// Methods
+        // Methods
         // Helper functions
-        void _prepareOVertex(uint32_t aLsb, long lambdaMin, long lambdaMax, int nodeid);
+        void _prepareOVertex(uint32_t aLsb, uint8_t nodeID);
 };
 
 
@@ -157,8 +139,8 @@ class OLocalVertex : public OVertex {
     public:
         // Constructors
         OLocalVertex();
-        OLocalVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base, int nodeid);
-        OLocalVertex(XBeeAddress64 a, long min, long max, long alpha, long beta, uint8_t Dout, long base, int nodeid);
+        OLocalVertex(uint32_t aLsb, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base);
+        OLocalVertex(XBeeAddress64 a, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base);
         // In-degree methods
         inline uint8_t getInDegree() { return _inDegree; }
         inline void incrementInDegree() { _inDegree++; }
@@ -182,32 +164,23 @@ class OLocalVertex : public OVertex {
         //use Linked List _l to choose an inheritor
         //int chooseInheritor();
         //use linked list to set number of neighbors
-        inline void setNeighborSize(int neighborSize) {_neighborSize = neighborSize; }
-        //get number of neighbors
-        inline int getNeighborSize() {return _neighborSize; }
+        // inline void setNeighborSize(int neighborSize) {_neighborSize = neighborSize; }
         //Status
-        inline int getStatus(int index) {return _status[index]; }
-        inline void setStatus(int index, int status) { _status[index] = status;  } 
-        // States yMin yMax
-        void initializeYMinYMax();
+        inline uint8_t getStatus(uint8_t nodeID) {return _status[nodeID-1]; }
+        inline void setStatus(uint8_t nodeID, uint8_t status) { _status[nodeID-1] = status;  } 
         // State Z
         inline void setZ(long z) { _z = z; }
         inline void addToZ(long increment) { _z += increment; }
         inline long getZ() { return _z; }
-        void updateZ();
         // Incoming state Z
         inline void setZIn(long zIn) { _zIn = zIn; }
         inline void addToZIn(long increment) { _zIn += increment; }
         inline void clearZIn() { _zIn = 0; }
         inline long getZIn() { return _zIn; }
-        // Broadcast states muMin and muMax
-        void initializeMuMinMuMax();
         // Sigma -- broadcast state for robust algorithm
         inline void setSigma(long sigma) { _sigma = sigma; }
         inline void addToSigma(long increment) { _sigma += increment; }
         inline long getSigma() { return _sigma; }
-        void updateSigma();
-        void initializeSigma();
         inline void clearSigma() { _sigma = 0; }
         // Tau -- state for robust algorithm
         bool setTau(uint8_t i, long tau);
@@ -229,6 +202,11 @@ class OLocalVertex : public OVertex {
         inline long getSquareVoltage() { return _sqV; }
         inline long getMu() { return _mu; }
         inline long getNu() { return _nu; }
+        inline float getWv() { return _Wv; }
+        inline float getWp() { return _Wp; }
+        inline float getWq() { return _Wq; }
+        inline float getDp() { return _Dp; }
+        inline float getDq() { return _Dq; }
 
         // Set directive for primal dual algorithm
         inline void setGenBusStatus(bool genBus) {_genBus = genBus; }
@@ -237,22 +215,23 @@ class OLocalVertex : public OVertex {
         inline void setSquareVoltage(long sqV) {_sqV = sqV; }
         inline void setMu(long mu) {_mu = mu; }
         inline void setNu(long nu) {_nu = nu; }
+        inline void setPrimalDualWeights(float Wv, float Wp, float Wq, float Dp, float Dq) {_Wv = Wv; _Wp = Wp; _Wq = Wq; _Dp = Dp; _Dq = Dq; }
 
         
 	protected:
         /// Properties
         long _base;
         //status information based on interaction with other nodes in network; 0 - Not a neighbor, 1 - neighbor but offline link, 2 - neighbor with  online link
-        int _status[NUM_REMOTE_VERTICES];
+        uint8_t _status[NUM_REMOTE_VERTICES];
         //Pointer for node status to be used by choose inheritor function (added in by Olaolu)
-        int *_statusP;
+        //int *_statusP;
         //leader and deputy ID
         //int _leaderID;
         //int _deputyID;
         // A linked list for IDs of online neghbors
         //LinkedList _l;
         //Number of online neighbors
-        int _neighborSize;
+        // int _neighborSize;
         // Ratio-consensus states
         long _z;
         long _zIn;
@@ -268,7 +247,7 @@ class OLocalVertex : public OVertex {
         uint8_t _inDegree;
         uint8_t _outDegree;
         /// Methods
-        void _prepareOLocalVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base, int nodeid);
+        void _prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base);
         long _computeLambda(long limit);
 
         //vertex property for primal dual algorithm
@@ -280,6 +259,13 @@ class OLocalVertex : public OVertex {
         long _sqV;  //per-unit voltage magnitude squared
         long _mu; //lagrange multiplier for active power balance
         long _nu; //lagrange multiplier for reactive power balance
+
+        //Weights for primal dual algorithm
+        float _Wv;  //voltage weight
+        float _Wp; //active power balance weight
+        float _Wq; //reactive power balance weight
+        float _Dp; //active power injection weight
+        float _Dq; //reactive power injection weight
 };
 
 class OLocalReserveVertex : public OLocalVertex {
@@ -309,10 +295,10 @@ class ORemoteVertex : public OVertex {
     public:
         // Constructors
         ORemoteVertex();
-        ORemoteVertex(XBeeAddress64 a, bool inNeighbor = false, uint8_t index = 0);
-        ORemoteVertex(uint32_t aLsb, bool inNeighbor = false, uint8_t index = 0);
-        ORemoteVertex(XBeeAddress64 a, long lambdaMin, long lambdaMax, bool inNeighbor = false, uint8_t index = 0);
-        ORemoteVertex(uint32_t aLsb, long lambdaMin , long lambdaMax, bool inNeighbor = false, uint8_t index = 0);
+        ORemoteVertex(XBeeAddress64 a, uint8_t nodeID, bool inNeighbor = false);
+        ORemoteVertex(uint32_t aLsb, uint8_t nodeID, bool inNeighbor = false);
+        ORemoteVertex(XBeeAddress64 a, uint8_t nodeID, long r, long x, bool inNeighbor = false);
+        ORemoteVertex(uint32_t aLsb, uint8_t nodeID, long r , long x, bool inNeighbor = false);
         
         // Get directive for inNeighbor
         inline bool isInNeighbor() { return _inNeighbor; }
@@ -334,14 +320,13 @@ class ORemoteVertex : public OVertex {
         inline void setReactiveFlow(long fq) {_fq = fq; }
         inline void setLambda(long lambda) {_lambda = lambda; }
 
-        inline void clearLambdaMinLambdaMax() { _lambdaMin = 0; _lambdaMax = 0; }
     private:
         /// Properties
         bool _inNeighbor;
         uint8_t _index;
         /// Methods
         // Constructor helper
-        void _prepareORemoteVertex(uint32_t aLsb = 0x0, long lambdaMin = 0, long lambdaMax = 0, bool inNeighbor = false, uint8_t index = 0, int nodeid = 0);
+        void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t nodeID = 0, long r = 0, long x = 0, bool inNeighbor = false);
 
         //vertex properties for primal dual algorithm
         long _r //per-unit resistance of electrical link
@@ -370,12 +355,12 @@ class OGraph_PD {
         
         /// In-neighbors
         // Add in-neighbor
-        bool addInNeighbor(XBeeAddress64 a);
-        bool addInNeighbor(uint32_t aLsb);
-        bool addInNeighbor(XBeeAddress64 a, long lambdaMin, long lambdaMax);
-        bool addInNeighbor(uint32_t aLsb, long lambdaMin, long lambdaMax);
+        bool addInNeighbor(XBeeAddress64 , uint8_t nodeID);
+        bool addInNeighbor(uint32_t aLsb, uint8_t nodeID);
+        bool addInNeighbor(XBeeAddress64 a, uint8_t nodeID, long r, long x);
+        bool addInNeighbor(uint32_t aLsb, uint8_t nodeID, long r, long x);
         //Remove in-neighbor
-        bool removeInNeighbor(int index);     //*Sammy
+        bool removeInNeighbor(uint8_t nodeID);     //Olaolu
         // Determine if vertex is in-neighbor
         bool isInNeighbor(XBeeAddress64 a);
         bool isInNeighbor(uint32_t aLsb);
@@ -385,10 +370,10 @@ class OGraph_PD {
         
         /// Non-neighbors
         // Add non-neighbor to array
-        bool addNonNeighbor(XBeeAddress64 a);
-        bool addNonNeighbor(uint32_t aLsb);
-        bool addNonNeighbor(XBeeAddress64 a, long lambdaMin, long lambdaMax);
-        bool addNonNeighbor(uint32_t aLsb, long lambdaMin, long lambdaMax);
+        bool addNonNeighbor(XBeeAddress64 a, uint8_t nodeID);
+        bool addNonNeighbor(uint32_t aLsb, uint8_t nodeID);
+        bool addNonNeighbor(XBeeAddress64 a, uint8_t nodeID, long r, long x);
+        bool addNonNeighbor(uint32_t aLsb, uint8_t nodeID, long r, long x);
         // Determine if vertex is non-neighbor
         bool isNonNeighbor(uint32_t aLsb);
         bool isNonNeighbor(XBeeAddress64 a);
@@ -408,15 +393,14 @@ class OGraph_PD {
         OVertex * getVertexByAddressLsb(uint32_t aLsb, uint8_t &i);
         OVertex * getVertexByAddress(XBeeAddress64 a);
         OVertex * getVertexByUniqueID(uint8_t i);
-        ORemoteVertex * getRemoteVertex(uint8_t i);
-        //Method to adjust remote vertex array
-        void AdjustVertexArray(int index, int step); //*Sammy
+        ORemoteVertex * getRemoteVertex(uint8_t nodeID);
 
         uint8_t _getRemoteVertexIndex(uint32_t aLsb);
 
 	private:
         /// Properties
         uint8_t _n;                         // Total number of vertices
+
         OLocalVertex * _self;               // Local vertex
         ORemoteVertex _remoteVertices[NUM_REMOTE_VERTICES];
         
@@ -425,7 +409,7 @@ class OGraph_PD {
     	//uint8_t _getRemoteVertexIndex(uint32_t aLsb);        made this function public (*Sammy)
         bool _isRemoteVertex(uint32_t aLsb);
         bool _isRemoteVertex(uint32_t aLsb, uint8_t &i);
-        bool _addRemoteVertex(uint32_t aLsb, long lambdaMin, long lambdaMax, bool inNeighbor = false);
+        bool _addRemoteVertex(uint32_t aLsb, long r, long x, bool inNeighbor = false);
 };
 
 

@@ -19,6 +19,7 @@
 #include "Dyno.h"
 
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sC
+#define SCHEDULE_PD_HEADER               0x7340 // schedule coordinate header is ascii sC
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
@@ -34,6 +35,7 @@
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
 #define SCHEDULE_TIMEOUT                 500   // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750   // delay before ratio consensus starts
+#define PD_DELAY                         750   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353  // used as the header to indicate the resync process is taking place (1st transaction)
@@ -80,23 +82,13 @@ class OAgent_PD {
         long nonleaderFairSplitRatioConsensus(long y, long z);
         long nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
         
-
         // Resilient consensus methods
         long fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period); 
         float ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period); 
 
+        // Primal Dual methods
+        long standardPrimalDual(bool genBus, float alpha, uint8_t iterations, uint16_t period);
 
-        // Optimal dispatch Methods
-        long optimalDispatch(long x, uint8_t iterations, uint16_t period);
-		long optimalDispatchWithDyno(long x, uint8_t iterations, uint16_t period, Dyno &d);
-		void leaderOptimalDispatchWithDyno(Dyno &d, uint8_t iterations, uint16_t period, uint8_t &ledPin);
-        long leaderOptimalDispatch(long initial, uint8_t iterations, uint16_t period, uint8_t &ledPin);
-        long nonleaderOptimalDispatch(long initial, uint8_t &ledPin);
-		void nonleaderOptimalDispatchWithDyno(Dyno &d, uint8_t &ledPin);
-        
-        void leaderDGC(Dyno &d, float k, int vref, uint8_t epsilon);
-        void nonleaderDGC();
-        
         // HRT Synchronization methods
         bool resync();
         bool sync(uint8_t attempts = 10);
@@ -109,7 +101,7 @@ class OAgent_PD {
         inline long getoffsetdata(){ return _offset; }
         //Sid
         inline long getbuffer2() {return _buffer2; }
-        int getStatusData(int index);
+        uint8_t getStatusData(uint8_t nodeID);
         //Olaolu
         //inline void setneighborY0(int index, float y) { _neighborY0[index] = y; }
         //inline void setneighborZ0(int index, float z) { _neighborZ0[index] = z; }
@@ -162,8 +154,14 @@ class OAgent_PD {
         inline bool _waitForScheduleFairSplitPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout) {
             return _waitForSchedulePacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
         }
+        inline bool _waitForPrimalDualPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout) {
+            return _waitForSchedulePacket_RSL(SCHEDULE_PD_HEADER,startTime,iterations,period,id,timeout);
+        }
         inline void _broadcastScheduleFairSplitPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
+        }
+        inline void _broadcastSchedulePrimalDualPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
+            _broadcastSchedulePacket(SCHEDULE_PD_HEADER,startTime,iterations,period);
         }
         inline bool _fairSplitPacketAvailable() { return _packetAvailable(FAIR_SPLITTING_HEADER,true); }
         void _initializeFairSplitting(OLocalVertex * s, long y, long z);
