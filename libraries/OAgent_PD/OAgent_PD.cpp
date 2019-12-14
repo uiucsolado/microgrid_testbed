@@ -120,10 +120,10 @@ float OAgent_PD::fairSplitRatioConsensus(long y, long z, uint8_t iterations, uin
                 if(_G->isInNeighbor(aLsb,i)) {    // check if remote device is in in-neighborhood
                     long inMu = _getMuFromPacket();                             // store incoming value of mu
                     long inSigma = _getSigmaFromPacket();                       // store incoming value of sigma
-                    int neighbor_id = _getneighborIDFromPacket();
+                    uint8_t neighbor_id = _getNeighborIDFromPacket();
                     //int inheritor_id = _getinheritorIDFromPacket();
 
-                    int node_id = s->getID();
+                    uint8_t node_id = s->getID();
 
 
                     if(s->getStatus(neighbor_id-1) == 1)
@@ -309,12 +309,12 @@ float OAgent_PD::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16
                 if(_G->isInNeighbor(aLsb,i)) {    // check if remote device is in in-neighborhood
                     long inMu = _getMuFromPacket();                             // store incoming value of mu
                     long inSigma = _getSigmaFromPacket();                       // store incoming value of sigma
-                    int neighbor_id = _getneighborIDFromPacket();
+                    uint8_t neighbor_id = _getNeighborIDFromPacket();
                     //int inheritor_id = _getinheritorIDFromPacket();
                     //int leader_id = _getleaderIDFromPacket();
                     //int deputy_id = _getdeputyIDFromPacket();
 
-                    int node_id = s->getID();
+                    uint8_t node_id = s->getID();
 
                     //find out id this node is the inheritor for node i
                     if(s->getStatus(neighbor_id-1) == 1)
@@ -477,7 +477,7 @@ long OAgent_PD::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, 
     srand(analogRead(7));                    //moved this instruction here from fairSplitRatioConsensus() - Sammy
     OLocalVertex * s = _G->getLocalVertex();
     // int leader_id = s->getleaderID();
-    int node_id = s->getID();
+    uint8_t node_id = s->getID();
     // if (leader_id==node_id)
     // 	setLeader(0);
     float gamma = 0;
@@ -511,7 +511,7 @@ long OAgent_PD::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterat
     unsigned long startTime = t0 + RC_DELAY;
     OLocalVertex * s = _G->getLocalVertex();
     float gamma = 0;
-    bool scheduled =_WaitForACKPacket_RSL(ACK_START_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
+    bool scheduled =_WaitForACKPacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     //bool stat = startTime>myMillis();
 
@@ -536,11 +536,8 @@ long OAgent_PD::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterat
 
 long OAgent_PD::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     unsigned long startTime = 0;
-    OLocalVertex * s = _G->getLocalVertex();
-    uint8_t id = s->getID();
-    float gamma = 0;
     //delay(50);
-    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,id,(period*iterations*3));
+    bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,(period*iterations*3));
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     
     //bool stat = startTime>myMillis();
@@ -605,73 +602,254 @@ long OAgent_PD::nonleaderFairSplitRatioConsensus(long y, long z) {
 
 // End fair splitting
 /// End ratio-consensus
-/// Optimal dispatch
-long OAgent_PD::optimalDispatch(long x, uint8_t iterations, uint16_t period) {
- 	OLocalVertex * s = _G->getLocalVertex();           // store pointer to local vertex object
-    uint8_t Dout = s->getOutDegree() + 1;       // store out degree
-    //Serial << "Out-degree: " << _DEC(Dout) << endl;
-    _initializeOptimalDispatch(s,x);            // initialize state variables
-    delay(20);
-    bool txDone;                                // create variable to keep track of broadcasts
-    uint16_t txTime = _genTxTime(period,5);     // time to broadcast packet
-    for(uint8_t k = 0; k < iterations; k++) {
-        // initialize toggle to keep track of broadcasts
-        txDone = false;  
-        // initialize timer   
-        _start_millis = millis();   
-        // do for iteration period
-        while(uint16_t(millis()-_start_millis) < period) {
-            // look for optimal dispatch packet
-            if(_optimalDispatchPacketAvailable()) {
-            	// index of in-neighbor packet received from
-            	uint8_t i;
-                // check if sender is in-neighbor
-                uint32_t rv = _rx->getRemoteAddress64().getLsb();
-                if(_G->isInNeighbor(rv,i)) {
-                    // process optimal dispatch packet
-					//Serial << _MEM(PSTR("packet from: ")) << _DEC(i) << endl;
-                    _processOptimalDispatchPacket(s,_G->getRemoteVertex(i)->getIndex());
-                }
-            // check if time to transmit and if transmit has already occured
-            } else if(_timeToTransmit(_start_millis,txTime) && !txDone) {
-                // toggle txDone
-                txDone = true; 
-                // broadcast optimal dispatch packet
-                _broadcastOptimalDispatchPacket(s);
-            }
-            delay(5);
-        }
-#ifdef VERBOSE
-        if(!_quiet) {
-            _printStates(s,k,true);
-            //delay(30);
-        } else {
-            delay(15);
-        }
-#endif
-		delay(15);
-        // update all states (z = z/Dout + zIn, etc)
-        _updateOptimalDispatchStates(s,Dout);
-        // clear all incoming states before next iteration
-        _G->clearAllInStates();
+
+
+
+
+
+
+
+
+
+
+
+
+// Primal Dual methods
+
+bool OAgent_PD::primalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period){
+    srand(analogRead(7));
+    bool gamma = 0;
+
+    if(isLeader())
+    { 
+        gamma = leaderPrimalDualAlgorithm(genBus,alpha,iterations,period);
     }
-#ifdef VERBOSE
-    uint8_t states = 2*(_G->getN());
-    float ratios[states];
-    _computeFinalOptimalDispatchRatios(s,ratios);
-    if(!_quiet)
-        _printRatios(ratios,states);
-	_printStates(s,iterations,false);
-	_printLambdas(s);
-#endif
-    long lambdaStar = _findLambdaStar(s);
-	delay(15);
-    //Serial << _MEM(PSTR("lambda* = ")) << _DEC(lambdaStar) << endl;
-    return s->g(lambdaStar);
+    else
+    {
+        gamma = nonleaderPrimalDualAlgorithm(genBus,alpha,iterations,period);
+    }
+        //Serial<<"Sup bro?! "<<getbufferdata(0)<<"\n";
+
+    return gamma;
+
+}
+
+bool OAgent_PD::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period) {
+    unsigned long t0 = myMillis();
+    unsigned long startTime = t0 + PD_DELAY;
+    bool gamma = 0;
+    bool scheduled =_WaitForACKPacket_RSL(SCHEDULE_PD_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
+    //Serial<<"Schedule done at "<<myMillis()<<"\n";
+    //bool stat = startTime>myMillis();
+
+    //Serial<<"Leader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
+
+    if (!scheduled) 
+    {
+        //Serial<<"No acknowledgements received from neighbors at t = "<<myMillis()<<"\n";
+        //s->setleaderID(s->getdeputyID());
+        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        gamma = 0;
+    }
+    else
+    {
+        if(_waitToStart(startTime,true,1800))
+        {
+            gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations,period);
+        }
+    }        
+    return gamma;
+}
+
+bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period) {
+    unsigned long startTime = 0;
+    bool gamma = 0;
+    //delay(50);
+    bool scheduled = _waitForSchedulePrimalDualPacket(startTime,iterations,period,(period*iterations*3));
+    //Serial<<"Schedule done at "<<myMillis()<<"\n";
+    
+    //bool stat = startTime>myMillis();
+    //Serial<<"Startime > Time? "<<stat<<"\n";
+
+    //Serial<<"NonLeader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
+
+    if(scheduled)
+    {
+        //Serial<<"Schedule received from Node "<<s->getleaderID()<<"\n";
+        if(_waitToStart(startTime,true,1800)) {
+            gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations,period);
+        }
+        
+        //digitalWrite(48,LOW);
+    }
+    else
+    {
+        //Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
+        //s->setleaderID(s->getdeputyID());
+        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        gamma = 0;
+    }
+    return gamma;
 }
 
 
-/// End optimal dispatch
+bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period) {  //,uint8_t round
+    OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex
+    ORemoteVertex * n = _G->getRemoteVertex(1);
+    unsigned long start;                // create variable to store iteration start time
+    bool txDone;                        // create variable to keep track of broadcasts
+    bool mucheck = 0;
+    bool sigmacheck = 0;
+
+    uint16_t txTime;       //_genTxTime(period,10,analogRead(0));   // get transmit time; 
+    long inY;                           // incoming state variable
+    long inZ;
+    int count = 3;
+    //uint8_t no_of_nodes = _G->getN() - 1;  //number of in-neighbors (in this case)
+    int node_check[NUM_REMOTE_VERTICES]; //checker for each neighbor whether data is received or not per iteration
+    //int step_counter = 0;        //used when adjusting vertex array to account for offline neigbors
+    uint32_t aLsb;
+
+    for(int i=0; i < NUM_REMOTE_VERTICES; i++)
+    {
+        node_check[i] = 0;
+        //Serial <<"\n"<<"For Node "<<s->getID()<<", from Node"<<i<<", Y[0]= "<< getneighborY0(i) << "\n ";
+        //Serial <<"\n"<<"For Node "<<s->getID()<<", from Node"<<i<<", Z[0]= "<< getneighborZ0(i) << "\n ";
+    }
+ 
+    int frame = 30
+    for(uint8_t k = 0; k < iterations; k++) {
+        srand(analogRead(0));
+        txTime =  (rand() % (period - 2*frame)) + frame;  //determines the time window in which a payload is transmitted
+        txDone = false;     // initialize toggle to keep track of broadcasts
+        start = millis();   // initialize timer
+        // clear in y and in z
+        inY = 0;
+        inZ = 0;
+            
+        //Serial << "iteration: ";
+        //Serial << k;
+        //Serial << "\n";
+        uint8_t i;
+        while(uint16_t(millis()-start) < period) {
+            if(_fairSplitPacketAvailable()) {                                   // robust, coordinate value packet available
+                                                                      // index of remote device in graph in-neighborhood
+                aLsb = _rx->getRemoteAddress64().getLsb();
+                if(_G->isInNeighbor(aLsb,i)) {    // check if remote device is in in-neighborhood
+                    long inMu = _getMuFromPacket();                             // store incoming value of mu
+                    long inSigma = _getSigmaFromPacket();                       // store incoming value of sigma
+                    uint8_t neighbor_id = _getNeighborIDFromPacket();
+                    uint8_t node_id = s->getID();
+
+                    //find out id this node is the inheritor for node i
+                    if(s->getStatus(neighbor_id-1) == 1)
+                    {
+                        s->setStatus(neighbor_id-1, 2);
+                        uint8_t dout = s->getOutDegree();
+                        s->setOutDegree(dout + 1);
+                    }
+                    else if(s->getStatus(neighbor_id-1) == 0)
+                        s->setStatus(neighbor_id-1, 2);
+                    
+                    long Mudiff = inMu - s->getNuMin(i); 
+                    long sigdiff =  inSigma - s->getTau(i);
+                        // if(k==0)
+                        // {
+                        //     setneighborY0( (neighbor_id-1), Mudiff+( Mudiff*(inheritor_id==node_id) ) );
+                        //     //Serial <<"\n"<<"Y0 element "<<i<<" is: "<< getneighborY0(i) << "\n ";
+                        //     setneighborZ0( (neighbor_id-1), sigdiff+( sigdiff*(inheritor_id==node_id) ) );
+                        //     //Serial <<"\n"<<"Z0 element "<<i<<" is: "<< getneighborZ0(i) << "\n " ;
+                        // }
+                    inY += Mudiff;                               // add mu from incoming device and subtract last received value
+                    s->setNuMin(i,inMu);                                        // save received mu as new nu (nuMin)
+                    inZ += sigdiff;                              // add sigma from incoming device and subtract last received value
+                    s->setTau(i,inSigma);                                       // save received sigma as new tau
+                    
+
+                    //Using min and max consensus, choose a leader and deputy for begining fair split ratio consensus
+                    //min consensus
+                    // if (leader_id < s->getleaderID())
+                    // {
+                    //     s->setleaderID(leader_id);
+                    // }
+                    // //max consensus
+                    // if (deputy_id > s->getdeputyID())
+                    // {
+                    //     s->setdeputyID(deputy_id);
+                    // }
+                    node_check[neighbor_id -1] = 1;                      //data was received from a neighbor at this iteration
+                    
+                }
+            }
+
+            if((int((millis() - start)) >= txTime) && !txDone) {
+                txDone = true; // toggle txDone
+                _broadcastFairSplitPacket_RSL(s);
+                
+            }
+        }
+
+        if(!_quiet) {
+           
+            delay(10);
+        } else {
+            delay(25);
+        }
+
+        s->setYMin(long(float(s->getYMin())/Dout) + inY);             //problem is here (if inY is zero then this is set to zero)
+        s->setMuMin(s->getMuMin() + long(float(s->getYMin())/Dout));
+        s->setZ(long(float(s->getZ())/Dout) + inZ);
+        s->addToSigma(long(float(s->getZ())/Dout));
+
+        _buffer[count] = float(s->getYMin())/float(s->getZ()); //add kth iterate to buffer
+        _bufferY[count] = float(s->getYMin()); //add kth iterate to buffer
+        _bufferZ[count] = float(s->getZ()); //add kth iterate to buffer
+        //Serial << "Every Iteration Y";
+        //Serial << _buffer[count];
+        //Serial << "\n";
+        count++; 
+
+        //CODE TO IMPROVE RESILIENCY
+
+                
+        for(int j=0;j < NUM_REMOTE_VERTICES; j++)
+        {
+            if(node_check[j] == 0 && node_counter[j] >= 0)
+                node_counter[j] += 1;
+            else if(node_check[j] == 1 ) 
+                node_counter[j] = 0;            
+            if(node_counter[j] >= int(iterations/2) )
+            {
+                s->setStatus(j, 1);
+                s->decrementInDegree();
+                uint8_t dout = s->getOutDegree();              //since we assume it is a bidirectional graph, InDegree is equivalent to OutDegree
+                s->setOutDegree(dout - 1); 
+                node_counter[j] = -1;                          //set counter to -1 when limit reached to indicate offline link status    
+            }
+            node_check[j] = 0;                                 //reset node_check after each iteration
+        }
+    }
+
+    if(s->getZ() != 0)
+        _buffer[0] = float(s->getYMin())/float(s->getZ()); 
+
+
+    _buffer[1] = s->getOutDegree();
+    _buffer[2] = _G->getN() - 1;
+
+    return float(s->getYMin())/float(s->getZ());
+}
+
+// End Primal Dual methods
+
+
+
+
+
+
+
+
+
 /// Synchronization methods
 bool OAgent_PD::sync(uint8_t attempts) {
     
@@ -702,7 +880,7 @@ bool OAgent_PD::sync(uint8_t attempts) {
     	{
     		uint8_t ptr = 2;
     	    long global_offset = _getLongFromPacket(ptr);   //offset between synced node and leader node
-    		unsigned long nodeid = _getUint32_tFromPacket(ptr); //node id of synced node
+    		unsigned long neighborID = _getUint32_tFromPacket(ptr); //node id of synced node
     		unsigned long period = _getUint32_tFromPacket(ptr);
 
     		unsigned long start = millis();
@@ -712,12 +890,12 @@ bool OAgent_PD::sync(uint8_t attempts) {
     			//JUST WAIT UNTIL PERIOD IS OVER
     		}
     		//Serial << "Recieved ID: ";
-    		//Serial << nodeid;
+    		//Serial << neighborID;
     		//Serial << "\n";
     		//Serial << "Response packet sent";
     		//Serial << "\n";
 
-    		_broadcastResyncResponsePacket(tTwo,nodeid);
+    		_broadcastResyncResponsePacket(tTwo,neighborID);
 
     		if(_waitForResyncFinalPacket(RESYNC_TOTAL_TIME)) {
 			// T = t + d + t2 - t2'
@@ -740,7 +918,7 @@ bool OAgent_PD::sync(uint8_t attempts) {
 
 bool OAgent_PD::resync(){
 	OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
-	unsigned long nodeid = s->getID();
+	unsigned long nodeID = s->getID();
 	unsigned long start_time = millis();
     unsigned long t = millis() - start_time; 
     bool transmit = false;
@@ -776,7 +954,7 @@ bool OAgent_PD::resync(){
 		//Serial << "ID: ";
 		//Serial << received_id;
 		//Serial << "\n";
-		if(nodeid == received_id)
+		if(nodeID == received_id)
 		{
 			//Serial << "Received Response & broadcasted final packet";
 			//Serial << "\n";
@@ -959,53 +1137,6 @@ void OAgent_PD::_broadcastFairSplitPacket_RSL(OLocalVertex * s) {
 #endif
 }
 
-//unicast PD packet (Siddhartha)
-void OAgent_PD::_unicastPacket_PD(OLocalVertex * s, uint16_t neighbor_id) {   
-    uint16_t payload[9];           
-    long flow_p = s->getflow_p();
-    long flow_q = s->getflow_q();
-    long lambda_PD = s->getlambda_PD();
-    uint16_t id_s = s->getID(); 
-    uint16_t id_r = neighbor_id; // need to define some function or variable for who we are sending it to
-
-    payload[0] = PD_PACKET_HEADER;
-    payload[1] = id_r;
-    payload[2] = flow_p
-    payload[3] = flow_p >> 16;
-    payload[4] = flow_q
-    payload[5] = flow_q >> 16;
-    payload[6] = lambda_PD
-    payload[7] = lambda_PD >> 16;
-    payload[8] = id_s;
-    //payload[6] = inheritorID;   //added in by Olaolu
-    //payload[7] = leaderID;   //added in by Olaolu
-    //payload[8] = deputyID;   //added in by Olaolu
-
-    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
-    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
-#ifdef VERBOSE
-    Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
-#endif
-}
-
-//unicast PD acknowledgement (Siddhartha)
-void OAgent_PD::_unicastACK_PD(OLocalVertex * s) {   
-    uint16_t payload[2];           
-    uint16_t id_s = s->getID(); 
-
-    payload[0] = PD_ACK_PACKET_HEADER;
-    payload[1] = id_s;
-    //payload[6] = inheritorID;   //added in by Olaolu
-    //payload[7] = leaderID;   //added in by Olaolu
-    //payload[8] = deputyID;   //added in by Olaolu
-
-    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
-    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
-#ifdef VERBOSE
-    Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
-#endif
-}
-
 long OAgent_PD::_getMuFromPacket() {
     uint8_t ptr = 2;
     return _getUint32_tFromPacket(ptr);
@@ -1017,295 +1148,6 @@ long OAgent_PD::_getSigmaFromPacket() {
 }
 
 /// End fair splitting ratio-consensus methods
-
-/// Optimal dispatch methods
-void OAgent_PD::_initializeOptimalDispatch(OLocalVertex * s, long x) {
-    // clear all algorithm states (yMin, yMax, z)
-    // clear all robust states (nuMin, nuMax, tau)
-    // clear all incoming states (yMinIn, yMaxIn and zIn)
-    // clear all broadcast states (muMin, muMax and sigma)
-    // clear all remote vertex lambdaMin and lambdaMax
-    _G->clearAllStates();
-    // initialize ymin and ymax of local vertex
-    s->initializeYMinYMax();
-    // initialize muMin and muMax of local vertex
-    s->initializeMuMinMuMax();
-    // initialize z     
-    s->setZ(x);
-    // initialize sigma
-    s->initializeSigma();
-	// cheat by initializing assuming we have all lambdas
-	for(uint8_t i=1; i < _G->getN(); i++) {
-		OVertex * r = _G->getVertexByUniqueID(i);
-		//Serial << _DEC(r->getLambdaMin()) << endl;
-		//Serial << _DEC(r->getLambdaMax()) << endl;
-		r->setYMinYMax(s->g(r->getLambdaMin()),s->g(r->getLambdaMax()));
-		r->setMuMinMuMax(r->getYMin()/(s->getOutDegree()+1),r->getYMax()/(s->getOutDegree()+1));
-	}
-}
-
-void OAgent_PD::_updateOptimalDispatchStates(OLocalVertex * s, uint8_t Dout) {
-    // update 
-    s->updateZ();
-    s->updateSigma();
-    // update yMin and yMax for each remote vertex
-    for(uint8_t i = 0; i < _G->getN(); i++) {
-    	_G->getVertexByUniqueID(i)->updateYMinYMax(Dout);
-    	_G->getVertexByUniqueID(i)->updateMuMinMuMax(Dout);
-    }
-}
-
-long OAgent_PD::_findLambdaStar(OLocalVertex * s) {
-    float min = 0;
-    float max = 1000000;
-    long lambdaMinus;
-    long lambdaPlus;
-	//float base = s->getBase();
-    long z = s->getZ();
-    for(uint8_t i = 0; i < _G->getN(); i++)
-        _updateLambdaMinLambdaMax(_G->getVertexByUniqueID(i),z,min,max,lambdaMinus,lambdaPlus);
-	//Serial << "+:" << _DEC(lambdaPlus) << ", -:" << _DEC(lambdaMinus) << endl << "max:" << _FLOAT(max,3) << ", min:" << _FLOAT(min,3) << endl;
-
-	return lambdaPlus - long((max-float(1))*(float(lambdaPlus-lambdaMinus))/(max-min));
-	// Serial << "lambdaStar: " << _DEC(lambdastar) << endl;
-	//     return lambdaPlus - long((max-float(1))*float((lambdaPlus-lambdaMinus)/s->getBase())/(max-min))*s->getBase();
-}
-
-void OAgent_PD::_updateLambdaMinLambdaMax(OVertex * v, long &z, float &min, float &max, long &lambdaMinus, long &lambdaPlus) {
-    uint8_t rsp;
-    rsp = _checkRatio(min,max,_computeRatio(v->getYMin(),z));
-    if(rsp == 1)
-        lambdaMinus = v->getLambdaMin();
-    else if(rsp == 2)
-        lambdaPlus = v->getLambdaMin();
-    rsp = _checkRatio(min,max,_computeRatio(v->getYMax(),z));
-    if(rsp == 1)
-        lambdaMinus = v->getLambdaMax();
-    else if(rsp == 2)
-        lambdaPlus = v->getLambdaMax();
-}
-
-uint8_t OAgent_PD::_checkRatio(float &min, float &max, float ratio) {
-    if(ratio < 1 && ratio > min) {
-        min = ratio;
-        return 1;
-    } else if(ratio > 1 && ratio < max) {
-        max = ratio;
-        return 2;
-    }
-    return 0;
-}
-
-void OAgent_PD::_computeFinalOptimalDispatchRatios(OLocalVertex * s, float ratios[]) {
-    long z = s->getZ();
-    for(uint8_t i = 0; i < _G->getN(); i++) {
-        ratios[2*i]   = _computeRatio(_G->getVertexByUniqueID(i)->getYMin(),z);
-        ratios[2*i+1] = _computeRatio(_G->getVertexByUniqueID(i)->getYMax(),z);;
-    }
-}
-
-//float OAgent_PD::_computeRatio(long num, long dem) {
-//    return float(num)/float(dem);
-//}
-
-void OAgent_PD::_findMinRatioMaxRatio(float ratios[], uint8_t num, float &min, float &max) {
-    min = 0;
-    max = 1000000;
-    for(uint8_t i = 0; i < num; i++) {
-        if(ratios[i] < 1 && ratios[i] > min)
-            min = ratios[i];
-        else if(ratios[i] > 1 && ratios[i] < max)
-            max = ratios[i];
-    }
-}
-
-void OAgent_PD::_broadcastOptimalDispatchPacket(OLocalVertex * s) {
-    uint8_t p = _getPayloadSize();
-    uint8_t payload[p];
-#ifdef VERBOSE
-    Serial << "packet bytes: " << _DEC(p) << endl;
-#endif
-    uint8_t ptr = 0;  // pointer to next open position in payload array
-    payload[0] = OPTIMAL_DISPATCH_HEADER;
-    payload[1] = OPTIMAL_DISPATCH_HEADER >> 8;
-    ptr = 2;          // account for header
-    // add sigma to payload
-    ptr = _addUint32_tToPayload(s->getSigma(),payload,ptr);
-    // add broadcast states (muMin and muMax) and (optionally) lamdbaMin and lambdaMax to payload for all vertices
-    for(uint8_t i = 0; i < (_G->getN()); i++) {
-        ptr = _addDataToPayload(_G->getVertexByUniqueID(i),payload,ptr);
-    }
-#ifdef VERBOSE
-    Serial << "payload: 0x"; 
-    for(uint8_t i = 0; i < p; i++) {
-        Serial << _HEX(payload[i]);
-    }
-    Serial << endl;
-#endif
-    // put payload in zigbee transmit object
-    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), p); 
-    // transmit packet
-    _xbee->send(_zbTx);
-}
-
-uint8_t OAgent_PD::_getPayloadSize() {
-	// get total number of devices
-    uint8_t n = _G->getN();        
-    // get number of lambdas to include in payload
-    uint8_t l = _getNumberLambdaMinMax();
-	//Serial << _MEM(PSTR("l=")) << _DEC(l) << endl;
-    // header + sigma + (address lsb + subheader + muMin + muMax) * devices + (lambda min + lambda max) * lambdas
-    return 2 + 4 + (4+1+4+4)*n + (4+4)*l;     
-}
-
-/*
- *
- * Returns the number of vertices that have valid lambda min and max that have not
- * yet been broadcasted.
- *
- */
-uint8_t OAgent_PD::_getNumberLambdaMinMax() {
-    // initialize counter
-    uint8_t l = 0;
-    // check each vertex
-    for(uint8_t i = 0; i < (_G->getN()); i++) {
-    	if(_G->getVertexByUniqueID(i)->unsentValidLambda())
-    		l++;
-    }    
-    return l;
-}
-
-
-uint8_t OAgent_PD::_addDataToPayload(OVertex * v, uint8_t payload[], uint8_t ptr) {
-    // get address lsb and put in playload
-    ptr = _addUint32_tToPayload(v->getAddressLsb(),payload,ptr);
-    // create byte to store subheader
-    uint8_t subheader;
-    // get state of broadcast lambda
-    bool bl = v->unsentValidLambda();
-    // determine if lambdaMin and lambdaMax of this vertex should be broadcast
-    if(bl)
-        subheader = INCLUDE_LAMBDA_MIN_MAX_SUBHEADER;
-    else 
-        subheader = NO_LAMBDA_MIN_MAX_SUBHEADER;
-    // add subheader to payload
-    payload[ptr] = subheader;
-    // increment payload pointer
-    ptr++;
-    // put muMin in payload
-    ptr = _addUint32_tToPayload(v->getMuMin(),payload,ptr);
-    // put muMax in payload
-    ptr = _addUint32_tToPayload(v->getMuMax(),payload,ptr);
-    if(bl) {
-		//Serial << _MEM(PSTR("includes lambdas")) << endl;
-        ptr = _addUint32_tToPayload(v->getLambdaMin(),payload,ptr);
-        ptr = _addUint32_tToPayload(v->getLambdaMax(),payload,ptr);
-        v->incrementBroadcastLambda();
-    }
-    return ptr;
-}
-
-uint8_t OAgent_PD::_addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr) {
-    //Serial << "byte to payload: " << _DEC(data) << endl;
-    payload[ptr]    = data;
-    payload[ptr+1]  = data >> 8;
-    payload[ptr+2]  = data >> 16;
-    payload[ptr+3]  = data >> 24;
-    return ptr + 4;
-}
-
-void OAgent_PD::_processOptimalDispatchPacket(OLocalVertex * s, uint8_t i) {
-    // Initialize pointer for traversing packet (header is first two bytes)
-    uint8_t ptr = 2;
-    long inData;
-    // get sigma from packet
-    inData = _getLongFromPacket(ptr);
-    // add (sigma - tau) to zIn
-    s->addToZIn(inData - (s->getTau(i)));
-    // save received sigma as new tau to sender object
-    s->setTau(i,inData);
-    // variable to store address lsb from packet
-    uint32_t inLsb;
-    // variable to store subheader
-    uint8_t subheader;
-    // Do for each vertex since there are 2*n states
-    for(uint8_t j = 0; j < _G->getN(); j++) {
-        // get address lsb from packet
-        inLsb = _getUint32_tFromPacket(ptr);
-        // variable to store unique id of vertex
-        // get pointer to vertex object and unique id of vertex
-        OVertex * v = _G->getVertexByAddressLsb(inLsb);
-        // get subheader from packet
-        subheader = _getUint8_tFromPacket(ptr);
-        // get muMin from packet
-        inData = _getLongFromPacket(ptr);
-        // add (muMin - nuMin) to yMinIn
-        v->addToYMinIn(inData - (v->getNuMin(i)));
-        // save received muMin as new nuMin to sender object
-        v->setNuMin(i,inData);
-        // get muMax from packet
-        inData = _getLongFromPacket(ptr);
-        // add (muMax - nuMax) to yMaxIn
-        v->addToYMaxIn(inData - (v->getNuMax(i)));
-        // save received muMax as new nuMax to sender object
-        v->setNuMax(i,inData);
-        // check if lambdas are included in packet
-        if(subheader == INCLUDE_LAMBDA_MIN_MAX_SUBHEADER) {
-        	// check if already have lambdaMin and lambdaMax
-        	if(v->getLambdaMin() == 0 && v->getLambdaMax() == 0) {
-    			// get lambdaMin from packet
-    			inData = _getLongFromPacket(ptr);
-    			// save lambdaMin
-    			//v->setLambdaMin(inData);
-    			// add g(lambdaMin) to yMinIn
-    			//v->addToYMinIn(s->g(inData));
-    			// get lambdaMax from packet
-    			inData = _getLongFromPacket(ptr);
-    			// save lambdaMax
-    			//v->setLambdaMax(inData);
-    			// add g(lambdaMax) to yMaxIn
-    			//v->addToYMaxIn(s->g(inData));
-        	} else {
-        		// ignoring lambdas since we already have them
-        		ptr += 8;
-        	}
-        }
-    }
-}
-
-void OAgent_PD::_printFinalYMinYMax(OLocalVertex * s) {
-    for(uint8_t i = 0; i < _G->getN(); i++)
-        Serial << _DEC(i) << " yMin: " << _DEC(_G->getVertexByUniqueID(i)->getYMin()) << ", yMax: " << _DEC(_G->getVertexByUniqueID(i)->getYMax()) << endl;
-}
-
-void OAgent_PD::_printStates(OLocalVertex * s, uint8_t k, bool printY) {
-    uint8_t nodeNum = 1;
-    //Serial << _MEM(PSTR("z(")) << (k+1) << _MEM(PSTR(",")) << _DEC(nodeNum) << _MEM(PSTR(") = ")) << _DEC(s->getZ()) << endl;
-    if(printY == true) {
-        for(uint8_t i = 0; i < _G->getN(); i++) {
-            //Serial << _MEM(PSTR("y")) << (i+1) << _MEM(PSTR("Min(")) << (k+1) << _MEM(PSTR(",")) << _DEC(nodeNum) << _MEM(PSTR(") = ")) << _DEC(_G->getVertexByUniqueID(i)->getYMin()) << _MEM(PSTR(";")) << endl;
-            //Serial << _MEM(PSTR("y")) << (i+1) << _MEM(PSTR("Max(")) << (k+1) << _MEM(PSTR(",")) << _DEC(nodeNum) << _MEM(PSTR(") = ")) << _DEC(_G->getVertexByUniqueID(i)->getYMax()) << _MEM(PSTR(";")) << endl;
-        }
-    }
-}
-
-void OAgent_PD::_printLambdas(OLocalVertex * s) {
-    uint8_t nodeNum = 1;
-    for(uint8_t i = 0; i < _G->getN(); i++) {
-        //Serial << _MEM(PSTR("lambda")) << (i+1) << _MEM(PSTR("Min(")) << _DEC(nodeNum) << _MEM(PSTR(") = ")) << _DEC(_G->getVertexByUniqueID(i)->getLambdaMin()) << _MEM(PSTR(";")) << endl;
-        //Serial << _MEM(PSTR("lambda")) << (i+1) << _MEM(PSTR("Max("))  << _DEC(nodeNum) << _MEM(PSTR(") = ")) << _DEC(_G->getVertexByUniqueID(i)->getLambdaMax()) << _MEM(PSTR(";")) << endl;
-    }
-}
-//#ifdef VERBOSE
-
-void OAgent_PD::_printRatios(float ratios[], uint8_t num) {
-    for(uint8_t i = 0; i < num; i++)
-        Serial << _FLOAT(ratios[i],3) << endl;
-}
-
-//#endif
-
-/// End optimal dispatch methods
 
 /// General xbee methods
 
@@ -1529,6 +1371,124 @@ bool OAgent_PD::_timeToTransmit(uint16_t startTime, uint16_t txTime) {
         return false;
 }
 
+
+
+
+// Primal Dual Algorithm Communication Methods
+
+long OAgent_PD::_getActiveFlowFromPacket() {
+    uint32_t mag_fp = (uint32_t(_rx->getData(8)) << 24) + (uint32_t(_rx->getData(7)) << 16) + (uint16_t(_rx->getData(6)) << 8) + _rx->getData(5);
+    int8_t sign_fp = -1 + ((_rx->getData(4))*2);
+    long fp = sign_fp*mag_fp;
+    return fp;
+}
+
+long OAgent_PD::_getReactiveFlowFromPacket() {
+    uint32_t mag_fq = (uint32_t(_rx->getData(13)) << 24) + (uint32_t(_rx->getData(12)) << 16) + (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);
+    int8_t sign_fq = -1 + ((_rx->getData(9))*2);
+    long fq = sign_fq*mag_fq;
+    return fq;
+}
+
+long OAgent_PD::_getLambdaFromPacket() {
+    uint32_t mag_lambda = (uint32_t(_rx->getData(18)) << 24) + (uint32_t(_rx->getData(17)) << 16) + (uint16_t(_rx->getData(16)) << 8) + _rx->getData(15);
+    int8_t sign_lambda = -1 + ((_rx->getData(14))*2);
+    long lambda = sign_lambda*mag_lambda;
+    return lambda;
+}
+
+
+//unicast PD packet (Siddhartha)
+void OAgent_PD::_unicastPacket_PD(ORemoteVertex * r, uint16_t recipientID) {
+    uint8_t payload[19];
+   //check if active flow is negative
+    if ( ((r+(recipientID-1))->getActiveFlow()) < 0) 
+    {
+        uint32_t fp = -1*((r+(recipientID-1))->getActiveFlow());
+        uint8_t sign_fp = 0;
+    }
+    else
+    {
+        uint32_t fp = (r+(recipientID-1))->getActiveFlow();
+        uint8_t sign_fp = 1;
+    }
+
+   //check if reactive flow is negative
+    if ( ((r+(recipientID-1))->getReactiveFlow()) < 0) 
+    {
+        uint32_t fq = -1*((r+(recipientID-1))->getReactiveFlow());
+        uint8_t sign_fq = 0;
+    }
+    else
+    {
+        uint32_t fq = (r+(recipientID-1))->getReactiveFlow();
+        uint8_t sign_fq = 1;
+    }
+
+   //check if lambda is negative
+    if ( ((r+(recipientID-1))->getLambda()) < 0) 
+    {
+        uint32_t lambda = -1*((r+(recipientID-1))->getLambda());
+        uint8_t sign_lambda = 0;
+    }
+    else
+    {
+        uint32_t lambda = (r+(recipientID-1))->getLambda();
+        uint8_t sign_lambda = 1;
+    }
+
+    uint16_t id_r = recipientID; // need to define some function or variable for who we are sending it to
+
+    //construct payload
+    payload[0] = PD_HEADER;
+    payload[1] = PD_HEADER >> 8;
+    payload[2] = id_r;
+    payload[3] = id_r >> 8;
+    payload[4] = sign_fp;
+    payload[5] = fp;
+    payload[6] = fp >> 8;
+    payload[7] = fp >> 16;
+    payload[8] = fp >> 24;
+    payload[9] = sign_fq;
+    payload[10] = fq;
+    payload[11] = fq >> 8;
+    payload[12] = fq >> 16;
+    payload[13] = fq >> 24;
+    payload[14] = sign_lambda;
+    payload[15] = lambda;
+    payload[16] = lambda >> 8;
+    payload[17] = lambda >> 16;
+    payload[18] = lambda >> 24;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+bool OAgent_PD::_waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout) {
+    unsigned long start;
+    if(timeout != -1)
+        start = millis();
+    while(true) {
+        if((timeout != -1) && (millis()-start >= timeout))
+            return false;
+        if(_waitForPacket(header,true,timeout)) {    //unless the packet contains the expected header it will keep waiting
+            int32_t aLsb = _rx->getRemoteAddress64().getLsb();
+            uint8_t index;  
+            if(_G->isInNeighbor(aLsb,index)) {
+                neighborID = index + 1;
+                return true;
+            }
+        }
+    }
+}
+
+ // End Primal Dual Algorithm communication methods
+
+
+
 void OAgent_PD::_broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period) {
     uint8_t payload[9];
     // put header in payload array
@@ -1568,45 +1528,35 @@ void OAgent_PD::_waitForSchedulePacket(uint16_t header, unsigned long &startTime
 	}
 }
 
-bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout) {
-    if(_waitForPacket(header,true,timeout)) {  //stays in loop until desired packet received
-        if(header == SCHEDULE_FAIR_SPLIT_HEADER || header == SCHEDULE_OPTIMAL_DISPATCH_HEADER)
-        {
+bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
+    uint8_t neighborID;
+    if(_waitForNeighborPacket(neighborID,header,true,timeout)) {  //stays in loop until desired packet received
+        if(header == SCHEDULE_FAIR_SPLIT_HEADER)
+        {       
             startTime   = _getStartTimeFromPacket();
             iterations  = _getIterationsFromPacket();
             period      = _getPeriodFromPacket();
-            
-            
-            uint16_t txtime;
-            txtime = rand()%50;    //so that transmission occurs at different points in time per node
-            delay(txtime);
-            _broadcastScheduleFairSplitPacket(startTime,iterations,period);
-            _broadcastACKPacket(ACK_START_HEADER,id);  
-            
-        }
-        return true;
-    }
-    else
-        return false;
-}
-
-bool OAgent_PD::_waitForPDPacket(uint16_t header, unsigned long &startTime, uint16_t id, int timeout) {
-    if(_waitForPacket(header,true,timeout)) {  //stays in loop until desired packet received
-        if(header == PD_PACKET_HEADER) 
-        {
-            startTime   = _getStartTimeFromPacket();
-            //iterations  = _getIterationsFromPacket();
-            //period      = _getPeriodFromPacket();
-            uint16_t rec_id = _getrecipientIDFromPacket();
-            if(id==rec_id){
-            	uint16_t txtime;
-            	txtime = rand()%50;    //so that transmission occurs at different points in time per node
-            	delay(txtime);
-            	//_broadcastScheduleFairSplitPacket(startTime,iterations,period);
-            	_unicastACK_PD(PD_ACK_PACKET_HEADER,id);  
+            uint16_t start = millis();
+            while (uint16_t(millis()-start) < 10)
+            {
+                _broadcastScheduleFairSplitPacket(startTime,iterations,period)
+                _broadcastACKPacket(ACK_START_HEADER,neighborID);
             }
+            return true;
         }
-        return true;
+        else if(header == SCHEDULE_PD_HEADER)
+        {       
+            startTime   = _getStartTimeFromPacket();
+            iterations  = _getIterationsFromPacket();
+            period      = _getPeriodFromPacket();
+            uint16_t start = millis();
+            while (uint16_t(millis()-start) < 10)
+            {
+                _broadcastSchedulePrimalDualPacket(startTime,iterations,period)
+                _broadcastACKPacket(SCHEDULE_PD_ACK_HEADER,neighborID);
+            }
+            return true;
+        }
     }
     else
         return false;
@@ -1623,13 +1573,14 @@ uint16_t OAgent_PD::_waitForSchedulePacket(unsigned long &startTime, uint8_t &it
     return 0x0;
 }
 
-void OAgent_PD::_broadcastACKPacket(uint16_t header, uint8_t id)
+void OAgent_PD::_broadcastACKPacket(uint16_t header, uint8_t recipientID)
 {
-    uint8_t payload[3];
+    uint8_t payload[4];
     // put header in payload array
     payload[0] = header;
     payload[1] = header >> 8;
-    payload[2] = id;
+    payload[2] = recipientID;
+    payload[3] = recipientID >> 8;
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload));
     _xbee->send(_zbTx);
@@ -1688,36 +1639,57 @@ void OAgent_PD::_WaitForACKPacket(uint16_t header, unsigned long t0, unsigned lo
    
 }
 
+
 //Resilient Version
 bool OAgent_PD::_WaitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period )
 { 
     unsigned long start = millis();
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
+    LinkedList _l = s->getLinkedList();
     int counter = 0;
-    _broadcastScheduleFairSplitPacket(startTime,iterations,period);
+    uint8_t neighborID;
+    _broadcastSchedulePacket(header,startTime,iterations,period);
     while (uint16_t(millis()-start) < timeout)
     {
             while (uint16_t(millis()-restart) < timeout*0.125)
             {
-                if(_waitForPacket(header,true,50))
-                {              
-                    counter++;
-                    if (counter==s->getNeighborSize())
-                        return true;
+                if(_waitForNeighborPacket(neighborID,header,true,50))
+                {
+                    if(header == SCHEDULE_PD_ACK_HEADER)
+                    {
+                        uint16_t nodeID = s->getID();
+                        uint16_t recipientID = _getRecipientIDFromPacket();
+                        if(nodeID == recipientID)
+                        {
+                            s->setStatus(neighborID-1, 2);
+                            counter++;
+                            if (counter==_G->getN()) {
+                                _l.updateLinkedList(_l.getStatusP());
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        counter++;
+                        if (counter==_G->getN())
+                            return true;
+                    }
                 }
             }
-            _broadcastScheduleFairSplitPacket(startTime,iterations,period);
+            _broadcastSchedulePacket(header,startTime,iterations,period);
             restart = millis();
     }
-    if (counter==0)
+    if (counter < (_G->getN()))
     	{	
-    		//Serial<<"No acknowledgements received from neighbors between "<<mystart<<" and "<<myMillis()<<"\n";
+    		//Serial<<"Few acknowledgements received from neighbors between "<<mystart<<" and "<<myMillis()<<"\n";
         	return false;
         }
     else
         return true;
 }
+
 
 
 uint32_t OAgent_PD::_getAvailableAgentLsb(uint8_t i) {
@@ -1839,10 +1811,10 @@ bool OAgent_PD::_isTargetNode() {
 	return _G->isLocalVertex(_getUint32_tFromPacket(ptr));
 }
 
-int OAgent_PD:: getStatusData(int index)
+uint8_t OAgent_PD:: getStatusData(uint8_t neighborID)
 {
 	 OLocalVertex * s = _G->getLocalVertex();
-	 return s->getStatus(index - 1); 
+	 return s->getStatus(neighborID - 1); 
 }
 
 /// End synchronization helper functions

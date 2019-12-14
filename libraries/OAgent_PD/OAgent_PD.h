@@ -16,12 +16,13 @@
 
 #include "XBee.h"   // Include header for xbee api
 #include "OGraph_PD.h"
-#include "Dyno.h"
 
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sC
+#define SCHEDULE_PD_HEADER               0x7340 // schedule coordinate header is ascii sC
+#define SCHEDULE_PD_ACK_HEADER           0x7334 // schedule coordinate header is ascii sC
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
-#define PD_PACKET_HEADER                 0x7550 // Unicast Primal-dual header is ascii uP
-#define PD_ACK_PACKET_HEADER			 0x6B50 // Primal-dual acknowledgment header is kP
+#define PD_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
+#define PD_ACK_HEADER			         0x6B50 // Primal-dual acknowledgment header is kP
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
 //#define TEST_PACKET_HEADER               0x7450
@@ -36,6 +37,7 @@
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
 #define SCHEDULE_TIMEOUT                 500   // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750   // delay before ratio consensus starts
+#define PD_DELAY                         750   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353  // used as the header to indicate the resync process is taking place (1st transaction)
@@ -78,27 +80,21 @@ class OAgent_PD {
         float fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period);
         // long computeFairSplitFinalValue(float gamma);
         long leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period);
-        long leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
         long nonleaderFairSplitRatioConsensus(long y, long z);
-        long nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
         
-
         // Resilient consensus methods
-        long fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period); 
+        long fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
+        long leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
+        long nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
         float ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period); 
 
+        // Primal Dual methods
+        bool primalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period);
+        bool leaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period);
+        bool nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period);
+        bool standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations, uint16_t period);
 
-        // Optimal dispatch Methods
-        long optimalDispatch(long x, uint8_t iterations, uint16_t period);
-		long optimalDispatchWithDyno(long x, uint8_t iterations, uint16_t period, Dyno &d);
-		void leaderOptimalDispatchWithDyno(Dyno &d, uint8_t iterations, uint16_t period, uint8_t &ledPin);
-        long leaderOptimalDispatch(long initial, uint8_t iterations, uint16_t period, uint8_t &ledPin);
-        long nonleaderOptimalDispatch(long initial, uint8_t &ledPin);
-		void nonleaderOptimalDispatchWithDyno(Dyno &d, uint8_t &ledPin);
-        
-        void leaderDGC(Dyno &d, float k, int vref, uint8_t epsilon);
-        void nonleaderDGC();
-        
+
         // HRT Synchronization methods
         bool resync();
         bool sync(uint8_t attempts = 10);
@@ -111,7 +107,7 @@ class OAgent_PD {
         inline long getoffsetdata(){ return _offset; }
         //Sid
         inline long getbuffer2() {return _buffer2; }
-        int getStatusData(int index);
+        uint8_t getStatusData(uint8_t neighborID);
         //Olaolu
         //inline void setneighborY0(int index, float y) { _neighborY0[index] = y; }
         //inline void setneighborZ0(int index, float z) { _neighborZ0[index] = z; }
@@ -161,16 +157,20 @@ class OAgent_PD {
             _waitForSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
         }
         //Resilient version
-        inline bool _waitForScheduleFairSplitPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout) {
-            return _waitForSchedulePacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
-        }
-        inline bool _waitForPacket_PD(unsigned long &startTime, uint16_t id,int timeout) {
-            return _waitForPDPacket(PD_PACKET_HEADER,startTime,id,timeout);
+        inline bool _waitForScheduleFairSplitPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period,int timeout) {
+            return _waitForSchedulePacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,timeout);
         }
         inline void _broadcastScheduleFairSplitPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
         }
+        inline bool _waitForSchedulePrimalDualPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period,int timeout) {
+            return _waitForSchedulePacket_RSL(SCHEDULE_PD_HEADER,startTime,iterations,period,timeout);
+        }
+        inline void _broadcastSchedulePrimalDualPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
+            _broadcastSchedulePacket(SCHEDULE_PD_HEADER,startTime,iterations,period);
+        }
         inline bool _fairSplitPacketAvailable() { return _packetAvailable(FAIR_SPLITTING_HEADER,true); }
+        //Primal Dual Algorithm
         inline bool _PDPacketAvailable() { return _packetAvailable(PD_PACKET_HEADER,true); }
         void _initializeFairSplitting(OLocalVertex * s, long y, long z);
         //Leader failure-resilient version
@@ -179,18 +179,13 @@ class OAgent_PD {
         void _broadcastFairSplitPacket(OLocalVertex * s);
         //Leader failure-resilient version
         void _broadcastFairSplitPacket_RSL(OLocalVertex * s);
-        //Unicast Primal Dual Packet - SN Addition
-        void _unicastPacket_PD(OLocalVertex * s, uint16_t neighbor_id);
-        //Primal Dual Acknowledgement
-        void _unicastACK_PD(OLocalVertex * s);
+        
+        //Unicast Primal Dual Packet - SN addition      edited by Olaolu
+        void _unicastPacket_PD(ORemoteVertex * r, uint16_t recipientID);
 
         long _getMuFromPacket();
         long _getSigmaFromPacket();
         long _getpacketcheck();
-        
-        /// Optimal dispatch methods
-        void _initializeOptimalDispatch(OLocalVertex * s, long x);
-        void _updateOptimalDispatchStates(OLocalVertex * s, uint8_t Dout);
         
         // Methods dealing with packets
         void _broadcastOptimalDispatchPacket(OLocalVertex * s);
@@ -199,14 +194,8 @@ class OAgent_PD {
         uint8_t _getPayloadSize();
         uint8_t _getNumberLambdaMinMax();
         uint8_t _addDataToPayload(OVertex * v, uint8_t payload[], uint8_t ptr);
-        inline void _waitForSchedulleOptimalDispatchPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout = -1) {
-            _waitForSchedulePacket(SCHEDULE_OPTIMAL_DISPATCH_HEADER,startTime,iterations,period,id, timeout);
-        }
-        inline void _broadcastScheduleOptimalDispatchPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
-            _broadcastSchedulePacket(SCHEDULE_OPTIMAL_DISPATCH_HEADER,startTime,iterations,period);
-        }
 
-        void _broadcastACKPacket(uint16_t header, uint8_t id);
+        void _broadcastACKPacket(uint16_t header, uint8_t recipientID);
 
         
         // Methods for finding final solution
@@ -251,8 +240,14 @@ class OAgent_PD {
         bool _packetAvailableHelper(uint16_t header, bool broadcast = false);
         bool _packetACKed(int timeout);
         inline uint16_t _getHeaderFromPacket() { return (uint16_t(_rx->getData(1)) << 8) + _rx->getData(0); }
-        inline uint16_t _getneighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
-        inline uint16_t _getrecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
+        inline uint16_t _getNeighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
+
+        //Primal Dual Algorithm
+        long _getActiveFlowFromPacket();
+        long _getReactiveFlowFromPacket();
+        long _getLambdaFromPacket();
+        inline uint16_t _getRecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
+        //
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
         //inline uint16_t _getleaderIDFromPacket()    { return (uint16_t(_rx->getData(15)) << 8) + _rx->getData(14);  }
         //inline uint16_t _getdeputyIDFromPacket()    { return (uint16_t(_rx->getData(17)) << 8) + _rx->getData(16);  }
@@ -279,9 +274,8 @@ class OAgent_PD {
         // General coordination helper functions
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
         void _waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
-        bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
-        bool _waitForPDPacket(uint16_t header, unsigned long &startTime, uint16_t id, int timeout);
-        uint16_t _waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout = - 1);
+        bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout);
+        bool _waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
         uint32_t _getAvailableAgentLsb(uint8_t i);
         uint32_t _getUint32_tFromPacket(uint8_t &lsbByteNumber);
