@@ -106,30 +106,31 @@ struct node {
 };
 
 
-// class LinkedList {
-//     public:
-//         // Constructor
-//         LinkedList();
-//         LinkedList(int n);
-//         //States
-//         inline void _setLLsize (int j) {_size = j;}
-//         inline int getLLsize() { return _size; }
-//         inline int getInheritorID() { return _inheritor; }
+class LinkedList {
+    public:
+        // Constructor
+        LinkedList();
+        LinkedList(int n);
+        //States
+        inline void setLLsize (int j) {_size = j;}
+        inline int getLLsize() { return _size; }
+        // inline int getInheritorID() { return _inheritor; }
 
-//         //method to display linked list of online node IDs
-//         void _displayALL();
-//         //method to prepare the linked list of online node IDs
-//         void _prepareALL(int n);
-//         //method to update the linked list of online node IDs based on neighbor status
-//         void _updateALL(int *p);
-//         //method to set node ID of inheritor
-//         void _setInheritorID();
+        //method to display linked list of online node IDs
+        void displayLinkedList();
+        //method to update the linked list of online node IDs based on neighbor status
+        void updateLinkedList(int *p);
+        // //method to set node ID of inheritor
+        // void _setInheritorID();
 
-//     private:
-//         //properties
-//         node *_head, *_pseudoHead, *_tail, *_pseudoTail;
-//         int _size, _inheritor;
-// };
+    private:
+        //properties
+        node *_head, *_pseudoHead, *_tail, *_pseudoTail;
+        int _size;//, _inheritor;
+
+        // Helper functions
+        void _prepareLinkedList(int n);
+};
 
 
 
@@ -164,10 +165,13 @@ class OLocalVertex : public OVertex {
         //use Linked List _l to choose an inheritor
         //int chooseInheritor();
         //use linked list to set number of neighbors
-        // inline void setNeighborSize(int neighborSize) {_neighborSize = neighborSize; }
+        inline void setNeighborSize(int neighborSize) {_neighborSize = neighborSize; }
+        //get number of neighbors
+        inline int getNeighborSize() {return _neighborSize; }
         //Status
-        inline uint8_t getStatus(uint8_t nodeID) {return _status[nodeID-1]; }
-        inline void setStatus(uint8_t nodeID, uint8_t status) { _status[nodeID-1] = status;  } 
+        inline uint8_t getStatus(uint8_t neighborID) {return _status[neighborID-1]; }
+        inline int * getStatusP() {return _statusP; }
+        inline void setStatus(uint8_t neighborID, uint8_t status) { _status[neighborID-1] = status;  } 
         // State Z
         inline void setZ(long z) { _z = z; }
         inline void addToZ(long increment) { _z += increment; }
@@ -216,6 +220,8 @@ class OLocalVertex : public OVertex {
         inline void setMu(long mu) {_mu = mu; }
         inline void setNu(long nu) {_nu = nu; }
         inline void setPrimalDualWeights(float Wv, float Wp, float Wq, float Dp, float Dq) {_Wv = Wv; _Wp = Wp; _Wq = Wq; _Dp = Dp; _Dq = Dq; }
+        // LinkedList method
+        inline LinkedList getLinkedList() { return _l; }
 
         
 	protected:
@@ -224,14 +230,14 @@ class OLocalVertex : public OVertex {
         //status information based on interaction with other nodes in network; 0 - Not a neighbor, 1 - neighbor but offline link, 2 - neighbor with  online link
         uint8_t _status[NUM_REMOTE_VERTICES];
         //Pointer for node status to be used by choose inheritor function (added in by Olaolu)
-        //int *_statusP;
+        int *_statusP;
         //leader and deputy ID
         //int _leaderID;
         //int _deputyID;
         // A linked list for IDs of online neghbors
-        //LinkedList _l;
+        LinkedList _l;
         //Number of online neighbors
-        // int _neighborSize;
+        int _neighborSize;
         // Ratio-consensus states
         long _z;
         long _zIn;
@@ -295,10 +301,10 @@ class ORemoteVertex : public OVertex {
     public:
         // Constructors
         ORemoteVertex();
-        ORemoteVertex(XBeeAddress64 a, uint8_t nodeID, bool inNeighbor = false);
-        ORemoteVertex(uint32_t aLsb, uint8_t nodeID, bool inNeighbor = false);
-        ORemoteVertex(XBeeAddress64 a, uint8_t nodeID, long r, long x, bool inNeighbor = false);
-        ORemoteVertex(uint32_t aLsb, uint8_t nodeID, long r , long x, bool inNeighbor = false);
+        ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, bool inNeighbor = false);
+        ORemoteVertex(uint32_t aLsb, uint8_t neighborID, bool inNeighbor = false);
+        ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, long r, long x, bool inNeighbor = false);
+        ORemoteVertex(uint32_t aLsb, uint8_t neighborID, long r , long x, bool inNeighbor = false);
         
         // Get directive for inNeighbor
         inline bool isInNeighbor() { return _inNeighbor; }
@@ -326,7 +332,7 @@ class ORemoteVertex : public OVertex {
         uint8_t _index;
         /// Methods
         // Constructor helper
-        void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t nodeID = 0, long r = 0, long x = 0, bool inNeighbor = false);
+        void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t neighborID = 0, long r = 0, long x = 0, bool inNeighbor = false);
 
         //vertex properties for primal dual algorithm
         long _r //per-unit resistance of electrical link
@@ -355,12 +361,12 @@ class OGraph_PD {
         
         /// In-neighbors
         // Add in-neighbor
-        bool addInNeighbor(XBeeAddress64 , uint8_t nodeID);
-        bool addInNeighbor(uint32_t aLsb, uint8_t nodeID);
-        bool addInNeighbor(XBeeAddress64 a, uint8_t nodeID, long r, long x);
-        bool addInNeighbor(uint32_t aLsb, uint8_t nodeID, long r, long x);
+        bool addInNeighbor(XBeeAddress64 , uint8_t neighborID);
+        bool addInNeighbor(uint32_t aLsb, uint8_t neighborID);
+        bool addInNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x);
+        bool addInNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x);
         //Remove in-neighbor
-        bool removeInNeighbor(uint8_t nodeID);     //Olaolu
+        bool removeInNeighbor(uint8_t neighborID);     //Olaolu
         // Determine if vertex is in-neighbor
         bool isInNeighbor(XBeeAddress64 a);
         bool isInNeighbor(uint32_t aLsb);
@@ -370,10 +376,10 @@ class OGraph_PD {
         
         /// Non-neighbors
         // Add non-neighbor to array
-        bool addNonNeighbor(XBeeAddress64 a, uint8_t nodeID);
-        bool addNonNeighbor(uint32_t aLsb, uint8_t nodeID);
-        bool addNonNeighbor(XBeeAddress64 a, uint8_t nodeID, long r, long x);
-        bool addNonNeighbor(uint32_t aLsb, uint8_t nodeID, long r, long x);
+        bool addNonNeighbor(XBeeAddress64 a, uint8_t neighborID);
+        bool addNonNeighbor(uint32_t aLsb, uint8_t neighborID);
+        bool addNonNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x);
+        bool addNonNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x);
         // Determine if vertex is non-neighbor
         bool isNonNeighbor(uint32_t aLsb);
         bool isNonNeighbor(XBeeAddress64 a);
@@ -393,7 +399,7 @@ class OGraph_PD {
         OVertex * getVertexByAddressLsb(uint32_t aLsb, uint8_t &i);
         OVertex * getVertexByAddress(XBeeAddress64 a);
         OVertex * getVertexByUniqueID(uint8_t i);
-        ORemoteVertex * getRemoteVertex(uint8_t nodeID);
+        ORemoteVertex * getRemoteVertex(uint8_t neighborID);
 
         uint8_t _getRemoteVertexIndex(uint32_t aLsb);
 

@@ -166,80 +166,80 @@ void OVertex::_prepareOVertex(uint32_t aLsb, uint8_t nodeID) {
 
 
 
-// LinkedList
-// Public mthods
-// LinkedList::LinkedList() {
-//     _prepareALL(NUM_REMOTE_VERTICES);
-// }
+//LinkedList
+//Public mthods
+LinkedList::LinkedList() {
+    _prepareLinkedList(NUM_REMOTE_VERTICES);
+}
 
-// LinkedList::LinkedList(int n) {
-//     _prepareALL(n);
-// }
+LinkedList::LinkedList(int n) {
+    _prepareLinkedList(n);
+}
 
-// //create a linked list of online neighbors, using their node IDs 
-// void LinkedList::_prepareALL(int n) {
-//     _head = NULL;
-//     _tail = NULL;
-//     _inheritor = 1;
-//     for (int i = 0; i < n; i++)
-//     {
-//         node *tmp = new node;
-//         tmp->data = i + 1;
-//         tmp->mainNext = NULL;
+//create a linked list of online neighbors, using their node IDs 
+void LinkedList::_prepareLinkedList(int n) {
+    _head = NULL;
+    _tail = NULL;
+    //_inheritor = 1;
+    for (int i = 0; i < n; i++)
+    {
+        node *tmp = new node;
+        tmp->data = i + 1;
+        tmp->mainNext = NULL;
 
-//         if (_head == NULL)
-//         {
-//             _head = tmp;
-//             _tail = tmp;
-//         }
-//         else
-//         {
-//             _tail->mainNext = tmp;
-//             _tail = tmp;
-//         }
-//     }
-//     _setLLsize (n);
-// }
+        if (_head == NULL)
+        {
+            _head = tmp;
+            _tail = tmp;
+        }
+        else
+        {
+            _tail->mainNext = tmp;
+            _tail = tmp;
+        }
+    }
+    setLLsize (n);
+}
 
-// //create a linked list of online neighbors, using their node IDs 
-// void LinkedList::_updateALL(int *p) {
-//     int i=0, j=0;
-//     _pseudoHead = NULL;
-//     node *tmp;
-//     tmp = _head;
-//     while (tmp != NULL)
-//     {
-//         if (*(p+i) == 2)
-//         {
-//             if (_pseudoHead == NULL)
-//             {
-//                 _pseudoHead = tmp;
-//                 _pseudoTail = tmp;
-//             }
-//             else
-//             {
-//                 _pseudoTail->next = tmp;
-//                 _pseudoTail = tmp;
-//             }
-//             j++;
-//         }
-//         tmp = tmp->mainNext;
-//         i++;
-//     }
-//     _pseudoTail->next = NULL;
-//     _setLLsize (j);
-// }
+//create a linked list of online neighbors, using their node IDs 
+void LinkedList::updateLinkedList(int *p) {
+    int i=0, j=0;
+    _pseudoHead = NULL;
+    node *tmp;
+    tmp = _head;
+    while (tmp != NULL)
+    {
+        if (*(p+i) == 2)
+        {
+            if (_pseudoHead == NULL)
+            {
+                _pseudoHead = tmp;
+                _pseudoTail = tmp;
+            }
+            else
+            {
+                _pseudoTail->next = tmp;
+                _pseudoTail = tmp;
+            }
+            j++;
+        }
+        tmp = tmp->mainNext;
+        i++;
+    }
+    _pseudoTail->next = NULL;
+    setLLsize (j);
+}
 
-// //display a linked list
-// void LinkedList::_displayALL() {
-//     node *tmp;
-//     tmp = _pseudoHead;
-//     while (tmp != NULL)
-//     {
-//         Serial << tmp->data << ' ';
-//         tmp = tmp->next;
-//     }
-// }
+//display a linked list
+void LinkedList::displayLinkedList() {
+    node *tmp;
+    tmp = _pseudoHead;
+    while (tmp != NULL)
+    {
+        Serial << tmp->data << ' ';
+        tmp = tmp->next;
+    }
+}
 
 // //get node ID of inheritor
 // void LinkedList::_setInheritorID() {
@@ -339,7 +339,7 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min,
     //_leaderID = 0;
     //_deputyID = 0;
     //linkedlist for online neighbors
-    //_l = LinkedList();
+    _l = LinkedList();
 
     //number of neighbors
     _neighborSize = 22;
@@ -417,33 +417,33 @@ ORemoteVertex::ORemoteVertex() {
     _prepareORemoteVertex();
 }
 
-ORemoteVertex::ORemoteVertex(XBeeAddress64 a, uint8_t nodeID, bool inNeighbor) {
-	_prepareORemoteVertex(a.getLsb(),nodeID,0,0,inNeighbor);                      //r, x, set to 0 by default i.e. line impedance is not yet known
+ORemoteVertex::ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, bool inNeighbor) {
+	_prepareORemoteVertex(a.getLsb(),neighborID,0,0,inNeighbor);                      //r, x, set to 0 by default i.e. line impedance is not yet known
 }
 
-ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t nodeID, bool inNeighbor) {
-	_prepareORemoteVertex(aLsb,nodeID,0,0,inNeighbor);
+ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t neighborID, bool inNeighbor) {
+	_prepareORemoteVertex(aLsb,neighborID,0,0,inNeighbor);
 }
 
-ORemoteVertex::ORemoteVertex(XBeeAddress64 a, uint8_t nodeID, long r, long x, bool inNeighbor) {
-    _prepareORemoteVertex(a.getLsb(),nodeID,r,x,inNeighbor);
+ORemoteVertex::ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, long r, long x, bool inNeighbor) {
+    _prepareORemoteVertex(a.getLsb(),neighborID,r,x,inNeighbor);
 }
 
-ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t nodeID, long r, long x, bool inNeighbor) {
-    _prepareORemoteVertex(aLsb,nodeID,r,x,inNeighbor);
+ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long x, bool inNeighbor) {
+    _prepareORemoteVertex(aLsb,neighborID,r,x,inNeighbor);
 }
 
 /// End public methods
 /// Private methods
-void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t nodeID, long r, long x, bool inNeighbor) {
+void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long x, bool inNeighbor) {
     _inNeighbor = inNeighbor;
-    _index = nodeID-1;
+    _index = neighborID-1;
     _r = r;
     _x = x;
     _fp = 0;
     _fq = 0;
     _lambda = 0; 
-    _prepareOVertex(aLsb, nodeID);
+    _prepareOVertex(aLsb, neighborID);
 }
 /// End private methods
 //// End ORemoteVertex
@@ -488,28 +488,28 @@ bool OGraph_PD::isLocalVertex(uint32_t aLsb) {
 //}
 
 // Add and remove vertices from in-neighborhood
-bool OGraph_PD::addInNeighbor(XBeeAddress64 a, uint8_t nodeID) {
-    return addInNeighbor(a.getLsb(),nodeID);
+bool OGraph_PD::addInNeighbor(XBeeAddress64 a, uint8_t neighborID) {
+    return addInNeighbor(a.getLsb(),neighborID);
 }
 
-bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t nodeID) {
-    return addInNeighbor(aLsb,nodeID,0,0);
+bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t neighborID) {
+    return addInNeighbor(aLsb,neighborID,0,0);
 }
 
-bool OGraph_PD::addInNeighbor(XBeeAddress64 a, uint8_t nodeID, long r, long x) {
-    return addInNeighbor(a.getLsb(),nodeID,r,x);
+bool OGraph_PD::addInNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x) {
+    return addInNeighbor(a.getLsb(),neighborID,r,x);
 }
 
-bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t nodeID, long r, long x) {
+bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x) {
     // make sure we can add another inNeighbor
     if((_self->getInDegree()) < NUM_IN_NEIGHBORS)
-        return _addRemoteVertex(aLsb,nodeID,r,x,true);
+        return _addRemoteVertex(aLsb,neighborID,r,x,true);
     return false;
 }
 
-bool OGraph_PD::removeInNeighbor(uint8_t nodeID){
+bool OGraph_PD::removeInNeighbor(uint8_t neighborID){
     
-    ORemoteVertex * neighbor = getRemoteVertex(nodeID-1);
+    ORemoteVertex * neighbor = getRemoteVertex(neighborID-1);
     uint32_t aLsb = neighbor->getAddressLsb();
 
     if(isInNeighbor(aLsb))
@@ -561,20 +561,20 @@ bool OGraph_PD::isInNeighbor(uint32_t aLsb, ORemoteVertex * &v) {
 }
 
 // Add and remove vertices from list of non-neighbors
-bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t nodeID) {
-    return addNonNeighbor(a.getLsb(), uint8_t nodeID);
+bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t neighborID) {
+    return addNonNeighbor(a.getLsb(), uint8_t neighborID);
 }
 
-bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t nodeID) {
-    return addNonNeighbor(aLsb,nodeID,0,0);
+bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t neighborID) {
+    return addNonNeighbor(aLsb,neighborID,0,0);
 }
 
-bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t nodeID, long r, long x) {
-    return addNonNeighbor(a.getLsb(),nodeID,r,x);
+bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x) {
+    return addNonNeighbor(a.getLsb(),neighborID,r,x);
 }
 
-bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t nodeID, long r, long x) {
-    return _addRemoteVertex(aLsb,nodeID,r,x);
+bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x) {
+    return _addRemoteVertex(aLsb,neighborID,r,x);
 }
 
 // Determine if vertex is non-neighbor
@@ -673,9 +673,9 @@ OVertex * OGraph_PD::getVertexByUniqueID(uint8_t i) {
 	}
 }
 
-ORemoteVertex * OGraph_PD::getRemoteVertex(uint8_t nodeID) {
-    if(nodeID < NUM_REMOTE_VERTICES)
-        return &_remoteVertices[nodeID-1];
+ORemoteVertex * OGraph_PD::getRemoteVertex(uint8_t neighborID) {
+    if(neighborID < NUM_REMOTE_VERTICES)
+        return &_remoteVertices[neighborID-1];
     return 0x0;
 }
 
@@ -707,9 +707,9 @@ bool OGraph_PD::_isRemoteVertex(uint32_t aLsb, uint8_t &i) {
     return false;
 }
 
-bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t nodeID, long r, long x, bool inNeighbor) {
+bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long x, bool inNeighbor) {
     // determine index for new neighbor
-    uint8_t index = nodeID - 1;
+    uint8_t index = neighborID - 1;
 	// check if another vertex can be stored
 	if(s+1 <= NUM_REMOTE_VERTICES) {
 		// there is room for one more non-neighbor in array
@@ -720,7 +720,7 @@ bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t nodeID, long r, long x, 
                 _self->incrementInDegree();
             }
         	// create new instance of OVertex object and store in array
-            _remoteVertices[index] = ORemoteVertex(aLsb,nodeID,r,x,inNeighbor);
+            _remoteVertices[index] = ORemoteVertex(aLsb,neighborID,r,x,inNeighbor);
             // increment total number of vertices current initialized
             _n++;
 #ifdef VERBOSE
