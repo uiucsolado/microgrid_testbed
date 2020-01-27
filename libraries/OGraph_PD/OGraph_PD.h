@@ -100,9 +100,10 @@ class OVertex {
 
 
 struct node {
-    int data;
+    uint8_t data;
     node *mainNext;
     node *next;
+    node *codedNext;
 };
 
 
@@ -112,21 +113,42 @@ class LinkedList {
         LinkedList();
         LinkedList(int n);
         //States
-        inline void setLLsize (int j) {_size = j;}
-        inline int getLLsize() { return _size; }
+        inline void setLLsize (uint8_t j) {_size = j;}
+        inline void resetLLsize () {_size = 0;}
+        inline uint8_t getLLsize() { return _size; }
+        inline void setNumCodedLinks (uint8_t j) {_numCodedLinks = j;}
+        inline uint8_t getNumCodedLinks() { return _numCodedLinks; }
         // inline int getInheritorID() { return _inheritor; }
 
         //method to display linked list of online node IDs
         void displayLinkedList();
+        //method to unlink a specific neighbor from the linkedlist
+        void unlinkNeighbor(int neighborID);
+        //method to get maximum activation code
+        uint8_t getMaxActCode();
+        //method to see if a link is still available
+        bool isCodedLinkAvailable(int neighborID);
+        //method to unlink the first node the linkedlist points to and return its data
+        uint8_t unlinkLinkedListNodes();
         //method to update the linked list of online node IDs based on neighbor status
         void updateLinkedList(int *p);
-        // //method to set node ID of inheritor
-        // void _setInheritorID();
+        //method to find an uncoded link
+        void updateCodedLinks(ORemoteVertex *n);
+        //method to unlink a coded link
+        void unlinkCodedLink(uint8_t neighborID)
+        //method to find an uncoded link
+        uint8_t findUncodedLink(ORemoteVertex *n);
+        //method to check if an activation code is available
+        bool isActCodeAvailable(uint8_t code, ORemoteVertex *n, bool &flag);
+        //method to check if an activation code is used; if yes, the ID of the remote vertex is returned
+        uint8_t isActCodeUsed(uint8_t code, ORemoteVertex *n);
+
 
     private:
         //properties
-        node *_head, *_pseudoHead, *_tail, *_pseudoTail;
-        int _size;//, _inheritor;
+        node *_head, *_pseudoHead, *_codedHead, *_tail, *_pseudoTail, *_codedTail;
+        uint8_t _size;  //size of linked list
+        uint8_t _numCodedLinks;  //number of coded links
 
         // Helper functions
         void _prepareLinkedList(int n);
@@ -201,11 +223,15 @@ class OLocalVertex : public OVertex {
 
         // Get directive for primal dual algorithm
         inline bool isGenBus() { return _genBus; }
-        inline long getActiveSetpoint() { return _p; }
-        inline long getReactiveSetpoint() { return _q; }
-        inline long getSquareVoltage() { return _sqV; }
-        inline long getMu() { return _mu; }
-        inline long getNu() { return _nu; }
+        inline float getActiveSetpoint() { return _p; }
+        inline float getReactiveSetpoint() { return _q; }
+        inline float getActiveDemand() { return _pd; }
+        inline float getReactiveDemand() { return _qd; }
+        inline float getActiveBalance() { return _bp; }
+        inline float getReactiveBalance() { return _bq; }
+        inline float getSquareVoltage() { return _sqV; }
+        inline float getMu() { return _mu; }
+        inline float getNu() { return _nu; }
         inline float getWv() { return _Wv; }
         inline float getWp() { return _Wp; }
         inline float getWq() { return _Wq; }
@@ -214,14 +240,18 @@ class OLocalVertex : public OVertex {
 
         // Set directive for primal dual algorithm
         inline void setGenBusStatus(bool genBus) {_genBus = genBus; }
-        inline void setActiveSetpoint(long p) {_p = p; }
-        inline void setReactiveSetpoint(long q) {_q = q; }
-        inline void setSquareVoltage(long sqV) {_sqV = sqV; }
-        inline void setMu(long mu) {_mu = mu; }
-        inline void setNu(long nu) {_nu = nu; }
+        inline void setActiveSetpoint(float p) {_p = p; }
+        inline void setReactiveSetpoint(float q) {_q = q; }
+        inline void setActiveDemand(float pd) {_pd = pd; }
+        inline void setReactiveDemand(float qd) {_qd = qd; }
+        inline void setActiveBalance(float bp) {_bp = bp; }
+        inline void setReactiveBalance(float bq) {_bq = bq; }
+        inline void setSquareVoltage(float sqV) {_sqV = sqV; }
+        inline void setMu(float mu) {_mu = mu; }
+        inline void setNu(float nu) {_nu = nu; }
         inline void setPrimalDualWeights(float Wv, float Wp, float Wq, float Dp, float Dq) {_Wv = Wv; _Wp = Wp; _Wq = Wq; _Dp = Dp; _Dq = Dq; }
         // LinkedList method
-        inline LinkedList getLinkedList() { return _l; }
+        inline LinkedList * getLinkedList() { return _list; }
 
         
 	protected:
@@ -229,13 +259,13 @@ class OLocalVertex : public OVertex {
         long _base;
         //status information based on interaction with other nodes in network; 0 - Not a neighbor, 1 - neighbor but offline link, 2 - neighbor with  online link
         uint8_t _status[NUM_REMOTE_VERTICES];
-        //Pointer for node status to be used by choose inheritor function (added in by Olaolu)
+        //Pointer for node status (added in by Olaolu)
         int *_statusP;
         //leader and deputy ID
         //int _leaderID;
         //int _deputyID;
         // A linked list for IDs of online neghbors
-        LinkedList _l;
+        LinkedList * _list;
         //Number of online neighbors
         int _neighborSize;
         // Ratio-consensus states
@@ -260,11 +290,15 @@ class OLocalVertex : public OVertex {
         bool _genBus //bus type (generator bus or load bus)
 
         //Decision variables for primal dual algorithm
-        long _p; //per-unit active power setpoint
-        long _q; //per-unit active power setpoint
-        long _sqV;  //per-unit voltage magnitude squared
-        long _mu; //lagrange multiplier for active power balance
-        long _nu; //lagrange multiplier for reactive power balance
+        float _p; //per-unit active power setpoint
+        float _q; //per-unit reactive power setpoint
+        float _pd; //per-unit active power demand
+        float _qd; //per-unit reactive power demand
+        float _bp; //per-unit active power balance
+        float _bq; //per-unit reactive power balance
+        float _sqV;  //per-unit voltage magnitude squared
+        float _mu; //lagrange multiplier for active power balance
+        float _nu; //lagrange multiplier for reactive power balance
 
         //Weights for primal dual algorithm
         float _Wv;  //voltage weight
@@ -311,20 +345,26 @@ class ORemoteVertex : public OVertex {
         inline uint8_t getIndex() { return _index; }
         
         // Get directive for primal dual algorithm
-        inline long getResistance() { return _r; }
-        inline long getReactance() { return _x; }
+        inline float getResistance() { return _r; }
+        inline float getReactance() { return _x; }
         
-        inline long getActiveFlow() { return _fp; }
-        inline long getReactiveFlow() { return _fq; }
-        inline long getLambda() { return _lambda; }
+        inline float getActiveFlow() { return _fp; }
+        inline float getReactiveFlow() { return _fq; }
+        inline float getLambda() { return _lambda; }
+
+        inline uint8_t getLinkActCode() { return _linkActCode; }
+        inline bool isLinkActLead() { return _linkActLead; }
         
         // Set directive for primal dual algorithm
-        inline void setResistance(long r) {_r = r; }
-        inline void setReactance(long x) {_x = x; }
+        inline void setResistance(float r) {_r = r; }
+        inline void setReactance(float x) {_x = x; }
 
-        inline void setActiveFlow(long fp) {_fp = fp; }
-        inline void setReactiveFlow(long fq) {_fq = fq; }
-        inline void setLambda(long lambda) {_lambda = lambda; }
+        inline void setActiveFlow(float fp) {_fp = fp; }
+        inline void setReactiveFlow(float fq) {_fq = fq; }
+        inline void setLambda(float lambda) {_lambda = lambda; }
+
+        inline void setLinkActCode(uint8_t linkActCode) {_linkActCode = linkActCode; }
+        inline void setLinkActLead(bool linkActLead) {_linkActLead = linkActLead; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
 
     private:
         /// Properties
@@ -335,13 +375,19 @@ class ORemoteVertex : public OVertex {
         void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t neighborID = 0, long r = 0, long x = 0, bool inNeighbor = false);
 
         //vertex properties for primal dual algorithm
-        long _r //per-unit resistance of electrical link
-        long _x //per-unit reactance of electrical link
+        float _r //per-unit resistance of electrical link
+        float _x //per-unit reactance of electrical link
 
         //Decision variables for primal dual algorithm
-        long _fp; //per-unit active flow along electrical link
-        long _fq; //per-unit reactive flow along electrical link
-        long _lambda; //lagrange multiplier for LinDistFlow
+        float _fp; //per-unit active flow along electrical link
+        float _fq; //per-unit reactive flow along electrical link
+        float _lambda; //lagrange multiplier for LinDistFlow
+
+        //link activation code (used to decide when a link should be activated, links with same activation code are activated simultaneously)
+        uint8_t _linkActCode;
+
+        //check if neighbor is a link activation lead
+        bool _linkActLead;
 };
 
 class OGraph_PD {
