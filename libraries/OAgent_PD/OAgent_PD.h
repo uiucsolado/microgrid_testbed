@@ -43,7 +43,7 @@
 #define SYNC_BEGIN_HEADER                0x7342	// HRTS sync_begin header is ascii sB
 #define SYNC_RESPONSE_HEADER             0x7352 // HRTS sync_response header is ascii sR
 #define SYNC_FINAL_HEADER                0x7346	// HRTS sync_final header is ascii sF
-#define SYNC_TIMEOUT                     2500   // time out period to wait for response to HRTS sync_begin broadcast in milliseconds
+#define SYNC_TIMEOUT                     2500    // (was 2500) time out period to wait for response to HRTS sync_begin broadcast in milliseconds
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
 #define SCHEDULE_TIMEOUT                 500    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750    // delay before ratio consensus starts
@@ -307,7 +307,7 @@ class OAgent_PD {
         // General scheduling methods
         void _waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);// General scheduling methods
         bool _waitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period );
-        bool _waitForSchedulePacketPD(int timeout, unsigned long startTime, uint8_t iterations)
+        bool _waitForSchedulePacketPD(int timeout, unsigned long startTime, uint8_t iterations);
 
         inline uint8_t _getIDFromPacket() {  return _rx->getData(2); }
 

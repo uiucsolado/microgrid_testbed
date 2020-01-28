@@ -168,7 +168,7 @@ void OVertex::_prepareOVertex(uint32_t aLsb, uint8_t nodeID) {
 
 //LinkedList
 //Public mthods
-LinkedList::LinkedList() {
+LinkedList::LinkedList() { 
     _prepareLinkedList(NUM_REMOTE_VERTICES);
 }
 
@@ -186,7 +186,7 @@ void LinkedList::_prepareLinkedList(int n) {
     _codedTail = NULL;
     _size = 0;
     _numCodedLinks = 0;
-    //_inheritor = 1;
+
     for (uint8_t i = 0; i < n; i++)
     {
         node *tmp = new node;
@@ -207,7 +207,7 @@ void LinkedList::_prepareLinkedList(int n) {
 }
 
 //create a linked list of online neighbors, using their node IDs 
-void LinkedList::updateLinkedList(int *p) {
+void LinkedList::updateLinkedList(uint8_t *p) {
     uint8_t i=0, j=0;
     _pseudoHead = NULL;
     node *tmp;
@@ -246,29 +246,17 @@ void LinkedList::displayLinkedList() {
     }
 }
 
-void LinkedList::unlinkNeighbor(uint8_t neighborID) {
-    if (_pseudoHead->data == neighborID)
+//display coded linked lists
+void LinkedList::displayCodedLinkedList(ORemoteVertex *n) {
+    node *tmp;
+    tmp = _codedHead;
+    uint8_t i = 0, actCode = 0;
+    while (tmp != NULL)
     {
-        _pseudoHead = _pseudoHead->next;
-        return;
-    }
-
-    node *tmp1, *tmp2;
-    tmp1 = _pseudoHead;
-    tmp2 = tmp1->next;
-
-    while (tmp2 != NULL)
-    {
-        if (tmp2->data == neighborID)
-        {
-            tmp1->next = tmp2->next;
-            return;
-        }
-        else
-        {
-            tmp1 = tmp2;
-            tmp2 = tmp1->next;
-        }
+        i = tmp->data;
+        actCode = (n+i-1)->getLinkActCode();        
+        Serial << actCode << ', ';
+        tmp = tmp->codedNext;
     }
 }
 
@@ -277,14 +265,22 @@ uint8_t LinkedList::findUncodedLink(ORemoteVertex *n) {
     node *tmp;
     tmp = _pseudoHead;
     uint8_t i = 0, actCode = 0;
+
     while (tmp != NULL)
     {
         i = tmp->data;
         actCode = (n+i-1)->getLinkActCode();
+        delay(10);
+        Serial << actCode << " is the actcode of the link to node " << i << endl;
+
         if (actCode == 0)
             return i;
         tmp = tmp->next;
     }
+
+    delay(100);
+    Serial << "tmp is zero" << endl;
+
     return 0;
 }
 
@@ -415,7 +411,7 @@ uint8_t LinkedList::addLambdas(ORemoteVertex *n) {
         lambda = lambda + ((n+i-1)->getLambda());       //get lambda of link associated with neighbor
         tmp = tmp->codedNext;
     }
-    return fq;
+    return lambda;
 }
 
 //update the linked list of coded links
@@ -427,7 +423,7 @@ void LinkedList::updateCodedLinks(ORemoteVertex *n) {
     while (tmp != NULL)
     {
         i = tmp->data;                                  //get ID of neighbor
-        if ((n+i-1)->->getLinkActCode() != 0)           //check if the link associated with the neighbor has an activation code
+        if ((n+i-1)->getLinkActCode() != 0)           //check if the link associated with the neighbor has an activation code
         {
             if (_codedHead == NULL)
             {
@@ -557,9 +553,6 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min,
     //initialize leaderID and deputyID
     //_leaderID = 0;
     //_deputyID = 0;
-    //linkedlist for online neighbors
-    LinkedList _l = LinkedList();
-    _list = &_l;
 
     //number of neighbors
     _neighborSize = 22;
@@ -649,17 +642,17 @@ ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t neighborID, bool inNeighbor)
 	_prepareORemoteVertex(aLsb,neighborID,0,0,inNeighbor);
 }
 
-ORemoteVertex::ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, long r, long x, bool inNeighbor) {
+ORemoteVertex::ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, float r, float x, bool inNeighbor) {
     _prepareORemoteVertex(a.getLsb(),neighborID,r,x,inNeighbor);
 }
 
-ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long x, bool inNeighbor) {
+ORemoteVertex::ORemoteVertex(uint32_t aLsb, uint8_t neighborID, float r, float x, bool inNeighbor) {
     _prepareORemoteVertex(aLsb,neighborID,r,x,inNeighbor);
 }
 
 /// End public methods
 /// Private methods
-void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long x, bool inNeighbor) {
+void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, float r, float x, bool inNeighbor) {
     _inNeighbor = inNeighbor;
     _index = neighborID-1;
     _r = r;
@@ -681,11 +674,24 @@ OGraph_PD::OGraph_PD() {
     _n = 0;
     OLocalVertex s =  OLocalVertex();
     _self = &s;
+    //linkedlist for online neighbors
+    LinkedList _l = LinkedList();
+    _list = &_l;
 }
 
 OGraph_PD::OGraph_PD(OLocalVertex * s) {
     _n = 1;
     _self = s;
+    //linkedlist for online neighbors
+    LinkedList _l = LinkedList();
+    _list = &_l;
+}
+
+OGraph_PD::OGraph_PD(OLocalVertex * s, LinkedList * l) {
+    _n = 1;
+    _self = s;
+    //linkedlist for online neighbors
+    _list = l;
 }
 
 // Local vertex
@@ -722,11 +728,11 @@ bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t neighborID) {
     return addInNeighbor(aLsb,neighborID,0,0);
 }
 
-bool OGraph_PD::addInNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x) {
+bool OGraph_PD::addInNeighbor(XBeeAddress64 a, uint8_t neighborID, float r, float x) {
     return addInNeighbor(a.getLsb(),neighborID,r,x);
 }
 
-bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x) {
+bool OGraph_PD::addInNeighbor(uint32_t aLsb, uint8_t neighborID, float r, float x) {
     // make sure we can add another inNeighbor
     if((_self->getInDegree()) < NUM_IN_NEIGHBORS)
         return _addRemoteVertex(aLsb,neighborID,r,x,true);
@@ -788,18 +794,18 @@ bool OGraph_PD::isInNeighbor(uint32_t aLsb, ORemoteVertex * &v) {
 
 // Add and remove vertices from list of non-neighbors
 bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t neighborID) {
-    return addNonNeighbor(a.getLsb(), uint8_t neighborID);
+    return addNonNeighbor(a.getLsb(),neighborID);
 }
 
 bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t neighborID) {
     return addNonNeighbor(aLsb,neighborID,0,0);
 }
 
-bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x) {
+bool OGraph_PD::addNonNeighbor(XBeeAddress64 a, uint8_t neighborID, float r, float x) {
     return addNonNeighbor(a.getLsb(),neighborID,r,x);
 }
 
-bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x) {
+bool OGraph_PD::addNonNeighbor(uint32_t aLsb, uint8_t neighborID, float r, float x) {
     return _addRemoteVertex(aLsb,neighborID,r,x);
 }
 
@@ -909,8 +915,12 @@ ORemoteVertex * OGraph_PD::getRemoteVertex(uint8_t neighborID) {
 /// Private methods
 
 
+void OGraph_PD::configureLinkedList() {
+    _list->updateLinkedList(_self->getStatusP());
+}
+
 uint8_t OGraph_PD::_getRemoteVertexIndex(XBeeAddress64 a) {
-	return _getRemoteVertexIndex(a.getLsb());
+    return _getRemoteVertexIndex(a.getLsb());
 }
 
 uint8_t OGraph_PD::_getRemoteVertexIndex(uint32_t aLsb) {
@@ -933,11 +943,11 @@ bool OGraph_PD::_isRemoteVertex(uint32_t aLsb, uint8_t &i) {
     return false;
 }
 
-bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long x, bool inNeighbor) {
+bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t neighborID, float r, float x, bool inNeighbor) {
     // determine index for new neighbor
     uint8_t index = neighborID - 1;
 	// check if another vertex can be stored
-	if(s+1 <= NUM_REMOTE_VERTICES) {
+    if(_n <= NUM_REMOTE_VERTICES) {
 		// there is room for one more non-neighbor in array
 		// check if vertex is already stored in array
         if(!_isRemoteVertex(aLsb)) {
@@ -947,12 +957,13 @@ bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t neighborID, long r, long
             }
         	// create new instance of OVertex object and store in array
             _remoteVertices[index] = ORemoteVertex(aLsb,neighborID,r,x,inNeighbor);
+            _self->setStatus(neighborID, 2);
             // increment total number of vertices current initialized
             _n++;
 #ifdef VERBOSE
             Serial << _MEM(PSTR("Vertex with address lsb 0x")) << _HEX(aLsb) << _MEM(PSTR(" added array of remote vertices.")) << endl;
 #endif
-            return true;            
+            return true;
         } else {
 #ifdef VERBOSE
             Serial << _MEM(PSTR("Vertex not added. A vertex with the same address is already in the array of remote vertices.")) << endl;

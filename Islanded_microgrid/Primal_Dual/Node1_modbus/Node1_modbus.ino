@@ -1,26 +1,22 @@
 #include <Streaming.h>
 #include <XBee.h>
 //#include <Dyno.h>
-#include <OGraph_DFC.h>
-#include <OAgent_DFC.h>
+#include <OGraph_PD.h>
+#include <OAgent_PD.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
 
 
 //Node 1
-
-long base = 10000;  // use base to increase precision of results
-long D_base = 100000000;
-
 XBee xbee = XBee();
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x4174F1AA,0,0.225*D_base,-2.1667*base,0.1667*base,2,D_base,1);  //#NODE
-//OLocalVertex s = OLocalVertex(0x4174F1AA,0,1*D_base,-2.1667*base,0.1667*base,5,D_base); //changed Dout to 1, OLocalVertex(0x404980AE,-0.1*base,0.05*base,-2.1667*base,0.1667*base,1,base); //SN The Xbee address  needs to be changed here right? Also  figure out how to assign the 
-OGraph_DFC g = OGraph_DFC(&s);
-OAgent_DFC a = OAgent_DFC(&xbee,&rx,&g,true,true); // argument rx?
+OLocalVertex s = OLocalVertex(0x4174F1AA,1,0,1,1,1,1,10);  //#NODE
+LinkedList l = LinkedList();  //#NODE
+OGraph_PD g = OGraph_PD(&s,&l);
+OAgent_PD a = OAgent_PD(&xbee,&rx,&g,true,true); // argument rx?
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
@@ -28,14 +24,6 @@ uint8_t cPin = 48;     // coordination enabled led pin
 
 //variables for node sync check
 boolean de = false;
-
-//AFE and controller variables
-int state;         // variable to store the read value 
-long n;
-float error = 0;
-float u =0;
-float u_set=0.85;
-int r = 0;
 
 //Modbus Communication
 MgsModbus Mb; 
@@ -46,8 +34,6 @@ IPAddress ip(192, 168, 2, 1); // What are these addresses //#NODE
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
 
-uint16_t state_high;
-uint16_t state_low;
 uint8_t Ref_high;
 uint8_t Ref_low;
 uint8_t Count_high;
@@ -59,12 +45,8 @@ int ref;
 int count;
 int pos;
 long t;
-int res_flag=0;
-float state1 = 0 ;
-float state0 = 0; //previous ratio consensus result
-float eps = 0.0628;
-int gen_flag=1;
 float D;
+bool primaldual;
 
 void setup()  {
   Serial.begin(38400);
@@ -76,24 +58,26 @@ void setup()  {
   
   xbee.setSerial(Serial3); //Specify the serial port for xbee
 //Define the Neighboring nodes
-  //g.addInNeighbor(0x4174F1AA); // node 1
-  g.addInNeighbor(0x4174F186); // node 2
-  g.addInNeighbor(0x4151C692); // node 3
-  //g.addInNeighbor(0x4151C48B); // node 4
-  //g.addInNeighbor(0x4151C688); // node 5
-  //g.addInNeighbor(0x4151C6AB); // node 6
-  //g.addInNeighbor(0x4151C6CB); // node 7
-  //g.addInNeighbor(0x4151C6AC); // node 8
-  //g.addInNeighbor(0x415786E1); // node 9
-  //g.addInNeighbor(0x415786D3); // node 10
-  //g.addInNeighbor(0x415DB670); // node 11
-  //g.addInNeighbor(0x415786A9); // node 12
-  //g.addInNeighbor(0x4157847B); // node 13
-  //g.addInNeighbor(0x415DB664); // node 14
-  //g.addInNeighbor(0x415DB673); // node 15
-  //g.addInNeighbor(0x415DB684); // node 19
-  //g.addInNeighbor(0x41516F0B); // node 20
-  
+  //g.addInNeighbor(0x4174F1AA,1,0,0); // node 1
+  //g.addInNeighbor(0x4174F186,2,0,0); // node 2
+  //g.addInNeighbor(0x4151C692,3,0,0); // node 3
+  g.addInNeighbor(0x4151C48B,4,0.05,0.07); // node 4
+  g.addInNeighbor(0x4151C688,5,0.04,0.06); // node 5
+  //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
+  //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
+  //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
+  //g.addInNeighbor(0x415786E1,9,0,0); // node 9
+  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
+  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
+  //g.addInNeighbor(0x415786A9,12,0,0); // node 12
+  //g.addInNeighbor(0x4157847B,13,0,0); // node 13
+  //g.addInNeighbor(0x415DB664,14,0,0); // node 14
+  //g.addInNeighbor(0x415DB673,15,0,0); // node 15
+  //g.addInNeighbor(0x415DB684,19,0,0); // node 19
+  //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
+
+  g.configureLinkedList();
+ 
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
   
@@ -103,7 +87,6 @@ void setup()  {
      Mb.MbData[i] = 0;
   }
 }
-
 
 void loop() {
   if(de == false) 
@@ -147,6 +130,7 @@ void loop() {
             Serial.println("Communication Link established");
             Serial.println("c");
             digitalWrite(sPin,HIGH);
+            int bb = Serial.read();      
             //ce = true;
           }
           else
@@ -157,73 +141,29 @@ void loop() {
       }
     }
   }
-
   
   else 
   {
-    if(a.isSynced()) {    
-    receiveTyphoonData();
-    state =  Mb.MbData[0]*((-2*Mb.MbData[1])+1);
-    if(state == 0)
+    if(a.isSynced())
     {
-      gen_flag=0;
-      D=0;
-    }
-    else
-    {
-      gen_flag=1;
-      D=0.225;
-    }    
-    Serial.println("Data");
-    Serial.println(float(state),4);
-    //a.leaderFairSplitRatioConsensus(base*state,10,200); //a.leaderFairSplitRatioConsensus(-0.35*base,75,50)
-    //a.fairSplitRatioConsensus_RSL(D_base*1,1*D_base, 16,160);
-    a.fairSplitRatioConsensus_RSL(base*state,D*D_base, 16,160);
-    //Serial.println("Out");
-    state1 = a.getbufferdata(0);
-    
-    //Serial.println("ratio consensus result");
-    //Serial.println(state1,4);
-    
-    // Controller code
-     r=r+1;
-     if(r>2)
-     { 
-        if(gen_flag==1)
-        { 
-            if((abs(state1-state0)>eps)&&(res_flag==0))
-            {
-               error=error + -1*0.707*state0;
-               u=u_set+0.7071*error;
-               //Serial.println(u,4);
-               res_flag =1;
-            }
-            else
-            {
-               error=error + -1*0.707*state1;
-               u=u_set+0.7071*error;
-               //Serial.println(u,4);
-               res_flag=0;
-            }
-        }
-        if (u<0)
-        {
-          Mb.MbData[0]=1;
-        }
-        else
-        {
-          Mb.MbData[0]=0;
-        }
-       Mb.MbData[1]=base*abs(u);
-       //Serial.println(res_flag);
-       sendConsensusResults();
-     }
-     // Controller code over
-     
-     a.resync();
+      if(Serial.available())
+      {
+        Serial.println("got some letter");
+        delay(10); 
+        Serial.println("Starting link activation");
+        a.linkActivationAlgorithm();
+      }
+      //primaldual = a.primalDualAlgorithm(true,0.1,500);
+      
+      //Serial.println("ratio consensus result");
+      //Serial.println(state1,4);
+      // Controller code over
+       
+       a.resync();
      }
   }
 }
+
 void sendConsensusResults()
 {
   //VARIABLES NOT BEING USED////////////////////////////////////

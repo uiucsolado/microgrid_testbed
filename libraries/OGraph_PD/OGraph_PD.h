@@ -96,68 +96,6 @@ class OVertex {
 };
 
 
-
-
-
-struct node {
-    uint8_t data;
-    node *mainNext;
-    node *next;
-    node *codedNext;
-};
-
-
-class LinkedList {
-    public:
-        // Constructor
-        LinkedList();
-        LinkedList(int n);
-        //States
-        inline void setLLsize (uint8_t j) {_size = j;}
-        inline void resetLLsize () {_size = 0;}
-        inline uint8_t getLLsize() { return _size; }
-        inline void setNumCodedLinks (uint8_t j) {_numCodedLinks = j;}
-        inline uint8_t getNumCodedLinks() { return _numCodedLinks; }
-        // inline int getInheritorID() { return _inheritor; }
-
-        //method to display linked list of online node IDs
-        void displayLinkedList();
-        //method to unlink a specific neighbor from the linkedlist
-        void unlinkNeighbor(int neighborID);
-        //method to get maximum activation code
-        uint8_t getMaxActCode();
-        //method to see if a link is still available
-        bool isCodedLinkAvailable(int neighborID);
-        //method to unlink the first node the linkedlist points to and return its data
-        uint8_t unlinkLinkedListNodes();
-        //method to update the linked list of online node IDs based on neighbor status
-        void updateLinkedList(int *p);
-        //method to find an uncoded link
-        void updateCodedLinks(ORemoteVertex *n);
-        //method to unlink a coded link
-        void unlinkCodedLink(uint8_t neighborID)
-        //method to find an uncoded link
-        uint8_t findUncodedLink(ORemoteVertex *n);
-        //method to check if an activation code is available
-        bool isActCodeAvailable(uint8_t code, ORemoteVertex *n, bool &flag);
-        //method to check if an activation code is used; if yes, the ID of the remote vertex is returned
-        uint8_t isActCodeUsed(uint8_t code, ORemoteVertex *n);
-
-
-    private:
-        //properties
-        node *_head, *_pseudoHead, *_codedHead, *_tail, *_pseudoTail, *_codedTail;
-        uint8_t _size;  //size of linked list
-        uint8_t _numCodedLinks;  //number of coded links
-
-        // Helper functions
-        void _prepareLinkedList(int n);
-};
-
-
-
-
-
 class OLocalVertex : public OVertex {
     public:
         // Constructors
@@ -192,7 +130,7 @@ class OLocalVertex : public OVertex {
         inline int getNeighborSize() {return _neighborSize; }
         //Status
         inline uint8_t getStatus(uint8_t neighborID) {return _status[neighborID-1]; }
-        inline int * getStatusP() {return _statusP; }
+        inline uint8_t * getStatusP() {return _statusP; }
         inline void setStatus(uint8_t neighborID, uint8_t status) { _status[neighborID-1] = status;  } 
         // State Z
         inline void setZ(long z) { _z = z; }
@@ -250,8 +188,6 @@ class OLocalVertex : public OVertex {
         inline void setMu(float mu) {_mu = mu; }
         inline void setNu(float nu) {_nu = nu; }
         inline void setPrimalDualWeights(float Wv, float Wp, float Wq, float Dp, float Dq) {_Wv = Wv; _Wp = Wp; _Wq = Wq; _Dp = Dp; _Dq = Dq; }
-        // LinkedList method
-        inline LinkedList * getLinkedList() { return _list; }
 
         
 	protected:
@@ -260,12 +196,10 @@ class OLocalVertex : public OVertex {
         //status information based on interaction with other nodes in network; 0 - Not a neighbor, 1 - neighbor but offline link, 2 - neighbor with  online link
         uint8_t _status[NUM_REMOTE_VERTICES];
         //Pointer for node status (added in by Olaolu)
-        int *_statusP;
+        uint8_t *_statusP;
         //leader and deputy ID
         //int _leaderID;
         //int _deputyID;
-        // A linked list for IDs of online neghbors
-        LinkedList * _list;
         //Number of online neighbors
         int _neighborSize;
         // Ratio-consensus states
@@ -287,7 +221,7 @@ class OLocalVertex : public OVertex {
         long _computeLambda(long limit);
 
         //vertex property for primal dual algorithm
-        bool _genBus //bus type (generator bus or load bus)
+        bool _genBus; //bus type (generator bus or load bus)
 
         //Decision variables for primal dual algorithm
         float _p; //per-unit active power setpoint
@@ -337,8 +271,8 @@ class ORemoteVertex : public OVertex {
         ORemoteVertex();
         ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, bool inNeighbor = false);
         ORemoteVertex(uint32_t aLsb, uint8_t neighborID, bool inNeighbor = false);
-        ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, long r, long x, bool inNeighbor = false);
-        ORemoteVertex(uint32_t aLsb, uint8_t neighborID, long r , long x, bool inNeighbor = false);
+        ORemoteVertex(XBeeAddress64 a, uint8_t neighborID, float r, float x, bool inNeighbor = false);
+        ORemoteVertex(uint32_t aLsb, uint8_t neighborID, float r , float x, bool inNeighbor = false);
         
         // Get directive for inNeighbor
         inline bool isInNeighbor() { return _inNeighbor; }
@@ -372,11 +306,11 @@ class ORemoteVertex : public OVertex {
         uint8_t _index;
         /// Methods
         // Constructor helper
-        void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t neighborID = 0, long r = 0, long x = 0, bool inNeighbor = false);
+        void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t neighborID = 0, float r = 0, float x = 0, bool inNeighbor = false);
 
         //vertex properties for primal dual algorithm
-        float _r //per-unit resistance of electrical link
-        float _x //per-unit reactance of electrical link
+        float _r; //per-unit resistance of electrical link
+        float _x; //per-unit reactance of electrical link
 
         //Decision variables for primal dual algorithm
         float _fp; //per-unit active flow along electrical link
@@ -390,11 +324,73 @@ class ORemoteVertex : public OVertex {
         bool _linkActLead;
 };
 
+
+struct node {
+    uint8_t data;
+    node *mainNext;
+    node *next;
+    node *codedNext;
+};
+
+
+class LinkedList {
+    public:
+        // Constructor
+        LinkedList();
+        LinkedList(int n);
+        //States
+        inline void setLLsize (uint8_t j) {_size = j;}
+        inline void resetLLsize () {_size = 0;}
+        inline uint8_t getLLsize() { return _size; }
+        inline void setNumCodedLinks (uint8_t j) {_numCodedLinks = j;}
+        inline uint8_t getNumCodedLinks() { return _numCodedLinks; }
+        // inline int getInheritorID() { return _inheritor; }
+
+        //method to display linked list of online node IDs
+        void displayLinkedList();
+        //method to display coded linked lists
+        void displayCodedLinkedList(ORemoteVertex *n);
+        //method to get maximum activation code
+        uint8_t getMaxActCode();
+        //method to see if a link is still available
+        bool isCodedLinkAvailable(uint8_t neighborID);
+        //method to unlink the first node the linkedlist points to and return its data
+        uint8_t unlinkLinkedListNodes();
+        //method to update the linked list of online node IDs based on neighbor status
+        void updateLinkedList(uint8_t *p);
+        //method to find an uncoded link
+        void updateCodedLinks(ORemoteVertex *n);
+        //method to unlink a coded link
+        void unlinkCodedLink(uint8_t neighborID);
+        //method to find an uncoded link
+        uint8_t findUncodedLink(ORemoteVertex *n);
+        //method to check if an activation code is available
+        bool isActCodeAvailable(uint8_t code, ORemoteVertex *n, bool &flag);
+        //method to check if an activation code is used; if yes, the ID of the remote vertex is returned
+        uint8_t isActCodeUsed(uint8_t code, ORemoteVertex *n);
+
+        uint8_t addActiveFlows(ORemoteVertex *n);
+        uint8_t addReactiveFlows(ORemoteVertex *n);
+        uint8_t addLambdas(ORemoteVertex *n);
+
+
+    private:
+        //properties
+        node *_head, *_pseudoHead, *_codedHead, *_tail, *_pseudoTail, *_codedTail;
+        uint8_t _size;  //size of linked list
+        uint8_t _numCodedLinks;  //number of coded links
+
+        // Helper functions
+        void _prepareLinkedList(int n);
+};
+
+
 class OGraph_PD {
 	public:
         /// Constructors
 		OGraph_PD();
         OGraph_PD(OLocalVertex * s);
+        OGraph_PD(OLocalVertex * s, LinkedList * l);
         
         /// Local vertex
         inline OLocalVertex * getLocalVertex() { return _self; }
@@ -409,8 +405,8 @@ class OGraph_PD {
         // Add in-neighbor
         bool addInNeighbor(XBeeAddress64 , uint8_t neighborID);
         bool addInNeighbor(uint32_t aLsb, uint8_t neighborID);
-        bool addInNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x);
-        bool addInNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x);
+        bool addInNeighbor(XBeeAddress64 a, uint8_t neighborID, float r, float x);
+        bool addInNeighbor(uint32_t aLsb, uint8_t neighborID, float r, float x);
         //Remove in-neighbor
         bool removeInNeighbor(uint8_t neighborID);     //Olaolu
         // Determine if vertex is in-neighbor
@@ -424,8 +420,8 @@ class OGraph_PD {
         // Add non-neighbor to array
         bool addNonNeighbor(XBeeAddress64 a, uint8_t neighborID);
         bool addNonNeighbor(uint32_t aLsb, uint8_t neighborID);
-        bool addNonNeighbor(XBeeAddress64 a, uint8_t neighborID, long r, long x);
-        bool addNonNeighbor(uint32_t aLsb, uint8_t neighborID, long r, long x);
+        bool addNonNeighbor(XBeeAddress64 a, uint8_t neighborID, float r, float x);
+        bool addNonNeighbor(uint32_t aLsb, uint8_t neighborID, float r, float x);
         // Determine if vertex is non-neighbor
         bool isNonNeighbor(uint32_t aLsb);
         bool isNonNeighbor(XBeeAddress64 a);
@@ -449,19 +445,24 @@ class OGraph_PD {
 
         uint8_t _getRemoteVertexIndex(uint32_t aLsb);
 
+        // LinkedList methods
+        void configureLinkedList();
+        inline LinkedList * getLinkedList() { return _list; }
+
 	private:
         /// Properties
         uint8_t _n;                         // Total number of vertices
 
         OLocalVertex * _self;               // Local vertex
         ORemoteVertex _remoteVertices[NUM_REMOTE_VERTICES];
-        
+        // A linked list for IDs of online neghbors
+        LinkedList * _list;
         // Methods
         uint8_t _getRemoteVertexIndex(XBeeAddress64 a);
     	//uint8_t _getRemoteVertexIndex(uint32_t aLsb);        made this function public (*Sammy)
         bool _isRemoteVertex(uint32_t aLsb);
         bool _isRemoteVertex(uint32_t aLsb, uint8_t &i);
-        bool _addRemoteVertex(uint32_t aLsb, long r, long x, bool inNeighbor = false);
+        bool _addRemoteVertex(uint32_t aLsb, uint8_t neighborID, float r, float x, bool inNeighbor = false);
 };
 
 

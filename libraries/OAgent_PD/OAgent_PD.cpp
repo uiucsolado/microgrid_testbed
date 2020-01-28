@@ -530,6 +530,7 @@ long OAgent_PD::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterat
 long OAgent_PD::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     unsigned long startTime = 0;
     //delay(50);
+    float gamma = 0;
     bool scheduled = _waitForScheduleFairSplitPacket_RSL(startTime,iterations,period,(period*iterations*3));
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     
@@ -785,7 +786,7 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t i
 bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
-    LinkedList * _l = s->getLinkedList();
+    LinkedList * l = _G->getLinkedList();
 
     uint16_t nodeID = s->getID();
     uint8_t neighborID;
@@ -800,11 +801,11 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
     float P = genBus*(s->getActiveSetpoint());                                                  // active injection
     float Q = genBus*(s->getReactiveSetpoint());                                                // reactive injection
     float Pd = s->getActiveDemand();                                                            // active demand
-    float Pq = s->getReactiveDemand();                                                          // reactive demand
+    float Qd = s->getReactiveDemand();                                                          // reactive demand
     float sqV = s->getSquareVoltage();                                                          // square voltage magnitude
     float Mu = s->getMu();                                                                      // lagrange multiplier
     float Nu = s->getNu();                                                                      // lagrange multiplier
-    float bP = P - Pd - _l->addActiveFlows(n);                                                  // active balance
+    float bP = P - Pd - l->addActiveFlows(n);                                                  // active balance
     float bQ = Q - Qd - l->addReactiveFlows(n);                                                 // reactive balance
     
     bool flag;
@@ -825,7 +826,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
 
         P = P - genBus*alpha*( Mu+((s->getDp())*P)+((s->getWp())*bP) );
         Q = Q - genBus*alpha*( Nu+((s->getDq())*Q)+((s->getWq())*bQ) );
-        sqV = sqV - alpha*( _l->addLambdas(n)+((s->getWv())*(sqV-1)) );
+        sqV = sqV - alpha*( l->addLambdas(n)+((s->getWv())*(sqV-1)) );
         Mu = Mu + alpha*bP;
         Nu = Nu + alpha*bQ;
 
@@ -836,12 +837,12 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
 
             while( uint16_t(millis()-start) < (i*WINDOW_LENGTH) )
             {
-                neighborID = _l->isActCodeUsed(i,n);
+                neighborID = l->isActCodeUsed(i,n);
                 if(neighborID != 0)
                 {
                     if(neighborID < nodeID)
                     {
-                        if(_waitForUnicastPacket(neighborID,nodeID,PD_PACKET_HEADER,true,WINDOW_LENGTH))                                // primal dual packet available for node from its neighbor
+                        if(_waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,WINDOW_LENGTH))                                // primal dual packet available for node from its neighbor
                         {
                             //get values for fp, fq, and lambda that are received from this neighbor
                             neighbor_fp = _getActiveFlowFromPacket();                               // store incoming value of fp
@@ -894,16 +895,16 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
             }
         }
         
-        bP = P - Pd - _l->addActiveFlows(n);
-        bQ = Q - Qd - _l->addReactiveFlows(n);
+        bP = P - Pd - l->addActiveFlows(n);
+        bQ = Q - Qd - l->addReactiveFlows(n);
 
-        _buffer_P[2000];
-        _buffer_Q[2000];
-        _buffer_bP[2000];
-        _buffer_bQ[2000];
-        _buffer_sqV[2000];
-        _buffer_mu[2000];
-        _buffer_nu[2000];
+        _buffer_P[k] = P;
+        _buffer_Q[k] = Q;
+        _buffer_bP[k] = bP;
+        _buffer_bQ[k] = bQ;
+        _buffer_sqV[k] = sqV;
+        _buffer_mu[k] = Mu;
+        _buffer_nu[k] = Nu;
     }
 
     s->setActiveBalance(bP);
@@ -1212,10 +1213,10 @@ void OAgent_PD::_broadcastFairSplitPacket_RSL(OLocalVertex * s) {
 void OAgent_PD::_broadcastMaxMinPacket(long max, long min) {   
     uint16_t payload[5];
     payload[0] = MAXMIN_HEADER;
-    payload[1] = y;
-    payload[2] = y >> 16;
-    payload[3] = z;
-    payload[4] = z >> 16;
+    payload[1] = max;
+    payload[2] = max >> 16;
+    payload[3] = min;
+    payload[4] = min >> 16;
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
@@ -1510,7 +1511,7 @@ void OAgent_PD::linkActivationAlgorithm() {
 uint8_t OAgent_PD:: _assignLinkACTCODES() {
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1); // store pointer to remote vertices
-    LinkedList * _l = s->getLinkedList(); // store pointer to linkedlist
+    LinkedList * l = _G->getLinkedList(); // store pointer to linkedlist
 
     uint16_t recipientID;
     uint8_t neighborID;
@@ -1518,7 +1519,9 @@ uint8_t OAgent_PD:: _assignLinkACTCODES() {
     uint8_t i = 0, j = 0;
 
     _listenForLinkACTCODES(10);
-    recipientID = _l->findUncodedLink(n);
+
+    recipientID = l->findUncodedLink(n);
+    //Serial << "Link to node " << recipientID << " is has no actcode \n";
     while(recipientID != 0)
     {
         _candactcodePacket(recipientID);
@@ -1528,32 +1531,41 @@ uint8_t OAgent_PD:: _assignLinkACTCODES() {
             {
                 i++;
                 (n+(neighborID-1))->setLinkActCode(_getACTCODEFromPacket());
-                _l->updateCodedLinks(n);                
-                _listenForLinkACTCODES(10);
-                recipientID = _l->findUncodedLink(n);
+                l->updateCodedLinks(n);
+		        Serial << "received actcode from node " << neighborID <<endl;
+		        delay(10);
             }
         }
+        _listenForLinkACTCODES(10);
+        recipientID = l->findUncodedLink(n);
     }
     while (j != i)
     {
         if(_waitForNeighborPacket(neighborID,LINKSACT_HEADER,true,-1))
         {
-            if((_l->isCodedLinkAvailable(neighborID)) && !((n+(neighborID-1))->isLinkActLead()))        //if this packet hasn't been received yet and the neighbor is not an activation lead, accept packet
+            if((l->isCodedLinkAvailable(neighborID)) && !((n+(neighborID-1))->isLinkActLead()))        //if this packet hasn't been received yet and the neighbor is not an activation lead, accept packet
             {    
                 j++;
-                _l->unlinkCodedLink(neighborID);
+                l->unlinkCodedLink(neighborID);
+		        Serial << "received linksact packet from node " << neighborID <<endl;
+		        delay(10);
             }
         }
         if (j == i)
-            _l->updateCodedLinks(n);
+            l->updateCodedLinks(n);
+
+        Serial << "received linksact packet from all nodes "<<endl;
+        delay(10);
     }
-    return (_l->getMaxActCode());
+    // display activation codes on serial monitor
+    l->displayCodedLinkedList(n);
+    return (l->getMaxActCode());
 }
 
 void OAgent_PD::_listenForLinkACTCODES(int timeout) { 
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1); // store pointer to remote vertices
-    LinkedList * _l = s->getLinkedList(); // store pointer to linkedlist
+    LinkedList * l = _G->getLinkedList(); // store pointer to linkedlist
 
     uint8_t nodeID = s->getID();
     uint8_t neighborID;
@@ -1564,25 +1576,27 @@ void OAgent_PD::_listenForLinkACTCODES(int timeout) {
     uint8_t actCode = 0;
     if(_waitForUnicastPacket(neighborID,nodeID,CANDACTCODE_HEADER,true,timeout))
     {
+        Serial << "received candactcode from node " << neighborID <<endl;
+    	delay(10);
         (n+(neighborID-1))->setLinkActLead(true);                               //set neighbor as link activation lead neighbor
         while(!codeAvailable)
         {
             actCode = _getCANDACTCODEFromPacket(k);
-            codeAvailable = _l->isActCodeAvailable(actCode,n,flag);
+            codeAvailable = l->isActCodeAvailable(actCode,n,flag);
             k++;
             if (k == 22)
                 k = 0;
         }
         _actcodePacket(neighborID,actCode);
         (n+(neighborID-1))->setLinkActCode(actCode);
-        _l->updateCodedLinks(n);
+        l->updateCodedLinks(n);
     }
 }
 
 void OAgent_PD::_candactcodePacket(uint16_t recipientID) {
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1); // store pointer to remote vertices
-    LinkedList * _l = s->getLinkedList(); // store pointer to linkedlist
+    LinkedList * l = _G->getLinkedList(); // store pointer to linkedlist
 
     bool flag = false;
     bool codeAvailable = false;
@@ -1599,7 +1613,7 @@ void OAgent_PD::_candactcodePacket(uint16_t recipientID) {
         while (!codeAvailable)
         {
             candactcode++;
-            codeAvailable = _l->isActCodeAvailable(candactcode,n,flag);
+            codeAvailable = l->isActCodeAvailable(candactcode,n,flag);
         }
         payload[4] = candactcode;
         _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
@@ -1622,7 +1636,7 @@ void OAgent_PD::_candactcodePacket(uint16_t recipientID) {
         {
             if (flag)
             {
-                candactcode++
+                candactcode++;
                 payload[i] = candactcode;
             }
             else
@@ -1631,7 +1645,7 @@ void OAgent_PD::_candactcodePacket(uint16_t recipientID) {
                 while (!codeAvailable)
                 {
                     candactcode++;
-                    codeAvailable = _l->isActCodeAvailable(candactcode,n,flag);
+                    codeAvailable = l->isActCodeAvailable(candactcode,n,flag);
                 }
             }
         }
@@ -1662,8 +1676,8 @@ void OAgent_PD::_actcodePacket(uint16_t recipientID, uint8_t actcode) {
 void OAgent_PD::_linksactPacket(uint16_t recipientID) {
     uint8_t payload[4];
     // put header in payload array
-    payload[0] = header;
-    payload[1] = header >> 8;
+    payload[0] = LINKSACT_HEADER;
+    payload[1] = LINKSACT_HEADER >> 8;
     payload[2] = recipientID;
     payload[3] = recipientID >> 8;
 
@@ -1674,6 +1688,12 @@ void OAgent_PD::_linksactPacket(uint16_t recipientID) {
 
 void OAgent_PD::_unicastPacket_PD(uint16_t recipientID, float fP, float fQ, float Lambda) {
     uint8_t payload[19];
+    uint32_t fp;
+    uint32_t fq;
+    uint32_t lambda;
+    uint8_t sign_fp;
+    uint8_t sign_fq;
+    uint8_t sign_lambda;
     fP = fP*BASE;
     fQ = fQ*BASE;
     Lambda = Lambda*BASE;
@@ -1682,39 +1702,39 @@ void OAgent_PD::_unicastPacket_PD(uint16_t recipientID, float fP, float fQ, floa
     if (fP < 0) 
     {
         fP = -1*fP;
-        uint32_t fp = (uint32_t) fP;
-        uint8_t sign_fp = 0;
+        fp = (uint32_t) fP;
+        sign_fp = 0;
     }
     else
     {
-        uint32_t fp = (uint32_t) fP;
-        uint8_t sign_fp = 1;
+        fp = (uint32_t) fP;
+        sign_fp = 1;
     }
 
    //check if reactive flow is negative
     if (fQ < 0) 
     {
         fQ = -1*fQ;
-        uint32_t fq = (uint32_t) fQ;
-        uint8_t sign_fq = 0;
+        fq = (uint32_t) fQ;
+        sign_fq = 0;
     }
     else
     {
-        uint32_t fq = (uint32_t) fQ;
-        uint8_t sign_fq = 1;
+        fq = (uint32_t) fQ;
+        sign_fq = 1;
     }
 
    //check if lambda is negative
-    if (lambda < 0) 
+    if (Lambda < 0) 
     {
         Lambda = -1*Lambda;
-        uint32_t lambda = (uint32_t) Lambda;
-        uint8_t sign_lambda = 0;
+        lambda = (uint32_t) Lambda;
+        sign_lambda = 0;
     }
     else
     {
-        uint32_t lambda = (uint32_t) Lambda;
-        uint8_t sign_lambda = 1;
+        lambda = (uint32_t) Lambda;
+        sign_lambda = 1;
     }
 
     //construct payload
@@ -1772,7 +1792,7 @@ bool OAgent_PD::_waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint1
             return false;
         if(_waitForPacket(header,true,timeout)) {                       //unless the packet contains the expected header it will keep waiting
             int32_t aLsb = _rx->getRemoteAddress64().getLsb();
-            uint16_t recipientID = _getRecipientIDFromPacket()
+            uint16_t recipientID = _getRecipientIDFromPacket();
             uint8_t index;  
             if(_G->isInNeighbor(aLsb,index)) {
                 if(recipientID == nodeID) {    //check that the packet's recipient ID matches the node ID
@@ -1847,7 +1867,8 @@ void OAgent_PD::_waitForSchedulePacket(uint16_t header, unsigned long &startTime
 
 bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
     uint8_t neighborID;
-    LinkedList * _l = (_G->getLocalVertex())->getLinkedList();    //get pointer to linked list
+    LinkedList * l = _G->getLinkedList();    //get pointer to linked list
+    OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     if(_waitForNeighborPacket(neighborID,header,true,timeout)) {  //stays in loop until desired packet received
         if(header == SCHEDULE_FAIR_SPLIT_HEADER)
         {       
@@ -1857,7 +1878,7 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
             uint16_t start = millis();
             while (uint16_t(millis()-start) < 10)
             {
-                _broadcastScheduleFairSplitPacket(startTime,iterations,period)
+                _broadcastScheduleFairSplitPacket(startTime,iterations,period);
                 _broadcastACKPacket(ACK_START_HEADER,neighborID);
             }
             return true;
@@ -1869,7 +1890,7 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
             period      = _getPeriodFromPacket();
             uint16_t start = millis();
             s->setStatus(neighborID, 2);
-            _l->updateLinkedList(_l->getStatusP());   //update linked list
+            l->updateLinkedList(s->getStatusP());   //update linked list
             while (uint16_t(millis()-start) < 10)
             {
                 _broadcastACKPacket(SCHEDULE_PD_ACK_HEADER,neighborID);
@@ -1885,13 +1906,14 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
 bool OAgent_PD::_waitForSchedulePrimalDualPacket(unsigned long &startTime, uint8_t &iterations, int timeout) {
     uint8_t neighborID;
     uint16_t header = SCHEDULE_PD_HEADER;
-    LinkedList * _l = (_G->getLocalVertex())->getLinkedList();                      //get pointer to linked list
+    LinkedList * l = _G->getLinkedList();                      //get pointer to linked list
+    OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     if(_waitForNeighborPacket(neighborID,header,true,timeout)) {                    //stays in loop until desired packet received       
         startTime   = _getStartTimeFromPacket();
         iterations  = _getIterationsFromPacket();
         uint16_t start = millis();
         s->setStatus(neighborID, 2);
-        _l->updateLinkedList(_l->getStatusP());                                     //update linked list
+        l->updateLinkedList(s->getStatusP());                                     //update linked list
         while (uint16_t(millis()-start) < 10)
             _broadcastACKPacket(SCHEDULE_PD_ACK_HEADER,neighborID);
 
@@ -1901,16 +1923,16 @@ bool OAgent_PD::_waitForSchedulePrimalDualPacket(unsigned long &startTime, uint8
         return false;
 }
 
-uint16_t OAgent_PD::_waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
-    uint16_t rsp = _waitForValidPacket(true,timeout);
-    if(rsp != 0x0) {
-        startTime   = _getStartTimeFromPacket();
-        iterations  = _getIterationsFromPacket();
-        period      = _getPeriodFromPacket();    
-        return rsp;
-    }
-    return 0x0;
-}
+// uint16_t OAgent_PD::_waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
+//     uint16_t rsp = _waitForValidPacket(true,timeout);
+//     if(rsp != 0x0) {
+//         startTime   = _getStartTimeFromPacket();
+//         iterations  = _getIterationsFromPacket();
+//         period      = _getPeriodFromPacket();    
+//         return rsp;
+//     }
+//     return 0x0;
+// }
 
 void OAgent_PD::_broadcastACKPacket(uint16_t header, uint8_t recipientID)
 {
@@ -1994,8 +2016,8 @@ bool OAgent_PD::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned lon
     unsigned long start = millis();
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
-    LinkedList * _l = s->getLinkedList();
-    uint8_t counter = _l->getLLsize();
+    LinkedList * l = _G->getLinkedList();
+    uint8_t counter = l->getLLsize();
     uint8_t neighborID;
     _broadcastSchedulePacket(header,startTime,iterations,period);
     while (uint16_t(millis()-start) < timeout)
@@ -2013,7 +2035,7 @@ bool OAgent_PD::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned lon
                             s->setStatus(neighborID, 2);
                             counter++;
                             if (counter==_G->getN()) {
-                                _l->updateLinkedList(_l->getStatusP());   //update linked list
+                                l->updateLinkedList(s->getStatusP());   //update linked list
                                 return true;
                             }
                         }
@@ -2043,8 +2065,8 @@ bool OAgent_PD::_waitForSchedulePacketPD(int timeout, unsigned long startTime, u
     unsigned long start = millis();
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex();                                                            // store pointer to local vertex 
-    LinkedList * _l = s->getLinkedList();
-    uint8_t counter = _l->getLLsize();
+    LinkedList * l = _G->getLinkedList();
+    uint8_t counter = l->getLLsize();
     uint8_t neighborID;
     _broadcastSchedulePacketPD(startTime,iterations);
     while(uint16_t(millis()-start) < timeout)
@@ -2061,7 +2083,7 @@ bool OAgent_PD::_waitForSchedulePacketPD(int timeout, unsigned long startTime, u
                     counter++;
                     if(counter==_G->getN())
                     {
-                        _l->updateLinkedList(_l->getStatusP());                                     //update linked list
+                        l->updateLinkedList(s->getStatusP());                                     //update linked list
                         return true;
                     }
                 }
@@ -2113,24 +2135,31 @@ bool OAgent_PD::_leaderSync() {
     	// seed random number generator with millis
         srand(millis());
         // get the index of a neighbor at random                  //getN() returns the number of nodes in the network
-        int i = (rand() % (_G->getN())) + 1;                 //******changed from _G->getN() to _G->getN() - 1 ******//
-        // broadcast sync begin packet
-        //Serial << "A\n";
-        unsigned long tOne = _broadcastSyncBeginPacket(i);
-        // variable to store receive time of final packet
-        unsigned long tFour;
-        // wait until sync response packet arrives or timeout
-        if(_waitForSyncResponsePacket(tFour))
+        uint8_t *p = (_G->getLocalVertex())->getStatusP();
+        for (int i = 0; i < NUM_REMOTE_VERTICES; i++)
         {
-            uint8_t ptr = 2;
-            unsigned long tTwo = _getUint32_tFromPacket(ptr);
-            long d = tTwo + _getUint32_tFromPacket(ptr) - tOne - tFour;
-        	// compute error between target and base
-        	d = float(d)/float(2);
-        	// broadcast final packet
-			_broadcastSyncFinalPacket(tTwo,d);
-			return true;
+            if(*(p+i)==2)
+            {
+            	// broadcast sync begin packet
+		        //Serial << i+1 <<" is the neighbor chosen\n";
+		        unsigned long tOne = _broadcastSyncBeginPacket(i+1);
+		        // variable to store receive time of final packet
+		        unsigned long tFour;
+		        // wait until sync response packet arrives or timeout
+		        if(_waitForSyncResponsePacket(tFour))
+		        {
+		        	//Serial << "Unicast Response Received\n";
+		            uint8_t ptr = 2;
+		            unsigned long tTwo = _getUint32_tFromPacket(ptr);
+		            long d = tTwo + _getUint32_tFromPacket(ptr) - tOne - tFour;
+		        	// compute error between target and base
+		        	d = float(d)/float(2);
+		        	// broadcast final packet
+					_broadcastSyncFinalPacket(tTwo,d);
+		        }
+            }
         }
+		return true;
     }
     return false;
 }
@@ -2138,7 +2167,7 @@ bool OAgent_PD::_leaderSync() {
 bool OAgent_PD::_targetSync(unsigned long tTwo) {
 	if(_unicastSyncResponsePacket(tTwo))
     {
-        //Serial << "Unicast Response Sent";
+        //Serial << "Unicast Response Sent\n";
 		if(_waitForSyncFinalPacket(SYNC_TIMEOUT))
         {
 			// T = t + d
@@ -2211,6 +2240,15 @@ uint8_t OAgent_PD:: getStatusData(uint8_t neighborID)
 {
 	 OLocalVertex * s = _G->getLocalVertex();
 	 return s->getStatus(neighborID - 1); 
+}
+
+uint8_t OAgent_PD::_addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr) {
+    //Serial << "byte to payload: " << _DEC(data) << endl;
+    payload[ptr]    = data;
+    payload[ptr+1]  = data >> 8;
+    payload[ptr+2]  = data >> 16;
+    payload[ptr+3]  = data >> 24;
+    return ptr + 4;
 }
 
 /// End synchronization helper functions
