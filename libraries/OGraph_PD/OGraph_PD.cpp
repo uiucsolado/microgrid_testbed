@@ -184,7 +184,7 @@ void LinkedList::_prepareLinkedList(int n) {
     _pseudoTail = NULL;
     _codedHead = NULL;
     _codedTail = NULL;
-    _size = 0;
+    _size = 1;
     _numCodedLinks = 0;
 
     for (uint8_t i = 0; i < n; i++)
@@ -207,14 +207,14 @@ void LinkedList::_prepareLinkedList(int n) {
 }
 
 //create a linked list of online neighbors, using their node IDs 
-void LinkedList::updateLinkedList(uint8_t *p) {
-    uint8_t i=0, j=0;
+void LinkedList::updateLinkedList(uint8_t *r) {
+    uint8_t i=0, j=1;
     _pseudoHead = NULL;
     node *tmp;
     tmp = _head;
     while (tmp != NULL)
     {
-        if (*(p+i) == 2)
+        if (*(r+i) >= 2)
         {
             if (_pseudoHead == NULL)
             {
@@ -226,13 +226,35 @@ void LinkedList::updateLinkedList(uint8_t *p) {
                 _pseudoTail->next = tmp;
                 _pseudoTail = tmp;
             }
-            j++;
+            if (*(r+i) == 3)
+                j++;
+            // Serial <<"counter updated to "<<j<<endl;
+            // delay(5);
         }
         tmp = tmp->mainNext;
         i++;
     }
     _pseudoTail->next = NULL;
-    setLLsize (j);
+    setLLsize(j);
+}
+
+//resets the status of all neighbors from 3 to 2 
+void LinkedList::resetLinkedListStatus(uint8_t *r) {
+    uint8_t i=0;
+    node *tmp;
+    tmp = _pseudoHead;
+    while (tmp != NULL)
+    {
+        i = tmp->data;
+        if (*(r+i-1) == 3)
+        {
+            *(r+i-1) = 2;
+            // Serial<< "Status of node "<<i<<" changed from 3 to "<<*(r+i)<<endl;
+            // delay(5);
+        }
+        tmp = tmp->next;
+    }
+    setLLsize(1);
 }
 
 //display a linked list
@@ -241,7 +263,7 @@ void LinkedList::displayLinkedList() {
     tmp = _pseudoHead;
     while (tmp != NULL)
     {
-        Serial << tmp->data << ' ';
+        Serial << tmp->data << " ";
         tmp = tmp->next;
     }
 }
@@ -253,9 +275,8 @@ void LinkedList::displayCodedLinkedList(ORemoteVertex *n) {
     uint8_t i = 0, actCode = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;
-        actCode = (n+i-1)->getLinkActCode();        
-        Serial << actCode << ', ';
+        i = tmp->data;   
+        //Serial << i << " is a coded link with actcode "<< (n+i-1)->getLinkActCode() <<endl;
         tmp = tmp->codedNext;
     }
 }
@@ -270,17 +291,12 @@ uint8_t LinkedList::findUncodedLink(ORemoteVertex *n) {
     {
         i = tmp->data;
         actCode = (n+i-1)->getLinkActCode();
-        delay(10);
-        Serial << actCode << " is the actcode of the link to node " << i << endl;
-
+        // Serial << actCode << " is the actcode of the link to node " << i << endl;
+        // delay(10);
         if (actCode == 0)
             return i;
         tmp = tmp->next;
     }
-
-    delay(100);
-    Serial << "tmp is zero" << endl;
-
     return 0;
 }
 
@@ -310,15 +326,17 @@ void LinkedList::unlinkCodedLink(uint8_t neighborID) {
     }
 }
 
-uint8_t LinkedList::getMaxActCode() {
+uint8_t LinkedList::getMaxActCode(ORemoteVertex *n) {
     node *tmp;
     tmp = _codedHead;
-    uint8_t actCode = 0;
+    uint8_t i = 0, actCode = 0, maxActCode = 0;
 
     while (tmp != NULL)
     {
-        if (tmp->data > actCode)
-            actCode = tmp->data;
+        i = tmp->data;
+        actCode = (n+i-1)->getLinkActCode();
+        if (maxActCode < actCode)
+            maxActCode = actCode;
         tmp = tmp->codedNext;
     }
     return actCode;
@@ -355,6 +373,8 @@ bool LinkedList::isActCodeAvailable(uint8_t code, ORemoteVertex *n, bool &flag) 
         }
         tmp = tmp->codedNext;
     }
+    // Serial << "candactcode found" <<endl;
+    // delay(10);
     return true;
 }
 
@@ -661,7 +681,7 @@ void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, flo
     _fq = 0;
     _lambda = 0;
     _linkActCode = 0;
-    _linkActLead = 0;
+    _linkParent = 0;
     _prepareOVertex(aLsb, neighborID);
 }
 /// End private methods

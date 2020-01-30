@@ -619,15 +619,21 @@ long OAgent_PD::leaderMaxMinConsensus(bool isMax, long max, long min, uint8_t it
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + MC_DELAY;
     long gamma = 0;
-
     bool scheduled =_waitForACKPacket_RSL(SCHEDULE_MAXMIN_HEADER,SCHEDULE_TIMEOUT,startTime,iterations,period);
 
-    if (!scheduled) 
+    if (!scheduled)
+    {
+    	Serial << "maxmin scheduling was a FAIL"<<endl;
         gamma = -1;
+    }
     else
     {
-        if(_waitToStart(startTime,true,1800))
+        Serial << "maxmin scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
+        {
+        	//Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = maxminConsensus(isMax,max,min,iterations,period);
+        }
     }        
     return gamma;
 }
@@ -636,15 +642,22 @@ long OAgent_PD::nonleaderMaxMinConsensus(bool isMax, long max, long min, uint8_t
     unsigned long startTime = 0;
     long gamma = 0;
 
-    bool scheduled = _waitForScheduleMaxMinPacket_RSL(startTime,iterations,period,(period*iterations*3));
+    bool scheduled = _waitForScheduleMaxMinPacket_RSL(startTime,iterations,period,-1);
 
     if(scheduled)
     {
-        if(_waitToStart(startTime,true,1800))
+        Serial << "maxmin scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
+        {
+        	//Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = maxminConsensus(isMax,max,min,iterations,period);
+        }
     }
     else
+    {
+        Serial << "maxmin scheduling was a FAIL"<<endl;
         gamma = -1;
+    }
     return gamma;
 }
 
@@ -681,6 +694,8 @@ long OAgent_PD::maxminConsensus(bool isMax, long max, long min, uint8_t iteratio
                 _broadcastMaxMinPacket(max,min);
             }
         }
+        // Serial << "At iteration "<< k <<" we have "<< max <<" windows"<<endl;
+        // delay(5);
     }
     if(isMax)
         return max;
@@ -741,12 +756,15 @@ bool OAgent_PD::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iter
 
     if (!scheduled) 
     {
+        Serial<<"PD scheduling was a FAIL"<<endl;
         gamma = false;
     }
     else
     {
-        if(_waitToStart(startTime,true,1800))
+        Serial<<"PD scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
         {
+            //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
         }
     }        
@@ -757,7 +775,7 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t i
     unsigned long startTime = 0;
     bool gamma = false;
     //delay(50);
-    bool scheduled = _waitForSchedulePrimalDualPacket(startTime,iterations,(300*iterations));
+    bool scheduled = _waitForSchedulePrimalDualPacket(startTime,iterations,-1);
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     
     //bool stat = startTime>myMillis();
@@ -767,16 +785,17 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t i
 
     if(scheduled)
     {
-        //Serial<<"Schedule received from Node "<<s->getleaderID()<<"\n";
-        if(_waitToStart(startTime,true,1800))
+        Serial<<"PD scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,1000))
+        {
+            //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
+        }
         //digitalWrite(48,LOW);
     }
     else
     {
-        //Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
-        //s->setleaderID(s->getdeputyID());
-        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        Serial<<"PD scheduling was a FAIL"<<endl;
         gamma = false;
     }
     return gamma;
@@ -819,7 +838,10 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
     uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;
 
     for(uint8_t k = 0; k < iterations; k++)
-    {
+    {   
+        Serial << "starting iteration " << k+1 <<endl;
+        delay(5);
+    
         srand(analogRead(0));
         txDone = false;     // initialize toggle to keep track of broadcasts
         start = millis();   // initialize timer
@@ -877,7 +899,6 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
                             _unicastPacket_PD(neighborID,self_fp,self_fq,self_lambda);
                             flag = _waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,7);
                         }
-
                         //get values for fp, fq, and lambda that are received from this neighbor
                         neighbor_fp = _getActiveFlowFromPacket();                               // store incoming value of fp
                         neighbor_fq = _getReactiveFlowFromPacket();                             // store incoming value of fq
@@ -906,10 +927,14 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
         _buffer_mu[k] = Mu;
         _buffer_nu[k] = Nu;
     }
-
     s->setActiveBalance(bP);
     s->setReactiveBalance(bQ);
 
+    Serial << "The net active injection at node" << nodeID << " is "<< P - Pd <<endl;
+    delay(5);
+    Serial << "The net reactive injection at node" << nodeID << " is "<< Q - Qd <<endl;
+    delay(5);
+    return true;
 }
 
 // End Primal Dual methods
@@ -1491,21 +1516,27 @@ float OAgent_PD::_getLambdaFromPacket() {
     return lambda;
 }
 
-void OAgent_PD::linkActivationAlgorithm() {  
+bool OAgent_PD::linkActivationAlgorithm() {  
     uint8_t maxActCode;
     if(isLeader())
         maxActCode = _assignLinkACTCODES();
     else
     {
         _listenForLinkACTCODES(-1);
+        Serial << "Resuming parent role"<<endl;
+		delay(10);
         maxActCode = _assignLinkACTCODES();
         uint16_t start = millis();
         while (uint16_t(millis()-start) < 10)
             _broadcastHeaderPacket(LINKSACT_HEADER);
     }
+    Serial << "Starting maxmin consensus algorithm with maxActCode " << maxActCode <<endl;
     //run max consensus to determine the max activation code value that is used. This will be used to determine the period for each iteration
-    long max =  maxminConsensusAlgorithm(true,maxActCode,0,50,200);
-    _windowsPerPeriod = (uint8_t) max;
+    long max =  maxminConsensusAlgorithm(true,maxActCode,0,10,200);
+    _windowsPerPeriod = uint8_t(max);
+    Serial << "Number of windows per period is " << _windowsPerPeriod <<endl;
+    
+    return true;
 }
 
 uint8_t OAgent_PD:: _assignLinkACTCODES() {
@@ -1518,48 +1549,54 @@ uint8_t OAgent_PD:: _assignLinkACTCODES() {
     uint8_t nodeID = s->getID();
     uint8_t i = 0, j = 0;
 
-    _listenForLinkACTCODES(10);
+    //_listenForLinkACTCODES(10);
 
     recipientID = l->findUncodedLink(n);
-    //Serial << "Link to node " << recipientID << " is has no actcode \n";
+    // Serial << "Link to node " << recipientID << " has no actcode \n";
+    // delay(5);
     while(recipientID != 0)
     {
-        _candactcodePacket(recipientID);
-        if(_waitForUnicastPacket(neighborID,nodeID,ACTCODE_HEADER,true,-1))
+    	while(true)
+    	{
+        	_candactcodePacket(recipientID);
+	    	// Serial << "candactcode sent to node " << neighborID <<endl;
+	     //    delay(5);
+        	if(_waitForUnicastPacket(neighborID,nodeID,ACTCODE_HEADER,true,100))						//wait for an acknowledgement for candactcode packet
+    			break;
+    	}
+    	// Serial << "received actcode from node " << neighborID <<endl;
+     //    delay(5);
+        if(neighborID == recipientID)
         {
-            if(neighborID == recipientID)
-            {
-                i++;
-                (n+(neighborID-1))->setLinkActCode(_getACTCODEFromPacket());
-                l->updateCodedLinks(n);
-		        Serial << "received actcode from node " << neighborID <<endl;
-		        delay(10);
-            }
+            _broadcastACKPacket(ACK_ACTCODE,neighborID);							//send acknowledgement for actcode packet
+        	i++;
+            (n+(neighborID-1))->setLinkActCode(_getACTCODEFromPacket());
+            l->updateCodedLinks(n);
         }
-        _listenForLinkACTCODES(10);
+        //_listenForLinkACTCODES(10);															//placed here to account for a non radial communication graph
         recipientID = l->findUncodedLink(n);
     }
     while (j != i)
     {
         if(_waitForNeighborPacket(neighborID,LINKSACT_HEADER,true,-1))
         {
-            if((l->isCodedLinkAvailable(neighborID)) && !((n+(neighborID-1))->isLinkActLead()))        //if this packet hasn't been received yet and the neighbor is not an activation lead, accept packet
+            if((l->isCodedLinkAvailable(neighborID)) && !((n+(neighborID-1))->isLinkParent()))        //if this packet hasn't been received yet and the neighbor is not a link parent, accept packet
             {    
                 j++;
-                l->unlinkCodedLink(neighborID);
-		        Serial << "received linksact packet from node " << neighborID <<endl;
-		        delay(10);
+                //l->unlinkCodedLink(neighborID);
+		        // Serial << "received linksact packet from node " << neighborID <<endl;
+		        // delay(10);
             }
         }
-        if (j == i)
-            l->updateCodedLinks(n);
+        // if (j == i)
+        //     l->updateCodedLinks(n);
 
         Serial << "received linksact packet from all nodes "<<endl;
         delay(10);
     }
     // display activation codes on serial monitor
     l->displayCodedLinkedList(n);
-    return (l->getMaxActCode());
+    return (l->getMaxActCode(n));
 }
 
 void OAgent_PD::_listenForLinkACTCODES(int timeout) { 
@@ -1576,18 +1613,34 @@ void OAgent_PD::_listenForLinkACTCODES(int timeout) {
     uint8_t actCode = 0;
     if(_waitForUnicastPacket(neighborID,nodeID,CANDACTCODE_HEADER,true,timeout))
     {
-        Serial << "received candactcode from node " << neighborID <<endl;
-    	delay(10);
-        (n+(neighborID-1))->setLinkActLead(true);                               //set neighbor as link activation lead neighbor
+     //    Serial << "received candactcode from node " << neighborID <<endl;
+    	// delay(10);
+        (n+(neighborID-1))->setLinkParent(true);                               //set neighbor as link activation lead neighbor
         while(!codeAvailable)
         {
-            actCode = _getCANDACTCODEFromPacket(k);
-            codeAvailable = l->isActCodeAvailable(actCode,n,flag);
+            
+	        actCode = _getCANDACTCODEFromPacket(k);								//get the kth candidate activation code that is contained in packet
+      //       Serial << "Got actcode " << actCode  << " from packet" <<endl;
+	    	// delay(10);
+            if (k == 0)
+            	codeAvailable = true;
+            else
+            	codeAvailable = l->isActCodeAvailable(actCode,n,flag);
+            if (codeAvailable)
+            {
+          //   	Serial << "act code chosen" <<endl;
+        		// delay(10);
+        	}
             k++;
-            if (k == 22)
-                k = 0;
         }
-        _actcodePacket(neighborID,actCode);
+     //    Serial << "sending actcode to node " << neighborID <<endl;
+    	// delay(10);
+    	while(true)
+    	{
+        	_actcodePacket(neighborID,actCode);
+        	if(_waitForUnicastPacket(neighborID,nodeID,ACK_ACTCODE,true,100))						//wait for an acknowledgement for actcode packet
+    			break;
+    	}
         (n+(neighborID-1))->setLinkActCode(actCode);
         l->updateCodedLinks(n);
     }
@@ -1647,6 +1700,7 @@ void OAgent_PD::_candactcodePacket(uint16_t recipientID) {
                     candactcode++;
                     codeAvailable = l->isActCodeAvailable(candactcode,n,flag);
                 }
+                payload[i] = candactcode;
             }
         }
         _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
@@ -1832,8 +1886,8 @@ void OAgent_PD::_broadcastSchedulePacket(uint16_t header, unsigned long startTim
 void OAgent_PD::_broadcastSchedulePacketPD(unsigned long startTime, uint8_t numIterations) {
     uint8_t payload[7];
     // put header in payload array
-    payload[0] = SCHEDULE_PD_ACK_HEADER;
-    payload[1] = SCHEDULE_PD_ACK_HEADER >> 8;
+    payload[0] = SCHEDULE_PD_HEADER;
+    payload[1] = SCHEDULE_PD_HEADER >> 8;
     // put start time in payload array
     payload[2] = startTime;
     payload[3] = startTime >> 8;
@@ -1867,16 +1921,21 @@ void OAgent_PD::_waitForSchedulePacket(uint16_t header, unsigned long &startTime
 
 bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
     uint8_t neighborID;
-    LinkedList * l = _G->getLinkedList();    //get pointer to linked list
-    OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
-    if(_waitForNeighborPacket(neighborID,header,true,timeout)) {  //stays in loop until desired packet received
+    LinkedList * l = _G->getLinkedList();    							//get pointer to linked list
+    OLocalVertex * s = _G->getLocalVertex(); 							// store pointer to local vertex 
+    l->resetLinkedListStatus(s->getStatusP());                          //gets linkedlist and resets status of online neighbors to 2 
+    
+    // Serial << "Waiting for Schedule Packet"<<endl;
+    // delay(5);
+
+    if(_waitForNeighborPacket(neighborID,header,true,timeout)) {  		//stays in loop until desired packet received
         if(header == SCHEDULE_FAIR_SPLIT_HEADER)
         {       
             startTime   = _getStartTimeFromPacket();
             iterations  = _getIterationsFromPacket();
             period      = _getPeriodFromPacket();
             uint16_t start = millis();
-            while (uint16_t(millis()-start) < 10)
+            while(uint16_t(millis()-start) < 10)
             {
                 _broadcastScheduleFairSplitPacket(startTime,iterations,period);
                 _broadcastACKPacket(ACK_START_HEADER,neighborID);
@@ -1884,19 +1943,43 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
             return true;
         }
         else if(header == SCHEDULE_PD_HEADER)
-        {       
+        {      
             startTime   = _getStartTimeFromPacket();
             iterations  = _getIterationsFromPacket();
             period      = _getPeriodFromPacket();
             uint16_t start = millis();
-            s->setStatus(neighborID, 2);
-            l->updateLinkedList(s->getStatusP());   //update linked list
-            while (uint16_t(millis()-start) < 10)
-            {
+            s->setStatus(neighborID, 3);
+            l->updateLinkedList(s->getStatusP());   					//update linked list
+            while(uint16_t(millis()-start) < 10)
                 _broadcastACKPacket(SCHEDULE_PD_ACK_HEADER,neighborID);
-            }
 
             return _waitForACKPacket_RSL(SCHEDULE_PD_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
+        }
+        else if(header == SCHEDULE_MAXMIN_HEADER)
+        {
+            // Serial << "Received a Schedule Packet"<<endl;
+            // delay(5);
+
+            startTime   = _getStartTimeFromPacket();
+            iterations  = _getIterationsFromPacket();
+            period      = _getPeriodFromPacket();
+            uint16_t start = millis();
+            s->setStatus(neighborID, 3);
+            l->updateLinkedList(s->getStatusP());   					//update linked list
+            while(true)
+            {
+                // Serial << "Sending Schedule ACK Packet to node " << neighborID<<endl;
+                // delay(5);
+
+                _broadcastACKPacket(SCHEDULE_MAXMIN_ACK_HEADER,neighborID);
+                if(_waitForUnicastPacket(neighborID,(_G->getLocalVertex())->getID(),SCHEDULE_MAXMIN_ACKACK_HEADER,true,100))						//wait for an acknowledgement for candactcode packet
+                {
+                    // Serial << "received schedule ACKACK from node " << neighborID<<endl;
+                    // delay(5);
+    				break;
+                }
+            }
+            return _waitForACKPacket_RSL(SCHEDULE_MAXMIN_HEADER,SCHEDULE_TIMEOUT, startTime, iterations, period);
         }
     }
     else
@@ -1906,17 +1989,36 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
 bool OAgent_PD::_waitForSchedulePrimalDualPacket(unsigned long &startTime, uint8_t &iterations, int timeout) {
     uint8_t neighborID;
     uint16_t header = SCHEDULE_PD_HEADER;
-    LinkedList * l = _G->getLinkedList();                      //get pointer to linked list
-    OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
-    if(_waitForNeighborPacket(neighborID,header,true,timeout)) {                    //stays in loop until desired packet received       
+    LinkedList * l = _G->getLinkedList();                      						//get pointer to linked list
+    OLocalVertex * s = _G->getLocalVertex(); 										// store pointer to local vertex 
+    l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2 
+
+    Serial << "Waiting for Schedule PD Packet"<<endl;
+    delay(5);
+
+    if(_waitForNeighborPacket(neighborID,header,true,timeout)) {                    //stays in loop until desired packet received
+
+        Serial << "Received Schedule PD Packet"<<endl;
+        delay(5);
+    
         startTime   = _getStartTimeFromPacket();
         iterations  = _getIterationsFromPacket();
         uint16_t start = millis();
-        s->setStatus(neighborID, 2);
-        l->updateLinkedList(s->getStatusP());                                     //update linked list
-        while (uint16_t(millis()-start) < 10)
-            _broadcastACKPacket(SCHEDULE_PD_ACK_HEADER,neighborID);
+        s->setStatus(neighborID, 3);
+        l->updateLinkedList(s->getStatusP());                                     	//update linked list
+        while(true)
+        {
+            Serial << "Sending Schedule ACK Packet to node " << neighborID<<endl;
+            delay(5);
 
+            _broadcastACKPacket(SCHEDULE_PD_ACK_HEADER,neighborID);
+            if(_waitForUnicastPacket(neighborID,(_G->getLocalVertex())->getID(),SCHEDULE_PD_ACKACK_HEADER,true,100))                        //wait for an acknowledgement for candactcode packet
+            {
+                Serial << "received schedule ACKACK from node " << neighborID<<endl;
+                delay(5);
+                break;
+            }
+        }
         return _waitForSchedulePacketPD(SCHEDULE_TIMEOUT,startTime,iterations);
     }
     else
@@ -2017,24 +2119,45 @@ bool OAgent_PD::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned lon
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     LinkedList * l = _G->getLinkedList();
+
+    if(isLeader())
+        l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2     
+
     uint8_t counter = l->getLLsize();
     uint8_t neighborID;
+    uint16_t headerACK;
+
+    if (counter==_G->getN())
+    	return true;
     _broadcastSchedulePacket(header,startTime,iterations,period);
+
+    if (header == SCHEDULE_PD_HEADER)
+        headerACK = SCHEDULE_PD_ACK_HEADER;
+    else if (header == SCHEDULE_MAXMIN_HEADER)
+        headerACK = SCHEDULE_MAXMIN_ACK_HEADER;
+
     while (uint16_t(millis()-start) < timeout)
     {
-            while (uint16_t(millis()-restart) < timeout*0.125)
+            while (uint16_t(millis()-restart) < timeout*0.01)
             {
-                if(_waitForNeighborPacket(neighborID,header,true,50))
+                if(_waitForNeighborPacket(neighborID,headerACK,true,100))
                 {
-                    if(header == SCHEDULE_PD_ACK_HEADER)
+                    if((headerACK == SCHEDULE_PD_ACK_HEADER) || (headerACK == SCHEDULE_MAXMIN_ACK_HEADER))
                     {
                         uint16_t nodeID = s->getID();
                         uint16_t recipientID = _getRecipientIDFromPacket();
                         if(nodeID == recipientID)
                         {
-                            s->setStatus(neighborID, 2);
-                            counter++;
-                            if (counter==_G->getN()) {
+                        	//Serial << "received acknowledgement from node " << neighborID<<endl;
+				            delay(5);
+                            if(s->getStatus(neighborID) < 3)
+                            {
+                                counter++;
+                                s->setStatus(neighborID, 3);
+                            }
+                            _broadcastACKPacket(SCHEDULE_MAXMIN_ACKACK_HEADER,neighborID);
+                            if (counter==_G->getN())
+                            {
                                 l->updateLinkedList(s->getStatusP());   //update linked list
                                 return true;
                             }
@@ -2042,14 +2165,21 @@ bool OAgent_PD::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned lon
                     }
                     else
                     {
+                    	s->setStatus(neighborID, 3);
                         counter++;
                         if (counter==_G->getN())
+                        {
+                            l->updateLinkedList(s->getStatusP());   //update linked list
                             return true;
+                        }
                     }
                 }
             }
             _broadcastSchedulePacket(header,startTime,iterations,period);
             restart = millis();
+            //Serial << "received acknowledgements from " << counter << " nodes"<<endl;
+            //Serial << "Number of neighbors is " << _G->getN()<<endl;
+            delay(5);
     }
     if (counter < (_G->getN()))
     	{	
@@ -2066,12 +2196,25 @@ bool OAgent_PD::_waitForSchedulePacketPD(int timeout, unsigned long startTime, u
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex();                                                            // store pointer to local vertex 
     LinkedList * l = _G->getLinkedList();
+
+    if(isLeader())
+        l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2     
+
     uint8_t counter = l->getLLsize();
+    // uint8_t counter = 1;
+
+    // Serial << "Counter = "<<counter<<endl;
+    // delay(5);
+    
     uint8_t neighborID;
+    if (counter==_G->getN())
+        return true;
+    Serial << "Broadcasting Schedule PD Packet"<<endl;
+    delay(5);
     _broadcastSchedulePacketPD(startTime,iterations);
     while(uint16_t(millis()-start) < timeout)
     {
-        while(uint16_t(millis()-restart) < timeout*0.125)
+        while(uint16_t(millis()-restart) < timeout*0.01)
         {
             if(_waitForNeighborPacket(neighborID,SCHEDULE_PD_ACK_HEADER,true,50))
             {
@@ -2079,22 +2222,27 @@ bool OAgent_PD::_waitForSchedulePacketPD(int timeout, unsigned long startTime, u
                 uint16_t recipientID = _getRecipientIDFromPacket();
                 if(nodeID == recipientID)
                 {
-                    s->setStatus(neighborID, 2);
-                    counter++;
+                    Serial << "received acknowledgement from node " << neighborID<<endl;
+                    delay(5);
+                    if(s->getStatus(neighborID) < 3)
+                    {
+                        counter++;
+                        s->setStatus(neighborID, 3);
+                    }
+                    Serial << "Counter = "<<counter<<endl;
+                    delay(5);
+    
+                    _broadcastACKPacket(SCHEDULE_PD_ACKACK_HEADER,neighborID);
                     if(counter==_G->getN())
                     {
                         l->updateLinkedList(s->getStatusP());                                     //update linked list
                         return true;
                     }
                 }
-                else
-                {
-                    counter++;
-                    if (counter==_G->getN())
-                        return true;
-                }
             }
         }
+        Serial << "Broadcasting Schedule PD Packet"<<endl;
+        delay(5);
         _broadcastSchedulePacketPD(startTime,iterations);
         restart = millis();
     }

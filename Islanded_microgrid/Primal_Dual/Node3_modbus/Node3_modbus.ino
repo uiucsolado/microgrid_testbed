@@ -13,16 +13,18 @@ XBee xbee = XBee();
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x4151C692,3,1,1,1,1,1,10);  //#NODE
-OGraph_PD g = OGraph_PD(&s);
+OLocalVertex s = OLocalVertex(0x4151C692,3,0,1,1,1,1,10);  //#NODE
+LinkedList l = LinkedList();  //#NODE
+OGraph_PD g = OGraph_PD(&s,&l);
 OAgent_PD a = OAgent_PD(&xbee,&rx,&g,false,true); // argument rx?
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
 uint8_t cPin = 48;     // coordination enabled led pin
 
-//variables for node sync check
+//variables for node sync check and link activation
 boolean de = false;
+boolean le = false;
 
 //Modbus Communication
 MgsModbus Mb; 
@@ -76,6 +78,8 @@ void setup()  {
   //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
   
   g.configureLinkedList();  
+  s.setActiveDemand(0);
+  s.setReactiveDemand(0);
  
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
@@ -145,19 +149,34 @@ void loop() {
   {
     if(a.isSynced())
     {
-      //if(Serial.available())
+      if (le == false)
       {
-        Serial.println("Waiting for link activation");
-        a.linkActivationAlgorithm();
+        if (a.isLeader())
+        {
+          if(Serial.available())
+          {
+            Serial.println("got some input");
+            delay(5); 
+            Serial.println("Starting link activation");
+            le = a.linkActivationAlgorithm();
+          }
+        }
+        else
+        {
+          Serial.println("Waiting for link activation");
+          le = a.linkActivationAlgorithm();
+        }
       }
-      //primaldual = a.primalDualAlgorithm(true,0.1,500);
-      
-      //Serial.println("ratio consensus result");
-      //Serial.println(state1,4);
-      // Controller code over
-       
-       a.resync();
-     }
+      else
+      {
+        Serial.println("Starting Primal Dual Algorithm");
+        primaldual = a.primalDualAlgorithm(true,0.1,5);
+        //Serial.println(state1,4);
+        // Controller code over
+         
+         a.resync();
+      }
+    }
   }
 }
 

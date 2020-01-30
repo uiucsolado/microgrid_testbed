@@ -18,15 +18,19 @@
 #include "OGraph_PD.h"
 
 #define SCHEDULE_MAXMIN_HEADER           0x7330 // schedule coordinate header is ascii s0
+#define SCHEDULE_MAXMIN_ACK_HEADER       0x7332 // schedule coordinate header
+#define SCHEDULE_MAXMIN_ACKACK_HEADER    0x7400 // schedule coordinate header
 #define SCHEDULE_PD_HEADER               0x7340 // schedule coordinate header is ascii s@
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sF
 #define SCHEDULE_PD_ACK_HEADER           0x7334 // schedule coordinate header is ascii s4
+#define SCHEDULE_PD_ACKACK_HEADER        0x7500 // schedule coordinate header is ascii s4
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define PD_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
 #define PD_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
+#define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
-#define WINDOW_LENGTH                    25     // time length for each window in a period
+#define WINDOW_LENGTH                    2000     // time length for each window in a period
 #define BASE                             100000  // base for transmitting decimals
 
 #define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "
@@ -45,10 +49,10 @@
 #define SYNC_FINAL_HEADER                0x7346	// HRTS sync_final header is ascii sF
 #define SYNC_TIMEOUT                     2500    // (was 2500) time out period to wait for response to HRTS sync_begin broadcast in milliseconds
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
-#define SCHEDULE_TIMEOUT                 500    // time out period (in milliseconds) to wait for schedule packet from leader node
+#define SCHEDULE_TIMEOUT                 5000    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750    // delay before ratio consensus starts
-#define MC_DELAY                         750    // delay before maxmin consensus starts
-#define PD_DELAY                         1000   // delay before primal dual algorithm starts
+#define MC_DELAY                         2500    // delay before maxmin consensus starts
+#define PD_DELAY                         2500   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353 // used as the header to indicate the resync process is taking place (1st transaction)
@@ -111,7 +115,7 @@ class OAgent_PD {
         bool standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations);
 
         // communication link activation methods
-        void linkActivationAlgorithm();
+        bool linkActivationAlgorithm();
 
         // HRT Synchronization methods
         bool resync();

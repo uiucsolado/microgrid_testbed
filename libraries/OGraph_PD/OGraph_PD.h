@@ -129,8 +129,8 @@ class OLocalVertex : public OVertex {
         //get number of neighbors
         inline int getNeighborSize() {return _neighborSize; }
         //Status
-        inline uint8_t getStatus(uint8_t neighborID) {return _status[neighborID-1]; }
-        inline uint8_t * getStatusP() {return _statusP; }
+        inline uint8_t getStatus(uint8_t neighborID) {return _status[neighborID-1]; }                       //get status 
+        inline uint8_t * getStatusP() {return _statusP; }                                                   //get staus pointer
         inline void setStatus(uint8_t neighborID, uint8_t status) { _status[neighborID-1] = status;  } 
         // State Z
         inline void setZ(long z) { _z = z; }
@@ -287,7 +287,7 @@ class ORemoteVertex : public OVertex {
         inline float getLambda() { return _lambda; }
 
         inline uint8_t getLinkActCode() { return _linkActCode; }
-        inline bool isLinkActLead() { return _linkActLead; }
+        inline bool isLinkParent() { return _linkParent; }
         
         // Set directive for primal dual algorithm
         inline void setResistance(float r) {_r = r; }
@@ -298,7 +298,7 @@ class ORemoteVertex : public OVertex {
         inline void setLambda(float lambda) {_lambda = lambda; }
 
         inline void setLinkActCode(uint8_t linkActCode) {_linkActCode = linkActCode; }
-        inline void setLinkActLead(bool linkActLead) {_linkActLead = linkActLead; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
+        inline void setLinkParent(bool linkParent) {_linkParent = linkParent; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
 
     private:
         /// Properties
@@ -321,7 +321,7 @@ class ORemoteVertex : public OVertex {
         uint8_t _linkActCode;
 
         //check if neighbor is a link activation lead
-        bool _linkActLead;
+        bool _linkParent;
 };
 
 
@@ -351,13 +351,15 @@ class LinkedList {
         //method to display coded linked lists
         void displayCodedLinkedList(ORemoteVertex *n);
         //method to get maximum activation code
-        uint8_t getMaxActCode();
+        uint8_t getMaxActCode(ORemoteVertex *n);
         //method to see if a link is still available
         bool isCodedLinkAvailable(uint8_t neighborID);
         //method to unlink the first node the linkedlist points to and return its data
         uint8_t unlinkLinkedListNodes();
         //method to update the linked list of online node IDs based on neighbor status
-        void updateLinkedList(uint8_t *p);
+        void updateLinkedList(uint8_t *r);
+        //resets the status of all neighbors from 3 to 2 
+        void resetLinkedListStatus(uint8_t *r);
         //method to find an uncoded link
         void updateCodedLinks(ORemoteVertex *n);
         //method to unlink a coded link
