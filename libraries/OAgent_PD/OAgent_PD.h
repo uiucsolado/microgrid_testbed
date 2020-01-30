@@ -30,7 +30,7 @@
 #define PD_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
 #define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
-#define WINDOW_LENGTH                    2000     // time length for each window in a period
+#define WINDOW_LENGTH                    1000     // time length for each window in a period
 #define BASE                             100000  // base for transmitting decimals
 
 #define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "

@@ -786,7 +786,7 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t i
     if(scheduled)
     {
         Serial<<"PD scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,1000))
+        if(_waitToStart(startTime,true,10000))
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
@@ -839,9 +839,6 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
 
     for(uint8_t k = 0; k < iterations; k++)
     {   
-        Serial << "starting iteration " << k+1 <<endl;
-        delay(5);
-    
         srand(analogRead(0));
         txDone = false;     // initialize toggle to keep track of broadcasts
         start = millis();   // initialize timer
@@ -855,6 +852,9 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
 
         for(int i=1; i <= _windowsPerPeriod; i++)
         {
+            Serial << "Iteration (" << k+1 <<","<<i<<")"<<endl;
+            delay(5);
+        
             flag = false;
 
             while( uint16_t(millis()-start) < (i*WINDOW_LENGTH) )
@@ -879,7 +879,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
                             while(!flag)
                             {
                                 _unicastPacket_PD(neighborID,self_fp,self_fq,self_lambda);
-                                flag = _waitForUnicastPacket(neighborID,nodeID,PD_ACK_HEADER,true,7);
+                                flag = _waitForUnicastPacket(neighborID,nodeID,PD_ACK_HEADER,true,50);
                             }
 
                             (n+(neighborID-1))->setActiveFlow(0.5*(self_fp+neighbor_fp));
@@ -897,7 +897,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
                         while(!flag)
                         {
                             _unicastPacket_PD(neighborID,self_fp,self_fq,self_lambda);
-                            flag = _waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,7);
+                            flag = _waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,50);
                         }
                         //get values for fp, fq, and lambda that are received from this neighbor
                         neighbor_fp = _getActiveFlowFromPacket();                               // store incoming value of fp
@@ -930,9 +930,9 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
     s->setActiveBalance(bP);
     s->setReactiveBalance(bQ);
 
-    Serial << "The net active injection at node" << nodeID << " is "<< P - Pd <<endl;
+    Serial << "The active power injection at node" << nodeID << " is "<< P <<endl;
     delay(5);
-    Serial << "The net reactive injection at node" << nodeID << " is "<< Q - Qd <<endl;
+    Serial << "The reactive power injection at node" << nodeID << " is "<< Q <<endl;
     delay(5);
     return true;
 }

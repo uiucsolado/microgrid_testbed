@@ -170,9 +170,14 @@ void loop() {
       else
       {
         Serial.println("Starting Primal Dual Algorithm");
-        primaldual = a.primalDualAlgorithm(true,0.1,5);
+        primaldual = a.primalDualAlgorithm(true,0.1,500);
         //Serial.println(state1,4);
         // Controller code over
+        
+        while (Serial.available() == 0) 
+        { 
+          //simply makes the arduino wait until commputer sends signal        
+        }
          
          a.resync();
       }
