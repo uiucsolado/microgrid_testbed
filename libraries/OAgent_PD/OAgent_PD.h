@@ -51,8 +51,8 @@
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
 #define SCHEDULE_TIMEOUT                 5000    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750    // delay before ratio consensus starts
-#define MC_DELAY                         2500    // delay before maxmin consensus starts
-#define PD_DELAY                         2500   // delay before primal dual algorithm starts
+#define MC_DELAY                         5000    // delay before maxmin consensus starts
+#define PD_DELAY                         5000   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353 // used as the header to indicate the resync process is taking place (1st transaction)
@@ -217,8 +217,9 @@ class OAgent_PD {
         void _broadcastFairSplitPacket_RSL(OLocalVertex * s);
         
         void _broadcastMaxMinPacket(long max, long min);
-        //Unicast Primal Dual Packet - SN addition      edited by Olaolu
-        void _unicastPacket_PD(uint16_t recipientID, float fP, float fQ, float Lambda);
+        //Unicast Primal Dual Packet - SN addition edited by Olaolu
+        void _unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag_PD);
+        void _unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag_PD, float fP_p, float fQ_p, float Lambda_p);
 
         //link activation packets - added by Olaolu
         void _candactcodePacket(uint16_t recipientID);
@@ -299,6 +300,12 @@ class OAgent_PD {
         float _getActiveFlowFromPacket();
         float _getReactiveFlowFromPacket();
         float _getLambdaFromPacket();
+        
+        bool _getFlagFromPacket();
+
+        float _getActiveFlowFromPacket_self();
+        float _getReactiveFlowFromPacket_self();
+        float _getLambdaFromPacket_self();
         inline uint16_t _getRecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
         //
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }

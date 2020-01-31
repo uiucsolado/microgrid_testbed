@@ -155,6 +155,7 @@ void loop() {
         {
           if(Serial.available())
           {
+            int bbb = Serial.read();  
             Serial.println("got some input");
             delay(5); 
             Serial.println("Starting link activation");
@@ -170,7 +171,7 @@ void loop() {
       else
       {
         Serial.println("Starting Primal Dual Algorithm");
-        primaldual = a.primalDualAlgorithm(true,0.1,500);
+        primaldual = a.primalDualAlgorithm(false,0.02,500);
         //Serial.println(state1,4);
         // Controller code over
         
