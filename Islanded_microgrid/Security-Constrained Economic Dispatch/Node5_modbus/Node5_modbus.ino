@@ -1,8 +1,8 @@
 #include <Streaming.h>
 #include <XBee.h>
 //#include <Dyno.h>
-#include <OGraph_FF.h>
-#include <OAgent_FF.h>
+#include <OGraph_SCED.h>
+#include <OAgent_SCED.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
@@ -15,8 +15,8 @@ ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
 OLocalVertex s = OLocalVertex(0x4151C688,5,0,1,1,1,1,10);  //#NODE
 LinkedList l = LinkedList();  //#NODE
-OGraph_FF g = OGraph_FF(&s,&l);
-OAgent_FF a = OAgent_FF(&xbee,&rx,&g,false,true); // argument rx?
+OGraph_SCED g = OGraph_SCED(&s,&l);
+OAgent_SCED a = OAgent_SCED(&xbee,&rx,&g,false,true); // argument rx?
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
@@ -47,7 +47,7 @@ int count;
 int pos;
 long t;
 float D;
-bool feasibleflow;
+bool feasible;
 
 void setup()  {
   Serial.begin(38400);
@@ -170,8 +170,8 @@ void loop() {
       }
       else
       {
-        Serial.println("Starting Feasible Flow Algorithm");
-        feasibleflow = a.FeasibleFlowAlgorithm(false,0.2,100);
+        Serial.println("Starting Security Constrained Economic Dispatch");
+        feasible = a.SecurityConstrainedEconomicDispatch(false,0.2,100);
         //Serial.println(state1,4);
         // Controller code over
         
