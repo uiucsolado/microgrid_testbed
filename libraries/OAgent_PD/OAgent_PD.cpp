@@ -849,8 +849,8 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
     float sqV = s->getSquareVoltage();                                                          // square voltage magnitude
     float Mu = s->getMu();                                                                      // lagrange multiplier
     float Nu = s->getNu();                                                                      // lagrange multiplier
-    float bP = P - Pd - l->addActiveFlows(n);                                                  // active balance
-    float bQ = Q - Qd - l->addReactiveFlows(n);                                                 // reactive balance
+    float bP = P - Pd - l->addActiveFlows(nodeID,n);                                                  // active balance
+    float bQ = Q - Qd - l->addReactiveFlows(nodeID,n);                                                 // reactive balance
     
     bool flag;
 
@@ -877,7 +877,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
         
         P = P - genBus*alpha*( Mu+((s->getDp())*P)+((s->getWp())*bP) );
         Q = Q - genBus*alpha*( Nu+((s->getDq())*Q)+((s->getWq())*bQ) );
-        sqV = sqV - alpha*( l->addLambdas(n)+((s->getWv())*(sqV-1)) );
+        sqV = sqV - alpha*( l->addLambdas(nodeID,n)+((s->getWv())*(sqV-1)) );
         Mu = Mu + alpha*bP;
         Nu = Nu + alpha*bQ;
 
@@ -931,7 +931,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
                                 new_self_fq =0.5*(self_fq+neighbor_fq)+gq;
                                 new_self_lambda = 0.5*(self_lambda+neighbor_lambda)+g_lambda;
 
-                                self_flags[neighborID-1] = ~self_flags[neighborID-1];
+                                self_flags[neighborID-1] = !self_flags[neighborID-1];
 
                                 vect_self_fp[neighborID-1]=self_fp;
                                 vect_neighbor_fp[neighborID-1]=neighbor_fp;
@@ -953,7 +953,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
                             (n+(neighborID-1))->setLambda(new_self_lambda);
 
                             // _unicastPacket_PD_C(neighborID,self_fp,self_fq,self_lambda,self_flag,neighbor_fp,neighbor_fq,neighbor_lambda);
-                             _unicastPacket_PD_C(neighborID,vect_self_fp[neighborID-1],vect_self_fq[neighborID-1],vect_self_lambda[neighborID-1],self_flags[neighborID-1],vect_neighbor_fp[neighborID-1],vect_neighbor_fq[neighborID-1],vect_neighbor_lambda[neighborID-1]);
+                            _unicastPacket_PD_C(neighborID,vect_self_fp[neighborID-1],vect_self_fq[neighborID-1],vect_self_lambda[neighborID-1],self_flags[neighborID-1],vect_neighbor_fp[neighborID-1],vect_neighbor_fq[neighborID-1],vect_neighbor_lambda[neighborID-1]);
 
                         }
                         else
@@ -1006,7 +1006,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
                                 new_self_fq =0.5*(self_old_fq+neighbor_old_fq)+self_fq-self_old_fq+gq;
                                 new_self_lambda = 0.5*(self_old_lambda+neighbor_old_lambda)+self_lambda-self_old_lambda+g_lambda;
 
-                                self_flags[neighborID-1] =~ self_flags[neighborID-1];
+                                self_flags[neighborID-1] = !self_flags[neighborID-1];
 
                             }
                             else
@@ -1037,8 +1037,8 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
             }
         }
         
-        bP = P - Pd - l->addActiveFlows(n);
-        bQ = Q - Qd - l->addReactiveFlows(n);
+        bP = P - Pd - l->addActiveFlows(nodeID,n);
+        bQ = Q - Qd - l->addReactiveFlows(nodeID,n);
 
         _buffer_P[k] = P;
         _buffer_Q[k] = Q;

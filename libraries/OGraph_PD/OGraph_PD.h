@@ -371,9 +371,9 @@ class LinkedList {
         //method to check if an activation code is used; if yes, the ID of the remote vertex is returned
         uint8_t isActCodeUsed(uint8_t code, ORemoteVertex *n);
 
-        uint8_t addActiveFlows(ORemoteVertex *n);
-        uint8_t addReactiveFlows(ORemoteVertex *n);
-        uint8_t addLambdas(ORemoteVertex *n);
+        uint8_t addActiveFlows(uint8_t i, ORemoteVertex *n);
+        uint8_t addReactiveFlows(uint8_t i, ORemoteVertex *n);
+        uint8_t addLambdas(uint8_t i, ORemoteVertex *n);
 
 
     private:
