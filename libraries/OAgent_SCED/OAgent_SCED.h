@@ -114,6 +114,12 @@ class OAgent_SCED {
         bool nonleaderSCED(bool genBus, float alpha, uint8_t iterations);
         bool StandardSCED(bool genBus);
         bool AcceleratedSCED(bool genBus);
+        void _SendToChild(uint16_t recipientID, float fP, float yP, bool flag_SCED);
+        void _SendToParent(uint16_t recipientID, float fP_c, float yP_c, bool flag_SCED, float fP_p, float yP_p);
+        float* _getPacketFromChild();
+        float* _getPacketFromParent();
+        bool _getFlagFromChild();
+        bool _getFlagFromParent();
 
         // communication link activation methods
         bool linkActivationAlgorithm();

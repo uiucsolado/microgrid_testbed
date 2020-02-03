@@ -766,6 +766,7 @@ bool OAgent_SCED::leaderSCED(bool genBus, float alpha, uint8_t iterations) {
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = StandardSCED(genBus);
+            // gamma = AcceleratedSCED(genBus);
         }
     }        
     return gamma;
@@ -790,6 +791,7 @@ bool OAgent_SCED::nonleaderSCED(bool genBus, float alpha, uint8_t iterations) {
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = StandardSCED(genBus);
+            // gamma = AcceleratedSCED(genBus);
         }
         //digitalWrite(48,LOW);
     }
@@ -1058,26 +1060,37 @@ bool OAgent_SCED::AcceleratedSCED(bool genBus) {
     }
 
     
-    float flows[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)flows[i]=0;
-    float self_fp=0;                                                                              // self state variable active flow
-    float neighbor_fp=0;                                                                          // neighbor state variable active flow
-    
-    float self_old_fp=0;                                                                              // self state variable active flow                                                                       
-    float neighbor_old_fp=0;                                                                          // neighbor state variable active flow                                                                       
-    float new_self_fp=0;                                                                              // self state variable active flow                                                                        
-
-    bool pos_flow;
+    float fp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)fp[i]=0;
+    float yp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)yp[i]=0;
+    float new_fp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)new_fp[i]=0;
+    float new_yp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)new_yp[i]=0;                                                                         // neighbor state variable active flow
 
     float vect_self_fp[NUM_REMOTE_VERTICES];  for (int i=0;i<NUM_REMOTE_VERTICES;i++)vect_self_fp[i]=0;
     float vect_neighbor_fp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)vect_neighbor_fp[i]=0;
+    float vect_self_yp[NUM_REMOTE_VERTICES];  for (int i=0;i<NUM_REMOTE_VERTICES;i++)vect_self_yp[i]=0;
+    float vect_neighbor_yp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)vect_neighbor_yp[i]=0;
     uint8_t received_from[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
     
+    float self_fp,neighbor_fp,self_old_fp,neighbor_old_fp;                                                                          // neighbor state variable active flow                                                                                                                                                   // self state variable active flow                                                                        
+
+    bool pos_flow;
+
     float P = genBus*(s->getActiveSetpoint());  
     float Pd = s->getActiveDemand();                                                // active injection
     float bP = P - Pd;                                                  // active balance
     float dP,gp;
 
-    float alpha=0.01,beta=2,iterations=500;
+    for (uint8_t i:neighbors) {
+        if (i>nodeID){
+            yp[i-1] = -2*(lambda+beta*bP);
+        }
+        else{
+            yp[i-1] = 2*(lambda+beta*bP);
+        }           
+
+    }
+
+    float alpha=0.1,beta=2,iterations=500;
 
     bool txDone;                                // create variable to keep track of broadcasts
     int timeout;                               // create variable to keep track of broadcasts
@@ -1105,59 +1118,66 @@ bool OAgent_SCED::AcceleratedSCED(bool genBus) {
 
              uint8_t nei_to_send=neighbors[i]; 
              i++; if (i==_G->getN()) i=0;
-            if (nei_to_send<nodeID) _unicastPacket_SCED_C(nei_to_send,vect_self_fp[nei_to_send-1],self_flags[nei_to_send-1],vect_neighbor_fp[nei_to_send-1]);
-            else if(nei_to_send>nodeID) _unicastPacket_SCED_P(nei_to_send,flows[nei_to_send-1],self_flags[nei_to_send-1]);
+            if (nei_to_send<nodeID) _SendToParent(nei_to_send,vect_self_fp[nei_to_send-1],vect_self_yp[nei_to_send-1],self_flags[nei_to_send-1],vect_neighbor_fp[nei_to_send-1],vect_neighbor_yp[nei_to_send-1]);
+            else if(nei_to_send>nodeID) _SendToChild(nei_to_send,fp[nei_to_send-1],yp[nei_to_send-1],self_flags[nei_to_send-1]);
 
             if(_waitForUnicastPacket(neighborID,nodeID,SCED_HEADER,true,200))                                // SCED packet available for node from its neighbor
             {
                 //Serial<<"neighbor is "<<neighborID<<" "<<received_from[neighborID-1]<<endl; delay(5);
                 if (!received_from[neighborID-1]){
                     received_from[neighborID-1]=1;
-                    if(neighborID < nodeID)  // in-coming flow
+                    if(neighborID < nodeID)  // in-coming flow, nodeID - child
                     {
-                        self_fp = flows[neighborID-1];
-                        gp = lambda+beta*bP;  // in-coming flow
+                        self_fp = fp[neighborID-1];
+                        self_yp = yp[neighborID-1];
                         //get values for fp, fq, and lambda that are received from this neighbor
-                        neighbor_fp = _getActiveFlowFromPacket();                               // store incoming value of fp
-                        neighbor_flag = _getFlagFromPacket();                                       // store incoming value of lambda                
+                        float* tmp=_getPacketFromChild();
+                        neighbor_fp = tmp[0]; 
+                        neighbor_yp = tmp[1];                              // store incoming value of fp
+                        neighbor_flag = _getFlagFromChild();                                       // store incoming value of lambda                
                         
                         if (neighbor_flags[neighborID-1] != neighbor_flag)
                         {       
                             //get values for fp, fq, and lambda that are currently associated with this neighbor
-                            new_self_fp = 0.5*(self_fp+neighbor_fp)-alpha*yp[neighborID-1];
-                            new_self_yp = 0.5*(self_yp+neighbor_yp)
+                            new_fp[neighborID-1] = 0.5*(self_fp+neighbor_fp)-alpha*yp[neighborID-1];
+                            new_yp[neighborID-1] = 0.5*(self_yp+neighbor_yp)
 
                             self_flags[neighborID-1] = !self_flags[neighborID-1];
                             neighbor_flags[neighborID-1] = neighbor_flag;
 
-                            vect_self_fp[neighborID-1]=self_fp;
-                            vect_neighbor_fp[neighborID-1]=neighbor_fp;
+                            vect_self_fp[neighborID-1]=self_fp; vect_self_yp[neighborID-1]=self_yp;
+                            vect_neighbor_fp[neighborID-1]=neighbor_fp; vect_neighbor_yp[neighborID-1]=neighbor_yp;
 
                         }
                         else
                         {
-                            new_self_fp = self_fp-alpha*yp[neighborID-1];
+                            new_fp[neighborID-1] = self_fp-alpha*yp[neighborID-1];
+                            new_yp[neighborID-1] = self_yp;
 
                         }
-                        if (new_self_fp>1) new_self_fp=1;
-                        else if (new_self_fp<-1) new_self_fp=-1;
-                        new_bP+=new_self_fp;
+                        if (new_fp[neighborID-1]>1) new_fp[neighborID-1]=1;
+                        else if (new_fp[neighborID-1]<-1) new_fp[neighborID-1]=-1;
+                        new_bP+=new_fp[neighborID-1];
 
                     }
-                    else if((neighborID > nodeID))  //out-going flow
+                    else if((neighborID > nodeID))  //out-going flow, nodeID - parent
                     {
                         //get values for fp, fq, and lambda that are currently associated with this neighbor
-                        self_fp = flows[neighborID-1];
-                        gp = -lambda-beta*bP;
+                        self_fp = fp[neighborID-1];
+                        self_yp = yp[neighborID-1];
 
-                        self_old_fp = _getActiveFlowFromPacket_self();                               // store incoming value of fp
-                        neighbor_old_fp = _getActiveFlowFromPacket();                               // store incoming value of fp
-                        neighbor_flag = _getFlagFromPacket();                                       // store incoming value of lambda
+                        float* tmp=_getPacketFromParent(); 
+                        self_old_fp = tmp[0];  
+                        self_old_yp = tmp[1];                              // store incoming value of fp
+                        neighbor_old_fp = tmp[2]; 
+                        neighbor_old_yp = tmp[3];                              // store incoming value of fp
+                        neighbor_flag = _getFlagFromParent();                                       // store incoming value of lambda
 
                         if (neighbor_flags[neighborID-1] != neighbor_flag)
                         {       
                             //get values for fp, fq, and lambda that are currently associated with this neighbor
-                            new_self_fp = 0.5*(self_old_fp+neighbor_old_fp)+self_fp-self_old_fp-alpha*yp[neighborID-1];
+                            new_fp[neighborID-1] = 0.5*(self_old_fp+neighbor_old_fp)+self_fp-self_old_fp-alpha*yp[neighborID-1];
+                            new_yp[neighborID-1] = 0.5*(self_old_yp+neighbor_old_yp)+self_yp-self_old_yp
                             //Serial<<"Flag at "<<neighborID<<" is "<<self_flags[neighborID-1]<<" and "<<!self_flags[neighborID-1]<<endl;delay(5);
                             self_flags[neighborID-1] =!self_flags[neighborID-1];
                             neighbor_flags[neighborID-1] = neighbor_flag;
@@ -1165,14 +1185,15 @@ bool OAgent_SCED::AcceleratedSCED(bool genBus) {
                         }
                         else
                         {
-                            new_self_fp = self_fp-alpha*yp[neighborID-1];
+                            new_fp[neighborID-1] = self_fp-alpha*yp[neighborID-1];
+                            new_yp[neighborID-1] = self_yp;
 
                         }
-                        if (new_self_fp>1) new_self_fp=1;
-                        else if (new_self_fp<-1) new_self_fp=-1;
-                        new_bP-=new_self_fp;
+                        if (new_fp[neighborID-1]>1) new_fp[neighborID-1]=1;
+                        else if (new_fp[neighborID-1]<-1) new_fp[neighborID-1]=-1;
+                        new_bP-=new_fp[neighborID-1];
                     }
-                    flows[neighborID-1]=new_self_fp; //Serial<<"New Flow at neighbor "<<neighborID<<" is "<<new_self_fp<<endl; delay(5);
+                    //Serial<<"New Flow at neighbor "<<neighborID<<" is "<<new_self_fp<<endl; delay(5);
                 }
                 
             }
@@ -1181,31 +1202,44 @@ bool OAgent_SCED::AcceleratedSCED(bool genBus) {
         for (uint8_t i:neighbors) {
             if (!received_from[i-1]){
                 if (i>nodeID){
-                    gp = -lambda-beta*bP; 
-                    new_self_fp = flows[i-1] -alpha*yp[i-1];
-                    if (new_self_fp>1) new_self_fp=1;
-                    else if (new_self_fp<-1) new_self_fp=-1;
-                    new_bP-=new_self_fp;
+                    new_fp[i-1] = fp[i-1] -alpha*yp[i-1];
+                    new_yp[i-1] = yp[i-1];
+                    if (new_fp[i-1]>1) new_fp[i-1]=1;
+                    else if (new_fp[i-1]<-1) new_fp[i-1]=-1;
+                    new_bP-=new_fp[i-1];
                 }
                 else{
-                    gp = lambda+beta*bP;
-                    new_self_fp = flows[i-1] -alpha*yp[i-1];
-                    if (new_self_fp>1) new_self_fp=1;
-                    else if (new_self_fp<-1) new_self_fp=-1;
-                    new_bP+=new_self_fp;
+                    new_fp[i-1] = fp[i-1] -alpha*yp[i-1];
+                    new_yp[i-1] = yp[i-1];
+                    if (new_fp[i-1]>1) new_fp[i-1]=1;
+                    else if (new_fp[i-1]<-1) new_fp[i-1]=-1;
+                    new_bP+=new_fp[i-1];
                 }
                 
-                flows[i-1]=new_self_fp;//Serial<<"New Flow at neighbor "<<i<<" is "<<new_self_fp<<endl; delay(5);
+                //Serial<<"New Flow at neighbor "<<i<<" is "<<new_self_fp<<endl; delay(5);
             }
             else received_from[i-1]=0;
+
         }
         P = P - alpha*dP;
         if (!genbus) P=0;
         if (P>1) P=1;
         else if (P<-1) P=-1;
-        lambda = lambda+alpha*bP;
+        fp=new_fp;
+
+        new_lambda = lambda+alpha*bP;
         new_bP +=P-Pd;
 
+        for (uint8_t i:neighbors) {
+            if (i>nodeID){
+                new_yp[i-1] -= 2*(new_lambda+beta*new_bP-lambda-beta*bP);
+            }
+            else{
+                new_yp[i-1] += 2*(new_lambda+beta*new_bP-lambda-beta*bP);
+            }           
+
+        }
+        yp = new_yp;
         bP = new_bP;
 
         _buffer_P[k] = P;
@@ -1220,6 +1254,191 @@ bool OAgent_SCED::AcceleratedSCED(bool genBus) {
 }
 
 
+
+
+void OAgent_SCED::_SendToChild(uint16_t recipientID, float fP, float yP, bool flag_SCED) {
+    uint8_t payload[14];
+    uint32_t fp,yp;
+    uint8_t sign_fp,sign_yp;
+    fP = fP*BASE;yP = yP*BASE;
+
+    //check if active flow is negative
+    if (fP < 0) 
+    {
+        fP = -1*fP;
+        fp = (uint32_t) fP;
+        sign_fp = 0;
+    }
+    else
+    {
+        fp = (uint32_t) fP;
+        sign_fp = 1;
+    }
+
+    //check if yp is negative
+    if (yP < 0) 
+    {
+        yP = -1*yP;
+        yp = (uint32_t) yP;
+        sign_yp = 0;
+    }
+    else
+    {
+        yp = (uint32_t) yP;
+        sign_yp = 1;
+    }
+
+    //construct payload
+    payload[0] = SCED_HEADER;
+    payload[1] = SCED_HEADER >> 8;
+    payload[2] = recipientID;
+    payload[3] = recipientID >> 8;
+    payload[4] = sign_fp;
+    payload[5] = fp;
+    payload[6] = fp >> 8;
+    payload[7] = fp >> 16;
+    payload[8] = fp >> 24;
+    payload[9] = sign_yp;
+    payload[10] = yp;
+    payload[11] = yp >> 8;
+    payload[12] = yp >> 16;
+    payload[13] = yp >> 24;
+    payload[14] = flag_SCED;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+void OAgent_SCED::_SendToParent(uint16_t recipientID, float fP_c, float yP_c, bool flag_SCED, float fP_p, float yP_p) {
+     uint8_t payload[25];
+    uint32_t fp_c,yp_c,fp_p,yp_p;
+    uint8_t sign_fp_c,sign_yp_c,sign_fp_p,sign_yp_p;
+    fP_c = fP_c*BASE;yP_c = yP_c*BASE;fP_p = fP_p*BASE;yP_p = yP_p*BASE;
+
+    //check if active flow is negative
+    if (fP_c < 0) 
+    {
+        fP_c = -1*fP_c;
+        fp_c = (uint32_t) fP_c;
+        sign_fp_c = 0;
+    }
+    else
+    {
+        fp_c = (uint32_t) fP_c;
+        sign_fp_c = 1;
+    }
+
+    //check if yp is negative
+    if (yP_c < 0) 
+    {
+        yP_c = -1*yP_c;
+        yp_c = (uint32_t) yP_c;
+        sign_yp_c = 0;
+    }
+    else
+    {
+        yp_c = (uint32_t) yP_c;
+        sign_yp_c = 1;
+    }
+
+    //construct payload
+    payload[0] = SCED_HEADER;
+    payload[1] = SCED_HEADER >> 8;
+    payload[2] = recipientID;
+    payload[3] = recipientID >> 8;
+    payload[4] = sign_fp_c;
+    payload[5] = fp_c;
+    payload[6] = fp_c >> 8;
+    payload[7] = fp_c >> 16;
+    payload[8] = fp_c >> 24;
+    payload[9] = sign_yp_c;
+    payload[10] = yp_c;
+    payload[11] = yp_c >> 8;
+    payload[12] = yp_c >> 16;
+    payload[13] = yp_c >> 24;
+    payload[14] = flag_SCED;
+    payload[15] = sign_fp_p;
+    payload[16] = fp_p;
+    payload[17] = fp_p >> 8;
+    payload[18] = fp_p >> 16;
+    payload[19] = fp_c >> 24;
+    payload[20] = sign_yp_p;
+    payload[21] = yp_p;
+    payload[22] = yp_p >> 8;
+    payload[23] = yp_p >> 16;
+    payload[24] = yp_p >> 24;
+
+    
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+
+float* OAgent_SCED::_getPacketFromChild() {
+    float a[4];
+
+    int32_t mag_fp_c = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
+    int8_t sign_fp_c = -1 + ((_rx->getData(4))*2);
+    float fp_c = (float) (sign_fp_c*mag_fp_c);
+    fp_c = fp_c/BASE;
+
+    int32_t mag_yp_c = (int32_t(_rx->getData(13)) << 24) + (int32_t(_rx->getData(12)) << 16) + (int16_t(_rx->getData(11)) << 8) + int8_t(_rx->getData(10));
+    int8_t sign_yp_c = -1 + ((_rx->getData(9))*2);
+    float yp = (float) (sign_yp_c*mag_yp_c);
+    yp_c = yp_c/BASE;
+
+    int32_t mag_fp_p = (int32_t(_rx->getData(19)) << 24) + (int32_t(_rx->getData(18)) << 16) + (int16_t(_rx->getData(17)) << 8) + int8_t(_rx->getData(16));
+    int8_t sign_fp_p = -1 + ((_rx->getData(15))*2);
+    float fp_p = (float) (sign_fp_p*mag_fp_p);
+    fp_p = fp_p/BASE;
+
+    int32_t mag_yp_p = (int32_t(_rx->getData(24)) << 24) + (int32_t(_rx->getData(23)) << 16) + (int16_t(_rx->getData(22)) << 8) + int8_t(_rx->getData(21));
+    int8_t sign_yp_p = -1 + ((_rx->getData(20))*2);
+    float yp_p = (float) (sign_yp_p*mag_yp_p);
+    yp_p = yp_p/BASE;
+
+    a[0]=fp_c; a[1]=yp_c; a[2]=fp_p; a[3]=yp_p;
+
+    return a;
+}
+
+float* OAgent_SCED::_getPacketFromParent() {
+    float a[2];
+    int32_t mag_fp = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
+    int8_t sign_fp = -1 + ((_rx->getData(4))*2);
+    float fp = (float) (sign_fp*mag_fp);
+    fp = fp/BASE;
+
+    int32_t mag_yp = (int32_t(_rx->getData(13)) << 24) + (int32_t(_rx->getData(12)) << 16) + (int16_t(_rx->getData(11)) << 8) + int8_t(_rx->getData(10));
+    int8_t sign_yp = -1 + ((_rx->getData(9))*2);
+    float yp = (float) (sign_yp*mag_yp);
+    yp = yp/BASE;
+
+    a[0]=fp; a[1]=yp;
+
+    return a;
+}
+
+
+
+bool OAgent_SCED::_getFlagFromChild() {
+    bool flag_SCED = (bool) _rx->getData(14);
+    
+    return flag_SCED;
+}
+
+bool OAgent_SCED::_getFlagFromParent() {
+    bool flag_SCED = (bool) _rx->getData(14);
+    
+    return flag_SCED;
+}
 
 
 
@@ -1766,7 +1985,7 @@ bool OAgent_SCED::_timeToTransmit(uint16_t startTime, uint16_t txTime) {
 
 // SCED Communication Methods
 
-float OAgent_SCED::_getActiveFlowFromPacket() {
+float OAgent_FF::_getActiveFlowFromPacket() {
     int32_t mag_fp = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
     int8_t sign_fp = -1 + ((_rx->getData(4))*2);
     float fp = (float) (sign_fp*mag_fp);
@@ -1774,14 +1993,6 @@ float OAgent_SCED::_getActiveFlowFromPacket() {
 
     return fp;
 }
-
-
-bool OAgent_SCED::_getFlagFromPacket() {
-    bool flag_SCED = (bool) _rx->getData(9);
-    
-    return flag_SCED;
-}
-
 
 float OAgent_SCED::_getActiveFlowFromPacket_self() {
     int32_t mag_fp = (int32_t(_rx->getData(14)) << 24) + (int32_t(_rx->getData(13)) << 16) + (int16_t(_rx->getData(12)) << 8) + int8_t(_rx->getData(11));
@@ -1792,6 +2003,11 @@ float OAgent_SCED::_getActiveFlowFromPacket_self() {
     return fp;
 }
 
+bool OAgent_FF::_getFlagFromPacket() {
+    bool flag_SCED = (bool) _rx->getData(9);
+    
+    return flag_SCED;
+}
 
 bool OAgent_SCED::linkActivationAlgorithm() {  
     uint8_t maxActCode;
@@ -2016,6 +2232,7 @@ void OAgent_SCED::_linksactPacket(uint16_t recipientID) {
     _xbee->send(_zbTx);
 }
 
+
 void OAgent_SCED::_unicastPacket_SCED_P(uint16_t recipientID, float fP, bool flag_SCED) {
     uint8_t payload[10];
     uint32_t fp;
@@ -2121,6 +2338,7 @@ void OAgent_SCED::_unicastPacket_SCED_C(uint16_t recipientID, float fP_c, bool f
         Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
     #endif
 }
+
 
 bool OAgent_SCED::_waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout) {
     unsigned long start;
