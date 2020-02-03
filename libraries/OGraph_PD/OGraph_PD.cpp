@@ -395,40 +395,49 @@ uint8_t LinkedList::isActCodeUsed(uint8_t code, ORemoteVertex *n) {
     return 0;
 }
 
-uint8_t LinkedList::addActiveFlows(ORemoteVertex *n) {
+uint8_t LinkedList::addActiveFlows(uint8_t i, ORemoteVertex *n) {
     node *tmp;
     tmp = _codedHead;
-    uint8_t i = 0, fp = 0;
+    uint8_t j = 0, fp = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        fp = fp + ((n+i-1)->getActiveFlow());           //get active flow of link associated with neighbor
+        j = tmp->data;                                  //get ID of neighbor
+        if (i < j)
+            fp = fp + ((n+j-1)->getActiveFlow());           //get active flow of link associated with neighbor
+        else if (i > j)
+            fp = fp - ((n+j-1)->getActiveFlow());           //get active flow of link associated with neighbor
         tmp = tmp->codedNext;
     }
     return fp;
 }
 
-uint8_t LinkedList::addReactiveFlows(ORemoteVertex *n) {
+uint8_t LinkedList::addReactiveFlows(uint8_t i, ORemoteVertex *n) {
     node *tmp;
     tmp = _codedHead;
-    uint8_t i = 0, fq = 0;
+    uint8_t j = 0, fq = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        fq = fq + ((n+i-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
+        j = tmp->data;                                  //get ID of neighbor
+        if (i < j)
+            fq = fq + ((n+j-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
+        else if (i > j)
+            fq = fq - ((n+j-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
         tmp = tmp->codedNext;
     }
     return fq;
 }
 
-uint8_t LinkedList::addLambdas(ORemoteVertex *n) {
+uint8_t LinkedList::addLambdas(uint8_t i, ORemoteVertex *n) {
     node *tmp;
     tmp = _codedHead;
-    uint8_t i = 0, lambda = 0;
+    uint8_t j = 0, lambda = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        lambda = lambda + ((n+i-1)->getLambda());       //get lambda of link associated with neighbor
+        j = tmp->data;                                  //get ID of neighbor
+        if (i < j)
+            lambda = lambda + ((n+j-1)->getLambda());       //get lambda of link associated with neighbor
+        else if (i > j)
+            lambda = lambda - ((n+j-1)->getLambda());       //get lambda of link associated with neighbor
         tmp = tmp->codedNext;
     }
     return lambda;

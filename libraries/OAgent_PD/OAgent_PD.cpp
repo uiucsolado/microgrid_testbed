@@ -762,7 +762,7 @@ bool OAgent_PD::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iter
     else
     {
         Serial<<"PD scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToStart(startTime,true,5000))
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
@@ -786,7 +786,7 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t i
     if(scheduled)
     {
         Serial<<"PD scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToStart(startTime,true,5000))
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
@@ -884,9 +884,12 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t it
 
         for(int i=1; i <= _windowsPerPeriod; i++)
         {
-            Serial << "Iteration (" << k+1 <<","<<i<<")"<<endl;
-            delay(5);
-
+            if (k%10 == 0)
+            {
+                Serial << "Iteration (" << k+1 <<","<<i<<")"<<endl;
+                delay(5);
+            }
+            
             flag = false;
 
             while( uint16_t(millis()-start) < (i*WINDOW_LENGTH) )
