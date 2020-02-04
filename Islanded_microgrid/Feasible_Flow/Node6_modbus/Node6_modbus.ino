@@ -171,7 +171,7 @@ void loop() {
       else
       {
         Serial.println("Starting Feasible Flow Algorithm");
-        feasibleflow = a.FeasibleFlowAlgorithm(false,0.01,100);
+        feasibleflow = a.FeasibleFlowAlgorithm(false,0.2,100);
         //Serial.println(state1,4);
         // Controller code over
         
