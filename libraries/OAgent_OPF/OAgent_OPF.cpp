@@ -1115,12 +1115,16 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
 
     bool pos_flow;
 
-    float P = genBus*(s->getActiveSetpoint()),lambda=0;  
-    float Pd = s->getActiveDemand();                                                // active injection
-    float bP = P - Pd;                                                  // active balance
-    float dP,gp;
+    float P=0,Q=0;  
+    float Pd = s->getActiveDemand(), Qd = s->getReactiveDemand();                                              // active injection
+    float bP = P - Pd, bQ = Q - Qd;                                                  // active balance
+    float dP,dQ,dV,new_V;
+    float lambda=0,mu=0;
 
-    float alpha=0.1,beta=2,alpha_V=1,iterations=200;
+    float bn[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) bn[i]=0;
+    float new_bn[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) new_bn[i]=0;
+
+    float alpha=0.1,beta1=2,beta2=1,beta3=1,alpha_V=1,iterations=200;
 
     for (uint8_t i:neighbors) {
         if (i>nodeID){
@@ -1131,6 +1135,15 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
         }           
 
     }
+
+    float Pmin=0,Pmax=1,Qmin=-1,Qmax=1,Vmin=0.8,Vmax=1.2,pmin=-1,pmax=1;
+    if (!genBus){Pmin=0;Pmax=0;Qmin=0;Qmax=0;}
+    float clip(float x, xmin, xmax){
+        if (x<xmin) return xmin;
+        if (x>xmax) return xmax;
+        return x;
+    }
+
 
     bool txDone;                                // create variable to keep track of broadcasts
     int timeout;                               // create variable to keep track of broadcasts
@@ -1148,28 +1161,27 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
         //      Serial<<"Old Flow at neighbor "<<i<<" is "<<flows[i-1]<<endl; delay(5);
         // }
        
-        float new_bP = 0, new_bQ = 0, new_bn = 0;
+        float new_bP = 0, new_bQ = 0;
 
         int i=0;
         start = millis();   // initialize timer
-        while (millis()-start<=200){
+        while (millis()-start<=2000){
 
              uint8_t nei_to_send=neighbors[i]; 
              i++; if (i==_G->getN()) i=0;
-            if (nei_to_send<nodeID) _SendToParent(nei_to_send,self_flags[nei_to_send-1],
-                                                    comm_self_fp[nei_to_send-1],comm_self_yp[nei_to_send-1],comm_neighbor_fp[nei_to_send-1],comm_neighbor_yp[nei_to_send-1],
-                                                    comm_self_fq[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_neighbor_fq[nei_to_send-1],comm_neighbor_yq[nei_to_send-1],
-                                                    comm_self_nu[nei_to_send-1],comm_self_yn[nei_to_send-1],comm_neighbor_nu[nei_to_send-1],comm_neighbor_yn[nei_to_send-1],
-                                                    comm_self_fv[nei_to_send-1],comm_self_yv[nei_to_send-1],comm_neighbor_fv[nei_to_send-1],comm_neighbor_yv[nei_to_send-1],
-                                                    comm_self_lmbd_v[nei_to_send-1],comm_self_ylmbd[nei_to_send-1],comm_neighbor_lmbd_v[nei_to_send-1],comm_neighbor_ylmbd[nei_to_send-1]);
-            else if(nei_to_send>nodeID) _SendToChild(nei_to_send,self_flags[nei_to_send-1],
-                                                    fp[nei_to_send-1],yp[nei_to_send-1],
-                                                    fq[nei_to_send-1],yq[nei_to_send-1],
-                                                    nu[nei_to_send-1],yn[nei_to_send-1],
-                                                    fv[nei_to_send-1],yv[nei_to_send-1],
-                                                    lmbd_v[nei_to_send-1],ylmbd[nei_to_send-1]);
-
-            if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,50))                                // OPF packet available for node from its neighbor
+            if (nei_to_send<nodeID) {
+                float vars_c[5] = {comm_self_fp[nei_to_send-1],comm_self_fq[nei_to_send-1],comm_self_nu[nei_to_send-1],comm_self_fv[nei_to_send-1],comm_self_lmbd_v[nei_to_send-1]};
+                float grad_c[5] = {comm_self_yp[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_self_yn[nei_to_send-1],comm_self_yv[nei_to_send-1],comm_self_ylmbd[nei_to_send-1]};
+                float vars_p[5] = {comm_neighbor_fp[nei_to_send-1],comm_neighbor_fq[nei_to_send-1],comm_neighbor_nu[nei_to_send-1],comm_neighbor_fv[nei_to_send-1],comm_neighbor_lmbd_v[nei_to_send-1]};
+                float grad_p[5] = {comm_neighbor_yp[nei_to_send-1],comm_neighbor_yq[nei_to_send-1],comm_neighbor_yn[nei_to_send-1],comm_neighbor_yv[nei_to_send-1],comm_neighbor_ylmbd[nei_to_send-1]};
+                _SendToParent(nei_to_send,self_flags[nei_to_send-1],vars_c,grad_c,vars_p,grad_p);
+                }
+            else if(nei_to_send>nodeID) {
+                float vars[5] = {comm_self_fp[nei_to_send-1],comm_self_fq[nei_to_send-1],comm_self_nu[nei_to_send-1],comm_self_fv[nei_to_send-1],comm_self_lmbd_v[nei_to_send-1]};
+                float grad[5] = {comm_self_yp[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_self_yn[nei_to_send-1],comm_self_yv[nei_to_send-1],comm_self_ylmbd[nei_to_send-1]};
+                _SendToChild(nei_to_send,self_flags[nei_to_send-1],vars,grad);
+                }
+            if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,500))                                // OPF packet available for node from its neighbor
             {
                 //Serial<<"neighbor is "<<neighborID<<" "<<received_from[neighborID-1]<<endl; delay(5);
                 if (!received_from[neighborID-1]){
@@ -1183,11 +1195,11 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
                     {
                         //get values for fp, fq, and lambda that are received from this neighbor
                         float* tmp=_getPacketFromParent();
-                        neighbor_fp = tmp[0]; neighbor_yp = tmp[1];
-                        neighbor_fq = tmp[2]; neighbor_yq = tmp[3];
-                        neighbor_nu = tmp[4]; neighbor_yn = tmp[5];
-                        neighbor_fv = tmp[6]; neighbor_yv = tmp[7];
-                        neighbor_lmbd_v = tmp[8]; neighbor_ylmbd = tmp[9];
+                        neighbor_fp = tmp[0]; neighbor_yp = tmp[5];
+                        neighbor_fq = tmp[1]; neighbor_yq = tmp[6];
+                        neighbor_nu = tmp[2]; neighbor_yn = tmp[7];
+                        neighbor_fv = tmp[3]; neighbor_yv = tmp[8];
+                        neighbor_lmbd_v = tmp[4]; neighbor_ylmbd = tmp[9];
 
                         neighbor_flag = _getFlagFromParent();                                       // store incoming value of lambda                
                         // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
@@ -1233,28 +1245,20 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
                             new_lmbd_v[neighborID-1] = self_lmbd_v+alpha*ylmbd[neighborID-1]; new_ylmbd[neighborID-1] = self_ylmbd;
 
                         }
-                        if (new_fp[neighborID-1]>1) new_fp[neighborID-1]=1;
-                        else if (new_fp[neighborID-1]<-1) new_fp[neighborID-1]=-1;
+                        new_fp[neighborID-1]=clip(new_fp[neighborID-1],pmin,pmax);
                         new_bP+=new_fp[neighborID-1];
-
-                        if (new_fq[neighborID-1]>1) new_fq[neighborID-1]=1;
-                        else if (new_fq[neighborID-1]<-1) new_fq[neighborID-1]=-1;
                         new_bQ+=new_fq[neighborID-1];
-
-                        if (new_fp[neighborID-1]>1) new_fp[neighborID-1]=1;
-                        else if (new_fp[neighborID-1]<-1) new_fp[neighborID-1]=-1;
-                        new_bP+=new_fp[neighborID-1];
 
                     }
                     else if((neighborID > nodeID))  //out-going flow, nodeID - parent
                     {
 
                         float* tmp=_getPacketFromChild(); 
-                        neighbor_old_fp = tmp[0]; neighbor_old_yp = tmp[1];self_old_fp = tmp[2]; self_old_yp = tmp[3]; 
-                        neighbor_old_fq = tmp[4]; neighbor_old_yq = tmp[5];self_old_fq = tmp[6]; self_old_yq = tmp[7];
-                        neighbor_old_nu = tmp[8]; neighbor_old_yn = tmp[9]; self_old_nu = tmp[10]; self_old_yn = tmp[11];
-                        neighbor_old_fv = tmp[12]; neighbor_old_fv = tmp[13]; self_old_fv = tmp[14]; self_old_fv = tmp[15];
-                        neighbor_old_lmbd_v = tmp[16]; neighbor_old_ylmbd = tmp[17]; self_old_lmbd_v = tmp[18]; self_old_ylmbd = tmp[19];
+                        neighbor_old_fp = tmp[0]; neighbor_old_yp = tmp[5];self_old_fp = tmp[10]; self_old_yp = tmp[15]; 
+                        neighbor_old_fq = tmp[1]; neighbor_old_yq = tmp[6];self_old_fq = tmp[11]; self_old_yq = tmp[16];
+                        neighbor_old_nu = tmp[2]; neighbor_old_yn = tmp[7]; self_old_nu = tmp[12]; self_old_yn = tmp[17];
+                        neighbor_old_fv = tmp[3]; neighbor_old_yv = tmp[8]; self_old_fv = tmp[13]; self_old_yv = tmp[18];
+                        neighbor_old_lmbd_v = tmp[4]; neighbor_old_ylmbd = tmp[9]; self_old_lmbd_v = tmp[14]; self_old_ylmbd = tmp[19];
                      
                         neighbor_flag = _getFlagFromChild();                                       // store incoming value of lambda
                         // Serial<<"Flows from child "<<neighborID<<" are "<<neighbor_old_fp<<" and "<<self_old_fp<<endl;delay(5);
@@ -1285,9 +1289,9 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
                             new_lmbd_v[neighborID-1] = self_lmbd_v+alpha*ylmbd[neighborID-1]; new_ylmbd[neighborID-1] = self_ylmbd;
 
                         }
-                        if (new_fp[neighborID-1]>1) new_fp[neighborID-1]=1;
-                        else if (new_fp[neighborID-1]<-1) new_fp[neighborID-1]=-1;
+                        new_fp[neighborID-1]=clip(new_fp[neighborID-1],pmin,pmax);
                         new_bP-=new_fp[neighborID-1];
+                        new_bQ-=new_fq[neighborID-1];
                     }
                     //Serial<<"New Flow at neighbor "<<neighborID<<" is "<<new_self_fp<<endl; delay(5);
                 }
@@ -1296,70 +1300,87 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
            
         }
         for (uint8_t i:neighbors) {
+
             if (!received_from[i-1]){
-                if (i>nodeID){
-                    new_fp[i-1] = fp[i-1] -alpha*yp[i-1];
-                    new_yp[i-1] = yp[i-1];
-                    if (new_fp[i-1]>1) new_fp[i-1]=1;
-                    else if (new_fp[i-1]<-1) new_fp[i-1]=-1;
+                new_fp[i-1] = clip(fp[i-1] - alpha*yp[i-1],fmin,fmax);
+                new_yp[i-1] = yp[i-1];
+
+                new_fq[i-1] = fq[i-1] - alpha*yq[i-1];
+                new_yq[i-1] = yq[i-1];
+
+                new_nu[i-1] = self_nu + alpha*yn[i-1];
+                new_yn[i-1] = yn[i-1];
+
+                new_fv[i-1] = fv[i-1] - alpha*yv[i-1];
+                new_yv[i-1] = yv[i-1];
+
+                new_lmbd_v[i-1] = lmbd_v[i-1] + alpha*ylmbd[i-1];
+                new_ylmbd[i-1] = ylmbd[i-1];
+
+                if (i>nodeID){                   
                     new_bP-=new_fp[i-1];
+                    new_bQ-=new_fq[i-1];
                 }
                 else{
-                    new_fp[i-1] = fp[i-1] -alpha*yp[i-1];
-                    new_yp[i-1] = yp[i-1];
-                    if (new_fp[i-1]>1) new_fp[i-1]=1;
-                    else if (new_fp[i-1]<-1) new_fp[i-1]=-1;
-                    new_bP+=new_fp[i-1];
+                    new_bP+=new_fp[i-1];                  
+                    new_bQ+=new_fq[i-1];
                 }
-                
-                //Serial<<"New Flow at neighbor "<<i<<" is "<<new_self_fp<<endl; delay(5);
             }
             else received_from[i-1]=0;
-            fp[i-1]=new_fp[i-1];
+
+            new_bn[i-1] = new_fv[i-1] - 2*((n+(i-1))->getResistance())*new_fp[i] - 2*((n+(i-1))->getReactance())*new_fq[i];
+            
 
         }
-        dP = P+lambda+beta*bP;
-        dV = alpha_V*(V-1)
-        for (uint8_t i:neighbors)
-            if (i>nodeID) dV+=lmbd_v[i-1]
-            else dV-=lmbd_v[i-1]
+
+        dP = P+lambda+beta1*bP;
+        dQ = mu+beta2*bQ;
+        dV = alpha_V*(V-1);
+        for (uint8_t i:neighbors){
+            if (i>nodeID) dV-=lmbd_v[i-1];
+            else dV+=lmbd_v[i-1];
+        }
 
 
-        P = P - alpha*dP;
-        V = V - alpha*dV;
-        
-        if (!genBus) P=0;
-        if (P>1) P=1;
-        else if (P<-1) P=-1;    
-        if (V>1.2) V=1.2;
-        else if (V<0.8) V=0.8;
+        P = clip(P - alpha*dP,Pmin,Pmax);
+        Q = clip(Q - alpha*dQ,Qmin,Qmax);
+        new_V = clip(V - alpha*dV,Vmin,Vmax);
         
         // fp=new_fp;
 
-        float new_lambda = lambda+alpha*bP;
-        new_bP +=P-Pd;
-
-        // float gp = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + (((n+(neighborID-1))->getResistance())*((n+(neighborID-1))->getLambda()))) ;
-        // float gq =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + (((n+(neighborID-1))->getReactance())*((n+(neighborID-1))->getLambda()))) ;
-        // float g_lambda= 2*alpha*(sqV*(-1) - (((n+(neighborID-1))->getActiveFlow())*((n+(neighborID-1))->getResistance())) - (((n+(neighborID-1))->getReactiveFlow())*((n+(neighborID-1))->getReactance())) );
-
-        // float gp = 2*alpha*(Mu + ((s->getWp())*bP) + (((n+(neighborID-1))->getResistance())*((n+(neighborID-1))->getLambda()))) ;
-        // float gq = 2*alpha*(Nu + ((s->getWq())*bQ) + (((n+(neighborID-1))->getReactance())*((n+(neighborID-1))->getLambda()))) ;
-        // float g_lambda = 2*alpha*(sqV - (((n+(neighborID-1))->getActiveFlow())*((n+(neighborID-1))->getResistance())) - (((n+(neighborID-1))->getReactiveFlow())*((n+(neighborID-1))->getReactance())) );
+        float new_lambda = lambda + alpha*beta1*bP;
+        float new_mu = mu + alpha*beta2*bQ;
+        new_bP +=P-Pd; new_bQ +=Q-Qd;
 
         for (uint8_t i:neighbors) {
             if (i>nodeID){
-                new_yp[i-1] -= 2*(new_lambda+beta*new_bP-lambda-beta*bP);
+                new_yp[i-1] -= 2*(new_lambda+beta1*new_bP-lambda-beta1*bP);
+                new_yq[i-1] -= 2*(new_mu+beta2*new_bQ-mu-beta2*bQ);
+                new_ylmbd[i-1] -= 2*(new_V-V);
             }
             else{
-                new_yp[i-1] += 2*(new_lambda+beta*new_bP-lambda-beta*bP);
+                new_yp[i-1] += 2*(new_lambda+beta1*new_bP-lambda-beta1*bP);
+                new_yq[i-1] += 2*(new_mu+beta2*new_bQ-mu-beta2*bQ);
+                new_ylmbd[i-1] += 2*(new_V-V);
             } 
-            yp[i-1]=new_yp[i-1];
+            new_yp[i-1] -= 2*((n+(i-1))->getResistance())*(new_nu[i-1]-nu[i-1]+beta3*(new_bn[i-1]-bn[i-1]));
+            new_yq[i-1] -= 2*((n+(i-1))->getReactance())*(new_nu[i-1]-nu[i-1]+beta3*(new_bn[i-1]-bn[i-1]));
+            new_yn[i-1] += new_bn[i-1]-bn[i-1];
+            new_yv[i-1] += new_lmbd_v[i-1] - lmbd_v[i-1] + new_nu[i-1] - nu[i-1] + beta3*(new_bn[i-1]-bn[i-1]);
+            new_ylmbd[i-1] += new_fv[i-1]-fv[i-1];
+            bn[i-1] = new_bn[i-1];
         }
 
-        lambda=new_lambda;
-        // yp = new_yp;
-        bP = new_bP;
+        for (uint8_t i:neighbors) {
+            fp[i-1]=new_fp[i-1]; yp[i-1]=new_yp[i-1];
+            fq[i-1]=new_fq[i-1]; yq[i-1]=new_yq[i-1];
+            nu[i-1]=new_nu[i-1]; yn[i-1]=new_yn[i-1];
+            fv[i-1]=new_fv[i-1]; yv[i-1]=new_yv[i-1];
+            lmbd_v[i-1]=new_lmbd_v[i-1]; ylmbd[i-1]=new_ylmbd[i-1];
+        }
+
+        V = new_V; lambda=new_lambda; mu=new_mu;
+        bP = new_bP; bQ = new_bQ; 
 
         _buffer_P[k] = P;
         _buffer_bP[k] = bP;
@@ -1373,56 +1394,60 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
 }
 
 
-
-
-void OAgent_OPF::_SendToChild(uint16_t recipientID, float fP, float yP, bool flag_OPF) {
-    uint8_t payload[15];
-    uint32_t fp,yp;
-    uint8_t sign_fp,sign_yp;
-    fP = fP*BASE;yP = yP*BASE;
-
-    //check if active flow is negative
-    if (fP < 0) 
-    {
-        fP = -1*fP;
-        fp = (uint32_t) fP;
-        sign_fp = 0;
-    }
-    else
-    {
-        fp = (uint32_t) fP;
-        sign_fp = 1;
+void OAgent_OPF::_sender_helper(float x,uint8_t* sign_y,uint32_t* y){
+        if (x < 0) 
+        {
+            *y = (uint32_t) (-x*BASE);
+            *sign_y= 0;
+        }
+        else
+        {
+            *y = (uint32_t) (x*BASE);
+            *sign_y = 1;
+        }
     }
 
-    //check if yp is negative
-    if (yP < 0) 
-    {
-        yP = -1*yP;
-        yp = (uint32_t) yP;
-        sign_yp = 0;
-    }
-    else
-    {
-        yp = (uint32_t) yP;
-        sign_yp = 1;
-    }
+void OAgent_OPF::_SendToChild(uint16_t recipientID, bool flag_OPF, float* vars, float* grad) {
+    uint8_t payload[55];
 
-    //construct payload
     payload[0] = OPF_HEADER;
     payload[1] = OPF_HEADER >> 8;
     payload[2] = recipientID;
     payload[3] = recipientID >> 8;
-    payload[4] = sign_fp;
-    payload[5] = fp;
-    payload[6] = fp >> 8;
-    payload[7] = fp >> 16;
-    payload[8] = fp >> 24;
-    payload[9] = sign_yp;
-    payload[10] = yp;
-    payload[11] = yp >> 8;
-    payload[12] = yp >> 16;
-    payload[13] = yp >> 24;
-    payload[14] = flag_OPF;
+    payload[4] = flag_OPF;
+
+    // fp,yp,fq,yq,nu,yn,fv,yv,lmbd_v,ylmbd;
+    
+    _sender_helper(float x,uint8_t* sign_y,uint32_t* y){
+        if (x < 0) 
+        {
+            *y = (uint32_t) (-x*BASE);
+            *sign_y= 0;
+        }
+        else
+        {
+            *y = (uint32_t) (x*BASE);
+            *sign_y = 1;
+        }
+    }
+
+    uint8_t sign_var; uint32_t var;
+    for (int i=0;i<10;i++){
+        _sender_helper(vars[i],&sign_var,&var);
+        payload[5*(i+1)]=sign_var;
+        payload[5*(i+1)+1] = var;
+        payload[5*(i+1)+2] = var >> 8;
+        payload[5*(i+1)+3] = var >> 16;
+        payload[5*(i+1)+4] = var >> 24;
+    }
+    for (int i=0;i<10;i++){
+        _sender_helper(grad[i],&sign_var,&var);
+        payload[5*(i+1)]=sign_var;
+        payload[5*(i+1)+1] = var;
+        payload[5*(i+1)+2] = var >> 8;
+        payload[5*(i+1)+3] = var >> 16;
+        payload[5*(i+1)+4] = var >> 24;
+    }
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
@@ -1431,90 +1456,52 @@ void OAgent_OPF::_SendToChild(uint16_t recipientID, float fP, float yP, bool fla
     #endif
 }
 
-void OAgent_OPF::_SendToParent(uint16_t recipientID, float fP_c, float yP_c, bool flag_OPF, float fP_p, float yP_p) {
-     uint8_t payload[25];
-    uint32_t fp_c,yp_c,fp_p,yp_p;
-    uint8_t sign_fp_c,sign_yp_c,sign_fp_p,sign_yp_p;
-    fP_c = fP_c*BASE;yP_c = yP_c*BASE;fP_p = fP_p*BASE;yP_p = yP_p*BASE;
+// void OAgent_OPF::_SendToParent(uint16_t recipientID,bool flag_OPF,float fp_c,float yp_c,float fq_c,float yq_c,float nu_c,float yn_c,float fv_c,float yv_c,float lmbd_v_c,float ylmbd_c,float fp_p,float yp_p,float fq_p,float yq_p,float nu_p,float yn_p,float fv_p,float yv_p,float lmbd_v_p,float ylmbd_p) {
+void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float* vars_c, float* grad_c, float* vars_p, float* grad_p){
+    uint8_t payload[105];
 
-    //check if active flow is negative
-    if (fP_c < 0) 
-    {
-        fP_c = -1*fP_c;
-        fp_c = (uint32_t) fP_c;
-        sign_fp_c = 0;
-    }
-    else
-    {
-        fp_c = (uint32_t) fP_c;
-        sign_fp_c = 1;
-    }
-
-    //check if yp is negative
-    if (yP_c < 0) 
-    {
-        yP_c = -1*yP_c;
-        yp_c = (uint32_t) yP_c;
-        sign_yp_c = 0;
-    }
-    else
-    {
-        yp_c = (uint32_t) yP_c;
-        sign_yp_c = 1;
-    }
-
-    if (fP_p < 0) 
-    {
-        fP_p = -1*fP_p;
-        fp_p = (uint32_t) fP_p;
-        sign_fp_p = 0;
-    }
-    else
-    {
-        fp_p = (uint32_t) fP_p;
-        sign_fp_p = 1;
-    }
-
-    //check if yp is negative
-    if (yP_p < 0) 
-    {
-        yP_p = -1*yP_p;
-        yp_p = (uint32_t) yP_p;
-        sign_yp_p = 0;
-    }
-    else
-    {
-        yp_p = (uint32_t) yP_p;
-        sign_yp_p = 1;
-    }
-
-    //construct payload
     payload[0] = OPF_HEADER;
     payload[1] = OPF_HEADER >> 8;
     payload[2] = recipientID;
     payload[3] = recipientID >> 8;
-    payload[4] = sign_fp_c;
-    payload[5] = fp_c;
-    payload[6] = fp_c >> 8;
-    payload[7] = fp_c >> 16;
-    payload[8] = fp_c >> 24;
-    payload[9] = sign_yp_c;
-    payload[10] = yp_c;
-    payload[11] = yp_c >> 8;
-    payload[12] = yp_c >> 16;
-    payload[13] = yp_c >> 24;
-    payload[14] = flag_OPF;
-    payload[15] = sign_fp_p;
-    payload[16] = fp_p;
-    payload[17] = fp_p >> 8;
-    payload[18] = fp_p >> 16;
-    payload[19] = fp_p >> 24;
-    payload[20] = sign_yp_p;
-    payload[21] = yp_p;
-    payload[22] = yp_p >> 8;
-    payload[23] = yp_p >> 16;
-    payload[24] = yp_p >> 24;
+    payload[4] = flag_OPF;
 
+    // fp_c,yp_c,fq_c,yq_c,nu_c,yn_c,fv_c,yv_c,lmbd_v_c,ylmbd_c;
+    // fp_p,yp_p,fq_p,yq_p,nu_p,yn_p,fv_p,yv_p,lmbd_v_p,ylmbd_p;
+
+    uint8_t sign_var; uint32_t var;
+    for (int i=0;i<10;i++){
+        _sender_helper(vars_c[i],&sign_var,&var);
+        payload[5*(i+1)]=sign_var;
+        payload[5*(i+1)+1] = var;
+        payload[5*(i+1)+2] = var >> 8;
+        payload[5*(i+1)+3] = var >> 16;
+        payload[5*(i+1)+4] = var >> 24;
+    }
+    for (int i=0;i<10;i++){
+        _sender_helper(grad_c[i],&sign_var,&var);
+        payload[5*(i+1)]=sign_var;
+        payload[5*(i+1)+1] = var;
+        payload[5*(i+1)+2] = var >> 8;
+        payload[5*(i+1)+3] = var >> 16;
+        payload[5*(i+1)+4] = var >> 24;
+    }
+    for (int i=0;i<10;i++){
+        _sender_helper(vars_p[i],&sign_var,&var);
+        payload[5*(i+1)]=sign_var;
+        payload[5*(i+1)+1] = var;
+        payload[5*(i+1)+2] = var >> 8;
+        payload[5*(i+1)+3] = var >> 16;
+        payload[5*(i+1)+4] = var >> 24;
+    }
+    for (int i=0;i<10;i++){
+        _sender_helper(grad_p[i],&sign_var,&var);
+        payload[5*(i+1)]=sign_var;
+        payload[5*(i+1)+1] = var;
+        payload[5*(i+1)+2] = var >> 8;
+        payload[5*(i+1)+3] = var >> 16;
+        payload[5*(i+1)+4] = var >> 24;
+    }
     
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
@@ -1524,63 +1511,42 @@ void OAgent_OPF::_SendToParent(uint16_t recipientID, float fP_c, float yP_c, boo
     #endif
 }
 
-
 float* OAgent_OPF::_getPacketFromChild() {
-    float* a = new float[4];
+    float* a = new float[20];
+    int32_t mag_x; int8_t sign_x; float x;
+    for (int i=5;i<105;i=i+5){
+        mag_x = (int32_t(_rx->getData(i+4)) << 24) + (int32_t(_rx->getData(i+3)) << 16) + (int16_t(_rx->getData(i+2)) << 8) + int8_t(_rx->getData(i+1));
+        sign_x = -1 + ((_rx->getData(i))*2);
+        x = (float) (sign_x*mag_x);
+        a[i] = x/BASE;
 
-    int32_t mag_fp_c = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
-    int8_t sign_fp_c = -1 + ((_rx->getData(4))*2);
-    float fp_c = (float) (sign_fp_c*mag_fp_c);
-    fp_c = fp_c/BASE;
-
-    int32_t mag_yp_c = (int32_t(_rx->getData(13)) << 24) + (int32_t(_rx->getData(12)) << 16) + (int16_t(_rx->getData(11)) << 8) + int8_t(_rx->getData(10));
-    int8_t sign_yp_c = -1 + ((_rx->getData(9))*2);
-    float yp_c = (float) (sign_yp_c*mag_yp_c);
-    yp_c = yp_c/BASE;
-
-    int32_t mag_fp_p = (int32_t(_rx->getData(19)) << 24) + (int32_t(_rx->getData(18)) << 16) + (int16_t(_rx->getData(17)) << 8) + int8_t(_rx->getData(16));
-    int8_t sign_fp_p = -1 + ((_rx->getData(15))*2);
-    float fp_p = (float) (sign_fp_p*mag_fp_p);
-    fp_p = fp_p/BASE;
-
-    int32_t mag_yp_p = (int32_t(_rx->getData(24)) << 24) + (int32_t(_rx->getData(23)) << 16) + (int16_t(_rx->getData(22)) << 8) + int8_t(_rx->getData(21));
-    int8_t sign_yp_p = -1 + ((_rx->getData(20))*2);
-    float yp_p = (float) (sign_yp_p*mag_yp_p);
-    yp_p = yp_p/BASE;
-
-    a[0]=fp_c; a[1]=yp_c; a[2]=fp_p; a[3]=yp_p;
-    // Serial<<"Flows from child are "<<fp_c<<" and "<<fp_p<<endl;delay(5);
+    }
     return a;
 }
 
 float* OAgent_OPF::_getPacketFromParent() {
-    float* a = new float[2];
-    int32_t mag_fp = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
-    int8_t sign_fp = -1 + ((_rx->getData(4))*2);
-    float fp = (float) (sign_fp*mag_fp);
-    fp = fp/BASE;
+    float* a = new float[10];
+    int32_t mag_x; int8_t sign_x; float x;
+    for (int i=5;i<55;i=i+5){
+        mag_x = (int32_t(_rx->getData(i+4)) << 24) + (int32_t(_rx->getData(i+3)) << 16) + (int16_t(_rx->getData(i+2)) << 8) + int8_t(_rx->getData(i+1));
+        sign_x = -1 + ((_rx->getData(i))*2);
+        x = (float) (sign_x*mag_x);
+        a[i] = x/BASE;
 
-    int32_t mag_yp = (int32_t(_rx->getData(13)) << 24) + (int32_t(_rx->getData(12)) << 16) + (int16_t(_rx->getData(11)) << 8) + int8_t(_rx->getData(10));
-    int8_t sign_yp = -1 + ((_rx->getData(9))*2);
-    float yp = (float) (sign_yp*mag_yp);
-    yp = yp/BASE;
-
-    a[0]=fp; a[1]=yp;
-    // Serial<<"Flow from parent is "<<fp<<endl;delay(5);
-
+    }
     return a;
 }
 
 
 
 bool OAgent_OPF::_getFlagFromChild() {
-    bool flag_OPF = (bool) _rx->getData(14);
+    bool flag_OPF = (bool) _rx->getData(4);
     
     return flag_OPF;
 }
 
 bool OAgent_OPF::_getFlagFromParent() {
-    bool flag_OPF = (bool) _rx->getData(14);
+    bool flag_OPF = (bool) _rx->getData(4);
     
     return flag_OPF;
 }
@@ -2378,22 +2344,22 @@ void OAgent_OPF::_linksactPacket(uint16_t recipientID) {
 }
 
 
-void OAgent_OPF::_unicastPacket_OPF_P(uint16_t recipientID, float fP, bool flag_OPF) {
+void OAgent_OPF::_unicastPacket_OPF_P(uint16_t recipientID, float fp, bool flag_OPF) {
     uint8_t payload[10];
     uint32_t fp;
     uint8_t sign_fp;
-    fP = fP*BASE;
+    fp = fp*BASE;
 
     //check if active flow is negative
-    if (fP < 0) 
+    if (fp < 0) 
     {
-        fP = -1*fP;
-        fp = (uint32_t) fP;
+        fp = -1*fp;
+        fp = (uint32_t) fp;
         sign_fp = 0;
     }
     else
     {
-        fp = (uint32_t) fP;
+        fp = (uint32_t) fp;
         sign_fp = 1;
     }
 
@@ -2416,41 +2382,41 @@ void OAgent_OPF::_unicastPacket_OPF_P(uint16_t recipientID, float fP, bool flag_
     #endif
 }
 
-void OAgent_OPF::_unicastPacket_OPF_C(uint16_t recipientID, float fP_c, bool flag_OPF,  float fP_p) {
+void OAgent_OPF::_unicastPacket_OPF_C(uint16_t recipientID, float fp_c, bool flag_OPF,  float fp_p) {
     uint8_t payload[15];
     uint32_t fp_c;
     uint8_t sign_fp_c;
-    fP_c = fP_c*BASE;
+    fp_c = fp_c*BASE;
 
     uint32_t fp_p;
     uint8_t sign_fp_p;
-    fP_p = fP_p*BASE;
+    fp_p = fp_p*BASE;
 
     //check if active flow is negative
-    if (fP_c < 0) 
+    if (fp_c < 0) 
     {
-        fP_c = -1*fP_c;
-        fp_c = (uint32_t) fP_c;
+        fp_c = -1*fp_c;
+        fp_c = (uint32_t) fp_c;
         sign_fp_c = 0;
     }
     else
     {
-        fp_c = (uint32_t) fP_c;
+        fp_c = (uint32_t) fp_c;
         sign_fp_c = 1;
     }
 
     /////////////////////////////////////////////
     /////////////////////////////////////////////    
     //check if active flow is negative
-    if (fP_p < 0) 
+    if (fp_p < 0) 
     {
-        fP_p = -1*fP_p;
-        fp_p = (uint32_t) fP_p;
+        fp_p = -1*fp_p;
+        fp_p = (uint32_t) fp_p;
         sign_fp_p = 0;
     }
     else
     {
-        fp_p = (uint32_t) fP_p;
+        fp_p = (uint32_t) fp_p;
         sign_fp_p = 1;
     }
 
