@@ -285,6 +285,17 @@ class ORemoteVertex : public OVertex {
         inline float getActiveFlow() { return _fp; }
         inline float getReactiveFlow() { return _fq; }
         inline float getLambda() { return _lambda; }
+        
+        inline float getNodeActiveFlow() { return _fpNode; }
+        inline float getNodeReactiveFlow() { return _fqNode; }
+        inline float getNodeLambda() { return _lambdaNode; }
+
+        inline float getNeighborActiveFlow() { return _fpNeighbor; }
+        inline float getNeighborReactiveFlow() { return _fqNeighbor; }
+        inline float getNeighborLambda() { return _lambdaNeighbor; }
+
+        inline bool getNodeFlag() { return _nodeFlag; }
+        inline bool getNeighborFlag() { return _neighborFlag; }
 
         inline uint8_t getLinkActCode() { return _linkActCode; }
         inline bool isLinkParent() { return _linkParent; }
@@ -296,6 +307,17 @@ class ORemoteVertex : public OVertex {
         inline void setActiveFlow(float fp) {_fp = fp; }
         inline void setReactiveFlow(float fq) {_fq = fq; }
         inline void setLambda(float lambda) {_lambda = lambda; }
+
+        inline void setNodeActiveFlow(float fpNode) {_fpNode = fpNode; }
+        inline void setNodeReactiveFlow(float fqNode) {_fqNode = fqNode; }
+        inline void setNodeLambda(float lambdaNode) {_lambdaNode = lambdaNode; }
+
+        inline void setNeighborActiveFlow(float fpNeighbor) {_fpNeighbor = fpNeighbor; }
+        inline void setNeighborReactiveFlow(float fqNeighbor) {_fqNeighbor = fqNeighbor; }
+        inline void setNeighborLambda(float lambdaNeighbor) {_lambdaNeighbor = lambdaNeighbor; }
+
+        inline void setNodeFlag(bool nodeFlag) {_nodeFlag = nodeFlag; }
+        inline void setNeighborFlag(bool neighborFlag) {_neighborFlag = neighborFlag; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
 
         inline void setLinkActCode(uint8_t linkActCode) {_linkActCode = linkActCode; }
         inline void setLinkParent(bool linkParent) {_linkParent = linkParent; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
@@ -316,6 +338,18 @@ class ORemoteVertex : public OVertex {
         float _fp; //per-unit active flow along electrical link
         float _fq; //per-unit reactive flow along electrical link
         float _lambda; //lagrange multiplier for LinDistFlow
+
+        float _fpNode; //local estimate of per-unit active flow along electrical link
+        float _fqNode; //local estimate of per-unit reactive flow along electrical link
+        float _lambdaNode; //local estimate of lagrange multiplier for LinDistFlow
+
+        float _fpNeighbor; //remote estimate of per-unit active flow along electrical link
+        float _fqNeighbor; //remote estimate of per-unit reactive flow along electrical link
+        float _lambdaNeighbor; //remote estimate of lagrange multiplier for LinDistFlow
+
+        //Flags associated with remote vertex
+        bool _nodeFlag;
+        bool _neighborFlag;
 
         //link activation code (used to decide when a link should be activated, links with same activation code are activated simultaneously)
         uint8_t _linkActCode;

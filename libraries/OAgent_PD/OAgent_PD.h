@@ -297,15 +297,15 @@ class OAgent_PD {
         inline uint16_t _getNeighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
 
         //Primal Dual Algorithm
-        float _getActiveFlowFromPacket();
-        float _getReactiveFlowFromPacket();
-        float _getLambdaFromPacket();
+        float _getActiveFlowFromPacket_neighbor();
+        float _getReactiveFlowFromPacket_neighbor();
+        float _getLambdaFromPacket_neighbor();
         
         bool _getFlagFromPacket();
 
-        float _getActiveFlowFromPacket_self();
-        float _getReactiveFlowFromPacket_self();
-        float _getLambdaFromPacket_self();
+        float _getActiveFlowFromPacket_node();
+        float _getReactiveFlowFromPacket_node();
+        float _getLambdaFromPacket_node();
         inline uint16_t _getRecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
         //
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }

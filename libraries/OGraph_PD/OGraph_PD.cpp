@@ -691,6 +691,8 @@ void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, flo
     _lambda = 0;
     _linkActCode = 0;
     _linkParent = 0;
+    _nodeFlag = false;
+    _neighborFlag = false;
     _prepareOVertex(aLsb, neighborID);
 }
 /// End private methods
