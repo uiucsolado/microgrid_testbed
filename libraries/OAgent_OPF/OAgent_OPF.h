@@ -109,15 +109,18 @@ class OAgent_OPF {
         long maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
         
         // Primal Dual methods
-        bool SecurityConstrainedEconomicDispatch(bool genBus, float alpha, uint8_t iterations);
+        bool OptimalPowerFlow(bool genBus, float alpha, uint8_t iterations);
         bool leaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool nonleaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool StandardOPF(bool genBus);
         bool AcceleratedOPF(bool genBus);
-        void _SendToChild(uint16_t recipientID, float fP, float yP, bool flag_OPF);
-        void _SendToParent(uint16_t recipientID, float fP_c, float yP_c, bool flag_OPF, float fP_p, float yP_p);
+        float _clip(float x, float xmin, float xmax);
+        void _sender_helper(float x,uint8_t* sign_y,uint32_t* y);
+        void _SendToChild(uint16_t recipientID, bool flag_OPF, float* vars, float* grad);
+        void _SendToParent(uint16_t recipientID, bool flag_OPF, float* vars, float* grad, uint8_t packet);
         float* _getPacketFromChild();
         float* _getPacketFromParent();
+        uint8_t _whichPacket();
         bool _getFlagFromChild();
         bool _getFlagFromParent();
 
@@ -218,8 +221,6 @@ class OAgent_OPF {
         
         void _broadcastMaxMinPacket(long max, long min);
         //Unicast Primal Dual Packet - SN addition edited by Olaolu
-        void _unicastPacket_OPF_P(uint16_t recipientID, float fP, bool flag_OPF);
-        void _unicastPacket_OPF_C(uint16_t recipientID, float fP_c, bool flag_OPF, float fP_p);
 
         //link activation packets - added by Olaolu
         void _candactcodePacket(uint16_t recipientID);
