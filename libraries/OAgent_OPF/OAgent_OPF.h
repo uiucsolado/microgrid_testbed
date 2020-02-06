@@ -10,7 +10,7 @@
 
 #ifndef OAgent_OPF_h
 #define OAgent_OPF_h
-
+#include "Streaming.h"
 
 //#define VERBOSE
 
@@ -123,6 +123,10 @@ class OAgent_OPF {
         uint8_t _whichPacket();
         bool _getFlagFromChild();
         bool _getFlagFromParent();
+        void _print_(String s,float val,uint8_t precision){
+
+            Serial<<s<<" "; Serial.print(val,precision); Serial<<endl;
+        }
 
         // communication link activation methods
         bool linkActivationAlgorithm();
@@ -187,6 +191,10 @@ class OAgent_OPF {
         
         float _buffer_P[2000];
         float _buffer_bP[2000];
+        float _buffer_Q[2000];
+        float _buffer_bQ[2000];
+        float _buffer_V[2000];
+        float _buffer_bn[2000];
 
         int node_counter[NUM_REMOTE_VERTICES];          //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //Methods

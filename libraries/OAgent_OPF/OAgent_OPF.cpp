@@ -12,6 +12,7 @@
 
 #include "OAgent_OPF.h"
 #include "Streaming.h"
+
 //#define VERBOSE
 
 //// Public methods
@@ -803,7 +804,6 @@ bool OAgent_OPF::nonleaderOPF(bool genBus, float alpha, uint8_t iterations) {
     return gamma;
 }
 
-
 bool OAgent_OPF::AcceleratedOPF(bool genBus) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
@@ -899,6 +899,7 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
 
     uint8_t received_from[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
     uint8_t received_packet_num[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_packet_num[i]=0;
+    uint8_t sent_packet_num[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) sent_packet_num[i]=1;
     float received_packets[2][10];
     
     float self_fp,neighbor_fp,self_old_fp,neighbor_old_fp,self_yp,neighbor_yp,self_old_yp,neighbor_old_yp;
@@ -918,7 +919,10 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
     float bn[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) bn[i]=0;
     float new_bn[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) new_bn[i]=0;
 
-    float alpha=0.01,beta1=10,beta2=10,beta3=1,alpha_V=1,iterations=1000;
+    /// Control Parameters
+    // float alpha=0.1,beta1=0.3,beta2=0.3,beta3=3,alpha_V=1,iterations=500; uint8_t comm=5;
+    float alpha=0.05,beta1=1,beta2=2,beta3=10,alpha_V=1,iterations=1000; uint8_t comm=3;
+    // float alpha=0.05,beta1=0.3,beta2=0.3,beta3=3,alpha_V=1,iterations=1000; uint8_t comm=10;
 
     for (uint8_t i:neighbors) {
         if (i>nodeID){
@@ -941,163 +945,113 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
     unsigned long start;
     for(uint16_t k = 0; k < iterations; k++)
     {
-        
+    
         srand(analogRead(0));
         txDone = false;     // initialize toggle to keep track of broadcasts
 
-        if (k%10==0){Serial << "Iteration " << k+1<<" "<<P<<" "<<Q<<" "<<V<<" "<<bP<<" "<<bQ<<endl; delay(5);}
+        // if (k%50==0){Serial << "Iteration " << k+1<<" P="<<P<<" Q="<<Q<<" V="<<V<<" bP="<<bP<<" bQ="<<bQ<<endl; delay(5);}
+        if (k%50==0){
+            Serial << "Iteration " << k+1<<endl;
+            _print_("P=",P,6);_print_("Q=",Q,6);_print_("V=",V,6);_print_("bP=",bP,6);_print_("bQ=",bQ,6);delay(5);
+        }
+        // Serial << "Iteration " << k+1<<endl; delay(5);
+        // for (uint8_t i:neighbors) {
+        //     Serial<<nu[i-1]<<" "<<yn[i-1]<<" "<<fv[i-1]<<" "<<yv[i-1]<<" "<<lmbd_v[i-1]<<" "<<ylmbd[i-1]<<" "<<bn[i-1]<<endl; delay(5);
+        // }
+
         // for (uint8_t i:neighbors) {
         //      Serial<<"Old Flow at neighbor "<<i<<" is "<<flows[i-1]<<endl; delay(5);
         // }
        
         float new_bP = 0, new_bQ = 0;
+        float zeta=1;
 
-        int i=0;
-        start = millis();   // initialize timer
-        while (millis()-start<=1000)
-        {
-             uint8_t nei_to_send=neighbors[i]; 
-             i++; if (i==_G->getN()) i=0;
-            if (nei_to_send<nodeID) 
+        if (k%comm==0){
+            int i=0;
+            start = millis();   // initialize timer
+            while (millis()-start<=500)
             {
-                float vars_c[5] = {comm_self_fp[nei_to_send-1],comm_self_fq[nei_to_send-1],comm_self_nu[nei_to_send-1],comm_self_fv[nei_to_send-1],comm_self_lmbd_v[nei_to_send-1]};
-                float grad_c[5] = {comm_self_yp[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_self_yn[nei_to_send-1],comm_self_yv[nei_to_send-1],comm_self_ylmbd[nei_to_send-1]};
-                float vars_p[5] = {comm_neighbor_fp[nei_to_send-1],comm_neighbor_fq[nei_to_send-1],comm_neighbor_nu[nei_to_send-1],comm_neighbor_fv[nei_to_send-1],comm_neighbor_lmbd_v[nei_to_send-1]};
-                float grad_p[5] = {comm_neighbor_yp[nei_to_send-1],comm_neighbor_yq[nei_to_send-1],comm_neighbor_yn[nei_to_send-1],comm_neighbor_yv[nei_to_send-1],comm_neighbor_ylmbd[nei_to_send-1]};
-                _SendToParent(nei_to_send,self_flags[nei_to_send-1],vars_c,grad_c,1); delay(5);
-                _SendToParent(nei_to_send,self_flags[nei_to_send-1],vars_p,grad_p,2);
-            }
-            else if(nei_to_send>nodeID) 
-            {
-                float vars[5] = {comm_self_fp[nei_to_send-1],comm_self_fq[nei_to_send-1],comm_self_nu[nei_to_send-1],comm_self_fv[nei_to_send-1],comm_self_lmbd_v[nei_to_send-1]};
-                float grad[5] = {comm_self_yp[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_self_yn[nei_to_send-1],comm_self_yv[nei_to_send-1],comm_self_ylmbd[nei_to_send-1]};
-                _SendToChild(nei_to_send,self_flags[nei_to_send-1],vars,grad);
-            }
-            if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,200))                                // OPF packet available for node from its neighbor
-            {
-                // Serial<<"neighbor is "<<neighborID<<" "<<received_from[neighborID-1]<<endl; delay(5);
-                if (!received_from[neighborID-1])
+                 uint8_t nei_to_send=neighbors[i]; 
+                 i++; if (i==_G->getN()) i=0;
+                if (nei_to_send<nodeID) 
                 {
-                    
-                    self_fp = fp[neighborID-1]; self_yp = yp[neighborID-1];
-                    self_fq = fq[neighborID-1]; self_yq = yq[neighborID-1];
-                    self_nu = nu[neighborID-1]; self_yn = yn[neighborID-1];
-                    self_fv = fv[neighborID-1]; self_yv = yv[neighborID-1];
-                    self_lmbd_v = lmbd_v[neighborID-1]; self_ylmbd = ylmbd[neighborID-1];
-                    if(neighborID < nodeID)  // in-coming flow, nodeID - child
-                    {
-                        received_from[neighborID-1]=1;
-                        //get values for fp, fq, and lambda that are received from this neighbor
-                        float* tmp=_getPacketFromParent();
-                        neighbor_fp = tmp[0]; neighbor_yp = tmp[5];
-                        neighbor_fq = tmp[1]; neighbor_yq = tmp[6];
-                        neighbor_nu = tmp[2]; neighbor_yn = tmp[7];
-                        neighbor_fv = tmp[3]; neighbor_yv = tmp[8];
-                        neighbor_lmbd_v = tmp[4]; neighbor_ylmbd = tmp[9];
-                        // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
-                        neighbor_flag = _getFlagFromParent();                                       // store incoming value of lambda                
-                        // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
-                        if (neighbor_flags[neighborID-1] != neighbor_flag)
-                        {       
-                            //get values for fp, fq, and lambda that are currently associated with this neighbor
-                            new_fp[neighborID-1] = 0.5*(self_fp+neighbor_fp)-alpha*yp[neighborID-1];
-                            new_yp[neighborID-1] = 0.5*(self_yp+neighbor_yp);
-                            new_fq[neighborID-1] = 0.5*(self_fq+neighbor_fq)-alpha*yq[neighborID-1];
-                            new_yq[neighborID-1] = 0.5*(self_yq+neighbor_yq);
-                            new_nu[neighborID-1] = 0.5*(self_nu+neighbor_nu)+alpha*yn[neighborID-1];
-                            new_yn[neighborID-1] = 0.5*(self_yn+neighbor_yn);
-                            new_fv[neighborID-1] = 0.5*(self_fv+neighbor_fv)-alpha*yv[neighborID-1];
-                            new_yv[neighborID-1] = 0.5*(self_yv+neighbor_yv);
-                            new_lmbd_v[neighborID-1] = 0.5*(self_lmbd_v+neighbor_lmbd_v)+alpha*ylmbd[neighborID-1];
-                            new_ylmbd[neighborID-1] = 0.5*(self_ylmbd+neighbor_ylmbd);
-
-                            self_flags[neighborID-1] = !self_flags[neighborID-1];
-                            neighbor_flags[neighborID-1] = neighbor_flag;
-
-                            comm_self_fp[neighborID-1]=self_fp; comm_self_yp[neighborID-1]=self_yp;
-                            comm_neighbor_fp[neighborID-1]=neighbor_fp; comm_neighbor_yp[neighborID-1]=neighbor_yp;
-
-                            comm_self_fq[neighborID-1]=self_fq; comm_self_yq[neighborID-1]=self_yq;
-                            comm_neighbor_fq[neighborID-1]=neighbor_fq; comm_neighbor_yq[neighborID-1]=neighbor_yq;
-
-                            comm_self_nu[neighborID-1]=self_nu; comm_self_yn[neighborID-1]=self_yn;
-                            comm_neighbor_nu[neighborID-1]=neighbor_nu; comm_neighbor_yn[neighborID-1]=neighbor_yn;
-
-                            comm_self_fv[neighborID-1]=self_fv; comm_self_yv[neighborID-1]=self_yv;
-                            comm_neighbor_fv[neighborID-1]=neighbor_fv; comm_neighbor_yv[neighborID-1]=neighbor_yv;
-
-                            comm_self_lmbd_v[neighborID-1]=self_lmbd_v; comm_self_ylmbd[neighborID-1]=self_ylmbd;
-                            comm_neighbor_lmbd_v[neighborID-1]=neighbor_lmbd_v; comm_neighbor_ylmbd[neighborID-1]=neighbor_ylmbd;
-
-                        }
-                        else
+                    float vars_c[5] = {comm_self_fp[nei_to_send-1],comm_self_fq[nei_to_send-1],comm_self_nu[nei_to_send-1],comm_self_fv[nei_to_send-1],comm_self_lmbd_v[nei_to_send-1]};
+                    float grad_c[5] = {comm_self_yp[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_self_yn[nei_to_send-1],comm_self_yv[nei_to_send-1],comm_self_ylmbd[nei_to_send-1]};
+                    float vars_p[5] = {comm_neighbor_fp[nei_to_send-1],comm_neighbor_fq[nei_to_send-1],comm_neighbor_nu[nei_to_send-1],comm_neighbor_fv[nei_to_send-1],comm_neighbor_lmbd_v[nei_to_send-1]};
+                    float grad_p[5] = {comm_neighbor_yp[nei_to_send-1],comm_neighbor_yq[nei_to_send-1],comm_neighbor_yn[nei_to_send-1],comm_neighbor_yv[nei_to_send-1],comm_neighbor_ylmbd[nei_to_send-1]};
+                    if (sent_packet_num[nei_to_send-1]==1) 
                         {
-                            new_fp[neighborID-1] = self_fp-alpha*yp[neighborID-1]; new_yp[neighborID-1] = self_yp;
-                            new_fq[neighborID-1] = self_fq-alpha*yq[neighborID-1]; new_yq[neighborID-1] = self_yq;
-                            new_nu[neighborID-1] = self_nu+alpha*yn[neighborID-1]; new_yn[neighborID-1] = self_yn;
-                            new_fv[neighborID-1] = self_fv-alpha*yv[neighborID-1]; new_yv[neighborID-1] = self_yv;
-                            new_lmbd_v[neighborID-1] = self_lmbd_v+alpha*ylmbd[neighborID-1]; new_ylmbd[neighborID-1] = self_ylmbd;
-
+                            _SendToParent(nei_to_send,self_flags[nei_to_send-1],vars_c,grad_c,1);
+                            sent_packet_num[nei_to_send-1]=2;
                         }
-                        new_fp[neighborID-1]=_clip(new_fp[neighborID-1],pmin,pmax);
-                        new_fq[neighborID-1]=_clip(new_fq[neighborID-1],qmin,qmax);
-                        new_bP+=new_fp[neighborID-1];
-                        new_bQ+=new_fq[neighborID-1];
-
+                    else
+                        {
+                            _SendToParent(nei_to_send,self_flags[nei_to_send-1],vars_p,grad_p,2);
+                            sent_packet_num[nei_to_send-1]=1;
                     }
-
-                    else if((neighborID > nodeID))  //out-going flow, nodeID - parent
+                }
+                else if(nei_to_send>nodeID) 
+                {
+                    float vars[5] = {fp[nei_to_send-1],fq[nei_to_send-1],nu[nei_to_send-1],fv[nei_to_send-1],lmbd_v[nei_to_send-1]};
+                    float grad[5] = {yp[nei_to_send-1],yq[nei_to_send-1],yn[nei_to_send-1],yv[nei_to_send-1],ylmbd[nei_to_send-1]};
+                    _SendToChild(nei_to_send,self_flags[nei_to_send-1],vars,grad);
+                }
+                if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))                                // OPF packet available for node from its neighbor
+                {
+                    //Serial<<"neighbor is "<<neighborID<<" "<<received_from[neighborID-1]<<endl; delay(5);
+                    if (!received_from[neighborID-1])
                     {
-
-                        float* tmp=_getPacketFromChild(); 
-                        uint8_t packet=_whichPacket();
-                        // neighbor_old_fp = tmp[0]; neighbor_old_yp = tmp[5];self_old_fp = tmp[10]; self_old_yp = tmp[15]; 
-                        // neighbor_old_fq = tmp[1]; neighbor_old_yq = tmp[6];self_old_fq = tmp[11]; self_old_yq = tmp[16];
-                        // neighbor_old_nu = tmp[2]; neighbor_old_yn = tmp[7]; self_old_nu = tmp[12]; self_old_yn = tmp[17];
-                        // neighbor_old_fv = tmp[3]; neighbor_old_yv = tmp[8]; self_old_fv = tmp[13]; self_old_yv = tmp[18];
-                        // neighbor_old_lmbd_v = tmp[4]; neighbor_old_ylmbd = tmp[9]; self_old_lmbd_v = tmp[14]; self_old_ylmbd = tmp[19];
-                        if (!(packet!=received_packet_num[neighborID-1] && received_packet_num[neighborID-1]>0)) {
-                            if (received_packet_num[neighborID-1]==0){
-                                received_packet_num[neighborID-1] = packet; //Serial<<"Packet "<<packet<<endl; delay(5);
-                                for (int t=0;t<10;t++) received_packets[packet-1][t]=tmp[t];
-                            }
-                        }
-                        else 
+                        
+                        self_fp = fp[neighborID-1]; self_yp = yp[neighborID-1];
+                        self_fq = fq[neighborID-1]; self_yq = yq[neighborID-1];
+                        self_nu = nu[neighborID-1]; self_yn = yn[neighborID-1];
+                        self_fv = fv[neighborID-1]; self_yv = yv[neighborID-1];
+                        self_lmbd_v = lmbd_v[neighborID-1]; self_ylmbd = ylmbd[neighborID-1];
+                        if(neighborID < nodeID)  // in-coming flow, nodeID - child
                         {
-                            received_from[neighborID-1]=1; //Serial<<"Packet "<<packet<<endl; delay(5);
-                            for (int t=0;t<10;t++) received_packets[packet-1][t]=tmp[t];
-                            received_packet_num[neighborID-1] = 0;  // Reset packet number
-
-                            neighbor_old_fp = received_packets[0][0]; neighbor_old_yp = received_packets[0][5];
-                            neighbor_old_fq = received_packets[0][1]; neighbor_old_yq = received_packets[0][6];
-                            neighbor_old_nu = received_packets[0][2]; neighbor_old_yn = received_packets[0][7];
-                            neighbor_old_fv = received_packets[0][3]; neighbor_old_yv = received_packets[0][8];
-                            neighbor_old_lmbd_v = received_packets[0][4]; neighbor_old_ylmbd = received_packets[0][9];
-
-                            self_old_fp = received_packets[1][0]; self_old_yp = received_packets[1][5]; 
-                            self_old_fq = received_packets[1][1]; self_old_yq = received_packets[1][6];
-                            self_old_nu = received_packets[1][2]; self_old_yn = received_packets[1][7];
-                            self_old_fv = received_packets[1][3]; self_old_yv = received_packets[1][8];
-                            self_old_lmbd_v = received_packets[1][4]; self_old_ylmbd = received_packets[1][9];
-                         
-                            neighbor_flag = _getFlagFromChild();                                       // store incoming value of lambda
-                            // Serial<<"Flows from child "<<neighborID<<" are "<<neighbor_old_fp<<" and "<<self_old_fp<<endl;delay(5);
+                            received_from[neighborID-1]=1;
+                            //get values for fp, fq, and lambda that are received from this neighbor
+                            float* tmp=_getPacketFromParent();
+                            neighbor_fp = tmp[0]; neighbor_yp = tmp[5];
+                            neighbor_fq = tmp[1]; neighbor_yq = tmp[6];
+                            neighbor_nu = tmp[2]; neighbor_yn = tmp[7];
+                            neighbor_fv = tmp[3]; neighbor_yv = tmp[8];
+                            neighbor_lmbd_v = tmp[4]; neighbor_ylmbd = tmp[9];
+                            // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
+                            neighbor_flag = _getFlagFromParent();                                       // store incoming value of lambda                
+                            // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
                             if (neighbor_flags[neighborID-1] != neighbor_flag)
-                            {       
+                            {    
+                                // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<" "<<self_fp<<endl;delay(5);   
                                 //get values for fp, fq, and lambda that are currently associated with this neighbor
-                                new_fp[neighborID-1] = 0.5*(self_old_fp+neighbor_old_fp)+self_fp-self_old_fp-alpha*yp[neighborID-1];
-                                new_yp[neighborID-1] = 0.5*(self_old_yp+neighbor_old_yp)+self_yp-self_old_yp;
-                                new_fq[neighborID-1] = 0.5*(self_old_fq+neighbor_old_fq)+self_fq-self_old_fq-alpha*yq[neighborID-1];
-                                new_yq[neighborID-1] = 0.5*(self_old_yq+neighbor_old_yq)+self_yq-self_old_yq;
-                                new_nu[neighborID-1] = 0.5*(self_old_nu+neighbor_old_nu)+self_nu-self_old_nu+alpha*yn[neighborID-1];
-                                new_yn[neighborID-1] = 0.5*(self_old_yn+neighbor_old_yn)+self_yn-self_old_yn;
-                                new_fv[neighborID-1] = 0.5*(self_old_fv+neighbor_old_fv)+self_fv-self_old_fv-alpha*yv[neighborID-1];
-                                new_yv[neighborID-1] = 0.5*(self_old_yv+neighbor_old_yv)+self_yv-self_old_yv;
-                                new_lmbd_v[neighborID-1] = 0.5*(self_old_lmbd_v+neighbor_old_lmbd_v)+self_lmbd_v-self_old_lmbd_v+alpha*ylmbd[neighborID-1];
-                                new_ylmbd[neighborID-1] = 0.5*(self_old_ylmbd+neighbor_old_ylmbd)+self_ylmbd-self_old_ylmbd;
-                                //Serial<<"Flag at "<<neighborID<<" is "<<self_flags[neighborID-1]<<" and "<<!self_flags[neighborID-1]<<endl;delay(5);
-                                self_flags[neighborID-1] =!self_flags[neighborID-1];
+                                new_fp[neighborID-1] = 0.5*(self_fp+neighbor_fp)-alpha*yp[neighborID-1];
+                                new_yp[neighborID-1] = 0.5*(self_yp+neighbor_yp);
+                                new_fq[neighborID-1] = 0.5*(self_fq+neighbor_fq)-alpha*yq[neighborID-1];
+                                new_yq[neighborID-1] = 0.5*(self_yq+neighbor_yq);
+                                new_nu[neighborID-1] = 0.5*(self_nu+neighbor_nu)+alpha*yn[neighborID-1];
+                                new_yn[neighborID-1] = 0.5*(self_yn+neighbor_yn);
+                                new_fv[neighborID-1] = 0.5*(self_fv+neighbor_fv)-alpha*yv[neighborID-1];
+                                new_yv[neighborID-1] = 0.5*(self_yv+neighbor_yv);
+                                new_lmbd_v[neighborID-1] = 0.5*(self_lmbd_v+neighbor_lmbd_v)+alpha*ylmbd[neighborID-1];
+                                new_ylmbd[neighborID-1] = 0.5*(self_ylmbd+neighbor_ylmbd);
+
+                                self_flags[neighborID-1] = !self_flags[neighborID-1];
                                 neighbor_flags[neighborID-1] = neighbor_flag;
+
+                                comm_self_fp[neighborID-1]=self_fp; comm_self_yp[neighborID-1]=self_yp;
+                                comm_neighbor_fp[neighborID-1]=neighbor_fp; comm_neighbor_yp[neighborID-1]=neighbor_yp;
+
+                                comm_self_fq[neighborID-1]=self_fq; comm_self_yq[neighborID-1]=self_yq;
+                                comm_neighbor_fq[neighborID-1]=neighbor_fq; comm_neighbor_yq[neighborID-1]=neighbor_yq;
+
+                                comm_self_nu[neighborID-1]=self_nu; comm_self_yn[neighborID-1]=self_yn;
+                                comm_neighbor_nu[neighborID-1]=neighbor_nu; comm_neighbor_yn[neighborID-1]=neighbor_yn;
+
+                                comm_self_fv[neighborID-1]=self_fv; comm_self_yv[neighborID-1]=self_yv;
+                                comm_neighbor_fv[neighborID-1]=neighbor_fv; comm_neighbor_yv[neighborID-1]=neighbor_yv;
+
+                                comm_self_lmbd_v[neighborID-1]=self_lmbd_v; comm_self_ylmbd[neighborID-1]=self_ylmbd;
+                                comm_neighbor_lmbd_v[neighborID-1]=neighbor_lmbd_v; comm_neighbor_ylmbd[neighborID-1]=neighbor_ylmbd;
 
                             }
                             else
@@ -1111,15 +1065,86 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
                             }
                             new_fp[neighborID-1]=_clip(new_fp[neighborID-1],pmin,pmax);
                             new_fq[neighborID-1]=_clip(new_fq[neighborID-1],qmin,qmax);
-                            new_bP-=new_fp[neighborID-1];
-                            new_bQ-=new_fq[neighborID-1];
+                            new_bP+=new_fp[neighborID-1];
+                            new_bQ+=new_fq[neighborID-1];
 
                         }
-                    //Serial<<"New Flow at neighbor "<<neighborID<<" is "<<new_self_fp<<endl; delay(5);
+
+                        else if((neighborID > nodeID))  //out-going flow, nodeID - parent
+                        {
+
+                            float* tmp=_getPacketFromChild(); 
+                            uint8_t packet=_whichPacket();
+                            // neighbor_old_fp = tmp[0]; neighbor_old_yp = tmp[5];self_old_fp = tmp[10]; self_old_yp = tmp[15]; 
+                            // neighbor_old_fq = tmp[1]; neighbor_old_yq = tmp[6];self_old_fq = tmp[11]; self_old_yq = tmp[16];
+                            // neighbor_old_nu = tmp[2]; neighbor_old_yn = tmp[7]; self_old_nu = tmp[12]; self_old_yn = tmp[17];
+                            // neighbor_old_fv = tmp[3]; neighbor_old_yv = tmp[8]; self_old_fv = tmp[13]; self_old_yv = tmp[18];
+                            // neighbor_old_lmbd_v = tmp[4]; neighbor_old_ylmbd = tmp[9]; self_old_lmbd_v = tmp[14]; self_old_ylmbd = tmp[19];
+                            if (!(packet!=received_packet_num[neighborID-1] && received_packet_num[neighborID-1]>0)) {
+                                if (received_packet_num[neighborID-1]==0){
+                                    received_packet_num[neighborID-1] = packet; //Serial<<"Packet "<<packet<<endl; delay(5);
+                                    for (int t=0;t<10;t++) received_packets[packet-1][t]=tmp[t];
+                                }
+                            }
+                            else 
+                            {
+                                received_from[neighborID-1]=1; //Serial<<"Packet "<<packet<<endl; delay(5);
+                                for (int t=0;t<10;t++) received_packets[packet-1][t]=tmp[t];
+                                received_packet_num[neighborID-1] = 0;  // Reset packet number
+
+                                neighbor_old_fp = received_packets[0][0]; neighbor_old_yp = received_packets[0][5];
+                                neighbor_old_fq = received_packets[0][1]; neighbor_old_yq = received_packets[0][6];
+                                neighbor_old_nu = received_packets[0][2]; neighbor_old_yn = received_packets[0][7];
+                                neighbor_old_fv = received_packets[0][3]; neighbor_old_yv = received_packets[0][8];
+                                neighbor_old_lmbd_v = received_packets[0][4]; neighbor_old_ylmbd = received_packets[0][9];
+
+                                self_old_fp = received_packets[1][0]; self_old_yp = received_packets[1][5]; 
+                                self_old_fq = received_packets[1][1]; self_old_yq = received_packets[1][6];
+                                self_old_nu = received_packets[1][2]; self_old_yn = received_packets[1][7];
+                                self_old_fv = received_packets[1][3]; self_old_yv = received_packets[1][8];
+                                self_old_lmbd_v = received_packets[1][4]; self_old_ylmbd = received_packets[1][9];
+                             
+                                neighbor_flag = _getFlagFromChild();                                       // store incoming value of lambda
+                                // Serial<<"Flows from child "<<neighborID<<" are "<<neighbor_old_fp<<" and "<<self_old_fp<<endl;delay(5);
+                                if (neighbor_flags[neighborID-1] != neighbor_flag)
+                                {       
+                                    //get values for fp, fq, and lambda that are currently associated with this neighbor
+                                    new_fp[neighborID-1] = 0.5*(self_old_fp+neighbor_old_fp)+self_fp-self_old_fp-alpha*yp[neighborID-1];
+                                    new_yp[neighborID-1] = 0.5*(self_old_yp+neighbor_old_yp)+self_yp-self_old_yp;
+                                    new_fq[neighborID-1] = 0.5*(self_old_fq+neighbor_old_fq)+self_fq-self_old_fq-alpha*yq[neighborID-1];
+                                    new_yq[neighborID-1] = 0.5*(self_old_yq+neighbor_old_yq)+self_yq-self_old_yq;
+                                    new_nu[neighborID-1] = 0.5*(self_old_nu+neighbor_old_nu)+self_nu-self_old_nu+alpha*yn[neighborID-1];
+                                    new_yn[neighborID-1] = 0.5*(self_old_yn+neighbor_old_yn)+self_yn-self_old_yn;
+                                    new_fv[neighborID-1] = 0.5*(self_old_fv+neighbor_old_fv)+self_fv-self_old_fv-alpha*yv[neighborID-1];
+                                    new_yv[neighborID-1] = 0.5*(self_old_yv+neighbor_old_yv)+self_yv-self_old_yv;
+                                    new_lmbd_v[neighborID-1] = 0.5*(self_old_lmbd_v+neighbor_old_lmbd_v)+self_lmbd_v-self_old_lmbd_v+alpha*ylmbd[neighborID-1];
+                                    new_ylmbd[neighborID-1] = 0.5*(self_old_ylmbd+neighbor_old_ylmbd)+self_ylmbd-self_old_ylmbd;
+                                    //Serial<<"Flag at "<<neighborID<<" is "<<s\elf_flags[neighborID-1]<<" and "<<!self_flags[neighborID-1]<<endl;delay(5);
+                                    self_flags[neighborID-1] =!self_flags[neighborID-1];
+                                    neighbor_flags[neighborID-1] = neighbor_flag;
+
+                                }
+                                else
+                                {
+                                    new_fp[neighborID-1] = self_fp-alpha*yp[neighborID-1]; new_yp[neighborID-1] = self_yp;
+                                    new_fq[neighborID-1] = self_fq-alpha*yq[neighborID-1]; new_yq[neighborID-1] = self_yq;
+                                    new_nu[neighborID-1] = self_nu+alpha*yn[neighborID-1]; new_yn[neighborID-1] = self_yn;
+                                    new_fv[neighborID-1] = self_fv-alpha*yv[neighborID-1]; new_yv[neighborID-1] = self_yv;
+                                    new_lmbd_v[neighborID-1] = self_lmbd_v+alpha*ylmbd[neighborID-1]; new_ylmbd[neighborID-1] = self_ylmbd;
+
+                                }
+                                new_fp[neighborID-1]=_clip(new_fp[neighborID-1],pmin,pmax);
+                                new_fq[neighborID-1]=_clip(new_fq[neighborID-1],qmin,qmax);
+                                new_bP-=new_fp[neighborID-1];
+                                new_bQ-=new_fq[neighborID-1];
+
+                            }
+                        //Serial<<"New Flow at neighbor "<<neighborID<<" is "<<new_self_fp<<endl; delay(5);
+                        }
                     }
                 }
+               
             }
-           
         }
         for (uint8_t i:neighbors) {
 
@@ -1150,19 +1175,19 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
             }
             else received_from[i-1]=0;
 
-            new_bn[i-1] = new_fv[i-1] - 2*((n+(i-1))->getResistance())*new_fp[i] - 2*((n+(i-1))->getReactance())*new_fq[i];
-            
+            new_bn[i-1] = new_fv[i-1] - zeta*2*((n+(i-1))->getResistance())*new_fp[i-1] - zeta*2*((n+(i-1))->getReactance())*new_fq[i-1];
+            //Serial<<"R and X for node "<<i<<" are "<<((n+(i-1))->getResistance())<<" and "<<((n+(i-1))->getReactance())<<endl;
 
         }
 
         dP = P+lambda+beta1*bP;
-        dQ = mu+beta2*bQ;
+        dQ = Q+mu+beta2*bQ;
         dV = alpha_V*(V-1);
         for (uint8_t i:neighbors){
             if (i>nodeID) dV-=lmbd_v[i-1];
             else dV+=lmbd_v[i-1];
         }
-
+        // dV=0;
 
         P = _clip(P - alpha*dP,Pmin,Pmax);
         Q = _clip(Q - alpha*dQ,Qmin,Qmax);
@@ -1183,8 +1208,8 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
                 new_yq[i-1] += 2*(new_mu+beta2*new_bQ-mu-beta2*bQ);
                 new_ylmbd[i-1] += 2*(new_V-V);
             } 
-            new_yp[i-1] -= 2*((n+(i-1))->getResistance())*(new_nu[i-1]-nu[i-1]+beta3*(new_bn[i-1]-bn[i-1]));
-            new_yq[i-1] -= 2*((n+(i-1))->getReactance())*(new_nu[i-1]-nu[i-1]+beta3*(new_bn[i-1]-bn[i-1]));
+            new_yp[i-1] -= zeta*2*((n+(i-1))->getResistance())*(new_nu[i-1]-nu[i-1]+beta3*(new_bn[i-1]-bn[i-1]));
+            new_yq[i-1] -= zeta*2*((n+(i-1))->getReactance())*(new_nu[i-1]-nu[i-1]+beta3*(new_bn[i-1]-bn[i-1]));
             new_yn[i-1] += new_bn[i-1]-bn[i-1];
             new_yv[i-1] += new_lmbd_v[i-1] - lmbd_v[i-1] + new_nu[i-1] - nu[i-1] + beta3*(new_bn[i-1]-bn[i-1]);
             new_ylmbd[i-1] += new_fv[i-1]-fv[i-1];
@@ -1197,6 +1222,7 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
             nu[i-1]=new_nu[i-1]; yn[i-1]=new_yn[i-1];
             fv[i-1]=new_fv[i-1]; yv[i-1]=new_yv[i-1];
             lmbd_v[i-1]=new_lmbd_v[i-1]; ylmbd[i-1]=new_ylmbd[i-1];
+            //Serial<<nu[i-1]<<" "<<yn[i-1]<<" "<<fv[i-1]<<" "<<yv[i-1]<<" "<<lmbd_v[i-1]<<" "<<ylmbd[i-1]<<" "<<bn[i-1]<<endl; delay(5);
         }
 
         V = new_V; lambda=new_lambda; mu=new_mu;
@@ -1204,13 +1230,35 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
 
         _buffer_P[k] = P;
         _buffer_bP[k] = bP;
+        _buffer_Q[k] = Q;
+        _buffer_bQ[k] = bQ;
+        _buffer_V[k] = V;
+        _buffer_bn[k] = 0; for (uint8_t i:neighbors) {if (_buffer_bn[k]<abs(bn[i-1])) _buffer_bn[k]=abs(bn[i-1]);}
     }
 
-    Serial << "The new active power injection at node" << nodeID << " is "<< P-Pd <<endl;
-    delay(5);
-    Serial << "The power imbalance at node" << nodeID << " is "<< bP <<endl;
-    delay(5);
-    return true;
+    _print_("Net active power injection",P-Pd,6);
+    _print_("Net reactive power injection",Q-Qd,6);
+    _print_("Voltage magnitude",V,6);
+    _print_("Active power imbalance", bP,6);
+    _print_("Reactive power imbalance", bQ,6);
+    for (uint8_t i:neighbors) {
+            _print_("Voltage drop imbalance", bn[i-1],6);
+        }
+
+    // Serial<<"Active power injections:"<<endl;
+    // for (int k=0;k<iterations;k++) Serial<<_buffer_P[k]<<endl;
+    // Serial<<"Reactive power injections:"<<endl;
+    // for (int k=0;k<iterations;k++) Serial<<_buffer_Q[k]<<endl;
+    // Serial<<"Votlage magnitudes:"<<endl;
+    // for (int k=0;k<iterations;k++) Serial<<_buffer_V[k]<<endl;
+        
+    // Serial<<"Active power imbalances:"<<endl;
+    // for (int k=0;k<iterations;k++) Serial<<_buffer_bP[k]<<endl;
+    // Serial<<"Reactive power imbalances:"<<endl;
+    // for (int k=0;k<iterations;k++) Serial<<_buffer_bQ[k]<<endl;
+    // Serial<<"Voltage drop imbalances:"<<endl;
+    // for (int k=0;k<iterations;k++) Serial<<_buffer_bn[k]<<endl;
+    // return true;
 }
 
  float OAgent_OPF:: _clip(float x, float xmin, float xmax){
@@ -1244,21 +1292,21 @@ void OAgent_OPF::_SendToChild(uint16_t recipientID, bool flag_OPF, float* vars, 
     // fp,yp,fq,yq,nu,yn,fv,yv,lmbd_v,ylmbd;
 
     uint8_t sign_var; uint32_t var;
-    for (int i=0;i<10;i++){
-        _sender_helper(vars[i],&sign_var,&var);
-        payload[5*(i+1)]=sign_var;
-        payload[5*(i+1)+1] = var;
-        payload[5*(i+1)+2] = var >> 8;
-        payload[5*(i+1)+3] = var >> 16;
-        payload[5*(i+1)+4] = var >> 24;
+    for (int i=5,j=0;i<30,j<5;i=i+5,j++){
+        _sender_helper(vars[j],&sign_var,&var);
+        payload[i]=sign_var;
+        payload[i+1] = var;
+        payload[i+2] = var >> 8;
+        payload[i+3] = var >> 16;
+        payload[i+4] = var >> 24;
     }
-    for (int i=0;i<10;i++){
-        _sender_helper(grad[i],&sign_var,&var);
-        payload[5*(i+1)]=sign_var;
-        payload[5*(i+1)+1] = var;
-        payload[5*(i+1)+2] = var >> 8;
-        payload[5*(i+1)+3] = var >> 16;
-        payload[5*(i+1)+4] = var >> 24;
+    for (int i=30,j=0;i<55,j<5;i=i+5,j++){
+        _sender_helper(grad[j],&sign_var,&var);
+        payload[i]=sign_var;
+        payload[i+1] = var;
+        payload[i+2] = var >> 8;
+        payload[i+3] = var >> 16;
+        payload[i+4] = var >> 24;
     }
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
@@ -1280,21 +1328,21 @@ void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float* vars,
     // fp,yp,fq,yq,nu,yn,fv,yv,lmbd_v,ylmbd;
 
     uint8_t sign_var; uint32_t var;
-    for (int i=0;i<10;i++){
-        _sender_helper(vars[i],&sign_var,&var);
-        payload[5*(i+1)]=sign_var;
-        payload[5*(i+1)+1] = var;
-        payload[5*(i+1)+2] = var >> 8;
-        payload[5*(i+1)+3] = var >> 16;
-        payload[5*(i+1)+4] = var >> 24;
+    for (int i=5,j=0;i<30,j<5;i=i+5,j++){
+        _sender_helper(vars[j],&sign_var,&var);
+        payload[i]=sign_var;
+        payload[i+1] = var;
+        payload[i+2] = var >> 8;
+        payload[i+3] = var >> 16;
+        payload[i+4] = var >> 24;
     }
-    for (int i=0;i<10;i++){
-        _sender_helper(grad[i],&sign_var,&var);
-        payload[5*(i+1)]=sign_var;
-        payload[5*(i+1)+1] = var;
-        payload[5*(i+1)+2] = var >> 8;
-        payload[5*(i+1)+3] = var >> 16;
-        payload[5*(i+1)+4] = var >> 24;
+    for (int i=30,j=0;i<55,j<5;i=i+5,j++){
+        _sender_helper(grad[j],&sign_var,&var);
+        payload[i]=sign_var;
+        payload[i+1] = var;
+        payload[i+2] = var >> 8;
+        payload[i+3] = var >> 16;
+        payload[i+4] = var >> 24;
     }
     
     payload[55] = packet;
@@ -1398,6 +1446,7 @@ float* OAgent_OPF::_getPacketFromParent() {
         a[j] = x/BASE;
 
     }
+    // Serial<<a[0]<<endl;
     return a;
 }
 
