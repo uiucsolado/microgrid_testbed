@@ -176,6 +176,15 @@ class OLocalVertex : public OVertex {
         inline float getDp() { return _Dp; }
         inline float getDq() { return _Dq; }
 
+        // Get directive for primal dual algorithms buffer data
+        inline float getBufferActiveSetpoint(uint8_t k) { return _buffer_P[k]; }
+        inline float getBufferReactiveSetpoint(uint8_t k) { return _buffer_Q[k]; }
+        inline float getBufferActiveBalance(uint8_t k) { return _buffer_bP[k]; }
+        inline float getBufferReactiveBalance(uint8_t k) { return _buffer_bQ[k]; }
+        inline float getBufferSquareVoltage(uint8_t k) { return _buffer_sqV[k]; }
+        inline float getBufferMu(uint8_t k) { return _buffer_mu[k]; }
+        inline float getBufferNu(uint8_t k) { return _buffer_nu[k]; }
+
         // Set directive for primal dual algorithm
         inline void setGenBusStatus(bool genBus) {_genBus = genBus; }
         inline void setActiveSetpoint(float p) {_p = p; }
@@ -188,6 +197,15 @@ class OLocalVertex : public OVertex {
         inline void setMu(float mu) {_mu = mu; }
         inline void setNu(float nu) {_nu = nu; }
         inline void setPrimalDualWeights(float Wv, float Wp, float Wq, float Dp, float Dq) {_Wv = Wv; _Wp = Wp; _Wq = Wq; _Dp = Dp; _Dq = Dq; }
+
+        // Set directive for primal dual algorithms buffer data
+        inline void setBufferActiveSetpoint(uint8_t k, float p) {_buffer_P[k] = p; }
+        inline void setBufferReactiveSetpoint(uint8_t k, float q) {_buffer_Q[k] = q; }
+        inline void setBufferActiveBalance(uint8_t k, float bp) {_buffer_bP[k] = bp; }
+        inline void setBufferReactiveBalance(uint8_t k, float bq) {_buffer_bQ[k] = bq; }
+        inline void setBufferSquareVoltage(uint8_t k, float sqV) {_buffer_sqV[k] = sqV; }
+        inline void setBufferMu(uint8_t k, float mu) {_buffer_mu[k] = mu; }
+        inline void setBufferNu(uint8_t k, float nu) {_buffer_nu[k] = nu; }
 
         
 	protected:
@@ -240,6 +258,15 @@ class OLocalVertex : public OVertex {
         float _Wq; //reactive power balance weight
         float _Dp; //active power injection weight
         float _Dq; //reactive power injection weight
+
+        //Olaolu's addition        
+        float _buffer_P[200];
+        float _buffer_Q[200];
+        float _buffer_bP[200];
+        float _buffer_bQ[200];
+        float _buffer_sqV[200];
+        float _buffer_mu[200];
+        float _buffer_nu[200];
 };
 
 class OLocalReserveVertex : public OLocalVertex {
@@ -297,8 +324,12 @@ class ORemoteVertex : public OVertex {
         inline bool getNodeFlag() { return _nodeFlag; }
         inline bool getNeighborFlag() { return _neighborFlag; }
 
-        inline uint8_t getLinkActCode() { return _linkActCode; }
-        inline bool isLinkParent() { return _linkParent; }
+        inline bool getLinkStatus() { return _linkStatus; }
+
+        // Get directive for primal dual algorithms buffer data
+        inline float getBufferActiveFlow(uint8_t k) { return _buffer_fP[k]; }
+        inline float getBufferReactiveFlow(uint8_t k) { return _buffer_fQ[k]; }
+        inline float getBufferLambda(uint8_t k) { return _buffer_lambda[k]; }
         
         // Set directive for primal dual algorithm
         inline void setResistance(float r) {_r = r; }
@@ -319,9 +350,12 @@ class ORemoteVertex : public OVertex {
         inline void setNodeFlag(bool nodeFlag) {_nodeFlag = nodeFlag; }
         inline void setNeighborFlag(bool neighborFlag) {_neighborFlag = neighborFlag; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
 
-        inline void setLinkActCode(uint8_t linkActCode) {_linkActCode = linkActCode; }
-        inline void setLinkParent(bool linkParent) {_linkParent = linkParent; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
+        inline void setLinkStatus(bool linkStatus) {_linkStatus = linkStatus; }
 
+        // Set directive for primal dual algorithms buffer data
+        inline void setBufferActiveFlow(uint8_t k, float fP) {_buffer_fP[k] = fP; }
+        inline void setBufferReactiveFlow(uint8_t k, float fQ) {_buffer_fQ[k] = fQ; }
+        inline void setBufferLambda(uint8_t k, float lambda) {_buffer_lambda[k] = lambda; }
     private:
         /// Properties
         bool _inNeighbor;
@@ -352,18 +386,21 @@ class ORemoteVertex : public OVertex {
         bool _neighborFlag;
 
         //link activation code (used to decide when a link should be activated, links with same activation code are activated simultaneously)
-        uint8_t _linkActCode;
+        bool _linkStatus;
 
-        //check if neighbor is a link activation lead
-        bool _linkParent;
+
+        //Olaolu's addition buffer data
+        float _buffer_fP[200];
+        float _buffer_fQ[200];
+        float _buffer_lambda[200];
 };
 
 
 struct node {
     uint8_t data;
-    node *mainNext;
     node *next;
-    node *codedNext;
+    node *neighborNext;
+    node *activeNext;
 };
 
 
@@ -376,45 +413,41 @@ class LinkedList {
         inline void setLLsize (uint8_t j) {_size = j;}
         inline void resetLLsize () {_size = 0;}
         inline uint8_t getLLsize() { return _size; }
-        inline void setNumCodedLinks (uint8_t j) {_numCodedLinks = j;}
-        inline uint8_t getNumCodedLinks() { return _numCodedLinks; }
+        inline void setNumActiveLinks (uint8_t j) {_numActiveLinks = j;}
+        inline uint8_t getNumActiveLinks() { return _numActiveLinks; }
         // inline int getInheritorID() { return _inheritor; }
 
         //method to display linked list of online node IDs
         void displayLinkedList();
-        //method to display coded linked lists
-        void displayCodedLinkedList(ORemoteVertex *n);
-        //method to get maximum activation code
-        uint8_t getMaxActCode(ORemoteVertex *n);
+        //method to display Active linked lists
+        void displayActiveLinkedList(ORemoteVertex *n);
         //method to see if a link is still available
-        bool isCodedLinkAvailable(uint8_t neighborID);
+        bool isLinkActive(uint8_t neighborID);
         //method to unlink the first node the linkedlist points to and return its data
         uint8_t unlinkLinkedListNodes();
         //method to update the linked list of online node IDs based on neighbor status
         void updateLinkedList(uint8_t *r);
         //resets the status of all neighbors from 3 to 2 
         void resetLinkedListStatus(uint8_t *r);
-        //method to find an uncoded link
-        void updateCodedLinks(ORemoteVertex *n);
-        //method to unlink a coded link
-        void unlinkCodedLink(uint8_t neighborID);
-        //method to find an uncoded link
-        uint8_t findUncodedLink(ORemoteVertex *n);
-        //method to check if an activation code is available
-        bool isActCodeAvailable(uint8_t code, ORemoteVertex *n, bool &flag);
-        //method to check if an activation code is used; if yes, the ID of the remote vertex is returned
-        uint8_t isActCodeUsed(uint8_t code, ORemoteVertex *n);
+        //method to find an unActive link
+        void resetActiveLinks(ORemoteVertex *n);
+        //method to find an unActive link
+        void updateActiveLinks(ORemoteVertex *n);
+        //method to unlink a Active link
+        void unlinkActiveLink(uint8_t neighborID);
+        //method to find an unActive link
+        uint8_t findInActiveLink(ORemoteVertex *n);
 
-        uint8_t addActiveFlows(uint8_t i, ORemoteVertex *n);
-        uint8_t addReactiveFlows(uint8_t i, ORemoteVertex *n);
-        uint8_t addLambdas(uint8_t i, ORemoteVertex *n);
+        float addActiveFlows(uint8_t i, ORemoteVertex *n);
+        float addReactiveFlows(uint8_t i, ORemoteVertex *n);
+        float addLambdas(uint8_t i, ORemoteVertex *n);
 
 
     private:
         //properties
-        node *_head, *_pseudoHead, *_codedHead, *_tail, *_pseudoTail, *_codedTail;
+        node *_head, *_neighborHead, *_activeHead, *_tail, *_neighborTail, *_activeTail;
         uint8_t _size;  //size of linked list
-        uint8_t _numCodedLinks;  //number of coded links
+        uint8_t _numActiveLinks;  //number of active links
 
         // Helper functions
         void _prepareLinkedList(int n);

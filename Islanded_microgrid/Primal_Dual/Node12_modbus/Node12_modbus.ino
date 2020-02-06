@@ -1,54 +1,40 @@
 #include <Streaming.h>
-#include <Dyno.h>
 #include <XBee.h>
-#include <OGraph.h>
-#include <OAgent.h>
+//#include <Dyno.h>
+#include <OGraph_PD.h>
+#include <OAgent_PD.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
 
 
-//Node 12
-
-long base = 10000;  // not using floating points so need a base number
-long D_base = 100000000;
-long base_value = 1000;
-long regd_base;
-long capacity = 25000;  //DER capacity limit
-
-Dyno d = Dyno();
-XBee xbee = XBee();                  // create an XBee object
+//Node 12  //#NODE
+XBee xbee = XBee();
 ZBRxResponse rx = ZBRxResponse();
+
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786A9,0,0.0479*D_base,-1.5*base,0.5*base,5,base,12);
-//OLocalVertex s = OLocalVertex(0x415786A9,0,0,-1.5*base,0.5*base,4,D_base,12);
-OGraph g = OGraph(&s);
-OAgent a = OAgent(&xbee,&rx,&g,false,true);
+OLocalVertex s = OLocalVertex(0x415786A9,12,0,1,1,1,1,10);  //#NODE
+LinkedList l = LinkedList();
+OGraph_PD g = OGraph_PD(&s,&l);
+OAgent_PD a = OAgent_PD(&xbee,&rx,&g,false,true); // argument rx?
 
-//My own additions
-ZBRxResponse* _rx = &rx;
-XBee* _xbee = &xbee;
-byte *b;
+uint8_t errorPin = 6;  // error led pin
+uint8_t sPin = 7;      // synced led
+uint8_t cPin = 48;     // coordination enabled led pin
 
-uint8_t cPin = 48;  // drive enable led
-uint8_t sPin = 7;   // synced led
-
+//variables for node sync check and link activation
 boolean de = false;
+boolean le = false;
 
-int state;         // variable to store the read value
-float state1;
-long n;
-
-MgsModbus Mb;
+//Modbus Communication
+MgsModbus Mb; 
 int val;
 // Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB6 };
-IPAddress ip(192, 168, 2, 6);
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBC};   //  #NODE
+IPAddress ip(192, 168, 2, 12);   // #NODE
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
 
-uint16_t state_high;
-uint16_t state_low;
 uint8_t Ref_high;
 uint8_t Ref_low;
 uint8_t Count_high;
@@ -59,108 +45,122 @@ int fc;
 int ref;
 int count;
 int pos;
+long t;
+float D;
+bool primaldual;
 
-void setup()  {  
+void setup()  {
   Serial.begin(38400);
-  while(!Serial)
-  {
-    ;
-    }
   Serial3.begin(38400);
-  pinMode(sPin, OUTPUT);
   pinMode(cPin, OUTPUT);
-  digitalWrite(sPin,HIGH);
+  pinMode(sPin, OUTPUT);
   digitalWrite(cPin,HIGH);
-  xbee.setSerial(Serial3);
-//Define the Neighboring nodes
-  //g.addInNeighbor(0x4174F1AA); // node 1
-  //g.addInNeighbor(0x4174F186); // node 2
-  //g.addInNeighbor(0x4151C692); // node 3
-  //g.addInNeighbor(0x4151C48B); // node 4
-  //g.addInNeighbor(0x4151C688); // node 5
-  //g.addInNeighbor(0x4151C6AB); // node 6
-  //g.addInNeighbor(0x4151C6CB); // node 7
-  //g.addInNeighbor(0x4151C6AC); // node 8
-  g.addInNeighbor(0x415786E1); // node 9
-  g.addInNeighbor(0x415786D3); // node 10
-  g.addInNeighbor(0x415DB670); // node 11
-  //g.addInNeighbor(0x415786A9); // node 12
-  g.addInNeighbor(0x4157847B); // node 13
-  //g.addInNeighbor(0x415DB664); // node 14
-  g.addInNeighbor(0x415DB684); // node 19
-  //g.addInNeighbor(0x41516F0B); // node 20
+  digitalWrite(sPin,HIGH);
   
-  digitalWrite(sPin,LOW);
-  digitalWrite(cPin,LOW);
+  xbee.setSerial(Serial3); //Specify the serial port for xbee
+//Define the Neighboring nodes
+  //g.addInNeighbor(0x4174F1AA,1,0,0); // node 1
+  //g.addInNeighbor(0x4174F186,2,0,0); // node 2
+  //g.addInNeighbor(0x4151C692,3,0,0); // node 3
+  //g.addInNeighbor(0x4151C48B,4,0.05,0.07); // node 4
+  //g.addInNeighbor(0x4151C688,5,0.04,0.06); // node 5
+  //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
+  //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
+  //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
+  g.addInNeighbor(0x415786E1,9,0.05,0.07); // node 9
+  g.addInNeighbor(0x415786D3,10,0.03,0.055); // node 10
+  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
+  //g.addInNeighbor(0x415786A9,12,0,0); // node 12
+  //g.addInNeighbor(0x4157847B,13,0,0); // node 13
+  //g.addInNeighbor(0x415DB664,14,0,0); // node 14
+  //g.addInNeighbor(0x415DB673,15,0,0); // node 15
+  //g.addInNeighbor(0x415DB684,19,0,0); // node 19
+  //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
 
-  // initialize the ethernet device
+  g.configureLinkedList();
+  s.setActiveDemand(0.2);
+  s.setReactiveDemand(0.1);
+ 
+  digitalWrite(cPin,LOW);
+  digitalWrite(sPin,LOW);
+  
+ // initialize the ethernet device
   Ethernet.begin(mac, ip, gateway, subnet);   // start etehrnet interface
   for (int i=0;i<12;i++) {
      Mb.MbData[i] = 0;
   }
-  //sendConsensusResults(); //initialize registers to zero
 }
 
-
 void loop() {
-  if(de == false) {
-   Serial.println("Still trying to sync");
-    if(a.sync()) {
-      de = true;
-      //d.flushSerial()
-      digitalWrite(sPin,HIGH);
-     Serial.println("Synced with Leader Node");
-    }    
-  } 
-   else {
-    if(a.isSynced()) {
-      receiveTyphoonData();
-      state =  Mb.MbData[0];
-      Serial.println("Data");
-      Serial.println(float(state),4);
-      a.nonleaderFairSplitRatioConsensus(-1*base*state);
-      //a.nonleaderFairSplitRatioConsensus(1*D_base);
-      state1 = a.getbufferdata(0);
-
-       
-      //Serial.println("Typhoon Data");
-      //Serial.println(state);
-      Serial.println("ratio consensus result");
-      Serial.println(state1,4);  
-       /* Controller code
-       r=r+1;
-       if(r>2)
-       { 
-       error=error + -1*0.707*state1;
-       u=u_set+0.707*error;
-       Serial.println(u,4);
-       }
-       Mb.MbData[1]=10*base*u;
-       sendConsensusResults();
-       
-       // Controller code over
-      */
-          
-//      n = state*base_value; //multiply by base value  to change to non-decimal
-//      state_high = (n >> 16) & 0x000FFFF;
-//      state_low = n & 0x0000FFFF;
-//      Mb.MbData[1] =  state_high;
-//      Mb.MbData[2] = state_low;
-//      
-//      for(int i = 3;i < 43;i++)
-//      {
-//        Serial.print(a.getbufferdata(i),4);
-//        Serial.print(", ");
-//      }
-//        
-//      Mb.MbData[1] =  state; 
-//      int temp =   base*base*state1;                  
-//      Mb.MbData[2] = temp;   
-//      sendConsensusResults();
-
+  if(de == false) 
+  {
+    if(!(a.isLeader()))
+    {
+      Serial.println("Still trying to sync");
+      if(a.sync()) 
+      {
+        Serial.println("Communication Link established");
+        Serial.println("c");
+        digitalWrite(sPin,HIGH);
+        de = true;
+      }
+      else
+      {
+        de  = false; //means could not sync 
+      }
+    }
+    if (a.isLeader())
+    {
+      Serial.println("Send letter s(r) to sync(resync)"); //let computer know you want to sync
+      while (Serial.available() == 0) 
+      { 
+        //simply makes the arduino wait until commputer sends signal        
+      }
+      if(Serial.available()) 
+      {
+        Serial.println("got some letter");
+        uint8_t b = Serial.read(); //enter the character 's'
+        Serial.println(b);
+        if (b == 'r')
+          {
+            a.setLeader(0);
+          }
+        if ((b == 's')||(b == 'r'))
+        {
+          Serial.println("got the s and about to sync");
+          de = true;
+          if(a.sync()) {
+            Serial.println("Communication Link established");
+            Serial.println("Enter some input to activate links");
+            digitalWrite(sPin,HIGH);
+            int bb = Serial.read();      
+            //ce = true;
+          }
+          else
+          {
+            de  = false; //means could not sync 
+          } 
+        }
+      }
+    }
+  }
+  
+  else 
+  {
+    if(a.isSynced())
+    {
+      Serial.println("Starting Primal Dual Algorithm");
+      primaldual = a.primalDualAlgorithm(false,0.1,10);
+      int bbbb = Serial.read();
+      
+        while (Serial.available() == 0) 
+        { 
+          //simply makes the arduino wait until commputer sends signal        
+        }
+         
+         a.resync();
       }
   }
- 
 }
 
 void sendConsensusResults()
@@ -179,15 +179,15 @@ void sendConsensusResults()
   //Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low);
   //Serial.println("Sent Request Packet");
   ////////////////////////////////////////////////////////////////
-  int node6_ip = 66; //part of ip address for node 1 on the HIL side 
-  Mb.Req(MB_FC_WRITE_REGISTER,0,1,1,node6_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+  int node12_ip = 72; //part of ip address for node 1 on the HIL side    #NODE
+  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node12_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)   #NODE
   Mb.MbmRun();
   //Serial.println("Received Response");
 }
 
 void receiveTyphoonData()
 {
-  int node6_ip = 66; //part of ip address for node 1 on the HIL side 
-  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,1,0,node6_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)
+  int node12_ip = 72; //part of ip address for node 1 on the HIL side   #NODE
+  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,2,0,node12_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)   #NODE
   Mb.MbmRun();
 }

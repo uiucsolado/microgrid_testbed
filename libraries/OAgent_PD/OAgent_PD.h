@@ -22,20 +22,13 @@
 #define SCHEDULE_MAXMIN_ACKACK_HEADER    0x7400 // schedule coordinate header
 #define SCHEDULE_PD_HEADER               0x7340 // schedule coordinate header is ascii s@
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sF
-#define SCHEDULE_PD_ACK_HEADER           0x7334 // schedule coordinate header is ascii s4
-#define SCHEDULE_PD_ACKACK_HEADER        0x7500 // schedule coordinate header is ascii s4
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define PD_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
 #define PD_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
-#define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
-#define WINDOW_LENGTH                    1000     // time length for each window in a period
+#define WINDOW_LENGTH                    5000     // time length for each window in a period
 #define BASE                             100000  // base for transmitting decimals
-
-#define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "
-#define ACTCODE_HEADER                   0x2221 // Primal-dual acknowledgment header is "!
-#define LINKSACT_HEADER                  0x2222 // Primal-dual acknowledgment header is ""
 
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
@@ -172,19 +165,6 @@ class OAgent_PD {
         //Sid
         long _buffer2;
 
-        //Olaolu's addition
-        float _buffer_fP[2000];
-        float _buffer_fQ[2000];
-        float _buffer_lambda[2000];
-        
-        float _buffer_P[2000];
-        float _buffer_Q[2000];
-        float _buffer_bP[2000];
-        float _buffer_bQ[2000];
-        float _buffer_sqV[2000];
-        float _buffer_mu[2000];
-        float _buffer_nu[2000];
-
         int node_counter[NUM_REMOTE_VERTICES];          //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //Methods
         //Fair splitting
@@ -318,7 +298,7 @@ class OAgent_PD {
         // General scheduling methods
         void _waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);// General scheduling methods
         bool _waitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period );
-        bool _waitForSchedulePacketPD(int timeout, unsigned long startTime, uint8_t iterations);
+        bool _waitForChildSchedulePacketPD(int timeout, unsigned long startTime, uint8_t iterations);
 
         inline uint8_t _getIDFromPacket() {  return _rx->getData(2); }
 
@@ -337,7 +317,7 @@ class OAgent_PD {
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
         void _waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
         bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout);
-        bool _waitForSchedulePrimalDualPacket(unsigned long &startTime, uint8_t &iterations,int timeout);
+        bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint8_t &iterations,int timeout);
         bool _waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout);
         bool _waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint16_t header, bool broadcast, int timeout);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
