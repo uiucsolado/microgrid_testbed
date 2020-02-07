@@ -313,6 +313,10 @@ class ORemoteVertex : public OVertex {
         inline float getReactiveFlow() { return _fq; }
         inline float getLambda() { return _lambda; }
         
+        inline float getActiveFlowOLD() { return _fpOLD; }
+        inline float getReactiveFlowOLD() { return _fqOLD; }
+        inline float getLambdaOLD() { return _lambdaOLD; }
+        
         inline float getNodeActiveFlow() { return _fpNode; }
         inline float getNodeReactiveFlow() { return _fqNode; }
         inline float getNodeLambda() { return _lambdaNode; }
@@ -339,6 +343,10 @@ class ORemoteVertex : public OVertex {
         inline void setReactiveFlow(float fq) {_fq = fq; }
         inline void setLambda(float lambda) {_lambda = lambda; }
 
+        inline void setActiveFlowOLD(float fpOLD) {_fpOLD = fpOLD; }
+        inline void setReactiveFlowOLD(float fqOLD) {_fqOLD = fqOLD; }
+        inline void setLambdaOLD(float lambdaOLD) {_lambdaOLD = lambdaOLD; }
+
         inline void setNodeActiveFlow(float fpNode) {_fpNode = fpNode; }
         inline void setNodeReactiveFlow(float fqNode) {_fqNode = fqNode; }
         inline void setNodeLambda(float lambdaNode) {_lambdaNode = lambdaNode; }
@@ -348,7 +356,7 @@ class ORemoteVertex : public OVertex {
         inline void setNeighborLambda(float lambdaNeighbor) {_lambdaNeighbor = lambdaNeighbor; }
 
         inline void setNodeFlag(bool nodeFlag) {_nodeFlag = nodeFlag; }
-        inline void setNeighborFlag(bool neighborFlag) {_neighborFlag = neighborFlag; }                 //when a candactcode packet is received from a neighbor, that neighbor is said to be a link activation lead
+        inline void setNeighborFlag(bool neighborFlag) {_neighborFlag = neighborFlag; }
 
         inline void setLinkStatus(bool linkStatus) {_linkStatus = linkStatus; }
 
@@ -372,6 +380,11 @@ class ORemoteVertex : public OVertex {
         float _fp; //per-unit active flow along electrical link
         float _fq; //per-unit reactive flow along electrical link
         float _lambda; //lagrange multiplier for LinDistFlow
+
+        //Decision variables for primal dual algorithm
+        float _fpOLD; //per-unit active flow along electrical link
+        float _fqOLD; //per-unit reactive flow along electrical link
+        float _lambdaOLD; //lagrange multiplier for LinDistFlow
 
         float _fpNode; //local estimate of per-unit active flow along electrical link
         float _fqNode; //local estimate of per-unit reactive flow along electrical link
@@ -429,6 +442,8 @@ class LinkedList {
         void updateLinkedList(uint8_t *r);
         //resets the status of all neighbors from 3 to 2 
         void resetLinkedListStatus(uint8_t *r);
+        //method to initialize node status for each neighbor
+        void initializeNodeStatus(ORemoteVertex *n);
         //method to find an unActive link
         void resetActiveLinks(ORemoteVertex *n);
         //method to find an unActive link

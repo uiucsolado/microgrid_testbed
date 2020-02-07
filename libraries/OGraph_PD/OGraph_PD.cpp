@@ -236,6 +236,7 @@ void LinkedList::updateLinkedList(uint8_t *r) {
     }
     _neighborTail->neighborNext = NULL;
     setLLsize(j);
+    //Serial<<"The neighborHead is node "<<_neighborHead->data<<endl;
 }
 
 //resets the status of all neighbors from 3 to 2 
@@ -294,11 +295,14 @@ uint8_t LinkedList::findInActiveLink(ORemoteVertex *n) {
     {
         i = tmp->data;
         linkStatus = (n+i-1)->getLinkStatus();
-        Serial <<"link to node "<< i << " has status " << linkStatus << endl;
-        delay(5);
-        tmp = tmp->neighborNext;
+        // Serial <<"link to node "<< i << " has status " << linkStatus << endl;
+        // delay(5);
         if (!linkStatus)
+        {
+            _neighborHead = tmp->neighborNext;
             return i;
+        }
+        tmp = tmp->neighborNext;
     }
     return 0;
 }
@@ -357,8 +361,9 @@ bool LinkedList::isLinkActive(uint8_t neighborID) {
 
 float LinkedList::addActiveFlows(uint8_t i, ORemoteVertex *n) {
     node *tmp;
-    tmp = _activeHead;
-    uint8_t j = 0, fp = 0;
+    tmp = _neighborHead;
+    uint8_t j = 0;
+    float fp = 0;
     while (tmp != NULL)
     {
         j = tmp->data;                                  //get ID of neighbor
@@ -366,15 +371,17 @@ float LinkedList::addActiveFlows(uint8_t i, ORemoteVertex *n) {
             fp = fp + ((n+j-1)->getActiveFlow());           //get active flow of link associated with neighbor
         else if (i > j)
             fp = fp - ((n+j-1)->getActiveFlow());           //get active flow of link associated with neighbor
-        tmp = tmp->activeNext;
+        tmp = tmp->neighborNext;
     }
+    //Serial<<"Sum of Active Flows is "<<fp<<endl;
     return fp;
 }
 
 float LinkedList::addReactiveFlows(uint8_t i, ORemoteVertex *n) {
     node *tmp;
-    tmp = _activeHead;
-    uint8_t j = 0, fq = 0;
+    tmp = _neighborHead;
+    uint8_t j = 0;
+    float fq = 0;
     while (tmp != NULL)
     {
         j = tmp->data;                                  //get ID of neighbor
@@ -382,15 +389,17 @@ float LinkedList::addReactiveFlows(uint8_t i, ORemoteVertex *n) {
             fq = fq + ((n+j-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
         else if (i > j)
             fq = fq - ((n+j-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
-        tmp = tmp->activeNext;
+        tmp = tmp->neighborNext;
     }
+    //Serial<<"Sum of Reactive Flows is "<<fq<<endl;
     return fq;
 }
 
 float LinkedList::addLambdas(uint8_t i, ORemoteVertex *n) {
     node *tmp;
-    tmp = _activeHead;
-    uint8_t j = 0, lambda = 0;
+    tmp = _neighborHead;
+    uint8_t j = 0;
+    float lambda = 0;
     while (tmp != NULL)
     {
         j = tmp->data;                                      //get ID of neighbor
@@ -398,8 +407,9 @@ float LinkedList::addLambdas(uint8_t i, ORemoteVertex *n) {
             lambda = lambda + ((n+j-1)->getLambda());       //get lambda of link associated with neighbor
         else if (i > j)
             lambda = lambda - ((n+j-1)->getLambda());       //get lambda of link associated with neighbor
-        tmp = tmp->activeNext;
+        tmp = tmp->neighborNext;
     }
+    //Serial<<"Sum of Lambdas is "<<lambda<<endl;
     return lambda;
 }
 
@@ -551,7 +561,7 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min,
     _q = 0;
     _pd = 0;
     _qd = 0;
-    _sqV = 0;
+    _sqV = 1;
     _mu = 0;
     _nu = 0;
 
@@ -649,9 +659,18 @@ void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, flo
     _fp = 0;
     _fq = 0;
     _lambda = 0;
+    _fpOLD = 0;
+    _fqOLD = 0;
+    _lambdaOLD = 0;
     _linkStatus = 0;
     _nodeFlag = false;
     _neighborFlag = false;
+    _fpNode = 0; //local estimate of per-unit active flow along electrical link
+    _fqNode = 0; //local estimate of per-unit reactive flow along electrical link
+    _lambdaNode = 0; //local estimate of lagrange multiplier for LinDistFlow
+    _fpNeighbor = 0; //remote estimate of per-unit active flow along electrical link
+    _fqNeighbor = 0; //remote estimate of per-unit reactive flow along electrical link
+    _lambdaNeighbor = 0; //remote estimate of lagrange multiplier for LinDistFlow
     _prepareOVertex(aLsb, neighborID);
 }
 /// End private methods
@@ -948,6 +967,8 @@ bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t neighborID, float r, flo
             }
         	// create new instance of OVertex object and store in array
             _remoteVertices[index] = ORemoteVertex(aLsb,neighborID,r,x,inNeighbor);
+            if(_self->getID() < neighborID)
+                _remoteVertices[index].setNodeFlag(true);
             _self->setStatus(neighborID, 2);
             // increment total number of vertices current initialized
             _n++;

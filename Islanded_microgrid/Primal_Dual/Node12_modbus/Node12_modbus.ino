@@ -80,6 +80,7 @@ void setup()  {
   g.configureLinkedList();
   s.setActiveDemand(0.2);
   s.setReactiveDemand(0.1);
+  s.setPrimalDualWeights(0.8,0.6,0.6,1.2,1.2);
  
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
@@ -150,7 +151,7 @@ void loop() {
     if(a.isSynced())
     {
       Serial.println("Starting Primal Dual Algorithm");
-      primaldual = a.primalDualAlgorithm(false,0.1,10);
+      primaldual = a.primalDualAlgorithm(false,0.1,1000);
       int bbbb = Serial.read();
       
         while (Serial.available() == 0) 
