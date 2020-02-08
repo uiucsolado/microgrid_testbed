@@ -806,9 +806,13 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
+    l->resetLinkedListStatus(s->getStatusP());
+	l->updateLinkedList(s->getStatusP());
+    uint8_t * neighborStatusP = s->getStatusP();
 
     ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
-
+    iterations = 1000;
+    alpha = 0.1;
     uint16_t nodeID = s->getID();
     uint8_t neighborID;
 
@@ -855,30 +859,41 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 
     int timeout = 100;                               // create variable to keep track of broadcasts
 
-    uint8_t packetDropCount = 0;
+    uint16_t packetDropCount = 0;
+    uint16_t packetReceiveCount = 0;
+    uint16_t packetsLost = 0;
+    uint16_t packetReceived = 0;
     //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
-    uint16_t period = 200;                            // create variable to keep track of broadcasts
-    uint8_t frame = 50;
+    uint16_t period = 200;                            										// create variable to keep track of broadcasts
+    uint8_t frame = 30;
     
-    unsigned long start;		                        // create variable to store iteration start time
-    
-    uint16_t txTime;  									//determines the time window in which a payload is transmitted
+    unsigned long start = (millis()-period);   // initialize timer		                        									// create variable to store iteration start time
+
+    srand(millis());    
+    uint16_t txTime = (rand() % (period - 2*frame)) + frame;  								//determines the time window in which a payload is transmitted
 
     for(uint16_t k = 0; k < iterations; k++)
     {
+    	Serial<<"Iteration"<<k+1<<endl;
     	if ((k+1)%20 == 0)
         {
-            Serial<<"Iteration "<<k+1<<endl;
+      //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
     		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
       //       delay(5);
-      //       packetDropCount = 0;
+      //       Serial<<packetReceiveCount<<" packets received"<<endl;
+		    // delay(5);
+		    // packetDropCount = 0;
+      //       packetReceiveCount = 0;
             Serial<<"Active balance: "<<bP<<endl<<"Reactive balance: "<<bQ<<endl<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
             delay(5);
         }
-        start = millis();   // initialize timer
-        srand(start);
-        txTime =  (rand() % (period - 2*frame)) + frame;
-        
+        // while( uint16_t(millis() - start - period ) < 500 )
+        // {
+        //     //waits for 0.5 seconds to begin next period
+        // }
+    	
+    	start = millis();   // initialize timer
+        // Serial<<"Iteration "<<k+1<<endl;
         P = P - (float)genBus*alpha*( Mu+((s->getDp())*P)+((s->getWp())*bP) );
         Q = Q - (float)genBus*alpha*( Nu+((s->getDq())*Q)+((s->getWq())*bQ) );
         sqV = sqV - alpha*( l->addLambdas(nodeID,n)+((s->getWv())*(sqV-1)) );
@@ -890,10 +905,17 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 
         while( uint16_t(millis()-start) < period )
         {
-        	receivedPacket = _waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,period/20);
-        	if (receivedPacket)                                           								//get values for fp, fq, and lambda that are received from this neighbor
+        	receivedPacket = _waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,10);
+        	if ( receivedPacket && (*(neighborStatusP+neighborID-1) == 2) )                                           								//get values for fp, fq, and lambda that are received from this neighbor
             {
-                //get values for fp, fq, and lambda that are received from this neighbor
+	            packetReceiveCount++;
+
+	            *(neighborStatusP+neighborID-1) = 3;															//set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
+
+       			Serial<<neighborID<<" active"<<endl;
+	    		delay(5);
+
+            	//get values for fp, fq, and lambda that are received from this neighbor
                 neighbor_fp = _getActiveFlowFromPacket_neighbor();                               		// store incoming value of fp
                 neighbor_fq = _getReactiveFlowFromPacket_neighbor();                             		// store incoming value of fq
                 neighbor_lambda = _getLambdaFromPacket_neighbor();                               		// store incoming value of lambda
@@ -960,20 +982,15 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 	            }
                 else if(neighborID > nodeID)
 	            {
-
-	                g_node_fp = 2*alpha*(Mu + ((s->getWp())*bP) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
-	                g_node_fq =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
-	                g_node_lambda= 2*alpha*(sqV - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
-
-					neighbornode_fp = _getActiveFlowFromPacket_node();                               		// store incoming value of fp from child
-                    neighbornode_fq = _getReactiveFlowFromPacket_node();                             		// store incoming value of fq from child
-                    neighbornode_lambda = _getLambdaFromPacket_node();                               		// store incoming value of lambda from child
-
                     // Serial<<"Received from Child Node "<<neighborID<<":"<<endl<<neighbor_fp<<endl<<neighbor_fq<<endl<<neighbor_lambda<<endl<<neighbor_status<<endl<<neighbornode_fp<<endl<<neighbornode_fq<<endl<<neighbornode_lambda<<endl;
                     // delay(5);
 
                     if (neighbor_flag != neighbor_status)
                     {
+                    	neighbornode_fp = _getActiveFlowFromPacket_node();                               		// store incoming value of fp from child
+	                    neighbornode_fq = _getReactiveFlowFromPacket_node();                             		// store incoming value of fq from child
+	                    neighbornode_lambda = _getLambdaFromPacket_node();                               		// store incoming value of lambda from child
+
                         node_flag = !node_flag;
             			neighborP->setNodeFlag(node_flag);                    								//invert node's flag value since averaging has been successfully performed
                         neighborP->setNeighborFlag(neighbor_status);										//update neighbor's status since neighbor's averaging step was successful
@@ -983,31 +1000,420 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
                         fq = 0.5*(neighbornode_fq+neighbor_fq);
                         lambda = 0.5*(neighbornode_lambda +neighbor_lambda);
 
-                        delta_node_fp = (neighborP->getActiveFlow()) - (neighborP->getActiveFlowOLD());
-                        delta_node_fq = (neighborP->getReactiveFlow()) - (neighborP->getReactiveFlowOLD());
-                        delta_node_lambda = (neighborP->getLambda()) - (neighborP->getLambdaOLD());
+                        delta_node_fp = (neighborP->getNodeActiveFlow()) - neighbornode_fp;
+                        delta_node_fq = (neighborP->getNodeReactiveFlow()) - neighbornode_fq;
+                        delta_node_lambda = (neighborP->getNodeLambda()) - neighbornode_lambda;
                         
-                        node_fp = fp + g_node_fp + delta_node_fp;
-                        node_fq = fq + g_node_fq + delta_node_fq;
-                        node_lambda = lambda + g_node_lambda + delta_node_lambda;
+                        fp = fp + delta_node_fp;
+                        fq = fq + delta_node_fq;
+                        lambda = lambda + delta_node_lambda;
+
+	                    neighborP->setActiveFlow(fp);
+	                    neighborP->setReactiveFlow(fq);
+	                    neighborP->setLambda(lambda);
+                    }
+	       //          Serial << "fp ("<<nodeID<<","<<neighborID<<") = "<<fp<<endl;
+	    			// delay(5);
+	       //          Serial << "fq ("<<nodeID<<","<<neighborID<<") = "<<fq<<endl;
+	    			// delay(5);
+	       //          Serial << "lambda ("<<nodeID<<","<<neighborID<<") = "<<lambda<<endl;
+	    			// delay(5);
+	            }
+	        }
+
+	        //if(!txDone && (uint16_t(millis()-start) >= txTime))
+	        if(!txDone && (uint16_t(millis()-start) >= (period-frame)/2))
+	        {
+	        	txDone = true;
+	        	neighborID = l->unlinkLinkedListNodes();
+	        	//Serial<<"Neighbor id is "<<neighborID<<endl;
+	        	while(neighborID != 0)																											//while neighbors have not been sent a packet
+	        	{
+	        		neighborP = (n+(neighborID-1));
+					if(neighborID < nodeID)
+					{
+	        			_unicastPacket_PD_C(neighborID,neighborP->getNodeActiveFlow(),neighborP->getNodeReactiveFlow(),neighborP->getNodeLambda(),neighborP->getNodeFlag(),neighborP->getNeighborActiveFlow(),neighborP->getNeighborReactiveFlow(),neighborP->getNeighborLambda());
+						// Serial<<"Sent to Parent Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl<<neighborP->getNeighborActiveFlow()<<endl<<neighborP->getNeighborReactiveFlow()<<endl<<neighborP->getNeighborLambda()<<endl;
+      //           		delay(5);
+					}
+	        		else if(neighborID > nodeID)
+	        		{
+	        			g_node_fp = 2*alpha*(Mu + ((s->getWp())*bP) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
+		                g_node_fq =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
+		                g_node_lambda= 2*alpha*(sqV - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+
+		                //get values for fp, fq, and lambda that are currently associated with this neighbor
+		                fp = (neighborP->getActiveFlow());
+		                fq = (neighborP->getReactiveFlow());
+		                lambda = (neighborP->getLambda());
+
+						node_fp = fp + g_node_fp;
+		                node_fq = fq + g_node_fq;
+		                node_lambda = lambda + g_node_lambda;
 
 		                neighborP->setNodeActiveFlow(node_fp);
 		                neighborP->setNodeReactiveFlow(node_fq);
 		                neighborP->setNodeLambda(node_lambda);
+					
+	                    neighborP->setActiveFlow(node_fp);
+	                    neighborP->setReactiveFlow(node_fp);
+	                    neighborP->setLambda(node_fp);
 
-	                    neighborP->setActiveFlowOLD(fp);
-	                    neighborP->setReactiveFlowOLD(fq);
-	                    neighborP->setLambdaOLD(lambda);
+	        			_unicastPacket_PD_P(neighborID,node_fp,node_fq,node_lambda,neighborP->getNodeFlag());
+						// Serial<<"Sent to Child Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl;
+      //           		delay(5);
+	        		}
+	        	   	neighborID = l->unlinkLinkedListNodes();
+		        	neighborP = (n+(neighborID-1));
+				}
+	        	//l->updateLinkedList(s->getStatusP());
+	        }
+        }
+		l->updateLinkedList(s->getStatusP());
+	   	l->updateActiveLinks(n);
+	   	l->resetLinkedListStatus(s->getStatusP());
+
+    	neighborID = l->findInActiveLink(n);																							//find neighbors that no packet was received from
+    	neighborP = (n+(neighborID-1));
+    	
+    	while(neighborID != 0)																											//while neighbors have not been sent a packet
+    	{
+	    	Serial<<neighborID<<" inactive"<<endl;
+	    	delay(5);
+
+			packetDropCount++;
+
+			if(neighborID < nodeID)
+			{
+				g_node_fp = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
+	            g_node_fq =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
+	            g_node_lambda= 2*alpha*(sqV*(-1) - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+
+	            //get values for fp, fq, and lambda that are currently associated with this neighbor
+	            fp = (neighborP->getActiveFlow());
+	            fq = (neighborP->getReactiveFlow());
+	            lambda = (neighborP->getLambda());
+
+	            neighborP->setActiveFlow(fp + g_node_fp);
+	            neighborP->setReactiveFlow(fq + g_node_fq);
+	            neighborP->setLambda(lambda + g_node_lambda);
+			}
+   //          Serial << "fp ("<<neighborID<<","<<nodeID<<") = "<<fp + g_node_fp<<endl;
+			// delay(5);
+   //          Serial << "fq ("<<neighborID<<","<<nodeID<<") = "<<fq + g_node_fq<<endl;
+			// delay(5);
+   //          Serial << "lambda ("<<neighborID<<","<<nodeID<<") = "<<lambda + g_node_lambda<<endl;
+			// delay(5);
+
+        	neighborID = l->findInActiveLink(n);
+        	neighborP = (n+(neighborID-1));
+		}
+		l->resetActiveLinks(n);
+		l->updateLinkedList(s->getStatusP());
+        bP = P - Pd - l->addActiveFlows(nodeID,n);
+        bQ = Q - Qd - l->addReactiveFlows(nodeID,n);
+        if (packetDropCount+packetReceiveCount > (_G->getN()-1))
+        {
+        	Serial<<"ERROR! "<<packetDropCount<<" packet drops encountered"<<endl;
+		    delay(5);
+		    Serial<<"ERROR! "<<packetReceiveCount<<" packets received"<<endl;
+		    delay(5);
+        }
+        packetsLost += packetDropCount;
+        packetReceived += packetReceiveCount;
+
+        packetDropCount = 0;
+      	packetReceiveCount = 0;
+    }
+    s->setActiveBalance(bP);
+    s->setReactiveBalance(bQ);
+
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
+    delay(5);
+    // Serial << "The active power injection at node" << nodeID << " is "<< P <<endl;
+    // delay(5);
+    // Serial << "The reactive power injection at node" << nodeID << " is "<< Q <<endl;
+    // delay(5);
+    return true;
+}
+
+
+bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
+    ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
+    LinkedList * l = _G->getLinkedList();
+    l->resetLinkedListStatus(s->getStatusP());
+	l->updateLinkedList(s->getStatusP());
+    uint8_t * neighborStatusP = s->getStatusP();
+
+    ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
+    iterations = 1000;
+    alpha = 0.1;
+    uint16_t nodeID = s->getID();
+    uint8_t neighborID;
+
+    float fp;                                                                                   // node state variable active flow
+    float fq;                                                                                   // node state variable reactive flow
+    float lambda;                                                                               // node state variable lagrange multiplier
+    float g_fp;
+    float g_fq;
+    float g_lambda;
+
+    float delta_fp;                                                                             // change in node state variable active flow
+    float delta_fq;                                                                             // change in node state variable reactive flow
+    float delta_lambda;                                                                         // change in node state variable lagrange multiplier
+    float delta_gfp;                                                                             // change in node state variable active flow
+    float delta_gfq;                                                                             // change in node state variable reactive flow
+    float delta_glambda;                                                                         // change in node state variable lagrange multiplier
+
+   	float g_fpTMP;
+    float g_fqTMP;
+    float g_lambdaTMP;
+
+    float node_fp;                                                                          // neighbor state variable active flow
+    float node_fq;                                                                          // neighbor state variable reactive flow
+    float node_lambda;  
+    float node_gfp;                                                                          // neighbor state variable active flow
+    float node_gfq;                                                                          // neighbor state variable reactive flow
+    float node_glambda;
+
+    float neighbor_fp;                                                                          // neighbor state variable active flow
+    float neighbor_fq;                                                                          // neighbor state variable reactive flow
+    float neighbor_lambda;  
+    float neighbor_gfp;                                                                          // neighbor state variable active flow
+    float neighbor_gfq;                                                                          // neighbor state variable reactive flow
+    float neighbor_glambda;  
+    
+	float neighbornode_fp;
+    float neighbornode_fq;
+    float neighbornode_lambda;
+    
+	float neighbornode_gfp;
+    float neighbornode_gfq;
+    float neighbornode_glambda;
+
+    bool node_flag;
+    bool neighbor_flag;
+    bool neighbor_status;
+    
+    float P = (float)genBus*(s->getActiveSetpoint());                                                  // active injection
+    float Q = (float)genBus*(s->getReactiveSetpoint());                                                // reactive injection
+    float Pd = s->getActiveDemand();                                                            // active demand
+    float Qd = s->getReactiveDemand();                                                          // reactive demand
+    float sqV = s->getSquareVoltage();                                                          // square voltage magnitude
+    float Mu = s->getMu();                                                                      // lagrange multiplier
+    float Nu = s->getNu();                                                                      // lagrange multiplier
+    float bP = P - Pd - l->addActiveFlows(nodeID,n);                                                  // active balance
+    float bQ = Q - Qd - l->addReactiveFlows(nodeID,n);                                                 // reactive balance
+    
+    bool receivedPacket;
+
+    bool txDone;                                // create variable to keep track of broadcasts
+    bool rxDone;                                // create variable to keep track of broadcasts
+
+    int timeout = 100;                               // create variable to keep track of broadcasts
+
+    uint16_t packetDropCount = 0;
+    uint16_t packetReceiveCount = 0;
+    uint16_t packetsLost = 0;
+    uint16_t packetReceived = 0;
+    //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
+    uint16_t period = 200;                            										// create variable to keep track of broadcasts
+    uint8_t frame = 30;
+    
+    unsigned long start = (millis()-period);   // initialize timer		                        									// create variable to store iteration start time
+
+    srand(millis());    
+    uint16_t txTime = (rand() % (period - 2*frame)) + frame;  								//determines the time window in which a payload is transmitted
+
+    for(uint16_t k = 0; k < iterations; k++)
+    {
+    	Serial<<"Iteration"<<k+1<<endl;
+    	if ((k+1)%20 == 0)
+        {
+      //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
+    		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
+      //       delay(5);
+      //       Serial<<packetReceiveCount<<" packets received"<<endl;
+		    // delay(5);
+		    // packetDropCount = 0;
+      //       packetReceiveCount = 0;
+            Serial<<"Active balance: "<<bP<<endl<<"Reactive balance: "<<bQ<<endl<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+            delay(5);
+        }
+        // while( uint16_t(millis() - start - period ) < 500 )
+        // {
+        //     //waits for 0.5 seconds to begin next period
+        // }
+    	
+    	start = millis();   // initialize timer
+        // Serial<<"Iteration "<<k+1<<endl;
+        P = P - (float)genBus*alpha*( Mu+((s->getDp())*P)+((s->getWp())*bP) );
+        Q = Q - (float)genBus*alpha*( Nu+((s->getDq())*Q)+((s->getWq())*bQ) );
+        sqV = sqV - alpha*( l->addLambdas(nodeID,n)+((s->getWv())*(sqV-1)) );
+        Mu = Mu + alpha*bP;
+        Nu = Nu + alpha*bQ;
+        
+        txDone = false;
+        rxDone = false;
+
+        while( uint16_t(millis()-start) < period )
+        {
+        	receivedPacket = _waitForUnicastPacket(neighborID,nodeID,PD_HEADER,true,10);
+        	if ( receivedPacket && (*(neighborStatusP+neighborID-1) == 2) )                                           								//get values for fp, fq, and lambda that are received from this neighbor
+            {
+	            packetReceiveCount++;
+
+	            *(neighborStatusP+neighborID-1) = 3;															//set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
+
+       			Serial<<neighborID<<" active"<<endl;
+	    		delay(5);
+
+            	//get values for fp, fq, and lambda that are received from this neighbor
+                neighbor_fp = _getActiveFlowFromPacket_neighbor();                               		// store incoming value of fp
+                neighbor_fq = _getReactiveFlowFromPacket_neighbor();                             		// store incoming value of fq
+                neighbor_lambda = _getLambdaFromPacket_neighbor();                               		// store incoming value of lambda
+                neighbor_gfp = _getActiveFlowGradientFromPacket_neighbor();                               		// store incoming value of fp
+                neighbor_gfq = _getReactiveFlowGradientFromPacket_neighbor();                             		// store incoming value of fq
+                neighbor_glambda = _getLambdaGradientFromPacket_neighbor();                               		// store incoming value of lambda
+
+                neighbor_status = _getFlagFromPacket_ACC();                                 				// store incoming value of lambda
+
+            	neighborP = (n+(neighborID-1));
+            	neighborP->setLinkStatus(true);
+
+                node_flag = neighborP->getNodeFlag();
+                neighbor_flag = neighborP->getNeighborFlag();
+
+                //get values for fp, fq, and lambda that are currently associated with this neighbor
+                node_fp = (neighborP->getActiveFlow());
+                node_fq = (neighborP->getReactiveFlow());
+                node_lambda = (neighborP->getLambda());
+
+            	if(neighborID < nodeID)
+	            {
+	                g_fpTMP = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
+	                g_fqTMP =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
+	                g_lambdaTMP= 2*alpha*(sqV*(-1) - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+
+	                node_gfp = neighborP->getActiveFlowGradient() + ( g_fpTMP - neighborP->getActiveFlowGradientTMP() );
+					node_gfq = neighborP->getReactiveFlowGradient() + ( g_fqTMP - neighborP->getReactiveFlowGradientTMP() );
+					node_glambda = neighborP->getLambdaGradient() + ( g_lambdaTMP - neighborP->getLambdaGradientTMP() );
+
+	                neighborP->setActiveFlowGradientTMP(g_fpTMP);
+    				neighborP->setReactiveFlowGradientTMP(g_fqTMP);
+    				neighborP->setLambdaGradientTMP(g_lambdaTMP);
+
+	            	// Serial<<"Received from Parent Node "<<neighborID<<":"<<endl<<neighbor_fp<<endl<<neighbor_fq<<endl<<neighbor_lambda<<endl<<neighbor_status<<endl;
+              //   	delay(5);
+
+                    if (neighbor_flag != neighbor_status)
+                    {  
+                    	node_flag = !node_flag;
+            			neighborP->setNodeFlag(node_flag);                    //invert node's flag value since averaging has been successfully performed
+                        neighborP->setNeighborFlag(neighbor_status);
+                        			
+                        //get values for fp, fq, and lambda that are currently associated with this neighbor
+                        fp = 0.5*(node_fp + neighbor_fp);
+                        fq = 0.5*(node_fq + neighbor_fq);
+                        lambda = 0.5*(node_lambda + neighbor_lambda);
+
+                        g_fp = 0.5*(node_gfp + neighbor_gfp);
+					    g_fq = 0.5*(node_gfq + neighbor_gfq);
+					    g_lambda = 0.5*(node_glambda + neighbor_glambda);
+					                        
+                        neighborP->setNodeActiveFlow(node_fp);
+                        neighborP->setNodeReactiveFlow(node_fq);
+                        neighborP->setNodeLambda(node_lambda);
+
+                        neighborP->setNeighborActiveFlow(neighbor_fp);
+                        neighborP->setNeighborReactiveFlow(neighbor_fq);
+                        neighborP->setNeighborLambda(neighbor_lambda);
+					                        
+                        neighborP->setNodeActiveFlowGradient(node_gfp);
+                        neighborP->setNodeReactiveFlowGradient(node_gfq);
+                        neighborP->setNodeLambdaGradient(node_glambda);
+
+                        neighborP->setNeighborActiveFlowGradient(neighbor_gfp);
+                        neighborP->setNeighborReactiveFlowGradient(neighbor_gfq);
+                        neighborP->setNeighborLambdaGradient(neighbor_glambda);
                     }
                     else
                     {
-                        fp = fp + g_node_fp;
-                        fq = fq + g_node_fq;
-                		lambda = lambda + g_node_lambda;
+                    	g_fp = node_gfp;
+					    g_fq = node_gfq;
+					    g_lambda = node_glambda;
+
+                        fp = node_fp;
+                        fq = node_fq;
+                        lambda = node_lambda;
                     }
-                    neighborP->setActiveFlow(fp);
-                    neighborP->setReactiveFlow(fq);
-                    neighborP->setLambda(lambda);
+    				neighborP->setActiveFlowGradient(g_fp);
+    				neighborP->setReactiveFlowGradient(g_fq);
+    				neighborP->setLambdaGradient(g_lambda);
+
+	                neighborP->setActiveFlow(fp + g_fp);
+	                neighborP->setReactiveFlow(fq + g_fq);
+	                neighborP->setLambda(lambda + g_lambda);
+	       //          Serial << "fp ("<<neighborID<<","<<nodeID<<") = "<<fp<<endl;
+	    			// delay(5);
+	       //          Serial << "fq ("<<neighborID<<","<<nodeID<<") = "<<fq<<endl;
+	    			// delay(5);
+	       //          Serial << "lambda ("<<neighborID<<","<<nodeID<<") = "<<lambda<<endl;
+	    			// delay(5);
+	            }
+                else if(neighborID > nodeID)
+	            {
+                    // Serial<<"Received from Child Node "<<neighborID<<":"<<endl<<neighbor_fp<<endl<<neighbor_fq<<endl<<neighbor_lambda<<endl<<neighbor_status<<endl<<neighbornode_fp<<endl<<neighbornode_fq<<endl<<neighbornode_lambda<<endl;
+                    // delay(5);
+
+                    if (neighbor_flag != neighbor_status)
+                    {
+                    	neighbornode_fp = _getActiveFlowFromPacket_nodeACC();                               		// store incoming value of fp from child
+	                    neighbornode_fq = _getReactiveFlowFromPacket_nodeACC();                             		// store incoming value of fq from child
+	                    neighbornode_lambda = _getLambdaFromPacket_nodeACC();                               		// store incoming value of lambda from child
+						neighbornode_gfp = _getActiveFlowGradientFromPacket_node();                               		// store incoming value of fp from child
+	                    neighbornode_gfq = _getReactiveFlowGradientFromPacket_node();                             		// store incoming value of fq from child
+	                    neighbornode_glambda = _getLambdaGradientFromPacket_node();                               		// store incoming value of lambda from child
+
+                        node_flag = !node_flag;
+            			neighborP->setNodeFlag(node_flag);                    								//invert node's flag value since averaging has been successfully performed
+                        neighborP->setNeighborFlag(neighbor_status);										//update neighbor's status since neighbor's averaging step was successful
+                        
+                        //get values for fp, fq, and lambda that are currently associated with this neighbor
+                        fp = 0.5*(neighbornode_fp+neighbor_fp);
+                        fq = 0.5*(neighbornode_fq+neighbor_fq);
+                        lambda = 0.5*(neighbornode_lambda +neighbor_lambda);
+
+                        g_fp = 0.5*(neighbornode_gfp + neighbor_gfp);
+					    g_fq = 0.5*(neighbornode_gfq + neighbor_gfq);
+					    g_lambda = 0.5*(neighbornode_glambda + neighbor_glambda);
+
+                        delta_fp = node_fp - neighbornode_fp;
+                        delta_fq = node_fq - neighbornode_fq;
+                        delta_lambda = node_lambda - neighbornode_lambda;
+
+                        delta_gfp = neighborP->getActiveFlowGradient() - neighbornode_gfp;
+                        delta_gfq = neighborP->getReactiveFlowGradient() - neighbornode_gfq;
+                        delta_glambda = neighborP->getLambdaGradient() - neighbornode_lambda;
+                        
+                        fp = fp + delta_fp;
+                        fq = fq + delta_fq;
+                        lambda = lambda + delta_lambda;
+
+                        g_fp = g_fp + delta_gfp;
+                        g_fq = g_fq + delta_gfq;
+                        g_lambda = g_lambda + delta_glambda;
+
+	                    neighborP->setActiveFlow(fp);
+	                    neighborP->setReactiveFlow(fq);
+	                    neighborP->setLambda(lambda);
+	                    neighborP->setActiveFlowGradient(g_fp);
+	                    neighborP->setReactiveFlowGradient(g_fq);
+	                    neighborP->setLambdaGradient(g_lambda);
+                    }
 	       //          Serial << "fp ("<<nodeID<<","<<neighborID<<") = "<<fp<<endl;
 	    			// delay(5);
 	       //          Serial << "fq ("<<nodeID<<","<<neighborID<<") = "<<fq<<endl;
@@ -1028,32 +1434,59 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 	        		neighborP = (n+(neighborID-1));
 					if(neighborID < nodeID)
 					{
-	        			_unicastPacket_PD_C(neighborID,neighborP->getNodeActiveFlow(),neighborP->getNodeReactiveFlow(),neighborP->getNodeLambda(),neighborP->getNodeFlag(),neighborP->getNeighborActiveFlow(),neighborP->getNeighborReactiveFlow(),neighborP->getNeighborLambda());
+						_sendToParent(neighborID,neighborP->getNodeActiveFlow(),neighborP->getNodeReactiveFlow(),neighborP->getNodeLambda(),neighborP->getNodeActiveFlowGradient(),neighborP->getNodeReactiveFlowGradient(),neighborP->getNodeLambdaGradient(),neighborP->getNodeFlag(),neighborP->getNeighborActiveFlow(),neighborP->getNeighborReactiveFlow(),neighborP->getNeighborLambda(),neighborP->getNeighborActiveFlowGradient(),neighborP->getNeighborReactiveFlowGradient(),neighborP->getNeighborLambdaGradient());
 						// Serial<<"Sent to Parent Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl<<neighborP->getNeighborActiveFlow()<<endl<<neighborP->getNeighborReactiveFlow()<<endl<<neighborP->getNeighborLambda()<<endl;
       //           		delay(5);
 					}
 	        		else if(neighborID > nodeID)
 	        		{
-	        			_unicastPacket_PD_P(neighborID,neighborP->getNodeActiveFlow(),neighborP->getNodeReactiveFlow(),neighborP->getNodeLambda(),neighborP->getNodeFlag());
+		                //get values for fp, fq, and lambda that are currently associated with this neighbor
+		                fp = (neighborP->getActiveFlow()) + (neighborP->getActiveFlowGradient());
+		                fq = (neighborP->getReactiveFlow()) + (neighborP->getReactiveFlowGradient());
+		                lambda = (neighborP->getLambda()) + (neighborP->getLambdaGradient());
+
+	        			g_fpTMP = 2*alpha*(Mu + ((s->getWp())*bP) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
+		                g_fqTMP =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*Gradient(neighborP->getLambda()))) ;
+		                g_lambdaTMP = 2*alpha*(sqV - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+
+		                g_fp = neighborP->getActiveFlowGradient() + ( g_fpTMP - neighborP->getActiveFlowGradientTMP() );
+						g_fq = neighborP->getReactiveFlowGradient() + ( g_fqTMP - neighborP->getReactiveFlowGradientTMP() );
+						g_lambda = neighborP->getLambdaGradient() + ( g_lambdaTMP - neighborP->getLambdaGradientTMP() );
+
+		                neighborP->setActiveFlowGradientTMP(g_fpTMP);
+        				neighborP->setReactiveFlowGradientTMP(g_fqTMP);
+        				neighborP->setLambdaGradientTMP(g_lambdaTMP);
+
+        				neighborP->setActiveFlowGradient(g_fp);
+        				neighborP->setReactiveFlowGradient(g_fq);
+        				neighborP->setLambdaGradient(g_lambda);
+
+        				neighborP->setActiveFlow(fp);
+        				neighborP->setReactiveFlow(fq);
+        				neighborP->setLambda(lambda);
+
+        				_sendToChild(neighborID,fp,fq,lambda,g_fp,g_fq,g_lambda,neighborP->getNodeFlag());
 						// Serial<<"Sent to Child Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl;
       //           		delay(5);
 	        		}
-	        		
-	        		delay(rand() % 10);
-
-		        	neighborID = l->unlinkLinkedListNodes();
+	        	   	neighborID = l->unlinkLinkedListNodes();
 		        	neighborP = (n+(neighborID-1));
 				}
 	        	//l->updateLinkedList(s->getStatusP());
 	        }
-        } 
+        }
+		l->updateLinkedList(s->getStatusP());
 	   	l->updateActiveLinks(n);
+	   	l->resetLinkedListStatus(s->getStatusP());
 
     	neighborID = l->findInActiveLink(n);																							//find neighbors that no packet was received from
     	neighborP = (n+(neighborID-1));
-
+    	
     	while(neighborID != 0)																											//while neighbors have not been sent a packet
     	{
+	    	Serial<<neighborID<<" inactive"<<endl;
+	    	delay(5);
+
 			packetDropCount++;
 
 			if(neighborID < nodeID)
@@ -1061,22 +1494,31 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 				g_node_fp = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
 	            g_node_fq =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
 	            g_node_lambda= 2*alpha*(sqV*(-1) - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+
+	            //get values for fp, fq, and lambda that are currently associated with this neighbor
+	            fp = (neighborP->getActiveFlow());
+	            fq = (neighborP->getReactiveFlow());
+	            lambda = (neighborP->getLambda());
+
+	            neighborP->setActiveFlow(fp + g_node_fp);
+	            neighborP->setReactiveFlow(fq + g_node_fq);
+	            neighborP->setLambda(lambda + g_node_lambda);
 			}
-            else if(neighborID > nodeID)
-			{
-				g_node_fp = 2*alpha*(Mu + ((s->getWp())*bP) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
-	            g_node_fq =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
-	            g_node_lambda= 2*alpha*(sqV - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+	        else if(neighborID > nodeID)
+	        {
+	        	g_fp = neighborP->getActiveFlowGradient();
+				g_fq = neighborP->getReactiveFlowGradient();
+				g_lambda = neighborP->getLambdaGradient();
+
+				//get values for fp, fq, and lambda that are currently associated with this neighbor
+	            fp = (neighborP->getActiveFlow());
+	            fq = (neighborP->getReactiveFlow());
+	            lambda = (neighborP->getLambda());
+
+	            neighborP->setActiveFlow(fp + g_fp);
+	            neighborP->setReactiveFlow(fq + g_fq);
+	            neighborP->setLambda(lambda + g_lambda);
 	        }
-
-            //get values for fp, fq, and lambda that are currently associated with this neighbor
-            fp = (neighborP->getActiveFlow());
-            fq = (neighborP->getReactiveFlow());
-            lambda = (neighborP->getLambda());
-
-            neighborP->setActiveFlow(fp + g_node_fp);
-            neighborP->setReactiveFlow(fq + g_node_fq);
-            neighborP->setLambda(lambda + g_node_lambda);
    //          Serial << "fp ("<<neighborID<<","<<nodeID<<") = "<<fp + g_node_fp<<endl;
 			// delay(5);
    //          Serial << "fq ("<<neighborID<<","<<nodeID<<") = "<<fq + g_node_fq<<endl;
@@ -1091,11 +1533,25 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 		l->updateLinkedList(s->getStatusP());
         bP = P - Pd - l->addActiveFlows(nodeID,n);
         bQ = Q - Qd - l->addReactiveFlows(nodeID,n);
+        if (packetDropCount+packetReceiveCount > (_G->getN()-1))
+        {
+        	Serial<<"ERROR! "<<packetDropCount<<" packet drops encountered"<<endl;
+		    delay(5);
+		    Serial<<"ERROR! "<<packetReceiveCount<<" packets received"<<endl;
+		    delay(5);
+        }
+        packetsLost += packetDropCount;
+        packetReceived += packetReceiveCount;
+
+        packetDropCount = 0;
+      	packetReceiveCount = 0;
     }
     s->setActiveBalance(bP);
     s->setReactiveBalance(bQ);
 
-    Serial<<packetDropCount<<" packet drops encountered"<<endl;
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
     delay(5);
     // Serial << "The active power injection at node" << nodeID << " is "<< P <<endl;
     // delay(5);
@@ -1103,6 +1559,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
     // delay(5);
     return true;
 }
+
 // End Primal Dual methods
 
 
@@ -1682,12 +2139,45 @@ float OAgent_PD::_getLambdaFromPacket_neighbor() {
     return lambda;
 }
 
+float OAgent_PD::_getActiveFlowGradientFromPacket_neighbor() {
+    int32_t mag_gfp = (int32_t(_rx->getData(23)) << 24) + (int32_t(_rx->getData(22)) << 16) + (int16_t(_rx->getData(21)) << 8) + int8_t(_rx->getData(20));
+    int8_t sign_gfp = -1 + ((_rx->getData(19))*2);
+    float gfp = (float) (sign_gfp*mag_gfp);
+    gfp = gfp/BASE;
+
+    return gfp;
+}
+
+float OAgent_PD::_getReactiveFlowGradientFromPacket_neighbor() {
+    int32_t mag_gfq = (int32_t(_rx->getData(28)) << 24) + (int32_t(_rx->getData(27)) << 16) + (int16_t(_rx->getData(26)) << 8) + int8_t(_rx->getData(25));
+    int8_t sign_gfq = -1 + ((_rx->getData(24))*2);
+    float gfq = (float) (sign_gfq*mag_gfq);
+    gfq = gfq/BASE;
+
+    return gfq;
+}
+
+float OAgent_PD::_getLambdaGradientFromPacket_neighbor() {
+    int32_t mag_glambda = (int32_t(_rx->getData(33)) << 24) + (int32_t(_rx->getData(32)) << 16) + (int16_t(_rx->getData(31)) << 8) + int8_t(_rx->getData(30));
+    int8_t sign_glambda = -1 + ((_rx->getData(29))*2);
+    float glambda = (float) (sign_glambda*mag_glambda);
+    glambda = glambda/BASE;
+
+    return glambda;
+}
+
+bool OAgent_PD::_getFlagFromPacket_ACC() {
+    bool flag = (bool) _rx->getData(34);
+    
+    return flag;
+}
+
+
 bool OAgent_PD::_getFlagFromPacket() {
     bool flag = (bool) _rx->getData(19);
     
     return flag;
 }
-
 
 float OAgent_PD::_getActiveFlowFromPacket_node() {
     int32_t mag_fp = (int32_t(_rx->getData(24)) << 24) + (int32_t(_rx->getData(23)) << 16) + (int16_t(_rx->getData(22)) << 8) + int8_t(_rx->getData(21));
@@ -1710,6 +2200,60 @@ float OAgent_PD::_getReactiveFlowFromPacket_node() {
 float OAgent_PD::_getLambdaFromPacket_node() {
     int32_t mag_lambda = (int32_t(_rx->getData(34)) << 24) + (int32_t(_rx->getData(33)) << 16) + (int16_t(_rx->getData(32)) << 8) + int8_t(_rx->getData(31));
     int8_t sign_lambda = -1 + ((_rx->getData(30))*2);
+    float lambda = (float) (sign_lambda*mag_lambda);
+    lambda = lambda/BASE;
+
+    return lambda;
+}
+
+float OAgent_PD::_getActiveFlowFromPacket_nodeACC() {
+    int32_t mag_fp = (int32_t(_rx->getData(39)) << 24) + (int32_t(_rx->getData(38)) << 16) + (int16_t(_rx->getData(37)) << 8) + int8_t(_rx->getData(36));
+    int8_t sign_fp = -1 + ((_rx->getData(35))*2);
+    float fp = (float) (sign_fp*mag_fp);
+    fp = fp/BASE;
+
+    return fp;
+}
+
+float OAgent_PD::_getReactiveFlowFromPacket_nodeACC() {
+    int32_t mag_fq = (int32_t(_rx->getData(44)) << 24) + (int32_t(_rx->getData(43)) << 16) + (int16_t(_rx->getData(42)) << 8) + int8_t(_rx->getData(41));
+    int8_t sign_fq = -1 + ((_rx->getData(40))*2);
+    float fq = (float) (sign_fq*mag_fq);
+    fq = fq/BASE;
+
+    return fq;
+}
+
+float OAgent_PD::_getLambdaFromPacket_nodeACC() {
+    int32_t mag_lambda = (int32_t(_rx->getData(49)) << 24) + (int32_t(_rx->getData(48)) << 16) + (int16_t(_rx->getData(47)) << 8) + int8_t(_rx->getData(46));
+    int8_t sign_lambda = -1 + ((_rx->getData(45))*2);
+    float lambda = (float) (sign_lambda*mag_lambda);
+    lambda = lambda/BASE;
+
+    return lambda;
+}
+
+float OAgent_PD::_getActiveFlowGradientFromPacket_node() {
+    int32_t mag_fp = (int32_t(_rx->getData(54)) << 24) + (int32_t(_rx->getData(53)) << 16) + (int16_t(_rx->getData(52)) << 8) + int8_t(_rx->getData(51));
+    int8_t sign_fp = -1 + ((_rx->getData(50))*2);
+    float fp = (float) (sign_fp*mag_fp);
+    fp = fp/BASE;
+
+    return fp;
+}
+
+float OAgent_PD::_getReactiveFlowGradientFromPacket_node() {
+    int32_t mag_fq = (int32_t(_rx->getData(59)) << 24) + (int32_t(_rx->getData(58)) << 16) + (int16_t(_rx->getData(57)) << 8) + int8_t(_rx->getData(56));
+    int8_t sign_fq = -1 + ((_rx->getData(55))*2);
+    float fq = (float) (sign_fq*mag_fq);
+    fq = fq/BASE;
+
+    return fq;
+}
+
+float OAgent_PD::_getLambdaGradientFromPacket_node() {
+    int32_t mag_lambda = (int32_t(_rx->getData(64)) << 24) + (int32_t(_rx->getData(63)) << 16) + (int16_t(_rx->getData(62)) << 8) + int8_t(_rx->getData(61));
+    int8_t sign_lambda = -1 + ((_rx->getData(60))*2);
     float lambda = (float) (sign_lambda*mag_lambda);
     lambda = lambda/BASE;
 
@@ -1936,6 +2480,422 @@ void OAgent_PD::_unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c
     payload[32] = lambda_p >> 8;
     payload[33] = lambda_p >> 16;
     payload[34] = lambda_p >> 24;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+
+void OAgent_PD::_sendToChild(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag) {
+    uint8_t payload[35];
+    uint32_t fp;
+    uint32_t fq;
+    uint32_t lambda;
+    uint32_t gfp;
+    uint32_t gfq;
+    uint32_t glambda;
+    uint8_t sign_fp;
+    uint8_t sign_fq;
+    uint8_t sign_lambda;
+    uint8_t sign_gfp;
+    uint8_t sign_gfq;
+    uint8_t sign_glambda;
+    fP = fP*BASE;
+    fQ = fQ*BASE;
+    Lambda = Lambda*BASE;
+    gfP = gfP*BASE;
+    gfQ = gfQ*BASE;
+    gLambda = gLambda*BASE;
+
+    //check if active flow is negative
+    if (fP < 0) 
+    {
+        fP = -1*fP;
+        fp = (uint32_t) fP;
+        sign_fp = 0;
+    }
+    else
+    {
+        fp = (uint32_t) fP;
+        sign_fp = 1;
+    }
+
+   //check if reactive flow is negative
+    if (fQ < 0) 
+    {
+        fQ = -1*fQ;
+        fq = (uint32_t) fQ;
+        sign_fq = 0;
+    }
+    else
+    {
+        fq = (uint32_t) fQ;
+        sign_fq = 1;
+    }
+
+   //check if lambda is negative
+    if (Lambda < 0) 
+    {
+        Lambda = -1*Lambda;
+        lambda = (uint32_t) Lambda;
+        sign_lambda = 0;
+    }
+    else
+    {
+        lambda = (uint32_t) Lambda;
+        sign_lambda = 1;
+    }
+
+    //check if active flow gradient is negative
+    if (gfP < 0) 
+    {
+        gfP = -1*gfP;
+        gfp = (uint32_t) gfP;
+        sign_gfp = 0;
+    }
+    else
+    {
+        gfp = (uint32_t) gfP;
+        sign_gfp = 1;
+    }
+
+   //check if reactive flow gradient is negative
+    if (gfQ < 0) 
+    {
+        gfQ = -1*gfQ;
+        gfq = (uint32_t) gfQ;
+        sign_gfq = 0;
+    }
+    else
+    {
+        gfq = (uint32_t) gfQ;
+        sign_gfq = 1;
+    }
+
+   //check if lambda gradient is negative
+    if (gLambda < 0) 
+    {
+        gLambda = -1*gLambda;
+        glambda = (uint32_t) gLambda;
+        sign_glambda = 0;
+    }
+    else
+    {
+        glambda = (uint32_t) gLambda;
+        sign_glambda = 1;
+    }
+
+    //construct payload
+    payload[0] = PD_HEADER;
+    payload[1] = PD_HEADER >> 8;
+    payload[2] = recipientID;
+    payload[3] = recipientID >> 8;
+    payload[4] = sign_fp;
+    payload[5] = fp;
+    payload[6] = fp >> 8;
+    payload[7] = fp >> 16;
+    payload[8] = fp >> 24;
+    payload[9] = sign_fq;
+    payload[10] = fq;
+    payload[11] = fq >> 8;
+    payload[12] = fq >> 16;
+    payload[13] = fq >> 24;
+    payload[14] = sign_lambda;
+    payload[15] = lambda;
+    payload[16] = lambda >> 8;
+    payload[17] = lambda >> 16;
+    payload[18] = lambda >> 24;
+    payload[19] = sign_gfp;
+    payload[20] = gfp;
+    payload[21] = gfp >> 8;
+    payload[22] = gfp >> 16;
+    payload[23] = gfp >> 24;
+    payload[24] = sign_gfq;
+    payload[25] = gfq;
+    payload[26] = gfq >> 8;
+    payload[27] = gfq >> 16;
+    payload[28] = gfq >> 24;
+    payload[29] = sign_glambda;
+    payload[30] = glambda;
+    payload[31] = glambda >> 8;
+    payload[32] = glambda >> 16;
+    payload[33] = glambda >> 24;
+
+    payload[34] = flag;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+void OAgent_PD::_sendToParent(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag, float fP_p, float fQ_p, float Lambda_p, float gfP_p, float gfQ_p, float gLambda_p) {
+    uint8_t payload[65];
+    uint32_t fp;
+    uint32_t fq;
+    uint32_t lambda;
+    uint32_t gfp;
+    uint32_t gfq;
+    uint32_t glambda;
+    uint8_t sign_fp;
+    uint8_t sign_fq;
+    uint8_t sign_lambda;
+    uint8_t sign_gfp;
+    uint8_t sign_gfq;
+    uint8_t sign_glambda;
+    uint32_t fP_p;
+    uint32_t fq_p;
+    uint32_t lambda_p;
+    uint32_t gfp_p;
+    uint32_t gfq_p;
+    uint32_t glambda_p;
+    uint8_t sign_fp_p;
+    uint8_t sign_fq_p;
+    uint8_t sign_lambda_p;
+    uint8_t sign_gfp_p;
+    uint8_t sign_gfq_p;
+    uint8_t sign_glambda_p;
+    fP = fP*BASE;
+    fQ = fQ*BASE;
+    Lambda = Lambda*BASE;
+    gfP = gfP*BASE;
+    gfQ = gfQ*BASE;
+    gLambda = gLambda*BASE;
+    fP_p = fP_p*BASE;
+    fQ_p = fQ_p*BASE;
+    Lambda_p = Lambda_p*BASE;
+    gfP_p = gfP_p*BASE;
+    gfQ_p = gfQ_p*BASE;
+    gLambda_p = gLambda_p*BASE;
+
+    //check if active flow is negative
+    if (fP < 0) 
+    {
+        fP = -1*fP;
+        fp = (uint32_t) fP;
+        sign_fp = 0;
+    }
+    else
+    {
+        fp = (uint32_t) fP;
+        sign_fp = 1;
+    }
+
+   //check if reactive flow is negative
+    if (fQ < 0) 
+    {
+        fQ = -1*fQ;
+        fq = (uint32_t) fQ;
+        sign_fq = 0;
+    }
+    else
+    {
+        fq = (uint32_t) fQ;
+        sign_fq = 1;
+    }
+
+   //check if lambda is negative
+    if (Lambda < 0) 
+    {
+        Lambda = -1*Lambda;
+        lambda = (uint32_t) Lambda;
+        sign_lambda = 0;
+    }
+    else
+    {
+        lambda = (uint32_t) Lambda;
+        sign_lambda = 1;
+    }
+
+    //check if active flow gradient is negative
+    if (gfP < 0) 
+    {
+        gfP = -1*gfP;
+        gfp = (uint32_t) gfP;
+        sign_gfp = 0;
+    }
+    else
+    {
+        gfp = (uint32_t) gfP;
+        sign_gfp = 1;
+    }
+
+   //check if reactive flow gradient is negative
+    if (gfQ < 0) 
+    {
+        gfQ = -1*gfQ;
+        gfq = (uint32_t) gfQ;
+        sign_gfq = 0;
+    }
+    else
+    {
+        gfq = (uint32_t) gfQ;
+        sign_gfq = 1;
+    }
+
+   //check if lambda gradient is negative
+    if (gLambda < 0) 
+    {
+        gLambda = -1*gLambda;
+        glambda = (uint32_t) gLambda;
+        sign_glambda = 0;
+    }
+    else
+    {
+        glambda = (uint32_t) gLambda;
+        sign_glambda = 1;
+    }
+
+    //check if active flow is negative
+    if (fP_p < 0) 
+    {
+        fP_p = -1*fP_p;
+        fp_p = (uint32_t) fP_p;
+        sign_fp_p = 0;
+    }
+    else
+    {
+        fp_p = (uint32_t) fP_p;
+        sign_fp_p = 1;
+    }
+
+   //check if reactive flow is negative
+    if (fQ_p < 0) 
+    {
+        fQ_p = -1*fQ_p;
+        fq_p = (uint32_t) fQ_p;
+        sign_fq_p = 0;
+    }
+    else
+    {
+        fq_p = (uint32_t) fQ_p;
+        sign_fq_p = 1;
+    }
+
+   //check if lambda is negative
+    if (Lambda_p_p < 0) 
+    {
+        Lambda_p = -1*Lambda_p;
+        lambda_p = (uint32_t) Lambda_p_p;
+        sign_lambda_p = 0;
+    }
+    else
+    {
+        lambda_p = (uint32_t) Lambda_p;
+        sign_lambda_p = 1;
+    }
+
+    //check if active flow gradient is negative
+    if (gfP_p < 0) 
+    {
+        gfP_p = -1*gfP_p;
+        gfp_p = (uint32_t) gfP_p;
+        sign_gfp_p = 0;
+    }
+    else
+    {
+        gfp_p = (uint32_t) gfP_p;
+        sign_gfp_p = 1;
+    }
+
+   //check if reactive flow gradient is negative
+    if (gfQ_p < 0) 
+    {
+        gfQ_p = -1*gfQ_p;
+        gfq_p = (uint32_t) gfQ_p;
+        sign_gfq_p = 0;
+    }
+    else
+    {
+        gfq_p = (uint32_t) gfQ_p;
+        sign_gfq_p = 1;
+    }
+
+   //check if lambda gradient is negative
+    if (gLambda_p < 0) 
+    {
+        gLambda_p = -1*gLambda_p;
+        glambda_p = (uint32_t) gLambda_p;
+        sign_glambda_p = 0;
+    }
+    else
+    {
+        glambda_p = (uint32_t) gLambda_p;
+        sign_glambda_p = 1;
+    }
+
+    //construct payload
+    payload[0] = PD_HEADER;
+    payload[1] = PD_HEADER >> 8;
+    payload[2] = recipientID;
+    payload[3] = recipientID >> 8;
+    payload[4] = sign_fp;
+    payload[5] = fp;
+    payload[6] = fp >> 8;
+    payload[7] = fp >> 16;
+    payload[8] = fp >> 24;
+    payload[9] = sign_fq;
+    payload[10] = fq;
+    payload[11] = fq >> 8;
+    payload[12] = fq >> 16;
+    payload[13] = fq >> 24;
+    payload[14] = sign_lambda;
+    payload[15] = lambda;
+    payload[16] = lambda >> 8;
+    payload[17] = lambda >> 16;
+    payload[18] = lambda >> 24;
+    payload[19] = sign_gfp;
+    payload[20] = gfp;
+    payload[21] = gfp >> 8;
+    payload[22] = gfp >> 16;
+    payload[23] = gfp >> 24;
+    payload[24] = sign_gfq;
+    payload[25] = gfq;
+    payload[26] = gfq >> 8;
+    payload[27] = gfq >> 16;
+    payload[28] = gfq >> 24;
+    payload[29] = sign_glambda;
+    payload[30] = glambda;
+    payload[31] = glambda >> 8;
+    payload[32] = glambda >> 16;
+    payload[33] = glambda >> 24;
+
+    payload[34] = flag;
+
+    payload[35] = sign_fp_p;
+    payload[36] = fp_p;
+    payload[37] = fp_p >> 8;
+    payload[38] = fp_p >> 16;
+    payload[39] = fp_p >> 24;
+    payload[40] = sign_fq_p;
+    payload[41] = fq_p;
+    payload[42] = fq_p >> 8;
+    payload[43] = fq_p >> 16;
+    payload[44] = fq_p >> 24;
+    payload[45] = sign_lambda_p;
+    payload[46] = lambda_p;
+    payload[47] = lambda_p >> 8;
+    payload[48] = lambda_p >> 16;
+    payload[49] = lambda_p >> 24;
+    payload[50] = sign_gfp_p;
+    payload[51] = gfp_p;
+    payload[52] = gfp_p >> 8;
+    payload[53] = gfp_p >> 16;
+    payload[54] = gfp_p >> 24;
+    payload[55] = sign_gfq_p;
+    payload[56] = gfq_p;
+    payload[57] = gfq_p >> 8;
+    payload[58] = gfq_p >> 16;
+    payload[59] = gfq_p >> 24;
+    payload[60] = sign_glambda_p;
+    payload[61] = glambda_p;
+    payload[62] = glambda_p >> 8;
+    payload[63] = glambda_p >> 16;
+    payload[64] = glambda_p >> 24;
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp

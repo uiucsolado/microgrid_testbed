@@ -313,9 +313,21 @@ class ORemoteVertex : public OVertex {
         inline float getReactiveFlow() { return _fq; }
         inline float getLambda() { return _lambda; }
         
-        inline float getActiveFlowOLD() { return _fpOLD; }
-        inline float getReactiveFlowOLD() { return _fqOLD; }
-        inline float getLambdaOLD() { return _lambdaOLD; }
+        inline float getActiveFlowGradient() { return _gfp; }
+        inline float getReactiveFlowGradient() { return _gfq; }
+        inline float getLambdaGradient() { return _glambda; }        
+        
+        inline float getActiveFlowGradientTMP() { return _gfpTMP; }
+        inline float getReactiveFlowGradientTMP() { return _gfqTMP; }
+        inline float getLambdaGradientTMP() { return _glambdaTMP; }        
+        
+        inline float getNodeActiveFlowGradient() { return _gfpNode; }
+        inline float getNodeReactiveFlowGradient() { return _gfqNode; }
+        inline float getNodeLambdaGradient() { return _glambdaNode; }
+                
+        inline float getNeighborActiveFlowGradient() { return _gfpNeighbor; }
+        inline float getNeighborReactiveFlowGradient() { return _gfqNeighbor; }
+        inline float getNeighborLambdaGradient() { return _glambdaNeighbor; }
         
         inline float getNodeActiveFlow() { return _fpNode; }
         inline float getNodeReactiveFlow() { return _fqNode; }
@@ -343,9 +355,21 @@ class ORemoteVertex : public OVertex {
         inline void setReactiveFlow(float fq) {_fq = fq; }
         inline void setLambda(float lambda) {_lambda = lambda; }
 
-        inline void setActiveFlowOLD(float fpOLD) {_fpOLD = fpOLD; }
-        inline void setReactiveFlowOLD(float fqOLD) {_fqOLD = fqOLD; }
-        inline void setLambdaOLD(float lambdaOLD) {_lambdaOLD = lambdaOLD; }
+        inline void setActiveFlowGradient(float gfp) {_gfp = gfp; }
+        inline void setReactiveFlowGradient(float gfq) {_gfq = gfq; }
+        inline void setLambdaGradient(float glambda) {_glambda = glambda; }
+
+        inline void setActiveFlowGradientTMP(float gfpTMP) {_gfpTMP = gfpTMP; }
+        inline void setReactiveFlowGradientTMP(float gfqTMP) {_gfqTMP = gfqTMP; }
+        inline void setLambdaGradientTMP(float glambdaTMP) {_glambdaTMP = glambdaTMP; }
+
+        inline void setNodeActiveFlowGradient(float gfpNode) {_gfpNode = gfpNode; }
+        inline void setNodeReactiveFlowGradient(float gfqNode) {_gfqNode = gfqNode; }
+        inline void setNodeLambdaGradient(float glambdaNode) {_glambdaNode = glambdaNode; }
+
+        inline void setNeighborActiveFlowGradient(float gfpNeighbor) {_gfpNeighbor = gfpNeighbor; }
+        inline void setNeighborReactiveFlowGradient(float gfqNeighbor) {_gfqNeighbor = gfqNeighbor; }
+        inline void setNeighborLambdaGradient(float glambdaNeighbor) {_glambdaNeighbor = glambdaNeighbor; }
 
         inline void setNodeActiveFlow(float fpNode) {_fpNode = fpNode; }
         inline void setNodeReactiveFlow(float fqNode) {_fqNode = fqNode; }
@@ -381,10 +405,25 @@ class ORemoteVertex : public OVertex {
         float _fq; //per-unit reactive flow along electrical link
         float _lambda; //lagrange multiplier for LinDistFlow
 
-        //Decision variables for primal dual algorithm
-        float _fpOLD; //per-unit active flow along electrical link
-        float _fqOLD; //per-unit reactive flow along electrical link
-        float _lambdaOLD; //lagrange multiplier for LinDistFlow
+        //gradient variables for primal dual algorithm
+        float _gfp; //per-unit active flow along electrical link
+        float _gfq; //per-unit reactive flow along electrical link
+        float _glambda; //lagrange multiplier for LinDistFlow
+
+        //gradient variables for primal dual algorithm
+        float _gfpTMP; //per-unit active flow along electrical link
+        float _gfqTMP; //per-unit reactive flow along electrical link
+        float _glambdaTMP; //lagrange multiplier for LinDistFlow
+
+        //gradient local estimate variable for primal dual algorithm
+        float _gfpNode; //per-unit active flow along electrical link
+        float _gfqNode; //per-unit reactive flow along electrical link
+        float _glambdaNode; //lagrange multiplier for LinDistFlow
+
+        //gradient remote estimate variable for primal dual algorithm
+        float _gfpNeighbor; //per-unit active flow along electrical link
+        float _gfqNeighbor; //per-unit reactive flow along electrical link
+        float _glambdaNeighbor; //lagrange multiplier for LinDistFlow
 
         float _fpNode; //local estimate of per-unit active flow along electrical link
         float _fqNode; //local estimate of per-unit reactive flow along electrical link

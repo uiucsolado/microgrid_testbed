@@ -659,9 +659,12 @@ void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, flo
     _fp = 0;
     _fq = 0;
     _lambda = 0;
-    _fpOLD = 0;
-    _fqOLD = 0;
-    _lambdaOLD = 0;
+    _gfp = 0;
+    _gfq = 0;
+    _glambda = 0;
+    _gfpNode = 0;
+    _gfqNode = 0;
+    _glambdaNode = 0;
     _linkStatus = 0;
     _nodeFlag = false;
     _neighborFlag = false;

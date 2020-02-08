@@ -106,6 +106,7 @@ class OAgent_PD {
         bool leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
         bool nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
         bool standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
+        bool acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
 
         // communication link activation methods
         bool linkActivationAlgorithm();
@@ -199,8 +200,10 @@ class OAgent_PD {
         
         void _broadcastMaxMinPacket(long max, long min);
         //Unicast Primal Dual Packet - SN addition edited by Olaolu
-        void _unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag_PD);
-        void _unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag_PD, float fP_p, float fQ_p, float Lambda_p);
+        void _unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag);
+        void _unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag, float fP_p, float fQ_p, float Lambda_p);
+        void _sendToChild(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag);
+        void _sendToParent(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag, float fP_p, float fQ_p, float Lambda_p, float gfP_p, float gfQ_p, float gLambda_p);
 
         //link activation packets - added by Olaolu
         void _candactcodePacket(uint16_t recipientID);
@@ -281,12 +284,24 @@ class OAgent_PD {
         float _getActiveFlowFromPacket_neighbor();
         float _getReactiveFlowFromPacket_neighbor();
         float _getLambdaFromPacket_neighbor();
+        float _getActiveFlowGradientFromPacket_neighbor();
+        float _getReactiveFlowGradientFromPacket_neighbor();
+        float _getLambdaGradientFromPacket_neighbor();
         
         bool _getFlagFromPacket();
+        bool _getFlagFromPacket_ACC();
 
         float _getActiveFlowFromPacket_node();
         float _getReactiveFlowFromPacket_node();
         float _getLambdaFromPacket_node();
+        
+        float _getActiveFlowFromPacket_nodeACC();
+        float _getReactiveFlowFromPacket_nodeACC();
+        float _getLambdaFromPacket_nodeACC();
+        float _getActiveFlowGradientFromPacket_node();
+        float _getReactiveFlowGradientFromPacket_node();
+        float _getLambdaGradientFromPacket_node();
+        
         inline uint16_t _getRecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
         //
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
