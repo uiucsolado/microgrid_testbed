@@ -1464,7 +1464,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 		                node_lambda = (neighborP->getLambda()) + (neighborP->getLambdaGradient());
 
 	        			g_fpTMP = 2*alpha*(Mu + ((s->getWp())*bP) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
-		                g_fqTMP =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*Gradient(neighborP->getLambda()))) ;
+		                g_fqTMP =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
 		                g_lambdaTMP = 2*alpha*(sqV - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
 
 		                node_gfp = neighborP->getActiveFlowGradient() + ( g_fpTMP - neighborP->getActiveFlowGradientTMP() );
@@ -1540,8 +1540,8 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 				node_glambda = neighborP->getNodeLambdaGradient();
 
 				//get values for fp, fq, and lambda that are currently associated with this neighbor
-	            node_fp = (neighborP->getNodeNodeNodeActiveFlow());
-	            node_fq = (neighborP->getNodeNodeReactiveFlow());
+	            node_fp = (neighborP->getNodeActiveFlow());
+	            node_fq = (neighborP->getNodeReactiveFlow());
 	            node_lambda = (neighborP->getNodeLambda());
 
                 neighborP->setActiveFlowGradient(node_gfp);
@@ -2680,7 +2680,7 @@ void OAgent_PD::_sendToParent(uint16_t recipientID, float fP, float fQ, float La
     uint8_t sign_gfp;
     uint8_t sign_gfq;
     uint8_t sign_glambda;
-    uint32_t fP_p;
+    uint32_t fp_p;
     uint32_t fq_p;
     uint32_t lambda_p;
     uint32_t gfp_p;
@@ -2810,10 +2810,10 @@ void OAgent_PD::_sendToParent(uint16_t recipientID, float fP, float fQ, float La
     }
 
    //check if lambda is negative
-    if (Lambda_p_p < 0) 
+    if (Lambda_p < 0) 
     {
         Lambda_p = -1*Lambda_p;
-        lambda_p = (uint32_t) Lambda_p_p;
+        lambda_p = (uint32_t) Lambda_p;
         sign_lambda_p = 0;
     }
     else
