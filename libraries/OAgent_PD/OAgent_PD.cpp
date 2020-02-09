@@ -1286,14 +1286,14 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 
                 node_flag = neighborP->getNodeFlag();
                 neighbor_flag = neighborP->getNeighborFlag();
-
-                //get values for fp, fq, and lambda that are currently associated with this neighbor
-                node_fp = (neighborP->getActiveFlow());
-                node_fq = (neighborP->getReactiveFlow());
-                node_lambda = (neighborP->getLambda());
-
+                
             	if(neighborID < nodeID)
 	            {
+                    //get values for fp, fq, and lambda that are currently associated with this neighbor
+                    node_fp = (neighborP->getActiveFlow()) + (neighborP->getActiveFlowGradient());
+                    node_fq = (neighborP->getReactiveFlow()) + (neighborP->getReactiveFlowGradient());
+                    node_lambda = (neighborP->getLambda()) + (neighborP->getLambdaGradient());
+
 	                g_fpTMP = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
 	                g_fqTMP =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
 	                g_lambdaTMP= 2*alpha*(sqV*(-1) - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
@@ -1354,9 +1354,9 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
     				neighborP->setReactiveFlowGradient(g_fq);
     				neighborP->setLambdaGradient(g_lambda);
 
-	                neighborP->setActiveFlow(fp + g_fp);
-	                neighborP->setReactiveFlow(fq + g_fq);
-	                neighborP->setLambda(lambda + g_lambda);
+	                neighborP->setActiveFlow(fp);
+	                neighborP->setReactiveFlow(fq);
+	                neighborP->setLambda(lambda);
 	       //          Serial << "fp ("<<neighborID<<","<<nodeID<<") = "<<fp<<endl;
 	    			// delay(5);
 	       //          Serial << "fq ("<<neighborID<<","<<nodeID<<") = "<<fq<<endl;
@@ -1366,6 +1366,14 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 	            }
                 else if(neighborID > nodeID)
 	            {
+                    //get values for fp, fq, and lambda that are currently associated with this neighbor
+                    node_fp = (neighborP->getNodeActiveFlow());
+                    node_fq = (neighborP->getNodeReactiveFlow());
+                    node_lambda = (neighborP->getNodeLambda());
+                    node_gfp = (neighborP->getNodeActiveFlowGradient());
+                    node_gfq = (neighborP->getNodeReactiveFlowGradient());
+                    node_glambda = (neighborP->getNodeLambdaGradient());
+
                     // Serial<<"Received from Child Node "<<neighborID<<":"<<endl<<neighbor_fp<<endl<<neighbor_fq<<endl<<neighbor_lambda<<endl<<neighbor_status<<endl<<neighbornode_fp<<endl<<neighbornode_fq<<endl<<neighbornode_lambda<<endl;
                     // delay(5);
 
@@ -1395,9 +1403,9 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
                         delta_fq = node_fq - neighbornode_fq;
                         delta_lambda = node_lambda - neighbornode_lambda;
 
-                        delta_gfp = neighborP->getActiveFlowGradient() - neighbornode_gfp;
-                        delta_gfq = neighborP->getReactiveFlowGradient() - neighbornode_gfq;
-                        delta_glambda = neighborP->getLambdaGradient() - neighbornode_lambda;
+                        delta_gfp = node_gfp - neighbornode_gfp;
+                        delta_gfq = node_gfq - neighbornode_gfq;
+                        delta_glambda = node_glambda - neighbornode_glambda;
                         
                         fp = fp + delta_fp;
                         fq = fq + delta_fq;
@@ -1406,14 +1414,24 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
                         g_fp = g_fp + delta_gfp;
                         g_fq = g_fq + delta_gfq;
                         g_lambda = g_lambda + delta_glambda;
-
-	                    neighborP->setActiveFlow(fp);
-	                    neighborP->setReactiveFlow(fq);
-	                    neighborP->setLambda(lambda);
-	                    neighborP->setActiveFlowGradient(g_fp);
-	                    neighborP->setReactiveFlowGradient(g_fq);
-	                    neighborP->setLambdaGradient(g_lambda);
                     }
+                    else
+                    {
+                        g_fp = node_gfp;
+                        g_fq = node_gfq;
+                        g_lambda = node_glambda;
+
+                        fp = node_fp;
+                        fq = node_fq;
+                        lambda = node_lambda;
+                    }
+                    neighborP->setActiveFlow(fp);
+                    neighborP->setReactiveFlow(fq);
+                    neighborP->setLambda(lambda);
+
+                    neighborP->setActiveFlowGradient(g_fp);
+                    neighborP->setReactiveFlowGradient(g_fq);
+                    neighborP->setLambdaGradient(g_lambda);
 	       //          Serial << "fp ("<<nodeID<<","<<neighborID<<") = "<<fp<<endl;
 	    			// delay(5);
 	       //          Serial << "fq ("<<nodeID<<","<<neighborID<<") = "<<fq<<endl;
@@ -1441,31 +1459,31 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 	        		else if(neighborID > nodeID)
 	        		{
 		                //get values for fp, fq, and lambda that are currently associated with this neighbor
-		                fp = (neighborP->getActiveFlow()) + (neighborP->getActiveFlowGradient());
-		                fq = (neighborP->getReactiveFlow()) + (neighborP->getReactiveFlowGradient());
-		                lambda = (neighborP->getLambda()) + (neighborP->getLambdaGradient());
+		                node_fp = (neighborP->getActiveFlow()) + (neighborP->getActiveFlowGradient());
+		                node_fq = (neighborP->getReactiveFlow()) + (neighborP->getReactiveFlowGradient());
+		                node_lambda = (neighborP->getLambda()) + (neighborP->getLambdaGradient());
 
 	        			g_fpTMP = 2*alpha*(Mu + ((s->getWp())*bP) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
 		                g_fqTMP =  2*alpha*(Nu + ((s->getWq())*bQ) + ((neighborP->getReactance())*Gradient(neighborP->getLambda()))) ;
 		                g_lambdaTMP = 2*alpha*(sqV - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
 
-		                g_fp = neighborP->getActiveFlowGradient() + ( g_fpTMP - neighborP->getActiveFlowGradientTMP() );
-						g_fq = neighborP->getReactiveFlowGradient() + ( g_fqTMP - neighborP->getReactiveFlowGradientTMP() );
-						g_lambda = neighborP->getLambdaGradient() + ( g_lambdaTMP - neighborP->getLambdaGradientTMP() );
+		                node_gfp = neighborP->getActiveFlowGradient() + ( g_fpTMP - neighborP->getActiveFlowGradientTMP() );
+						node_gfq = neighborP->getReactiveFlowGradient() + ( g_fqTMP - neighborP->getReactiveFlowGradientTMP() );
+						node_glambda = neighborP->getLambdaGradient() + ( g_lambdaTMP - neighborP->getLambdaGradientTMP() );
 
 		                neighborP->setActiveFlowGradientTMP(g_fpTMP);
         				neighborP->setReactiveFlowGradientTMP(g_fqTMP);
         				neighborP->setLambdaGradientTMP(g_lambdaTMP);
 
-        				neighborP->setActiveFlowGradient(g_fp);
-        				neighborP->setReactiveFlowGradient(g_fq);
-        				neighborP->setLambdaGradient(g_lambda);
+        				neighborP->setNodeActiveFlowGradient(node_gfp);
+        				neighborP->setNodeReactiveFlowGradient(node_gfq);
+        				neighborP->setNodeLambdaGradient(node_glambda);
 
-        				neighborP->setActiveFlow(fp);
-        				neighborP->setReactiveFlow(fq);
-        				neighborP->setLambda(lambda);
+        				neighborP->setNodeActiveFlow(node_fp);
+                        neighborP->setNodeReactiveFlow(node_fq);
+                        neighborP->setNodeLambda(node_lambda);
 
-        				_sendToChild(neighborID,fp,fq,lambda,g_fp,g_fq,g_lambda,neighborP->getNodeFlag());
+        				_sendToChild(neighborID,node_fp,node_fq,node_lambda,node_gfp,node_gfq,node_glambda,neighborP->getNodeFlag());
 						// Serial<<"Sent to Child Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl;
       //           		delay(5);
 	        		}
@@ -1491,33 +1509,48 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 
 			if(neighborID < nodeID)
 			{
-				g_node_fp = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
-	            g_node_fq =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
-	            g_node_lambda= 2*alpha*(sqV*(-1) - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
+				g_fpTMP = 2*alpha*(Mu*(-1) + ((s->getWp())*bP)*(-1) + ((neighborP->getResistance())*(neighborP->getLambda()))) ;
+                g_fqTMP =  2*alpha*(Nu*(-1) + ((s->getWq())*bQ)*(-1) + ((neighborP->getReactance())*(neighborP->getLambda()))) ;
+                g_lambdaTMP= 2*alpha*(sqV*(-1) - ((neighborP->getActiveFlow())*(neighborP->getResistance())) - ((neighborP->getReactiveFlow())*(neighborP->getReactance())) );
 
-	            //get values for fp, fq, and lambda that are currently associated with this neighbor
-	            fp = (neighborP->getActiveFlow());
-	            fq = (neighborP->getReactiveFlow());
-	            lambda = (neighborP->getLambda());
+                node_fp = (neighborP->getActiveFlow()) + (neighborP->getActiveFlowGradient());
+                node_fq = (neighborP->getReactiveFlow()) + (neighborP->getReactiveFlowGradient());
+                node_lambda = (neighborP->getLambda()) + (neighborP->getLambdaGradient());
 
-	            neighborP->setActiveFlow(fp + g_node_fp);
-	            neighborP->setReactiveFlow(fq + g_node_fq);
-	            neighborP->setLambda(lambda + g_node_lambda);
+                node_gfp = neighborP->getActiveFlowGradient() + ( g_fpTMP - neighborP->getActiveFlowGradientTMP() );
+                node_gfq = neighborP->getReactiveFlowGradient() + ( g_fqTMP - neighborP->getReactiveFlowGradientTMP() );
+                node_glambda = neighborP->getLambdaGradient() + ( g_lambdaTMP - neighborP->getLambdaGradientTMP() );
+
+                neighborP->setActiveFlowGradientTMP(g_fpTMP);
+                neighborP->setReactiveFlowGradientTMP(g_fqTMP);
+                neighborP->setLambdaGradientTMP(g_lambdaTMP);
+
+                neighborP->setActiveFlow(node_fp);
+                neighborP->setReactiveFlow(node_fq);
+                neighborP->setLambda(node_lambda);
+
+                neighborP->setActiveFlowGradient(node_gfp);
+                neighborP->setReactiveFlowGradient(node_gfq);
+                neighborP->setLambdaGradient(node_gfp);
 			}
 	        else if(neighborID > nodeID)
 	        {
-	        	g_fp = neighborP->getActiveFlowGradient();
-				g_fq = neighborP->getReactiveFlowGradient();
-				g_lambda = neighborP->getLambdaGradient();
+	        	node_gfp = neighborP->getNodeActiveFlowGradient();
+				node_gfq = neighborP->getNodeReactiveFlowGradient();
+				node_glambda = neighborP->getNodeLambdaGradient();
 
 				//get values for fp, fq, and lambda that are currently associated with this neighbor
-	            fp = (neighborP->getActiveFlow());
-	            fq = (neighborP->getReactiveFlow());
-	            lambda = (neighborP->getLambda());
+	            node_fp = (neighborP->getNodeNodeNodeActiveFlow());
+	            node_fq = (neighborP->getNodeNodeReactiveFlow());
+	            node_lambda = (neighborP->getNodeLambda());
 
-	            neighborP->setActiveFlow(fp + g_fp);
-	            neighborP->setReactiveFlow(fq + g_fq);
-	            neighborP->setLambda(lambda + g_lambda);
+                neighborP->setActiveFlowGradient(node_gfp);
+                neighborP->setReactiveFlowGradient(node_gfq);
+                neighborP->setLambdaGradient(node_gfp);
+
+                neighborP->setActiveFlow(node_fp);
+                neighborP->setReactiveFlow(node_fq);
+                neighborP->setLambda(node_lambda);
 	        }
    //          Serial << "fp ("<<neighborID<<","<<nodeID<<") = "<<fp + g_node_fp<<endl;
 			// delay(5);
