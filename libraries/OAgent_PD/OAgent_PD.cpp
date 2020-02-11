@@ -765,7 +765,8 @@ bool OAgent_PD::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t ite
         if(_waitToStart(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
-            gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
+            // gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
+            gamma = acceleratedPrimalDualAlgorithm(genBus,alpha,iterations);
         }
     }        
     return gamma;
@@ -789,7 +790,8 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t 
         if(_waitToStart(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
-            gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
+            // gamma = standardPrimalDualAlgorithm(genBus,alpha,iterations);
+            gamma = acceleratedPrimalDualAlgorithm(genBus,alpha,iterations);
         }
         //digitalWrite(48,LOW);
     }
@@ -812,7 +814,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 
     ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
     iterations = 1000;
-    alpha = 0.1;
+    alpha = 0.05;
     uint16_t nodeID = s->getID();
     uint8_t neighborID;
 
@@ -865,7 +867,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
     uint16_t packetReceived = 0;
     //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
     uint16_t period = 200;                            										// create variable to keep track of broadcasts
-    uint8_t frame = 30;
+    uint8_t frame = 25;
     
     unsigned long start = (millis()-period);   // initialize timer		                        									// create variable to store iteration start time
 
@@ -874,9 +876,11 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 
     for(uint16_t k = 0; k < iterations; k++)
     {
-    	Serial<<"Iteration"<<k+1<<endl;
+    	// Serial<<"Iteration"<<k+1<<endl;
     	if ((k+1)%20 == 0)
         {
+            Serial<<"Balance: "<<_FLOAT(bP,6)<<" , "<<_FLOAT(bQ,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+            delay(5);
       //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
     		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
       //       delay(5);
@@ -884,8 +888,6 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 		    // delay(5);
 		    // packetDropCount = 0;
       //       packetReceiveCount = 0;
-            Serial<<"Active balance: "<<bP<<endl<<"Reactive balance: "<<bQ<<endl<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
-            delay(5);
         }
         // while( uint16_t(millis() - start - period ) < 500 )
         // {
@@ -912,8 +914,8 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 
 	            *(neighborStatusP+neighborID-1) = 3;															//set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
 
-       			Serial<<neighborID<<" active"<<endl;
-	    		delay(5);
+       // 			Serial<<neighborID<<" active"<<endl;
+	    		// delay(5);
 
             	//get values for fp, fq, and lambda that are received from this neighbor
                 neighbor_fp = _getActiveFlowFromPacket_neighbor();                               		// store incoming value of fp
@@ -1078,8 +1080,8 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
     	
     	while(neighborID != 0)																											//while neighbors have not been sent a packet
     	{
-	    	Serial<<neighborID<<" inactive"<<endl;
-	    	delay(5);
+	    	// Serial<<neighborID<<" inactive"<<endl;
+	    	// delay(5);
 
 			packetDropCount++;
 
@@ -1125,9 +1127,14 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
         packetDropCount = 0;
       	packetReceiveCount = 0;
     }
+  	s->setActiveSetpoint(P);
+    s->setReactiveSetpoint(Q);
     s->setActiveBalance(bP);
     s->setReactiveBalance(bQ);
-
+    s->setSquareVoltage(sqV);
+    s->setMu(Mu);
+    s->setNu(Nu);
+    
     Serial<<packetsLost<<" packets lost"<<endl;
     delay(5);
     Serial<<packetReceived<<" packets received"<<endl;
@@ -1221,7 +1228,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
     uint16_t packetReceived = 0;
     //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
     uint16_t period = 200;                            										// create variable to keep track of broadcasts
-    uint8_t frame = 30;
+    uint8_t frame = 25;
     
     unsigned long start = (millis()-period);   // initialize timer		                        									// create variable to store iteration start time
 
@@ -1230,9 +1237,34 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 
     for(uint16_t k = 0; k < iterations; k++)
     {
-    	Serial<<"Iteration"<<k+1<<endl;
+    	// Serial<<"Iteration"<<k+1<<endl;
     	if ((k+1)%20 == 0)
         {
+            Serial<<"Balance: "<<_FLOAT(bP,6)<<" , "<<_FLOAT(bQ,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+            delay(5);
+
+        	neighborID = l->unlinkLinkedListNodes();
+        	neighborP = (n+(neighborID-1));
+        	//Serial<<"Neighbor id is "<<neighborID<<endl;
+        	while(neighborID != 0)																									//while neighbors have not been sent a packet
+        	{
+        		if(neighborID < nodeID)
+	            {
+	            	Serial<<"LinDistFlow Error ("<<neighborID<<" , "<<nodeID<<"): "<<_FLOAT(neighborP->getLambdaGradient(),6)<<endl;
+	            	delay(5);
+	            }
+	            else if(neighborID > nodeID)
+	            {
+	            	Serial<<"LinDistFlow Error ("<<nodeID<<" , "<<neighborID<<"): "<<_FLOAT(neighborP->getLambdaGradient(),6)<<endl;
+	            	delay(5);
+	            }
+
+        	   	neighborID = l->unlinkLinkedListNodes();
+	        	neighborP = (n+(neighborID-1));
+			}
+			l->updateLinkedList(s->getStatusP());
+		   	l->updateActiveLinks(n);
+		   	l->resetLinkedListStatus(s->getStatusP());
       //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
     		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
       //       delay(5);
@@ -1240,8 +1272,6 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 		    // delay(5);
 		    // packetDropCount = 0;
       //       packetReceiveCount = 0;
-            Serial<<"Active balance: "<<bP<<endl<<"Reactive balance: "<<bQ<<endl<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
-            delay(5);
         }
         // while( uint16_t(millis() - start - period ) < 500 )
         // {
@@ -1268,8 +1298,8 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 
 	            *(neighborStatusP+neighborID-1) = 3;															//set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
 
-       			Serial<<neighborID<<" active"<<endl;
-	    		delay(5);
+       // 			Serial<<neighborID<<" active"<<endl;
+	    		// delay(5);
 
             	//get values for fp, fq, and lambda that are received from this neighbor
                 neighbor_fp = _getActiveFlowFromPacket_neighbor();                               		// store incoming value of fp
@@ -1306,7 +1336,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
     				neighborP->setReactiveFlowGradientTMP(g_fqTMP);
     				neighborP->setLambdaGradientTMP(g_lambdaTMP);
 
-	            	// Serial<<"Received from Parent Node "<<neighborID<<":"<<endl<<neighbor_fp<<endl<<neighbor_fq<<endl<<neighbor_lambda<<endl<<neighbor_status<<endl;
+	            	// Serial<<"Received from Parent Node "<<neighborID<<":"<<endl<<neighbor_fp<<" , "<<neighbor_fq<<" , "<<neighbor_lambda<<" , "<<neighbor_gfp<<" , "<<neighbor_gfq<<" , "<<neighbor_glambda<<" , "<<neighbor_status<<endl;
               //   	delay(5);
 
                     if (neighbor_flag != neighbor_status)
@@ -1374,7 +1404,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
                     node_gfq = (neighborP->getNodeReactiveFlowGradient());
                     node_glambda = (neighborP->getNodeLambdaGradient());
 
-                    // Serial<<"Received from Child Node "<<neighborID<<":"<<endl<<neighbor_fp<<endl<<neighbor_fq<<endl<<neighbor_lambda<<endl<<neighbor_status<<endl<<neighbornode_fp<<endl<<neighbornode_fq<<endl<<neighbornode_lambda<<endl;
+                    // Serial<<"Received from Child Node "<<neighborID<<":"<<endl<<neighbor_fp<<" , "<<neighbor_fq<<" , "<<neighbor_lambda<<" , "<<neighbor_gfp<<" , "<<neighbor_gfq<<" , "<<neighbor_glambda<<" , "<<neighbor_status<<endl;
                     // delay(5);
 
                     if (neighbor_flag != neighbor_status)
@@ -1385,6 +1415,9 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 						neighbornode_gfp = _getActiveFlowGradientFromPacket_node();                               		// store incoming value of fp from child
 	                    neighbornode_gfq = _getReactiveFlowGradientFromPacket_node();                             		// store incoming value of fq from child
 	                    neighbornode_glambda = _getLambdaGradientFromPacket_node();                               		// store incoming value of lambda from child
+
+	                    // Serial<<"Received self data from Child Node "<<neighborID<<":"<<endl<<node_fp<<" , "<<node_fq<<" , "<<node_lambda<<" , "<<node_gfp<<" , "<<node_gfq<<" , "<<node_glambda<<" , "<<neighbor_status<<endl;
+                    	// delay(5);
 
                         node_flag = !node_flag;
             			neighborP->setNodeFlag(node_flag);                    								//invert node's flag value since averaging has been successfully performed
@@ -1453,7 +1486,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 					if(neighborID < nodeID)
 					{
 						_sendToParent(neighborID,neighborP->getNodeActiveFlow(),neighborP->getNodeReactiveFlow(),neighborP->getNodeLambda(),neighborP->getNodeActiveFlowGradient(),neighborP->getNodeReactiveFlowGradient(),neighborP->getNodeLambdaGradient(),neighborP->getNodeFlag(),neighborP->getNeighborActiveFlow(),neighborP->getNeighborReactiveFlow(),neighborP->getNeighborLambda(),neighborP->getNeighborActiveFlowGradient(),neighborP->getNeighborReactiveFlowGradient(),neighborP->getNeighborLambdaGradient());
-						// Serial<<"Sent to Parent Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl<<neighborP->getNeighborActiveFlow()<<endl<<neighborP->getNeighborReactiveFlow()<<endl<<neighborP->getNeighborLambda()<<endl;
+						// Serial<<"Sent to Parent Node "<<neighborID<<": "<<neighborP->getNodeActiveFlow()<<" , "<<neighborP->getNodeReactiveFlow()<<" , "<<neighborP->getNodeLambda()<<" , "<<neighborP->getNodeActiveFlowGradient()<<" , "<<neighborP->getNodeReactiveFlowGradient()<<" , "<<neighborP->getNodeLambdaGradient()<<" , "<<neighborP->getNodeFlag()<<" , "<<neighborP->getNeighborActiveFlow()<<" , "<<neighborP->getNeighborReactiveFlow()<<" , "<<neighborP->getNeighborLambda()<<" , "<<neighborP->getNeighborActiveFlowGradient()<<" , "<<neighborP->getNeighborReactiveFlowGradient()<<" , "<<neighborP->getNeighborLambdaGradient()<<endl;
       //           		delay(5);
 					}
 	        		else if(neighborID > nodeID)
@@ -1484,7 +1517,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
                         neighborP->setNodeLambda(node_lambda);
 
         				_sendToChild(neighborID,node_fp,node_fq,node_lambda,node_gfp,node_gfq,node_glambda,neighborP->getNodeFlag());
-						// Serial<<"Sent to Child Node "<<neighborID<<":"<<endl<<neighborP->getNodeActiveFlow()<<endl<<neighborP->getNodeReactiveFlow()<<endl<<neighborP->getNodeLambda()<<endl<<neighborP->getNodeFlag()<<endl;
+						// Serial<<"Sent to Child Node "<<neighborID<<": "<<neighborP->getNodeActiveFlow()<<" , "<<neighborP->getNodeReactiveFlow()<<" , "<<neighborP->getNodeLambda()<<" , "<<neighborP->getNodeActiveFlowGradient()<<" , "<<neighborP->getNodeReactiveFlowGradient()<<" , "<<neighborP->getNodeLambdaGradient()<<" , "<<neighborP->getNodeFlag()<<endl;
       //           		delay(5);
 	        		}
 	        	   	neighborID = l->unlinkLinkedListNodes();
@@ -1502,8 +1535,8 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
     	
     	while(neighborID != 0)																											//while neighbors have not been sent a packet
     	{
-	    	Serial<<neighborID<<" inactive"<<endl;
-	    	delay(5);
+	    	// Serial<<neighborID<<" inactive"<<endl;
+	    	// delay(5);
 
 			packetDropCount++;
 
@@ -1579,9 +1612,15 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
         packetDropCount = 0;
       	packetReceiveCount = 0;
     }
+
+  	s->setActiveSetpoint(P);
+    s->setReactiveSetpoint(Q);
     s->setActiveBalance(bP);
     s->setReactiveBalance(bQ);
-
+    s->setSquareVoltage(sqV);
+    s->setMu(Mu);
+    s->setNu(Nu);
+    
     Serial<<packetsLost<<" packets lost"<<endl;
     delay(5);
     Serial<<packetReceived<<" packets received"<<endl;

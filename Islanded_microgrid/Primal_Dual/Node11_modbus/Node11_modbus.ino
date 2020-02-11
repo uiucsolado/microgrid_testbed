@@ -80,6 +80,7 @@ void setup()  {
   g.configureLinkedList();
   s.setActiveDemand(0);
   s.setReactiveDemand(0);
+  s.setPrimalDualWeights(0.8,0.6,0.6,1.2,1.2);
  
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
@@ -149,39 +150,31 @@ void loop() {
   {
     if(a.isSynced())
     {
-      if (le == false)
-      {
-        if (a.isLeader())
-        {
-          if(Serial.available())
-          {
-            int bbb = Serial.read();  
-            Serial.println("got some input");
-            delay(5); 
-            Serial.println("Starting link activation");
-            le = a.linkActivationAlgorithm();
-          }
-        }
-        else
-        {
-          Serial.println("Waiting for link activation");
-          le = a.linkActivationAlgorithm();
-        }
+      Serial.println("Starting Primal Dual Algorithm");
+      primaldual = a.primalDualAlgorithm(true,0.1,1000);
+      int bbbb = Serial.read();
+      
+      Serial.println("P      Q      bP      bQ      sqV      Mu      Nu");
+      Serial.print(s.getActiveSetpoint(),4);
+      Serial.print("  ");
+      Serial.print(s.getReactiveSetpoint(),4);
+      Serial.print("  ");
+      Serial.print(s.getActiveBalance(),4);
+      Serial.print("  ");
+      Serial.print(s.getReactiveBalance(),4);
+      Serial.print("  ");
+      Serial.print(s.getSquareVoltage(),4);
+      Serial.print("  ");
+      Serial.print(s.getMu(),4);
+      Serial.print("  ");
+      Serial.print(s.getNu(),4);
+      
+      while (Serial.available() == 0) 
+      { 
+        //simply makes the arduino wait until commputer sends signal        
       }
-      else
-      {
-        Serial.println("Starting Primal Dual Algorithm");
-        primaldual = a.primalDualAlgorithm(true,0.1,10);
-        //Serial.println(state1,4);
-        // Controller code over
-        
-        while (Serial.available() == 0) 
-        { 
-          //simply makes the arduino wait until commputer sends signal        
-        }
-         
-         a.resync();
-      }
+       
+      a.resync();
     }
   }
 }

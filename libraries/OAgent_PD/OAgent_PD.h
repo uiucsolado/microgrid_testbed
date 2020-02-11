@@ -28,7 +28,7 @@
 #define PD_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
 
 #define WINDOW_LENGTH                    5000     // time length for each window in a period
-#define BASE                             100000  // base for transmitting decimals
+#define BASE                             1000000000  // base for transmitting decimals
 
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)

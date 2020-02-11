@@ -69,7 +69,7 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
   g.addInNeighbor(0x415786E1,9,0.04,0.06); // node 9
   //g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  //g.addInNeighbor(0x415DB670,11,0.04,0.06); // node 11
+  g.addInNeighbor(0x415DB670,11,0.04,0.06); // node 11
   //g.addInNeighbor(0x415786A9,12,0,0); // node 12
   //g.addInNeighbor(0x4157847B,13,0,0); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14
@@ -153,6 +153,21 @@ void loop() {
       Serial.println("Starting Primal Dual Algorithm");
       primaldual = a.primalDualAlgorithm(false,0.1,1000);
       int bbbb = Serial.read();
+      
+      Serial.println("P      Q      bP      bQ      sqV      Mu      Nu");
+      Serial.print(s.getActiveSetpoint(),4);
+      Serial.print("  ");
+      Serial.print(s.getReactiveSetpoint(),4);
+      Serial.print("  ");
+      Serial.print(s.getActiveBalance(),4);
+      Serial.print("  ");
+      Serial.print(s.getReactiveBalance(),4);
+      Serial.print("  ");
+      Serial.print(s.getSquareVoltage(),4);
+      Serial.print("  ");
+      Serial.print(s.getMu(),4);
+      Serial.print("  ");
+      Serial.print(s.getNu(),4);
       
         while (Serial.available() == 0) 
         { 
