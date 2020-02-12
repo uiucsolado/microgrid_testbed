@@ -154,20 +154,20 @@ void loop() {
       primaldual = a.primalDualAlgorithm(false,0.1,1000);
       int bbbb = Serial.read();
       
-      Serial.println("P      Q      bP      bQ      sqV      Mu      Nu");
-      Serial.print(s.getActiveSetpoint(),4);
-      Serial.print("  ");
-      Serial.print(s.getReactiveSetpoint(),4);
-      Serial.print("  ");
-      Serial.print(s.getActiveBalance(),4);
-      Serial.print("  ");
-      Serial.print(s.getReactiveBalance(),4);
-      Serial.print("  ");
-      Serial.print(s.getSquareVoltage(),4);
-      Serial.print("  ");
-      Serial.print(s.getMu(),4);
-      Serial.print("  ");
-      Serial.print(s.getNu(),4);
+//      Serial.println("P      Q      bP      bQ      sqV      Mu      Nu");
+//      Serial.print(s.getActiveSetpoint(),4);
+//      Serial.print("  ");
+//      Serial.print(s.getReactiveSetpoint(),4);
+//      Serial.print("  ");
+//      Serial.print(s.getActiveBalance(),4);
+//      Serial.print("  ");
+//      Serial.print(s.getReactiveBalance(),4);
+//      Serial.print("  ");
+//      Serial.print(s.getSquareVoltage(),4);
+//      Serial.print("  ");
+//      Serial.print(s.getMu(),4);
+//      Serial.print("  ");
+//      Serial.print(s.getNu(),4);
       
         while (Serial.available() == 0) 
         { 

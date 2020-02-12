@@ -813,8 +813,8 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
     uint8_t * neighborStatusP = s->getStatusP();
 
     ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
-    iterations = 1000;
-    alpha = 0.05;
+    iterations = 500;
+    alpha = 0.1;
     uint16_t nodeID = s->getID();
     uint8_t neighborID;
 
@@ -877,18 +877,18 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
     for(uint16_t k = 0; k < iterations; k++)
     {
     	// Serial<<"Iteration"<<k+1<<endl;
-    	if ((k+1)%20 == 0)
-        {
-            Serial<<"Balance: "<<_FLOAT(bP,6)<<" , "<<_FLOAT(bQ,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
-            delay(5);
-      //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
-    		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
-      //       delay(5);
-      //       Serial<<packetReceiveCount<<" packets received"<<endl;
-		    // delay(5);
-		    // packetDropCount = 0;
-      //       packetReceiveCount = 0;
-        }
+    	// if ((k+1)%20 == 0)
+     //    {
+     //        Serial<<"Balance: "<<_FLOAT(bP,6)<<" , "<<_FLOAT(bQ,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+     //        delay(5);
+     //  //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
+    	// 	// Serial<<packetDropCount<<" packet drops encountered"<<endl;
+     //  //       delay(5);
+     //  //       Serial<<packetReceiveCount<<" packets received"<<endl;
+		   //  // delay(5);
+		   //  // packetDropCount = 0;
+     //  //       packetReceiveCount = 0;
+     //    }
         // while( uint16_t(millis() - start - period ) < 500 )
         // {
         //     //waits for 0.5 seconds to begin next period
@@ -1114,18 +1114,21 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 		l->updateLinkedList(s->getStatusP());
         bP = P - Pd - l->addActiveFlows(nodeID,n);
         bQ = Q - Qd - l->addReactiveFlows(nodeID,n);
-        if (packetDropCount+packetReceiveCount > (_G->getN()-1))
-        {
-        	Serial<<"ERROR! "<<packetDropCount<<" packet drops encountered"<<endl;
-		    delay(5);
-		    Serial<<"ERROR! "<<packetReceiveCount<<" packets received"<<endl;
-		    delay(5);
-        }
+      //   if (packetDropCount+packetReceiveCount > (_G->getN()-1))
+      //   {
+      //   	Serial<<"ERROR! "<<packetDropCount<<" packet drops encountered"<<endl;
+		    // delay(5);
+		    // Serial<<"ERROR! "<<packetReceiveCount<<" packets received"<<endl;
+		    // delay(5);
+      //   }
         packetsLost += packetDropCount;
         packetReceived += packetReceiveCount;
 
         packetDropCount = 0;
       	packetReceiveCount = 0;
+
+      	Serial<<_FLOAT(P,6)<<","<<_FLOAT(Q,6)<<","<<_FLOAT(bP,6)<<","<<_FLOAT(bQ,6)<<","<<_FLOAT(sqV,6)<<","<<_FLOAT(Mu,6)<<","<<_FLOAT(Nu,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+        delay(5);
     }
   	s->setActiveSetpoint(P);
     s->setReactiveSetpoint(Q);
@@ -1156,7 +1159,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
     uint8_t * neighborStatusP = s->getStatusP();
 
     ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
-    iterations = 1000;
+    iterations = 500;
     alpha = 0.1;
     uint16_t nodeID = s->getID();
     uint8_t neighborID;
@@ -1238,41 +1241,41 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
     for(uint16_t k = 0; k < iterations; k++)
     {
     	// Serial<<"Iteration"<<k+1<<endl;
-    	if ((k+1)%20 == 0)
-        {
-            Serial<<"Balance: "<<_FLOAT(bP,6)<<" , "<<_FLOAT(bQ,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
-            delay(5);
+   //  	if ((k+1)%20 == 0)
+   //      {
+   //          Serial<<"Balance: "<<_FLOAT(bP,6)<<" , "<<_FLOAT(bQ,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+   //          delay(5);
 
-        	neighborID = l->unlinkLinkedListNodes();
-        	neighborP = (n+(neighborID-1));
-        	//Serial<<"Neighbor id is "<<neighborID<<endl;
-        	while(neighborID != 0)																									//while neighbors have not been sent a packet
-        	{
-        		if(neighborID < nodeID)
-	            {
-	            	Serial<<"LinDistFlow Error ("<<neighborID<<" , "<<nodeID<<"): "<<_FLOAT(neighborP->getLambdaGradient(),6)<<endl;
-	            	delay(5);
-	            }
-	            else if(neighborID > nodeID)
-	            {
-	            	Serial<<"LinDistFlow Error ("<<nodeID<<" , "<<neighborID<<"): "<<_FLOAT(neighborP->getLambdaGradient(),6)<<endl;
-	            	delay(5);
-	            }
+   //      	neighborID = l->unlinkLinkedListNodes();
+   //      	neighborP = (n+(neighborID-1));
+   //      	//Serial<<"Neighbor id is "<<neighborID<<endl;
+   //      	while(neighborID != 0)																									//while neighbors have not been sent a packet
+   //      	{
+   //      		if(neighborID < nodeID)
+	  //           {
+	  //           	Serial<<"LinDistFlow Error ("<<neighborID<<" , "<<nodeID<<"): "<<_FLOAT(neighborP->getLambdaGradient(),6)<<endl;
+	  //           	delay(5);
+	  //           }
+	  //           else if(neighborID > nodeID)
+	  //           {
+	  //           	Serial<<"LinDistFlow Error ("<<nodeID<<" , "<<neighborID<<"): "<<_FLOAT(neighborP->getLambdaGradient(),6)<<endl;
+	  //           	delay(5);
+	  //           }
 
-        	   	neighborID = l->unlinkLinkedListNodes();
-	        	neighborP = (n+(neighborID-1));
-			}
-			l->updateLinkedList(s->getStatusP());
-		   	l->updateActiveLinks(n);
-		   	l->resetLinkedListStatus(s->getStatusP());
-      //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
-    		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
-      //       delay(5);
-      //       Serial<<packetReceiveCount<<" packets received"<<endl;
-		    // delay(5);
-		    // packetDropCount = 0;
-      //       packetReceiveCount = 0;
-        }
+   //      	   	neighborID = l->unlinkLinkedListNodes();
+	  //       	neighborP = (n+(neighborID-1));
+			// }
+			// l->updateLinkedList(s->getStatusP());
+		 //   	l->updateActiveLinks(n);
+		 //   	l->resetLinkedListStatus(s->getStatusP());
+   //    //       Serial<<"Iterations "<<k-18<<" to "<<k+1<<endl;
+   //  		// Serial<<packetDropCount<<" packet drops encountered"<<endl;
+   //    //       delay(5);
+   //    //       Serial<<packetReceiveCount<<" packets received"<<endl;
+		 //    // delay(5);
+		 //    // packetDropCount = 0;
+   //    //       packetReceiveCount = 0;
+   //      }
         // while( uint16_t(millis() - start - period ) < 500 )
         // {
         //     //waits for 0.5 seconds to begin next period
@@ -1488,6 +1491,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 						_sendToParent(neighborID,neighborP->getNodeActiveFlow(),neighborP->getNodeReactiveFlow(),neighborP->getNodeLambda(),neighborP->getNodeActiveFlowGradient(),neighborP->getNodeReactiveFlowGradient(),neighborP->getNodeLambdaGradient(),neighborP->getNodeFlag(),neighborP->getNeighborActiveFlow(),neighborP->getNeighborReactiveFlow(),neighborP->getNeighborLambda(),neighborP->getNeighborActiveFlowGradient(),neighborP->getNeighborReactiveFlowGradient(),neighborP->getNeighborLambdaGradient());
 						// Serial<<"Sent to Parent Node "<<neighborID<<": "<<neighborP->getNodeActiveFlow()<<" , "<<neighborP->getNodeReactiveFlow()<<" , "<<neighborP->getNodeLambda()<<" , "<<neighborP->getNodeActiveFlowGradient()<<" , "<<neighborP->getNodeReactiveFlowGradient()<<" , "<<neighborP->getNodeLambdaGradient()<<" , "<<neighborP->getNodeFlag()<<" , "<<neighborP->getNeighborActiveFlow()<<" , "<<neighborP->getNeighborReactiveFlow()<<" , "<<neighborP->getNeighborLambda()<<" , "<<neighborP->getNeighborActiveFlowGradient()<<" , "<<neighborP->getNeighborReactiveFlowGradient()<<" , "<<neighborP->getNeighborLambdaGradient()<<endl;
       //           		delay(5);
+						Serial<<_FLOAT(neighborP->getActiveFlow(),6)<<","<<_FLOAT(neighborP->getReactiveFlow(),6)<<";";
 					}
 	        		else if(neighborID > nodeID)
 	        		{
@@ -1519,6 +1523,7 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
         				_sendToChild(neighborID,node_fp,node_fq,node_lambda,node_gfp,node_gfq,node_glambda,neighborP->getNodeFlag());
 						// Serial<<"Sent to Child Node "<<neighborID<<": "<<neighborP->getNodeActiveFlow()<<" , "<<neighborP->getNodeReactiveFlow()<<" , "<<neighborP->getNodeLambda()<<" , "<<neighborP->getNodeActiveFlowGradient()<<" , "<<neighborP->getNodeReactiveFlowGradient()<<" , "<<neighborP->getNodeLambdaGradient()<<" , "<<neighborP->getNodeFlag()<<endl;
       //           		delay(5);
+        				Serial<<_FLOAT(neighborP->getActiveFlow(),6)<<","<<_FLOAT(neighborP->getReactiveFlow(),6)<<";";
 	        		}
 	        	   	neighborID = l->unlinkLinkedListNodes();
 		        	neighborP = (n+(neighborID-1));
@@ -1599,18 +1604,21 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 		l->updateLinkedList(s->getStatusP());
         bP = P - Pd - l->addActiveFlows(nodeID,n);
         bQ = Q - Qd - l->addReactiveFlows(nodeID,n);
-        if (packetDropCount+packetReceiveCount > (_G->getN()-1))
-        {
-        	Serial<<"ERROR! "<<packetDropCount<<" packet drops encountered"<<endl;
-		    delay(5);
-		    Serial<<"ERROR! "<<packetReceiveCount<<" packets received"<<endl;
-		    delay(5);
-        }
+      //   if (packetDropCount+packetReceiveCount > (_G->getN()-1))
+      //   {
+      //   	Serial<<"ERROR! "<<packetDropCount<<" packet drops encountered"<<endl;
+		    // delay(5);
+		    // Serial<<"ERROR! "<<packetReceiveCount<<" packets received"<<endl;
+		    // delay(5);
+      //   }
         packetsLost += packetDropCount;
         packetReceived += packetReceiveCount;
 
         packetDropCount = 0;
       	packetReceiveCount = 0;
+
+      	Serial<<_FLOAT(P,6)<<","<<_FLOAT(Q,6)<<","<<_FLOAT(bP,6)<<","<<_FLOAT(bQ,6)<<","<<_FLOAT(sqV,6)<<","<<_FLOAT(Mu,6)<<","<<_FLOAT(Nu,6)<<endl;//<<"Active injection: "<<P<<endl<<"Reactive injection: "<<Q<<endl;
+        delay(5);
     }
 
   	s->setActiveSetpoint(P);
