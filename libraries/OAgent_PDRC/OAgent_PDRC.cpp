@@ -1,5 +1,5 @@
 /*
- *  OAgent_PD.cpp
+ *  OAgent_PDRC.cpp
  *  
  *
  *  Created by Stanton T. Cady on 06/15/12
@@ -10,63 +10,63 @@
 
 
 
-#include "OAgent_PD.h"
+#include "OAgent_PDRC.h"
 #include "Streaming.h"
 //#define VERBOSE
 
 //// Public methods
 /// Constructors
-OAgent_PD::OAgent_PD() {
+OAgent_PDRC::OAgent_PDRC() {
 
     XBee temp1 = XBee();
     ZBRxResponse temp2 = ZBRxResponse();
-    OGraph_PD temp3 = OGraph_PD();
-    _prepareOAgent_PD(&temp1,&temp2,&temp3);
+    OGraph_PDRC temp3 = OGraph_PDRC();
+    _prepareOAgent_PDRC(&temp1,&temp2,&temp3);
     //setRS(0);
 }
 
-OAgent_PD::OAgent_PD(XBee * xbee, OGraph_PD * G, bool leader, bool quiet) {
+OAgent_PDRC::OAgent_PDRC(XBee * xbee, OGraph_PDRC * G, bool leader, bool quiet) {
      ZBRxResponse temp = ZBRxResponse();
-    _prepareOAgent_PD(xbee,&temp,G,leader,quiet);
+    _prepareOAgent_PDRC(xbee,&temp,G,leader,quiet);
     //setRS(0);
 }
 
-OAgent_PD::OAgent_PD(XBee * xbee, ZBRxResponse * rx, OGraph_PD * G, bool leader, bool quiet) {
-    _prepareOAgent_PD(xbee,rx,G,leader,quiet);
+OAgent_PDRC::OAgent_PDRC(XBee * xbee, ZBRxResponse * rx, OGraph_PDRC * G, bool leader, bool quiet) {
+    _prepareOAgent_PDRC(xbee,rx,G,leader,quiet);
     //setRS(0);
 }
 
-// OAgent_PD::OAgent_PD(XBee * xbee, ZBRxResponse * rx, OGraph_PD * G, bool leader, bool quiet, int RS) {
-//     _prepareOAgent_PD(xbee,rx,G,leader,quiet);  
+// OAgent_PDRC::OAgent_PDRC(XBee * xbee, ZBRxResponse * rx, OGraph_PDRC * G, bool leader, bool quiet, int RS) {
+//     _prepareOAgent_PDRC(xbee,rx,G,leader,quiet);  
 // }
 
 /// End Constructors
 
 /// Methods to get private elements
-//OGraph_PD * OAgent_PD::getGraph() {
+//OGraph_PDRC * OAgent_PDRC::getGraph() {
 //    return _G;
 //}
 //
-//void OAgent_PD::setLeader(bool leader) {
+//void OAgent_PDRC::setLeader(bool leader) {
 //    _leader = leader;
 //}
 //
-//bool OAgent_PD::isLeader() {
+//bool OAgent_PDRC::isLeader() {
 //    return _leader;
 //}
 //
-//void OAgent_PD::setQuiet(bool quiet) {
+//void OAgent_PDRC::setQuiet(bool quiet) {
 //    _quiet = quiet;
 //}
 //
-//bool OAgent_PD::isQuiet() {
+//bool OAgent_PDRC::isQuiet() {
 //    return _quiet;
 //}
 /// End methods to get private elements
 
 /// Ratio-consensus
 // Fair splitting
-float OAgent_PD::fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period) {  //,uint8_t round
+float OAgent_PDRC::fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period) {  //,uint8_t round
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     float Dout = float(s->getOutDegree() + 1);    // store out degree, the +1 is to account for the self loops
     _initializeFairSplitting(s,y,z);      // initialize state variables                           
@@ -254,7 +254,7 @@ float OAgent_PD::fairSplitRatioConsensus(long y, long z, uint8_t iterations, uin
 
 
 // Resilient Fair splitting RC (added in by Olaolu)
-float OAgent_PD::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period) {  //,uint8_t round
+float OAgent_PDRC::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period) {  //,uint8_t round
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
     float Dout = float(s->getOutDegree() + 1);    // store out degree, the +1 is to account for the self loops
     _initializeFairSplitting_RSL(s,y,z);      // initialize state variables                           
@@ -453,7 +453,7 @@ float OAgent_PD::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16
 }
 
 
-// long OAgent_PD::computeFairSplitFinalValue(float gamma) {
+// long OAgent_PDRC::computeFairSplitFinalValue(float gamma) {
 //     OLocalVertex * s = _G->getLocalVertex();
 // 	if(gamma <= 0)
 // 		return s->getMin();
@@ -466,7 +466,7 @@ float OAgent_PD::ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16
 
 
 
-long OAgent_PD::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     srand(analogRead(7));                    //moved this instruction here from fairSplitRatioConsensus() - Sammy
     OLocalVertex * s = _G->getLocalVertex();
     // int leader_id = s->getleaderID();
@@ -499,7 +499,7 @@ long OAgent_PD::fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, 
 
 
 
-long OAgent_PD::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + RC_DELAY;
     OLocalVertex * s = _G->getLocalVertex();
@@ -527,7 +527,7 @@ long OAgent_PD::leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterat
     return gamma;
 }
 
-long OAgent_PD::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period) {
     unsigned long startTime = 0;
     //delay(50);
     float gamma = 0;
@@ -560,7 +560,7 @@ long OAgent_PD::nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t ite
 
 
 
-long OAgent_PD::leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period) {
     srand(analogRead(7));                    //moved this instruction here from fairSplitRatioConsensus() - Sammy
     unsigned long t0 = millis(); 
     unsigned long startTime = t0 + 1200;                         //was 1200 initially
@@ -574,7 +574,7 @@ long OAgent_PD::leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations
     return gamma;
 }
 
-long OAgent_PD::nonleaderFairSplitRatioConsensus(long y, long z) {
+long OAgent_PDRC::nonleaderFairSplitRatioConsensus(long y, long z) {
     srand(analogRead(7));
     unsigned long startTime = 0;
     uint8_t iterations = 0;
@@ -604,7 +604,7 @@ long OAgent_PD::nonleaderFairSplitRatioConsensus(long y, long z) {
 //  Begin Max Consensus
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-long OAgent_PD::maxminConsensusAlgorithm(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::maxminConsensusAlgorithm(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
     srand(analogRead(7));
     long gamma = 0;
 
@@ -615,7 +615,7 @@ long OAgent_PD::maxminConsensusAlgorithm(bool isMax, long max, long min, uint8_t
     return gamma;
 }
 
-long OAgent_PD::leaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::leaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + MC_DELAY;
     long gamma = 0;
@@ -638,7 +638,7 @@ long OAgent_PD::leaderMaxMinConsensus(bool isMax, long max, long min, uint8_t it
     return gamma;
 }
 
-long OAgent_PD::nonleaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::nonleaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
     unsigned long startTime = 0;
     long gamma = 0;
 
@@ -662,7 +662,7 @@ long OAgent_PD::nonleaderMaxMinConsensus(bool isMax, long max, long min, uint8_t
 }
 
 // MaxMin Consensus Algorithm (added in by Olaolu)
-long OAgent_PD::maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
+long OAgent_PDRC::maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period) {
     unsigned long start;                // create variable to store iteration start time
     bool txDone;                        // create variable to keep track of broadcasts
     uint16_t txTime;       //_genTxTime(period,10,analogRead(0));   // get transmit time; 
@@ -705,12 +705,12 @@ long OAgent_PD::maxminConsensus(bool isMax, long max, long min, uint8_t iteratio
 
 
 
-long OAgent_PD::_getMaxFromPacket() {
+long OAgent_PDRC::_getMaxFromPacket() {
     uint8_t ptr = 2;
     return _getUint32_tFromPacket(ptr);
 }
 
-long OAgent_PD::_getMinFromPacket() {
+long OAgent_PDRC::_getMinFromPacket() {
     uint8_t ptr = 6;
     return _getUint32_tFromPacket(ptr);
 }
@@ -726,7 +726,7 @@ long OAgent_PD::_getMinFromPacket() {
 
 // Primal Dual methods
 
-bool OAgent_PD::primalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+bool OAgent_PDRC::primalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
     srand(analogRead(7));
     bool gamma = false;
 
@@ -744,7 +744,7 @@ bool OAgent_PD::primalDualAlgorithm(bool genBus, float alpha, uint16_t iteration
 
 }
 
-bool OAgent_PD::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+bool OAgent_PDRC::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + PD_DELAY;
     bool gamma = false;
@@ -772,7 +772,7 @@ bool OAgent_PD::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t ite
     return gamma;
 }
 
-bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+bool OAgent_PDRC::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
     unsigned long startTime = 0;
     bool gamma = false;
     //delay(50);
@@ -804,7 +804,7 @@ bool OAgent_PD::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t 
 }
 
 
-bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+bool OAgent_PDRC::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
@@ -1267,7 +1267,7 @@ bool OAgent_PD::standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t i
 }
 
 
-bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+bool OAgent_PDRC::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
@@ -1765,10 +1765,395 @@ bool OAgent_PD::acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_
 
 
 
+// Economic Dispatch methods
+
+bool OAgent_PDRC::economicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+    srand(analogRead(7));
+    bool gamma = false;
+
+    if(isLeader())
+    { 
+        gamma = leaderEconomicDispatchAlgorithm(genBus,alpha,iterations);
+    }
+    else
+    {
+        gamma = nonleaderEconomicDispatchAlgorithm(genBus,alpha,iterations);
+    }
+        //Serial<<"Sup bro?! "<<getbufferdata(0)<<"\n";
+
+    return gamma;
+
+}
+
+bool OAgent_PDRC::leaderEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+    unsigned long t0 = myMillis();
+    unsigned long startTime = t0 + ED_DELAY;
+    bool gamma = false;
+    bool scheduled = _waitForChildSchedulePacketED(SCHEDULE_TIMEOUT,startTime,iterations);
+    //Serial<<"Schedule done at "<<myMillis()<<"\n";
+    //bool stat = startTime>myMillis();
+
+    //Serial<<"Leader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
+
+    if (!scheduled) 
+    {
+        Serial<<"ED scheduling was a FAIL"<<endl;
+        gamma = false;
+    }
+    else
+    {
+        Serial<<"ED scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
+        {
+            Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
+            // gamma = standardEconomicDispatchAlgorithm(genBus,alpha,iterations);
+            gamma = acceleratedEconomicDispatchAlgorithm(genBus,alpha,iterations);
+        }
+    }        
+    return gamma;
+}
+
+bool OAgent_PDRC::nonleaderEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+    unsigned long startTime = 0;
+    bool gamma = false;
+    //delay(50);
+    bool scheduled = _waitForParentSchedulePacketED(startTime,iterations,-1);
+    //Serial<<"Schedule done at "<<myMillis()<<"\n";
+    
+    //bool stat = startTime>myMillis();
+    //Serial<<"Startime > Time? "<<stat<<"\n";
+
+    //Serial<<"NonLeader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
+
+    if(scheduled)
+    {
+        Serial<<"ED scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
+        {
+            Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
+            // gamma = standardEconomicDispatchAlgorithm(genBus,alpha,iterations);
+            gamma = acceleratedEconomicDispatchAlgorithm(genBus,alpha,iterations);
+        }
+        //digitalWrite(48,LOW);
+    }
+    else
+    {
+        Serial<<"ED scheduling was a FAIL"<<endl;
+        gamma = false;
+    }
+    return gamma;
+}
+
+
+bool OAgent_PDRC::standardEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
+    ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
+    LinkedList * l = _G->getLinkedList();
+    l->resetLinkedListStatus(s->getStatusP());
+	l->updateLinkedList(s->getStatusP());
+    uint8_t * neighborStatusP = s->getStatusP();
+
+    ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
+
+    uint16_t nodeID = s->getID();
+    ORemoteVertex * nodeP = (n+(nodeID-1));                                                     // pointer to this vertex
+
+    iterations = 750;
+    alpha = 0.1;
+
+    uint8_t neighborID;
+
+    float P = (float)genBus*(s->getActiveSetpoint());                                           // active injection
+    float Pd = s->getActiveDemand();                                                            // active demand
+
+   	float nodeLambda = 0;                                                                       // node state variable lagrange multiplier
+    float nodeNu = 1;
+    float nodeGamma = 0;
+
+   	float lambda;                                                                       // node state variable lagrange multiplier
+    float nu;
+	
+	float neighborLambda = 0;                                                                       // node state variable lagrange multiplier
+    float neighborNu = 0;
+    float neighborGamma = 0;
+
+    float sumNeighborLambda = 0;                                                                       // node state variable lagrange multiplier
+    float sumNeighborNu = 0;
+    float sumNeighborGamma = 0;
+
+    float Xi;
+
+   	float sumLambda;
+    float sumNu;
+    float sumGamma;
+
+    bool receivedPacket;
+
+    bool txDone;                                // create variable to keep track of broadcasts
+
+    int timeout = 100;                               // create variable to keep track of broadcasts
+
+    uint16_t packetDropCount = 0;
+    uint16_t packetReceiveCount = 0;
+    uint16_t packetsLost = 0;
+    uint16_t packetReceived = 0;
+    //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
+    uint16_t period = 200;                            										// create variable to keep track of broadcasts
+    uint8_t frame = 25;
+
+    unsigned long start = (millis()-period);   // initialize timer		                        									// create variable to store iteration start time
+
+    srand(millis());    
+    uint16_t txTime = (rand() % (period - 2*frame)) + frame;  								//determines the time window in which a payload is transmitted
+
+    for(uint16_t k = 0; k < iterations; k++)
+    {
+    	start = millis();   // initialize timer
+
+    	nodeLambda = ( s->getLambda() - (alpha*(P - Pd)) )/(s->getOutDegree());
+    	nodeNu = s->getNu()/(s->getOutDegree());
+
+    	nodeP->setSumLambda(nodeP->getSumLambda() + nodeLambda);
+    	nodeP->setSumNu(nodeP->getSumNu() + nodeNu);
+
+        // Serial<<"Iteration "<<k+1<<endl;
+        
+        txDone = false;
+
+        while( uint16_t(millis()-start) < period )
+        {
+        	receivedPacket = _waitForNeighborPacket(neighborID,ED_HEADER,true,10);
+        	if ( receivedPacket && (*(neighborStatusP+neighborID-1) == 2) )                                           								//get values for fp, fq, and lambda that are received from this neighbor
+            {
+	            packetReceiveCount++;
+
+	            *(neighborStatusP+neighborID-1) = 3;															//set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
+
+       // 			Serial<<neighborID<<" active"<<endl;
+	    		// delay(5);
+
+            	//get running sum values for Lambda and NU that are received from this neighbor
+                sumLambda =_getSumLambdaFromPacket();                               					// store incoming value of lambda
+                sumNu = _getSumNuFromPacket();                             								// store incoming value of nu
+
+            	neighborP = (n+(neighborID-1));
+            	
+            	neighborLambda = sumLambda - neighborP->getSumLambda();
+				neighborNu = sumNu - neighborP->getSumNu();
+
+				sumNeighborLambda += neighborLambda;
+				sumNeighborNu += neighborNu;
+
+				neighborP->setSumLambda(sumLambda);
+				neighborP->setSumNu(sumNu);
+			}
+	        if(!txDone && (uint16_t(millis()-start) >= txTime))
+	        //if(!txDone && (uint16_t(millis()-start) >= (period-frame)/2))
+	        {
+	        	txDone = true;
+	        	_sendToNeighbor(nodeP->getSumLambda(),nodeP->getSumNu());
+				// Serial<<"Sent to Neighbors: "<<nodeP->getSumLambda()<<" , "<<nodeP->getSumNu()<<endl;
+                // delay(5);
+        		//Serial<<_FLOAT(nodeP->getSumLambda(),6)<<","<<_FLOAT(nodeP->getSumNu()<<";";
+	        }
+        }
+        lambda = sumNeighborLambda + nodeLambda;
+        nu = sumNeighborNu + nodeNu;
+        P = P - (float)genBus*alpha*( (s->getDp())*P - lambda/nu);
+
+        s->setLambda(lambda);
+        s->setNu(nu);
+        
+        packetReceived += packetReceiveCount;
+        packetsLost += (_G->getN() - packetReceiveCount - 1);
+
+      	packetReceiveCount = 0;      	
+	   	l->resetLinkedListStatus(s->getStatusP());
+    }
+  	s->setActiveSetpoint(P);
+    
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
+    delay(5);
+    // Serial << "The active power injection at node" << nodeID << " is "<< P <<endl;
+    // delay(5);
+    // Serial << "The reactive power injection at node" << nodeID << " is "<< Q <<endl;
+    // delay(5);
+    return true;
+}
+
+
+bool OAgent_PDRC::acceleratedEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations) {
+    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
+    ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
+    LinkedList * l = _G->getLinkedList();
+    l->resetLinkedListStatus(s->getStatusP());
+	l->updateLinkedList(s->getStatusP());
+    uint8_t * neighborStatusP = s->getStatusP();
+
+    ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
+
+    uint16_t nodeID = s->getID();
+    ORemoteVertex * nodeP = (n+(nodeID-1));                                                     // pointer to this vertex
+
+    iterations = 500;
+    alpha = 0.1;
+
+    uint8_t neighborID;
+
+    float P = (float)genBus*(s->getActiveSetpoint());                                           // active injection
+    float Pd = s->getActiveDemand();                                                            // active demand
+
+   	float nodeLambda = 0;                                                                       // node state variable lagrange multiplier
+    float nodeNu = 1;
+    float nodeGamma = 0;
+
+   	float lambda;                                                                       // node state variable lagrange multiplier
+    float nu;
+    float gamma;
+    float gammaTMP;
+	
+	float neighborLambda = 0;                                                                       // node state variable lagrange multiplier
+    float neighborNu = 0;
+    float neighborGamma = 0;
+
+    float sumNeighborLambda;                                                                       // node state variable lagrange multiplier
+    float sumNeighborNu;
+    float sumNeighborGamma;
+
+    float Xi;
+
+   	float sumLambda;
+    float sumNu;
+    float sumGamma;
+
+    bool receivedPacket;
+
+    bool txDone;                                // create variable to keep track of broadcasts
+
+    int timeout = 100;                               // create variable to keep track of broadcasts
+
+    uint16_t packetDropCount = 0;
+    uint16_t packetReceiveCount = 0;
+    uint16_t packetsLost = 0;
+    uint16_t packetReceived = 0;
+    //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
+    uint16_t period = 500;                            										// create variable to keep track of broadcasts
+    uint8_t frame = 50;
+
+    unsigned long start = (millis()-period);   // initialize timer		                        									// create variable to store iteration start time
+
+    srand(millis());    
+    uint16_t txTime = (rand() % (period - 2*frame)) + frame;  								//determines the time window in which a payload is transmitted
+
+    for(uint16_t k = 0; k < iterations; k++)
+    {
+    	start = millis();   // initialize timer
+
+    	gammaTMP = P - Pd;
+
+    	nodeLambda = ( s->getLambda() - (alpha*(s->getGamma())) )/(s->getOutDegree());
+    	nodeNu = s->getNu()/(s->getOutDegree());
+    	nodeGamma = ( (s->getGamma()) + (gammaTMP - (s->getGammaTMP())) )/(s->getOutDegree());
+
+    	s->setGammaTMP(gammaTMP);
+
+    	nodeP->setSumLambda(nodeP->getSumLambda() + nodeLambda);
+    	nodeP->setSumNu(nodeP->getSumNu() + nodeNu);
+    	nodeP->setSumGamma(nodeP->getSumGamma() + nodeGamma);    	
+
+      	sumNeighborLambda = 0;
+		sumNeighborNu = 0;
+		sumNeighborGamma = 0;
+
+        // Serial<<"Iteration "<<k+1<<endl;
+        
+        txDone = false;
+
+        while( uint16_t(millis()-start) < period )
+        {
+        	receivedPacket = _waitForNeighborPacket(neighborID,ED_HEADER,true,10);
+        	if ( receivedPacket && (*(neighborStatusP+neighborID-1) == 2) )                                           								//get values for fp, fq, and lambda that are received from this neighbor
+            {
+	            packetReceiveCount++;
+
+	            *(neighborStatusP+neighborID-1) = 3;															//set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
+
+       			//get running sum values for Lambda, Nu, and Gamma that are received from this neighbor
+                sumLambda =_getSumLambdaFromPacket();                               					// store incoming value of lambda
+                sumNu = _getSumNuFromPacket();                             								// store incoming value of nu
+                sumGamma = _getSumGammaFromPacket();                               						// store incoming value of gamma
+
+                // Serial<<"Received from Node "<<neighborID<<": "<<sumLambda<<" , "<<sumNu<<" , "<<sumGamma<<endl;
+                // delay(5);
+
+            	neighborP = (n+(neighborID-1));
+            	neighborP->setLinkStatus(true);
+
+            	neighborLambda = sumLambda - neighborP->getSumLambda();
+				neighborNu = sumNu - neighborP->getSumNu();
+				neighborGamma = sumGamma - neighborP->getSumGamma();
+
+				sumNeighborLambda += neighborLambda;
+				sumNeighborNu += neighborNu;
+				sumNeighborGamma += neighborGamma;
+
+				neighborP->setSumLambda(sumLambda);
+				neighborP->setSumNu(sumNu);
+				neighborP->setSumGamma(sumGamma);
+			}
+	        if(!txDone && (uint16_t(millis()-start) >= txTime))
+	        //if(!txDone && (uint16_t(millis()-start) >= (period-frame)/2))
+	        {
+	        	txDone = true;
+	        	_sendToNeighbor_ACC(nodeP->getSumLambda(),nodeP->getSumNu(),nodeP->getSumGamma());
+				// Serial<<"Sent to Neighbors: "<<nodeP->getSumLambda()<<" , "<<nodeP->getSumNu()<<" , "<<nodeP->getSumGamma()<<endl;
+    //             delay(5);
+	        }
+        }
+        lambda = sumNeighborLambda + nodeLambda;
+        nu = sumNeighborNu + nodeNu;
+        gamma = sumNeighborGamma + nodeGamma;
+        P = P - (float)genBus*alpha*( (s->getDp())*P - lambda/nu);
+
+        // if(k%10 == 0)
+			Serial<<_FLOAT(lambda,6)<<", "<<_FLOAT(nu,6)<<", "<<_FLOAT(gamma,6)<<", "<<_FLOAT(P,6)<<endl;
+
+        s->setLambda(lambda);
+        s->setNu(nu);
+        s->setGamma(gamma);
+        
+        packetReceived += packetReceiveCount;
+        packetsLost += (_G->getN() - packetReceiveCount - 1);
+
+      	packetReceiveCount = 0;
+
+	   	l->resetLinkedListStatus(s->getStatusP());
+    }
+  	s->setActiveSetpoint(P);
+    
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
+    delay(5);
+    // Serial << "The active power injection at node" << nodeID << " is "<< P <<endl;
+    // delay(5);
+    // Serial << "The reactive power injection at node" << nodeID << " is "<< Q <<endl;
+    // delay(5);
+    return true;
+}
+
+// End Economic Dispatch Methods
+
+
+
+
+
 
 
 /// Synchronization methods
-bool OAgent_PD::sync(uint8_t attempts) {
+bool OAgent_PDRC::sync(uint8_t attempts) {
     
     if(_leader) {
     	//Serial << "Is leader, and is in sync\n";
@@ -1833,7 +2218,7 @@ bool OAgent_PD::sync(uint8_t attempts) {
 
 //////////////////////////* RESYNC CODE*//////////////////////////////
 
-bool OAgent_PD::resync(){
+bool OAgent_PDRC::resync(){
 	OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
 	unsigned long nodeID = s->getID();
 	unsigned long start_time = millis();
@@ -1905,7 +2290,7 @@ bool OAgent_PD::resync(){
 }
 
 
-unsigned long OAgent_PD::_broadcastResyncBeginPacket(unsigned long period){
+unsigned long OAgent_PDRC::_broadcastResyncBeginPacket(unsigned long period){
 
 	uint16_t payload[7];
 	long offset = _offset;
@@ -1924,7 +2309,7 @@ unsigned long OAgent_PD::_broadcastResyncBeginPacket(unsigned long period){
 }
 
 
-void OAgent_PD::_broadcastResyncResponsePacket(unsigned long t2, unsigned long received_id){
+void OAgent_PDRC::_broadcastResyncResponsePacket(unsigned long t2, unsigned long received_id){
 
 	uint16_t payload[5];
 	payload[0] = RESYNC_RESPONSE_HEADER;
@@ -1938,17 +2323,17 @@ void OAgent_PD::_broadcastResyncResponsePacket(unsigned long t2, unsigned long r
 }
 
 
-bool OAgent_PD::_waitForResyncPacketResponse(unsigned long &rxTime, uint16_t timeout){
+bool OAgent_PDRC::_waitForResyncPacketResponse(unsigned long &rxTime, uint16_t timeout){
 
 	return _waitForPacket(RESYNC_RESPONSE_HEADER, rxTime, true, timeout);      //assuming response is broadcasted from unsynced not
 }
 
-bool OAgent_PD::_waitForResyncFinalPacket(unsigned long timeout){
+bool OAgent_PDRC::_waitForResyncFinalPacket(unsigned long timeout){
 
 	return _waitForPacket(RESYNC_HEADER_FINAL, false, timeout);
 }
 
-void OAgent_PD::_broadcastResyncFinalPacket(long offset){
+void OAgent_PDRC::_broadcastResyncFinalPacket(long offset){
 
 	uint16_t payload[3];
 	payload[0] = RESYNC_HEADER_FINAL;
@@ -1961,11 +2346,11 @@ void OAgent_PD::_broadcastResyncFinalPacket(long offset){
 
 ////////////////////////////////////////////////
 
-unsigned long OAgent_PD::myMillis() { 
+unsigned long OAgent_PDRC::myMillis() { 
 	return millis() - (unsigned long)_offset; 
 }
 
-void OAgent_PD::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
+void OAgent_PDRC::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
     _G->clearAllStates();                   // clear everything
     uint8_t Dout = s->getOutDegree() + 1;   // store out degree
 
@@ -1985,7 +2370,7 @@ void OAgent_PD::_initializeFairSplitting(OLocalVertex * s, long y, long z) {
 }
 
 // Resilient version
-void OAgent_PD::_initializeFairSplitting_RSL(OLocalVertex * s, long y, long z) {
+void OAgent_PDRC::_initializeFairSplitting_RSL(OLocalVertex * s, long y, long z) {
     _G->clearAllStates();                   // clear everything
     uint8_t Dout = s->getOutDegree() + 1;   // store out degree
 
@@ -2005,7 +2390,7 @@ void OAgent_PD::_initializeFairSplitting_RSL(OLocalVertex * s, long y, long z) {
     //s->setdeputyID(s->getID());
 }
 
-void OAgent_PD::_broadcastFairSplitPacket(OLocalVertex * s) {   
+void OAgent_PDRC::_broadcastFairSplitPacket(OLocalVertex * s) {   
     uint16_t payload[6];           
     long mu    = s->getMuMin();
     long sigma = s->getSigma();
@@ -2028,7 +2413,7 @@ void OAgent_PD::_broadcastFairSplitPacket(OLocalVertex * s) {
 }
 
 //leaderfailure-resilient version (Olaolu)
-void OAgent_PD::_broadcastFairSplitPacket_RSL(OLocalVertex * s) {   
+void OAgent_PDRC::_broadcastFairSplitPacket_RSL(OLocalVertex * s) {   
     uint16_t payload[6];           
     long mu    = s->getMuMin();
     long sigma = s->getSigma();
@@ -2055,7 +2440,7 @@ void OAgent_PD::_broadcastFairSplitPacket_RSL(OLocalVertex * s) {
 }
 
 //leaderfailure-resilient version (Olaolu)
-void OAgent_PD::_broadcastMaxMinPacket(long max, long min) {   
+void OAgent_PDRC::_broadcastMaxMinPacket(long max, long min) {   
     uint16_t payload[5];
     payload[0] = MAXMIN_HEADER;
     payload[1] = max;
@@ -2070,12 +2455,12 @@ void OAgent_PD::_broadcastMaxMinPacket(long max, long min) {
 #endif
 }
 
-long OAgent_PD::_getMuFromPacket() {
+long OAgent_PDRC::_getMuFromPacket() {
     uint8_t ptr = 2;
     return _getUint32_tFromPacket(ptr);
 }
 
-long OAgent_PD::_getSigmaFromPacket() {
+long OAgent_PDRC::_getSigmaFromPacket() {
     uint8_t ptr = 6;
     return _getUint32_tFromPacket(ptr);
 }
@@ -2090,7 +2475,7 @@ long OAgent_PD::_getSigmaFromPacket() {
  * If the packet it is valid the function will return true and it will store the response in the
  * ZBRxResponse parameter.
  */
-bool OAgent_PD::_validPacketAvailable() {
+bool OAgent_PDRC::_validPacketAvailable() {
 	if(_xbee->getResponse().isAvailable()) {	// packet is available
         // check if recieved data is a zb rx packet
         
@@ -2106,20 +2491,20 @@ bool OAgent_PD::_validPacketAvailable() {
 	return false;
 }
 
-bool OAgent_PD::_packetAvailable(uint16_t header, bool broadcast) {
+bool OAgent_PDRC::_packetAvailable(uint16_t header, bool broadcast) {
     // read packet
     _xbee->readPacket();
     return _packetAvailableHelper(header,broadcast);
 }
 
-bool OAgent_PD::_packetAvailable(uint16_t header,  unsigned long &rxTime, bool broadcast) {
+bool OAgent_PDRC::_packetAvailable(uint16_t header,  unsigned long &rxTime, bool broadcast) {
     // read packet and save rx time
     rxTime = _xbee->readPacketTwo(true);
     //Serial << "\n Before packetAvailableHelper \n";
     return _packetAvailableHelper(header,broadcast);
 }
 
-uint16_t OAgent_PD::_packetAvailable(bool broadcast) {
+uint16_t OAgent_PDRC::_packetAvailable(bool broadcast) {
     _xbee->readPacket();
     if(_validPacketAvailable()) {
         if(((broadcast == true) && ((_rx->getOption() & 0x0F) == ZB_BROADCAST_PACKET)) || ((broadcast == false) && ((_rx->getOption() & 0x0F) == ZB_PACKET_ACKNOWLEDGED)))
@@ -2129,7 +2514,7 @@ uint16_t OAgent_PD::_packetAvailable(bool broadcast) {
 }
 
 
-bool  OAgent_PD::_packetAvailable2(unsigned long &rxTime, bool broadcast){
+bool  OAgent_PDRC::_packetAvailable2(unsigned long &rxTime, bool broadcast){
 
 	rxTime = _xbee->readPacketTwo(true);
 
@@ -2141,7 +2526,7 @@ bool  OAgent_PD::_packetAvailable2(unsigned long &rxTime, bool broadcast){
 
 
  
-bool OAgent_PD::_packetAvailableHelper(uint16_t header, bool broadcast) {
+bool OAgent_PDRC::_packetAvailableHelper(uint16_t header, bool broadcast) {
     //SerialUSB << "Here1\n";
     if(_validPacketAvailable()) {
         //SerialUSB << "HERE\n";
@@ -2161,7 +2546,7 @@ bool OAgent_PD::_packetAvailableHelper(uint16_t header, bool broadcast) {
     return false; 
 }
 
-bool OAgent_PD::_packetACKed(int timeout) {
+bool OAgent_PDRC::_packetACKed(int timeout) {
 	if(_xbee->readPacket(timeout)) { // wait for up to ack timeout period
 		if(_xbee->getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) { // got a response
 			_xbee->getResponse().getZBTxStatusResponse(_txStatus); // fill out status
@@ -2177,11 +2562,11 @@ bool OAgent_PD::_packetACKed(int timeout) {
  * This function returns the two byte header of an xbee packet.  The header should be
  * in the first 2 bytes of the received packet.
  */
-//uint16_t OAgent_PD::_getHeaderFromPacket() {
+//uint16_t OAgent_PDRC::_getHeaderFromPacket() {
 //	return (uint16_t(_rx->getData(1)) << 8) + _rx->getData(0);
 //}
 
-bool OAgent_PD::_waitForPacket(uint16_t header, unsigned long &rxTime, bool broadcast, int timeout) {
+bool OAgent_PDRC::_waitForPacket(uint16_t header, unsigned long &rxTime, bool broadcast, int timeout) {
     unsigned long start;
 
 	if(timeout != -1)
@@ -2196,7 +2581,7 @@ bool OAgent_PD::_waitForPacket(uint16_t header, unsigned long &rxTime, bool broa
 	}
 }
 
-bool OAgent_PD::_waitForPacket(uint16_t header, bool broadcast, int timeout) { //Where it stays in an endless loop (if timeout =-1) until packet received
+bool OAgent_PDRC::_waitForPacket(uint16_t header, bool broadcast, int timeout) { //Where it stays in an endless loop (if timeout =-1) until packet received
 	unsigned long start;
     if(timeout != -1)
 		start = millis();
@@ -2208,7 +2593,7 @@ bool OAgent_PD::_waitForPacket(uint16_t header, bool broadcast, int timeout) { /
 	}
 }
 
-int  OAgent_PD::_waitForPacket2(uint16_t header1, uint16_t header2, unsigned long &rxTime, bool broadcast){
+int  OAgent_PDRC::_waitForPacket2(uint16_t header1, uint16_t header2, unsigned long &rxTime, bool broadcast){
 
 	while(true){
 
@@ -2234,7 +2619,7 @@ int  OAgent_PD::_waitForPacket2(uint16_t header1, uint16_t header2, unsigned lon
 
 }
 
-uint16_t OAgent_PD::_waitForValidPacket(bool broadcast, int timeout) {
+uint16_t OAgent_PDRC::_waitForValidPacket(bool broadcast, int timeout) {
     unsigned long start;
     // if using timeout, initialize clock
 	if(timeout != -1)
@@ -2255,7 +2640,7 @@ uint16_t OAgent_PD::_waitForValidPacket(bool broadcast, int timeout) {
 /// End general xbee methods
 /// General scheduling methods
 
-bool OAgent_PD::_waitToStart(unsigned long startTime, bool useMyMillis, int timeout) {
+bool OAgent_PDRC::_waitToStart(unsigned long startTime, bool useMyMillis, int timeout) {
     long temp;
     unsigned long s = millis();
     while(true) {
@@ -2283,7 +2668,7 @@ bool OAgent_PD::_waitToStart(unsigned long startTime, bool useMyMillis, int time
  * This function generates a random transmit time given an iteration period and inter-frame spacing.
  * The current time in milliseconds is used as the seed for the random number generation.
  */
-uint16_t OAgent_PD::_genTxTime(uint16_t iterationPeriod, uint8_t ITF) {
+uint16_t OAgent_PDRC::_genTxTime(uint16_t iterationPeriod, uint8_t ITF) {
 	srand(analogRead(0));
 	return (rand() % (iterationPeriod - 2*ITF)) + ITF;
 }
@@ -2292,12 +2677,12 @@ uint16_t OAgent_PD::_genTxTime(uint16_t iterationPeriod, uint8_t ITF) {
  * This function generates a random transmit time given an iteration period and inter-frame spacing.
  * A seed for the random number generation is accepted as an argument.
  */
-uint16_t OAgent_PD::_genTxTime(uint16_t iterationPeriod, uint8_t ITF, int seed) {
+uint16_t OAgent_PDRC::_genTxTime(uint16_t iterationPeriod, uint8_t ITF, int seed) {
 	srand(seed);
 	return (rand() % (iterationPeriod - 2*ITF)) + ITF;
 }
 
-bool OAgent_PD::_timeToTransmit(uint16_t startTime, uint16_t txTime) {
+bool OAgent_PDRC::_timeToTransmit(uint16_t startTime, uint16_t txTime) {
     if((int((millis() - startTime)) >= txTime))
         return true;
     else
@@ -2309,7 +2694,7 @@ bool OAgent_PD::_timeToTransmit(uint16_t startTime, uint16_t txTime) {
 
 // Primal Dual Algorithm Communication Methods
 
-float OAgent_PD::_getActiveFlowFromPacket_neighbor() {
+float OAgent_PDRC::_getActiveFlowFromPacket_neighbor() {
     int32_t mag_fp = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
     int8_t sign_fp = -1 + ((_rx->getData(4))*2);
     float fp = (float) (sign_fp*mag_fp);
@@ -2318,7 +2703,7 @@ float OAgent_PD::_getActiveFlowFromPacket_neighbor() {
     return fp;
 }
 
-float OAgent_PD::_getReactiveFlowFromPacket_neighbor() {
+float OAgent_PDRC::_getReactiveFlowFromPacket_neighbor() {
     int32_t mag_fq = (int32_t(_rx->getData(13)) << 24) + (int32_t(_rx->getData(12)) << 16) + (int16_t(_rx->getData(11)) << 8) + int8_t(_rx->getData(10));
     int8_t sign_fq = -1 + ((_rx->getData(9))*2);
     float fq = (float) (sign_fq*mag_fq);
@@ -2327,7 +2712,7 @@ float OAgent_PD::_getReactiveFlowFromPacket_neighbor() {
     return fq;
 }
 
-float OAgent_PD::_getLambdaFromPacket_neighbor() {
+float OAgent_PDRC::_getLambdaFromPacket_neighbor() {
     int32_t mag_lambda = (int32_t(_rx->getData(18)) << 24) + (int32_t(_rx->getData(17)) << 16) + (int16_t(_rx->getData(16)) << 8) + int8_t(_rx->getData(15));
     int8_t sign_lambda = -1 + ((_rx->getData(14))*2);
     float lambda = (float) (sign_lambda*mag_lambda);
@@ -2336,7 +2721,7 @@ float OAgent_PD::_getLambdaFromPacket_neighbor() {
     return lambda;
 }
 
-float OAgent_PD::_getActiveFlowGradientFromPacket_neighbor() {
+float OAgent_PDRC::_getActiveFlowGradientFromPacket_neighbor() {
     int32_t mag_gfp = (int32_t(_rx->getData(23)) << 24) + (int32_t(_rx->getData(22)) << 16) + (int16_t(_rx->getData(21)) << 8) + int8_t(_rx->getData(20));
     int8_t sign_gfp = -1 + ((_rx->getData(19))*2);
     float gfp = (float) (sign_gfp*mag_gfp);
@@ -2345,7 +2730,7 @@ float OAgent_PD::_getActiveFlowGradientFromPacket_neighbor() {
     return gfp;
 }
 
-float OAgent_PD::_getReactiveFlowGradientFromPacket_neighbor() {
+float OAgent_PDRC::_getReactiveFlowGradientFromPacket_neighbor() {
     int32_t mag_gfq = (int32_t(_rx->getData(28)) << 24) + (int32_t(_rx->getData(27)) << 16) + (int16_t(_rx->getData(26)) << 8) + int8_t(_rx->getData(25));
     int8_t sign_gfq = -1 + ((_rx->getData(24))*2);
     float gfq = (float) (sign_gfq*mag_gfq);
@@ -2354,7 +2739,7 @@ float OAgent_PD::_getReactiveFlowGradientFromPacket_neighbor() {
     return gfq;
 }
 
-float OAgent_PD::_getLambdaGradientFromPacket_neighbor() {
+float OAgent_PDRC::_getLambdaGradientFromPacket_neighbor() {
     int32_t mag_glambda = (int32_t(_rx->getData(33)) << 24) + (int32_t(_rx->getData(32)) << 16) + (int16_t(_rx->getData(31)) << 8) + int8_t(_rx->getData(30));
     int8_t sign_glambda = -1 + ((_rx->getData(29))*2);
     float glambda = (float) (sign_glambda*mag_glambda);
@@ -2363,20 +2748,20 @@ float OAgent_PD::_getLambdaGradientFromPacket_neighbor() {
     return glambda;
 }
 
-bool OAgent_PD::_getFlagFromPacket_ACC() {
+bool OAgent_PDRC::_getFlagFromPacket_ACC() {
     bool flag = (bool) _rx->getData(34);
     
     return flag;
 }
 
 
-bool OAgent_PD::_getFlagFromPacket() {
+bool OAgent_PDRC::_getFlagFromPacket() {
     bool flag = (bool) _rx->getData(19);
     
     return flag;
 }
 
-float OAgent_PD::_getActiveFlowFromPacket_node() {
+float OAgent_PDRC::_getActiveFlowFromPacket_node() {
     int32_t mag_fp = (int32_t(_rx->getData(24)) << 24) + (int32_t(_rx->getData(23)) << 16) + (int16_t(_rx->getData(22)) << 8) + int8_t(_rx->getData(21));
     int8_t sign_fp = -1 + ((_rx->getData(20))*2);
     float fp = (float) (sign_fp*mag_fp);
@@ -2385,7 +2770,7 @@ float OAgent_PD::_getActiveFlowFromPacket_node() {
     return fp;
 }
 
-float OAgent_PD::_getReactiveFlowFromPacket_node() {
+float OAgent_PDRC::_getReactiveFlowFromPacket_node() {
     int32_t mag_fq = (int32_t(_rx->getData(29)) << 24) + (int32_t(_rx->getData(28)) << 16) + (int16_t(_rx->getData(27)) << 8) + int8_t(_rx->getData(26));
     int8_t sign_fq = -1 + ((_rx->getData(25))*2);
     float fq = (float) (sign_fq*mag_fq);
@@ -2394,7 +2779,7 @@ float OAgent_PD::_getReactiveFlowFromPacket_node() {
     return fq;
 }
 
-float OAgent_PD::_getLambdaFromPacket_node() {
+float OAgent_PDRC::_getLambdaFromPacket_node() {
     int32_t mag_lambda = (int32_t(_rx->getData(34)) << 24) + (int32_t(_rx->getData(33)) << 16) + (int16_t(_rx->getData(32)) << 8) + int8_t(_rx->getData(31));
     int8_t sign_lambda = -1 + ((_rx->getData(30))*2);
     float lambda = (float) (sign_lambda*mag_lambda);
@@ -2403,7 +2788,7 @@ float OAgent_PD::_getLambdaFromPacket_node() {
     return lambda;
 }
 
-float OAgent_PD::_getActiveFlowFromPacket_nodeACC() {
+float OAgent_PDRC::_getActiveFlowFromPacket_nodeACC() {
     int32_t mag_fp = (int32_t(_rx->getData(39)) << 24) + (int32_t(_rx->getData(38)) << 16) + (int16_t(_rx->getData(37)) << 8) + int8_t(_rx->getData(36));
     int8_t sign_fp = -1 + ((_rx->getData(35))*2);
     float fp = (float) (sign_fp*mag_fp);
@@ -2412,7 +2797,7 @@ float OAgent_PD::_getActiveFlowFromPacket_nodeACC() {
     return fp;
 }
 
-float OAgent_PD::_getReactiveFlowFromPacket_nodeACC() {
+float OAgent_PDRC::_getReactiveFlowFromPacket_nodeACC() {
     int32_t mag_fq = (int32_t(_rx->getData(44)) << 24) + (int32_t(_rx->getData(43)) << 16) + (int16_t(_rx->getData(42)) << 8) + int8_t(_rx->getData(41));
     int8_t sign_fq = -1 + ((_rx->getData(40))*2);
     float fq = (float) (sign_fq*mag_fq);
@@ -2421,7 +2806,7 @@ float OAgent_PD::_getReactiveFlowFromPacket_nodeACC() {
     return fq;
 }
 
-float OAgent_PD::_getLambdaFromPacket_nodeACC() {
+float OAgent_PDRC::_getLambdaFromPacket_nodeACC() {
     int32_t mag_lambda = (int32_t(_rx->getData(49)) << 24) + (int32_t(_rx->getData(48)) << 16) + (int16_t(_rx->getData(47)) << 8) + int8_t(_rx->getData(46));
     int8_t sign_lambda = -1 + ((_rx->getData(45))*2);
     float lambda = (float) (sign_lambda*mag_lambda);
@@ -2430,7 +2815,7 @@ float OAgent_PD::_getLambdaFromPacket_nodeACC() {
     return lambda;
 }
 
-float OAgent_PD::_getActiveFlowGradientFromPacket_node() {
+float OAgent_PDRC::_getActiveFlowGradientFromPacket_node() {
     int32_t mag_fp = (int32_t(_rx->getData(54)) << 24) + (int32_t(_rx->getData(53)) << 16) + (int16_t(_rx->getData(52)) << 8) + int8_t(_rx->getData(51));
     int8_t sign_fp = -1 + ((_rx->getData(50))*2);
     float fp = (float) (sign_fp*mag_fp);
@@ -2439,7 +2824,7 @@ float OAgent_PD::_getActiveFlowGradientFromPacket_node() {
     return fp;
 }
 
-float OAgent_PD::_getReactiveFlowGradientFromPacket_node() {
+float OAgent_PDRC::_getReactiveFlowGradientFromPacket_node() {
     int32_t mag_fq = (int32_t(_rx->getData(59)) << 24) + (int32_t(_rx->getData(58)) << 16) + (int16_t(_rx->getData(57)) << 8) + int8_t(_rx->getData(56));
     int8_t sign_fq = -1 + ((_rx->getData(55))*2);
     float fq = (float) (sign_fq*mag_fq);
@@ -2448,7 +2833,7 @@ float OAgent_PD::_getReactiveFlowGradientFromPacket_node() {
     return fq;
 }
 
-float OAgent_PD::_getLambdaGradientFromPacket_node() {
+float OAgent_PDRC::_getLambdaGradientFromPacket_node() {
     int32_t mag_lambda = (int32_t(_rx->getData(64)) << 24) + (int32_t(_rx->getData(63)) << 16) + (int16_t(_rx->getData(62)) << 8) + int8_t(_rx->getData(61));
     int8_t sign_lambda = -1 + ((_rx->getData(60))*2);
     float lambda = (float) (sign_lambda*mag_lambda);
@@ -2457,7 +2842,7 @@ float OAgent_PD::_getLambdaGradientFromPacket_node() {
     return lambda;
 }
 
-void OAgent_PD::_unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag) {
+void OAgent_PDRC::_unicastPacket_PDRC_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag) {
     uint8_t payload[20];
     uint32_t fp;
     uint32_t fq;
@@ -2537,7 +2922,7 @@ void OAgent_PD::_unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, fl
     #endif
 }
 
-void OAgent_PD::_unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag, float fP_p, float fQ_p, float Lambda_p) {
+void OAgent_PDRC::_unicastPacket_PDRC_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag, float fP_p, float fQ_p, float Lambda_p) {
     uint8_t payload[35];
     uint32_t fp_c;
     uint32_t fq_c;
@@ -2686,7 +3071,7 @@ void OAgent_PD::_unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c
 }
 
 
-void OAgent_PD::_sendToChild(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag) {
+void OAgent_PDRC::_sendToChild(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag) {
     uint8_t payload[35];
     uint32_t fp;
     uint32_t fq;
@@ -2830,7 +3215,7 @@ void OAgent_PD::_sendToChild(uint16_t recipientID, float fP, float fQ, float Lam
     #endif
 }
 
-void OAgent_PD::_sendToParent(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag, float fP_p, float fQ_p, float Lambda_p, float gfP_p, float gfQ_p, float gLambda_p) {
+void OAgent_PDRC::_sendToParent(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag, float fP_p, float fQ_p, float Lambda_p, float gfP_p, float gfQ_p, float gLambda_p) {
     uint8_t payload[65];
     uint32_t fp;
     uint32_t fq;
@@ -3101,7 +3486,7 @@ void OAgent_PD::_sendToParent(uint16_t recipientID, float fP, float fQ, float La
     #endif
 }
 
-bool OAgent_PD::_waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout) {
+bool OAgent_PDRC::_waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout) {
     unsigned long start;
     if(timeout != -1)
         start = millis();
@@ -3119,7 +3504,7 @@ bool OAgent_PD::_waitForNeighborPacket(uint8_t &neighborID, uint16_t header, boo
     }
 }
 
-bool OAgent_PD::_waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint16_t header, bool broadcast, int timeout) {
+bool OAgent_PDRC::_waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint16_t header, bool broadcast, int timeout) {
     unsigned long start;
     if(timeout != -1)
         start = millis();
@@ -3144,7 +3529,176 @@ bool OAgent_PD::_waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint1
 
 
 
-void OAgent_PD::_broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period) {
+
+// Economic Dispatch Algorithm Communication Methods
+
+float OAgent_PDRC::_getSumLambdaFromPacket() {
+    int32_t mag_sumLambda = (int32_t(_rx->getData(6)) << 24) + (int32_t(_rx->getData(5)) << 16) + (int16_t(_rx->getData(4)) << 8) + int8_t(_rx->getData(3));
+    int8_t sign_sumLambda = -1 + ((_rx->getData(2))*2);
+    float sumLambda = (float) (sign_sumLambda*mag_sumLambda);
+    sumLambda = sumLambda/BASE;
+
+    return sumLambda;
+}
+
+float OAgent_PDRC::_getSumNuFromPacket() {
+    int32_t mag_sumNu = (int32_t(_rx->getData(11)) << 24) + (int32_t(_rx->getData(10)) << 16) + (int16_t(_rx->getData(9)) << 8) + int8_t(_rx->getData(8));
+    int8_t sign_sumNu = -1 + ((_rx->getData(7))*2);
+    float sumNu = (float) (sign_sumNu*mag_sumNu);
+    sumNu = sumNu/BASE;
+
+    return sumNu;
+}
+
+float OAgent_PDRC::_getSumGammaFromPacket() {
+    int32_t mag_sumGamma = (int32_t(_rx->getData(16)) << 24) + (int32_t(_rx->getData(15)) << 16) + (int16_t(_rx->getData(14)) << 8) + int8_t(_rx->getData(13));
+    int8_t sign_sumGamma = -1 + ((_rx->getData(12))*2);
+    float sumGamma = (float) (sign_sumGamma*mag_sumGamma);
+    sumGamma = sumGamma/BASE;
+
+    return sumGamma;
+}
+
+void OAgent_PDRC::_sendToNeighbor(float sumLAMBDA, float sumNU) {
+    uint8_t payload[12];
+    uint32_t sumLambda;
+    uint32_t sumNu;
+    uint8_t sign_sumLambda;
+    uint8_t sign_sumNu;
+    sumLAMBDA = sumLAMBDA*BASE;
+    sumNU = sumNU*BASE;
+
+    //check if sumLambda is negative
+    if (sumLAMBDA < 0) 
+    {
+        sumLAMBDA = -1*sumLAMBDA;
+        sumLambda = (uint32_t) sumLAMBDA;
+        sign_sumLambda = 0;
+    }
+    else
+    {
+        sumLambda = (uint32_t) sumLAMBDA;
+        sign_sumLambda = 1;
+    }
+
+   //check if sumNuis negative
+    if (sumNU < 0) 
+    {
+        sumNU = -1*sumNU;
+        sumNu = (uint32_t) sumNU;
+        sign_sumNu = 0;
+    }
+    else
+    {
+        sumNu = (uint32_t) sumNU;
+        sign_sumNu = 1;
+    }
+
+
+    //construct payload
+    payload[0] = ED_HEADER;
+    payload[1] = ED_HEADER >> 8;
+    payload[2] = sign_sumLambda;
+    payload[3] = sumLambda;
+    payload[4] = sumLambda >> 8;
+    payload[5] = sumLambda >> 16;
+    payload[6] = sumLambda >> 24;
+    payload[7] = sign_sumNu;
+    payload[8] = sumNu;
+    payload[9] = sumNu >> 8;
+    payload[10] = sumNu >> 16;
+    payload[11] = sumNu >> 24;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+void OAgent_PDRC::_sendToNeighbor_ACC(float sumLAMBDA, float sumNU, float sumGAMMA) {
+    uint8_t payload[17];
+    uint32_t sumLambda;
+    uint32_t sumNu;
+    uint32_t sumGamma;
+    uint8_t sign_sumLambda;
+    uint8_t sign_sumNu;
+    uint8_t sign_sumGamma;
+    sumLAMBDA = sumLAMBDA*BASE;
+    sumNU = sumNU*BASE;
+    sumGAMMA = sumGAMMA*BASE;
+
+    //check if sumLambda is negative
+    if (sumLAMBDA < 0) 
+    {
+        sumLAMBDA = -1*sumLAMBDA;
+        sumLambda = (uint32_t) sumLAMBDA;
+        sign_sumLambda = 0;
+    }
+    else
+    {
+        sumLambda = (uint32_t) sumLAMBDA;
+        sign_sumLambda = 1;
+    }
+
+   //check if sumNuis negative
+    if (sumNU < 0) 
+    {
+        sumNU = -1*sumNU;
+        sumNu = (uint32_t) sumNU;
+        sign_sumNu = 0;
+    }
+    else
+    {
+        sumNu = (uint32_t) sumNU;
+        sign_sumNu = 1;
+    }
+
+   //check if sumGamma is negative
+    if (sumGAMMA < 0) 
+    {
+        sumGAMMA = -1*sumGAMMA;
+        sumGamma = (uint32_t) sumGAMMA;
+        sign_sumGamma = 0;
+    }
+    else
+    {
+        sumGamma = (uint32_t) sumGAMMA;
+        sign_sumGamma = 1;
+    }
+
+
+
+    //construct payload
+    payload[0] = ED_HEADER;
+    payload[1] = ED_HEADER >> 8;
+    payload[2] = sign_sumLambda;
+    payload[3] = sumLambda;
+    payload[4] = sumLambda >> 8;
+    payload[5] = sumLambda >> 16;
+    payload[6] = sumLambda >> 24;
+    payload[7] = sign_sumNu;
+    payload[8] = sumNu;
+    payload[9] = sumNu >> 8;
+    payload[10] = sumNu >> 16;
+    payload[11] = sumNu >> 24;
+    payload[12] = sign_sumGamma;
+    payload[13] = sumGamma;
+    payload[14] = sumGamma >> 8;
+    payload[15] = sumGamma >> 16;
+    payload[16] = sumGamma >> 24;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+ // End Economic Dispatch Algorithm communication methods
+
+
+void OAgent_PDRC::_broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period) {
     uint8_t payload[9];
     // put header in payload array
     payload[0] = header;
@@ -3165,7 +3719,7 @@ void OAgent_PD::_broadcastSchedulePacket(uint16_t header, unsigned long startTim
     _xbee->send(_zbTx);
 }
 
-void OAgent_PD::_broadcastSchedulePacketPD(unsigned long startTime, uint16_t numIterations) {
+void OAgent_PDRC::_broadcastSchedulePacketPD(unsigned long startTime, uint16_t numIterations) {
     uint8_t payload[8];
     // put header in payload array
     payload[0] = SCHEDULE_PD_HEADER;
@@ -3184,7 +3738,26 @@ void OAgent_PD::_broadcastSchedulePacketPD(unsigned long startTime, uint16_t num
     _xbee->send(_zbTx);
 }
 
-void OAgent_PD::_waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout) {
+void OAgent_PDRC::_broadcastSchedulePacketED(unsigned long startTime, uint16_t numIterations) {
+    uint8_t payload[8];
+    // put header in payload array
+    payload[0] = SCHEDULE_ED_HEADER;
+    payload[1] = SCHEDULE_ED_HEADER >> 8;
+    // put start time in payload array
+    payload[2] = startTime;
+    payload[3] = startTime >> 8;
+    payload[4] = startTime >> 16;
+    payload[5] = startTime >> 24;
+    // put number of iterations in payload array
+    payload[6] = numIterations;
+    payload[7] = numIterations >> 8;
+    // put payload in zigbee transmit object
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); 
+    // transmit packet
+    _xbee->send(_zbTx);
+}
+
+void OAgent_PDRC::_waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout) {
     if(_waitForPacket(header,true,timeout)) {  //stays in loop until desired packet received
 		if(header == SCHEDULE_FAIR_SPLIT_HEADER || header == SCHEDULE_OPTIMAL_DISPATCH_HEADER) {
 			startTime   = _getStartTimeFromPacket();
@@ -3202,7 +3775,7 @@ void OAgent_PD::_waitForSchedulePacket(uint16_t header, unsigned long &startTime
 	}
 }
 
-bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
+bool OAgent_PDRC::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
     uint8_t neighborID;
     LinkedList * l = _G->getLinkedList();    							//get pointer to linked list
     OLocalVertex * s = _G->getLocalVertex(); 							// store pointer to local vertex 
@@ -3256,7 +3829,7 @@ bool OAgent_PD::_waitForSchedulePacket_RSL(uint16_t header, unsigned long &start
         return false;
 }
 
-bool OAgent_PD::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations, int timeout) {
+bool OAgent_PDRC::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations, int timeout) {
     uint8_t neighborID;
     uint16_t header = SCHEDULE_PD_HEADER;
     LinkedList * l = _G->getLinkedList();                      						//get pointer to linked list
@@ -3330,7 +3903,81 @@ bool OAgent_PD::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16_
         return false;
 }
 
-// uint16_t OAgent_PD::_waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
+bool OAgent_PDRC::_waitForParentSchedulePacketED(unsigned long &startTime, uint16_t &iterations, int timeout) {
+    uint8_t neighborID;
+    uint16_t header = SCHEDULE_ED_HEADER;
+    LinkedList * l = _G->getLinkedList();                      						//get pointer to linked list
+    OLocalVertex * s = _G->getLocalVertex(); 										// store pointer to local vertex
+    l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2
+    uint8_t counter = 1;
+
+    Serial << "Waiting for Schedule ED Packet"<<endl;
+    delay(5);
+
+    if(_waitForNeighborPacket(neighborID,header,true,timeout))                    	//stays in loop until desired packet received
+ 	{
+        Serial << "Received Schedule ED Packet from node " << neighborID<<endl;
+        delay(5);
+    
+        startTime   = _getStartTimeFromPacket();
+        iterations  = _getIterationsFromPacketPD();
+        uint16_t start = millis();
+        s->setStatus(neighborID, 3);
+	    counter++;
+
+	    if(counter==_G->getN())
+        {
+			Serial << "No Schedule ED ACK is required from neighbors"<<endl;
+            delay(5);
+            Serial << "Sending Schedule ED ACK to parent"<<endl;
+        	delay(5);
+        
+			while(true)
+			{
+				if(_waitForNeighborPacket(neighborID,header,true,SCHEDULE_TIMEOUT/2))                        //wait for acknowledgement packets
+				{
+					delay(10);
+					_broadcastSchedulePacketED(startTime,iterations);
+				}
+				else
+				{
+					l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                    return true;
+				}
+			}
+        }
+
+       	Serial << "Waiting for Schedule ED ACKs"<<endl;
+        delay(5);
+
+        while(true)
+        {
+        	_broadcastSchedulePacketED(startTime,iterations);
+            if(_waitForNeighborPacket(neighborID,header,true,200))                        //wait for acknowledgement packets
+            {
+                if(s->getStatus(neighborID) < 3)
+                {
+                 //    Serial << "received Schedule ED ACK from node " << neighborID<<endl;
+	                // delay(5);
+                    s->setStatus(neighborID, 3);
+	                counter++;
+                }
+
+                if(counter==_G->getN())
+                {
+					Serial << "All neighbors scheduled for economic dispatch algorithm"<<endl;
+	                delay(5);
+					l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                    return true;
+                }
+            }
+        }
+    }
+    else
+        return false;
+}
+
+// uint16_t OAgent_PDRC::_waitForSchedulePacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout) {
 //     uint16_t rsp = _waitForValidPacket(true,timeout);
 //     if(rsp != 0x0) {
 //         startTime   = _getStartTimeFromPacket();
@@ -3341,7 +3988,7 @@ bool OAgent_PD::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16_
 //     return 0x0;
 // }
 
-void OAgent_PD::_broadcastACKPacket(uint16_t header, uint8_t recipientID)
+void OAgent_PDRC::_broadcastACKPacket(uint16_t header, uint8_t recipientID)
 {
     uint8_t payload[4];
     // put header in payload array
@@ -3354,7 +4001,7 @@ void OAgent_PD::_broadcastACKPacket(uint16_t header, uint8_t recipientID)
     _xbee->send(_zbTx);
 }
 
-void OAgent_PD::_broadcastHeaderPacket(uint16_t header)
+void OAgent_PDRC::_broadcastHeaderPacket(uint16_t header)
 {
     uint8_t payload[2];
     // put header in payload array
@@ -3365,7 +4012,7 @@ void OAgent_PD::_broadcastHeaderPacket(uint16_t header)
     _xbee->send(_zbTx);
 }
 
-void OAgent_PD::_waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period)
+void OAgent_PDRC::_waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period)
 {   
     int nodes = 9; //number of online neighbors in the network
     int counter = 0;
@@ -3419,7 +4066,7 @@ void OAgent_PD::_waitForACKPacket(uint16_t header, unsigned long t0, unsigned lo
 }
 
 //Resilient Version
-bool OAgent_PD::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period ) { 
+bool OAgent_PDRC::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period ) { 
     unsigned long start = millis();
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex(); // store pointer to local vertex 
@@ -3494,7 +4141,7 @@ bool OAgent_PD::_waitForACKPacket_RSL(uint16_t header, int timeout, unsigned lon
 }
 
 // Primal Dual Algorithm
-bool OAgent_PD::_waitForChildSchedulePacketPD(int timeout, unsigned long startTime, uint16_t iterations)  {
+bool OAgent_PDRC::_waitForChildSchedulePacketPD(int timeout, unsigned long startTime, uint16_t iterations)  {
     unsigned long start = millis();
     unsigned long restart = start;
     OLocalVertex * s = _G->getLocalVertex();                                                            // store pointer to local vertex 
@@ -3534,27 +4181,68 @@ bool OAgent_PD::_waitForChildSchedulePacketPD(int timeout, unsigned long startTi
     return false;
 }
 
-uint32_t OAgent_PD::_getAvailableAgentLsb(uint8_t i) {
+// Economic Dispatch Algorithm
+bool OAgent_PDRC::_waitForChildSchedulePacketED(int timeout, unsigned long startTime, uint16_t iterations)  {
+    unsigned long start = millis();
+    unsigned long restart = start;
+    OLocalVertex * s = _G->getLocalVertex();                                                            // store pointer to local vertex 
+    LinkedList * l = _G->getLinkedList();
+	l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2     
+
+    uint8_t counter = 1;    
+    uint8_t neighborID;
+
+    _broadcastSchedulePacketED(startTime,iterations);
+
+    Serial << "Waiting for Schedule ED ACKs"<<endl;
+    delay(5);
+    
+    while(uint16_t(millis()-start) < timeout)
+    {
+    	if(_waitForNeighborPacket(neighborID,SCHEDULE_ED_HEADER,true,200))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 3)
+            {
+                // Serial << "received Schedule ED ACK from node " << neighborID<<endl;
+                // delay(5);
+                s->setStatus(neighborID, 3);
+                counter++;
+            }
+
+            if(counter==_G->getN())
+            {
+				Serial << "All neighbors scheduled for economic dispatch algorithm"<<endl;
+                delay(5);
+				l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                return true;
+            }
+        }
+    	_broadcastSchedulePacketED(startTime,iterations);
+    }
+    return false;
+}
+
+uint32_t OAgent_PDRC::_getAvailableAgentLsb(uint8_t i) {
     return _availableAgentLsb[i-1];
 }
 
-uint8_t OAgent_PD::_getUint8_tFromPacket(uint8_t &byteNumber) {
+uint8_t OAgent_PDRC::_getUint8_tFromPacket(uint8_t &byteNumber) {
     byteNumber++;
     return _rx->getData(byteNumber-1);
 }
 
-uint32_t OAgent_PD::_getUint32_tFromPacket(uint8_t &lsbByteNumber) {
+uint32_t OAgent_PDRC::_getUint32_tFromPacket(uint8_t &lsbByteNumber) {
     lsbByteNumber += 4;
     return (uint32_t(_rx->getData(lsbByteNumber-1)) << 24) + (uint32_t(_rx->getData(lsbByteNumber-2)) << 16) + (uint16_t(_rx->getData(lsbByteNumber-3)) << 8) + _rx->getData(lsbByteNumber-4);
 }
 
-//  long OAgent_PD::_getLongFromPacket(uint8_t &lsbByteNumber) {
+//  long OAgent_PDRC::_getLongFromPacket(uint8_t &lsbByteNumber) {
 //	return long(_getUint32_tFromPacket(lsbByteNumber));
 //}
 /// End general coordination helper functions
 
 /// Synchronization helper functions
-bool OAgent_PD::_leaderSync() {
+bool OAgent_PDRC::_leaderSync() {
     // only attempt to sync if there is at least one other vertex
     //Serial << "i AM HERE";
     if(_G->getN() > 1) 
@@ -3591,7 +4279,7 @@ bool OAgent_PD::_leaderSync() {
     return false;
 }
 
-bool OAgent_PD::_targetSync(unsigned long tTwo) {
+bool OAgent_PDRC::_targetSync(unsigned long tTwo) {
 	if(_unicastSyncResponsePacket(tTwo))
     {
         //Serial << "Unicast Response Sent\n";
@@ -3608,7 +4296,7 @@ bool OAgent_PD::_targetSync(unsigned long tTwo) {
 }
 
 
-bool OAgent_PD::_nonTargetSync(unsigned long tTwo) {
+bool OAgent_PDRC::_nonTargetSync(unsigned long tTwo) {
 	if(_waitForSyncFinalPacket(SYNC_TIMEOUT+ACK_TIMEOUT)) {
 		// T = t + d + t2 - t2'
         uint8_t ptr = 6;
@@ -3621,7 +4309,7 @@ bool OAgent_PD::_nonTargetSync(unsigned long tTwo) {
 	return false;
 }
 
-unsigned long OAgent_PD::_broadcastSyncBeginPacket(uint8_t i) {
+unsigned long OAgent_PDRC::_broadcastSyncBeginPacket(uint8_t i) {
     uint16_t payload[3];
     // put header in bytes 0 and 1
     payload[0] = SYNC_BEGIN_HEADER;
@@ -3633,7 +4321,7 @@ unsigned long OAgent_PD::_broadcastSyncBeginPacket(uint8_t i) {
     return _xbee->sendTwo(_zbTx,false,true);
 }
 
-void OAgent_PD::_broadcastSyncFinalPacket(unsigned long tTwo, long d) {
+void OAgent_PDRC::_broadcastSyncFinalPacket(unsigned long tTwo, long d) {
 	uint16_t payload[5];
 	// put sync final header in bytes 0 and 1
 	payload[0] = SYNC_FINAL_HEADER;
@@ -3646,7 +4334,7 @@ void OAgent_PD::_broadcastSyncFinalPacket(unsigned long tTwo, long d) {
 	_xbee->send(_zbTx); // transmit
 }
 
-bool OAgent_PD::_unicastSyncResponsePacket(unsigned long tTwo) {
+bool OAgent_PDRC::_unicastSyncResponsePacket(unsigned long tTwo) {
 	uint16_t payload[3];
 	// put sync response header in bytes 0 and 1
 	payload[0] = SYNC_RESPONSE_HEADER;
@@ -3657,19 +4345,19 @@ bool OAgent_PD::_unicastSyncResponsePacket(unsigned long tTwo) {
 	return _packetACKed(ACK_TIMEOUT);
 }
 
-bool OAgent_PD::_isTargetNode() {
+bool OAgent_PDRC::_isTargetNode() {
     uint8_t ptr = 2;
     
 	return _G->isLocalVertex(_getUint32_tFromPacket(ptr));
 }
 
-uint8_t OAgent_PD:: getStatusData(uint8_t neighborID)
+uint8_t OAgent_PDRC:: getStatusData(uint8_t neighborID)
 {
 	 OLocalVertex * s = _G->getLocalVertex();
 	 return s->getStatus(neighborID - 1); 
 }
 
-uint8_t OAgent_PD::_addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr) {
+uint8_t OAgent_PDRC::_addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr) {
     //Serial << "byte to payload: " << _DEC(data) << endl;
     payload[ptr]    = data;
     payload[ptr+1]  = data >> 8;
@@ -3681,7 +4369,7 @@ uint8_t OAgent_PD::_addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8
 /// End synchronization helper functions
 /// General helper functions
 
-void OAgent_PD::_prepareOAgent_PD(XBee * xbee, ZBRxResponse * rx, OGraph_PD * G, bool leader, bool quiet) {
+void OAgent_PDRC::_prepareOAgent_PDRC(XBee * xbee, ZBRxResponse * rx, OGraph_PDRC * G, bool leader, bool quiet) {
     _xbee = xbee;
     _G = G;
     _leader = leader;
