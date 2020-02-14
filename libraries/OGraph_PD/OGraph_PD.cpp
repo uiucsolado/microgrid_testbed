@@ -180,18 +180,18 @@ LinkedList::LinkedList(int n) {
 void LinkedList::_prepareLinkedList(int n) {
     _head = NULL;
     _tail = NULL;
-    _pseudoHead = NULL;
-    _pseudoTail = NULL;
-    _codedHead = NULL;
-    _codedTail = NULL;
+    _neighborHead = NULL;
+    _neighborTail = NULL;
+    _activeHead = NULL;
+    _activeTail = NULL;
     _size = 1;
-    _numCodedLinks = 0;
+    _numActiveLinks = 0;
 
     for (uint8_t i = 0; i < n; i++)
     {
         node *tmp = new node;
         tmp->data = i + 1;
-        tmp->mainNext = NULL;
+        tmp->next = NULL;
 
         if (_head == NULL)
         {
@@ -200,7 +200,7 @@ void LinkedList::_prepareLinkedList(int n) {
         }
         else
         {
-            _tail->mainNext = tmp;
+            _tail->next = tmp;
             _tail = tmp;
         }
     }
@@ -209,40 +209,41 @@ void LinkedList::_prepareLinkedList(int n) {
 //create a linked list of online neighbors, using their node IDs 
 void LinkedList::updateLinkedList(uint8_t *r) {
     uint8_t i=0, j=1;
-    _pseudoHead = NULL;
+    _neighborHead = NULL;
     node *tmp;
     tmp = _head;
     while (tmp != NULL)
     {
         if (*(r+i) >= 2)
         {
-            if (_pseudoHead == NULL)
+            if (_neighborHead == NULL)
             {
-                _pseudoHead = tmp;
-                _pseudoTail = tmp;
+                _neighborHead = tmp;
+                _neighborTail = tmp;
             }
             else
             {
-                _pseudoTail->next = tmp;
-                _pseudoTail = tmp;
+                _neighborTail->neighborNext = tmp;
+                _neighborTail = tmp;
             }
             if (*(r+i) == 3)
                 j++;
             // Serial <<"counter updated to "<<j<<endl;
             // delay(5);
         }
-        tmp = tmp->mainNext;
+        tmp = tmp->next;
         i++;
     }
-    _pseudoTail->next = NULL;
+    _neighborTail->neighborNext = NULL;
     setLLsize(j);
+    //Serial<<"The neighborHead is node "<<_neighborHead->data<<endl;
 }
 
 //resets the status of all neighbors from 3 to 2 
 void LinkedList::resetLinkedListStatus(uint8_t *r) {
     uint8_t i=0;
     node *tmp;
-    tmp = _pseudoHead;
+    tmp = _neighborHead;
     while (tmp != NULL)
     {
         i = tmp->data;
@@ -252,7 +253,7 @@ void LinkedList::resetLinkedListStatus(uint8_t *r) {
             // Serial<< "Status of node "<<i<<" changed from 3 to "<<*(r+i)<<endl;
             // delay(5);
         }
-        tmp = tmp->next;
+        tmp = tmp->neighborNext;
     }
     setLLsize(1);
 }
@@ -260,216 +261,194 @@ void LinkedList::resetLinkedListStatus(uint8_t *r) {
 //display a linked list
 void LinkedList::displayLinkedList() {
     node *tmp;
-    tmp = _pseudoHead;
+    tmp = _neighborHead;
+    Serial << "Neighbors are: "<<endl;
     while (tmp != NULL)
     {
-        Serial << tmp->data << " ";
-        tmp = tmp->next;
+        Serial << tmp->data <<endl;
+        tmp = tmp->neighborNext;
     }
 }
 
-//display coded linked lists
-void LinkedList::displayCodedLinkedList(ORemoteVertex *n) {
+//display Active linked lists
+void LinkedList::displayActiveLinkedList(ORemoteVertex *n) {
     node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, actCode = 0;
+    tmp = _activeHead;
+    uint8_t i = 0;
+
     while (tmp != NULL)
     {
         i = tmp->data;   
-        //Serial << i << " is a coded link with actcode "<< (n+i-1)->getLinkActCode() <<endl;
-        tmp = tmp->codedNext;
+        Serial << i << " is an active link"<<endl;
+        tmp = tmp->activeNext;
     }
 }
 
-//find an uncoded communication link and return the ID of its associated neighbor, return 0 if all links are coded
-uint8_t LinkedList::findUncodedLink(ORemoteVertex *n) {
+//find an inactive communication link and return the ID of its associated neighbor, return 0 if all links are active
+uint8_t LinkedList::findInActiveLink(ORemoteVertex *n) {
     node *tmp;
-    tmp = _pseudoHead;
-    uint8_t i = 0, actCode = 0;
+    tmp = _neighborHead;
+    uint8_t i = 0;
+    bool linkStatus;
 
     while (tmp != NULL)
     {
         i = tmp->data;
-        actCode = (n+i-1)->getLinkActCode();
-        // Serial << actCode << " is the actcode of the link to node " << i << endl;
-        // delay(10);
-        if (actCode == 0)
+        linkStatus = (n+i-1)->getLinkStatus();
+        // Serial <<"link to node "<< i << " has status " << linkStatus << endl;
+        // delay(5);
+        if (!linkStatus)
+        {
+            _neighborHead = tmp->neighborNext;
             return i;
-        tmp = tmp->next;
+        }
+        tmp = tmp->neighborNext;
     }
     return 0;
 }
 
-void LinkedList::unlinkCodedLink(uint8_t neighborID) {
-    if (_codedHead->data == neighborID)
+//sets the status of all active links to false 
+void LinkedList::resetActiveLinks(ORemoteVertex *n) {
+    uint8_t i=0;
+    node *tmp;
+    tmp = _activeHead;
+    while (tmp != NULL)
     {
-        _codedHead = _codedHead->codedNext;
+        i = tmp->data;
+        (n+i-1)->setLinkStatus(false);
+        tmp = tmp->activeNext;
+    }
+}
+
+void LinkedList::unlinkActiveLink(uint8_t neighborID) {
+    if (_activeHead->data == neighborID)
+    {
+        _activeHead = _activeHead->activeNext;
         return;
     }
 
     node *tmp1, *tmp2;
-    tmp1 = _codedHead;
-    tmp2 = tmp1->codedNext;
+    tmp1 = _activeHead;
+    tmp2 = tmp1->activeNext;
 
     while (tmp2 != NULL)
     {
         if (tmp2->data == neighborID)
         {
-            tmp1->codedNext = tmp2->codedNext;
+            tmp1->activeNext = tmp2->activeNext;
             return;
         }
         else
         {
             tmp1 = tmp2;
-            tmp2 = tmp1->codedNext;
+            tmp2 = tmp1->activeNext;
         }
     }
 }
 
-uint8_t LinkedList::getMaxActCode(ORemoteVertex *n) {
+bool LinkedList::isLinkActive(uint8_t neighborID) {
     node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, actCode = 0, maxActCode = 0;
-
-    while (tmp != NULL)
-    {
-        i = tmp->data;
-        actCode = (n+i-1)->getLinkActCode();
-        if (maxActCode < actCode)
-            maxActCode = actCode;
-        tmp = tmp->codedNext;
-    }
-    return actCode;
-}
-
-bool LinkedList::isCodedLinkAvailable(uint8_t neighborID) {
-    node *tmp;
-    tmp = _codedHead;
+    tmp = _activeHead;
 
     while (tmp != NULL)
     {
         if (tmp->data == neighborID)
             return true;
-        tmp = tmp->codedNext;
+        tmp = tmp->activeNext;
     }
     return false;
 }
 
-bool LinkedList::isActCodeAvailable(uint8_t code, ORemoteVertex *n, bool &flag) {
+float LinkedList::addActiveFlows(uint8_t i, ORemoteVertex *n) {
     node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, actCode = 0;
-    flag = true;                                        //set flag to true if the candidate actCode is greater than the observed actCode
+    tmp = _neighborHead;
+    uint8_t j = 0;
+    float fp = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        actCode = (n+i-1)->getLinkActCode();            //get activation code of link associated with the neighbor
-        if (actCode > code)
-            flag = false;                               //set flag to false if the candidate actCode is less than or equal to the observed actCode
-        if (actCode == code)
-        {
-            flag = false;
-            return false;
-        }
-        tmp = tmp->codedNext;
+        j = tmp->data;                                  //get ID of neighbor
+        if (i < j)
+            fp = fp + ((n+j-1)->getActiveFlow());           //get active flow of link associated with neighbor
+        else if (i > j)
+            fp = fp - ((n+j-1)->getActiveFlow());           //get active flow of link associated with neighbor
+        tmp = tmp->neighborNext;
     }
-    // Serial << "candactcode found" <<endl;
-    // delay(10);
-    return true;
-}
-
-uint8_t LinkedList::isActCodeUsed(uint8_t code, ORemoteVertex *n) {
-    node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, actCode = 0;
-    while (tmp != NULL)
-    {
-        i = tmp->data;                                  //get ID of neighbor
-        actCode = (n+i-1)->getLinkActCode();            //get activation code of link associated with the neighbor
-        if (actCode == code)
-        {
-            return i;
-        }
-        tmp = tmp->codedNext;
-    }
-    return 0;
-}
-
-uint8_t LinkedList::addActiveFlows(ORemoteVertex *n) {
-    node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, fp = 0;
-    while (tmp != NULL)
-    {
-        i = tmp->data;                                  //get ID of neighbor
-        fp = fp + ((n+i-1)->getActiveFlow());           //get active flow of link associated with neighbor
-        tmp = tmp->codedNext;
-    }
+    //Serial<<"Sum of Active Flows is "<<fp<<endl;
     return fp;
 }
 
-uint8_t LinkedList::addReactiveFlows(ORemoteVertex *n) {
+float LinkedList::addReactiveFlows(uint8_t i, ORemoteVertex *n) {
     node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, fq = 0;
+    tmp = _neighborHead;
+    uint8_t j = 0;
+    float fq = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        fq = fq + ((n+i-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
-        tmp = tmp->codedNext;
+        j = tmp->data;                                  //get ID of neighbor
+        if (i < j)
+            fq = fq + ((n+j-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
+        else if (i > j)
+            fq = fq - ((n+j-1)->getReactiveFlow());         //get reactive flow of link associated with neighbor
+        tmp = tmp->neighborNext;
     }
+    //Serial<<"Sum of Reactive Flows is "<<fq<<endl;
     return fq;
 }
 
-uint8_t LinkedList::addLambdas(ORemoteVertex *n) {
+float LinkedList::addLambdas(uint8_t i, ORemoteVertex *n) {
     node *tmp;
-    tmp = _codedHead;
-    uint8_t i = 0, lambda = 0;
+    tmp = _neighborHead;
+    uint8_t j = 0;
+    float lambda = 0;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        lambda = lambda + ((n+i-1)->getLambda());       //get lambda of link associated with neighbor
-        tmp = tmp->codedNext;
+        j = tmp->data;                                      //get ID of neighbor
+        if (i < j)
+            lambda = lambda + ((n+j-1)->getLambda());       //get lambda of link associated with neighbor
+        else if (i > j)
+            lambda = lambda - ((n+j-1)->getLambda());       //get lambda of link associated with neighbor
+        tmp = tmp->neighborNext;
     }
+    //Serial<<"Sum of Lambdas is "<<lambda<<endl;
     return lambda;
 }
 
-//update the linked list of coded links
-void LinkedList::updateCodedLinks(ORemoteVertex *n) {
+//update the linked list of active links
+void LinkedList::updateActiveLinks(ORemoteVertex *n) {
     uint8_t i=0, j=0;
-    _codedHead = NULL;
+    _activeHead = NULL;
     node *tmp;
-    tmp = _pseudoHead;
+    tmp = _neighborHead;
     while (tmp != NULL)
     {
-        i = tmp->data;                                  //get ID of neighbor
-        if ((n+i-1)->getLinkActCode() != 0)           //check if the link associated with the neighbor has an activation code
+        i = tmp->data;                                      //get ID of neighbor
+        if ((n+i-1)->getLinkStatus())                       //check if the link associated with the neighbor is active
         {
-            if (_codedHead == NULL)
+            if (_activeHead == NULL)
             {
-                _codedHead = tmp;
-                _codedTail = tmp;
+                _activeHead = tmp;
+                _activeTail = tmp;
             }
             else
             {
-                _codedTail->codedNext = tmp;
-                _codedTail = tmp;
+                _activeTail->activeNext = tmp;
+                _activeTail = tmp;
             }
             j++;
         }
-        tmp = tmp->next;
+        tmp = tmp->neighborNext;
     }
-    _codedTail->codedNext = NULL;
-    setNumCodedLinks(j);
+    _activeTail->activeNext = NULL;
+    setNumActiveLinks(j);
 }
 
 //unlink the first node the linkedlist points to and return its data
 uint8_t LinkedList::unlinkLinkedListNodes() {
     node *tmp;
-    tmp = _pseudoHead;
+    tmp = _neighborHead;
     if (tmp != NULL)
     {
-        _pseudoHead = tmp->next;
+        _neighborHead = tmp->neighborNext;
         return tmp->data;
     }
     else
@@ -479,7 +458,7 @@ uint8_t LinkedList::unlinkLinkedListNodes() {
 // //get node ID of inheritor
 // void LinkedList::_setInheritorID() {
 //     node *tmp;
-//     tmp = _pseudoHead;
+//     tmp = _neighborHead;
 //     int ID = 0;
 //     int index;
 
@@ -495,7 +474,7 @@ uint8_t LinkedList::unlinkLinkedListNodes() {
 //         for (int i = 0; i <= index; i++)
 //         {
 //             ID = tmp->data;
-//             tmp = tmp->next;
+//             tmp = tmp->neighborNext;
 //         }
 //         _inheritor = ID;
 //     }
@@ -582,7 +561,7 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min,
     _q = 0;
     _pd = 0;
     _qd = 0;
-    _sqV = 0;
+    _sqV = 1;
     _mu = 0;
     _nu = 0;
 
@@ -680,8 +659,27 @@ void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, flo
     _fp = 0;
     _fq = 0;
     _lambda = 0;
-    _linkActCode = 0;
-    _linkParent = 0;
+    _gfp = 0;
+    _gfq = 0;
+    _glambda = 0;
+    _gfpNode = 0;
+    _gfqNode = 0;
+    _glambdaNode = 0;
+    _gfpNeighbor = 0;
+    _gfqNeighbor = 0;
+    _glambdaNeighbor = 0;
+    _gfpTMP = 0;
+    _gfqTMP = 0;
+    _glambdaTMP = 0;
+    _linkStatus = 0;
+    _nodeFlag = false;
+    _neighborFlag = false;
+    _fpNode = 0; //local estimate of per-unit active flow along electrical link
+    _fqNode = 0; //local estimate of per-unit reactive flow along electrical link
+    _lambdaNode = 0; //local estimate of lagrange multiplier for LinDistFlow
+    _fpNeighbor = 0; //remote estimate of per-unit active flow along electrical link
+    _fqNeighbor = 0; //remote estimate of per-unit reactive flow along electrical link
+    _lambdaNeighbor = 0; //remote estimate of lagrange multiplier for LinDistFlow
     _prepareOVertex(aLsb, neighborID);
 }
 /// End private methods
@@ -937,6 +935,7 @@ ORemoteVertex * OGraph_PD::getRemoteVertex(uint8_t neighborID) {
 
 void OGraph_PD::configureLinkedList() {
     _list->updateLinkedList(_self->getStatusP());
+    _list->displayLinkedList();
 }
 
 uint8_t OGraph_PD::_getRemoteVertexIndex(XBeeAddress64 a) {
@@ -977,6 +976,8 @@ bool OGraph_PD::_addRemoteVertex(uint32_t aLsb, uint8_t neighborID, float r, flo
             }
         	// create new instance of OVertex object and store in array
             _remoteVertices[index] = ORemoteVertex(aLsb,neighborID,r,x,inNeighbor);
+            if(_self->getID() < neighborID)
+                _remoteVertices[index].setNodeFlag(true);
             _self->setStatus(neighborID, 2);
             // increment total number of vertices current initialized
             _n++;

@@ -78,8 +78,8 @@ void setup()  {
   //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
  
   g.configureLinkedList();
-  s.setActiveDemand(0.2);
-  s.setReactiveDemand(0.1);
+  s.setActiveDemand(0.3);
+  s.setReactiveDemand(0.2);
  
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
@@ -149,27 +149,6 @@ void loop() {
   {
     if(a.isSynced())
     {
-      if (le == false)
-      {
-        if (a.isLeader())
-        {
-          if(Serial.available())
-          {
-            int bbb = Serial.read();  
-            Serial.println("got some input");
-            delay(5); 
-            Serial.println("Starting link activation");
-            le = a.linkActivationAlgorithm();
-          }
-        }
-        else
-        {
-          Serial.println("Waiting for link activation");
-          le = a.linkActivationAlgorithm();
-        }
-      }
-      else
-      {
         Serial.println("Starting Optimal Power Flow");
         feasible = a.OptimalPowerFlow(false,0.1,100);
         //Serial.println(state1,4);
@@ -181,7 +160,7 @@ void loop() {
         }
          
          a.resync();
-      }
+    
     }
   }
 }

@@ -149,27 +149,6 @@ void loop() {
   {
     if(a.isSynced())
     {
-      if (le == false)
-      {
-        if (a.isLeader())
-        {
-          if(Serial.available())
-          {
-            int bbb = Serial.read();  
-            Serial.println("got some input");
-            delay(5); 
-            Serial.println("Starting link activation");
-            le = a.linkActivationAlgorithm();
-          }
-        }
-        else
-        {
-          Serial.println("Waiting for link activation");
-          le = a.linkActivationAlgorithm();
-        }
-      }
-      else
-      {
         Serial.println("Starting Optimal Power Flow");
         feasible = a.OptimalPowerFlow(true,0.1,100);
         //Serial.println(state1,4);
@@ -181,7 +160,6 @@ void loop() {
         }
          
          a.resync();
-      }
     }
   }
 }

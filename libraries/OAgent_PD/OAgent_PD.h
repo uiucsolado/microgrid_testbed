@@ -22,20 +22,13 @@
 #define SCHEDULE_MAXMIN_ACKACK_HEADER    0x7400 // schedule coordinate header
 #define SCHEDULE_PD_HEADER               0x7340 // schedule coordinate header is ascii s@
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sF
-#define SCHEDULE_PD_ACK_HEADER           0x7334 // schedule coordinate header is ascii s4
-#define SCHEDULE_PD_ACKACK_HEADER        0x7500 // schedule coordinate header is ascii s4
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define PD_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
 #define PD_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
-#define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
-#define WINDOW_LENGTH                    1000     // time length for each window in a period
-#define BASE                             100000  // base for transmitting decimals
-
-#define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "
-#define ACTCODE_HEADER                   0x2221 // Primal-dual acknowledgment header is "!
-#define LINKSACT_HEADER                  0x2222 // Primal-dual acknowledgment header is ""
+#define WINDOW_LENGTH                    5000     // time length for each window in a period
+#define BASE                             1000000000  // base for transmitting decimals
 
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
@@ -109,10 +102,11 @@ class OAgent_PD {
         long maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
         
         // Primal Dual methods
-        bool primalDualAlgorithm(bool genBus, float alpha, uint8_t iterations);
-        bool leaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations);
-        bool nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations);
-        bool standardPrimalDualAlgorithm(bool genBus, float alpha, uint8_t iterations);
+        bool primalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
+        bool leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
+        bool nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
+        bool standardPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
+        bool acceleratedPrimalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
 
         // communication link activation methods
         bool linkActivationAlgorithm();
@@ -172,19 +166,6 @@ class OAgent_PD {
         //Sid
         long _buffer2;
 
-        //Olaolu's addition
-        float _buffer_fP[2000];
-        float _buffer_fQ[2000];
-        float _buffer_lambda[2000];
-        
-        float _buffer_P[2000];
-        float _buffer_Q[2000];
-        float _buffer_bP[2000];
-        float _buffer_bQ[2000];
-        float _buffer_sqV[2000];
-        float _buffer_mu[2000];
-        float _buffer_nu[2000];
-
         int node_counter[NUM_REMOTE_VERTICES];          //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //Methods
         //Fair splitting
@@ -205,6 +186,7 @@ class OAgent_PD {
             _broadcastSchedulePacket(SCHEDULE_PD_HEADER,startTime,iterations,period);
         }
         inline bool _fairSplitPacketAvailable() { return _packetAvailable(FAIR_SPLITTING_HEADER,true); }
+        inline bool _primaldualPacketAvailable() { return _packetAvailable(PD_HEADER,true); }
         inline bool _maxminPacketAvailable() { return _packetAvailable(MAXMIN_HEADER,true); }
         //Primal Dual Algorithm
         //inline bool _PDPacketAvailable() { return _packetAvailable(PD_PACKET_HEADER,true); }
@@ -218,8 +200,10 @@ class OAgent_PD {
         
         void _broadcastMaxMinPacket(long max, long min);
         //Unicast Primal Dual Packet - SN addition edited by Olaolu
-        void _unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag_PD);
-        void _unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag_PD, float fP_p, float fQ_p, float Lambda_p);
+        void _unicastPacket_PD_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag);
+        void _unicastPacket_PD_C(uint16_t recipientID, float fP_c, float fQ_c, float Lambda_c, bool flag, float fP_p, float fQ_p, float Lambda_p);
+        void _sendToChild(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag);
+        void _sendToParent(uint16_t recipientID, float fP, float fQ, float Lambda, float gfP, float gfQ, float gLambda, bool flag, float fP_p, float fQ_p, float Lambda_p, float gfP_p, float gfQ_p, float gLambda_p);
 
         //link activation packets - added by Olaolu
         void _candactcodePacket(uint16_t recipientID);
@@ -297,15 +281,27 @@ class OAgent_PD {
         inline uint16_t _getNeighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
 
         //Primal Dual Algorithm
-        float _getActiveFlowFromPacket();
-        float _getReactiveFlowFromPacket();
-        float _getLambdaFromPacket();
+        float _getActiveFlowFromPacket_neighbor();
+        float _getReactiveFlowFromPacket_neighbor();
+        float _getLambdaFromPacket_neighbor();
+        float _getActiveFlowGradientFromPacket_neighbor();
+        float _getReactiveFlowGradientFromPacket_neighbor();
+        float _getLambdaGradientFromPacket_neighbor();
         
         bool _getFlagFromPacket();
+        bool _getFlagFromPacket_ACC();
 
-        float _getActiveFlowFromPacket_self();
-        float _getReactiveFlowFromPacket_self();
-        float _getLambdaFromPacket_self();
+        float _getActiveFlowFromPacket_node();
+        float _getReactiveFlowFromPacket_node();
+        float _getLambdaFromPacket_node();
+        
+        float _getActiveFlowFromPacket_nodeACC();
+        float _getReactiveFlowFromPacket_nodeACC();
+        float _getLambdaFromPacket_nodeACC();
+        float _getActiveFlowGradientFromPacket_node();
+        float _getReactiveFlowGradientFromPacket_node();
+        float _getLambdaGradientFromPacket_node();
+        
         inline uint16_t _getRecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
         //
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
@@ -318,7 +314,7 @@ class OAgent_PD {
         // General scheduling methods
         void _waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);// General scheduling methods
         bool _waitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period );
-        bool _waitForSchedulePacketPD(int timeout, unsigned long startTime, uint8_t iterations);
+        bool _waitForChildSchedulePacketPD(int timeout, unsigned long startTime, uint16_t iterations);
 
         inline uint8_t _getIDFromPacket() {  return _rx->getData(2); }
 
@@ -328,6 +324,7 @@ class OAgent_PD {
         }
         inline uint8_t _getIterationsFromPacket() { return _rx->getData(6); }
         inline uint16_t _getPeriodFromPacket() { return (uint16_t(_rx->getData(8)) << 8) + _rx->getData(7); }
+        inline uint16_t _getIterationsFromPacketPD() { return (uint16_t(_rx->getData(7)) << 8) + _rx->getData(6); }
         
         // Generate transmit time
         uint16_t _genTxTime(uint16_t iterationPeriod, uint8_t ITF);
@@ -337,11 +334,11 @@ class OAgent_PD {
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
         void _waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
         bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout);
-        bool _waitForSchedulePrimalDualPacket(unsigned long &startTime, uint8_t &iterations,int timeout);
+        bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations,int timeout);
         bool _waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout);
         bool _waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint16_t header, bool broadcast, int timeout);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
-        void _broadcastSchedulePacketPD(unsigned long startTime, uint8_t numIterations);
+        void _broadcastSchedulePacketPD(unsigned long startTime, uint16_t numIterations);
         uint32_t _getAvailableAgentLsb(uint8_t i);
         uint32_t _getUint32_tFromPacket(uint8_t &lsbByteNumber);
         inline long _getLongFromPacket(uint8_t &lsbByteNumber) { return long(_getUint32_tFromPacket(lsbByteNumber)); }
