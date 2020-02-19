@@ -1,0 +1,3 @@
+loss minimization algorithm (OPF)
+economic dispatch algorithm (PD + RC)
+voltage deviation and imbalance minimization (PD)

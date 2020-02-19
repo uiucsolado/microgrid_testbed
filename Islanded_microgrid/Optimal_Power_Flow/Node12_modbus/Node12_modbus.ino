@@ -1,22 +1,22 @@
 #include <Streaming.h>
 #include <XBee.h>
 //#include <Dyno.h>
-#include <OGraph_PDRC.h>
-#include <OAgent_PDRC.h>
+#include <OGraph_OPF.h>
+#include <OAgent_OPF.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
 
 
-//Node 9
+//Node 12  //#NODE
 XBee xbee = XBee();
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786E1,9,0,1,1,1,1,10);  //#NODE
-LinkedList l = LinkedList();  //#NODE
-OGraph_PDRC g = OGraph_PDRC(&s,&l);
-OAgent_PDRC a = OAgent_PDRC(&xbee,&rx,&g,true,true); // argument rx?
+OLocalVertex s = OLocalVertex(0x415786A9,12,0,1,1,1,1,10);  //#NODE
+LinkedList l = LinkedList();
+OGraph_OPF g = OGraph_OPF(&s,&l);
+OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,false,true); // argument rx?
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
@@ -30,8 +30,8 @@ boolean le = false;
 MgsModbus Mb; 
 int val;
 // Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB9}; //#NODE
-IPAddress ip(192, 168, 2, 9); // What are these addresses //#NODE
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBC};   //  #NODE
+IPAddress ip(192, 168, 2, 12);   // #NODE
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
 
@@ -47,7 +47,7 @@ int count;
 int pos;
 long t;
 float D;
-bool ecoDispatch;
+bool primaldual;
 
 void setup()  {
   Serial.begin(38400);
@@ -67,19 +67,19 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
-  //g.addInNeighbor(0x415786E1,9,0,0); // node 9
-  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
+  g.addInNeighbor(0x415786E1,9,0.05,0.07); // node 9
+  g.addInNeighbor(0x415786D3,10,0.03,0.055); // node 10
   //g.addInNeighbor(0x415DB670,11,0,0); // node 11
-  g.addInNeighbor(0x415786A9,12,0.05,0.07); // node 12
-  g.addInNeighbor(0x4157847B,13,0.04,0.06); // node 13
+  //g.addInNeighbor(0x415786A9,12,0,0); // node 12
+  //g.addInNeighbor(0x4157847B,13,0,0); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14
   //g.addInNeighbor(0x415DB673,15,0,0); // node 15
   //g.addInNeighbor(0x415DB684,19,0,0); // node 19
   //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
 
   g.configureLinkedList();
-  s.setActiveDemand(0);
-  s.setReactiveDemand(0);
+  s.setActiveDemand(0.2);
+  s.setReactiveDemand(0.1);
   s.setVoltageWeight(0.8);
   s.setActiveBalanceWeight(0.6);
   s.setReactiveBalanceWeight(0.6);
@@ -154,8 +154,8 @@ void loop() {
   {
     if(a.isSynced())
     {
-      Serial.println("Starting Economic Dispatch Algorithm");
-      ecoDispatch = a.economicDispatchAlgorithm(true,0.1,1000);
+      Serial.println("Starting Primal Dual Algorithm");
+      primaldual = a.primalDualAlgorithm(false,0.1,1000);
       int bbbb = Serial.read();
       
 //      Serial.println("P      Q      bP      bQ      sqV      Mu      Nu");
@@ -173,13 +173,13 @@ void loop() {
 //      Serial.print("  ");
 //      Serial.print(s.getNu(),4);
       
-      while (Serial.available() == 0) 
-      { 
-        //simply makes the arduino wait until commputer sends signal        
+        while (Serial.available() == 0) 
+        { 
+          //simply makes the arduino wait until commputer sends signal        
+        }
+         
+         a.resync();
       }
-       
-       a.resync();
-    }
   }
 }
 
@@ -199,15 +199,15 @@ void sendConsensusResults()
   //Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low);
   //Serial.println("Sent Request Packet");
   ////////////////////////////////////////////////////////////////
-  int node9_ip = 69; //part of ip address for node 9 on the HIL side 
-  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node9_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+  int node12_ip = 72; //part of ip address for node 1 on the HIL side    #NODE
+  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node12_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)   #NODE
   Mb.MbmRun();
-  //SerialUSB.println("Sent Stuff to typhoon");
+  //Serial.println("Received Response");
 }
 
 void receiveTyphoonData()
 {
-  int node9_ip = 69; //part of ip address for node 9 on the HIL side
-  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,2,0,node9_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)
+  int node12_ip = 72; //part of ip address for node 1 on the HIL side   #NODE
+  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,2,0,node12_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)   #NODE
   Mb.MbmRun();
 }

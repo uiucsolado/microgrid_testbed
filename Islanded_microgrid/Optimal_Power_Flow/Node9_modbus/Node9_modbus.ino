@@ -1,8 +1,8 @@
 #include <Streaming.h>
 #include <XBee.h>
 //#include <Dyno.h>
-#include <OGraph_PDRC.h>
-#include <OAgent_PDRC.h>
+#include <OGraph_OPF.h>
+#include <OAgent_OPF.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
@@ -15,8 +15,8 @@ ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
 OLocalVertex s = OLocalVertex(0x415786E1,9,0,1,1,1,1,10);  //#NODE
 LinkedList l = LinkedList();  //#NODE
-OGraph_PDRC g = OGraph_PDRC(&s,&l);
-OAgent_PDRC a = OAgent_PDRC(&xbee,&rx,&g,true,true); // argument rx?
+OGraph_OPF g = OGraph_OPF(&s,&l);
+OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,true,true); // argument rx?
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
@@ -47,7 +47,7 @@ int count;
 int pos;
 long t;
 float D;
-bool ecoDispatch;
+bool primaldual;
 
 void setup()  {
   Serial.begin(38400);
@@ -68,8 +68,8 @@ void setup()  {
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
   //g.addInNeighbor(0x415786E1,9,0,0); // node 9
-  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
+  //g.addInNeighbor(0x415786D3,10,0.01,0.01); // node 10
+  //g.addInNeighbor(0x415DB670,11,0.01,0.01); // node 11
   g.addInNeighbor(0x415786A9,12,0.05,0.07); // node 12
   g.addInNeighbor(0x4157847B,13,0.04,0.06); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14
@@ -154,8 +154,8 @@ void loop() {
   {
     if(a.isSynced())
     {
-      Serial.println("Starting Economic Dispatch Algorithm");
-      ecoDispatch = a.economicDispatchAlgorithm(true,0.1,1000);
+      Serial.println("Starting Primal Dual Algorithm");
+      primaldual = a.primalDualAlgorithm(true,0.1,1000);
       int bbbb = Serial.read();
       
 //      Serial.println("P      Q      bP      bQ      sqV      Mu      Nu");
