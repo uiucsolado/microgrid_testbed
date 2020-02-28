@@ -22,7 +22,6 @@ OLocalVertex s = OLocalVertex(0x4174F1AA,0,0.225*D_base,-2.1667*base,0.1667*base
 OGraph_OPF g = OGraph_OPF(&s);
 OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,true,true); // argument rx?
 
-uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
 uint8_t cPin = 48;     // coordination enabled led pin
 
@@ -38,7 +37,6 @@ float error = 0;
 float u_f =0;
 float u_v =0;
 float u_set=0.85;
-int r = 0;
 
 //Modbus Communication
 MgsModbus Mb; 
@@ -61,8 +59,7 @@ int fc;
 int ref;
 int count;
 int pos;
-long t;
-long tt;
+
 float eps = 0.001;
 uint8_t genFlag_f=1;
 uint8_t genFlag_v=1;
@@ -78,23 +75,23 @@ void setup()  {
   
   xbee.setSerial(Serial3); //Specify the serial port for xbee
 //Define the Neighboring nodes
-  //g.addInNeighbor(0x4174F1AA); // node 1
-  g.addInNeighbor(0x4174F186,2,0,0); // node 2
-  //g.addInNeighbor(0x4151C692); // node 3
-  //g.addInNeighbor(0x4151C48B); // node 4
-  //g.addInNeighbor(0x4151C688); // node 5
-  //g.addInNeighbor(0x4151C6AB); // node 6
-  //g.addInNeighbor(0x4151C6CB); // node 7
-  //g.addInNeighbor(0x4151C6AC); // node 8
-  //g.addInNeighbor(0x415786E1); // node 9
-  //g.addInNeighbor(0x415786D3); // node 10
-  //g.addInNeighbor(0x415DB670); // node 11
-  //g.addInNeighbor(0x415786A9); // node 12
-  //g.addInNeighbor(0x4157847B); // node 13
-  //g.addInNeighbor(0x415DB664); // node 14
-  //g.addInNeighbor(0x415DB673); // node 15
-  //g.addInNeighbor(0x415DB684); // node 19
-  //g.addInNeighbor(0x41516F0B); // node 20
+  //g.addInNeighbor(0x4174F1AA,1,0,0); // node 1
+  //g.addInNeighbor(0x4174F186,2,0,0); // node 2
+  //g.addInNeighbor(0x4151C692,3,0,0); // node 3
+  //g.addInNeighbor(0x4151C48B,4,0,0); // node 4
+  //g.addInNeighbor(0x4151C688,5,0,0); // node 5
+  //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
+  //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
+  //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
+  //g.addInNeighbor(0x415786E1,9,0,0); // node 9
+  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
+  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
+  //g.addInNeighbor(0x415786A9,12,0,0); // node 12
+  g.addInNeighbor(0x4157847B,13,0,0); // node 13
+  //g.addInNeighbor(0x415DB664,14,0,0); // node 14
+  //g.addInNeighbor(0x415DB673,15,0,0); // node 15
+  g.addInNeighbor(0x415DB684,19,0,0); // node 19
+  //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
   
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
@@ -105,7 +102,6 @@ void setup()  {
      Mb.MbData[i] = 0;
   }
 }
-
 
 void loop() {
   if(de == false) 
@@ -252,6 +248,7 @@ void loop() {
     }
   }
 }
+
 void sendConsensusResults()
 {
   //VARIABLES NOT BEING USED////////////////////////////////////
