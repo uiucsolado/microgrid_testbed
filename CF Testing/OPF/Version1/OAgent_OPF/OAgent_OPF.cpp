@@ -920,8 +920,9 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
     float new_bn[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) new_bn[i]=0;
 
     /// Control Parameters
-    // float alpha=0.1,beta1=0.3,beta2=0.3,beta3=3,alpha_V=1,iterations=500; uint8_t comm=5;
-    float alpha=0.1,beta1=0.6,beta2=0.6,beta3=2,alpha_V=1,iterations=500; uint8_t comm=1;
+    // float alpha=0.1,alpha_P=1,alpha_Q=1,beta1=0.3,beta2=0.3,beta3=3,alpha_V=1,iterations=500; uint8_t comm=5;
+    // float alpha=0.1,alpha_P=1,alpha_Q=1,beta1=0.6,beta2=0.6,beta3=2,alpha_V=1,iterations=500; uint8_t comm=2;
+    float alpha=0.1,alpha_P=2,alpha_Q=2,beta1=0.6,beta2=0.6,beta3=2,alpha_V=1,iterations=1000; uint8_t comm=3;
     // float alpha=0.05,beta1=0.3,beta2=0.3,beta3=3,alpha_V=1,iterations=1000; uint8_t comm=10;
 
     for (uint8_t i:neighbors) {
@@ -972,7 +973,7 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
         if (k%comm==0){
             int i=0;
             start = millis();   // initialize timer
-            while (millis()-start<=1000)
+            while (millis()-start<=500)
             {
                  uint8_t nei_to_send=neighbors[i]; 
                  i++; if (i==_G->getN()) i=0;
@@ -1173,8 +1174,8 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
 
         }
 
-        dP = P+lambda+beta1*bP;
-        dQ = Q+mu+beta2*bQ;
+        dP = alpha_P*P+lambda+beta1*bP;
+        dQ = alpha_Q*Q+mu+beta2*bQ;
         dV = alpha_V*(V-1);
         for (uint8_t i:neighbors){
             if (i>nodeID) dV-=lmbd_v[i-1];
