@@ -1187,6 +1187,7 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     }
 
     float x[_G->getN()]; for (int i=0;i<_G->getN();i++)x[i]=0;
+    float lambda[NUM_REMOTE_VERTICES]]; for (int i=0;i<NUM_REMOTE_VERTICES];i++)lambda[i]=1;
     float Hessian_lambda[NUM_REMOTE_VERTICES][NUM_REMOTE_VERTICES]; 
     Hessian_lambda = multiply(transpose(N),J);
     Hessian_lambda = multiply(Hessian_lambda,N);
@@ -1196,19 +1197,24 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     float grad_lambda[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)grad_lambda[i]=0;
     float Newton_direction[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)Newton_direction[i]=0;
 
-    for (int k=0;k<5;k++)
+    for (int k=0;k<1;k++)
     {
         x = -dot(multiply(J,N),lambda)-matbyvec(J,g)+g;
         for (uint8_t i:neighbors) {
             grad_lambda[i] = -dot(transpose(N[i]),x);       
         } 
+        _print2Darray_(Hessian_lambda,5);
+        _print1Darray_(grad_lambda,5);
         Newton_direction = Conjugate_gradient(Hessian_lambda,-grad_lambda,Newton_direction);
+        float error = matbyvec(Hessian_lambda,Newton_direction) + grad_lambda;
+        _print1Darray_(error,6);
         lambda += Newton_direction;
     }
 }
 
 float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
 
+	Serial<<"Executing Conjugate Gradient Method"<<endl;
 
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
@@ -1231,7 +1237,7 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
             j++;
         }
     }
-
+    uint8_t received_from[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
     bool self_flags[NUM_REMOTE_VERTICES];
     bool neighbor_flag=false;
     bool neighbor_flags[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)neighbor_flags[i]=false;
@@ -1268,6 +1274,7 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
                     received_from[neighborID-1]=1; 
                     float* tmp=_getPacketFromChild(); 
                     r[neighborID-1]+=tmp[0];
+                    Serial<<"Received from "<<neighborID<<endl;
                 }
             }
 
@@ -1276,30 +1283,56 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
 
     float p[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) p[j]=-r[j];
     float q[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) q[j]=0;
+    for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
     for (int k=0;k<20;k++)
     {
 
         q = matbyvec(H,p);
         cnt=0; i = 0;
-        while (cnt<children){
+        while (cnt<_G->getN()){
             uint8_t nei_to_send=neighbors[i]; 
             i++; if (i==_G->getN()) i=0;
             if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))
+            {
+            	if (!received_from[neighborID-1])
                 {
-                    neighbor_flag = _getFlagFromChild();
-                    if ()
-                    if (!received_from[neighborID-1]){
-                        cnt+=1;
-                        received_from[neighborID-1]=1; 
 
-                        float* tmp=_getPacketFromChild(); 
-                        if tmp[0]
-                        q[neighborID-1]+=tmp[0];
-                    }
+                	if (neighborID>nodeID)
+                	{
+                		neighbor_flag = _getFlagFromChild();
+	                    if (neighbor_flag!=neighbor_flags[neighborID-1])
+	                    {
+	                        cnt+=1;
+	                        self_flags[neighborID-1] =!self_flags[neighborID-1];
+	                        neighbor_flags[neighborID-1] = neighbor_flag;
+
+	                        float* tmp=_getPacketFromChild(); 
+	                        q[neighborID-1]+=tmp[0];
+	                    }
+                	}
+                	else if (neighborID<nodeID)
+                	{
+                		neighbor_flag = _getFlagFromParent();
+	                    if (neighbor_flag!=neighbor_flags[neighborID-1])
+	                    {
+	                    	received_from[neighborID-1]=1; 
+	                        cnt+=1;
+	                        self_flags[neighborID-1] =!self_flags[neighborID-1];
+	                        neighbor_flags[neighborID-1] = neighbor_flag;
+
+	                        float* tmp=_getPacketFromParent(); 
+	                        q[neighborID-1]+=tmp[0];
+	                    }
+                	}
                 }
+                    
+            }            
 
-            _SendToParent(nei_to_send,q[nei_to_send-1]);
+            if (nei_to_send<nodeID)_SendToParent(nei_to_send,self_flags[nei_to_send-1],q[nei_to_send-1]);
+            else _SendToChild(nei_to_send,self_flags[nei_to_send-1],q[nei_to_send-1]);
         }
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
+
 
         int mu=0,nu=0;
         for (uint8_t i:neighbors) {
@@ -1307,7 +1340,8 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
             nu += p[i]*q[i];   
         }
 
-        alpha = fairSplitRatioConsensus_RSL(mu,nu,50,500);
+
+        alpha = RunRatioConsensus(mu,nu,50,neighbors,self_flags,neighbor_flags,old_data);
         float x_prev = x, r_prev = r;
         x = x + alpha*p;
         r = r + alpha*q;
@@ -1324,6 +1358,78 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
     return x;
     
 }
+
+float OAgent_OPF::RunRatioConsensus(float mu,float nu,uint8_t iterations,uint8_t neighbors[_G->getN()-1],bool self_flags[NUM_REMOTE_VERTICES],bool neighbor_flags[NUM_REMOTE_VERTICES],float old_data[NUM_REMOTE_VERTICES]){
+
+	bool ratio_cons_start[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) ratio_cons_start[j] = false;
+    for (uint8_t i:neighbors) {
+        if (i>nodeID) ratio_cons_start[i] = true;
+    }
+
+	// float run_sum_mu=0,run_sum_nu=0;
+	float run_sum_mu[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) run_sum_mu[j]=0;
+	float run_sum_nu[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) run_sum_nu[j]=0;
+	uint8_t out_deg = _G->getN();
+
+	int i=0; 
+	for (int _=0;_<iterations;_++){
+		uint8_t nei_to_send=neighbors[i]; 
+        i++; if (i==_G->getN()) i=0;
+        if (nei_to_send<nodeID && !ratio_cons_start[nei_to_send-1]){
+        	_SendToParent(nei_to_send,self_flags[nei_to_send-1],old_data[nei_to_send-1]);
+		}
+		_CG_RC_SendPacket(run_sum_mu[nodeID-1],run_sum_nu[nodeID-1]);
+
+		unsigned long start = millis();   // initialize timer
+        while (millis()-start<=500)
+        {
+			if(_waitForUnicastPacket(neighborID,nodeID,CG_RC_SUBHEADER,true,100))
+	        {
+	        	float* tmp=_CG_RC_ReceivePacket(); 
+	        	mu+= tmp[0]-run_sum_mu[neighborID-1];
+	        	nu+= tmp[1]-run_sum_nu[neighborID-1];
+	        	run_sum_mu[neighborID-1] = tmp[0];
+	        	run_sum_nu[neighborID-1] = tmp[1];
+	        }
+	    }
+	    run_sum_mu += mu/out_deg;run_sum_nu += nu/out_deg;
+
+	}
+	return mu/nu;
+
+}
+
+// Functions for Printing 
+void OAgent_OPF::_print_(String s,float val,uint8_t precision){
+
+    Serial<<s<<" "; Serial.print(val,precision); Serial<<endl;
+    delay(5);
+}
+void OAgent_OPF::_print2Darray_(String s,float** A,uint8_t precision){
+    int m = sizeof(A)/sizeof(A[0]), n = sizeof(A[0])/sizeof(A[0][0]);
+    Serial<<s<<":"<<endl;
+    for (int i=0;i<m;i++){
+        for (int j=0;j<n;j++){
+            Serial.print(val,precision);Serial<<" ";
+        }
+        Serial<<endl;
+    }
+    delay(5);
+    
+}
+
+void OAgent_OPF::_print1Darray_(String s,float* a,uint8_t precision){
+    int n = sizeof(A)/sizeof(A[0]);
+    Serial<<s<<":"<<endl;
+    for (int i=0;i<n;i++){
+        Serial.print(val,precision);Serial<<" ";
+    }
+    Serial<<endl;
+    delay(5);
+}
+
+
+// Matrix, vector algebraic operations
 
 float OAgent_OPF::dot(float*a, float*b){
     float res=0;
@@ -1388,6 +1494,7 @@ float** OAgent_OPF::multiply(float*A, float*B){
         return x;
     }
 
+/// Functions for Communicating Data
 void OAgent_OPF::_sender_helper(float x,uint8_t* sign_y,uint32_t* y){
         if (x < 0) 
         {
@@ -1401,8 +1508,8 @@ void OAgent_OPF::_sender_helper(float x,uint8_t* sign_y,uint32_t* y){
         }
     }
 
-void OAgent_OPF::_SendToChild(uint16_t recipientID, bool flag_OPF, float* vars, float* grad) {
-    uint8_t payload[25];
+void OAgent_OPF::_SendToChild(uint16_t recipientID, bool flag_OPF, float num) {
+    uint8_t payload[10];
 
     payload[0] = OPF_HEADER;
     payload[1] = OPF_HEADER >> 8;
@@ -1413,22 +1520,12 @@ void OAgent_OPF::_SendToChild(uint16_t recipientID, bool flag_OPF, float* vars, 
     // fp,yp,fq,yq,nu,yn,fv,yv,lmbd_v,ylmbd;
 
     uint8_t sign_var; uint32_t var;
-    for (int i=5,j=0;i<15,j<2;i=i+5,j++){
-        _sender_helper(vars[j],&sign_var,&var);
-        payload[i]=sign_var;
-        payload[i+1] = var;
-        payload[i+2] = var >> 8;
-        payload[i+3] = var >> 16;
-        payload[i+4] = var >> 24;
-    }
-    for (int i=15,j=0;i<25,j<2;i=i+5,j++){
-        _sender_helper(grad[j],&sign_var,&var);
-        payload[i]=sign_var;
-        payload[i+1] = var;
-        payload[i+2] = var >> 8;
-        payload[i+3] = var >> 16;
-        payload[i+4] = var >> 24;
-    }
+    _sender_helper(num,&sign_var,&var);
+    payload[5]=sign_var;
+    payload[6] = var;
+    payload[7] = var >> 8;
+    payload[8] = var >> 16;
+    payload[9] = var >> 24;
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
@@ -1437,8 +1534,8 @@ void OAgent_OPF::_SendToChild(uint16_t recipientID, bool flag_OPF, float* vars, 
     #endif
 }
 
-void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float* vars, float* grad){
-    uint8_t payload[45];
+void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float num){
+    uint8_t payload[10];
 
     payload[0] = OPF_HEADER;
     payload[1] = OPF_HEADER >> 8;
@@ -1449,22 +1546,12 @@ void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float* vars,
     // fp,yp,fq,yq,nu,yn,fv,yv,lmbd_v,ylmbd;
 
     uint8_t sign_var; uint32_t var;
-    for (int i=5,j=0;i<25,j<4;i=i+5,j++){
-        _sender_helper(vars[j],&sign_var,&var);
-        payload[i]=sign_var;
-        payload[i+1] = var;
-        payload[i+2] = var >> 8;
-        payload[i+3] = var >> 16;
-        payload[i+4] = var >> 24;
-    }
-    for (int i=25,j=0;i<45,j<4;i=i+5,j++){
-        _sender_helper(grad[j],&sign_var,&var);
-        payload[i]=sign_var;
-        payload[i+1] = var;
-        payload[i+2] = var >> 8;
-        payload[i+3] = var >> 16;
-        payload[i+4] = var >> 24;
-    }
+    _sender_helper(num,&sign_var,&var);
+    payload[5]=sign_var;
+    payload[6] = var;
+    payload[7] = var >> 8;
+    payload[8] = var >> 16;
+    payload[9] = var >> 24;
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
@@ -1474,30 +1561,56 @@ void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float* vars,
 }
 
 
-float* OAgent_OPF::_getPacketFromChild() {
-    float* a = new float[8];
+void OAgent_OPF::_CG_RC_SendPacket(uint16_t recipientID, float mu, float nu){
+    uint8_t payload[10];
+
+    payload[0] = CG_RC_HEADER;
+    payload[1] = CG_RC_HEADER >> 8;
+    payload[2] = recipientID;
+    payload[3] = recipientID >> 8;
+
+    uint8_t sign_var; uint32_t var;
+    _sender_helper(num,&sign_var,&var);
+    payload[4]=sign_var;
+    payload[5] = var;
+    payload[6] = var >> 8;
+    payload[7] = var >> 16;
+    payload[8] = var >> 24;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+float OAgent_OPF::_CG_RC_ReceivePacket() {
+    float a;
     int32_t mag_x; int8_t sign_x; float x;
-    for (int i=5,j=0;i<45,j<8;i=i+5,j++){
-        mag_x = (int32_t(_rx->getData(i+4)) << 24) + (int32_t(_rx->getData(i+3)) << 16) + (int16_t(_rx->getData(i+2)) << 8) + int8_t(_rx->getData(i+1));
-        sign_x = -1 + ((_rx->getData(i))*2);
-        x = (float) (sign_x*mag_x);
-        a[j] = x/BASE;
-
-    }
+    mag_x = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
+    sign_x = -1 + ((_rx->getData(4))*2);
+    x = (float) (sign_x*mag_x);
+    a = x/BASE;
     return a;
 }
 
-float* OAgent_OPF::_getPacketFromParent() {
-    float* a = new float[4];
+float OAgent_OPF::_getPacketFromChild() {
+    float a;
     int32_t mag_x; int8_t sign_x; float x;
-    for (int i=5,j=0;i<25,j<4;i=i+5,j++){
-        mag_x = (int32_t(_rx->getData(i+4)) << 24) + (int32_t(_rx->getData(i+3)) << 16) + (int16_t(_rx->getData(i+2)) << 8) + int8_t(_rx->getData(i+1));
-        sign_x = -1 + ((_rx->getData(i))*2);
-        x = (float) (sign_x*mag_x);
-        a[j] = x/BASE;
+    mag_x = (int32_t(_rx->getData(9)) << 24) + (int32_t(_rx->getData(8)) << 16) + (int16_t(_rx->getData(7)) << 8) + int8_t(_rx->getData(6));
+    sign_x = -1 + ((_rx->getData(5))*2);
+    x = (float) (sign_x*mag_x);
+    a = x/BASE;
+    return a;
+}
 
-    }
-    // Serial<<a[0]<<endl;
+float OAgent_OPF::_getPacketFromParent() {
+    float a;
+    int32_t mag_x; int8_t sign_x; float x;
+    mag_x = (int32_t(_rx->getData(9)) << 24) + (int32_t(_rx->getData(8)) << 16) + (int16_t(_rx->getData(7)) << 8) + int8_t(_rx->getData(6));
+    sign_x = -1 + ((_rx->getData(5))*2);
+    x = (float) (sign_x*mag_x);
+    a = x/BASE;
     return a;
 }
 

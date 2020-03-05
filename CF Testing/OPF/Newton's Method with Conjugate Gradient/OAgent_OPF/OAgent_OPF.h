@@ -27,6 +27,7 @@
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define OPF_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
+#define CG_RC_SUBHEADER                   0x7551 // Conjugate gradient ratio-consensus subheader 
 #define OPF_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
 #define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
@@ -131,15 +132,16 @@ class OAgent_OPF {
         void _sender_helper(float x,uint8_t* sign_y,uint32_t* y);
         void _SendToChild(uint16_t recipientID, bool flag_OPF, float* data);
         void _SendToParent(uint16_t recipientID, bool flag_OPF, float* data);
-        float* _getPacketFromChild();
-        float* _getPacketFromParent();
+        void _CG_RC_SendPacket(uint16_t recipientID, float mu, float nu);
+        float _CG_RC_ReceivePacket();
+        float _getPacketFromChild();
+        float _getPacketFromParent();
         bool _getFlagFromChild();
         bool _getFlagFromParent();
 
-        void _print_(String s,float val,uint8_t precision){
-
-            Serial<<s<<" "; Serial.print(val,precision); Serial<<endl;
-        }
+        void _print_(String s,float val,uint8_t precision);
+        void _print2Darray_(String s,float** A,uint8_t precision);
+        void _print1Darray_(String s,float* a,uint8_t precision);
 
         // communication link activation methods
         bool linkActivationAlgorithm();

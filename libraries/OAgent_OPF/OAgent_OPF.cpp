@@ -1175,8 +1175,13 @@ bool OAgent_OPF::AcceleratedOPF(bool genBus) {
             }
             else received_from[i-1]=0;
 
+<<<<<<< Updated upstream
             new_bn[i-1] = new_fv[i-1] - zeta*2*((n+(i-1))->getResistance())*new_fp[i-1] - zeta*2*((n+(i-1))->getReactance())*new_fq[i-1];
             //Serial<<"R and X for node "<<i<<" are "<<((n+(i-1))->getResistance())<<" and "<<((n+(i-1))->getReactance())<<endl;
+=======
+            new_bn[i-1] = new_fv[i-1] - 2*((n+(i-1))->getResistance())*new_fp[i-1] - 2*((n+(i-1))->getReactance())*new_fq[i-1];
+            
+>>>>>>> Stashed changes
 
         }
 
