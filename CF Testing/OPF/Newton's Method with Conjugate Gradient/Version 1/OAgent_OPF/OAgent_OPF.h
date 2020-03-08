@@ -32,7 +32,7 @@
 #define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
 #define WINDOW_LENGTH                    1000     // time length for each window in a period
-#define BASE                             1000000000  // base for transmitting decimals
+#define BASE                             10000000  // base for transmitting decimals
 
 #define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "
 #define ACTCODE_HEADER                   0x2221 // Primal-dual acknowledgment header is "!
@@ -113,35 +113,34 @@ class OAgent_OPF {
         bool OptimalPowerFlow(bool genBus, float alpha, uint8_t iterations);
         bool leaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool nonleaderOPF(bool genBus, float alpha, uint8_t iterations);
-        bool StandardOPF(bool genBus);
-        bool AcceleratedOPF(bool genBus);
         bool SecondOrderOPF(bool genBus);
-        float* Conjugate_gradient(float**A, float*b, float*x_init);
+        float* Conjugate_gradient(float*A,int rows, int cols, float*b, float*x_init);
+        float RunRatioConsensus(uint16_t nodeID,float *mu,float *nu,uint8_t iterations,uint8_t *neighbors,int num_neighbors,bool self_flags[NUM_REMOTE_VERTICES],bool neighbor_flags[NUM_REMOTE_VERTICES],float old_data[NUM_REMOTE_VERTICES]);
 
         // Algebraic operations
         float _clip(float x, float xmin, float xmax);
 
         // Matrix-vector algebraic operations 
         float dot(float*a, float*b);
-        float* matbyvec(float**A, float*b);
-        float** transpose(float *A);
-        float** multiply(float*A, float*B);
+        float* matbyvec(float*a,int rows, int cols, float*b);
+        void transpose(float *a_T, float *a,int rows, int cols);
+        void multiply(float *res, float*a,int rows_A, int cols_A, float* b, int rows_B, int cols_B);
 
         
        	// Helper functions for communicating and receiving data 
         void _sender_helper(float x,uint8_t* sign_y,uint32_t* y);
-        void _SendToChild(uint16_t recipientID, bool flag_OPF, float* data);
-        void _SendToParent(uint16_t recipientID, bool flag_OPF, float* data);
-        void _CG_RC_SendPacket(uint16_t recipientID, float mu, float nu);
-        float _CG_RC_ReceivePacket();
+        void _SendToChild(uint16_t recipientID, bool flag_OPF, float data);
+        void _SendToParent(uint16_t recipientID, bool flag_OPF, float data);
+        void _CG_RC_SendPacket(float mu, float nu, uint8_t k);
+        float* _CG_RC_ReceivePacket();
         float _getPacketFromChild();
         float _getPacketFromParent();
         bool _getFlagFromChild();
         bool _getFlagFromParent();
 
         void _print_(String s,float val,uint8_t precision);
-        void _print2Darray_(String s,float** A,uint8_t precision);
-        void _print1Darray_(String s,float* a,uint8_t precision);
+        void _print2Darray_(String s,float* A,int rows,int cols,uint8_t precision);
+        void _print1Darray_(String s,float* a,int size, uint8_t precision);
 
         // communication link activation methods
         bool linkActivationAlgorithm();
@@ -201,15 +200,15 @@ class OAgent_OPF {
         //Sid
         long _buffer2;
 
-        //Olaolu's addition
-        float _buffer_fP[2000];
+        // //Olaolu's addition
+        // float _buffer_fP[2000];
         
-        float _buffer_P[2000];
-        float _buffer_bP[2000];
-        float _buffer_Q[2000];
-        float _buffer_bQ[2000];
-        float _buffer_V[2000];
-        float _buffer_bn[2000];
+        // float _buffer_P[2000];
+        // float _buffer_bP[2000];
+        // float _buffer_Q[2000];
+        // float _buffer_bQ[2000];
+        // float _buffer_V[2000];
+        // float _buffer_bn[2000];
 
         int node_counter[NUM_REMOTE_VERTICES];          //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //Methods

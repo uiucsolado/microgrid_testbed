@@ -12,6 +12,9 @@
 
 #include "OAgent_OPF.h"
 #include "Streaming.h"
+#include <vector>
+
+using namespace std;
 
 //#define VERBOSE
 
@@ -767,7 +770,7 @@ bool OAgent_OPF::leaderOPF(bool genBus, float alpha, uint8_t iterations) {
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = StandardOPF(genBus);
-            gamma = AcceleratedOPF(genBus);
+            gamma = SecondOrderOPF(genBus);
         }
     }        
     return gamma;
@@ -792,7 +795,7 @@ bool OAgent_OPF::nonleaderOPF(bool genBus, float alpha, uint8_t iterations) {
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = StandardOPF(genBus);
-            gamma = AcceleratedOPF(genBus);
+            gamma = SecondOrderOPF(genBus);
         }
         //digitalWrite(48,LOW);
     }
@@ -804,315 +807,6 @@ bool OAgent_OPF::nonleaderOPF(bool genBus, float alpha, uint8_t iterations) {
     return gamma;
 }
 
-bool OAgent_OPF::AcceleratedOPF(bool genBus) {
-    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
-    ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
-    LinkedList * l = _G->getLinkedList();
-
-    uint16_t nodeID = s->getID();
-    uint8_t neighborID;
-    uint8_t num_parents=0;
-
-    uint8_t neighbors[_G->getN()-1];
-    uint8_t *p = s->getStatusP();
-    if (genBus){
-        Serial<<"Node is generator"<<endl;
-        delay(5);}
-    else
-        {Serial<<"Node is load"<<endl;
-        delay(5);}
-    Serial<<"Node has the following neighbors:"<<endl;
-    delay(5);
-    int j=0;
-    for (uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
-    {
-        if(*(p+i)>=2)
-        {
-            neighbors[j]=i+1;
-            Serial <<"Neighbor "<<neighbors[j]<<endl;
-            delay(5);
-            j++;
-        }
-    }
-    Serial<<"Node has "<<_G->getN()-1<<" neighbors"<<endl;
-    delay(5);
-
-    bool self_flags[NUM_REMOTE_VERTICES];
-    bool neighbor_flag=false;
-    bool neighbor_flags[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)neighbor_flags[i]=false;
-    for (uint8_t i:neighbors) {
-        if (i>nodeID) {
-            self_flags[i-1]=true;
-            Serial<<"Initial flag is true for neighbor "<<i<<endl; delay(5);
-        }
-        else{
-            self_flags[i-1]=false;
-            Serial<<"Initial flag is false for neighbor "<<i<<endl; delay(5);
-            num_parents+=1;
-        }
-        Serial<<"Flag is "<<self_flags[i-1]<<endl;
-    }
-
-    
-    float fp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)fp[i]=0;
-    float yp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)yp[i]=0;
-    float fq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)fq[i]=0;
-    float yq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)yq[i]=0;
-    float parent_V[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)parent_V[i]=1;
-    float child_V[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)child_V[i]=1;
-    float adjust_V[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)adjust_V[i]=0;
-
-    float new_fp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)new_fp[i]=0;
-    float new_yp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)new_yp[i]=0; 
-    float new_fq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)new_fq[i]=0;
-    float new_yq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)new_yq[i]=0;
-
-
-    float comm_self_fp[NUM_REMOTE_VERTICES];  for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_self_fp[i]=0;
-    float comm_self_yp[NUM_REMOTE_VERTICES];  for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_self_yp[i]=0;   
-    float comm_self_fq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_self_fq[i]=0;
-    float comm_self_yq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_self_yq[i]=0;
-    float comm_V[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_V[i]=1;
-    float comm_adjust_V[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_adjust_V[i]=0;
-
-
-    float comm_neighbor_fp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_neighbor_fp[i]=0;
-    float comm_neighbor_yp[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_neighbor_yp[i]=0;
-    float comm_neighbor_fq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_neighbor_fq[i]=0;
-    float comm_neighbor_yq[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)comm_neighbor_yq[i]=0;
-
-    uint8_t received_from[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
-    uint8_t received_from_parents[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from_parents[i]=0;
-    uint8_t received_from_children[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from_children[i]=0;
-    
-    float self_fp,neighbor_fp,self_old_fp,neighbor_old_fp,self_yp,neighbor_yp,self_old_yp,neighbor_old_yp;
-    float self_fq,neighbor_fq,self_old_fq,neighbor_old_fq,self_yq,neighbor_yq,self_old_yq,neighbor_old_yq;
-    float neighbor_V, change_V;
-
-    bool pos_flow;
-
-    float P=0,Q=0;  
-    float Pd = s->getActiveDemand(), Qd = s->getReactiveDemand();                                              // active injection
-    float bP = P - Pd, bQ = Q - Qd;                                                  // active balance
-    float dP=0,dQ=0;
-    float lambda=0,mu=0;
-
-     /// Control Parameters
-    float alpha=0.1,beta1=0.3,beta2=0.3,alpha_p=1,alpha_q=1,iterations=500; uint8_t comm=5;
-    // float alpha=0.1,beta1=1,beta2=2,beta3=10,alpha_V=1,iterations=1000; uint8_t comm=5;
-    // float alpha=0.05,beta1=0.3,beta2=0.3,beta3=3,alpha_V=1,iterations=1000; uint8_t comm=10;
-
-    for (uint8_t i:neighbors) {
-        if (i>nodeID){
-            yp[i-1] = -2*(lambda+beta1*bP);
-            yq[i-1] = -2*(mu+beta2*bQ);
-        }
-        else{
-            yp[i-1] = 2*(lambda+beta1*bP);
-            yq[i-1] = 2*(mu+beta2*bQ);
-        }           
-
-    }
-
-    float Pmin=0,Pmax=1,Qmin=-1,Qmax=1,Vmin=0.8,Vmax=1.2,pmin=-1,pmax=1,qmin=-1,qmax=1;
-    if (!genBus){Pmin=0;Pmax=0;Qmin=0;Qmax=0;}
-
-
-    unsigned long start;
-    for(uint16_t k = 0; k < iterations; k++)
-    {
-    
-        if (k%50==0){
-            Serial << "Iteration " << k+1<<endl;
-            _print_("P=",P,6);_print_("Q=",Q,6);_print_("bP=",bP,6);_print_("bQ=",bQ,6);delay(5);
-        }
-          
-        float new_bP = 0, new_bQ = 0;
-
-        if (k%comm==0){
-            int i=0;
-            start = millis();   // initialize timer
-            while (millis()-start<=500)
-            {
-                 uint8_t nei_to_send=neighbors[i]; 
-                 i++; if (i==_G->getN()) i=0;
-                if (nei_to_send<nodeID) 
-                {
-                    float vars[4] = {comm_self_fp[nei_to_send-1],comm_self_fq[nei_to_send-1],comm_neighbor_fp[nei_to_send-1],comm_neighbor_fq[nei_to_send-1]};
-                    float grad[4] = {comm_self_yp[nei_to_send-1],comm_self_yq[nei_to_send-1],comm_neighbor_yp[nei_to_send-1],comm_neighbor_yq[nei_to_send-1]};
-                    _SendToParent(nei_to_send,self_flags[nei_to_send-1],vars,grad);
-
-                }
-                else if(nei_to_send>nodeID) 
-                {
-                    float vars[2] = {fp[nei_to_send-1],fq[nei_to_send-1]};
-                    float grad[2] = {yp[nei_to_send-1],yq[nei_to_send-1]};
-                    _SendToChild(nei_to_send,self_flags[nei_to_send-1],vars,grad);
-                }
-                if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))                                // OPF packet available for node from its neighbor
-                {
-                    //Serial<<"neighbor is "<<neighborID<<" "<<received_from[neighborID-1]<<endl; delay(5);
-                    if (!received_from[neighborID-1])
-                    {
-                        
-                        self_fp = fp[neighborID-1]; self_yp = yp[neighborID-1];
-                        self_fq = fq[neighborID-1]; self_yq = yq[neighborID-1];
-                        if(neighborID < nodeID)  // in-coming flow, nodeID - child
-                        {
-                            received_from[neighborID-1]=1;
-                            //get values for fp, fq, and lambda that are received from this neighbor
-                            float* tmp=_getPacketFromParent();
-                            neighbor_fp = tmp[0]; neighbor_yp = tmp[2];
-                            neighbor_fq = tmp[1]; neighbor_yq = tmp[3];
-
-                            // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
-                            neighbor_flag = _getFlagFromParent();                                       // store incoming value of lambda                
-                            // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<endl;delay(5);
-                            if (neighbor_flags[neighborID-1] != neighbor_flag)
-                            {    
-                                // Serial<<"Flow from parent "<<neighborID<<" is "<<neighbor_fp<<" "<<self_fp<<endl;delay(5);   
-                                //get values for fp, fq, and lambda that are currently associated with this neighbor
-                                new_fp[neighborID-1] = 0.5*(self_fp+neighbor_fp)-alpha*yp[neighborID-1];
-                                new_yp[neighborID-1] = 0.5*(self_yp+neighbor_yp);
-                                new_fq[neighborID-1] = 0.5*(self_fq+neighbor_fq)-alpha*yq[neighborID-1];
-                                new_yq[neighborID-1] = 0.5*(self_yq+neighbor_yq);
-
-                                self_flags[neighborID-1] = !self_flags[neighborID-1];
-                                neighbor_flags[neighborID-1] = neighbor_flag;
-
-                                comm_self_fp[neighborID-1]=self_fp; comm_self_yp[neighborID-1]=self_yp;
-                                comm_neighbor_fp[neighborID-1]=neighbor_fp; comm_neighbor_yp[neighborID-1]=neighbor_yp;
-
-                                comm_self_fq[neighborID-1]=self_fq; comm_self_yq[neighborID-1]=self_yq;
-                                comm_neighbor_fq[neighborID-1]=neighbor_fq; comm_neighbor_yq[neighborID-1]=neighbor_yq;
-
-                            }
-                            else
-                            {
-                                new_fp[neighborID-1] = self_fp-alpha*yp[neighborID-1]; new_yp[neighborID-1] = self_yp;
-                                new_fq[neighborID-1] = self_fq-alpha*yq[neighborID-1]; new_yq[neighborID-1] = self_yq;
-
-                            }
-                            new_fp[neighborID-1]=_clip(new_fp[neighborID-1],pmin,pmax);
-                            new_fq[neighborID-1]=_clip(new_fq[neighborID-1],qmin,qmax);
-                            new_bP+=new_fp[neighborID-1];
-                            new_bQ+=new_fq[neighborID-1];
-
-                        }
-
-                        else if((neighborID > nodeID))  //out-going flow, nodeID - parent
-                        {
-                            received_from[neighborID-1]=1; 
-
-                            float* tmp=_getPacketFromChild(); 
-
-                            neighbor_old_fp = tmp[0]; neighbor_old_fq = tmp[1];
-                            self_old_fp = tmp[2]; self_old_fq = tmp[3];                    
-                            neighbor_old_yp = tmp[4]; neighbor_old_yq = tmp[5];
-                            self_old_yp = tmp[6]; self_old_yq = tmp[7];
-                         
-                            neighbor_flag = _getFlagFromChild();                                       // store incoming value of lambda
-                            // Serial<<"Flows from child "<<neighborID<<" are "<<neighbor_old_fp<<" and "<<self_old_fp<<endl;delay(5);
-                            if (neighbor_flags[neighborID-1] != neighbor_flag)
-                            {       
-                                received_from_children[neighborID-1]=1;
-                                //get values for fp, fq, and lambda that are currently associated with this neighbor
-                                new_fp[neighborID-1] = 0.5*(self_old_fp+neighbor_old_fp)+self_fp-self_old_fp-alpha*yp[neighborID-1];
-                                new_yp[neighborID-1] = 0.5*(self_old_yp+neighbor_old_yp)+self_yp-self_old_yp;
-                                new_fq[neighborID-1] = 0.5*(self_old_fq+neighbor_old_fq)+self_fq-self_old_fq-alpha*yq[neighborID-1];
-                                new_yq[neighborID-1] = 0.5*(self_old_yq+neighbor_old_yq)+self_yq-self_old_yq;
-                                //Serial<<"Flag at "<<neighborID<<" is "<<s\elf_flags[neighborID-1]<<" and "<<!self_flags[neighborID-1]<<endl;delay(5);
-                                self_flags[neighborID-1] =!self_flags[neighborID-1];
-                                neighbor_flags[neighborID-1] = neighbor_flag;
-
-                            }
-                            else
-                            {
-                                new_fp[neighborID-1] = self_fp-alpha*yp[neighborID-1]; new_yp[neighborID-1] = self_yp;
-                                new_fq[neighborID-1] = self_fq-alpha*yq[neighborID-1]; new_yq[neighborID-1] = self_yq;
-                                
-
-                            }
-                            new_fp[neighborID-1]=_clip(new_fp[neighborID-1],pmin,pmax);
-                            new_fq[neighborID-1]=_clip(new_fq[neighborID-1],qmin,qmax);
-                            new_bP-=new_fp[neighborID-1];
-                            new_bQ-=new_fq[neighborID-1];
-
-                        }
-                    }
-                }
-               
-            }
-        }
-
-        for (uint8_t i:neighbors) {
-
-            if (!received_from[i-1]){
-                new_fp[i-1] = _clip(fp[i-1] - alpha*yp[i-1],pmin,pmax);
-                new_yp[i-1] = yp[i-1];
-
-                new_fq[i-1] = _clip(fq[i-1] - alpha*yq[i-1],qmin,qmax);
-                new_yq[i-1] = yq[i-1];
-
-                if (i>nodeID){                                    
-                    new_bP-=new_fp[i-1];
-                    new_bQ-=new_fq[i-1];
-                }
-                else{
-                    new_bP+=new_fp[i-1];                  
-                    new_bQ+=new_fq[i-1];
-                }
-
-            }
-            else received_from[i-1] = 0;
-            // new_bn[i-1] = new_fv[i-1] - zeta*2*((n+(i-1))->getResistance())*new_fp[i-1] - zeta*2*((n+(i-1))->getReactance())*new_fq[i-1];
-            //Serial<<"R and X for node "<<i<<" are "<<((n+(i-1))->getResistance())<<" and "<<((n+(i-1))->getReactance())<<endl;
-
-        }
-        dP = lambda+beta1*bP;
-        dQ = mu+beta2*bQ;
-        
-
-        P = _clip(P - alpha*dP,Pmin,Pmax);
-        Q = _clip(Q - alpha*dQ,Qmin,Qmax);
-
-
-        float new_lambda = lambda + alpha*bP;
-        float new_mu = mu + alpha*bQ;
-        new_bP +=P-Pd; new_bQ +=Q-Qd;
-
-        for (uint8_t i:neighbors) {
-            if (i>nodeID){
-                new_yp[i-1] -= 2*(new_lambda+beta1*new_bP-lambda-beta1*bP);
-                new_yq[i-1] -= 2*(new_mu+beta2*new_bQ-mu-beta2*bQ);
-            }
-            else{
-                new_yp[i-1] += 2*(new_lambda+beta1*new_bP-lambda-beta1*bP);
-                new_yq[i-1] += 2*(new_mu+beta2*new_bQ-mu-beta2*bQ);
-            } 
-            new_yp[i-1]+=alpha_p*(new_fp[i-1]-fp[i-1]); new_yq[i-1]+=alpha_q*(new_fq[i-1]-fq[i-1]);
-        }
-
-        for (uint8_t i:neighbors) {
-            fp[i-1]=new_fp[i-1]; yp[i-1]=new_yp[i-1];
-            fq[i-1]=new_fq[i-1]; yq[i-1]=new_yq[i-1];
-        }
-
-        lambda=new_lambda; mu=new_mu;
-        bP = new_bP; bQ = new_bQ; 
-
-        // _buffer_P[k] = P;
-        // _buffer_bP[k] = bP;
-        // _buffer_Q[k] = Q;
-        // _buffer_bQ[k] = bQ;
-        // _buffer_bn[k] = 0; for (uint8_t i:neighbors) {if (_buffer_bn[k]<abs(bn[i-1])) _buffer_bn[k]=abs(bn[i-1]);}
-    }
-
-    _print_("Net active power injection",P-Pd,6);
-    _print_("Net reactive power injection",Q-Qd,6);
-    _print_("Active power imbalance", bP,6);
-    _print_("Reactive power imbalance", bQ,6);
-}
 
 bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
@@ -1153,69 +847,162 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     for (uint8_t i:neighbors) {
         if (i>nodeID) {
             self_flags[i-1]=true;
-            Serial<<"Initial flag is true for neighbor "<<i<<endl; delay(5);
+            // Serial<<"Initial flag is true for neighbor "<<i<<endl; delay(5);
         }
         else{
             self_flags[i-1]=false;
-            Serial<<"Initial flag is false for neighbor "<<i<<endl; delay(5);
+            // Serial<<"Initial flag is false for neighbor "<<i<<endl; delay(5);
             num_parents+=1;
         }
-        Serial<<"Flag is "<<self_flags[i-1]<<endl;
+        // Serial<<"Flag is "<<self_flags[i-1]<<endl;
     }
+    // float **N = new float*[_G->getN()]; 
+    // for(int i=0;i<_G->getN();i++)
+    // {
+    //     N[i]=new float[NUM_REMOTE_VERTICES];
+    // }
 
-    float N[_G->getN()][NUM_REMOTE_VERTICES]; 
+    // /////////////////////////////////////
+    // // Test Ratio Consensus
+
+    // float mu=s->getActiveDemand(),nu=1;
+    // float old_data[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)old_data[i]=0;
+    // Serial<<"mu and nu are "<<mu<<" "<<nu<<endl; delay(5);
+    // float alpha = RunRatioConsensus(nodeID,&mu,&nu,50,neighbors,_G->getN()-1,self_flags,neighbor_flags,old_data);
+    // Serial<<"mu and nu are "<<mu<<" "<<nu<<endl; 
+    // Serial<<"alpha is "<<alpha<<endl;delay(20000);
+    // ////////////////////////////////////
+
+    float N[_G->getN()][NUM_REMOTE_VERTICES];
     for (int i=0;i<_G->getN();i++){
         for (int j=0;j<NUM_REMOTE_VERTICES;j++){
             N[i][j]=0;
         }
     }
     
-    for (int i=0;i<_G->getN();i++){
+    for (int i=0;i<_G->getN()-1;i++){
+        // Serial<<i+1<<" "<<neighbors[i]-1<<endl;delay(5);
         N[i+1][neighbors[i]-1] = 1;
     } 
+    // for (int i=0;i<_G->getN();i++){
+    //     for (int j=0;j<NUM_REMOTE_VERTICES;j++){
+    //         // Serial.print(A[k],precision);Serial<<" "; k++;
+    //         Serial.print(N[i][j],3);Serial<<" ";
+    //     }
+    //     Serial<<endl;
+    // }
+    // delay(10);
+    // _print2Darray_("N Matrix",&N[0][0],_G->getN(),NUM_REMOTE_VERTICES,3);
+    // Serial<<N[0][0]<<" "<<NUM_REMOTE_VERTICES<<endl; delay(5);
+    float N_T[NUM_REMOTE_VERTICES][_G->getN()];
+    transpose(&N_T[0][0],&N[0][0],_G->getN(),NUM_REMOTE_VERTICES);
+    // _print2Darray_("N_T Matrix",&N_T[0][0],NUM_REMOTE_VERTICES,_G->getN(),3);
+    // float **N_T = new float*[NUM_REMOTE_VERTICES]; 
+    // for(int i=0;i<NUM_REMOTE_VERTICES;i++)
+    // {
+    //     N_T[i]=new float[_G->getN()];
+    // }
+    // float **N_T = transpose((float *)N,_G->getN(),NUM_REMOTE_VERTICES);
+    // float **J = new float*[_G->getN()]; 
+    // for(int i=0;i<_G->getN();i++)
+    // {
+    //     J[i]=new float[_G->getN()];
+    // }
+    float J[_G->getN()][_G->getN()];
     if (_G->getN()-1==2){
 
-        float E[3][2],F[2][2],J[3][3];  
-        E = {{1,1,0},{1,0,1}};
-        F = {{2/3,-1/3},{-1/3,2/3}};
-        J = multiply(E,F); 
-        J = multiply(J,transpose(E)); 
+        // float **E = new float*[3]; 
+        // for(int i=0;i<3;i++)
+        // {
+        //     E[i]=new float[2];
+        // }
+        float E[3][2],E_T[2][3],F[2][2],EF[3][2];
+        E[0][0]=1.0;E[0][1]=1.0; E[1][0]=1.0;E[1][1]=0; E[2][0]=0;E[2][1]=1.0;
+        transpose(&E_T[0][0],&E[0][0],3,2);
+        // _print2Darray_("E_T Matrix",&E_T[0][0],2,3,3);
+        // float **F = new float*[2]; 
+        // for(int i=0;i<2;i++)
+        // {
+        //     F[i]=new float[2];
+        // }
+        F[0][0]=2.0/3.0;F[0][1]=-1.0/3.0; F[1][0]=-1.0/3.0;F[1][1]=2.0/3.0;
+        // float **E_T = transpose(E);
+        // float **EF = multiply(E,F);
+        // float **J = multiply(EF,E_T); 
+        multiply(&EF[0][0],&E[0][0],3,2,&F[0][0],2,2);
+        // _print2Darray_("EF Matrix",&EF[0][0],3,2,3);
+        multiply(&J[0][0],&EF[0][0],3,2,&E_T[0][0],2,3);
+        // E={{1,1},{1,0},{0,1}},F = {{2/3,-1/3},{-1/3,2/3}}
+        // vector<vector<float>> E={{1,1},{1,0},{0,1}},F = {{2/3,-1/3},{-1/3,2/3}};
+        // vector<vector<float>> J = multiply(multiply(E,F),transpose(E)); 
     }
     else{
-        float J[2][2];
-        J = {{0.5,0.5},{0.5,0.5}};
+        // vector<vector<float>> J = {{0.5,0.5},{0.5,0.5}};
+        J[0][0]=0.5;J[0][1]=0.5; J[1][0]=0.5;J[1][1]=0.5;
     }
-
-    float x[_G->getN()]; for (int i=0;i<_G->getN();i++)x[i]=0;
-    float lambda[NUM_REMOTE_VERTICES]]; for (int i=0;i<NUM_REMOTE_VERTICES];i++)lambda[i]=1;
-    float Hessian_lambda[NUM_REMOTE_VERTICES][NUM_REMOTE_VERTICES]; 
-    Hessian_lambda = multiply(transpose(N),J);
-    Hessian_lambda = multiply(Hessian_lambda,N);
+     // _print2Darray_("J Matrix",&J[0][0],_G->getN(),_G->getN(),3);
+    // float x[_G->getN()]; for (int i=0;i<_G->getN();i++)x[i]=0;
+    float *x = new float[_G->getN()];
+    float lambda[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)lambda[i]=1;
+    // float Hessian_lambda[NUM_REMOTE_VERTICES][NUM_REMOTE_VERTICES];
+    // float **Hessian_lambda = new float*[NUM_REMOTE_VERTICES]; 
+    // for(int i=0;i<NUM_REMOTE_VERTICES;i++)
+    // {
+    //     Hessian_lambda[i]=new float[NUM_REMOTE_VERTICES];
+    // }
+    float Hessian_lambda[NUM_REMOTE_VERTICES][NUM_REMOTE_VERTICES];
+    float buf1[NUM_REMOTE_VERTICES][_G->getN()],buf2[_G->getN()][NUM_REMOTE_VERTICES];
+    multiply(&buf1[0][0],&N_T[0][0],NUM_REMOTE_VERTICES,_G->getN(),&J[0][0],_G->getN(),_G->getN());
+    multiply(&Hessian_lambda[0][0],&buf1[0][0],NUM_REMOTE_VERTICES,_G->getN(),&N[0][0],_G->getN(),NUM_REMOTE_VERTICES);
     float g[_G->getN()];for (int i=0;i<_G->getN();i++)g[i]=0;
     float Pd = s->getActiveDemand();
     g[0] = Pd;
-    float grad_lambda[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)grad_lambda[i]=0;
-    float Newton_direction[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)Newton_direction[i]=0;
+    float *neg_grad_lambda = new float[NUM_REMOTE_VERTICES];
+    float *Newton_direction = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)Newton_direction[i]=0;
 
-    for (int k=0;k<1;k++)
+    multiply(&buf2[0][0],&J[0][0],_G->getN(),_G->getN(),&N[0][0],_G->getN(),NUM_REMOTE_VERTICES);
+    float *tmp = matbyvec(&J[0][0],_G->getN(),_G->getN(),g);
+    for (int k=0;k<5;k++)
     {
-        x = -dot(multiply(J,N),lambda)-matbyvec(J,g)+g;
-        for (uint8_t i:neighbors) {
-            grad_lambda[i] = -dot(transpose(N[i]),x);       
-        } 
-        _print2Darray_(Hessian_lambda,5);
-        _print1Darray_(grad_lambda,5);
-        Newton_direction = Conjugate_gradient(Hessian_lambda,-grad_lambda,Newton_direction);
-        float error = matbyvec(Hessian_lambda,Newton_direction) + grad_lambda;
-        _print1Darray_(error,6);
-        lambda += Newton_direction;
+        
+        x = matbyvec(&buf2[0][0],_G->getN(),NUM_REMOTE_VERTICES,lambda);
+        // _print1Darray_("x",x,_G->getN(),3);
+        
+        for (int i=0;i<_G->getN();i++) x[i]=-x[i]-tmp[i]+g[i];
+        _print1Darray_("x",x,_G->getN(),5);
+        // _print1Darray_("x",x,_G->getN(),3);
+        neg_grad_lambda = matbyvec(&N_T[0][0],NUM_REMOTE_VERTICES,_G->getN(),x);  
+        // for (int i=0;i<NUM_REMOTE_VERTICES;i++) 
+        //     {neg_grad_lambda[i]=tmp[i];Serial<<neg_grad_lambda[i];} 
+        
+        // _print2Darray_("Hessian Matrix",&Hessian_lambda[0][0],NUM_REMOTE_VERTICES,NUM_REMOTE_VERTICES,3);
+        // _print1Darray_("Negative gradient",neg_grad_lambda,NUM_REMOTE_VERTICES,3);
+        Newton_direction = Conjugate_gradient(&Hessian_lambda[0][0],NUM_REMOTE_VERTICES,NUM_REMOTE_VERTICES,neg_grad_lambda,Newton_direction);       
+
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) lambda[i] += Newton_direction[i];
     }
+    x = matbyvec(&buf2[0][0],_G->getN(),NUM_REMOTE_VERTICES,lambda);
+    for (int i=0;i<_G->getN();i++) x[i]=-x[i]-tmp[i]+g[i];
+    _print1Darray_("x",x,_G->getN(),5);
+    
 }
 
-float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
+float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, float*x_init) {
 
 	Serial<<"Executing Conjugate Gradient Method"<<endl;
 
+    float H[rows][cols];
+    // float **H = new float*[rows]; 
+    // for(int i=0;i<rows;i++)
+    // {
+    //     H[i]=new float[cols];
+    // }
+    int k=0;
+    for (int i=0;i<rows;i++){
+        for (int j=0;j<cols;j++){
+            H[i][j]=*((A+i*cols)+j); k++;
+        }
+    }
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
@@ -1226,12 +1013,12 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
     uint8_t num_nodes=5;
 
     uint8_t neighbors[_G->getN()-1];
-    uint8_t *p = s->getStatusP();
+    uint8_t *status_ptr = s->getStatusP();
    
     int j=0;
     for (uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
     {
-        if(*(p+i)>=2)
+        if(*(status_ptr+i)>=2)
         {
             neighbors[j]=i+1;
             j++;
@@ -1256,47 +1043,69 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
         if (i>nodeID) children+=1;
     }
 
-    float r[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) r[j]=0;
-    float x[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) x[j]=x_init[j];
-    float z[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) z[j]=0;
+    // float *r = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) r[i]=0;
+    // float *x = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) x[i]=x_init[i];
+    // float *z = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) z[i]=0;
 
-    r = matbyvec(H,x)-b;
+    float *r = new float[NUM_REMOTE_VERTICES];
+    float *x = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) x[i]=x_init[i];
+    float *z = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) z[i]=0;
 
+    r = matbyvec(&H[0][0],NUM_REMOTE_VERTICES,NUM_REMOTE_VERTICES,x);
+    for (int i=0;i<NUM_REMOTE_VERTICES;i++) r[i]=r[i]-b[i];
+    // _print1Darray_("r",r,NUM_REMOTE_VERTICES,3);
+    float *new_r = new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) new_r[i]=r[i];
+    // _print1Darray_("new r",new_r,NUM_REMOTE_VERTICES,3);   
     int cnt=0;
     int i = 0;
-    while (cnt<children){
+    unsigned long start = millis();   // initialize timer
+    while (millis()-start<=10000){
         uint8_t nei_to_send=neighbors[i]; 
-        i++; if (i==_G->getN()) i=0;
-        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))
+        i++; if (i==_G->getN()-1) i=0;
+        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
             {
                 if (!received_from[neighborID-1]){
-                    cnt+=1;
-                    received_from[neighborID-1]=1; 
-                    float* tmp=_getPacketFromChild(); 
-                    r[neighborID-1]+=tmp[0];
-                    Serial<<"Received from "<<neighborID<<endl;
+                	received_from[neighborID-1]=1;
+                    if (neighborID>nodeID){
+                        cnt+=1; 
+                        float tmp=_getPacketFromChild(); 
+                        new_r[neighborID-1]+=tmp;
+                        // Serial<<"Received from "<<neighborID<<endl;
+                    }
+                    else if (neighborID<nodeID){
+                        cnt+=1;                        
+                        float tmp=_getPacketFromParent(); 
+                        new_r[neighborID-1]+=tmp;
+                        // Serial<<"Received from "<<neighborID<<endl;
+                    }
                 }
             }
 
-        _SendToParent(nei_to_send,r[nei_to_send-1]);
+        if (nei_to_send<nodeID)_SendToParent(nei_to_send,self_flags[nei_to_send-1],r[nei_to_send-1]);
+        else _SendToChild(nei_to_send,self_flags[nei_to_send-1],r[nei_to_send-1]);
     }
-
-    float p[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) p[j]=-r[j];
-    float q[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) q[j]=0;
+    for (int i=0;i<NUM_REMOTE_VERTICES;i++) r[i]=new_r[i];
+    _print1Darray_("r",r,NUM_REMOTE_VERTICES,5);
+    float *p=new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) p[i]=-r[i];
+    float *q=new float[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) q[i]=0;
+    float *new_q = new float[NUM_REMOTE_VERTICES];
     for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
-    for (int k=0;k<20;k++)
+    for (int k=0;k<5;k++)
     {
-
-        q = matbyvec(H,p);
+        // _print2Darray_("H",&H[0][0],NUM_REMOTE_VERTICES,NUM_REMOTE_VERTICES,3);
+        // _print1Darray_("p",p,NUM_REMOTE_VERTICES,3);
+        q = matbyvec(&H[0][0],NUM_REMOTE_VERTICES,NUM_REMOTE_VERTICES,p);
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) new_q[i]=q[i];
         cnt=0; i = 0;
-        while (cnt<_G->getN()){
+        unsigned long start = millis();   // initialize timer
+        while (millis()-start<=5000){
+        // while (cnt<_G->getN()-1){
             uint8_t nei_to_send=neighbors[i]; 
-            i++; if (i==_G->getN()) i=0;
-            if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))
+            i++; if (i==_G->getN()-1) i=0;
+            if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
             {
             	if (!received_from[neighborID-1])
-                {
-
+                {	 
                 	if (neighborID>nodeID)
                 	{
                 		neighbor_flag = _getFlagFromChild();
@@ -1305,9 +1114,9 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
 	                        cnt+=1;
 	                        self_flags[neighborID-1] =!self_flags[neighborID-1];
 	                        neighbor_flags[neighborID-1] = neighbor_flag;
-
-	                        float* tmp=_getPacketFromChild(); 
-	                        q[neighborID-1]+=tmp[0];
+	                        received_from[neighborID-1]=1;
+	                        float tmp=_getPacketFromChild(); 
+	                        new_q[neighborID-1]+=tmp;
 	                    }
                 	}
                 	else if (neighborID<nodeID)
@@ -1315,13 +1124,12 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
                 		neighbor_flag = _getFlagFromParent();
 	                    if (neighbor_flag!=neighbor_flags[neighborID-1])
 	                    {
-	                    	received_from[neighborID-1]=1; 
 	                        cnt+=1;
 	                        self_flags[neighborID-1] =!self_flags[neighborID-1];
 	                        neighbor_flags[neighborID-1] = neighbor_flag;
-
-	                        float* tmp=_getPacketFromParent(); 
-	                        q[neighborID-1]+=tmp[0];
+	                        received_from[neighborID-1]=1;
+	                        float tmp=_getPacketFromParent(); 
+	                        new_q[neighborID-1]+=tmp;
 	                    }
                 	}
                 }
@@ -1332,100 +1140,175 @@ float* OAgent_OPF::Conjugate_gradient(float**A, float*b, float*x_init) {
             else _SendToChild(nei_to_send,self_flags[nei_to_send-1],q[nei_to_send-1]);
         }
         for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) q[i]=new_q[i];
+        _print1Darray_("q",q,NUM_REMOTE_VERTICES,5);
 
-
-        int mu=0,nu=0;
+        float mu1=0,mu2=0;
         for (uint8_t i:neighbors) {
-            mu += r[i]*r[i];
-            nu += p[i]*q[i];   
+            mu1 += r[i-1]*r[i-1];
+            mu2 += p[i-1]*q[i-1];   
         }
 
+        _print_("mu1 is",mu1,6);
+        float nu = 1;
+        float alpha1 = RunRatioConsensus(nodeID,&mu1,&nu,40,neighbors,_G->getN()-1,self_flags,neighbor_flags,q);
+        _print_("alpha1 is",alpha1,6);
+        if (abs(alpha1)<0.00001) break;
+        _print_("mu2 is",mu2,6);
+        nu = 1;
+        float alpha2 = RunRatioConsensus(nodeID,&mu2,&nu,40,neighbors,_G->getN()-1,self_flags,neighbor_flags,q);
+        _print_("alpha2 is",alpha2,6); 
 
-        alpha = RunRatioConsensus(mu,nu,50,neighbors,self_flags,neighbor_flags,old_data);
-        float x_prev = x, r_prev = r;
-        x = x + alpha*p;
-        r = r + alpha*q;
-        mu=0; nu=0;
+        if (abs(alpha2)<0.0000001) break;
+        float alpha = alpha1/alpha2;
+        _print_("alpha is",alpha,6);
+
+        float *x_prev = new float[NUM_REMOTE_VERTICES];
+        float *r_prev = new float[NUM_REMOTE_VERTICES];
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) 
+        {
+            x_prev[i]=x[i]; r_prev[i]=r[i];
+            x[i]+=alpha*p[i]; r[i]+=alpha*q[i];
+        } 
+        // x = x + alpha*p;
+        // r = r + alpha*q;
+        mu1=0;
         for (uint8_t i:neighbors) {
-            mu += r[i]*r[i];
-            nu += r_prev[i]*r_prev[i];   
+            mu1 += r[i-1]*r[i-1];
+            // nu += r_prev[i-1]*r_prev[i-1];   
         }
-        beta = fairSplitRatioConsensus_RSL(mu,nu,50,500);
-        p = -r + beta*p;
+        _print_("mu1 is",mu1,6);
+        nu = 1;
+        float alpha3 = RunRatioConsensus(nodeID,&mu1,&nu,40,neighbors,_G->getN()-1,self_flags,neighbor_flags,q);
+        _print_("alpha3 is",alpha3,6); 
 
+        float beta = alpha3/alpha1;
+        _print_("beta is",beta,6);
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) 
+        {
+            p[i]=-r[i]+beta*p[i];
+        } 
+        // p = -r + beta*p;
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++)neighbor_flags[i]=false;
+        for (uint8_t i:neighbors) {
+            if (i>nodeID) self_flags[i-1]=true;
+            else self_flags[i-1]=false;
+        }
 
     }
+
+    r = matbyvec(&H[0][0],NUM_REMOTE_VERTICES,NUM_REMOTE_VERTICES,x);
+    for (int i=0;i<NUM_REMOTE_VERTICES;i++) {r[i]=r[i]-b[i];new_r[i]=r[i];received_from[i]=0;} 
+    cnt=0;
+    i = 0;
+    start = millis();   // initialize timer
+    while (millis()-start<=5000){
+        uint8_t nei_to_send=neighbors[i]; 
+        i++; if (i==_G->getN()-1) i=0;
+        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))
+            {
+                if (!received_from[neighborID-1]){
+                	received_from[neighborID-1]=1;
+                    if (neighborID>nodeID){
+                        cnt+=1;
+                        float tmp=_getPacketFromChild(); 
+                        new_r[neighborID-1]+=tmp;
+                        // Serial<<"Received from "<<neighborID<<endl;
+                    }
+                    else if (neighborID<nodeID){
+                        cnt+=1;              
+                        float tmp=_getPacketFromParent(); 
+                        new_r[neighborID-1]+=tmp;
+                        // Serial<<"Received from "<<neighborID<<endl;
+                    }
+                }
+            }
+
+        if (nei_to_send<nodeID)_SendToParent(nei_to_send,self_flags[nei_to_send-1],r[nei_to_send-1]);
+        else _SendToChild(nei_to_send,self_flags[nei_to_send-1],r[nei_to_send-1]);
+    }
+    for (int i=0;i<NUM_REMOTE_VERTICES;i++) r[i]=new_r[i];
+    float error=0;
+    for (int i=0;i<NUM_REMOTE_VERTICES;i++){
+        if (error<abs(r[i])) error = abs(r[i]);
+    }
+    _print_("Error",error,6);
     return x;
     
 }
 
-float OAgent_OPF::RunRatioConsensus(float mu,float nu,uint8_t iterations,uint8_t neighbors[_G->getN()-1],bool self_flags[NUM_REMOTE_VERTICES],bool neighbor_flags[NUM_REMOTE_VERTICES],float old_data[NUM_REMOTE_VERTICES]){
+float OAgent_OPF::RunRatioConsensus(uint16_t nodeID, float *mu,float *nu,uint8_t iterations,uint8_t *neighbors,int num_neighbors,bool self_flags[NUM_REMOTE_VERTICES],bool neighbor_flags[NUM_REMOTE_VERTICES],float old_data[NUM_REMOTE_VERTICES]){
 
+    uint8_t neighborID;
 	bool ratio_cons_start[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) ratio_cons_start[j] = false;
-    for (uint8_t i:neighbors) {
+    for (int j=0;j<num_neighbors;j++) {
+        uint8_t i = neighbors[j];
         if (i>nodeID) ratio_cons_start[i] = true;
     }
 
+    uint8_t received_from[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
 	// float run_sum_mu=0,run_sum_nu=0;
 	float run_sum_mu[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) run_sum_mu[j]=0;
 	float run_sum_nu[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) run_sum_nu[j]=0;
-	uint8_t out_deg = _G->getN();
-
+    uint8_t numIterations[NUM_REMOTE_VERTICES]; for (int j=0;j<NUM_REMOTE_VERTICES;j++) numIterations[j]=0;
+	float out_deg = float(_G->getN());
+    // Serial<<"out-degree is "<<out_deg<<endl;delay(5);
 	int i=0; 
-	for (int _=0;_<iterations;_++){
+    uint8_t k=0; bool must_break = false; srand(nodeID);
+	while (true){
 		uint8_t nei_to_send=neighbors[i]; 
         i++; if (i==_G->getN()) i=0;
         if (nei_to_send<nodeID && !ratio_cons_start[nei_to_send-1]){
         	_SendToParent(nei_to_send,self_flags[nei_to_send-1],old_data[nei_to_send-1]);
 		}
-		_CG_RC_SendPacket(run_sum_mu[nodeID-1],run_sum_nu[nodeID-1]);
 
+        run_sum_mu[nodeID-1] += (*mu)/out_deg;
+        run_sum_nu[nodeID-1] += (*nu)/out_deg;
+        // Serial<<run_sum_mu[nodeID-1]<<" "<<run_sum_nu[nodeID-1]<<endl; delay(5);
+        (*mu) = (*mu)/out_deg; (*nu) = (*nu)/out_deg;
+        bool not_received=true;
 		unsigned long start = millis();   // initialize timer
-        while (millis()-start<=500)
+        int cnt=0;
+        while (millis()-start<=500 or not_received)
         {
-			if(_waitForUnicastPacket(neighborID,nodeID,CG_RC_SUBHEADER,true,100))
+            _CG_RC_SendPacket(run_sum_mu[nodeID-1],run_sum_nu[nodeID-1],k);
+			if(_waitForNeighborPacket(neighborID,CG_RC_SUBHEADER,true,100))
 	        {
-	        	float* tmp=_CG_RC_ReceivePacket(); 
-	        	mu+= tmp[0]-run_sum_mu[neighborID-1];
-	        	nu+= tmp[1]-run_sum_nu[neighborID-1];
-	        	run_sum_mu[neighborID-1] = tmp[0];
-	        	run_sum_nu[neighborID-1] = tmp[1];
+                if (!received_from[neighborID-1])
+                {
+                    if (neighborID<nodeID) ratio_cons_start[neighborID-1]=true;
+    	        	float* tmp=_CG_RC_ReceivePacket(); 
+                    // Serial<<"Received from "<<neighborID<<" "<<tmp[0]<<" "<<tmp[1]<<endl;
+                    if (tmp[2]<numIterations[neighborID-1]) {Serial<<"Received "<<tmp[2]<<endl;must_break = true; break;}
+    	        	*mu+= tmp[0]-run_sum_mu[neighborID-1];
+    	        	*nu+= tmp[1]-run_sum_nu[neighborID-1];
+                    if (tmp[2]<=k+10) numIterations[neighborID-1] = tmp[2];
+
+    	        	run_sum_mu[neighborID-1] = tmp[0];
+    	        	run_sum_nu[neighborID-1] = tmp[1];
+                    received_from[neighborID-1] = 1;
+
+                    not_received=false;
+                }
 	        }
+            cnt+=1; if (cnt>50) {Serial<<"Did not receive any packet"<<endl;must_break=true;break;}
 	    }
-	    run_sum_mu += mu/out_deg;run_sum_nu += nu/out_deg;
+        if (must_break) break;
+        uint8_t minIter = k, maxIter = k;
+        for (int j=0;j<num_neighbors;j++) {
+            if (minIter>numIterations[neighbors[j]-1]) minIter=numIterations[neighbors[j]-1];
+            if (maxIter<numIterations[neighbors[j]-1]) maxIter=numIterations[neighbors[j]-1];
+        }
+        if (minIter>iterations) break;
+        // if (k%5==0) Serial<<minIter<<" "<<maxIter<<endl;
+	    k++;
+        for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0;
 
 	}
-	return mu/nu;
-
-}
-
-// Functions for Printing 
-void OAgent_OPF::_print_(String s,float val,uint8_t precision){
-
-    Serial<<s<<" "; Serial.print(val,precision); Serial<<endl;
     delay(5);
-}
-void OAgent_OPF::_print2Darray_(String s,float** A,uint8_t precision){
-    int m = sizeof(A)/sizeof(A[0]), n = sizeof(A[0])/sizeof(A[0][0]);
-    Serial<<s<<":"<<endl;
-    for (int i=0;i<m;i++){
-        for (int j=0;j<n;j++){
-            Serial.print(val,precision);Serial<<" ";
-        }
-        Serial<<endl;
-    }
-    delay(5);
-    
-}
+    // Serial<<"Ratio consensus r = "<<(*mu)/(*nu)<<endl;
+	return (*mu)/(*nu);
 
-void OAgent_OPF::_print1Darray_(String s,float* a,uint8_t precision){
-    int n = sizeof(A)/sizeof(A[0]);
-    Serial<<s<<":"<<endl;
-    for (int i=0;i<n;i++){
-        Serial.print(val,precision);Serial<<" ";
-    }
-    Serial<<endl;
-    delay(5);
 }
 
 
@@ -1439,53 +1322,92 @@ float OAgent_OPF::dot(float*a, float*b){
         res+=a[j]*b[j];
     }
     return res;
-
 }
-float OAgent_OPF::matbyvec(float**A, float*b){
+float* OAgent_OPF::matbyvec(float*A,int rows, int cols, float*b){
     
-    int n = sizeof(A)/sizeof(A[0]);
-    int m = sizeof(b)/sizeof(b[0]);
-    float* res = new float[n];
-
-    for (int i=0;i<n;i++){
-        for (int j=0;j<m;j++){
-            res[i]+=A[i][j]*b[j];
+    float* res = new float[rows];
+    int k=0;
+    for (int i=0;i<rows;i++){
+        res[i]=0;
+        for (int j=0;j<cols;j++){
+            res[i]+=(*((A+i*cols)+j))*b[j]; k++;
         }
         
     }
     return res;
 
 }
-float** OAgent_OPF::transpose(float *A) 
+void OAgent_OPF::transpose(float *A_T, float* A, int rows,int cols) 
 { 
-    int m = sizeof(A)/sizeof(A[0]), n = sizeof(A[0])/sizeof(A[0][0]);    
+    // int m = sizeof(A)/sizeof(A[0]), n = sizeof(A[0])/sizeof(A[0][0]);    
     // float B[n][m];
-    float** B = new float[n][m];
-    for (i = 0; i < m; i++) {
-        for (j = 0; j < n; j++) {
-            B[j][i] = A[i][j]; 
+    // float **B = new float[n][m]; 
+    // *((arr+i*n) + j)
+    float **B = new float*[rows]; 
+    for(int i=0;i<rows;i++)
+    {
+        B[i]=new float[cols];
+    }
+    // Serial<<"Transpose"<<" "<<rows<<" "<<cols<<endl; delay(10);
+    int k=0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            // B[j][i] = A[k];
+            *((A_T+j*rows)+i) = *((A+i*cols)+j); 
+            // Serial<<*((A_T+j*rows)+i)<<endl; delay(10);
+            k++;
         }
     }
-    return B;
+    // Serial<<B[0][0]<<endl; delay(10);
+    // return B;
 } 
 
-float** OAgent_OPF::multiply(float*A, float*B){
-        int m = sizeof(A)/sizeof(A[0]), n = sizeof(B[0])/sizeof(B[0][0]);
-        int rows_B = sizeof(B)/sizeof(B[0]);
-        // float res[m][n];
-        float** res = new float[m][n];
-
-        for (int i=0;i<m;i++){
-            for (int j=0;j<n;j++){
-                res[i][j]=0;
-                for (int k=0;k<rows_B;i++){
-                    res[i][j]+=A[i][k]*B[k][j];
+void OAgent_OPF::multiply(float *res, float* a,int rows_A, int cols_A, float* b, int rows_B, int cols_B){
+    // int m = sizeof(A)/sizeof(A[0]), n = sizeof(B[0])/sizeof(B[0][0]);
+    // int rows_B = sizeof(B)/sizeof(B[0]);
+    // float res[m][n];
+    // float** A = new float[rows_A][cols_A];
+    // Serial<<"Multiply"<<endl; delay(10);
+    float A[rows_A][cols_A]; 
+    // for(int i=0;i<rows_A;i++)
+    // {
+    //     A[i]=new float[cols_A];
+    // }
+    float B[rows_B][cols_B];
+    // float **B = new float*[rows_B]; 
+    // for(int i=0;i<rows_B;i++)
+    // {
+    //     B[i]=new float[cols_B];
+    // }
+    int k=0;
+    for (int i=0;i<rows_A;i++){
+        for (int j=0;j<cols_A;j++){
+            A[i][j]=*((a+i*cols_A)+j);
+        }
+    }
+    k=0;
+    for (int i=0;i<rows_B;i++){
+        for (int j=0;j<cols_B;j++){
+            B[i][j]=*((b+i*cols_B)+j);
+        }
+    }
+    // _print2Darray_("A Matrix",&A[0][0],rows_A,cols_A,3);
+    // _print2Darray_("B Matrix",&B[0][0],rows_B,cols_B,3);
+    // float** res = new float[rows_A][cols_B];
+    // float **res = new float*[rows_A]; 
+    // for(int i=0;i<rows_A;i++)
+    // {
+    //     res[i]=new float[cols_B];
+    // }
+    for (int i=0;i<rows_A;i++){
+        for (int j=0;j<cols_B;j++){
+            *((res+i*cols_B)+j)=0;
+            for (int k=0;k<rows_B;k++){
+                *((res+i*cols_B)+j)+=A[i][k]*B[k][j];
             }
         }
-
-        return res;
-
     }
+    // return res;
 }
 
  float OAgent_OPF:: _clip(float x, float xmin, float xmax){
@@ -1561,22 +1483,30 @@ void OAgent_OPF::_SendToParent(uint16_t recipientID, bool flag_OPF, float num){
 }
 
 
-void OAgent_OPF::_CG_RC_SendPacket(uint16_t recipientID, float mu, float nu){
-    uint8_t payload[10];
+void OAgent_OPF::_CG_RC_SendPacket(float mu, float nu, uint8_t k){
+    uint8_t payload[15];
 
-    payload[0] = CG_RC_HEADER;
-    payload[1] = CG_RC_HEADER >> 8;
-    payload[2] = recipientID;
-    payload[3] = recipientID >> 8;
+    payload[0] = CG_RC_SUBHEADER;
+    payload[1] = CG_RC_SUBHEADER >> 8;
+    payload[2] = CG_RC_SUBHEADER;  // dummy payloads
+    payload[3] = CG_RC_SUBHEADER >> 8;
 
     uint8_t sign_var; uint32_t var;
-    _sender_helper(num,&sign_var,&var);
+    _sender_helper(mu,&sign_var,&var);
     payload[4]=sign_var;
     payload[5] = var;
     payload[6] = var >> 8;
     payload[7] = var >> 16;
     payload[8] = var >> 24;
 
+    _sender_helper(nu,&sign_var,&var);
+    payload[9]=sign_var;
+    payload[10] = var;
+    payload[11] = var >> 8;
+    payload[12] = var >> 16;
+    payload[13] = var >> 24;
+
+    payload[14] = k;
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
     #ifdef VERBOSE
@@ -1584,13 +1514,19 @@ void OAgent_OPF::_CG_RC_SendPacket(uint16_t recipientID, float mu, float nu){
     #endif
 }
 
-float OAgent_OPF::_CG_RC_ReceivePacket() {
-    float a;
+float* OAgent_OPF::_CG_RC_ReceivePacket() {
+    float *a = new float[3];
     int32_t mag_x; int8_t sign_x; float x;
     mag_x = (int32_t(_rx->getData(8)) << 24) + (int32_t(_rx->getData(7)) << 16) + (int16_t(_rx->getData(6)) << 8) + int8_t(_rx->getData(5));
     sign_x = -1 + ((_rx->getData(4))*2);
     x = (float) (sign_x*mag_x);
-    a = x/BASE;
+    a[0] = x/BASE;
+
+    mag_x = (int32_t(_rx->getData(13)) << 24) + (int32_t(_rx->getData(12)) << 16) + (int16_t(_rx->getData(11)) << 8) + int8_t(_rx->getData(10));
+    sign_x = -1 + ((_rx->getData(9))*2);
+    x = (float) (sign_x*mag_x);
+    a[1] = x/BASE;
+    a[2] = int8_t(_rx->getData(14));
     return a;
 }
 
@@ -1628,7 +1564,37 @@ bool OAgent_OPF::_getFlagFromParent() {
 }
 
 
+// Functions for Printing 
+void OAgent_OPF::_print_(String s,float val,uint8_t precision){
 
+    Serial<<s<<" "; Serial.print(val,precision); Serial<<endl;
+    delay(5);
+}
+void OAgent_OPF::_print2Darray_(String s,float*A,int rows,int cols,uint8_t precision){
+    // int m = sizeof(A)/sizeof(A[0]), n = sizeof(A[0])/sizeof(A[0][0]);
+    Serial<<s<<":"<<endl;
+    int k=0;
+    for (int i=0;i<rows;i++){
+        for (int j=0;j<cols;j++){
+            // Serial.print(A[k],precision);Serial<<" "; k++;
+            Serial.print(*((A+i*cols)+j),precision);Serial<<" ";
+        }
+        Serial<<endl;//*((arr+i*n) + j)
+        delay(5);
+    }
+    // delay(5);
+    
+}
+
+void OAgent_OPF::_print1Darray_(String s,float* a,int size,uint8_t precision){
+    // int n = sizeof(a)/sizeof(a[0]);
+    Serial<<s<<":"<<endl;
+    for (int i=0;i<size;i++){
+        Serial.print(*(a+i),precision);Serial<<" ";
+    }
+    Serial<<endl;
+    delay(5);
+}
 
 /// Synchronization methods
 bool OAgent_OPF::sync(uint8_t attempts) {

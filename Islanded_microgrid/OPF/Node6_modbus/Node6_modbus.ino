@@ -1,8 +1,8 @@
 #include <Streaming.h>
 #include <XBee.h>
 //#include <Dyno.h>
-#include <OGraph_SCED.h>
-#include <OAgent_SCED.h>
+#include <OGraph_OPF.h>
+#include <OAgent_OPF.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
@@ -15,8 +15,8 @@ ZBRxResponse rx = ZBRxResponse();
 // address, min, max, alpha, beta, out-degree, base
 OLocalVertex s = OLocalVertex(0x4151C6AB,6,0,1,1,1,1,10);  //#NODE
 LinkedList l = LinkedList();  //#NODE
-OGraph_SCED g = OGraph_SCED(&s,&l);
-OAgent_SCED a = OAgent_SCED(&xbee,&rx,&g,false,true); // argument rx?
+OGraph_OPF g = OGraph_OPF(&s,&l);
+OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,false,true); // argument rx?
 
 uint8_t errorPin = 6;  // error led pin
 uint8_t sPin = 7;      // synced led
@@ -59,9 +59,9 @@ void setup()  {
   
   xbee.setSerial(Serial3); //Specify the serial port for xbee
 //Define the Neighboring nodes
-  //g.addInNeighbor(0x4174F1AA,1,0,0); // node 1
-  g.addInNeighbor(0x4174F186,2,0.03,0.055); // node 2
-  //g.addInNeighbor(0x4151C692,3,0,0); // node 3
+  g.addInNeighbor(0x4174F1AA,1,0,0); // node 1
+//  g.addInNeighbor(0x4174F186,2,0.03,0.055); // node 2
+//  g.addInNeighbor(0x4151C692,3,0,0); // node 3
   //g.addInNeighbor(0x4151C48B,4,0,0); // node 4
   //g.addInNeighbor(0x4151C688,5,0,0); // node 5
   //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
@@ -149,29 +149,8 @@ void loop() {
   {
     if(a.isSynced())
     {
-      if (le == false)
-      {
-        if (a.isLeader())
-        {
-          if(Serial.available())
-          {
-            int bbb = Serial.read();  
-            Serial.println("got some input");
-            delay(5); 
-            Serial.println("Starting link activation");
-            le = a.linkActivationAlgorithm();
-          }
-        }
-        else
-        {
-          Serial.println("Waiting for link activation");
-          le = a.linkActivationAlgorithm();
-        }
-      }
-      else
-      {
-        Serial.println("Starting Security Constrained Economic Dispatch");
-        feasible = a.SecurityConstrainedEconomicDispatch(false,0.2,100);
+        Serial.println("Starting Optimal Power Flow");
+        feasible = a.OptimalPowerFlow(true,0.1,100);
         //Serial.println(state1,4);
         // Controller code over
         
@@ -181,10 +160,10 @@ void loop() {
         }
          
          a.resync();
-      }
     }
   }
 }
+
 
 void sendConsensusResults()
 {
