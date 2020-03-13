@@ -62,13 +62,43 @@
 #define LOG_GAMMA_KEY					 0x47	// log gamma key is ascii G	 
 #define LOG_LAMBDA_KEY					 0x4C	// log gamma key is ascii L	
 
+struct lagMultiplier{
+    float value;
+    float function;
+    lagMultiplier *next;
+};
+
+class OAgent_LinkedList {
+    public:
+        // Constructor
+        OAgent_LinkedList();
+
+        //methods
+        void resetLinkedList(float alpha_p, float beta_p, float max_p, float min_p);
+        bool updateLinkedListArrays(float * arrayValue, float * arrayFunc, uint8_t arraySize);
+        void updateLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize);
+        void addToLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize);
+
+        void getNewLinkedListData(float * newArrayFunc, float * inArrayValue, float * inArrayFunc, uint8_t inArraySize);
+
+        uint8_t getLinkedListSize() { return _size; }
+        
+
+    private:
+        //properties
+        lagMultiplier *_head, *_tail;
+        inline uint8_t _size;  //size of linked list
+
+        // Helper functions
+        void _prepareOAgentLinkedList();
+};
+
 class OAgent_OPF {
 	public:
         /// Constructors
 		OAgent_OPF();
-        OAgent_OPF(XBee * xbee, OGraph_OPF * G, bool leader = false, bool quiet = true);
-        OAgent_OPF(XBee * xbee, ZBRxResponse * rx, OGraph_OPF * G, bool leader = false, bool quiet = true);
-        //OAgent_OPF(XBee * xbee, ZBRxResponse * rx, OGraph_OPF * G, bool leader = false, bool quiet = true, int RS = 0);
+        OAgent_OPF(XBee * xbee, OGraph_OPF * G, OAgent_LinkedList * lambdaList, bool leader = false, bool quiet = true);
+        OAgent_OPF(XBee * xbee, ZBRxResponse * rx, OGraph_OPF * G, OAgent_LinkedList * lambdaList, bool leader = false, bool quiet = true);
         
         /// Methods
         inline OGraph_OPF * getGraph() { return _G; }
@@ -88,21 +118,15 @@ class OAgent_OPF {
         //inline void setRS(int RS) { _RS = RS;}
         
         // Fair splitting methods
-        float fairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period);
-        // long computeFairSplitFinalValue(float gamma);
-        long leaderFairSplitRatioConsensus(long y, long z, uint8_t iterations, uint16_t period);
-        long nonleaderFairSplitRatioConsensus(long y, long z);
-        
-        // Resilient consensus methods
-        long fairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
-        long leaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
-        long nonleaderFairSplitRatioConsensus_RSL(long y, long z, uint8_t iterations, uint16_t period);
-        float ratiomaxminConsensus(long y, long z, uint8_t iterations, uint16_t period);
+        float ratioConsensusAlgorithm(float y, float z, uint8_t iterations, uint16_t period);
+        float leaderRatioConsensus(float y, float z, uint8_t iterations, uint16_t period);
+        float nonleaderRatioConsensus(float y, float z, uint8_t iterations, uint16_t period);
+        float ratioConsensus(float y, float z, uint8_t iterations, uint16_t period);
 
-        long maxminConsensusAlgorithm(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
-        long leaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
-        long nonleaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
-        long maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
+        float maxminConsensusAlgorithm(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
+        float leaderMaxMinConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
+        float nonleaderMaxMinConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
+        float maxminConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
         
         // Primal Dual methods
         bool primalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
@@ -115,12 +139,18 @@ class OAgent_OPF {
         bool standardPrimalDualAlgorithm2(bool genBus, float alpha, uint16_t iterations);                       //includes a minimization of line losses
         bool acceleratedPrimalDualAlgorithm2(bool genBus, float alpha, uint16_t iterations);                    //includes a minimization of line losses
                        //includes a minimization of line losses
-        // Economic Dispatch Algorithm
+        //Madi's Economic Dispatch Algorithm
         bool economicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations);
-        bool leaderEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations);
-        bool nonleaderEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations);
-        bool standardEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations);
-        bool acceleratedEconomicDispatchAlgorithm(bool genBus, float alpha, uint16_t iterations);
+        bool leaderEconomicDispatch(bool genBus, float alpha, uint16_t iterations);
+        bool nonleaderEconomicDispatch(bool genBus, float alpha, uint16_t iterations);
+        bool standardEconomicDispatch(bool genBus, float alpha, uint16_t iterations);
+        bool acceleratedEconomicDispatch(bool genBus, float alpha, uint16_t iterations);
+
+        //Alejandro's Economic Dispatch Algorithm
+        bool economicDispatchAlgorithm(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        bool leaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        bool nonleaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        bool economicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
 
         // communication link activation methods
         bool linkActivationAlgorithm();
@@ -169,8 +199,11 @@ class OAgent_OPF {
         uint16_t _period;
         uint16_t _windowsPerPeriod;
 
-        //Resilience Strategy Property
-        //int _RS;
+        //Economic Dispatch property
+        OAgent_LinkedList * _lambdaList;
+        OAgent_LinkedList _sumLambdaList[NUM_REMOTE_VERTICES];
+
+        
         
         //Sammy's addition to contain iterates
         float _buffer[200];
@@ -183,36 +216,24 @@ class OAgent_OPF {
         int node_counter[NUM_REMOTE_VERTICES];          //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //Methods
         //Fair splitting
-        inline void _waitForScheduleFairSplitPacket(unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id,int timeout = -1) {
-            _waitForSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,id,timeout);
-        }
-        //Resilient version
-        inline bool _waitForScheduleFairSplitPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period,int timeout) {
-            return _waitForSchedulePacket_RSL(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period,timeout);
-        }
-        inline bool _waitForScheduleMaxMinPacket_RSL(unsigned long &startTime, uint8_t &iterations, uint16_t &period,int timeout) {
-            return _waitForSchedulePacket_RSL(SCHEDULE_MAXMIN_HEADER,startTime,iterations,period,timeout);
-        }
-        inline void _broadcastScheduleFairSplitPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
+        inline void _broadcastScheduleRCPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
         }
         inline void _broadcastSchedulePrimalDualPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_PD_HEADER,startTime,iterations,period);
         }
-        inline bool _fairSplitPacketAvailable() { return _packetAvailable(FAIR_SPLITTING_HEADER,true); }
-        inline bool _primaldualPacketAvailable() { return _packetAvailable(PD_HEADER,true); }
         inline bool _maxminPacketAvailable() { return _packetAvailable(MAXMIN_HEADER,true); }
         //Primal Dual Algorithm
         //inline bool _OPFPacketAvailable() { return _packetAvailable(PD_PACKET_HEADER,true); }
-        void _initializeFairSplitting(OLocalVertex * s, long y, long z);
-        //Leader failure-resilient version
-        void _initializeFairSplitting_RSL(OLocalVertex * s, long y, long z);
+        void _initializeRatioConsensus(OLocalVertex * s, float y, float z);
+        void _initializeEconomicDispatch(OLocalVertex * s, float u);
 
-        void _broadcastFairSplitPacket(OLocalVertex * s);
         //Leader failure-resilient version
-        void _broadcastFairSplitPacket_RSL(OLocalVertex * s);
+        void _broadcastRCPacket(float sumY, float sumZ);
+
+        void _broadcastEDPacket(float sumZ, float * arrayValue, float * arraySumFunc, uint8_t arraySize);
         
-        void _broadcastMaxMinPacket(long max, long min);
+        void _broadcastMaxMinPacket(float max, float min);
 
         //Unicast Primal Dual Packet - SN addition edited by Olaolu
         void _unicastPacket_OPF_P(uint16_t recipientID, float fP, float fQ, float Lambda, bool flag);
@@ -239,9 +260,15 @@ class OAgent_OPF {
         //methods to get packet data
         long _getMaxFromPacket();
         long _getMinFromPacket();
-        long _getMuFromPacket();
-        long _getSigmaFromPacket();
-        long _getpacketcheck();
+        float _getSumYFromPacket();
+        float _getSumZFromPacket();
+
+        float _getSumZFromEDPacket();
+        inline uint8_t _getArraySizeFromEDPacket() {  return _rx->getData(7); };
+
+        float _getLambdaValueFromEDPacket(uint8_t index);
+        float _getSumLambdaFunctionFromEDPacket(uint8_t index);
+        
         
         // Methods dealing with packets
         void _broadcastOptimalDispatchPacket(OLocalVertex * s);
@@ -337,7 +364,8 @@ class OAgent_OPF {
         
         // General scheduling methods
         void _waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);// General scheduling methods
-        bool _waitForACKPacket_RSL(uint16_t header, int timeout, unsigned long startTime, uint8_t iterations, uint16_t period );
+        bool _waitForChildSchedulePacketRC(int timeout, unsigned long startTime, uint16_t iterations, uint16_t period);
+        bool _waitForChildSchedulePacketMMC(int timeout, unsigned long startTime, uint16_t iterations, uint16_t period);
         bool _waitForChildSchedulePacketPD(int timeout, unsigned long startTime, uint16_t iterations);
         bool _waitForChildSchedulePacketED(int timeout, unsigned long startTime, uint16_t iterations);
 
@@ -357,8 +385,8 @@ class OAgent_OPF {
         
         // General coordination helper functions
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
-        void _waitForSchedulePacket(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, uint8_t id, int timeout);
-        bool _waitForSchedulePacket_RSL(uint16_t header, unsigned long &startTime, uint8_t &iterations, uint16_t &period, int timeout);
+        bool _waitForParentSchedulePacketRC(unsigned long &startTime, uint16_t &iterations, uint16_t &period, int timeout);
+        bool _waitForParentSchedulePacketMMC(unsigned long &startTime, uint16_t &iterations, uint16_t &period, int timeout);
         bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations,int timeout);
         bool _waitForParentSchedulePacketED(unsigned long &startTime, uint16_t &iterations,int timeout);
         bool _waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout);
@@ -373,7 +401,7 @@ class OAgent_OPF {
         uint8_t _addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr);
         
         // Constructor helper function
-        void _prepareOAgent_OPF(XBee * xbee, ZBRxResponse * rx, OGraph_OPF * G, bool leader = false, bool quiet = true);
+        void _prepareOAgent_OPF(XBee * xbee, ZBRxResponse * rx, OGraph_OPF * G,  OAgent_LinkedList * lambdaList, bool leader = false, bool quiet = true);
 };
 
 #endif // OAgent_OPF_h

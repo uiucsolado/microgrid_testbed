@@ -29,137 +29,12 @@ OVertex::OVertex(XBeeAddress64 a) {
 	_prepareOVertex(a.getLsb(),0);
 }
 
-
-
-
-void OVertex::updateYMinYMax(uint8_t weight) {
-    setYMinYMax(_yMin/weight+_yMinIn,_yMax/weight+_yMaxIn);
-}
-//
-//// incoming states yMinIn and yMaxIn
-//void OVertex::setYMinIn(long yMinIn) {
-//    _yMinIn = yMinIn;
-//}
-//
-//void OVertex::setYMaxIn(long yMaxIn) {
-//    _yMaxIn = yMaxIn;
-//}
-//
-//void OVertex::setYMinInYMaxIn(long yMinIn, long yMaxIn) {
-//    setYMinIn(yMinIn);
-//    setYMaxIn(yMaxIn);
-//}
-//
-//void OVertex::addToYMinIn(long increment) {
-//    _yMinIn += increment;
-//}
-//
-//void OVertex::addToYMaxIn(long increment) {
-//    _yMaxIn += increment;
-//}
-//
-//void OVertex::addToYMinInYMaxIn(long incrementYMinIn, long incrementYMaxIn) {
-//    addToYMinIn(incrementYMinIn);
-//    addToYMaxIn(incrementYMaxIn);
-//}
-//
-//void OVertex::clearYMinInYMaxIn() {
-//    setYMinInYMaxIn(0,0);
-//}
-
-// Broadcast states muMin and muMax
-//void OVertex::setMuMin(long muMin) {
-//    _muMin = muMin;
-//}
-
-//void OVertex::setMuMax(long muMax) {
-//    _muMax = muMax;
-//}
-//
-//void OVertex::setMuMinMuMax(long muMin, long muMax) {
-//    setMuMin(muMin);
-//    setMuMax(muMax);
-//}
-
-//long OVertex::getMuMin() {
-//    return _muMin;
-//}
-
-//long OVertex::getMuMax() {
-//    return _muMax;
-//}
-//
-//void OVertex::getMuMinMuMax(long &muMin, long &muMax) {
-//    muMin = getMuMin();
-//    muMax = getMuMax();
-//}
-//
-//void OVertex::clearMuMinMuMax() {
-//    setMuMinMuMax(0,0);
-//}
-
-void OVertex::updateMuMinMuMax(uint8_t weight) {
-    setMuMinMuMax(_muMin+_yMin/weight,_muMax+_yMax/weight);
-}
-
-// Robust algorithm states nuMin and nuMax
-bool OVertex::setNuMin(uint8_t i, long nuMin) {
-    if(i < NUM_IN_NEIGHBORS) {
-        _nuMin[i] = nuMin;
-        return true;
-    }
-    return false;
-}
-
-bool OVertex::setNuMax(uint8_t i, long nuMax) {
-    if(i < NUM_IN_NEIGHBORS) {
-        _nuMax[i] = nuMax;
-        return true;
-    }
-    return false;
-}
-
-long OVertex::getNuMin(uint8_t i) {
-    if(i < NUM_IN_NEIGHBORS)
-        return _nuMin[i];
-    return LONG_ERROR;
-}
-
-long OVertex::getNuMax(uint8_t i) {
-    if(i < NUM_IN_NEIGHBORS)
-        return _nuMax[i];
-    return LONG_ERROR;
-}
-
-bool OVertex::clearNuMinNuMax(uint8_t i) {
-    if(i < NUM_IN_NEIGHBORS) {
-        _nuMin[i] = 0;
-        _nuMax[i] = 0;
-        return true;
-    }
-    return false;
-}
-
-void OVertex::clearAllNuMinNuMax() {
-    for(uint8_t i = 0; i < NUM_IN_NEIGHBORS; i++) {
-        _nuMin[i] = 0;
-        _nuMax[i] = 0;
-    }        
-}
-
 /// End public methods
 /// Private methods
 // Helper functions
 void OVertex::_prepareOVertex(uint32_t aLsb, uint8_t nodeID) {
     _aLsb = aLsb;
     _nodeID = nodeID;
-    _yMin   = 0;
-    _yMax   = 0;
-    _yMinIn = 0;
-    _yMaxIn = 0;
-    _muMin  = 0;
-    _muMax  = 0;
-    clearAllNuMinNuMax();
 }
 /// End private methods
 //// End OVertex
@@ -531,10 +406,8 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min,
     // set base
     _base = base;
     // initialize states
-    _z 		= 0;
-    _zIn 	= 0;
-    _sigma 	= 0;
-    clearAllTau();
+    _y = 0;
+    _z = 0;
     // set limits
     _min = min;
     _max = max;
@@ -686,6 +559,8 @@ void ORemoteVertex::_prepareORemoteVertex(uint32_t aLsb, uint8_t neighborID, flo
     _fpNeighbor = 0; //remote estimate of per-unit active flow along electrical link
     _fqNeighbor = 0; //remote estimate of per-unit reactive flow along electrical link
     _lambdaNeighbor = 0; //remote estimate of lagrange multiplier for LinDistFlow
+    _sumY  = 0;
+    _sumZ  = 0;
     _sumLambda = 0;     //running sum of Lambda for remotevertex
     _sumNu = 0;        //running sum of Nu for remotevertex
     _sumGamma = 0;      //running sum of Nu for remotevertex
@@ -856,48 +731,12 @@ bool OGraph_OPF::isNonNeighbor(uint32_t aLsb, uint8_t &i) {
     return false;
 }
 
-// Methods to clear various states
-void OGraph_OPF::clearAllNuTau() {
-	_self->clearAllTau();
-    _self->clearAllNuMinNuMax();
+void OGraph_OPF::clearRatioConsensusStates() {
+    _self->clearY();
+    _self->clearZ();
     for(uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++) {
-        _remoteVertices[i].clearAllNuMinNuMax();
-    }
-}
-
-void OGraph_OPF::clearAllYMinYMax() {
-    _self->clearYMinYMax();
-	for(uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
-		_remoteVertices[i].clearYMinYMax();
-}
-
-void OGraph_OPF::clearAllInStates() {
-    _self->clearZIn();
-    _self->clearYMinInYMaxIn();
-	for(uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
-		_remoteVertices[i].clearYMinInYMaxIn();
-}
-
-void OGraph_OPF::clearAllBroadcastStates() {
-	_self->clearSigma();
-    _self->clearMuMinMuMax();
-	for(uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
-		_remoteVertices[i].clearMuMinMuMax();
-}
-
-void OGraph_OPF::clearAllStates() {
-    _self->clearZInSigma();
-    _self->setZ(0);
-    _self->clearAllTau();
-    _self->clearYMinYMax();
-    _self->clearYMinInYMaxIn();
-    _self->clearMuMinMuMax();
-    _self->clearAllNuMinNuMax();
-    for(uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++) {
-        _remoteVertices[i].clearYMinYMax();
-        _remoteVertices[i].clearYMinInYMaxIn();
-        _remoteVertices[i].clearMuMinMuMax();
-        _remoteVertices[i].clearAllNuMinNuMax();
+        _remoteVertices[i].clearSumY();
+        _remoteVertices[i].clearSumZ();
     }    
 }
 

@@ -32,65 +32,12 @@ class OVertex {
 
         // Address
         inline uint32_t getAddressLsb() { return _aLsb; }
-        
-        // States
-        inline void setYMin(long yMin) { _yMin = yMin; }
-        inline void setYMax(long yMax) { _yMax = yMax; }
-        inline void setYMinYMax(long yMin, long yMax) { _yMin = yMin; _yMax = yMax; }
-        inline void addToYMin(long increment) { _yMin += increment; }
-        inline void addToYMax(long increment) { _yMax += increment; }
-        inline void addToYMinYMax(long incrementYMin, long incrementYMax) { _yMin += incrementYMin; _yMax += incrementYMax; }
-        inline long getYMin() { return _yMin; }
-        inline long getYMax() { return _yMax; }
-        inline void getYMinYMax(long &yMin, long &yMax) { yMin = _yMin; yMax = _yMax; }
-        inline void clearYMinYMax() { _yMin = 0; _yMax = 0; }
-        void updateYMinYMax(uint8_t weight);
-        
-        // incoming states
-        inline void setYMinIn(long yMinIn) { _yMinIn = yMinIn; }
-        inline void setYMaxIn(long yMaxIn) { _yMaxIn = yMaxIn; }
-        inline void setYMinInYMaxIn(long yMinIn, long yMaxIn) { _yMinIn = yMinIn; _yMaxIn = yMaxIn; }
-        inline void addToYMinIn(long increment) { _yMinIn += increment; }
-        inline void addToYMaxIn(long increment) { _yMaxIn += increment; }
-        inline void addToYMinInYMaxIn(long incrementYMinIn, long incrementYMaxIn) { _yMinIn += incrementYMinIn; _yMaxIn += incrementYMaxIn; }
-        inline void clearYMinInYMaxIn() { _yMinIn = 0; _yMaxIn = 0; }
-
-        // broadcast states
-        inline void setMuMin(long muMin) { _muMin = muMin; }
-        inline void setMuMax(long muMax) { _muMax = muMax; }
-        inline void setMuMinMuMax(long muMin, long muMax) { _muMin = muMin; _muMax = muMax; }
-        inline long getMuMin() { return _muMin; }
-        inline long getMuMax() { return _muMax; }
-        inline void getMuMinMuMax(long &muMin, long &muMax) { muMin = _muMin; muMax = _muMax; }
-        inline void clearMuMinMuMax() { _muMin = 0; _muMax = 0; }
-        void updateMuMinMuMax(uint8_t weight);
-
-        // Previously received values for robust algorithm
-        bool setNuMin(uint8_t i, long nuMin);
-        bool setNuMax(uint8_t i, long nuMax);
-        long getNuMin(uint8_t i);
-        long getNuMax(uint8_t i);
-        bool clearNuMinNuMax(uint8_t i);
-        void clearAllNuMinNuMax();
-
 
     protected:
         // Properties
         uint32_t _aLsb;
         uint8_t _nodeID;
-        // States
-        long _yMin;
-        long _yMax;
-        // Variable to keep track of incoming states
-        long _yMinIn;
-        long _yMaxIn;
-        // Broadcast states for robust algorithm
-        long _muMin;
-        long _muMax;
-        // Previous received values for robust algorithm
-        long _nuMin[NUM_IN_NEIGHBORS];
-        long _nuMax[NUM_IN_NEIGHBORS];
-        // Methods
+
         // Helper functions
         void _prepareOVertex(uint32_t aLsb, uint8_t nodeID);
 };
@@ -100,8 +47,8 @@ class OLocalVertex : public OVertex {
     public:
         // Constructors
         OLocalVertex();
-        OLocalVertex(uint32_t aLsb, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base);
-        OLocalVertex(XBeeAddress64 a, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base);
+        OLocalVertex(uint32_t aLsb, uint8_t nodeID, long base);
+        OLocalVertex(XBeeAddress64 a, uint8_t nodeID, long base);
 
         // In-degree methods
         inline uint8_t getInDegree() { return _inDegree; }
@@ -138,34 +85,26 @@ class OLocalVertex : public OVertex {
         inline int getNeighborSize() {return _neighborSize; }
         //Status
         inline uint8_t getStatus(uint8_t neighborID) {return _status[neighborID-1]; }                       //get status 
-        inline uint8_t * getStatusP() {return _statusP; }                                                   //get staus pointer
+        inline uint8_t * getStatusP() {return _statusP; }                                                   //get status pointer
         inline void setStatus(uint8_t neighborID, uint8_t status) { _status[neighborID-1] = status;  } 
-        // State Z
-        inline void setZ(long z) { _z = z; }
-        inline void addToZ(long increment) { _z += increment; }
-        inline long getZ() { return _z; }
-        // Incoming state Z
-        inline void setZIn(long zIn) { _zIn = zIn; }
-        inline void addToZIn(long increment) { _zIn += increment; }
-        inline void clearZIn() { _zIn = 0; }
-        inline long getZIn() { return _zIn; }
-        // Sigma -- broadcast state for robust algorithm
-        inline void setSigma(long sigma) { _sigma = sigma; }
-        inline void addToSigma(long increment) { _sigma += increment; }
-        inline long getSigma() { return _sigma; }
-        inline void clearSigma() { _sigma = 0; }
-        // Tau -- state for robust algorithm
-        bool setTau(uint8_t i, long tau);
-        long getTau(uint8_t i);
-        void clearAllTau();
+        
+        // States Y and Z
+        inline void setY(float y) { _y = y; }
+        inline void addToY(float increment) { _y += increment; }
+        inline float getY() { return _y; }
+        inline void clearY() { _y = 0; }
+
+        inline void setZ(float z) { _z = z; }
+        inline void addToZ(float increment) { _z += increment; }
+        inline float getZ() { return _z; }
+        inline void clearZ() { _z = 0; }
+        
         // Limits and cost coefficients
         inline long getMin() { return _min; }
         inline long getMax() { return _max; }
 		inline void setMax(long max) { _max = max; }
         inline long getAlpha() { return _alpha; }
         inline long getBeta() { return _beta; }
-        // Clear temporary states (zIn and sigma)
-        inline void clearZInSigma() { _zIn = 0; _sigma = 0; }
 
         // Get directive for primal dual algorithm
         inline bool isGenBus() { return _genBus; }
@@ -241,17 +180,17 @@ class OLocalVertex : public OVertex {
         //int _deputyID;
         //Number of online neighbors
         int _neighborSize;
+
         // Ratio-consensus states
-        long _z;
-        long _zIn;
-        // Robust algorithm states
-        long _sigma;
-        long _tau[NUM_IN_NEIGHBORS];
+        float _y;
+        float _z;
+
         // Limits and cost coefficients
         long _min;
         long _max;
         long _alpha;
         long _beta;
+
         // Graph degrees
         uint8_t _inDegree;
         uint8_t _outDegree;
@@ -331,6 +270,15 @@ class ORemoteVertex : public OVertex {
         inline bool isInNeighbor() { return _inNeighbor; }
         inline uint8_t getIndex() { return _index; }
         
+        // Running sum state for robust algorithm
+        inline void setSumY(float sumY) { _sumY = sumY; }
+        inline float getSumY() { return _sumY; }
+        inline void clearSumY() { _sumY = 0; }
+
+        inline void setSumZ(float sumZ) { _sumZ = sumZ; }
+        inline float getSumZ() { return _sumZ; }
+        inline void clearSumZ() { _sumZ = 0; }
+
         // Get directive for primal dual algorithm
         inline float getResistance() { return _r; }
         inline float getReactance() { return _x; }
@@ -432,7 +380,11 @@ class ORemoteVertex : public OVertex {
         // Constructor helper
         void _prepareORemoteVertex(uint32_t aLsb = 0x0, uint8_t neighborID = 0, float r = 0, float x = 0, bool inNeighbor = false);
 
-        //ratio consensus variables for economic dispatch algorithm
+        //ratio consensus running sum states
+        float _sumY;
+        float _sumZ;
+
+        //ratio consensus running sum states for economic dispatch algorithm
         float _sumLambda;   //running sum of Lambda for remotevertex
         float _sumNu;       //running sum of Nu for remotevertex
         float _sumGamma;    //running sum of Gamma for remotevertex
@@ -594,12 +546,8 @@ class OGraph_OPF {
                         
         /// Common vertices
         // Methods to clear various states
-        void clearAllNuTau();
-        void clearAllYMinYMax();
-        void clearAllInStates();
-        void clearAllBroadcastStates();
-        void clearAllBroadcastLambda();
-        void clearAllStates();
+        void clearRatioConsensusStates();
+
         // Methods to get pointer to vertex
         OVertex * getVertexByAddressLsb(uint32_t aLsb);
         OVertex * getVertexByAddressLsb(uint32_t aLsb, uint8_t &i);
