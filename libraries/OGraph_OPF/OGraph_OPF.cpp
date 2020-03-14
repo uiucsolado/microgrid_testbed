@@ -367,52 +367,24 @@ uint8_t LinkedList::unlinkLinkedListNodes() {
 /// Public methods
 // Constructors
 OLocalVertex::OLocalVertex() {
-    _prepareOLocalVertex(0x0,0,0,0,0,0,0,100000);
+    _prepareOLocalVertex(0x0,0);
 }
 
-OLocalVertex::OLocalVertex(uint32_t aLsb, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base) {
-    _prepareOLocalVertex(aLsb,nodeID,min,max,alpha,beta,Dout,base);
+OLocalVertex::OLocalVertex(uint32_t aLsb, uint8_t nodeID) {
+    _prepareOLocalVertex(aLsb,nodeID);
 }
 
-OLocalVertex::OLocalVertex(XBeeAddress64 a, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base) {
-    _prepareOLocalVertex(a.getLsb(),nodeID,min,max,alpha,beta,Dout,base);
-}
-
-
-// Robust algorithm state tau
-bool OLocalVertex::setTau(uint8_t i, long tau) {
-    if(i < NUM_IN_NEIGHBORS) {
-        _tau[i] = tau;
-        return true;
-    }
-    return false;
-}
-
-long OLocalVertex::getTau(uint8_t i) {
-    if(i < NUM_IN_NEIGHBORS)
-        return _tau[i];
-    return LONG_ERROR;
-}
-
-void OLocalVertex::clearAllTau() {
-    for(uint8_t i = 0; i < NUM_IN_NEIGHBORS; i++)
-        setTau(i,0);
+OLocalVertex::OLocalVertex(XBeeAddress64 a, uint8_t nodeID) {
+    _prepareOLocalVertex(a.getLsb(),nodeID);
 }
 
 /// End public methods
 /// Private methods
 // Helper functions
-void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base) {
-    // set base
-    _base = base;
+void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID) {
     // initialize states
     _y = 0;
     _z = 0;
-    // set limits
-    _min = min;
-    _max = max;
-    _alpha = alpha;
-    _beta = beta;
     // set graph out-degree
     _inDegree = 0;
     _outDegree = 1;     //Dout; assume bidirectional communication
@@ -453,28 +425,6 @@ void OLocalVertex::_prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min,
     _prepareOVertex(aLsb, nodeID);
 }
 
-
-// Inheritor ID selection
-// int OLocalVertex::chooseInheritor() {
-//     //Update linked list based on updated neghbor status, and choose inheritor
-//     _l._updateALL(_statusP);
-//     _l._setInheritorID();
-//     setNeighborSize(_l.getLLsize());
-
-//     return _l.getInheritorID();
-// }
-
-
-// Optimal dispatch functions
-long OLocalVertex::_computeLambda(long limit) {
-	float b = float(_base);
-    long rslt = long(b*(float(limit - _alpha)/float(_beta)));
-    if(rslt > 0)
-        return rslt;
-    else
-        return LONG_ERROR;
-}
-
 /// End private methods
 //// End OLocalVertex
 
@@ -482,24 +432,23 @@ long OLocalVertex::_computeLambda(long limit) {
 /// Public methods
 // Constructors
 OLocalReserveVertex::OLocalReserveVertex() {
-	_prepareOLocalReserveVertex(0x0,0,0,0,0,0,100000);
+	_prepareOLocalReserveVertex(0x0,0);
 }
 
-OLocalReserveVertex::OLocalReserveVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base) {
-	_prepareOLocalReserveVertex(aLsb,min,max,alpha,beta,Dout,base);
+OLocalReserveVertex::OLocalReserveVertex(uint32_t aLsb, uint8_t nodeID) {
+	_prepareOLocalReserveVertex(aLsb,nodeID);
 }
 
-OLocalReserveVertex::OLocalReserveVertex(XBeeAddress64 a, long min, long max, long alpha, long beta, uint8_t Dout, long base) {
-	_prepareOLocalReserveVertex(a.getLsb(),min,max,alpha,beta,Dout,base);
+OLocalReserveVertex::OLocalReserveVertex(XBeeAddress64 a, uint8_t nodeID) {
+	_prepareOLocalReserveVertex(a.getLsb(),nodeID);
 }
 /// End public methods
 /// Private methods
-void OLocalReserveVertex::_prepareOLocalReserveVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base) {
-    _reserveMin = min;
-    _reserveMax = max;
+void OLocalReserveVertex::_prepareOLocalReserveVertex(uint32_t aLsb, uint8_t nodeID) {
+    _nodeID = nodeID;
 	_limitExceeded = false;
 	_limitGamma = 1;
-    _prepareOLocalVertex(aLsb,min,max,alpha,beta,Dout,base,0);
+    _prepareOLocalVertex(aLsb,nodeID);
 }
 
 /// End private methods

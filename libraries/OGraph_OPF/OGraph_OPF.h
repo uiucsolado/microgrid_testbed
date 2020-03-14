@@ -47,8 +47,8 @@ class OLocalVertex : public OVertex {
     public:
         // Constructors
         OLocalVertex();
-        OLocalVertex(uint32_t aLsb, uint8_t nodeID, long base);
-        OLocalVertex(XBeeAddress64 a, uint8_t nodeID, long base);
+        OLocalVertex(uint32_t aLsb, uint8_t nodeID);
+        OLocalVertex(XBeeAddress64 a, uint8_t nodeID);
 
         // In-degree methods
         inline uint8_t getInDegree() { return _inDegree; }
@@ -63,10 +63,6 @@ class OLocalVertex : public OVertex {
 
         // Optimal dispatch functions
         long g(long lambda);
-
-        // Base
-        inline void setBase(long base) { _base = base; }
-        inline long getBase() { return _base; }
 
         //nodeID
         inline int getID() {return _nodeID; }
@@ -98,13 +94,6 @@ class OLocalVertex : public OVertex {
         inline void addToZ(float increment) { _z += increment; }
         inline float getZ() { return _z; }
         inline void clearZ() { _z = 0; }
-        
-        // Limits and cost coefficients
-        inline long getMin() { return _min; }
-        inline long getMax() { return _max; }
-		inline void setMax(long max) { _max = max; }
-        inline long getAlpha() { return _alpha; }
-        inline long getBeta() { return _beta; }
 
         // Get directive for primal dual algorithm
         inline bool isGenBus() { return _genBus; }
@@ -170,7 +159,7 @@ class OLocalVertex : public OVertex {
         
 	protected:
         /// Properties
-        long _base;
+
         //status information based on interaction with other nodes in network; 0 - Not a neighbor, 1 - neighbor but offline link, 2 - neighbor with  online link
         uint8_t _status[NUM_REMOTE_VERTICES];
         //Pointer for node status (added in by Olaolu)
@@ -185,18 +174,11 @@ class OLocalVertex : public OVertex {
         float _y;
         float _z;
 
-        // Limits and cost coefficients
-        long _min;
-        long _max;
-        long _alpha;
-        long _beta;
-
         // Graph degrees
         uint8_t _inDegree;
         uint8_t _outDegree;
         /// Methods
-        void _prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID, long min, long max, long alpha, long beta, uint8_t Dout, long base);
-        long _computeLambda(long limit);
+        void _prepareOLocalVertex(uint32_t aLsb, uint8_t nodeID);
 
         //variables for Economic Dispatch Algorithm
         float _lambda;
@@ -237,24 +219,19 @@ class OLocalVertex : public OVertex {
 class OLocalReserveVertex : public OLocalVertex {
 	public:
 		OLocalReserveVertex();
-        OLocalReserveVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base);
-        OLocalReserveVertex(XBeeAddress64 a, long min, long max, long alpha, long beta, uint8_t Dout, long base);
-		inline long getReserveMin() { return _reserveMin; }
-		inline void setReserveMin(long reserveMin) { _reserveMin = reserveMin; }
-		inline long getReserveMax() { return _reserveMax; }
-		inline void setReserveMax(long reserveMax) { _reserveMax = reserveMax; }
+        OLocalReserveVertex(uint32_t aLsb, uint8_t nodeID);
+        OLocalReserveVertex(XBeeAddress64 a, uint8_t nodeID);
 		inline bool getLimitExceeded() { return _limitExceeded; }
 		inline void setLimitExceeded(bool limitExceeded) { _limitExceeded = limitExceeded; }
 		inline float getLimitGamma() { return _limitGamma; }
 		inline void setLimitGamma(float limitGamma) { _limitGamma = limitGamma; }
-	private:	
+	private:
 		/// Properties
-		long _reserveMin;
-		long _reserveMax;
+        uint8_t _nodeID;
 		bool _limitExceeded;
 		float _limitGamma;
 		/// Methods
-		void _prepareOLocalReserveVertex(uint32_t aLsb, long min, long max, long alpha, long beta, uint8_t Dout, long base);
+		void _prepareOLocalReserveVertex(uint32_t aLsb, uint8_t nodeID);
 };
 
 class ORemoteVertex : public OVertex {

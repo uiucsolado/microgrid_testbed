@@ -28,15 +28,8 @@ uint8_t cPin = 48;     // coordination enabled led pin
 //variables for node sync check
 boolean de = false;
 
-//AFE and controller variables
-float f_error0;         // variable to store the read value 
-float v_error0;         // variable to store the read value
-float f_error1;         // ratio consensus result for average frequency error
-
-float error = 0;
-float u_f =0;
-float u_v =0;
-float u_set=0.85;
+//RC variables
+float RC;
 
 //Modbus Communication
 MgsModbus Mb;
@@ -59,10 +52,6 @@ int fc;
 int ref;
 int count;
 int pos;
-
-float eps_f = 0.001;
-float eps_v = 0.001;
-float D = 1;
 
 void setup()  {
   Serial.begin(38400);
@@ -161,70 +150,32 @@ void loop() {
   {
     if(a.isSynced())
     {
-      receiveTyphoonData();
-      int f_error =  Mb.MbData[0]*((-2*Mb.MbData[1])+1);
-      int v_error  = Mb.MbData[2]*((-2*Mb.MbData[3])+1);
-      f_error0 =  float(f_error);
-      v_error0 =  float(v_error);
-      f_error0 =  f_error0/base;
-      v_error0 =  v_error0/base;
-      
-      Serial.print("f error: ");
-      Serial.println(float(f_error0),4);
-      Serial.print("D: ");
-      Serial.println(D,4);
-      Serial.print("v error: ");
-      Serial.println(float(v_error0),4);
-      delay(100);
-      
-      f_error1 = a.ratioConsensusAlgorithm(f_error0,D,10,500);
-      
-      Serial.println("ratio consensus result");
-      Serial.println(f_error1,4);
-      delay(100);
-      
-    // frequency controller code
-      if(abs(f_error1) > eps_f)
+      if (a.isLeader())
       {
-         error=error + -1*0.707*f_error1;
-         u_f=u_set+0.7071*error;
-         //Serial.println(u,4);
-      }      
-      //Sending data
-      if (u_f<0)
-      {
-        Mb.MbData[0]=1;
+        Serial.println("Begin ratio consensus? (y/n)"); //let computer know you want to begin ratio consensus
+        while (Serial.available() == 0) 
+        { 
+          //simply makes the arduino wait until commputer sends signal        
+        }
+        if(Serial.available()) 
+        {
+          Serial.println("got some letter");
+          uint8_t o = Serial.read(); //enter the character 's'
+          Serial.println(o);
+          if (o == 'y')
+          {
+            RC = a.ratioConsensusAlgorithm(5,1,5,150);
+            Serial.println("RC result");
+            Serial.println(RC,4);
+          }
+        }
       }
-      else
+      if (!(a.isLeader()))
       {
-        Mb.MbData[0]=0;
+        RC = a.ratioConsensusAlgorithm(5,1,5,150);
+        Serial.println("RC result");
+        Serial.println(RC,4);
       }
-      Mb.MbData[1]=base*abs(u_f);
-
-
-      // voltage controller code
-      if(abs(v_error0) > eps_v)
-      {
-        u_v=0.01*v_error0;
-      }
-      else
-      {
-        u_v=0;
-      }
-      //Sending Data
-      if (u_v<0)
-      {
-        Mb.MbData[2]=1;
-      }
-      else
-      {
-        Mb.MbData[2]=0;
-      }
-      Mb.MbData[3]=base*abs(u_v);
-   // Controller code over
-  
-      sendConsensusResults();     
-      a.resync();
     }
   }
 }

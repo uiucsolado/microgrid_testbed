@@ -11,16 +11,16 @@
 //Node 10
 
 long base = 10000;  // not using floating points so need a base number
-long D_base = 100000000;
 
 XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786D3,0,0.679*D_base,-1.5*base,0.5*base,4,D_base,10);
-//OLocalVertex s = OLocalVertex(0x415786D3,0,0,-1.5*base,0.5*base,5,D_base,10);
-OGraph_OPF g = OGraph_OPF(&s);
-OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,false,true);
+OLocalVertex s = OLocalVertex(0x415786D3,10);
+LinkedList l = LinkedList();  //#NODE
+OGraph_OPF g = OGraph_OPF(&s,&l);
+OAgent_LinkedList al = OAgent_LinkedList();  //#NODE
+OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,&al,false,true);
 
 uint8_t sPin = 7;      // synced led
 uint8_t cPin = 48;     // coordination enabled led pin
@@ -62,7 +62,7 @@ int pos;
 
 float eps_f = 0.001;
 float eps_v = 0.001;
-float D;
+float D = 1;
 
 void setup()  {
   Serial.begin(38400);
@@ -91,6 +91,8 @@ void setup()  {
   //g.addInNeighbor(0x415DB673,15,0,0); // node 15
   //g.addInNeighbor(0x415DB684,19,0,0); // node 19
   //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
+
+  g.configureLinkedList();
   
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
@@ -154,7 +156,6 @@ void loop() {
       }
     }
   }
-
   
   else 
   {
@@ -168,14 +169,15 @@ void loop() {
       f_error0 =  f_error0/base;
       v_error0 =  v_error0/base;
       
-      Serial.println("frequency error: ");
+      Serial.print("f error: ");
       Serial.println(float(f_error0),4);
-      Serial.println("voltage error: ");
+      Serial.print("D: ");
+      Serial.println(D,4);
+      Serial.print("v error: ");
       Serial.println(float(v_error0),4);
       delay(100);
-      a.fairSplitRatioConsensus_RSL(D_base*f_error0,D*D_base, 16,160);
-      //Serial.println("Out");
-      f_error1 = float(a.getbufferdata(0))/D_base;
+      
+      f_error1 = a.ratioConsensusAlgorithm(f_error0,D,10,500);
       
       Serial.println("ratio consensus result");
       Serial.println(f_error1,4);

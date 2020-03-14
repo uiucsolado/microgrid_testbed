@@ -8,7 +8,7 @@
 #include <Ethernet.h>
 
 
-//Node 11
+//Node 10
 
 long base = 10000;  // not using floating points so need a base number
 
@@ -16,7 +16,7 @@ XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415DB670,11);
+OLocalVertex s = OLocalVertex(0x415786D3,10);
 LinkedList l = LinkedList();  //#NODE
 OGraph_OPF g = OGraph_OPF(&s,&l);
 OAgent_LinkedList al = OAgent_LinkedList();  //#NODE
@@ -28,22 +28,15 @@ uint8_t cPin = 48;     // coordination enabled led pin
 //variables for node sync check
 boolean de = false;
 
-//AFE and controller variables
-float f_error0;         // variable to store the read value 
-float v_error0;         // variable to store the read value
-float f_error1;         // ratio consensus result for average frequency error
-
-float error = 0;
-float u_f =0;
-float u_v =0;
-float u_set=0.85;
+//RC variables
+float RC;
 
 //Modbus Communication
 MgsModbus Mb;
 int val;
 // Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xB3 };
-IPAddress ip(192, 168, 2, 3);
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBA };
+IPAddress ip(192, 168, 2, 10);
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
 
@@ -59,10 +52,6 @@ int fc;
 int ref;
 int count;
 int pos;
-
-float eps_f = 0.001;
-float eps_v = 0.001;
-float D = 1;
 
 void setup()  {
   Serial.begin(38400);
@@ -83,8 +72,8 @@ void setup()  {
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
   g.addInNeighbor(0x415786E1,9,0,0); // node 9
-  g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
+  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
+  g.addInNeighbor(0x415DB670,11,0,0); // node 11
   //g.addInNeighbor(0x415786A9,12,0,0); // node 12
   //g.addInNeighbor(0x4157847B,13,0,0); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14
@@ -161,70 +150,32 @@ void loop() {
   {
     if(a.isSynced())
     {
-      receiveTyphoonData();
-      int f_error =  Mb.MbData[0]*((-2*Mb.MbData[1])+1);
-      int v_error  = Mb.MbData[2]*((-2*Mb.MbData[3])+1);
-      f_error0 =  float(f_error);
-      v_error0 =  float(v_error);
-      f_error0 =  f_error0/base;
-      v_error0 =  v_error0/base;
-      
-      Serial.print("f error: ");
-      Serial.println(float(f_error0),4);
-      Serial.print("D: ");
-      Serial.println(D,4);
-      Serial.print("v error: ");
-      Serial.println(float(v_error0),4);
-      delay(100);
-      
-      f_error1 = a.ratioConsensusAlgorithm(f_error0,D,10,500);
-      
-      Serial.println("ratio consensus result");
-      Serial.println(f_error1,4);
-      delay(100);
-      
-    // frequency controller code
-      if(abs(f_error1) > eps_f)
+      if (a.isLeader())
       {
-         error=error + -1*0.707*f_error1;
-         u_f=u_set+0.7071*error;
-         //Serial.println(u,4);
-      }      
-      //Sending data
-      if (u_f<0)
-      {
-        Mb.MbData[0]=1;
+        Serial.println("Begin ratio consensus? (y/n)"); //let computer know you want to begin ratio consensus
+        while (Serial.available() == 0) 
+        { 
+          //simply makes the arduino wait until commputer sends signal        
+        }
+        if(Serial.available()) 
+        {
+          Serial.println("got some letter");
+          uint8_t o = Serial.read(); //enter the character 's'
+          Serial.println(o);
+          if (o == 'y')
+          {
+            RC = a.ratioConsensusAlgorithm(5,1,5,150);
+            Serial.println("RC result");
+            Serial.println(RC,4);
+          }
+        }
       }
-      else
+      if (!(a.isLeader()))
       {
-        Mb.MbData[0]=0;
+        RC = a.ratioConsensusAlgorithm(5,1,5,150);
+        Serial.println("RC result");
+        Serial.println(RC,4);
       }
-      Mb.MbData[1]=base*abs(u_f);
-
-
-      // voltage controller code
-      if(abs(v_error0) > eps_v)
-      {
-        u_v=0.01*v_error0;
-      }
-      else
-      {
-        u_v=0;
-      }
-      //Sending Data
-      if (u_v<0)
-      {
-        Mb.MbData[2]=1;
-      }
-      else
-      {
-        Mb.MbData[2]=0;
-      }
-      Mb.MbData[3]=base*abs(u_v);
-   // Controller code over
-  
-      sendConsensusResults();     
-      a.resync();
     }
   }
 }
@@ -245,15 +196,15 @@ void sendConsensusResults()
   //Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low);
   //Serial.println("Sent Request Packet");
   ////////////////////////////////////////////////////////////////
-  int node11_ip = 71; //part of ip address for node 11 on the HIL side 
-  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,4,0,node11_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+  int node10_ip = 70; //part of ip address for node 10 on the HIL side 
+  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,4,0,node10_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
   Mb.MbmRun();
   //Serial.println("Received Response");
 }
 
 void receiveTyphoonData()
 {
-  int node11_ip = 71; //part of ip address for node 11 on the HIL side 
-  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,4,0,node11_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)
+  int node10_ip = 70; //part of ip address for node 10 on the HIL side 
+  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,4,0,node10_ip); //(MB_FC FC, word Ref, word Count, word Pos, int nodeip)
   Mb.MbmRun();
 }

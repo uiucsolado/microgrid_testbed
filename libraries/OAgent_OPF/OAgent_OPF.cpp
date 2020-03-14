@@ -25,12 +25,19 @@ void OAgent_LinkedList::_prepareOAgentLinkedList() {
     _head = NULL;
     _tail = NULL;
     _size = 0;
+
+    _alphaP =0;
+    _betaP =0.001;
+    _maxP =0;
+    _minP =0;
 }
 
 // End Constructors
 
 //update lambda values
 void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize) {
+    float difference = 0;
+    
     for(uint8_t i = 0; i < arraySize; i++)
     {
         if(_head == NULL)
@@ -39,7 +46,7 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
             //resetLambdaList(0,0,0,0);
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
-            tmp0->function = *(arrayFunction+i);
+            tmp0->function = *(arrayFunc+i);
             tmp0->next = NULL;
 
             _head = tmp0;
@@ -48,9 +55,10 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
             continue;
         }
 
-        if((_head->value)==*(arrayValue+i))
+        difference = (_head->value)-(*(arrayValue+i));
+        if( (difference > -0.001) && (difference < 0.001) )
         {
-            _head->function = *(arrayFunction+i)
+            _head->function = *(arrayFunc+i);
             continue;
         }
 
@@ -58,7 +66,7 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
         {
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
-            tmp0->function = *(arrayFunction+i);
+            tmp0->function = *(arrayFunc+i);
             tmp0->next = _head;
 
             _head = tmp0;
@@ -72,9 +80,10 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
 
         while (tmp2 != NULL)
         {
-            if((tmp2->value)==*(arrayValue+i))
+            difference = (tmp2->value)-(*(arrayValue+i));
+            if( (difference > -0.001) && (difference < 0.001) )
             {
-                tmp2->function = *(arrayFunction+i)
+                tmp2->function = *(arrayFunc+i);
                 continue;
             }
 
@@ -82,7 +91,7 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
             {
                 lagMultiplier *tmp0 = new lagMultiplier;
                 tmp0->value = *(arrayValue+i);
-                tmp0->function = *(arrayFunction+i);
+                tmp0->function = *(arrayFunc+i);
                 tmp0->next = tmp2;
                 tmp1->next = tmp0;
 
@@ -94,20 +103,24 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
             tmp2 = tmp1->next;
         }
 
-        lagMultiplier *tmp0 = new lagMultiplier;
-        tmp0->value = *(arrayValue+i);
-        tmp0->function = *(arrayFunction+i);
-        tmp1->next = tmp0;
-        tmp0->next = NULL;
-        _tail = tmp0;
-        _size++;
-        continue;
+        if(tmp2 == NULL)
+        {
+            lagMultiplier *tmp0 = new lagMultiplier;
+            tmp0->value = *(arrayValue+i);
+            tmp0->function = *(arrayFunc+i);
+            tmp1->next = tmp0;
+            tmp0->next = NULL;
+            _tail = tmp0;
+            _size++;
+        }
     }
     return;     
 }
 
 //add to lambda function values
 void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize) {
+    float difference = 0;
+    
     for(uint8_t i = 0; i < arraySize; i++)
     {
         if(_head == NULL)
@@ -116,7 +129,7 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
             //resetLambdaList(0,0,0,0);
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
-            tmp0->function = *(arrayFunction+i);
+            tmp0->function = *(arrayFunc+i);
             tmp0->next = NULL;
 
             _head = tmp0;
@@ -125,9 +138,10 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
             continue;
         }
 
-        if((_head->value)==*(arrayValue+i))
+        difference = (_head->value)-(*(arrayValue+i));
+        if( (difference > -0.001) && (difference < 0.001) )
         {
-            _head->function = (_head->function) + *(arrayFunction+i)
+            _head->function = (_head->function) + *(arrayFunc+i);
             continue;
         }
 
@@ -135,7 +149,7 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
         {
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
-            tmp0->function = *(arrayFunction+i);
+            tmp0->function = *(arrayFunc+i);
             tmp0->next = _head;
 
             _head = tmp0;
@@ -149,9 +163,10 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
 
         while (tmp2 != NULL)
         {
-            if((tmp2->value)==*(arrayValue+i))
+            difference = (tmp2->value)-(*(arrayValue+i));
+            if( (difference > -0.001) && (difference < 0.001) )
             {
-                tmp2->function = (tmp2->function) + *(arrayFunction+i)
+                tmp2->function = (tmp2->function) + *(arrayFunc+i);
                 continue;
             }
 
@@ -159,7 +174,7 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
             {
                 lagMultiplier *tmp0 = new lagMultiplier;
                 tmp0->value = *(arrayValue+i);
-                tmp0->function = *(arrayFunction+i);
+                tmp0->function = *(arrayFunc+i);
                 tmp0->next = tmp2;
                 tmp1->next = tmp0;
 
@@ -170,15 +185,131 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
             tmp1 = tmp2;
             tmp2 = tmp1->next;
         }
+        
+        if(tmp2 == NULL)
+        {
+            lagMultiplier *tmp0 = new lagMultiplier;
+            tmp0->value = *(arrayValue+i);
+            tmp0->function = *(arrayFunc+i);
+            tmp1->next = tmp0;
+            tmp0->next = NULL;
+            _tail = tmp0;
+            _size++;
+        }
+    }
+    return;     
+}
 
-        lagMultiplier *tmp0 = new lagMultiplier;
-        tmp0->value = *(arrayValue+i);
-        tmp0->function = *(arrayFunction+i);
-        tmp1->next = tmp0;
-        tmp0->next = NULL;
-        _tail = tmp0;
-        _size++;
-        continue;
+//add incoming data to lambda function values
+void OAgent_LinkedList::addIncomingToLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize) {
+    float difference = 0;
+    float lambda_min = (_minP - _alphaP)/_betaP;
+    float lambda_max = (_maxP - _alphaP)/_betaP;
+    float g_function = 0;
+    
+    for(uint8_t i = 0; i < arraySize; i++)
+    {
+        if(_head == NULL)
+        {
+            //assumption here is that if _head is NULL, then all other elements of the linked list are NULL
+            //resetLambdaList(0,0,0,0);
+            if(*(arrayValue+i) < lambda_min)
+                g_function = _minP;
+            else if(*(arrayValue+i) > lambda_max)
+                g_function = _minP;
+            else
+                g_function = _alphaP + ( (*(arrayValue+i))*_betaP );
+
+            lagMultiplier *tmp0 = new lagMultiplier;
+            tmp0->value = *(arrayValue+i);
+            tmp0->function = *(arrayFunc+i) + g_function;
+            tmp0->next = NULL;
+
+            _head = tmp0;
+            _tail = tmp0;
+            _size++;
+            continue;
+        }
+
+        difference = (_head->value)-(*(arrayValue+i));
+        if( (difference > -0.001) && (difference < 0.001) )
+        {
+            _head->function = (_head->function) + *(arrayFunc+i);
+            continue;
+        }
+
+        if((_head->value)>*(arrayValue+i))
+        {
+            if(*(arrayValue+i) < lambda_min)
+                g_function = _minP;
+            else if(*(arrayValue+i) > lambda_max)
+                g_function = _minP;
+            else
+                g_function = _alphaP + ( (*(arrayValue+i))*_betaP );
+
+            lagMultiplier *tmp0 = new lagMultiplier;
+            tmp0->value = *(arrayValue+i);
+            tmp0->function = *(arrayFunc+i) + g_function;
+            tmp0->next = _head;
+
+            _head = tmp0;
+            _size++;
+            continue;
+        }
+
+        lagMultiplier *tmp1, *tmp2;
+        tmp1 = _head;
+        tmp2 = tmp1->next;
+
+        while (tmp2 != NULL)
+        {
+            difference = (tmp2->value)-(*(arrayValue+i));
+            if( (difference > -0.001) && (difference < 0.001) )
+            {
+                tmp2->function = (tmp2->function) + *(arrayFunc+i);
+                continue;
+            }
+
+            if((tmp2->value)>*(arrayValue+i))
+            {
+                if(*(arrayValue+i) < lambda_min)
+                    g_function = _minP;
+                else if(*(arrayValue+i) > lambda_max)
+                    g_function = _minP;
+                else
+                    g_function = _alphaP + ( (*(arrayValue+i))*_betaP );
+
+                lagMultiplier *tmp0 = new lagMultiplier;
+                tmp0->value = *(arrayValue+i);
+                tmp0->function = *(arrayFunc+i) + g_function;
+                tmp0->next = tmp2;
+                tmp1->next = tmp0;
+
+                tmp1 = tmp0;
+                _size++;
+                continue;
+            }
+            tmp1 = tmp2;
+            tmp2 = tmp1->next;
+        }
+        
+        if(tmp2 == NULL)
+        {
+            if(*(arrayValue+i) < lambda_min)
+                g_function = _minP;
+            else if(*(arrayValue+i) > lambda_max)
+                g_function = _minP;
+            else
+                g_function = _alphaP + ( (*(arrayValue+i))*_betaP );
+
+            lagMultiplier *tmp0 = new lagMultiplier;
+            tmp0->value = *(arrayValue+i);
+            tmp0->function = *(arrayFunc+i);
+            tmp1->next = tmp0;
+            tmp0->next = NULL;
+            _tail = tmp0;
+            _size++;
+        }
     }
     return;     
 }
@@ -246,19 +377,24 @@ void OAgent_LinkedList::resetLinkedList(float alpha_p, float beta_p, float max_p
         return;
     else
     {
+        _alphaP = alpha_p;
+        _betaP = beta_p;
+        _maxP = max_p;
+        _minP = min_p;
+
         float lambda_min = (min_p - alpha_p)/beta_p;
         float lambda_max = (max_p - alpha_p)/beta_p;
-        float f_min = ((min_p - alpha_p)^2)/(2*beta_p) - (lambda_min*max_p);
-        float f_max = ((max_p - alpha_p)^2)/(2*beta_p) - (lambda_max*max_p);
+        float g_min = min_p;//((min_p - alpha_p)*(min_p - alpha_p))/(2*beta_p) - (lambda_min*max_p);
+        float g_max = max_p;//((max_p - alpha_p)*(max_p - alpha_p))/(2*beta_p) - (lambda_max*max_p);
 
         lagMultiplier *tmp0 = new lagMultiplier;
         tmp0->value = lambda_min;
-        tmp0->function = f_min;
+        tmp0->function = g_min;
         _head = tmp0;
 
         lagMultiplier *tmp1 = new lagMultiplier;
         tmp1->value = lambda_max;
-        tmp1->function = f_max;
+        tmp1->function = g_max;
         _tail = tmp1;
 
         _head->next = _tail;
@@ -268,6 +404,37 @@ void OAgent_LinkedList::resetLinkedList(float alpha_p, float beta_p, float max_p
         return;
     }
 }
+
+//add to lambda function values
+void OAgent_LinkedList::getLambdaMinLambdaPlus(float * arrayValue, float * arrayRatio, float Z) {
+    lagMultiplier *tmp1, *tmp2;
+    tmp1 = _head;
+    tmp2 = tmp1->next;
+
+    float ratio1;
+    float ratio2;
+
+    while (tmp2 != NULL)
+    {
+        ratio1 = (tmp1->function)/Z;
+        ratio2 = (tmp2->function)/Z;
+
+        if((ratio1 <= 1) && (ratio2 >= 1))
+        {
+            *(arrayValue) = tmp1->value;
+            *(arrayValue+1) = tmp2->value;
+            *(arrayRatio) = ratio1;
+            *(arrayRatio+1) = ratio2;
+            return;
+        }
+        tmp1 = tmp2;
+        tmp2 = tmp1->next;
+    }
+    Serial<<"getLambdaMinLambdaPlus(...) FAILED!"<<endl;
+    delay(5);
+    return;
+}
+
 
 //// Public methods
 /// Constructors
@@ -297,7 +464,7 @@ OAgent_OPF::OAgent_OPF(XBee * xbee, ZBRxResponse * rx, OGraph_OPF * G, OAgent_Li
 /// Ratio-consensus
 // Fair splitting
 // Resilient Fair splitting RC (added in by Olaolu)
-float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::ratioConsensus(float y, float z, uint16_t iterations, uint16_t period) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
@@ -313,7 +480,7 @@ float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t 
     uint8_t neighborID;
 
     _initializeRatioConsensus(s,y,z);      // initialize state variables
-    float Dout = float(s->getOutDegree() + 1);    // store out degree, the +1 is to account for the self loops
+    float Dout = float(s->getOutDegree());    // store out degree, the +1 is to account for the self loops
     float inY_total;                           // incoming state variable
     float inZ_total;
     float inSumY;                           // incoming state variable
@@ -327,12 +494,10 @@ float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t 
 
     int timeout = 100;                               // create variable to keep track of broadcasts
 
-    uint16_t packetDropCount = 0;
     uint16_t packetReceiveCount = 0;
     uint16_t packetsLost = 0;
     uint16_t packetReceived = 0;
     //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
-    uint16_t period = 200;                                                                  // create variable to keep track of broadcasts
     uint8_t frame = 25;
 
     unsigned long start = (millis()-period);   // initialize timer                                                                  // create variable to store iteration start time
@@ -368,8 +533,10 @@ float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t 
 
                 //get running sum values for Lambda and NU that are received from this neighbor
                 inSumY = _getSumYFromPacket();                             // store incoming value of numerator running sum
-                inSumZ = _getSumZFromPacket(); 
+                inSumZ = _getSumZFromPacket();
                 
+                // Serial<<"Received from Node "<<neighborID<<": "<<_FLOAT(inSumY,6)<<" , "<<_FLOAT(inSumZ,6)<<endl;
+                // delay(5);
                 neighborP = (n+(neighborID-1));
                 
                 inY = inSumY - neighborP->getSumY();
@@ -385,22 +552,14 @@ float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t 
             //if(!txDone && (uint16_t(millis()-start) >= (period-frame)/2))
             {
                 txDone = true;
-                _broadcastRCPacket(nodeP->getSumY(),nodeP->getSumY());
-                // Serial<<"Sent to Neighbors: "<<_FLOAT(nodeP->getSumY(),6)<<" , "<<_FLOAT(nodeP->getSumZ()<<endl;
+                _broadcastRCPacket(nodeP->getSumY(),nodeP->getSumZ());
+                // Serial<<"Sent to Neighbors: "<<_FLOAT(nodeP->getSumY(),6)<<" , "<<_FLOAT(nodeP->getSumZ(),6)<<endl;
                 // delay(5);
             }
         }
 
         s->setY( ((s->getY())/Dout) + inY_total );
         s->setZ( ((s->getZ())/Dout) + inZ_total );
-        
-        // _buffer[count] = (s->getY())/(s->getZ()); //add kth iterate to buffer
-        // _bufferY[count] = s->getY(); //add kth iterate to buffer
-        // _bufferZ[count] = s->getZ(); //add kth iterate to buffer
-        // //Serial << "Every Iteration Y";
-        // //Serial << _buffer[count];
-        // //Serial << "\n";
-        // count++; 
 
         //CODE TO IMPROVE RESILIENCY
 
@@ -431,7 +590,18 @@ float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t 
         //     }
         //     node_check[j] = 0;                                 //reset node_check after each iteration
         // }
+        packetReceived += packetReceiveCount;
+        packetsLost += (_G->getN() - packetReceiveCount - 1);
+
+        packetReceiveCount = 0;
+
+        l->resetLinkedListStatus(s->getStatusP());
     }
+    
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
+    delay(5);
 
     // if(s->getZ() != 0)
     //     _buffer[0] = float(s->getYMin())/float(s->getZ()); 
@@ -448,7 +618,7 @@ float OAgent_OPF::ratioConsensus(float y, float z, uint8_t iterations, uint16_t 
 }
 
 
-float OAgent_OPF::ratioConsensusAlgorithm(float y, float z, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::ratioConsensusAlgorithm(float y, float z, uint16_t iterations, uint16_t period) {
     srand(analogRead(7));                    //moved this instruction here from fairSplitRatioConsensus() - Sammy
     OLocalVertex * s = _G->getLocalVertex();
     // int leader_id = s->getleaderID();
@@ -481,9 +651,9 @@ float OAgent_OPF::ratioConsensusAlgorithm(float y, float z, uint8_t iterations, 
 
 
 
-float OAgent_OPF::leaderRatioConsensus(float y, float z, uint8_t iterations, uint16_t period) {
-    unsigned float t0 = myMillis();
-    unsigned float startTime = t0 + RC_DELAY;
+float OAgent_OPF::leaderRatioConsensus(float y, float z, uint16_t iterations, uint16_t period) {
+    unsigned long t0 = myMillis();
+    unsigned long startTime = t0 + RC_DELAY;
     OLocalVertex * s = _G->getLocalVertex();
     float gamma = 0;
     bool scheduled = _waitForChildSchedulePacketRC(SCHEDULE_TIMEOUT, startTime, iterations, period);
@@ -494,22 +664,22 @@ float OAgent_OPF::leaderRatioConsensus(float y, float z, uint8_t iterations, uin
 
     if (!scheduled) 
     {
-        //Serial<<"No acknowledgements received from neighbors at t = "<<myMillis()<<"\n";
-        //s->setleaderID(s->getdeputyID());
-        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        Serial << "RC scheduling was a FAIL"<<endl;
         gamma = -1;
     }
     else
     {
-        if(_waitToStart(startTime,true,3000))
+        Serial << "RC scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
         {
+            Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = ratioConsensus(y, z, iterations,period);
         }
     }        
     return gamma;
 }
 
-float OAgent_OPF::nonleaderRatioConsensus(float y, float z, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::nonleaderRatioConsensus(float y, float z, uint16_t iterations, uint16_t period) {
     unsigned long startTime = 0;
     //delay(50);
     float gamma = 0;
@@ -523,8 +693,10 @@ float OAgent_OPF::nonleaderRatioConsensus(float y, float z, uint8_t iterations, 
 
     if(scheduled)
     {
-        //Serial<<"Schedule received from Node "<<s->getleaderID()<<"\n";
-        if(_waitToStart(startTime,true,3000)) {
+        Serial << "RC scheduling was a SUCCESS"<<endl;
+        if(_waitToStart(startTime,true,10000))
+        {
+            Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = ratioConsensus(y, z, iterations,period);
         }
         
@@ -532,9 +704,7 @@ float OAgent_OPF::nonleaderRatioConsensus(float y, float z, uint8_t iterations, 
     }
     else
     {
-        //Serial<<"No schedule received from Node "<<s->getleaderID()<<"\n";
-        //s->setleaderID(s->getdeputyID());
-        //Serial<<"Node "<<s->getleaderID()<<" is the new leader\n";
+        Serial << "RC scheduling was a FAIL"<<endl;
         gamma = -1;
     }
     return gamma;
@@ -550,7 +720,7 @@ float OAgent_OPF::nonleaderRatioConsensus(float y, float z, uint8_t iterations, 
 //  Begin Max Consensus
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float OAgent_OPF::maxminConsensusAlgorithm(bool isMax, float max, float min, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::maxminConsensusAlgorithm(bool isMax, float max, float min, uint16_t iterations, uint16_t period) {
     srand(analogRead(7));
     float gamma = 0;
 
@@ -561,7 +731,7 @@ float OAgent_OPF::maxminConsensusAlgorithm(bool isMax, float max, float min, uin
     return gamma;
 }
 
-float OAgent_OPF::leaderMaxMinConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::leaderMaxMinConsensus(bool isMax, float max, float min, uint16_t iterations, uint16_t period) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + MC_DELAY;
     float gamma = 0;
@@ -575,7 +745,7 @@ float OAgent_OPF::leaderMaxMinConsensus(bool isMax, float max, float min, uint8_
     else
     {
         Serial << "maxmin scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,3000))
+        if(_waitToStart(startTime,true,10000))
         {
         	//Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = maxminConsensus(isMax,max,min,iterations,period);
@@ -584,7 +754,7 @@ float OAgent_OPF::leaderMaxMinConsensus(bool isMax, float max, float min, uint8_
     return gamma;
 }
 
-float OAgent_OPF::nonleaderMaxMinConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::nonleaderMaxMinConsensus(bool isMax, float max, float min, uint16_t iterations, uint16_t period) {
     unsigned long startTime = 0;
     float gamma = 0;
 
@@ -593,7 +763,7 @@ float OAgent_OPF::nonleaderMaxMinConsensus(bool isMax, float max, float min, uin
     if(scheduled)
     {
         Serial << "maxmin scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,3000))
+        if(_waitToStart(startTime,true,10000))
         {
         	//Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = maxminConsensus(isMax,max,min,iterations,period);
@@ -608,7 +778,7 @@ float OAgent_OPF::nonleaderMaxMinConsensus(bool isMax, float max, float min, uin
 }
 
 // MaxMin Consensus Algorithm (added in by Olaolu)
-float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period) {
+float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint16_t iterations, uint16_t period) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
@@ -637,7 +807,6 @@ float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint8_t iter
     uint16_t packetsLost = 0;
     uint16_t packetReceived = 0;
     //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
-    uint16_t period = 200;                                                                  // create variable to keep track of broadcasts
     uint8_t frame = 25;
 
     unsigned long start = (millis()-period);   // initialize timer                                                                  // create variable to store iteration start time
@@ -676,12 +845,12 @@ float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint8_t iter
 
 float OAgent_OPF::_getMaxFromPacket() {
     uint8_t ptr = 2;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE);
 }
 
 float OAgent_OPF::_getMinFromPacket() {
     uint8_t ptr = 7;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3609,6 +3778,12 @@ bool OAgent_OPF::nonleaderEconomicDispatch(float alpha_p, float beta_p, float ma
 }
 
 bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
+    //precaution to avoid too large or NaN values
+    if ( (beta_p > -0.001) && (beta_p <= 0) )
+        beta_p = -0.001;
+    if ( (beta_p < 0.001) && (beta_p >= 0) )
+        beta_p = 0.001;
+
     _lambdaList->resetLinkedList(alpha_p,beta_p,max_p,min_p);                                   //initialize OAgent linked list
 
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
@@ -3629,7 +3804,7 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
     
     uint8_t neighborID;
 
-    float Dout = float(s->getOutDegree() + 1);    // store out degree, the +1 is to account for the self loops
+    float Dout = float(s->getOutDegree());    // store out degree, the +1 is to account for the self loops
     float inZ_total;
     float inSumZ;
     float inZ;
@@ -3645,7 +3820,6 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
     uint16_t packetsLost = 0;
     uint16_t packetReceived = 0;
     //uint16_t period = _windowsPerPeriod*WINDOW_LENGTH;                            // create variable to keep track of broadcasts
-    uint16_t period = 200;                                                                  // create variable to keep track of broadcasts
     uint8_t frame = 25;
 
     unsigned long start = (millis()-period);   // initialize timer                                                                  // create variable to store iteration start time
@@ -3708,7 +3882,7 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
                 neighborAgentLL->getNewLinkedListData(newLambdaFunction,inLambdaValue,inLambdaFunction,inArraySize);
                 inZ = inSumZ - neighborP->getSumZ();
                 
-                _lambdaList->addToLinkedList(inLambdaValue,newLambdaFunction,inArraySize);
+                _lambdaList->addIncomingToLinkedList(inLambdaValue,newLambdaFunction,inArraySize);
                 inZ_total += inZ;
 
                 neighborP->setSumZ(inSumZ);
@@ -3718,13 +3892,13 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
             //if(!txDone && (uint16_t(millis()-start) >= (period-frame)/2))
             {
                 txDone = true;
-                //make sure array size is not greater than 6
+                //make sure array size is not greater than 10
                 _broadcastEDPacket(nodeP->getSumZ(),lambdaValue,sumLambdaFunction,arraySize);
                 // Serial<<"Sent to Neighbors: "<<_FLOAT(nodeP->getSumY(),6)<<" , "<<_FLOAT(nodeP->getSumZ()<<endl;
                 // delay(5);
             }
         }
-        _lambdaList->->addToLinkedList(lambdaValue,lambdaFunction_Dout,arraySize);
+        _lambdaList->addToLinkedList(lambdaValue,lambdaFunction_Dout,arraySize);
         s->setZ( ((s->getZ())/Dout) + inZ_total );
         
         // _buffer[count] = (s->getY())/(s->getZ()); //add kth iterate to buffer
@@ -3736,23 +3910,19 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
         // count++; 
 
         //CODE TO IMPROVE RESILIENCY
-
-                
+        
         // for(int j=0;j < NUM_REMOTE_VERTICES; j++)
         // {
         //     if(node_check[j] == 0 && node_counter[j] >= 0)
         //         node_counter[j] += 1;
         //     else if(node_check[j] == 1 ) 
         //         node_counter[j] = 0;
-            
 
-            
         //     //Serial << "node_counter ";
         //     //Serial << j;
         //     //Serial << " : ";
         //     //Serial << node_counter[j];
         //     //Serial << "\n";
-            
 
         //     if(node_counter[j] >= int(iterations/2) )
         //     {
@@ -3764,8 +3934,25 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
         //     }
         //     node_check[j] = 0;                                 //reset node_check after each iteration
         // }
+        l->resetLinkedListStatus(s->getStatusP());
     }
-    return (s->getY())/(s->getZ());
+    float valueMinPlus[2];
+    float ratioMinPlus[2];
+    _lambdaList->getLambdaMinLambdaPlus(valueMinPlus,ratioMinPlus,s->getZ());
+
+    float lambda = valueMinPlus[1] - ( (ratioMinPlus[1] - 1)*((valueMinPlus[1] - valueMinPlus[0])/(ratioMinPlus[1]-ratioMinPlus[0])) );
+    float setpoint = min_p;
+    
+    if ( lambda < ((min_p - alpha_p)/beta_p) )
+        setpoint = min_p;
+    else if  ( lambda > ((max_p - alpha_p)/beta_p) )
+        setpoint = max_p;
+    else
+        setpoint = alpha_p + (lambda*beta_p);
+
+
+
+    return setpoint;
 }
 
 // End Economic Dispatch Methods
@@ -3995,7 +4182,7 @@ void OAgent_OPF::_initializeEconomicDispatch(OLocalVertex * s, float u) {
    
     for(int i=0; i < NUM_REMOTE_VERTICES; i++)
     {
-        _sumLambdaList[i]->resetLinkedList(0,0,0,0);
+        _sumLambdaList[i].resetLinkedList(0,0,0,0);
     }
     // for (int i=0; i< NUM_REMOTE_VERTICES; i++){
     //     if ((s->getStatus(i)) == 1){
@@ -4018,8 +4205,8 @@ void OAgent_OPF::_broadcastRCPacket(float sumY, float sumZ) {
     uint8_t sign_sumY;
     uint8_t sign_sumZ;
     
-    sumY = sumY*BASE;
-    sumZ = sumZ*BASE;
+    sumY = sumY*BASE_RC;
+    sumZ = sumZ*BASE_RC;
 
     //check if sumLambda is negative
     if (sumY < 0) 
@@ -4130,12 +4317,12 @@ void OAgent_OPF::_broadcastMaxMinPacket(float max, float min) {
 
 float OAgent_OPF::_getSumYFromPacket() {
     uint8_t ptr = 2;
-    return _getFloat32FromPacket(ptr);
+    return(_getFloat32FromPacket(ptr)/BASE_RC);
 }
 
 float OAgent_OPF::_getSumZFromPacket() {
     uint8_t ptr = 7;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE_RC);
 }
 
 /// End ratio-consensus and maxmin consensus methods
@@ -4144,14 +4331,14 @@ float OAgent_OPF::_getSumZFromPacket() {
 
 // Xbee methods for Alejandro's ED algorithm
 void OAgent_OPF::_broadcastEDPacket(float sumZ, float * arrayValue, float * arraySumFunc, uint8_t arraySize) {
-    //if arraysize is greater than 6, split it into two broadcasts
-    uint8_t payloadSize = 8+(arraySize*10);
+    //if arraysize is greater than 10, split it into two broadcasts
+    uint8_t payloadSize = 8+(arraySize*8);
     uint8_t payload[payloadSize];
 
     uint32_t unsignedSumZ;
     uint8_t sign_sumZ;
     
-    float sumZ = sumZ*BASE;
+    sumZ = sumZ*BASE_ED;
 
     //check if sumNu is negative
     if (sumZ < 0) 
@@ -4181,24 +4368,24 @@ void OAgent_OPF::_broadcastEDPacket(float sumZ, float * arrayValue, float * arra
 
     for(uint8_t i = 0; i < arraySize; i++)
     {
-        uint32_t unsignedY1;
+        uint16_t unsignedY1;
         uint8_t sign_Y1;
         uint32_t unsignedSumY2;
         uint8_t sign_sumY2;
         
-        float Y1 = (*(arrayValue+i))*BASE;
-        float sumY2 = (*(arraySumFunc+i))*BASE;
+        float Y1 = (*(arrayValue+i))*BASE_LAMBDA;
+        float sumY2 = (*(arraySumFunc+i))*BASE_ED;
 
         //check if sumLambda is negative
         if (Y1 < 0) 
         {
             Y1 = -1*Y1;
-            unsignedY1 = (uint32_t) Y1;
+            unsignedY1 = (uint16_t) Y1;
             sign_Y1 = 0;
         }
         else
         {
-            unsignedY1 = (uint32_t) Y1;
+            unsignedY1 = (uint16_t) Y1;
             sign_Y1 = 1;
         }
         //check if sumLambda is negative
@@ -4214,17 +4401,14 @@ void OAgent_OPF::_broadcastEDPacket(float sumZ, float * arrayValue, float * arra
             sign_sumY2 = 1;
         }
 
-        payload[8+(i*10)] = sign_Y1;
-        payload[9+(i*10)] = unsignedY1;
-        payload[10+(i*10)] = unsignedY1 >> 8;
-        payload[11+(i*10)] = unsignedY1 >> 16;
-        payload[12+(i*10)] = unsignedY1 >> 24;
-
-        payload[13+(i*10)] = sign_sumY2;
-        payload[14+(i*10)] = unsignedSumY2;
-        payload[15+(i*10)] = unsignedSumY2 >> 8;
-        payload[16+(i*10)] = unsignedSumY2 >> 16;
-        payload[17+(i*10)] = unsignedSumY2 >> 24;
+        payload[8+(i*8)] = sign_Y1;
+        payload[9+(i*8)] = unsignedY1;
+        payload[10+(i*8)] = unsignedY1 >> 8;
+        payload[11+(i*8)] = sign_sumY2;
+        payload[12+(i*8)] = unsignedSumY2;
+        payload[13+(i*8)] = unsignedSumY2 >> 8;
+        payload[14+(i*8)] = unsignedSumY2 >> 16;
+        payload[15+(i*8)] = unsignedSumY2 >> 24;
     }
 
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
@@ -4236,17 +4420,17 @@ void OAgent_OPF::_broadcastEDPacket(float sumZ, float * arrayValue, float * arra
 
 float OAgent_OPF::_getSumZFromEDPacket() {
     uint8_t ptr = 2;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE_ED);
 }
 
 float OAgent_OPF::_getLambdaValueFromEDPacket(uint8_t index) {
-    uint8_t ptr = 8+(index*10);
-    return _getFloat32FromPacket(ptr);
+    uint8_t ptr = 8+(index*8);
+    return (_getFloat16FromPacket(ptr)/BASE_LAMBDA);
 }
 
-float _getSumLambdaFunctionFromEDPacket(uint8_t index) {
-    uint8_t ptr = 13+(index*10);
-    return _getFloat32FromPacket(ptr);
+float OAgent_OPF::_getSumLambdaFunctionFromEDPacket(uint8_t index) {
+    uint8_t ptr = 11+(index*8);
+    return (_getFloat32FromPacket(ptr)/BASE_ED);
 }
 //End of Alejandro's ED xbee methods
 
@@ -5318,17 +5502,17 @@ bool OAgent_OPF::_waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint
 
 float OAgent_OPF::_getSumLambdaFromPacket() {
     uint8_t ptr = 2;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE_ED);
 }
 
 float OAgent_OPF::_getSumNuFromPacket() {
     uint8_t ptr = 7;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE_ED);
 }
 
 float OAgent_OPF::_getSumGammaFromPacket() {
     uint8_t ptr = 12;
-    return _getFloat32FromPacket(ptr);
+    return (_getFloat32FromPacket(ptr)/BASE_ED);
 }
 
 void OAgent_OPF::_sendToNeighbor(float sumLAMBDA, float sumNU) {
@@ -5337,8 +5521,8 @@ void OAgent_OPF::_sendToNeighbor(float sumLAMBDA, float sumNU) {
     uint32_t sumNu;
     uint8_t sign_sumLambda;
     uint8_t sign_sumNu;
-    sumLAMBDA = sumLAMBDA*BASE;
-    sumNU = sumNU*BASE;
+    sumLAMBDA = sumLAMBDA*BASE_ED;
+    sumNU = sumNU*BASE_ED;
 
     //check if sumLambda is negative
     if (sumLAMBDA < 0) 
@@ -5396,9 +5580,9 @@ void OAgent_OPF::_sendToNeighbor_ACC(float sumLAMBDA, float sumNU, float sumGAMM
     uint8_t sign_sumLambda;
     uint8_t sign_sumNu;
     uint8_t sign_sumGamma;
-    sumLAMBDA = sumLAMBDA*BASE;
-    sumNU = sumNU*BASE;
-    sumGAMMA = sumGAMMA*BASE;
+    sumLAMBDA = sumLAMBDA*BASE_ED;
+    sumNU = sumNU*BASE_ED;
+    sumGAMMA = sumGAMMA*BASE_ED;
 
     //check if sumLambda is negative
     if (sumLAMBDA < 0) 
@@ -5537,13 +5721,13 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
     l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2
     uint8_t counter = 1;
 
-    Serial << "Waiting for Schedule RC Packet"<<endl;
-    delay(5);
+    //Serial << "Waiting for Schedule RC Packet"<<endl;
+    //delay(5);
 
     if(_waitForNeighborPacket(neighborID,header,true,timeout))                      //stays in loop until desired packet received
     {
-        Serial << "Received Schedule RC Packet from node " << neighborID<<endl;
-        delay(5);
+        //Serial << "Received Schedule RC Packet from node " << neighborID<<endl;
+        //delay(5);
     
         startTime   = _getStartTimeFromPacket();
         iterations  = _getIterationsFromPacket();
@@ -5554,10 +5738,10 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
 
         if(counter==_G->getN())
         {
-            Serial << "No Schedule RC ACK is required from neighbors"<<endl;
-            delay(5);
-            Serial << "Sending Schedule RC ACK to parent"<<endl;
-            delay(5);
+            //Serial << "No Schedule RC ACK is required from neighbors"<<endl;
+            //delay(5);
+            //Serial << "Sending Schedule RC ACK to parent"<<endl;
+            //delay(5);
         
             while(true)
             {
@@ -5574,8 +5758,8 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
             }
         }
 
-        Serial << "Waiting for Schedule RC ACKs"<<endl;
-        delay(5);
+        //Serial << "Waiting for Schedule RC ACKs"<<endl;
+        //delay(5);
 
         while(true)
         {
@@ -5592,8 +5776,8 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
 
                 if(counter==_G->getN())
                 {
-                    Serial << "All neighbors scheduled for ratio consensus algorithm"<<endl;
-                    delay(5);
+                    //Serial << "All neighbors scheduled for ratio consensus algorithm"<<endl;
+                    //delay(5);
                     l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                     return true;
                 }
@@ -5761,13 +5945,13 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
     l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2
     uint8_t counter = 1;
 
-    Serial << "Waiting for Schedule ED Packet"<<endl;
-    delay(5);
+    // Serial << "Waiting for Schedule ED Packet"<<endl;
+    // delay(5);
 
     if(_waitForNeighborPacket(neighborID,header,true,timeout))                    	//stays in loop until desired packet received
  	{
-        Serial << "Received Schedule ED Packet from node " << neighborID<<endl;
-        delay(5);
+        // Serial << "Received Schedule ED Packet from node " << neighborID<<endl;
+        // delay(5);
     
         startTime   = _getStartTimeFromPacket();
         iterations  = _getIterationsFromPacketPD();
@@ -5777,10 +5961,10 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
 
 	    if(counter==_G->getN())
         {
-			Serial << "No Schedule ED ACK is required from neighbors"<<endl;
-            delay(5);
-            Serial << "Sending Schedule ED ACK to parent"<<endl;
-        	delay(5);
+			// Serial << "No Schedule ED ACK is required from neighbors"<<endl;
+   //          delay(5);
+   //          Serial << "Sending Schedule ED ACK to parent"<<endl;
+   //      	delay(5);
         
 			while(true)
 			{
@@ -5797,8 +5981,8 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
 			}
         }
 
-       	Serial << "Waiting for Schedule ED ACKs"<<endl;
-        delay(5);
+       	// Serial << "Waiting for Schedule ED ACKs"<<endl;
+        // delay(5);
 
         while(true)
         {
@@ -5815,8 +5999,8 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
 
                 if(counter==_G->getN())
                 {
-					Serial << "All neighbors scheduled for economic dispatch algorithm"<<endl;
-	                delay(5);
+					// Serial << "All neighbors scheduled for economic dispatch algorithm"<<endl;
+	    //             delay(5);
 					l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                     return true;
                 }
@@ -5928,8 +6112,8 @@ bool OAgent_OPF::_waitForChildSchedulePacketRC(int timeout, unsigned long startT
 
     _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
 
-    Serial << "Waiting for Schedule RC ACKs"<<endl;
-    delay(5);
+    //Serial << "Waiting for Schedule RC ACKs"<<endl;
+    //delay(5);
     
     while(uint16_t(millis()-start) < timeout)
     {
@@ -5945,8 +6129,8 @@ bool OAgent_OPF::_waitForChildSchedulePacketRC(int timeout, unsigned long startT
 
             if(counter==_G->getN())
             {
-                Serial << "All neighbors scheduled for ratio consensus algorithm"<<endl;
-                delay(5);
+                //Serial << "All neighbors scheduled for ratio consensus algorithm"<<endl;
+                //delay(5);
                 l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                 return true;
             }
@@ -6052,8 +6236,8 @@ bool OAgent_OPF::_waitForChildSchedulePacketED(int timeout, unsigned long startT
 
     _broadcastSchedulePacketED(startTime,iterations);
 
-    Serial << "Waiting for Schedule ED ACKs"<<endl;
-    delay(5);
+    // Serial << "Waiting for Schedule ED ACKs"<<endl;
+    // delay(5);
     
     while(uint16_t(millis()-start) < timeout)
     {
@@ -6069,8 +6253,8 @@ bool OAgent_OPF::_waitForChildSchedulePacketED(int timeout, unsigned long startT
 
             if(counter==_G->getN())
             {
-				Serial << "All neighbors scheduled for economic dispatch algorithm"<<endl;
-                delay(5);
+				// Serial << "All neighbors scheduled for economic dispatch algorithm"<<endl;
+    //             delay(5);
 				l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                 return true;
             }
@@ -6094,12 +6278,20 @@ uint32_t OAgent_OPF::_getUint32_tFromPacket(uint8_t &lsbByteNumber) {
     return (uint32_t(_rx->getData(lsbByteNumber-1)) << 24) + (uint32_t(_rx->getData(lsbByteNumber-2)) << 16) + (uint16_t(_rx->getData(lsbByteNumber-3)) << 8) + _rx->getData(lsbByteNumber-4);
 }
 
+float OAgent_OPF::_getFloat16FromPacket(uint8_t &lsbByteNumber) {
+    lsbByteNumber += 3;
+    int16_t mag = (int16_t(_rx->getData(lsbByteNumber-1)) << 8) + int8_t(_rx->getData(lsbByteNumber-2));
+    int8_t sign = -1 + ((_rx->getData(lsbByteNumber-3))*2);
+    float value = (float) (sign*mag);
+
+    return value;
+}
+
 float OAgent_OPF::_getFloat32FromPacket(uint8_t &lsbByteNumber) {
     lsbByteNumber += 5;
     int32_t mag = (int32_t(_rx->getData(lsbByteNumber-1)) << 24) + (int32_t(_rx->getData(lsbByteNumber-2)) << 16) + (int16_t(_rx->getData(lsbByteNumber-3)) << 8) + int8_t(_rx->getData(lsbByteNumber-4));
     int8_t sign = -1 + ((_rx->getData(lsbByteNumber-5))*2);
     float value = (float) (sign*mag);
-    value = value/BASE;
 
     return value;
 }

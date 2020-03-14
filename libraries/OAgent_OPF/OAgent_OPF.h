@@ -31,6 +31,9 @@
 
 #define WINDOW_LENGTH                    5000     // time length for each window in a period
 #define BASE                             1000000000  // base for transmitting decimals
+#define BASE_ED                          1000000  // base for transmitting decimals
+#define BASE_RC                          10000000  // base for transmitting decimals
+#define BASE_LAMBDA                      1000  // base for transmitting decimals
 
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
@@ -44,11 +47,11 @@
 #define SYNC_FINAL_HEADER                0x7346	// HRTS sync_final header is ascii sF
 #define SYNC_TIMEOUT                     2500    // (was 2500) time out period to wait for response to HRTS sync_begin broadcast in milliseconds
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
-#define SCHEDULE_TIMEOUT                 5000    // time out period (in milliseconds) to wait for schedule packet from leader node
-#define RC_DELAY                         750    // delay before ratio consensus starts
+#define SCHEDULE_TIMEOUT                 2000    // time out period (in milliseconds) to wait for schedule packet from leader node
+#define RC_DELAY                         3000    // delay before ratio consensus starts
 #define MC_DELAY                         5000    // delay before maxmin consensus starts
 #define PD_DELAY                         5000   // delay before primal dual algorithm starts
-#define ED_DELAY                         5000   // delay before primal dual algorithm starts
+#define ED_DELAY                         3000   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353 // used as the header to indicate the resync process is taking place (1st transaction)
@@ -78,8 +81,10 @@ class OAgent_LinkedList {
         bool updateLinkedListArrays(float * arrayValue, float * arrayFunc, uint8_t arraySize);
         void updateLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize);
         void addToLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize);
+        void addIncomingToLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize);
 
         void getNewLinkedListData(float * newArrayFunc, float * inArrayValue, float * inArrayFunc, uint8_t inArraySize);
+        void getLambdaMinLambdaPlus(float * arrayValue, float * arrayRatio, float Z);
 
         uint8_t getLinkedListSize() { return _size; }
         
@@ -87,7 +92,13 @@ class OAgent_LinkedList {
     private:
         //properties
         lagMultiplier *_head, *_tail;
-        inline uint8_t _size;  //size of linked list
+        uint8_t _size;  //size of linked list
+
+
+        float _alphaP;
+        float _betaP;
+        float _maxP;
+        float _minP;
 
         // Helper functions
         void _prepareOAgentLinkedList();
@@ -118,15 +129,15 @@ class OAgent_OPF {
         //inline void setRS(int RS) { _RS = RS;}
         
         // Fair splitting methods
-        float ratioConsensusAlgorithm(float y, float z, uint8_t iterations, uint16_t period);
-        float leaderRatioConsensus(float y, float z, uint8_t iterations, uint16_t period);
-        float nonleaderRatioConsensus(float y, float z, uint8_t iterations, uint16_t period);
-        float ratioConsensus(float y, float z, uint8_t iterations, uint16_t period);
+        float ratioConsensusAlgorithm(float y, float z, uint16_t iterations, uint16_t period);
+        float leaderRatioConsensus(float y, float z, uint16_t iterations, uint16_t period);
+        float nonleaderRatioConsensus(float y, float z, uint16_t iterations, uint16_t period);
+        float ratioConsensus(float y, float z, uint16_t iterations, uint16_t period);
 
-        float maxminConsensusAlgorithm(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
-        float leaderMaxMinConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
-        float nonleaderMaxMinConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
-        float maxminConsensus(bool isMax, float max, float min, uint8_t iterations, uint16_t period);
+        float maxminConsensusAlgorithm(bool isMax, float max, float min, uint16_t iterations, uint16_t period);
+        float leaderMaxMinConsensus(bool isMax, float max, float min, uint16_t iterations, uint16_t period);
+        float nonleaderMaxMinConsensus(bool isMax, float max, float min, uint16_t iterations, uint16_t period);
+        float maxminConsensus(bool isMax, float max, float min, uint16_t iterations, uint16_t period);
         
         // Primal Dual methods
         bool primalDualAlgorithm(bool genBus, float alpha, uint16_t iterations);
@@ -258,8 +269,8 @@ class OAgent_OPF {
         inline uint8_t _getCANDACTCODEFromPacket(uint8_t i) {  return _rx->getData(4+i); }
 
         //methods to get packet data
-        long _getMaxFromPacket();
-        long _getMinFromPacket();
+        float _getMaxFromPacket();
+        float _getMinFromPacket();
         float _getSumYFromPacket();
         float _getSumZFromPacket();
 
@@ -387,8 +398,8 @@ class OAgent_OPF {
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
         bool _waitForParentSchedulePacketRC(unsigned long &startTime, uint16_t &iterations, uint16_t &period, int timeout);
         bool _waitForParentSchedulePacketMMC(unsigned long &startTime, uint16_t &iterations, uint16_t &period, int timeout);
-        bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations,int timeout);
-        bool _waitForParentSchedulePacketED(unsigned long &startTime, uint16_t &iterations,int timeout);
+        bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations, int timeout);
+        bool _waitForParentSchedulePacketED(unsigned long &startTime, uint16_t &iterations, int timeout);
         bool _waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout);
         bool _waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint16_t header, bool broadcast, int timeout);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
@@ -396,6 +407,8 @@ class OAgent_OPF {
         void _broadcastSchedulePacketED(unsigned long startTime, uint16_t numIterations);
         uint32_t _getAvailableAgentLsb(uint8_t i);
         uint32_t _getUint32_tFromPacket(uint8_t &lsbByteNumber);
+        float _getFloat16FromPacket(uint8_t &lsbByteNumber);
+        float _getFloat32FromPacket(uint8_t &lsbByteNumber);
         inline long _getLongFromPacket(uint8_t &lsbByteNumber) { return long(_getUint32_tFromPacket(lsbByteNumber)); }
         uint8_t _getUint8_tFromPacket(uint8_t &byteNumber);
         uint8_t _addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr);
