@@ -59,7 +59,7 @@ void setup()  {
   
   xbee.setSerial(Serial3); //Specify the serial port for xbee
 //Define the Neighboring nodes
-  g.addInNeighbor(0x4174F1AA,1,0,0); // node 1
+  g.addInNeighbor(0x4174F1AA,1,0.05,0.07); // node 1
   //g.addInNeighbor(0x4174F186,2,0,0); // node 2
   //g.addInNeighbor(0x4151C692,3,0,0); // node 3
   //g.addInNeighbor(0x4151C48B,4,0,0); // node 4
@@ -79,7 +79,7 @@ void setup()  {
   
   g.configureLinkedList();  
   s.setActiveDemand(0.4);
-  s.setReactiveDemand(0);
+  s.setReactiveDemand(0.3);
  
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);

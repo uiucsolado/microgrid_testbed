@@ -32,7 +32,8 @@
 #define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
 #define WINDOW_LENGTH                    1000     // time length for each window in a period
-#define BASE                             10000000  // base for transmitting decimals
+#define BASE_64                             10000000000000  // base for transmitting decimals
+#define BASE_32                             1000000000
 
 #define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "
 #define ACTCODE_HEADER                   0x2221 // Primal-dual acknowledgment header is "!
@@ -114,8 +115,9 @@ class OAgent_OPF {
         bool leaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool nonleaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool SecondOrderOPF(bool genBus);
+        void setup_Newton_method_opf(float *N_T,float *buf2,float *Hessian_lambda,float *tmp);
         float* Conjugate_gradient(float*A,int rows, int cols, float*b, float*x_init);
-        float RunRatioConsensus(uint16_t nodeID,float *mu,float *nu,uint8_t iterations,uint8_t *neighbors,int num_neighbors,bool self_flags[NUM_REMOTE_VERTICES],bool neighbor_flags[NUM_REMOTE_VERTICES],float old_data[NUM_REMOTE_VERTICES]);
+        float RunRatioConsensus(uint16_t nodeID,float *mu,float *nu,uint8_t iterations,uint8_t *neighbors);
 
         // Algebraic operations
         float _clip(float x, float xmin, float xmax);
@@ -123,27 +125,25 @@ class OAgent_OPF {
         // Matrix-vector algebraic operations 
         float dot(float*a, float*b);
         float* matbyvec(float*a,int rows, int cols, float*b);
-        void transpose(float *a_T, float *a,int rows, int cols);
-        void multiply(float *res, float*a,int rows_A, int cols_A, float* b, int rows_B, int cols_B);
-
+        void MatrixTranspose(float *a_T, float *a,int rows, int cols);
+        void MatrixMultiply(float *res, float*a,int rows_A, int cols_A, float* b, int rows_B, int cols_B);
+        int MatrixInverse(float* AInverse, float* A, int n);
         
        	// Helper functions for communicating and receiving data 
-        void _sender_helper(float x,uint8_t* sign_y,uint32_t* y);
-        void _SendToChild(uint16_t recipientID, bool flag_OPF, float data);
-        void _SendToParent(uint16_t recipientID, bool flag_OPF, float data);
-        void _CG_RC_SendPacket(float mu, float nu, uint8_t k);
-        float* _CG_RC_ReceivePacket();
-        float _getPacketFromChild();
-        float _getPacketFromParent();
+        void _sender_helper_32bit(float x,uint8_t* sign_y,uint32_t* y);
+        void _sender_helper_64bit(float x,uint8_t* sign_y,uint64_t* y);
+        void _SendToChild(uint16_t recipientID, float *vars, uint8_t n_var, uint8_t task);
+        void _SendToParent(uint16_t recipientID, float *vars, uint8_t n_var, uint8_t task);
+        void _CG_RC_SendPacket(float mu, float nu);
+        double* _CG_RC_ReceivePacket();
+        float* _getPacketFromChild(uint8_t n_var);
+        float* _getPacketFromParent(uint8_t n_var);
         bool _getFlagFromChild();
         bool _getFlagFromParent();
 
-        void _print_(String s,float val,uint8_t precision);
-        void _print2Darray_(String s,float* A,int rows,int cols,uint8_t precision);
-        void _print1Darray_(String s,float* a,int size, uint8_t precision);
-
-        // communication link activation methods
-        bool linkActivationAlgorithm();
+        void _print_(String &s,float &val,uint8_t precision);
+        void _print2Darray_(String &s,float* A,int rows,int cols,uint8_t precision);
+        void _print1Darray_(String &s,float* a,int size, uint8_t precision);
 
         // HRT Synchronization methods
         bool resync();
@@ -243,19 +243,7 @@ class OAgent_OPF {
         
         void _broadcastMaxMinPacket(long max, long min);
         //Unicast Primal Dual Packet - SN addition edited by Olaolu
-
-        //link activation packets - added by Olaolu
-        void _candactcodePacket(uint16_t recipientID);
-        void _actcodePacket(uint16_t recipientID, uint8_t actcode);
-        void _linksactPacket(uint16_t recipientID);
-
-        ////link activation methods - added by Olaolu
-        uint8_t _assignLinkACTCODES();
-        void _listenForLinkACTCODES(int timeout);
-
-        inline uint8_t _getACTCODEFromPacket() {  return _rx->getData(4); }
-        inline uint8_t _getCANDACTCODEFromPacket(uint8_t i) {  return _rx->getData(4+i); }
-
+        
         //methods to get packet data
         long _getMaxFromPacket();
         long _getMinFromPacket();
@@ -319,16 +307,6 @@ class OAgent_OPF {
         inline uint16_t _getHeaderFromPacket() { return (uint16_t(_rx->getData(1)) << 8) + _rx->getData(0); }
         inline uint16_t _getNeighborIDFromPacket()    { return (uint16_t(_rx->getData(11)) << 8) + _rx->getData(10);  }
 
-        //Primal Dual Algorithm
-        float _getActiveFlowFromPacket();
-        float _getReactiveFlowFromPacket();
-        float _getLambdaFromPacket();
-        
-        bool _getFlagFromPacket();
-
-        float _getActiveFlowFromPacket_self();
-        float _getReactiveFlowFromPacket_self();
-        float _getLambdaFromPacket_self();
         inline uint16_t _getRecipientIDFromPacket()    { return (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);  }
         //
         //inline uint16_t _getinheritorIDFromPacket()    { return (uint16_t(_rx->getData(13)) << 8) + _rx->getData(12);  }
