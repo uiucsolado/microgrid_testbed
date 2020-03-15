@@ -115,7 +115,7 @@ class OAgent_OPF {
         bool leaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool nonleaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool SecondOrderOPF(bool genBus);
-        void setup_Newton_method_opf(float *N_T,float *B,float *Hessian_lambda,float *z);
+        void setup_Newton_method_opf(float *N_T,float *buf2,float *Hessian_lambda,float *tmp);
         float* Conjugate_gradient(float*A,int rows, int cols, float*b, float*x_init);
         float RunRatioConsensus(uint16_t nodeID,float *mu,float *nu,uint8_t iterations,uint8_t *neighbors);
 

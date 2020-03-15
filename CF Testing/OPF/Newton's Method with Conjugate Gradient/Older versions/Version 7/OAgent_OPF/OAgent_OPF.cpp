@@ -851,20 +851,20 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     float lambda[4*deg]; for (int i=0;i<4*deg;i++)lambda[i]=0;
 
     float Hessian_lambda[4*deg][4*deg];
-    float JN[3+3*deg][4*deg];
+    float buf2[3+3*deg][4*deg];
     float g[3+3*deg];
     float *neg_grad_lambda = new float[4*deg];
     float *Newton_direction = new float[4*deg]; for (int i=0;i<4*deg;i++)Newton_direction[i]=0;
-    float *z = new float[3+3*deg];
+    float *tmp = new float[3+3*deg];
 
-    setup_Newton_method_opf(&N_T[0][0],&JN[0][0],&Hessian_lambda[0][0],z);
+    setup_Newton_method_opf(&N_T[0][0],&buf2[0][0],&Hessian_lambda[0][0],tmp);
     for (int k=0;k<5;k++)
     {
         
-        x = matbyvec(&JN[0][0],3+3*deg,4*deg,lambda);
+        x = matbyvec(&buf2[0][0],3+3*deg,4*deg,lambda);
         // _print1Darray_("x",x,3+3*deg,3);
         
-        for (int i=0;i<3+3*deg;i++) x[i]=-x[i]+z[i];
+        for (int i=0;i<3+3*deg;i++) x[i]=-x[i]+tmp[i];
         String str = "x";
         _print1Darray_(str,x,3+3*deg,5);
         neg_grad_lambda = matbyvec(&N_T[0][0],4*deg,3+3*deg,x);
@@ -879,14 +879,14 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     	// _print1Darray_(str,lambda,4*deg,5);
     	// free(str);
     }
-    x = matbyvec(&JN[0][0],3+3*deg,4*deg,lambda);
-    for (int i=0;i<3+3*deg;i++) x[i]=-x[i]+z[i];
+    x = matbyvec(&buf2[0][0],3+3*deg,4*deg,lambda);
+    for (int i=0;i<3+3*deg;i++) x[i]=-x[i]+tmp[i];
     String str = "x";
     _print1Darray_(str,x,3+3*deg,5); //free(str);
     
 }
 
-void  OAgent_OPF::setup_Newton_method_opf(float *N_T,float *JN,float *Hessian_lambda,float *z){
+void  OAgent_OPF::setup_Newton_method_opf(float *N_T,float *buf2,float *Hessian_lambda,float *tmp){
 
 	OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
@@ -930,7 +930,16 @@ void  OAgent_OPF::setup_Newton_method_opf(float *N_T,float *JN,float *Hessian_la
     }
     for (int i=0;i<deg;i++){
     	N[2+2*deg][nei2index[neighbors[i]-1]+2*deg] = 1;
-    	N[i+3+2*deg][nei2index[neighbors[i]-1]+3*deg] = 1;       
+    	N[i+3+2*deg][nei2index[neighbors[i]-1]+3*deg] = 1;
+        // if (nodeID<neighbors[i]){
+        // 	N[2+2*deg][nei2index[neighbors[i]-1]+2*deg] = 1;
+        // 	N[i+3+2*deg][nei2index[neighbors[i]-1]+3*deg] = 1;
+        // }
+        // else{
+        // 	N[2+2*deg][nei2index[neighbors[i]-1]+3*deg] = 1;
+        // 	N[i+3+2*deg][nei2index[neighbors[i]-1]+2*deg] = 1;
+        // }
+        
     }
 
     // float N_T[4*deg][3+3*deg];
@@ -969,10 +978,13 @@ void  OAgent_OPF::setup_Newton_method_opf(float *N_T,float *JN,float *Hessian_la
     MatrixMultiply(&EF[0][0],&E[0][0],3+3*deg,1+2*deg,&F[0][0],1+2*deg,1+2*deg);
     MatrixMultiply(&J[0][0],&EF[0][0],3+3*deg,1+2*deg,&E_T[0][0],1+2*deg,3+3*deg);
     
+    // float *x = new float[3+3*deg];
+    // float lambda[4*deg]; for (int i=0;i<4*deg;i++)lambda[i]=0;
+    
     //float Hessian_lambda[4*deg][4*deg];
-    float N_TJ[4*deg][3+3*deg];//,JN[3+3*deg][4*deg];
-    MatrixMultiply(&N_TJ[0][0],N_T,4*deg,3+3*deg,&J[0][0],3+3*deg,3+3*deg);
-    MatrixMultiply(Hessian_lambda,&N_TJ[0][0],4*deg,3+3*deg,&N[0][0],3+3*deg,4*deg);
+    float buf1[4*deg][3+3*deg];//,buf2[3+3*deg][4*deg];
+    MatrixMultiply(&buf1[0][0],N_T,4*deg,3+3*deg,&J[0][0],3+3*deg,3+3*deg);
+    MatrixMultiply(Hessian_lambda,&buf1[0][0],4*deg,3+3*deg,&N[0][0],3+3*deg,4*deg);
     float g[3+3*deg],g_plus_c[3+3*deg];
     for (int i=0;i<3+3*deg;i++)
     	{
@@ -985,9 +997,9 @@ void  OAgent_OPF::setup_Newton_method_opf(float *N_T,float *JN,float *Hessian_la
     float *neg_grad_lambda = new float[4*deg];
     float *Newton_direction = new float[4*deg]; for (int i=0;i<4*deg;i++)Newton_direction[i]=0;
     
-    MatrixMultiply(JN,&J[0][0],3+3*deg,3+3*deg,&N[0][0],3+3*deg,4*deg);
-    float *z2 = matbyvec(&J[0][0],3+3*deg,3+3*deg,g_plus_c);
-    for (int i=0;i<3+3*deg;i++) z[i]=-z2[i]+g[i];
+    MatrixMultiply(buf2,&J[0][0],3+3*deg,3+3*deg,&N[0][0],3+3*deg,4*deg);
+    float *tmp2 = matbyvec(&J[0][0],3+3*deg,3+3*deg,g_plus_c);
+    for (int i=0;i<3+3*deg;i++) tmp[i]=-tmp2[i]+g[i];
 
 }
 float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, float*x_init) {
@@ -1120,19 +1132,21 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
     str="alpha1";_print_(str,alpha1,6);
     for (int k=0;k<5;k++)
     {
+        // _print2Darray_("H",&H[0][0],deg,deg,3);
+        // _print1Darray_("p",p,deg,3);
 
     	for (int i=0;i<deg;i++) received_from[i]=0;
         q = matbyvec(&H[0][0],4*deg,4*deg,p);
         // str = "q";_print1Darray_(str,q,4*deg,6);
         for (int i=0;i<4*deg;i++) {new_q[i]=q[i];new_r[i]=r[i];new_x[i]=x[i];new_p[i]=p[i];}
-        startTime = myMillis()+15000;
+        startTime = myMillis()+10000;
 	    scheduled = false;
 	    while (!scheduled)
 	    { 
 	    	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
 	    	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
 		}
-		Serial<<"Start time is "<<startTime<<endl;
+		// Serial<<"Start time is "<<startTime<<endl;
 		_waitToStart(startTime,true,2000);
 
         i = 0;
@@ -1141,6 +1155,9 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
             uint8_t nei_to_send=neighbors[i]; 
             i++; if (i==_G->getN()-1) i=0;
             int t = nei2index[nei_to_send-1];
+            // if (nei_to_send<nodeID)_SendToParent(nei_to_send,q[t],q[t+deg],q[t+3*deg],q[t+2*deg],1);
+            // else _SendToChild(nei_to_send,q[t],q[t+deg],q[t+3*deg],q[t+2*deg],1);
+            // float vars[16] = {q[t],q[t+deg],q[t+3*deg],q[t+2*deg],r[t],r[t+deg],r[t+3*deg],r[t+2*deg],x[t],x[t+deg],x[t+3*deg],x[t+2*deg],p[t],p[t+deg],p[t+3*deg],p[t+2*deg]};
             float vars[4] = {q[t],q[t+deg],q[t+3*deg],q[t+2*deg]};
             if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,4,1);
             else _SendToChild(nei_to_send,vars,4,1);
@@ -1160,6 +1177,24 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	                        new_q[j+deg]+=tmp[1];
 	                        new_q[j+2*deg]+=tmp[2];
 	                        new_q[j+3*deg]+=tmp[3];
+
+	                        // new_r[j]=0.5*(new_r[j]+tmp[4]);
+	                        // new_r[j+deg]=0.5*(new_r[j+deg]+tmp[5]);
+	                        // new_r[j+2*deg]=0.5*(new_r[j+2*deg]+tmp[6]);
+	                        // new_r[j+3*deg]=0.5*(new_r[j+3*deg]+tmp[7]);
+
+	                        // new_x[j]=0.5*(new_x[j]+tmp[8]);
+	                        // new_x[j+deg]=0.5*(new_x[j+deg]+tmp[9]);
+	                        // new_x[j+2*deg]=0.5*(new_x[j+2*deg]+tmp[10]);
+	                        // new_x[j+3*deg]=0.5*(new_x[j+3*deg]+tmp[11]);
+
+	                        // new_p[j]=0.5*(new_p[j]+tmp[12]);
+	                        // new_p[j+deg]=0.5*(new_p[j+deg]+tmp[13]);
+	                        // new_p[j+2*deg]=0.5*(new_p[j+2*deg]+tmp[14]);
+	                        // new_p[j+3*deg]=0.5*(new_p[j+3*deg]+tmp[15]);
+
+	                        // Serial<<"Received from "<<neighborID<<endl;
+	                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
 	                    }
                 	}
                 	else if (neighborID<nodeID)
@@ -1173,6 +1208,25 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	                        new_q[j+deg]+=tmp[1];
 	                        new_q[j+2*deg]+=tmp[2];
 	                        new_q[j+3*deg]+=tmp[3];
+
+	                        // new_r[j]=0.5*(new_r[j]+tmp[4]);
+	                        // new_r[j+deg]=0.5*(new_r[j+deg]+tmp[5]);
+	                        // new_r[j+2*deg]=0.5*(new_r[j+2*deg]+tmp[6]);
+	                        // new_r[j+3*deg]=0.5*(new_r[j+3*deg]+tmp[7]);
+
+	                        // new_x[j]=0.5*(new_x[j]+tmp[8]);
+	                        // new_x[j+deg]=0.5*(new_x[j+deg]+tmp[9]);
+	                        // new_x[j+2*deg]=0.5*(new_x[j+2*deg]+tmp[10]);
+	                        // new_x[j+3*deg]=0.5*(new_x[j+3*deg]+tmp[11]);
+
+	                        // new_p[j]=0.5*(new_p[j]+tmp[12]);
+	                        // new_p[j+deg]=0.5*(new_p[j+deg]+tmp[13]);
+	                        // new_p[j+2*deg]=0.5*(new_p[j+2*deg]+tmp[14]);
+	                        // new_p[j+3*deg]=0.5*(new_p[j+3*deg]+tmp[15]);
+
+
+	                        // Serial<<"Received from "<<neighborID<<endl;
+	                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
 	                    }
                 	}
                 }
@@ -1190,12 +1244,16 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
         for (uint8_t j:neighbors) {
         	i = nei2index[j-1];
             // mu1 += r[i]*r[i]+r[i+deg]*r[i+deg]+r[i+2*deg]*r[i+2*deg]+r[i+3*deg]*r[i+3*deg];
+            // mu1 -= r[i]*p[i]+r[i+deg]*p[i+deg]+r[i+2*deg]*p[i+2*deg]+r[i+3*deg]*p[i+3*deg];
             mu2 += p[i]*q[i]+p[i+deg]*q[i+deg]+p[i+2*deg]*q[i+2*deg]+p[i+3*deg]*q[i+3*deg];
         }
 
-         // str="mu2";_print_(str,mu2,6);
+        // str="mu1";_print_(str,mu1,6);
+        
 
-        startTime = myMillis()+15000;
+        // str="mu2";_print_(str,mu2,6);
+
+        startTime = myMillis()+10000;
 	    scheduled = false;
 	    while (!scheduled)
 	    { 
@@ -1212,8 +1270,12 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 
         float alpha = alpha1/alpha2;
         str="alpha";_print_(str,alpha,6);
+        // if (alpha>10) {str="alpha1";_print_(str,alpha1,6);str="alpha2";_print_(str,alpha2,6);str="r";_print1Darray_(str,r,4*deg,6);}
+        float *x_prev = new float[4*deg];
+        float *r_prev = new float[4*deg];
         for (int i=0;i<4*deg;i++) 
         {
+            x_prev[i]=x[i]; r_prev[i]=r[i];
             x[i]+=alpha*p[i]; r[i]+=alpha*q[i];
         } 
 
@@ -1221,10 +1283,11 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
         for (uint8_t j:neighbors) {
         	i = nei2index[j-1];
             mu1 += r[i]*r[i]+r[i+deg]*r[i+deg]+r[i+2*deg]*r[i+2*deg]+r[i+3*deg]*r[i+3*deg];
+            // mu3 += r[i]*q[i]+r[i+deg]*q[i+deg]+r[i+2*deg]*q[i+2*deg]+r[i+3*deg]*q[i+3*deg];
         }
-        // str="mu1";_print_(str,mu1,6);
+        // str="mu3";_print_(str,mu3,6);
 
-        startTime = myMillis()+15000;
+        startTime = myMillis()+10000;
 	    scheduled = false;
 	    while (!scheduled)
 	    { 
@@ -1251,7 +1314,66 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 
     }
 
- 	str="Newton direction";_print1Darray_(str,x,4*deg,5);
+ //    r = matbyvec(&H[0][0],4*deg,4*deg,x);
+ //    for (int i=0;i<4*deg;i++) {r[i]=r[i]-b[i];new_r[i]=r[i];}     
+	// // str="r"; _print1Darray_(str,r,4*deg,6);
+
+	// for (int i=0;i<deg;i++) received_from[i]=0;
+ //    i = 0;
+ //    start = millis();   // initialize timer
+ //    while (millis()-start<=10000){
+ //        uint8_t nei_to_send=neighbors[i]; 
+ //        i++; if (i==_G->getN()-1) i=0;
+ //        int t = nei2index[nei_to_send-1];
+ //        float vars[4] = {r[t],r[t+deg],r[t+3*deg],r[t+2*deg]};
+ //        if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,4,1);
+ //        else _SendToChild(nei_to_send,vars,4,1);
+ //        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
+ //            {
+ //            	int j = nei2index[neighborID-1];
+ //                if (!received_from[j]){
+ //                    if (neighborID>nodeID){
+ //                        float *tmp=_getPacketFromChild(4); 
+ //                        uint8_t task = tmp[4];
+ //                        if(task==5)
+ //                        {
+ //                        	received_from[j]=1;
+	//                         new_r[j]+=tmp[0];
+	//                         new_r[j+deg]+=tmp[1];
+	//                         new_r[j+2*deg]+=tmp[2];
+	//                         new_r[j+3*deg]+=tmp[3];
+
+	//                         // Serial<<"Received from "<<neighborID<<endl;
+	//                         // Serial.print(tmp[0],6); Serial<<endl; delay(5);
+	//                     }
+ //                    }
+ //                    else if (neighborID<nodeID){                      
+ //                        float *tmp=_getPacketFromParent(4);
+ //                        uint8_t task = tmp[4];
+ //                        if(task==5)
+ //                        { 
+ //                        	received_from[j]=1;
+	//                         new_r[j]+=tmp[0];
+	//                         new_r[j+deg]+=tmp[1];
+	//                         new_r[j+2*deg]+=tmp[2];
+	//                         new_r[j+3*deg]+=tmp[3];
+
+	//                         // Serial<<"Received from "<<neighborID<<endl;
+	//                         // Serial.print(tmp[0],6); Serial<<endl; delay(5);
+	//                     }
+ //                    }
+ //                }
+ //            }
+ //    }
+ //    for (int i=0;i<4*deg;i++) r[i]=new_r[i];
+    str="r";_print1Darray_(str,r,4*deg,6);
+ //    float error=0;
+ //    for (int i=0;i<4*deg;i++){
+ //        if (error<abs(r[i])) error = abs(r[i]);
+ //    }
+ //    str="Error";_print_(str,error,6);
+    // free(str);
+    // _print1Darray_("Newton direction",x,4*deg,5);
     return x;
     
 }
@@ -1282,6 +1404,7 @@ float OAgent_OPF::RunRatioConsensus(uint16_t nodeID, float *mu,float *nu,uint8_t
         while (millis()-start<=200)
         {
             _CG_RC_SendPacket(run_sum_mu[nei2index[nodeID-1]],run_sum_nu[nei2index[nodeID-1]]);
+            // _CG_RC_SendPacket(1.234,-1.234);
 			if(_waitForNeighborPacket(neighborID,CG_RC_SUBHEADER,true,50))
 	        {
 	        	int j = nei2index[neighborID-1];
