@@ -23,6 +23,7 @@
 #define SCHEDULE_PD_HEADER               0x7340 // schedule coordinate header is ascii s@
 #define SCHEDULE_ED_HEADER               0x7320 // schedule coordinate header is ascii s@
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x8346 // schedule coordinate header is ascii sF
+#define SCHEDULE_DONE                    0x1177 // schedule coordinate header is ascii sF
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define PD_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
@@ -377,10 +378,10 @@ class OAgent_OPF {
         
         // General scheduling methods
         void _waitForACKPacket(uint16_t header, unsigned long t0, unsigned long startTime, uint8_t iterations, uint16_t period);// General scheduling methods
-        bool _waitForChildSchedulePacketRC(int timeout, unsigned long startTime, uint16_t iterations, uint16_t period);
-        bool _waitForChildSchedulePacketMMC(int timeout, unsigned long startTime, uint16_t iterations, uint16_t period);
-        bool _waitForChildSchedulePacketPD(int timeout, unsigned long startTime, uint16_t iterations);
-        bool _waitForChildSchedulePacketED(int timeout, unsigned long startTime, uint16_t iterations);
+        bool _waitForChildSchedulePacketRC(unsigned long startTime, uint16_t iterations, uint16_t period);
+        bool _waitForChildSchedulePacketMMC(unsigned long startTime, uint16_t iterations, uint16_t period);
+        bool _waitForChildSchedulePacketPD(unsigned long startTime, uint16_t iterations);
+        bool _waitForChildSchedulePacketED(unsigned long startTime, uint16_t iterations);
 
         inline uint8_t _getIDFromPacket() {  return _rx->getData(2); }
 
@@ -398,10 +399,10 @@ class OAgent_OPF {
         
         // General coordination helper functions
         bool _timeToTransmit(uint16_t startTime, uint16_t txTime);
-        bool _waitForParentSchedulePacketRC(unsigned long &startTime, uint16_t &iterations, uint16_t &period, int timeout);
-        bool _waitForParentSchedulePacketMMC(unsigned long &startTime, uint16_t &iterations, uint16_t &period, int timeout);
-        bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations, int timeout);
-        bool _waitForParentSchedulePacketED(unsigned long &startTime, uint16_t &iterations, int timeout);
+        bool _waitForParentSchedulePacketRC(unsigned long &startTime, uint16_t &iterations, uint16_t &period);
+        bool _waitForParentSchedulePacketMMC(unsigned long &startTime, uint16_t &iterations, uint16_t &period);
+        bool _waitForParentSchedulePacketPD(unsigned long &startTime, uint16_t &iterations);
+        bool _waitForParentSchedulePacketED(unsigned long &startTime, uint16_t &iterations);
         bool _waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bool broadcast, int timeout);
         bool _waitForUnicastPacket(uint8_t &neighborID, uint8_t nodeID, uint16_t header, bool broadcast, int timeout);
         void _broadcastSchedulePacket(uint16_t header, unsigned long startTime, uint8_t numIterations, uint16_t period);
