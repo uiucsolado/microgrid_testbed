@@ -43,7 +43,6 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
         if(_head == NULL)
         {
             //assumption here is that if _head is NULL, then all other elements of the linked list are NULL
-            //resetLambdaList(0,0,0,0);
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
             tmp0->function = *(arrayFunc+i);
@@ -84,7 +83,7 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
             if( (difference > -0.001) && (difference < 0.001) )
             {
                 tmp2->function = *(arrayFunc+i);
-                continue;
+                break;
             }
 
             if((tmp2->value)>*(arrayValue+i))
@@ -97,7 +96,7 @@ void OAgent_LinkedList::updateLinkedList(float * arrayValue, float * arrayFunc, 
 
                 tmp1 = tmp0;
                 _size++;
-                continue;
+                break;
             }
             tmp1 = tmp2;
             tmp2 = tmp1->next;
@@ -125,8 +124,10 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
     {
         if(_head == NULL)
         {
+            // Serial<<"head is NULL"<<endl;
+            // delay(5);
+        
             //assumption here is that if _head is NULL, then all other elements of the linked list are NULL
-            //resetLambdaList(0,0,0,0);
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
             tmp0->function = *(arrayFunc+i);
@@ -141,12 +142,18 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
         difference = (_head->value)-(*(arrayValue+i));
         if( (difference > -0.001) && (difference < 0.001) )
         {
+            // Serial<<"head lambda value is received from neighbor"<<endl;
+            // delay(5);
+            
             _head->function = (_head->function) + *(arrayFunc+i);
             continue;
         }
 
         if((_head->value)>*(arrayValue+i))
         {
+            // Serial<<"head lambda value is greater than that received from neighbor"<<endl;
+            // delay(5);
+
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
             tmp0->function = *(arrayFunc+i);
@@ -166,12 +173,18 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
             difference = (tmp2->value)-(*(arrayValue+i));
             if( (difference > -0.001) && (difference < 0.001) )
             {
+                // Serial<<"Existing lambda value is received from neighbor"<<endl;
+                // delay(5);
+
                 tmp2->function = (tmp2->function) + *(arrayFunc+i);
-                continue;
+                break;
             }
 
             if((tmp2->value)>*(arrayValue+i))
             {
+                // Serial<<"New lambda value is received from neighbor"<<endl;
+                // delay(5);
+
                 lagMultiplier *tmp0 = new lagMultiplier;
                 tmp0->value = *(arrayValue+i);
                 tmp0->function = *(arrayFunc+i);
@@ -180,7 +193,7 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
 
                 tmp1 = tmp0;
                 _size++;
-                continue;
+                break;
             }
             tmp1 = tmp2;
             tmp2 = tmp1->next;
@@ -188,6 +201,9 @@ void OAgent_LinkedList::addToLinkedList(float * arrayValue, float * arrayFunc, u
         
         if(tmp2 == NULL)
         {
+            // Serial<<"New lambda value received from neighbor is greater than all existing values"<<endl;
+            // delay(5);
+
             lagMultiplier *tmp0 = new lagMultiplier;
             tmp0->value = *(arrayValue+i);
             tmp0->function = *(arrayFunc+i);
@@ -209,10 +225,15 @@ void OAgent_LinkedList::addIncomingToLinkedList(float * arrayValue, float * arra
     
     for(uint8_t i = 0; i < arraySize; i++)
     {
+        // Serial<<"Updating index "<<i+1<<" of inArray"<<endl;
+        // delay(5);
+
         if(_head == NULL)
-        {
+        {            
+            // Serial<<"head is NULL"<<endl;
+            // delay(5);
+        
             //assumption here is that if _head is NULL, then all other elements of the linked list are NULL
-            //resetLambdaList(0,0,0,0);
             if(*(arrayValue+i) < lambda_min)
                 g_function = _minP;
             else if(*(arrayValue+i) > lambda_max)
@@ -234,12 +255,17 @@ void OAgent_LinkedList::addIncomingToLinkedList(float * arrayValue, float * arra
         difference = (_head->value)-(*(arrayValue+i));
         if( (difference > -0.001) && (difference < 0.001) )
         {
+            // Serial<<"head lambda value is received from neighbor"<<endl;
+            // delay(5);
             _head->function = (_head->function) + *(arrayFunc+i);
             continue;
         }
 
         if((_head->value)>*(arrayValue+i))
         {
+            // Serial<<"head lambda value is greater than that received from neighbor"<<endl;
+            // delay(5);
+
             if(*(arrayValue+i) < lambda_min)
                 g_function = _minP;
             else if(*(arrayValue+i) > lambda_max)
@@ -266,12 +292,18 @@ void OAgent_LinkedList::addIncomingToLinkedList(float * arrayValue, float * arra
             difference = (tmp2->value)-(*(arrayValue+i));
             if( (difference > -0.001) && (difference < 0.001) )
             {
+                // Serial<<"Existing lambda value is received from neighbor"<<endl;
+                // delay(5);
+
                 tmp2->function = (tmp2->function) + *(arrayFunc+i);
-                continue;
+                break;
             }
 
             if((tmp2->value)>*(arrayValue+i))
             {
+                // Serial<<"New lambda value is received from neighbor"<<endl;
+                // delay(5);
+                
                 if(*(arrayValue+i) < lambda_min)
                     g_function = _minP;
                 else if(*(arrayValue+i) > lambda_max)
@@ -287,7 +319,7 @@ void OAgent_LinkedList::addIncomingToLinkedList(float * arrayValue, float * arra
 
                 tmp1 = tmp0;
                 _size++;
-                continue;
+                break;
             }
             tmp1 = tmp2;
             tmp2 = tmp1->next;
@@ -295,6 +327,8 @@ void OAgent_LinkedList::addIncomingToLinkedList(float * arrayValue, float * arra
         
         if(tmp2 == NULL)
         {
+            // Serial<<"New lambda value received from neighbor is greater than all existing values"<<endl;
+            // delay(5);
             if(*(arrayValue+i) < lambda_min)
                 g_function = _minP;
             else if(*(arrayValue+i) > lambda_max)
@@ -337,6 +371,10 @@ bool OAgent_LinkedList::updateLinkedListArrays(float * arrayValue, float * array
 }
 
 void OAgent_LinkedList::getNewLinkedListData(float * newArrayFunc, float * inArrayValue, float * inArrayFunc, uint8_t inArraySize) {
+    float difference = 0;
+
+    // Serial<<"g(lambda) data received: ";
+    // delay(5);
     for(uint8_t i = 0; i < inArraySize; i++)
     {
         lagMultiplier *tmp;
@@ -344,7 +382,8 @@ void OAgent_LinkedList::getNewLinkedListData(float * newArrayFunc, float * inArr
 
         while(tmp != NULL)
         {
-            if (*(inArrayValue+i) == tmp->value)
+            difference = (*(inArrayValue+i)) - (tmp->value);
+            if( (difference > -0.001) && (difference < 0.001) )
             {
                 *(newArrayFunc+i) = *(inArrayFunc+i) - (tmp->function);
                 break;
@@ -353,11 +392,38 @@ void OAgent_LinkedList::getNewLinkedListData(float * newArrayFunc, float * inArr
         }
 
         if(tmp == NULL)
+        {
+            // Serial<<"(NEW!!!) ";
+            // delay(5);
             *(newArrayFunc+i) = *(inArrayFunc+i);
+        }
+
+        // Serial<<" "<<*(newArrayFunc+i);
+        // delay(5);
     }
+    //Serial<<endl;
     return;
 }
 
+
+//reset lambda values
+void OAgent_LinkedList::resetLinkedList() {
+    lagMultiplier *tmp, *current;
+    current = _head;
+
+    while(current!=NULL)
+    {
+        tmp = current->next;
+        delete current;
+        current = tmp;
+    }
+
+    _head = NULL;
+    _tail = NULL;
+    _size = 0;
+
+    return;
+}
 
 //reset lambda values
 void OAgent_LinkedList::resetLinkedList(float alpha_p, float beta_p, float max_p, float min_p) {
@@ -371,10 +437,16 @@ void OAgent_LinkedList::resetLinkedList(float alpha_p, float beta_p, float max_p
         current = tmp;
     }
 
+    _head = NULL;
+    _tail = NULL;
     _size = 0;
 
     if(beta_p==0)
+    {
+        Serial<<"ERROR! beta_p = 0"<<endl;
+        delay(5);
         return;
+    }
     else
     {
         _alphaP = alpha_p;
@@ -384,8 +456,8 @@ void OAgent_LinkedList::resetLinkedList(float alpha_p, float beta_p, float max_p
 
         float lambda_min = (min_p - alpha_p)/beta_p;
         float lambda_max = (max_p - alpha_p)/beta_p;
-        float g_min = min_p;//((min_p - alpha_p)*(min_p - alpha_p))/(2*beta_p) - (lambda_min*max_p);
-        float g_max = max_p;//((max_p - alpha_p)*(max_p - alpha_p))/(2*beta_p) - (lambda_max*max_p);
+        float g_min = min_p;
+        float g_max = max_p;
 
         lagMultiplier *tmp0 = new lagMultiplier;
         tmp0->value = lambda_min;
@@ -401,8 +473,25 @@ void OAgent_LinkedList::resetLinkedList(float alpha_p, float beta_p, float max_p
         _tail->next = NULL;
 
         _size = 2;
+
+        Serial<<"Lambda linked list successfully reset"<<endl;
+        delay(5);
+
         return;
     }
+}
+
+//set data to zero
+void OAgent_LinkedList::setLinkedListDataToZero() {
+    lagMultiplier *tmp;
+    tmp = _head;
+
+    while(tmp!=NULL)
+    {        
+        tmp->function = 0;
+        tmp = tmp->next;
+    }
+     return;
 }
 
 //add to lambda function values
@@ -425,6 +514,15 @@ void OAgent_LinkedList::getLambdaMinLambdaPlus(float * arrayValue, float * array
             *(arrayValue+1) = tmp2->value;
             *(arrayRatio) = ratio1;
             *(arrayRatio+1) = ratio2;
+            return;
+        }
+
+        if((ratio2 <= 1) && (ratio1 >= 1))
+        {
+            *(arrayValue) = tmp2->value;
+            *(arrayValue+1) = tmp1->value;
+            *(arrayRatio) = ratio2;
+            *(arrayRatio+1) = ratio1;
             return;
         }
         tmp1 = tmp2;
@@ -3702,9 +3800,9 @@ bool OAgent_OPF::acceleratedEconomicDispatch(bool genBus, float alpha, uint16_t 
 
 
 // Alejandro's Economic Dispatch methods
-bool OAgent_OPF::economicDispatchAlgorithm(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
+float OAgent_OPF::economicDispatchAlgorithm(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
     srand(analogRead(7));
-    bool gamma = false;
+    float gamma;
 
     if(isLeader())
     { 
@@ -3720,10 +3818,10 @@ bool OAgent_OPF::economicDispatchAlgorithm(float alpha_p, float beta_p, float ma
 
 }
 
-bool OAgent_OPF::leaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
+float OAgent_OPF::leaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + ED_DELAY;
-    bool gamma = false;
+    float gamma = 0;
     bool scheduled = _waitForChildSchedulePacketED(SCHEDULE_TIMEOUT,startTime,iterations);
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     //bool stat = startTime>myMillis();
@@ -3733,7 +3831,6 @@ bool OAgent_OPF::leaderEconomicDispatch(float alpha_p, float beta_p, float max_p
     if (!scheduled) 
     {
         Serial<<"ED scheduling was a FAIL"<<endl;
-        gamma = false;
     }
     else
     {
@@ -3747,9 +3844,9 @@ bool OAgent_OPF::leaderEconomicDispatch(float alpha_p, float beta_p, float max_p
     return gamma;
 }
 
-bool OAgent_OPF::nonleaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
+float OAgent_OPF::nonleaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
     unsigned long startTime = 0;
-    bool gamma = false;
+    float gamma = 0;
     //delay(50);
     bool scheduled = _waitForParentSchedulePacketED(startTime,iterations,-1);
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
@@ -3772,12 +3869,11 @@ bool OAgent_OPF::nonleaderEconomicDispatch(float alpha_p, float beta_p, float ma
     else
     {
         Serial<<"ED scheduling was a FAIL"<<endl;
-        gamma = false;
     }
     return gamma;
 }
 
-bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
+float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period) {
     //precaution to avoid too large or NaN values
     if ( (beta_p > -0.001) && (beta_p <= 0) )
         beta_p = -0.001;
@@ -3785,6 +3881,7 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
         beta_p = 0.001;
 
     _lambdaList->resetLinkedList(alpha_p,beta_p,max_p,min_p);                                   //initialize OAgent linked list
+    //Serial << "Agent Linked List reset"<<endl;
 
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
@@ -3795,6 +3892,8 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
     uint16_t nodeID = s->getID();
     
     _initializeEconomicDispatch(s,u);      // initialize state variables
+    //Serial << "ED initialized"<<endl;
+
 
     ORemoteVertex * neighborP;                                                                  // pointer to a remote vertex
     OAgent_LinkedList * neighborAgentLL;                                                         //pointer to linked list for a remote vertex
@@ -3836,20 +3935,43 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
         float lambdaFunction[arraySize];
         _lambdaList->updateLinkedListArrays(lambdaValue,lambdaFunction,arraySize);
 
+        // Serial<<"Iteration "<<k+1<<endl;
+        // delay(5);
+
+        // Serial<<"Lambdas are currently:";
+        // delay(5);
+        
+        // for(uint8_t i = 0; i < arraySize; i++)
+        // {
+        //     Serial<<" "<<lambdaValue[i];
+        // }
+        // Serial<<endl;
+
+        // Serial<<"(g,z) is currently:";
+        // delay(5);
+        
+        // for(uint8_t i = 0; i < arraySize; i++)
+        // {
+        //     Serial<<" ("<<lambdaFunction[i]<<","<<(s->getZ())<<")";
+        // }
+        // Serial<<endl;
+
         float lambdaFunction_Dout[arraySize];
         for(uint8_t i = 0; i < arraySize; i++)
             lambdaFunction_Dout[i] = lambdaFunction[i]/Dout;
-
+        
+        _lambdaList->setLinkedListDataToZero();
+        // Serial<<"Lambda list initialized"<<endl;
+        // delay(5);
         nodeAgentLL->addToLinkedList(lambdaValue,lambdaFunction_Dout,arraySize);
-
+        // Serial<<"Sum g(lambda) list initialized"<<endl;
+        // delay(5);
         float sumLambdaFunction[arraySize];
         nodeAgentLL->updateLinkedListArrays(lambdaValue,sumLambdaFunction,arraySize);
 
         inZ_total = 0;
         nodeP->setSumZ( nodeP->getSumZ() + ((s->getZ())/Dout) );
 
-        // Serial<<"Iteration "<<k+1<<endl;
-        
         txDone = false;
 
         while( uint16_t(millis()-start) < period )
@@ -3869,12 +3991,20 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
                 uint8_t inArraySize = _getArraySizeFromEDPacket();
                 float inLambdaValue[inArraySize];
                 float inLambdaFunction[inArraySize];
+                // Serial << "Data received from node "<<neighborID<<":";
+                // delay(5);
                 for(uint8_t i = 0; i < inArraySize; i++)
                 {
                     inLambdaValue[i] = _getLambdaValueFromEDPacket(i);
+                    // Serial<<" ("<<_FLOAT(inLambdaValue[i],4);
+                    // delay(5);
+        
                     inLambdaFunction[i] = _getSumLambdaFunctionFromEDPacket(i);
+                    // Serial<<","<<_FLOAT(inLambdaFunction[i],4)<<")";
+                    // delay(5);
                 }
-                
+                // Serial<<endl;
+
                 neighborP = (n+(neighborID-1));
                 neighborAgentLL = &_sumLambdaList[neighborID-1];
                 
@@ -3882,11 +4012,20 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
                 neighborAgentLL->getNewLinkedListData(newLambdaFunction,inLambdaValue,inLambdaFunction,inArraySize);
                 inZ = inSumZ - neighborP->getSumZ();
                 
+                // Serial << "Linked list data extracted from packet"<<endl;
+                // delay(5);
+
                 _lambdaList->addIncomingToLinkedList(inLambdaValue,newLambdaFunction,inArraySize);
                 inZ_total += inZ;
+                
+                // Serial << "Linked list data updated"<<endl;
+                // delay(5);
 
                 neighborP->setSumZ(inSumZ);
                 neighborAgentLL->updateLinkedList(inLambdaValue,inLambdaFunction,inArraySize);
+                
+                // Serial << "Neighbor running sum list updated"<<endl;
+                // delay(5);
             }
             if(!txDone && (uint16_t(millis()-start) >= txTime))
             //if(!txDone && (uint16_t(millis()-start) >= (period-frame)/2))
@@ -3894,13 +4033,24 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
                 txDone = true;
                 //make sure array size is not greater than 10
                 _broadcastEDPacket(nodeP->getSumZ(),lambdaValue,sumLambdaFunction,arraySize);
-                // Serial<<"Sent to Neighbors: "<<_FLOAT(nodeP->getSumY(),6)<<" , "<<_FLOAT(nodeP->getSumZ()<<endl;
+                // Serial<<"Sent to Neighbors:"<<endl;;
                 // delay(5);
+                // for(uint8_t i = 0; i < arraySize; i++)
+                // {
+                //     Serial<<" ("<<_FLOAT(lambdaValue[i],4)<<","<<_FLOAT(sumLambdaFunction[i],4)<<")";
+                //     delay(5);
+                // }
+                // Serial<<endl;
             }
         }
         _lambdaList->addToLinkedList(lambdaValue,lambdaFunction_Dout,arraySize);
         s->setZ( ((s->getZ())/Dout) + inZ_total );
         
+        
+        packetReceived += packetReceiveCount;
+        packetsLost += (_G->getN() - packetReceiveCount - 1);
+
+        packetReceiveCount = 0;
         // _buffer[count] = (s->getY())/(s->getZ()); //add kth iterate to buffer
         // _bufferY[count] = s->getY(); //add kth iterate to buffer
         // _bufferZ[count] = s->getZ(); //add kth iterate to buffer
@@ -3939,8 +4089,15 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
     float valueMinPlus[2];
     float ratioMinPlus[2];
     _lambdaList->getLambdaMinLambdaPlus(valueMinPlus,ratioMinPlus,s->getZ());
+    // Serial << "Lambda+ = "<<_FLOAT(valueMinPlus[1],4)<< " ratio+ = "<<_FLOAT(ratioMinPlus[1],4)<<endl;
+    // delay(5);
+    // Serial << "Lambda- = "<<_FLOAT(valueMinPlus[0],4)<< " ratio- = "<<_FLOAT(ratioMinPlus[0],4)<<endl;
+    // delay(5);
 
     float lambda = valueMinPlus[1] - ( (ratioMinPlus[1] - 1)*((valueMinPlus[1] - valueMinPlus[0])/(ratioMinPlus[1]-ratioMinPlus[0])) );
+    // Serial << "Lambda* = "<<lambda<<endl;
+    // delay(5);
+
     float setpoint = min_p;
     
     if ( lambda < ((min_p - alpha_p)/beta_p) )
@@ -3950,7 +4107,10 @@ bool OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, floa
     else
         setpoint = alpha_p + (lambda*beta_p);
 
-
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
+    delay(5);
 
     return setpoint;
 }
@@ -4182,7 +4342,7 @@ void OAgent_OPF::_initializeEconomicDispatch(OLocalVertex * s, float u) {
    
     for(int i=0; i < NUM_REMOTE_VERTICES; i++)
     {
-        _sumLambdaList[i].resetLinkedList(0,0,0,0);
+        _sumLambdaList[i].resetLinkedList();
     }
     // for (int i=0; i< NUM_REMOTE_VERTICES; i++){
     //     if ((s->getStatus(i)) == 1){
@@ -4365,7 +4525,8 @@ void OAgent_OPF::_broadcastEDPacket(float sumZ, float * arrayValue, float * arra
 
     payload[7] = arraySize;
 
-
+    // Serial << "lambda values sent in uint16_t are:";
+    // delay(5);
     for(uint8_t i = 0; i < arraySize; i++)
     {
         uint16_t unsignedY1;
@@ -4409,8 +4570,11 @@ void OAgent_OPF::_broadcastEDPacket(float sumZ, float * arrayValue, float * arra
         payload[13+(i*8)] = unsignedSumY2 >> 8;
         payload[14+(i*8)] = unsignedSumY2 >> 16;
         payload[15+(i*8)] = unsignedSumY2 >> 24;
-    }
 
+        // Serial << " " <<unsignedY1;
+        // delay(5);
+    }
+    // Serial <<endl;
     _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
     unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
     #ifdef VERBOSE
@@ -5968,7 +6132,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
         
 			while(true)
 			{
-				if(_waitForNeighborPacket(neighborID,header,true,SCHEDULE_TIMEOUT/2))                        //wait for acknowledgement packets
+				if(_waitForNeighborPacket(neighborID,header,true,SCHEDULE_TIMEOUT/4))                        //wait for acknowledgement packets
 				{
 					delay(10);
 					_broadcastSchedulePacketED(startTime,iterations);
@@ -6280,16 +6444,16 @@ uint32_t OAgent_OPF::_getUint32_tFromPacket(uint8_t &lsbByteNumber) {
 
 float OAgent_OPF::_getFloat16FromPacket(uint8_t &lsbByteNumber) {
     lsbByteNumber += 3;
-    int16_t mag = (int16_t(_rx->getData(lsbByteNumber-1)) << 8) + int8_t(_rx->getData(lsbByteNumber-2));
+    int16_t mag = (int16_t) ((uint16_t(_rx->getData(lsbByteNumber-1)) << 8) + uint8_t(_rx->getData(lsbByteNumber-2)));
     int8_t sign = -1 + ((_rx->getData(lsbByteNumber-3))*2);
     float value = (float) (sign*mag);
-
+    // Serial << "\nuint16t "<<(uint16_t(_rx->getData(lsbByteNumber-1)) << 8)<<" and "<< "uint8t "<<uint8_t(_rx->getData(lsbByteNumber-2))<<" received from neighbor"<<endl;
     return value;
 }
 
 float OAgent_OPF::_getFloat32FromPacket(uint8_t &lsbByteNumber) {
     lsbByteNumber += 5;
-    int32_t mag = (int32_t(_rx->getData(lsbByteNumber-1)) << 24) + (int32_t(_rx->getData(lsbByteNumber-2)) << 16) + (int16_t(_rx->getData(lsbByteNumber-3)) << 8) + int8_t(_rx->getData(lsbByteNumber-4));
+    int32_t mag = (uint32_t) ((uint32_t(_rx->getData(lsbByteNumber-1)) << 24) + (uint32_t(_rx->getData(lsbByteNumber-2)) << 16) + (uint16_t(_rx->getData(lsbByteNumber-3)) << 8) + uint8_t(_rx->getData(lsbByteNumber-4)));
     int8_t sign = -1 + ((_rx->getData(lsbByteNumber-5))*2);
     float value = (float) (sign*mag);
 

@@ -19,7 +19,7 @@ ZBRxResponse rx = ZBRxResponse();
 OLocalVertex s = OLocalVertex(0x415DB670,11);
 LinkedList l = LinkedList();  //#NODE
 OGraph_OPF g = OGraph_OPF(&s,&l);
-OAgent_LinkedList al = OAgent_LinkedList();  //#NODE
+OAgent_LinkedList al = OAgent_LinkedList();  //#NODE  
 OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,&al,false,true);
 
 uint8_t sPin = 7;      // synced led
@@ -31,9 +31,9 @@ boolean de = false;
 //ED variables
 float ED;
 float alpha_p = 0;
-float beta_p = 0.1;
-float max_p = 2;
-float min_p = -2;
+float beta_p = 1;
+float max_p = 4;
+float min_p = -4;
 float u = 0;
 
 //Modbus Communication
@@ -76,7 +76,7 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
-  g.addInNeighbor(0x415786E1,9,0,0); // node 9
+  //g.addInNeighbor(0x415786E1,9,0,0); // node 9
   g.addInNeighbor(0x415786D3,10,0,0); // node 10
   //g.addInNeighbor(0x415DB670,11,0,0); // node 11
   //g.addInNeighbor(0x415786A9,12,0,0); // node 12
@@ -169,7 +169,7 @@ void loop() {
           Serial.println(o);
           if (o == 'y')
           {
-            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,5,150);
+            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,20,150);
           Serial.println("ED result");
           Serial.println(ED,4);
           }
@@ -177,7 +177,7 @@ void loop() {
       }
       if (!(a.isLeader()))
       {
-        ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,5,150);
+        ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,20,150);
         Serial.println("ED result");
         Serial.println(ED,4);
       }

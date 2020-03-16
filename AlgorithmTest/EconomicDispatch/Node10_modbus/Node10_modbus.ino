@@ -31,9 +31,9 @@ boolean de = false;
 //ED variables
 float ED;
 float alpha_p = 0;
-float beta_p = 0.1;
-float max_p = 2;
-float min_p = -2;
+float beta_p = 1;
+float max_p = 4;
+float min_p = -4;
 float u = 0;
 
 //Modbus Communication
@@ -169,7 +169,7 @@ void loop() {
           Serial.println(o);
           if (o == 'y')
           {
-            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,5,150);
+            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,20,150);
           Serial.println("ED result");
           Serial.println(ED,4);
           }
@@ -177,7 +177,7 @@ void loop() {
       }
       if (!(a.isLeader()))
       {
-        ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,5,150);
+        ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,20,150);
         Serial.println("ED result");
         Serial.println(ED,4);
       }

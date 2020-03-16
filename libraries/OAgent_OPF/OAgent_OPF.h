@@ -77,6 +77,8 @@ class OAgent_LinkedList {
         OAgent_LinkedList();
 
         //methods
+        void setLinkedListDataToZero();
+        void resetLinkedList();
         void resetLinkedList(float alpha_p, float beta_p, float max_p, float min_p);
         bool updateLinkedListArrays(float * arrayValue, float * arrayFunc, uint8_t arraySize);
         void updateLinkedList(float * arrayValue, float * arrayFunc, uint8_t arraySize);
@@ -158,10 +160,10 @@ class OAgent_OPF {
         bool acceleratedEconomicDispatch(bool genBus, float alpha, uint16_t iterations);
 
         //Alejandro's Economic Dispatch Algorithm
-        bool economicDispatchAlgorithm(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
-        bool leaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
-        bool nonleaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
-        bool economicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        float economicDispatchAlgorithm(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        float leaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        float nonleaderEconomicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
+        float economicDispatch(float alpha_p, float beta_p, float max_p, float min_p, float u, uint16_t iterations, uint16_t period);
 
         // communication link activation methods
         bool linkActivationAlgorithm();
