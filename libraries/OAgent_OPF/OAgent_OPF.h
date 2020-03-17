@@ -33,6 +33,7 @@
 #define WINDOW_LENGTH                    5000     // time length for each window in a period
 #define BASE                             1000000000  // base for transmitting decimals
 #define BASE_ED                          1000000  // base for transmitting decimals
+#define BASE_MMC                         1000000  // base for transmitting decimals
 #define BASE_RC                          10000000  // base for transmitting decimals
 #define BASE_LAMBDA                      1000  // base for transmitting decimals
 
@@ -236,7 +237,7 @@ class OAgent_OPF {
         inline void _broadcastSchedulePrimalDualPacket(unsigned long startTime, uint8_t iterations, uint16_t period) {
             _broadcastSchedulePacket(SCHEDULE_PD_HEADER,startTime,iterations,period);
         }
-        inline bool _maxminPacketAvailable() { return _packetAvailable(MAXMIN_HEADER,true); }
+        
         //Primal Dual Algorithm
         //inline bool _OPFPacketAvailable() { return _packetAvailable(PD_PACKET_HEADER,true); }
         void _initializeRatioConsensus(OLocalVertex * s, float y, float z);

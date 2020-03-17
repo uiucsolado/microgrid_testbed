@@ -900,7 +900,6 @@ float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint16_t ite
 
     int timeout = 100;                               // create variable to keep track of broadcasts
 
-    uint16_t packetDropCount = 0;
     uint16_t packetReceiveCount = 0;
     uint16_t packetsLost = 0;
     uint16_t packetReceived = 0;
@@ -912,14 +911,26 @@ float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint16_t ite
     srand(millis());    
     uint16_t txTime = (rand() % (period - 2*frame)) + frame;                                //determines the time window in which a payload is transmitted
     
-    for(uint8_t k = 0; k < iterations; k++) {
-        srand(analogRead(0));
-        txTime =  (rand() % (period - 2*frame)) + frame;  //determines the time window in which a payload is transmitted
+    srand(analogRead(0));
+    txTime =  (rand() % (period - 2*frame)) + frame;  //determines the time window in which a payload is transmitted
+    
+    for(uint8_t k = 0; k < iterations; k++)
+    {
         txDone = false;     // initialize toggle to keep track of broadcasts
         start = millis();   // initialize timer
         
-        while(uint16_t(millis()-start) < period) {
-            if(_maxminPacketAvailable()) {
+        while(uint16_t(millis()-start) < period)
+        {
+            receivedPacket = _waitForNeighborPacket(neighborID,MAXMIN_HEADER,true,10);
+            if ( receivedPacket && (*(neighborStatusP+neighborID-1) == 2) )                                                                         //get values for fp, fq, and lambda that are received from this neighbor
+            {
+                packetReceiveCount++;
+
+                *(neighborStatusP+neighborID-1) = 3;                                                            //set neighbor status to 3, i.e., note that node has received from this neighbor in this iteration
+
+                // Serial<<neighborID<<" active"<<endl;
+                // delay(5);
+
                 float inMax = _getMaxFromPacket();                               // store incoming value of Max
                 float inMin = _getMinFromPacket();                               // store incoming value of Min
                 if(inMax > max)
@@ -934,7 +945,19 @@ float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint16_t ite
         }
         // Serial << "At iteration "<< k <<" we have "<< max <<" windows"<<endl;
         // delay(5);
+        packetReceived += packetReceiveCount;
+        packetsLost += (_G->getN() - packetReceiveCount - 1);
+
+        packetReceiveCount = 0;
+
+        l->resetLinkedListStatus(s->getStatusP());
     }
+    
+    Serial<<packetsLost<<" packets lost"<<endl;
+    delay(5);
+    Serial<<packetReceived<<" packets received"<<endl;
+    delay(5);
+
     if(isMax)
         return max;
     else
@@ -943,12 +966,12 @@ float OAgent_OPF::maxminConsensus(bool isMax, float max, float min, uint16_t ite
 
 float OAgent_OPF::_getMaxFromPacket() {
     uint8_t ptr = 2;
-    return (_getFloat32FromPacket(ptr)/BASE);
+    return (_getFloat32FromPacket(ptr)/BASE_MMC);
 }
 
 float OAgent_OPF::_getMinFromPacket() {
     uint8_t ptr = 7;
-    return (_getFloat32FromPacket(ptr)/BASE);
+    return (_getFloat32FromPacket(ptr)/BASE_MMC);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4424,8 +4447,8 @@ void OAgent_OPF::_broadcastMaxMinPacket(float max, float min) {
     uint8_t sign_max;
     uint8_t sign_min;
     
-    max = max*BASE;
-    min = min*BASE;
+    max = max*BASE_MMC;
+    min = min*BASE_MMC;
 
     //check if sumLambda is negative
     if (max < 0) 
