@@ -122,7 +122,7 @@ void LinkedList::resetLinkedListStatus(uint8_t *r) {
     while (tmp != NULL)
     {
         i = tmp->data;
-        if (*(r+i-1) == 3)
+        if (*(r+i-1) > 2)
         {
             *(r+i-1) = 2;
             // Serial<< "Status of node "<<i<<" changed from 3 to "<<*(r+i)<<endl;
