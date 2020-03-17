@@ -4672,7 +4672,7 @@ bool OAgent_OPF::_packetAvailableHelper(uint16_t header, bool broadcast) {
         	if(((broadcast == true) && ((_rx->getOption() & 0x0F) == ZB_BROADCAST_PACKET)) || ((broadcast == false) && ((_rx->getOption() & 0x0F) == ZB_PACKET_ACKNOWLEDGED)))
             {
              //    Serial << "Packet conditions met \n";
-	            // return true;
+	            return true;
             }
         }
     }
