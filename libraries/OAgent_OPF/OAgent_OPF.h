@@ -24,6 +24,7 @@
 #define SCHEDULE_ED_HEADER               0x7320 // schedule coordinate header is ascii s@
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x8346 // schedule coordinate header is ascii sF
 #define SCHEDULE_DONE                    0x1177 // schedule coordinate header is ascii sF
+#define WAIT_TO_START                    0x7711 // schedule coordinate header is ascii sF
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define PD_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
@@ -51,8 +52,8 @@
 #define ACK_TIMEOUT                      500    // time out period to wait for an ack
 #define SCHEDULE_TIMEOUT                 2000    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         3000    // delay before ratio consensus starts
-#define MC_DELAY                         5000    // delay before maxmin consensus starts
-#define PD_DELAY                         5000   // delay before primal dual algorithm starts
+#define MC_DELAY                         3000    // delay before maxmin consensus starts
+#define PD_DELAY                         3000   // delay before primal dual algorithm starts
 #define ED_DELAY                         3000   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
@@ -387,6 +388,7 @@ class OAgent_OPF {
         inline uint8_t _getIDFromPacket() {  return _rx->getData(2); }
 
         bool _waitToStart(unsigned long startTime, bool useMyMillis, int timeout = -1);
+        bool _waitToFinishSchedule(unsigned long startTime, bool useMyMillis, int timeout = -1);
         inline uint32_t _getStartTimeFromPacket() {
             return (uint32_t(_rx->getData(5)) << 24) + (uint32_t(_rx->getData(4)) << 16) + (uint16_t(_rx->getData(3)) << 8) + _rx->getData(2);
         }

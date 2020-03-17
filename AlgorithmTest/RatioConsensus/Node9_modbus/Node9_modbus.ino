@@ -73,7 +73,7 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
   //g.addInNeighbor(0x415786E1,9,0,0); // node 9
   g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  g.addInNeighbor(0x415DB670,11,0,0); // node 11
+  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
   //g.addInNeighbor(0x415786A9,12,0,0); // node 12
   //g.addInNeighbor(0x4157847B,13,0,0); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14

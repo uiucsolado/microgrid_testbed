@@ -768,7 +768,7 @@ float OAgent_OPF::leaderRatioConsensus(float y, float z, uint16_t iterations, ui
     else
     {
         Serial << "RC scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = ratioConsensus(y, z, iterations,period);
@@ -792,7 +792,7 @@ float OAgent_OPF::nonleaderRatioConsensus(float y, float z, uint16_t iterations,
     if(scheduled)
     {
         Serial << "RC scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = ratioConsensus(y, z, iterations,period);
@@ -843,7 +843,7 @@ float OAgent_OPF::leaderMaxMinConsensus(bool isMax, float max, float min, uint16
     else
     {
         Serial << "maxmin scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
         	//Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = maxminConsensus(isMax,max,min,iterations,period);
@@ -861,7 +861,7 @@ float OAgent_OPF::nonleaderMaxMinConsensus(bool isMax, float max, float min, uin
     if(scheduled)
     {
         Serial << "maxmin scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
         	//Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = maxminConsensus(isMax,max,min,iterations,period);
@@ -1018,7 +1018,7 @@ bool OAgent_OPF::leaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t it
     else
     {
         Serial<<"PD scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = standardPrimalDualAlgorithm0(genBus,alpha,iterations);
@@ -1047,7 +1047,7 @@ bool OAgent_OPF::nonleaderPrimalDualAlgorithm(bool genBus, float alpha, uint16_t
     if(scheduled)
     {
         Serial<<"PD scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = standardPrimalDualAlgorithm0(genBus,alpha,iterations);
@@ -3482,7 +3482,7 @@ bool OAgent_OPF::leaderEconomicDispatch(bool genBus, float alpha, uint16_t itera
     else
     {
         Serial<<"ED scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = standardEconomicDispatch(genBus,alpha,iterations);
@@ -3507,7 +3507,7 @@ bool OAgent_OPF::nonleaderEconomicDispatch(bool genBus, float alpha, uint16_t it
     if(scheduled)
     {
         Serial<<"ED scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = standardEconomicDispatch(genBus,alpha,iterations);
@@ -3858,7 +3858,7 @@ float OAgent_OPF::leaderEconomicDispatch(float alpha_p, float beta_p, float max_
     else
     {
         Serial<<"ED scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = economicDispatch(alpha_p,beta_p,max_p,min_p,u,iterations,period);
@@ -3882,7 +3882,7 @@ float OAgent_OPF::nonleaderEconomicDispatch(float alpha_p, float beta_p, float m
     if(scheduled)
     {
         Serial<<"ED scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
+        if(_waitToFinishSchedule(startTime,true,10000))
         {
             Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             gamma = economicDispatch(alpha_p,beta_p,max_p,min_p,u,iterations,period);
@@ -4799,13 +4799,48 @@ uint16_t OAgent_OPF::_waitForValidPacket(bool broadcast, int timeout) {
 bool OAgent_OPF::_waitToStart(unsigned long startTime, bool useMyMillis, int timeout) {
     long temp;
     unsigned long s = millis();
-    while(true) {
-        if(useMyMillis == true) {
+
+    while(true)
+    {
+        if(useMyMillis == true)
+        {
             temp = startTime - (myMillis());
             if(temp <= 0)
                 return true;
-        } else {
+        } 
+        else
+        {
             temp = startTime - millis(); 
+            if(temp <= 0)
+                return true;
+        }
+        if(timeout != -1) {
+            temp = millis()-s;
+            if(temp > timeout)
+                return false;
+        }
+    }    
+}
+
+bool OAgent_OPF::_waitToFinishSchedule(unsigned long startTime, bool useMyMillis, int timeout) {
+    long temp;
+    unsigned long s = millis();
+
+    srand(s);
+    while(true)
+    {
+        _broadcastHeaderPacket(WAIT_TO_START);
+        delay(10);
+
+        if(useMyMillis == true)
+        {
+            temp = (startTime-10) - (myMillis());
+            if(temp <= 0)
+                return true;
+        } 
+        else
+        {
+            temp = (startTime-10) - millis(); 
             if(temp <= 0)
                 return true;
         }
@@ -5916,7 +5951,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
 
     while(true)
     {
-        if(_waitForNeighborPacket(neighborID,header,true,1000))                      //stays in loop until desired packet received
+        if(_waitForNeighborPacket(neighborID,header,true,500))                      //stays in loop until desired packet received
         {
             //Serial << "Received Schedule RC Packet from node " << neighborID<<endl;
             //delay(5);
@@ -5941,13 +5976,24 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
 
                     delay(rand() % 100);
 
-                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                     {
     	                if(s->getStatus(neighborID) < 4)
     	                {
     		                s->setStatus(neighborID, 4);																	//sets status of online neighbor to 4
     	                    scheduleDoneCounter++;
     					}
+                    }
+
+                    if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                    {
+                        if(s->getStatus(neighborID) < 4)
+                        {
+                            Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                            delay(5);
+                            s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                            scheduleDoneCounter++;
+                        }
                     }
 
                     if(scheduleDoneCounter >= _G->getN())
@@ -5967,7 +6013,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
                 {
                 	_broadcastSchedulePacket(header,startTime,iterations,period);
 
-    	            if(_waitForNeighborPacket(neighborID,header,true,100))                        //wait for acknowledgement packets
+    	            if(_waitForNeighborPacket(neighborID,header,true,50))                        //wait for acknowledgement packets
     	            {
     	                if(s->getStatus(neighborID) < 3)
     	                {
@@ -5982,23 +6028,47 @@ bool OAgent_OPF::_waitForParentSchedulePacketRC(unsigned long &startTime, uint16
                 else
                     _broadcastHeaderPacket(SCHEDULE_DONE);
 
-                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                 {
                     if(s->getStatus(neighborID) < 4)
                     {
-                    	s->setStatus(neighborID, 4);																	//resets status of online neighbor to 4
-                    	scheduleCounter++;
-                    	scheduleDoneCounter++;
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
+                    }
+                }
+
+                if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                {
+                    if(s->getStatus(neighborID) < 4)
+                    {
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
                     }
                 }
 
                 if(scheduleDoneCounter >= _G->getN())
                 {
-                	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                    l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                     return true;
                 }
 
-                delay(rand() % 100);
+                delay(rand() % 50);
             }
         }
         // Serial << "Waiting for Schedule RC Packet"<<endl;
@@ -6021,10 +6091,10 @@ bool OAgent_OPF::_waitForParentSchedulePacketMMC(unsigned long &startTime, uint1
     delay(5);
     while(true)
     {
-        if(_waitForNeighborPacket(neighborID,header,true,1000))                        //stays in loop until desired packet received
+        if(_waitForNeighborPacket(neighborID,header,true,500))                        //stays in loop until desired packet received
         {
-            // Serial << "Received Schedule MMC Packet from node " << neighborID<<endl;
-            // delay(5);
+            Serial << "Received Schedule MMC Packet from node " << neighborID<<endl;
+            delay(5);
         
             startTime   = _getStartTimeFromPacket();
             iterations  = _getIterationsFromPacket();
@@ -6046,13 +6116,24 @@ bool OAgent_OPF::_waitForParentSchedulePacketMMC(unsigned long &startTime, uint1
 
                     delay(rand() % 100);
 
-                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                     {
     	                if(s->getStatus(neighborID) < 4)
     	                {
     		                s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
     	                    scheduleDoneCounter++;
     					}
+                    }
+
+                    if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                    {
+                        if(s->getStatus(neighborID) < 4)
+                        {
+                            Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                            delay(5);
+                            s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                            scheduleDoneCounter++;
+                        }
                     }
 
                     if(scheduleDoneCounter >= _G->getN())
@@ -6072,12 +6153,12 @@ bool OAgent_OPF::_waitForParentSchedulePacketMMC(unsigned long &startTime, uint1
                 {
                 	_broadcastSchedulePacket(header,startTime,iterations,period);
 
-    	            if(_waitForNeighborPacket(neighborID,header,true,100))                        //wait for acknowledgement packets
+    	            if(_waitForNeighborPacket(neighborID,header,true,50))                        //wait for acknowledgement packets
     	            {
     	                if(s->getStatus(neighborID) < 3)
     	                {
-    	                    // Serial << "received Schedule MMC ACK from node " << neighborID<<endl;
-    	                    // delay(5);
+    	                    Serial << "received Schedule MMC ACK from node " << neighborID<<endl;
+    	                    delay(5);
     	                    s->setStatus(neighborID, 3);
     	                    scheduleCounter++;
     	                }
@@ -6087,23 +6168,47 @@ bool OAgent_OPF::_waitForParentSchedulePacketMMC(unsigned long &startTime, uint1
                 else
                     _broadcastHeaderPacket(SCHEDULE_DONE);
 
-                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                 {
                     if(s->getStatus(neighborID) < 4)
                     {
-                    	s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-                    	scheduleCounter++;
-                    	scheduleDoneCounter++;
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
+                    }
+                }
+
+                if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                {
+                    if(s->getStatus(neighborID) < 4)
+                    {
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
                     }
                 }
 
                 if(scheduleDoneCounter >= _G->getN())
                 {
-                	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                    l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                     return true;
                 }
 
-                delay(rand() % 100);
+                delay(rand() % 50);
             }
         }
         // Serial << "Waiting for Schedule MMC Packet"<<endl;
@@ -6126,7 +6231,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16
     delay(5);
     while(true)
     {
-        if(_waitForNeighborPacket(neighborID,header,true,1000))                        //stays in loop until desired packet received
+        if(_waitForNeighborPacket(neighborID,header,true,500))                        //stays in loop until desired packet received
      	{
             // Serial << "Received Schedule PD Packet from node " << neighborID<<endl;
             // delay(5);
@@ -6150,13 +6255,24 @@ bool OAgent_OPF::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16
 
                     delay(rand() % 100);
 
-                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                     {
     	                if(s->getStatus(neighborID) == 3)
     	                {
     		                s->setStatus(neighborID, 2);																	//resets status of online neighbor to 2
     	                    scheduleDoneCounter++;
     					}
+                    }
+
+                    if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                    {
+                        if(s->getStatus(neighborID) < 4)
+                        {
+                            Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                            delay(5);
+                            s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                            scheduleDoneCounter++;
+                        }
                     }
 
                     if(scheduleDoneCounter >= _G->getN())
@@ -6173,7 +6289,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16
                 {
                 	_broadcastSchedulePacketPD(startTime,iterations);
 
-    	            if(_waitForNeighborPacket(neighborID,header,true,100))                        //wait for acknowledgement packets
+    	            if(_waitForNeighborPacket(neighborID,header,true,50))                        //wait for acknowledgement packets
     	            {
     	                if(s->getStatus(neighborID) < 3)
     	                {
@@ -6188,23 +6304,47 @@ bool OAgent_OPF::_waitForParentSchedulePacketPD(unsigned long &startTime, uint16
                 else
                     _broadcastHeaderPacket(SCHEDULE_DONE);
 
-                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                 {
                     if(s->getStatus(neighborID) < 4)
                     {
-                    	s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-                    	scheduleCounter++;
-                    	scheduleDoneCounter++;
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
+                    }
+                }
+
+                if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                {
+                    if(s->getStatus(neighborID) < 4)
+                    {
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
                     }
                 }
 
                 if(scheduleDoneCounter >= _G->getN())
                 {
-                	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                    l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                     return true;
                 }
 
-                delay(rand() % 100);
+                delay(rand() % 50);
             }
         }
         // Serial << "Waiting for Schedule PD Packet"<<endl;
@@ -6227,7 +6367,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
     delay(5);
     while(true)
     {
-        if(_waitForNeighborPacket(neighborID,header,true,1000))                    	//stays in loop until desired packet received
+        if(_waitForNeighborPacket(neighborID,header,true,500))                    	//stays in loop until desired packet received
      	{
             Serial << "Received Schedule ED Packet from node " << neighborID<<endl;
             delay(5);
@@ -6251,7 +6391,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
 
                     delay(rand() % 100);
 
-                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                     {
     	                if(s->getStatus(neighborID) < 4)
     	                {
@@ -6262,7 +6402,18 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
     					}
                     }
 
-                    if((scheduleDoneCounter >= _G->getN()) && !(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,1000)))
+                    if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                    {
+                        if(s->getStatus(neighborID) < 4)
+                        {
+                            Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                            delay(5);
+                            s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                            scheduleDoneCounter++;
+                        }
+                    }
+
+                    if(scheduleDoneCounter >= _G->getN())
                     {
                     	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                         return true;
@@ -6279,7 +6430,7 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
                 {
                 	_broadcastSchedulePacketED(startTime,iterations);
 
-    	            if(_waitForNeighborPacket(neighborID,header,true,100))                        //wait for acknowledgement packets
+    	            if(_waitForNeighborPacket(neighborID,header,true,50))                        //wait for acknowledgement packets
     	            {
     	                if(s->getStatus(neighborID) < 3)
     	                {
@@ -6294,25 +6445,47 @@ bool OAgent_OPF::_waitForParentSchedulePacketED(unsigned long &startTime, uint16
                 else
                     _broadcastHeaderPacket(SCHEDULE_DONE);
 
-                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
                 {
                     if(s->getStatus(neighborID) < 4)
                     {
                     	Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
                         delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
                         s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-                    	scheduleCounter++;
                     	scheduleDoneCounter++;
                     }
                 }
 
-                if((scheduleDoneCounter >= _G->getN()) && !(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,1000)))
+                if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                {
+                    if(s->getStatus(neighborID) < 4)
+                    {
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
+                    }
+                }
+
+                if(scheduleDoneCounter >= _G->getN())
                 {
                 	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
                     return true;
                 }
 
-                delay(rand() % 100);
+                delay(rand() % 50);
             }
         }
         // Serial << "Waiting for Schedule ED Packet"<<endl;
@@ -6416,8 +6589,8 @@ bool OAgent_OPF::_waitForChildSchedulePacketRC(unsigned long startTime, uint16_t
     LinkedList * l = _G->getLinkedList();
     l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2     
 
-    uint8_t scheduleCounter = 1;    
-    uint8_t scheduleDoneCounter = 1;    
+    uint8_t scheduleCounter = 1;
+    uint8_t scheduleDoneCounter = 1;
     uint8_t neighborID;
 
     _broadcastSchedulePacket(SCHEDULE_FAIR_SPLIT_HEADER,startTime,iterations,period);
@@ -6429,7 +6602,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketRC(unsigned long startTime, uint16_t
     {
         if(scheduleCounter < _G->getN())
         {
-        	if(_waitForNeighborPacket(neighborID,SCHEDULE_FAIR_SPLIT_HEADER,true,100))                        //wait for acknowledgement packets
+        	if(_waitForNeighborPacket(neighborID,SCHEDULE_FAIR_SPLIT_HEADER,true,50))                        //wait for acknowledgement packets
 	        {
 	            if(s->getStatus(neighborID) < 3)
 	            {
@@ -6446,25 +6619,47 @@ bool OAgent_OPF::_waitForChildSchedulePacketRC(unsigned long startTime, uint16_t
 	    else
         	_broadcastHeaderPacket(SCHEDULE_DONE);
 
-	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
         {
             if(s->getStatus(neighborID) < 4)
             {
             	Serial << "received Schedule DONE packet from node " << neighborID<<endl;
                 delay(5);
-                s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-            	scheduleCounter++;
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);
             	scheduleDoneCounter++;
             }
         }
 
-        if((scheduleDoneCounter >= _G->getN()) && !(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,1000)))
+        if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 4)
+            {
+                Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                delay(5);
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                scheduleDoneCounter++;
+            }
+        }
+
+        if(scheduleDoneCounter >= _G->getN())
         {
         	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
             return true;
         }
 
-        delay(rand() % 100);        
+        delay(rand() % 50);        
     }
 
 	Serial << "Scheduling timed out"<<endl;
@@ -6494,7 +6689,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketMMC(unsigned long startTime, uint16_
     {
         if(scheduleCounter < _G->getN())
         {
-	        if(_waitForNeighborPacket(neighborID,SCHEDULE_MAXMIN_HEADER,true,100))                        //wait for acknowledgement packets
+	        if(_waitForNeighborPacket(neighborID,SCHEDULE_MAXMIN_HEADER,true,50))                        //wait for acknowledgement packets
 	        {
 	            if(s->getStatus(neighborID) < 3)
 	            {
@@ -6511,25 +6706,47 @@ bool OAgent_OPF::_waitForChildSchedulePacketMMC(unsigned long startTime, uint16_
 	    else
         	_broadcastHeaderPacket(SCHEDULE_DONE);
 
-	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
         {
             if(s->getStatus(neighborID) < 4)
             {
             	Serial << "received Schedule DONE packet from node " << neighborID<<endl;
                 delay(5);
-                s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-            	scheduleCounter++;
-            	scheduleDoneCounter++;
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);
+                scheduleDoneCounter++;
             }
         }
 
-        if((scheduleDoneCounter >= _G->getN()) && !(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,1000)))
+        if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 4)
+            {
+                Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                delay(5);
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                scheduleDoneCounter++;
+            }
+        }
+
+        if(scheduleDoneCounter >= _G->getN())
         {
         	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
             return true;
         }
 
-        delay(rand() % 100);       
+        delay(rand() % 50);       
     }
 
 	Serial << "Scheduling timed out"<<endl;
@@ -6560,7 +6777,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketPD(unsigned long startTime, uint16_t
     {
     	if(scheduleCounter < _G->getN())
         {
-	        if(_waitForNeighborPacket(neighborID,SCHEDULE_PD_HEADER,true,100))                        //wait for acknowledgement packets
+	        if(_waitForNeighborPacket(neighborID,SCHEDULE_PD_HEADER,true,50))                        //wait for acknowledgement packets
 	        {
 	            if(s->getStatus(neighborID) < 3)
 	            {
@@ -6577,25 +6794,47 @@ bool OAgent_OPF::_waitForChildSchedulePacketPD(unsigned long startTime, uint16_t
 	    else
         	_broadcastHeaderPacket(SCHEDULE_DONE);
 
-	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
         {
             if(s->getStatus(neighborID) < 4)
             {
             	Serial << "received Schedule DONE packet from node " << neighborID<<endl;
                 delay(5);
-                s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-            	scheduleCounter++;
-            	scheduleDoneCounter++;
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);
+                scheduleDoneCounter++;
             }
         }
 
-        if((scheduleDoneCounter >= _G->getN()) && !(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,1000)))
+        if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 4)
+            {
+                Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                delay(5);
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                scheduleDoneCounter++;
+            }
+        }
+
+        if(scheduleDoneCounter >= _G->getN())
         {
         	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
             return true;
         }
 
-        delay(rand() % 100);       
+        delay(rand() % 50);       
     }
 
 	Serial << "Scheduling timed out"<<endl;
@@ -6625,7 +6864,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketED(unsigned long startTime, uint16_t
     {
     	if(scheduleCounter < _G->getN())
         {
-	        if(_waitForNeighborPacket(neighborID,SCHEDULE_ED_HEADER,true,100))                        //wait for acknowledgement packets
+	        if(_waitForNeighborPacket(neighborID,SCHEDULE_ED_HEADER,true,50))                        //wait for acknowledgement packets
 	        {
 	            if(s->getStatus(neighborID) < 3)
 	            {
@@ -6642,25 +6881,47 @@ bool OAgent_OPF::_waitForChildSchedulePacketED(unsigned long startTime, uint16_t
 	    else
         	_broadcastHeaderPacket(SCHEDULE_DONE);
 
-	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,100))                        //wait for acknowledgement packets
+	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
         {
             if(s->getStatus(neighborID) < 4)
             {
             	Serial << "received Schedule DONE packet from node " << neighborID<<endl;
                 delay(5);
-                s->setStatus(neighborID, 4);																	//resets status of online neighbor to 2
-            	scheduleCounter++;
-            	scheduleDoneCounter++;
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);
+                scheduleDoneCounter++;
             }
         }
 
-        if((scheduleDoneCounter >= _G->getN()) && !(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,1000)))
+        if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 4)
+            {
+                Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                delay(5);
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                scheduleDoneCounter++;
+            }
+        }
+
+        if(scheduleDoneCounter >= _G->getN())
         {
         	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
             return true;
         }
 
-        delay(rand() % 100);       
+        delay(rand() % 50);       
     }
 
 	Serial << "Scheduling timed out"<<endl;
