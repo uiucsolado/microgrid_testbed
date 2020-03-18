@@ -3949,13 +3949,14 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
     srand(millis());    
     uint16_t txTime = (rand() % (period - 2*frame)) + frame;                                //determines the time window in which a payload is transmitted
 
+
     for(uint8_t k = 0; k < iterations; k++)
     {
         start = millis();   // initialize timer
 
         uint8_t arraySize = _lambdaList->getLinkedListSize();
-        float lambdaValue[arraySize];
-        float lambdaFunction[arraySize];
+        float * lambdaValue = new float[arraySize];
+        float * lambdaFunction = new float[arraySize];
         _lambdaList->updateLinkedListArrays(lambdaValue,lambdaFunction,arraySize);
 
         // Serial<<"Iteration "<<k+1<<endl;
@@ -3979,7 +3980,7 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
         // }
         // Serial<<endl;
 
-        float lambdaFunction_Dout[arraySize];
+        float * lambdaFunction_Dout = new float[arraySize];
         for(uint8_t i = 0; i < arraySize; i++)
             lambdaFunction_Dout[i] = lambdaFunction[i]/Dout;
         
@@ -3989,7 +3990,7 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
         nodeAgentLL->addToLinkedList(lambdaValue,lambdaFunction_Dout,arraySize);
         // Serial<<"Sum g(lambda) list initialized"<<endl;
         // delay(5);
-        float sumLambdaFunction[arraySize];
+        float * sumLambdaFunction = new float[arraySize];
         nodeAgentLL->updateLinkedListArrays(lambdaValue,sumLambdaFunction,arraySize);
 
         inZ_total = 0;
@@ -4012,8 +4013,8 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
                 //get running sum values for Lambda and NU that are received from this neighbor
                 inSumZ = _getSumZFromEDPacket();
                 uint8_t inArraySize = _getArraySizeFromEDPacket();
-                float inLambdaValue[inArraySize];
-                float inLambdaFunction[inArraySize];
+                float * inLambdaValue = new float[inArraySize];
+                float * inLambdaFunction = new float[inArraySize];
                 // Serial << "Data received from node "<<neighborID<<":";
                 // delay(5);
                 for(uint8_t i = 0; i < inArraySize; i++)
@@ -4031,7 +4032,7 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
                 neighborP = (n+(neighborID-1));
                 neighborAgentLL = &_sumLambdaList[neighborID-1];
                 
-                float newLambdaFunction[inArraySize];
+                float * newLambdaFunction = new float[inArraySize];
                 neighborAgentLL->getNewLinkedListData(newLambdaFunction,inLambdaValue,inLambdaFunction,inArraySize);
                 inZ = inSumZ - neighborP->getSumZ();
                 
@@ -4046,7 +4047,15 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
 
                 neighborP->setSumZ(inSumZ);
                 neighborAgentLL->updateLinkedList(inLambdaValue,inLambdaFunction,inArraySize);
+
+                delete[] inLambdaValue;
+                inLambdaValue = NULL;
+
+                delete[] inLambdaFunction;
+                inLambdaFunction = NULL;
                 
+                delete[] newLambdaFunction;
+                newLambdaFunction = NULL;
                 // Serial << "Neighbor running sum list updated"<<endl;
                 // delay(5);
             }
@@ -4067,13 +4076,25 @@ float OAgent_OPF::economicDispatch(float alpha_p, float beta_p, float max_p, flo
             }
         }
         _lambdaList->addToLinkedList(lambdaValue,lambdaFunction_Dout,arraySize);
-        s->setZ( ((s->getZ())/Dout) + inZ_total );
-        
+        s->setZ( ((s->getZ())/Dout) + inZ_total );        
         
         packetReceived += packetReceiveCount;
         packetsLost += (_G->getN() - packetReceiveCount - 1);
 
         packetReceiveCount = 0;
+
+        delete[] lambdaValue;
+        lambdaValue = NULL;
+
+        delete[] lambdaFunction;
+        lambdaFunction = NULL;
+
+        delete[] lambdaFunction_Dout;
+        lambdaFunction_Dout = NULL;
+
+        delete[] sumLambdaFunction;
+        sumLambdaFunction = NULL;
+
         // _buffer[count] = (s->getY())/(s->getZ()); //add kth iterate to buffer
         // _bufferY[count] = s->getY(); //add kth iterate to buffer
         // _bufferZ[count] = s->getZ(); //add kth iterate to buffer
@@ -6598,7 +6619,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketRC(unsigned long startTime, uint16_t
     Serial << "Waiting for Schedule RC ACKs"<<endl;
     delay(5);
     
-    while(uint16_t(millis()-start) < 5000)
+    while(uint16_t(millis()-start) < RC_DELAY)
     {
         if(scheduleCounter < _G->getN())
         {
@@ -6685,7 +6706,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketMMC(unsigned long startTime, uint16_
     Serial << "Waiting for Schedule MMC ACKs"<<endl;
     delay(5);
     
-    while(uint16_t(millis()-start) < 5000)
+    while(uint16_t(millis()-start) < MC_DELAY)
     {
         if(scheduleCounter < _G->getN())
         {
@@ -6773,7 +6794,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketPD(unsigned long startTime, uint16_t
     Serial << "Waiting for Schedule PD ACKs"<<endl;
     delay(5);
     
-    while(uint16_t(millis()-start) < 5000)
+    while(uint16_t(millis()-start) < PD_DELAY)
     {
     	if(scheduleCounter < _G->getN())
         {
@@ -6860,7 +6881,7 @@ bool OAgent_OPF::_waitForChildSchedulePacketED(unsigned long startTime, uint16_t
     Serial << "Waiting for Schedule ED ACKs"<<endl;
     delay(5);
     
-    while(uint16_t(millis()-start) < 5000)
+    while(uint16_t(millis()-start) < ED_DELAY)
     {
     	if(scheduleCounter < _G->getN())
         {
