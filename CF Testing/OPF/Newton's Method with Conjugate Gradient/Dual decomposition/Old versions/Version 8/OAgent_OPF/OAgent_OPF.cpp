@@ -750,9 +750,12 @@ bool OAgent_OPF::OptimalPowerFlow(bool genBus, float alpha, uint8_t iterations) 
 
 bool OAgent_OPF::leaderOPF(bool genBus, float alpha, uint8_t iterations) {
     unsigned long t0 = myMillis();
-    unsigned long startTime = t0 + OPF_DELAY;
+    unsigned long startTime = t0 + 15000;
     bool gamma = false;
-    bool scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
+    // bool scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
+    // bool scheduled = _waitForChildSchedulePacketOPF(startTime,iterations);
+    // bool scheduled = _ScheduleLeaderOPF(startTime,iterations);
+    bool scheduled = true;
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     //bool stat = startTime>myMillis();
 
@@ -766,12 +769,14 @@ bool OAgent_OPF::leaderOPF(bool genBus, float alpha, uint8_t iterations) {
     else
     {
         Serial<<"OPF scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
-        {
-            //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
-            // gamma = StandardOPF(genBus);
-            gamma = SecondOrderOPF(genBus);
-        }
+        gamma = SecondOrderOPF(genBus);
+        // Serial<<"Start time is "<<startTime<<endl;
+        // if(_waitToStart(startTime,true,-1))
+        // {
+        //     //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
+        //     // gamma = StandardOPF(genBus);
+        //     gamma = SecondOrderOPF(genBus);
+        // }
     }        
     return gamma;
 }
@@ -780,7 +785,10 @@ bool OAgent_OPF::nonleaderOPF(bool genBus, float alpha, uint8_t iterations) {
     unsigned long startTime = 0;
     bool gamma = false;
     //delay(50);
-    bool scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+    // bool scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+    // bool scheduled = _waitForParentSchedulePacketOPF(startTime,iterations);
+    // bool scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
+    bool scheduled = true;
     //Serial<<"Schedule done at "<<myMillis()<<"\n";
     
     //bool stat = startTime>myMillis();
@@ -791,12 +799,14 @@ bool OAgent_OPF::nonleaderOPF(bool genBus, float alpha, uint8_t iterations) {
     if(scheduled)
     {
         Serial<<"OPF scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
-        {
-            //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
-            // gamma = StandardOPF(genBus);
-            gamma = SecondOrderOPF(genBus);
-        }
+        gamma = SecondOrderOPF(genBus);
+        // Serial<<"Start time is "<<startTime<<endl;
+        // if(_waitToStart(startTime,true,-1))
+        // {
+        //     //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
+        //     // gamma = StandardOPF(genBus);
+        //     gamma = SecondOrderOPF(genBus);
+        // }
         //digitalWrite(48,LOW);
     }
     else
@@ -1039,16 +1049,21 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
     String str = "r";
     // _print1Darray_(str,r,4*deg,6); 
 
-    unsigned long startTime = myMillis()+5000;
+    unsigned long startTime = myMillis()+SCHEDULE_OPF_DELAY;
     bool scheduled = false;
     uint8_t iterations = 1;
     while (!scheduled)
     { 
-    	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
-    	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+    // 	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
+    // 	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+    	// if(isLeader()) scheduled = _waitForChildSchedulePacketOPF(startTime,iterations);
+    	// else  scheduled = _waitForParentSchedulePacketOPF(startTime,iterations);
+    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 	}
-	// Serial<<"Start time is "<<startTime<<endl;
-	_waitToStart(startTime,true,1000);
+	Serial<<"Start time is "<<startTime<<endl;
+	_waitToStart(startTime,true,-1);
+	// _waitToFinishSchedule(startTime,true,-1);
   
     int i = 0;
     unsigned long start = millis();   // initialize timer
@@ -1078,8 +1093,8 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	                        new_r[j+2*deg]+=tmp[2];
 	                        new_r[j+3*deg]+=tmp[3];
 
-	                        // Serial<<"Received from "<<neighborID<<endl;
-	                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
+	                        Serial<<"Received from "<<neighborID<<endl;
+	                        Serial.print(tmp[0],6); Serial<<endl; delay(5);
 	                    }
                     }
                     else if (neighborID<nodeID){                      
@@ -1093,8 +1108,8 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	                        new_r[j+2*deg]+=tmp[2];
 	                        new_r[j+3*deg]+=tmp[3];
 
-	                        // Serial<<"Received from "<<neighborID<<endl;
-	                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
+	                        Serial<<"Received from "<<neighborID<<endl;
+	                        Serial.print(tmp[0],6); Serial<<endl; delay(5);
 	                    }
                     }
                 }
@@ -1102,7 +1117,7 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 
     }
     for (int i=0;i<4*deg;i++) r[i]=new_r[i];
-    // _print1Darray_(str,r,4*deg,6);
+    _print1Darray_(str,r,4*deg,6);
     float *p=new float[4*deg]; for (int i=0;i<4*deg;i++) p[i]=-r[i];
     float *q=new float[4*deg]; for (int i=0;i<4*deg;i++) q[i]=0;
     float *new_q = new float[4*deg];
@@ -1125,15 +1140,20 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
         q = matbyvec(&H[0][0],4*deg,4*deg,p);
         // str = "q";_print1Darray_(str,q,4*deg,6);
         for (int i=0;i<4*deg;i++) {new_q[i]=q[i];new_r[i]=r[i];new_x[i]=x[i];new_p[i]=p[i];}
-        startTime = myMillis()+15000;
+        startTime = myMillis()+SCHEDULE_OPF_DELAY;
 	    scheduled = false;
 	    while (!scheduled)
 	    { 
-	    	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
-	    	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+	    // 	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
+	    // 	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+	    	// if(isLeader()) scheduled = _waitForChildSchedulePacketOPF(startTime,iterations);
+	    	// else  scheduled = _waitForParentSchedulePacketOPF(startTime,iterations);
+	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 		}
 		Serial<<"Start time is "<<startTime<<endl;
-		_waitToStart(startTime,true,2000);
+		_waitToStart(startTime,true,-1);
+		// _waitToFinishSchedule(startTime,true,-1);
 
         i = 0;
         unsigned long start = millis();   // initialize timer
@@ -1195,15 +1215,20 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 
          // str="mu2";_print_(str,mu2,6);
 
-        startTime = myMillis()+15000;
+        startTime = myMillis()+SCHEDULE_OPF_DELAY;
 	    scheduled = false;
 	    while (!scheduled)
 	    { 
-	    	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
-	    	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+	    // 	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
+	    // 	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+	    	// if(isLeader()) scheduled = _waitForChildSchedulePacketOPF(startTime,iterations);
+	    	// else  scheduled = _waitForParentSchedulePacketOPF(startTime,iterations);
+	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 		}
-		Serial<<"Start time is "<<startTime<<endl; delay(5);
-		_waitToStart(startTime,true,2000);
+		Serial<<"Start time is "<<startTime<<endl;
+		_waitToStart(startTime,true,-1);
+		// _waitToFinishSchedule(startTime,true,-1);
         nu = 1;
         float alpha2 = RunRatioConsensus(nodeID,&mu2,&nu,50,neighbors);
         str="alpha2";_print_(str,alpha2,6); 
@@ -1224,15 +1249,20 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
         }
         // str="mu1";_print_(str,mu1,6);
 
-        startTime = myMillis()+15000;
+        startTime = myMillis()+SCHEDULE_OPF_DELAY;
 	    scheduled = false;
 	    while (!scheduled)
 	    { 
-	    	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
-	    	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+	    // 	if(isLeader()) scheduled = _waitForSchedulePacketOPF(SCHEDULE_TIMEOUT,startTime,iterations);
+	    // 	else  scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
+	    	// if(isLeader()) scheduled = _waitForChildSchedulePacketOPF(startTime,iterations);
+	    	// else  scheduled = _waitForParentSchedulePacketOPF(startTime,iterations);
+	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 		}
-		Serial<<"Start time is "<<startTime<<endl; delay(5);
-		_waitToStart(startTime,true,2000);
+		Serial<<"Start time is "<<startTime<<endl;
+		_waitToStart(startTime,true,-1);
+		// _waitToFinishSchedule(startTime,true,-1);
 
         nu = 1;
         float alpha1_prev = alpha1;
@@ -1306,6 +1336,294 @@ float OAgent_OPF::RunRatioConsensus(uint16_t nodeID, float *mu,float *nu,uint8_t
 
 }
 
+bool OAgent_OPF::_ScheduleLeaderOPF(unsigned long &startTime, uint8_t &iterations){
+
+    while(true)
+    {
+        _broadcastSchedulePacketOPF(startTime,iterations);
+        if (myMillis()+100>startTime) return true;
+        delay(10);
+    }    
+}
+
+bool OAgent_OPF::_ScheduleNonLeaderOPF(unsigned long &startTime, uint8_t &iterations){
+
+    uint8_t neighborID;
+    uint16_t header = SCHEDULE_OPF_HEADER;
+	if(_waitForNeighborPacket(neighborID,header,true,-1))                        //stays in loop until desired packet received
+ 	{
+        // Serial << "Received Schedule OPF Packet from node " << neighborID<<endl;
+        // delay(5);       
+        startTime   = _getStartTimeFromPacket();
+        iterations  = _getIterationsFromPacketOPF();
+		while(true){
+			_broadcastSchedulePacketOPF(startTime,iterations);
+			if (myMillis()+100>startTime) return true;
+	        delay(10);
+		}	        
+	}    
+}
+
+bool OAgent_OPF::_waitForParentSchedulePacketOPF(unsigned long &startTime, uint8_t &iterations) {
+    uint8_t neighborID;
+    uint16_t header = SCHEDULE_OPF_HEADER;
+    LinkedList * l = _G->getLinkedList();                      						//get pointer to linked list
+    OLocalVertex * s = _G->getLocalVertex(); 										// store pointer to local vertex
+    l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2
+    srand(millis());
+
+    uint8_t scheduleCounter = 1;
+    uint8_t scheduleDoneCounter = 1;
+
+    Serial << "Waiting for Schedule OPF Packet"<<endl;
+    delay(5);
+    while(true)
+    {
+        if(_waitForNeighborPacket(neighborID,header,true,500))                        //stays in loop until desired packet received
+     	{
+            Serial << "Received Schedule OPF Packet from node " << neighborID<<endl;
+            delay(5);
+        
+            startTime   = _getStartTimeFromPacket();
+            iterations  = _getIterationsFromPacketOPF();
+            uint16_t start = millis();
+            s->setStatus(neighborID, 3);
+    	    scheduleCounter++;
+
+    	    if(scheduleCounter >= _G->getN())
+            {
+                Serial << "No Schedule OPF ACK is required from neighbors"<<endl;
+                delay(5);
+                // Serial << "Sending Schedule OPF ACK to parent"<<endl;
+                // delay(5);
+            
+                while(true)
+                {
+                	Serial << "Sending Schedule OPF ACK to parent"<<endl;
+	                delay(5);
+                    _broadcastHeaderPacket(SCHEDULE_DONE);
+
+                    delay(rand() % 100);
+
+                    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
+                    {
+    	                if(s->getStatus(neighborID) == 3)
+    	                {
+    		                s->setStatus(neighborID, 2);																	//resets status of online neighbor to 2
+    	                    scheduleDoneCounter++;
+    					}
+                    }
+                	_broadcastHeaderPacket(SCHEDULE_DONE);
+                    if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                    {
+                        if(s->getStatus(neighborID) < 4)
+                        {
+                            Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                            delay(5);
+                            s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                            scheduleDoneCounter++;
+                        }
+                    }
+
+                    if(scheduleDoneCounter >= _G->getN())
+                        return true;
+                }
+            }
+
+            //Serial << "Waiting for Schedule OPF ACKs"<<endl;
+            //delay(5);
+
+            while(true)
+            {
+                if(scheduleCounter < _G->getN())
+                {
+                	Serial << "Waiting for Schedule OPF ACKs"<<endl;
+		            delay(5);
+                	_broadcastSchedulePacketOPF(startTime,iterations);
+
+    	            if(_waitForNeighborPacket(neighborID,header,true,50))                        //wait for acknowledgement packets
+    	            {
+    	                if(s->getStatus(neighborID) < 3)
+    	                {
+    	                    // Serial << "received Schedule OPF ACK from node " << neighborID<<endl;
+    	                    // delay(5);
+    	                    s->setStatus(neighborID, 3);
+    	                    scheduleCounter++;
+    	                }
+    	            }
+    	        }
+
+                else
+                    _broadcastHeaderPacket(SCHEDULE_DONE);
+
+                delay(rand() % 50);
+
+                if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,500))                        //wait for acknowledgement packets
+                {
+                	Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                    delay(5);
+                    if(s->getStatus(neighborID) < 4)
+                    {
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
+                    }
+                }
+
+                if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+                {
+                    if(s->getStatus(neighborID) < 4)
+                    {
+                        Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                        delay(5);
+                        if(s->getStatus(neighborID) < 3)
+                        {
+                            Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                            delay(5);
+                            scheduleCounter++;
+                        }
+                        s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                        scheduleDoneCounter++;
+                    }
+                }
+
+                if(scheduleDoneCounter >= _G->getN())
+                {
+                    l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+                    return true;
+                }
+
+                delay(rand() % 50);
+            }
+        }
+        // Serial << "Waiting for Schedule OPF Packet"<<endl;
+        // delay(5);
+    }
+}
+
+
+bool OAgent_OPF::_waitForChildSchedulePacketOPF(unsigned long startTime, uint8_t iterations)  {
+    unsigned long start = millis();
+    unsigned long restart = start;
+    OLocalVertex * s = _G->getLocalVertex();                                                            // store pointer to local vertex 
+    LinkedList * l = _G->getLinkedList();
+	l->resetLinkedListStatus(s->getStatusP());                   //gets linkedlist and resets status of online neighbors to 2     
+
+    uint8_t scheduleCounter = 1;    
+    uint8_t scheduleDoneCounter = 1;    
+    uint8_t neighborID;
+
+    _broadcastSchedulePacketOPF(startTime,iterations);
+
+    Serial << "Waiting for Schedule OPF ACKs"<<endl;
+    delay(5);
+    
+    while(uint16_t(millis()-start) < 5000)
+    {
+    	if(scheduleCounter < _G->getN())
+        {
+	        if(_waitForNeighborPacket(neighborID,SCHEDULE_OPF_HEADER,true,50))                        //wait for acknowledgement packets
+	        {
+	            if(s->getStatus(neighborID) < 3)
+	            {
+	                Serial << "received Schedule ACK from node " << neighborID<<endl;
+                    delay(5);
+                    s->setStatus(neighborID, 3);
+	                scheduleCounter++;
+	            }
+	        }
+
+        	_broadcastSchedulePacketOPF(startTime,iterations);
+	    }
+
+	    else
+        	_broadcastHeaderPacket(SCHEDULE_DONE);
+
+	    if(_waitForNeighborPacket(neighborID,SCHEDULE_DONE,true,50))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 4)
+            {
+            	Serial << "received Schedule DONE packet from node " << neighborID<<endl;
+                delay(5);
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);
+                scheduleDoneCounter++;
+            }
+        }
+
+        if(_waitForNeighborPacket(neighborID,WAIT_TO_START,true,50))                        //wait for acknowledgement packets
+        {
+            if(s->getStatus(neighborID) < 4)
+            {
+                Serial << "Received Schedule DONE Packet from node " << neighborID<<endl;
+                delay(5);
+                if(s->getStatus(neighborID) < 3)
+                {
+                    Serial << "Received Schedule ACK Packet from node " << neighborID<<endl;
+                    delay(5);
+                    scheduleCounter++;
+                }
+                s->setStatus(neighborID, 4);                                                                    //resets status of online neighbor to 2
+                scheduleDoneCounter++;
+            }
+        }
+
+        if(scheduleDoneCounter >= _G->getN())
+        {
+        	l->resetLinkedListStatus(s->getStatusP());                                      //gets linkedlist and resets status of online neighbors to 2
+            return true;
+        }
+
+        delay(rand() % 50);       
+    }
+
+	Serial << "Scheduling timed out"<<endl;
+	delay(5);
+   
+    return false;
+}
+
+bool OAgent_OPF::_waitToFinishSchedule(unsigned long startTime, bool useMyMillis, int timeout) {
+    long temp;
+    unsigned long s = millis();
+
+    srand(s);
+    while(true)
+    {
+        _broadcastHeaderPacket(WAIT_TO_START);
+        delay(10);
+
+        if(useMyMillis == true)
+        {
+            temp = (startTime-10) - (myMillis());
+            if(temp <= 0)
+                return true;
+        } 
+        else
+        {
+            temp = (startTime-10) - millis(); 
+            if(temp <= 0)
+                return true;
+        }
+        if(timeout != -1) {
+            temp = millis()-s;
+            if(temp > timeout)
+                return false;
+        }
+    }    
+}
 
 // Matrix, vector algebraic operations
 
@@ -2250,7 +2568,8 @@ bool OAgent_OPF::_waitForNeighborPacket(uint8_t &neighborID, uint16_t header, bo
             return false;
         if(_waitForPacket(header,true,timeout)) {                       //unless the packet contains the expected header it will keep waiting
             int32_t aLsb = _rx->getRemoteAddress64().getLsb();
-            uint8_t index;  
+            uint8_t index; 
+            // if (header == SCHEDULE_DONE) {Serial<<"Received SCHEDULE_DONE"<<endl;delay(5);}
             if(_G->isInNeighbor(aLsb,index)) {
                 neighborID = index + 1;
                 return true;

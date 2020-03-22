@@ -24,20 +24,17 @@
 #define SCHEDULE_FAIR_SPLIT_HEADER       0x7346 // schedule coordinate header is ascii sF
 #define SCHEDULE_OPF_ACK_HEADER           0x7334 // schedule coordinate header is ascii s4
 #define SCHEDULE_OPF_ACKACK_HEADER        0x7500 // schedule coordinate header is ascii s4
+#define SCHEDULE_DONE                    0x1177 // schedule coordinate header is ascii sF
+#define WAIT_TO_START                    0x7711 // schedule coordinate header is ascii sF
 #define FAIR_SPLITTING_HEADER            0x6653 // fair splitting ratio-consensus header is ascii fS
 #define MAXMIN_HEADER                    0x6650 // maxmin consensus header is ascii fP
 #define OPF_HEADER                        0x7550 // Unicast Primal-dual header is ascii uP
 #define CG_RC_SUBHEADER                   0x7551 // Conjugate gradient ratio-consensus subheader 
 #define OPF_ACK_HEADER                    0x6B50 // Primal-dual acknowledgment header is kP
-#define ACK_ACTCODE                      0x6B52 // Actcode packet acknowledgment
 
 #define WINDOW_LENGTH                    1000     // time length for each window in a period
 #define BASE_64                             10000000000000  // base for transmitting decimals
 #define BASE_32                             1000000000
-
-#define CANDACTCODE_HEADER               0x2220 // Primal-dual acknowledgment header is "
-#define ACTCODE_HEADER                   0x2221 // Primal-dual acknowledgment header is "!
-#define LINKSACT_HEADER                  0x2222 // Primal-dual acknowledgment header is ""
 
 #define OPTIMAL_DISPATCH_HEADER          0x6f44 // optimal dispatch header is ascii oD
 #define ACK_START_HEADER                 0x6B55 //acknowledgment header is ascii kU (used to ensure start packet has been received by all neighbor nodes)
@@ -54,7 +51,7 @@
 #define SCHEDULE_TIMEOUT                 5000    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750    // delay before ratio consensus starts
 #define MC_DELAY                         5000    // delay before maxmin consensus starts
-#define OPF_DELAY                         5000   // delay before primal dual algorithm starts
+#define SCHEDULE_OPF_DELAY                        15000   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353 // used as the header to indicate the resync process is taking place (1st transaction)
@@ -119,6 +116,11 @@ class OAgent_OPF {
         float* Conjugate_gradient(float*A,int rows, int cols, float*b, float*x_init);
         float RunRatioConsensus(uint16_t nodeID,float *mu,float *nu,uint8_t iterations,uint8_t *neighbors);
 
+        bool _ScheduleLeaderOPF(unsigned long &startTime, uint8_t &iterations);
+	    bool _ScheduleNonLeaderOPF(unsigned long &startTime, uint8_t &iterations);
+        bool _waitForChildSchedulePacketOPF(unsigned long startTime, uint8_t iterations);
+        bool _waitForParentSchedulePacketOPF(unsigned long &startTime, uint8_t &iterations);
+        bool _waitToFinishSchedule(unsigned long startTime, bool useMyMillis, int timeout);
         // Algebraic operations
         float _clip(float x, float xmin, float xmax);
 
@@ -329,6 +331,7 @@ class OAgent_OPF {
         }
         inline uint8_t _getIterationsFromPacket() { return _rx->getData(6); }
         inline uint16_t _getPeriodFromPacket() { return (uint16_t(_rx->getData(8)) << 8) + _rx->getData(7); }
+        inline uint16_t _getIterationsFromPacketOPF() { return (uint16_t(_rx->getData(7)) << 8) + _rx->getData(6); }
         
         // Generate transmit time
         uint16_t _genTxTime(uint16_t iterationPeriod, uint8_t ITF);
