@@ -51,7 +51,7 @@
 #define SCHEDULE_TIMEOUT                 5000    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750    // delay before ratio consensus starts
 #define MC_DELAY                         5000    // delay before maxmin consensus starts
-#define SCHEDULE_OPF_DELAY               3000   // delay before primal dual algorithm starts
+#define SCHEDULE_OPF_DELAY                        15000   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353 // used as the header to indicate the resync process is taking place (1st transaction)
@@ -113,7 +113,7 @@ class OAgent_OPF {
         bool nonleaderOPF(bool genBus, float alpha, uint8_t iterations);
         bool SecondOrderOPF(bool genBus);
         void setup_Newton_method_opf(float *N_T,float *B,float *Hessian_lambda,float *z,bool *active_set);
-        float* Conjugate_gradient(float*A,int rows, int cols, float*b, float*x_init, double &factor);
+        float* Conjugate_gradient(float*A,int rows, int cols, float*b, float*x_init);
         float RunRatioConsensus(uint16_t nodeID,float *mu,float *nu,uint8_t iterations,uint8_t *neighbors);
 
         bool _ScheduleLeaderOPF(unsigned long &startTime, uint8_t &iterations);

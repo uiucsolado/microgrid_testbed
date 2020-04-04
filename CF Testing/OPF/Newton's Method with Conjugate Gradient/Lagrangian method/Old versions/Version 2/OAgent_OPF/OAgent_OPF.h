@@ -51,7 +51,7 @@
 #define SCHEDULE_TIMEOUT                 5000    // time out period (in milliseconds) to wait for schedule packet from leader node
 #define RC_DELAY                         750    // delay before ratio consensus starts
 #define MC_DELAY                         5000    // delay before maxmin consensus starts
-#define SCHEDULE_OPF_DELAY               3000   // delay before primal dual algorithm starts
+#define SCHEDULE_OPF_DELAY                        15000   // delay before primal dual algorithm starts
 #define SYNC_RETRY_PERIOD                250    // period to wait between broadcasting HRTS sync_begin packet
 #define SYNC_ERROR                       8      // calibrate for small amount of error
 #define RESYNC_HEADER                    0x7353 // used as the header to indicate the resync process is taking place (1st transaction)

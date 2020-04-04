@@ -819,6 +819,7 @@ bool OAgent_OPF::nonleaderOPF(bool genBus, float alpha, uint8_t iterations) {
 
 
 bool OAgent_OPF::SecondOrderOPF(bool genBus) {
+    Serial<<"Executing Second-Order Lagrangian Method"<<endl;
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     ORemoteVertex * n = _G->getRemoteVertex(1);                                                 // store pointer to remote vertices
     LinkedList * l = _G->getLinkedList();
@@ -864,7 +865,6 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     	LineX[i] = ((n+(neighbors[i]-1))->getReactance());
     }
     // P,Q,V,p,q
-    float x[3+2*deg],g[3+2*deg],b[2+deg];
     float A[2+deg][3+2*deg];
     for (int i=0;i<2+deg;i++){
     	for (int j=0;j<3+2*deg;j++){A[i][j]=0;}
@@ -885,33 +885,23 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
     }
 
     float A_T[3+2*deg][2+deg];
-    MatrixTranspose(&A_T[0][0],&A[0][0],2+deg,3+2*deg);//Serial<<"A_T entry: "<<A_T[0][0]<<endl; 
-    // String str2="A_T";_print2Darray_(str2,&A_T[0][0],3+2*deg,2+deg,3);
+    MatrixTranspose(&A_T[0][0],&A[0][0],2+deg,3+2*deg);
     float L[2+deg][2+deg];
     for (int i=0;i<2+deg;i++) 
     {
     	for (int j=0;j<2+deg;j++){L[i][j]=0;}
     }
-    // L[0][0] = deg; 
-    // for (int i=0;i<deg;i++) {L[0][2+i]=-1;L[0][2+2*deg+i]=2*LineR[i];}
-    // L[1][1] = deg; 
-    // for (int i=0;i<deg;i++) {L[1][2+deg+i]=-1;L[1][2+2*deg+i]=2*LineX[i];} 
-    // for (int i=0;i<deg;i++)
-    // {
-    // 	if (neighbors[i]>nodeID) {L[2+i][0]=2*LineR[i];L[2+i][1]=2*LineX[i];}
-    // 	else {L[2+i][0]=-2*LineR[i];L[2+i][1]=-2*LineX[i];}
-
-    // 	for (int j=0;j<deg;j++){
-    // 		if (i==j) continue;
-    // 		if (neighbors[j]>nodeID) L[2+i][2+2*deg+j]=1;
-    // 		else L[2+i][2+2*deg+j]=-1;
-    // 	}
-    // 	L[2+i][2+2*deg+i]=0.5*(4*LineR[i]*LineR[i]+4*LineX[i]*LineX[i]+2);
-    // }
 	L[0][0] = 1+deg; 
-    for (int i=0;i<deg;i++) {L[0][2+i]=LineR[i];}
+    for (int i=0;i<deg;i++) {
+        if (neighbors[i]>nodeID) {L[0][2+i]=LineR[i];}
+        else {L[0][2+i]=-LineR[i];}
+    }
+    //{L[0][2+i]=LineR[i];}
     L[1][1] = 1+deg; 
-    for (int i=0;i<deg;i++) {L[1][2+i]=LineX[i];} 
+    for (int i=0;i<deg;i++) {
+        if (neighbors[i]>nodeID) {L[1][2+i]=LineX[i];}
+        else {L[1][2+i]=-LineX[i];}
+    } 
     for (int i=0;i<deg;i++)
     {
     	if (neighbors[i]>nodeID) {L[2+i][0]=2*LineR[i];L[2+i][1]=2*LineX[i];}
@@ -919,127 +909,244 @@ bool OAgent_OPF::SecondOrderOPF(bool genBus) {
 
     	for (int j=0;j<deg;j++){
     		if (i==j) continue;
-    		if (neighbors[j]>nodeID) L[2+i][2+j]=1;
+    		if ((neighbors[i]>nodeID && neighbors[j]>nodeID) or (neighbors[i]<nodeID && neighbors[j]<nodeID)) L[2+i][2+j]=1;
     		else L[2+i][2+j]=-1;
     	}
     	L[2+i][2+i]=0.5*(4*LineR[i]*LineR[i]+4*LineX[i]*LineX[i]+2);
     }
-    for (int i=0;i<2+deg;i++) b[i]=0;
-   	b[0]=Pd; b[1] = Qd;
+    float a[3+2*deg],b[2+deg];
     for (int i=0;i<3+2*deg;i++) 
     {
-    	x[i]=0;
-    	if (i==2) x[i]=1;
+        a[i]=0.0;
+        if (i==2) a[i]=1.0;
     }
+    for (int i=0;i<2+deg;i++) b[i]=0;
+    b[0]=Pd; b[1] = Qd;
 
+    float *x = new float[3+2*deg];
     float *w = new float[2+deg]; for (int i=0;i<2+deg;i++)w[i]=0;
-    float *grad = new float[3+2*deg];
-    float *y = new float[2+deg]; float *tmp = new float[2+deg];
+    float *y = new float[2+deg];
     String str;
-    str = "x";_print1Darray_(str,x,3+2*deg,5);
-    // str="A";_print2Darray_(str,&A[0][0],2+deg,3+2*deg,3);
-    // str="A_T";_print2Darray_(str,&A_T[0][0],3+2*deg,2+deg,3);
-    // str="L";_print2Darray_(str,&L[0][0],2+deg,2+deg,3);
-    for (int k=0;k<5;k++)
-    {
-    	
-	    for (int i=0;i<3+2*deg;i++) 
-	    {
-	    	g[i]=x[i];
-	    	if (i==2) g[i]=x[i]-1;
-	    }
-
-	    y = matbyvec(&A[0][0],2+deg,3+2*deg,x);
-	    tmp = matbyvec(&A[0][0],2+deg,3+2*deg,g);
-	    for (int i=0;i<2+deg;i++) y[i]-=b[i]+tmp[i];
-    	// str = "y";_print1Darray_(str,y,2+deg,6);
-        w = Conjugate_gradient(&L[0][0],2+deg,2+deg,y,w); 
-        // str = "w";_print1Darray_(str,w,2+deg,6);
-    	grad = matbyvec(&A_T[0][0],3+2*deg,2+deg,w);
-    	for (int i=0;i<3+2*deg;i++) grad[i]+=g[i];
-
-    	float *new_grad = new float[3+2*deg]; for (int i=0;i<3+2*deg;i++) new_grad[i]=grad[i];
-	    str = "grad";
-	    // _print1Darray_(str,grad,3+2*deg,6); 
-
-	     uint8_t received_from[deg]; for (int i=0;i<deg;i++) received_from[i]=0;
-    	unsigned long startTime = myMillis()+SCHEDULE_OPF_DELAY;
-	    bool scheduled = false;
-	    uint8_t iterations = 1;
-	    while (!scheduled)
-	    { 
-	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
-	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
-		}
-		// Serial<<"Start time is "<<startTime<<endl;
-		_waitToStart(startTime,true,-1);
-	  
-	    int i = 0;
-	    unsigned long start = millis();   // initialize timer
-	    while (millis()-start<=10000){
-	        uint8_t nei_to_send=neighbors[i]; 
-	        i++; if (i==_G->getN()-1) i=0;
-	        int t = nei2index[nei_to_send-1];
-
-	        float vars[2] = {grad[3+t],grad[3+deg+t]};
-	        if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,2,0);
-	        else _SendToChild(nei_to_send,vars,2,0);
-	        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
-	            {
-	            	int j = nei2index[neighborID-1];
-	                if (!received_from[j]){
-	                    if (neighborID>nodeID){
-	                        float *tmp=_getPacketFromChild(2); 
-	                        uint8_t task = tmp[2];
-	                        if(task==0)
-	                        {
-	                        	received_from[j]=1;
-	                        	new_grad[3+j]+=tmp[0];
-	                        	new_grad[3+j+deg]+=tmp[1];
-
-		                        // Serial<<"Received from "<<neighborID<<endl;
-		                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
-		                    }
-	                    }
-	                    else if (neighborID<nodeID){                      
-	                        float *tmp=_getPacketFromParent(2);
-	                        uint8_t task = tmp[2];
-	                        if(task==0)
-	                        { 
-	                        	received_from[j]=1;
-	                        	new_grad[3+j]+=tmp[0];
-	                        	new_grad[3+j+deg]+=tmp[1];
-
-		                        // Serial<<"Received from "<<neighborID<<endl;
-		                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
-		                    }
-	                    }
-	                }
-	            }
-
-	    }
-	    for (int i=0;i<3+2*deg;i++) grad[i]=new_grad[i];
-	    _print1Darray_(str,grad,3+2*deg,6);
-    	for (int i=0;i<3+2*deg;i++) x[i]-=grad[i];
-        
-        // _print2Darray_("Hessian Matrix",&Hessian_lambda[0][0],2+deg,2+deg,3);
-        // _print1Darray_("Negative gradient",neg_grad_lambda,2+deg,3);
-        // str = "Newton direction";_print1Darray_(str,Newton_direction,2+deg,5);
-        str = "x";_print1Darray_(str,x,3+2*deg,5);
-        
-    } 
-
-    // g = np.dot(H,(x-a))
-    // L = multi_dot([A,inv(H),A.T])
-    // s = np.dot(A,x)-b-multi_dot([A,inv(H),g])
+    str="A";_print2Darray_(str,&A[0][0],2+deg,3+2*deg,3);
+    str="A_T";_print2Darray_(str,&A_T[0][0],3+2*deg,2+deg,3);
+    str="L";_print2Darray_(str,&L[0][0],2+deg,2+deg,3);
     
-    // w = conjugate_gradient_method(L,s,w)
-    // grad_x = multi_dot([inv(H),g+np.dot(A.T,w)])
-    // x = x - 0.9*grad_x
+    
+    double factor = 1;
+
+    y = matbyvec(&A[0][0],2+deg,3+2*deg,a);
+    for (int i=0;i<2+deg;i++) y[i]-=b[i];
+	str = "y";_print1Darray_(str,y,2+deg,6);
+    w = Conjugate_gradient(&L[0][0],2+deg,2+deg,y,w,factor);
+    str = "w";_print1Darray_(str,w,2+deg,6);
+
+    float *r = new float[2+deg]; float *new_r = new float[2+deg];
+    r = matbyvec(&L[0][0],2+deg,2+deg,w);
+    for (int i=0;i<2+deg;i++) r[i]=r[i]-y[i];
+    for (int i=0;i<2+deg;i++) new_r[i]=r[i];
+    str = "r";_print1Darray_(str,r,2+deg,6); 
+
+    int ExchangePeriod = 1000;
+    uint8_t received_from[deg]; for (int i=0;i<deg;i++) received_from[i]=0;
+    unsigned long startTime = myMillis()+SCHEDULE_OPF_DELAY;
+    bool scheduled = false;
+    uint8_t iterations = 1;
+    while (!scheduled)
+    { 
+        if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+        else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
+    }
+    // Serial<<"Start time is "<<startTime<<endl;
+    _waitToStart(startTime,true,-1);
+  
+    int i = 0;
+    unsigned long start = millis();   // initialize timer
+    while (millis()-start<=ExchangePeriod){
+        uint8_t nei_to_send=neighbors[i]; 
+        i++; if (i==_G->getN()-1) i=0;
+        int t = nei2index[nei_to_send-1];
+
+        if (nei_to_send>nodeID)
+        {
+            float vars[3] = {-w[0]-LineR[t]*w[2+t],-w[1]-LineX[t]*w[2+t],r[2+t]};
+            _SendToChild(nei_to_send,vars,3,0);
+        }
+        else
+        {
+            float vars[3] = {-w[0]+LineR[t]*w[2+t],-w[1]+LineX[t]*w[2+t],r[2+t]};
+            _SendToParent(nei_to_send,vars,3,0);
+        }
+        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
+            {
+                int j = nei2index[neighborID-1];
+                if (!received_from[j]){
+                    if (neighborID>nodeID){
+                        float *tmp=_getPacketFromChild(3); 
+                        uint8_t task = tmp[3];
+                        if(task==0)
+                        {
+                            received_from[j]=1;
+                            new_r[0] += tmp[0];
+                            new_r[1] += tmp[1];
+                            new_r[2+j]+=tmp[2];
+
+                            Serial<<"Received from "<<neighborID<<endl;
+                            // Serial.print(tmp[2],6); Serial<<endl; delay(5);
+                        }
+                    }
+                    else if (neighborID<nodeID){                      
+                        float *tmp=_getPacketFromParent(3);
+                        uint8_t task = tmp[3];
+                        if(task==0)
+                        { 
+                            received_from[j]=1;
+                            new_r[0] += tmp[0];
+                            new_r[1] += tmp[1];
+                            new_r[2+j]+=tmp[2];
+
+                            Serial<<"Received from "<<neighborID<<endl;
+                            // Serial.print(tmp[2],6); Serial<<endl; delay(5);
+                        }
+                    }
+                }
+            }
+
+    }
+    for (int i=0;i<2+deg;i++) r[i]=new_r[i];
+    str = "r";_print1Darray_(str,r,2+deg,6);
+
+	x = matbyvec(&A_T[0][0],3+2*deg,2+deg,w);
+    for (int i=0;i<3+2*deg;i++){x[i]=a[i]-x[i];}
+
+	float *new_x = new float[3+2*deg]; for (int i=0;i<3+2*deg;i++) new_x[i]=x[i];
+    str = "x";
+    _print1Darray_(str,x,3+2*deg,6); 
+
+    for (int i=0;i<deg;i++) received_from[i]=0;
+	startTime = myMillis()+SCHEDULE_OPF_DELAY;
+    scheduled = false;
+    iterations = 1;
+    while (!scheduled)
+    { 
+    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
+	}
+	// Serial<<"Start time is "<<startTime<<endl;
+	_waitToStart(startTime,true,-1);
+  
+    i = 0;
+    start = millis();   // initialize timer
+    while (millis()-start<=ExchangePeriod){
+        uint8_t nei_to_send=neighbors[i]; 
+        i++; if (i==_G->getN()-1) i=0;
+        int t = nei2index[nei_to_send-1];
+
+        float vars[2] = {x[3+t],x[3+deg+t]};
+        if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,2,111);
+        else _SendToChild(nei_to_send,vars,2,111);
+        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
+            {
+            	int j = nei2index[neighborID-1];
+                if (!received_from[j]){
+                    if (neighborID>nodeID){
+                        float *tmp=_getPacketFromChild(2); 
+                        uint8_t task = tmp[2];
+                        if(task==111)
+                        {
+                        	received_from[j]=1;
+                        	new_x[3+j]+=tmp[0];
+                        	new_x[3+j+deg]+=tmp[1];
+
+	                        Serial<<"Received from "<<neighborID<<endl;
+	                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
+	                    }
+                    }
+                    else if (neighborID<nodeID){                      
+                        float *tmp=_getPacketFromParent(2);
+                        uint8_t task = tmp[2];
+                        if(task==111)
+                        { 
+                        	received_from[j]=1;
+                        	new_x[3+j]+=tmp[0];
+                        	new_x[3+j+deg]+=tmp[1];
+
+	                        Serial<<"Received from "<<neighborID<<endl;
+	                        // Serial.print(tmp[0],6); Serial<<endl; delay(5);
+	                    }
+                    }
+                }
+            }
+
+    }
+    for (int i=0;i<3+2*deg;i++) x[i]=new_x[i];
+    str = "x";_print1Darray_(str,x,3+2*deg,6);
+
+    // float *r = new float[2+deg]; float *new_r = new float[2+deg];
+    r = matbyvec(&A[0][0],2+deg,3+2*deg,x);
+    for (int i=0;i<2+deg;i++) r[i]=r[i]-b[i];
+    for (int i=0;i<2+deg;i++) new_r[i]=r[i];
+    str = "r";_print1Darray_(str,r,2+deg,6); 
+
+    for (int i=0;i<deg;i++) received_from[i]=0;
+    startTime = myMillis()+SCHEDULE_OPF_DELAY;
+    scheduled = false;
+    iterations = 1;
+    while (!scheduled)
+    { 
+        if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
+        else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
+    }
+    // Serial<<"Start time is "<<startTime<<endl;
+    _waitToStart(startTime,true,-1);
+    
+    i = 0;
+    start = millis();   // initialize timer
+    while (millis()-start<=ExchangePeriod){
+        uint8_t nei_to_send=neighbors[i]; 
+        i++; if (i==_G->getN()-1) i=0;
+        int t = nei2index[nei_to_send-1];
+
+        float vars[1] = {r[2+t]};
+        if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,1,101);
+        else _SendToChild(nei_to_send,vars,1,101);
+        if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
+            {
+                int j = nei2index[neighborID-1];
+                if (!received_from[j]){
+                    if (neighborID>nodeID){
+                        float *tmp=_getPacketFromChild(1); 
+                        uint8_t task = tmp[1];
+                        if(task==101)
+                        {
+                            received_from[j]=1;
+                            new_r[2+j]+=tmp[0];
+
+                            Serial<<"Received from "<<neighborID<<endl;
+                            // Serial.print(tmp[2],6); Serial<<endl; delay(5);
+                        }
+                    }
+                    else if (neighborID<nodeID){                      
+                        float *tmp=_getPacketFromChild(1); 
+                        uint8_t task = tmp[1];
+                        if(task==101)
+                        {
+                            received_from[j]=1;
+                            new_r[2+j]+=tmp[0];
+
+                            Serial<<"Received from "<<neighborID<<endl;
+                            // Serial.print(tmp[2],6); Serial<<endl; delay(5);
+                        }
+                    }
+                }
+            }
+
+    }
+    for (int i=0;i<2+deg;i++) r[i]=new_r[i];
+    _print1Darray_(str,r,2+deg,6);
     
 }
 
-float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, float*x_init) {
+float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, float*x_init, double &factor) {
 
 	// Serial<<"Executing Conjugate Gradient Method"<<endl;
 
@@ -1059,6 +1166,10 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
     uint8_t neighbors[_G->getN()-1];
     uint8_t *status_ptr = s->getStatusP();
    	uint8_t deg = _G->getN()-1;
+
+    uint8_t num_iter_RatioCons = 15;
+    Serial<<"Num of iterations Ratio Consensus: "<<num_iter_RatioCons<<endl;
+    int ExchangePeriod = 1000;
 
     int j=0;
     for (uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
@@ -1107,14 +1218,20 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
   
     int i = 0;
     unsigned long start = millis();   // initialize timer
-    while (millis()-start<=10000){
+    while (millis()-start<=ExchangePeriod){
         uint8_t nei_to_send=neighbors[i]; 
         i++; if (i==_G->getN()-1) i=0;
         int t = nei2index[nei_to_send-1];
-
-        float vars[3] = {-x[0]+LineR[t]*x[2+t],-x[1]+LineX[t]*x[2+t],r[2+t]};
-        if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,3,0);
-        else _SendToChild(nei_to_send,vars,3,0);
+        if (nei_to_send>nodeID)
+        {
+            float vars[3] = {-x[0]-LineR[t]*x[2+t],-x[1]-LineX[t]*x[2+t],r[2+t]};
+            _SendToChild(nei_to_send,vars,3,0);
+        }
+        else
+        {
+            float vars[3] = {-x[0]+LineR[t]*x[2+t],-x[1]+LineX[t]*x[2+t],r[2+t]};
+            _SendToParent(nei_to_send,vars,3,0);
+        } 
         if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,150))
             {
             	int j = nei2index[neighborID-1];
@@ -1129,7 +1246,7 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
                         	new_r[1] += tmp[1];
                         	new_r[2+j]+=tmp[2];
 
-	                        // Serial<<"Received from "<<neighborID<<endl;
+	                        Serial<<"Received from "<<neighborID<<endl;
 	                        // Serial.print(tmp[2],6); Serial<<endl; delay(5);
 	                    }
                     }
@@ -1143,7 +1260,7 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
                         	new_r[1] += tmp[1];
                         	new_r[2+j]+=tmp[2];
 
-	                        // Serial<<"Received from "<<neighborID<<endl;
+	                        Serial<<"Received from "<<neighborID<<endl;
 	                        // Serial.print(tmp[2],6); Serial<<endl; delay(5);
 	                    }
                     }
@@ -1161,15 +1278,19 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 
     float mu1=r[0]*r[0]+r[1]*r[1];
     for (int i=2;i<2+deg;i++){mu1 += 0.5*r[i]*r[i];}
-    
+    mu1 = float(mu1*factor);
     float nu = 1;
-    float alpha1 = RunRatioConsensus(nodeID,&mu1,&nu,50,neighbors);
-    // str="alpha1";_print_(str,alpha1,6);
-    for (int k=0;k<5;k++)
+    float alpha1 = RunRatioConsensus(nodeID,&mu1,&nu,num_iter_RatioCons,neighbors);
+    Serial<<"Factor "<<factor<<endl;
+    str="alpha1";_print_(str,alpha1,6);
+    // alpha1 = alpha1/factor;
+    for (int k=0;k<8;k++)
     {
-
+        // if (factor>=10000000000) break;
     	for (int i=0;i<deg;i++) received_from[i]=0;
         q = matbyvec(&H[0][0],2+deg,2+deg,p);
+        r = matbyvec(&H[0][0],2+deg,2+deg,x);
+        for (int i=0;i<2+deg;i++) r[i]=r[i]-b[i];
         // str = "q";_print1Darray_(str,q,2+deg,6);
         for (int i=0;i<2+deg;i++) {new_q[i]=q[i];new_r[i]=r[i];new_x[i]=x[i];new_p[i]=p[i];}
         startTime = myMillis()+SCHEDULE_OPF_DELAY;
@@ -1179,19 +1300,27 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
 	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 		}
-		// Serial<<"Start time is "<<startTime<<endl;
+		Serial<<"Start time is "<<startTime<<endl;
 		_waitToStart(startTime,true,-1);
 
         i = 0;
         unsigned long start = millis();   // initialize timer
-        while (millis()-start<=10000){
+        while (millis()-start<=ExchangePeriod){
             uint8_t nei_to_send=neighbors[i]; 
             i++; if (i==_G->getN()-1) i=0;
             int t = nei2index[nei_to_send-1];
+            if (nei_to_send>nodeID)
+            {
+                float vars[8] = {-p[0]-LineR[t]*p[2+t],-p[1]-LineX[t]*p[2+t],q[2+t],-x[0]-LineR[t]*x[2+t],-x[1]-LineX[t]*x[2+t],r[2+t],x[2+t],p[2+t]};
+                _SendToChild(nei_to_send,vars,8,1);
 
-            float vars[3] = {-p[0]+LineR[t]*p[2+t],-p[1]+LineX[t]*p[2+t],q[2+t]};
-	        if (nei_to_send<nodeID)_SendToParent(nei_to_send,vars,3,1);
-	        else _SendToChild(nei_to_send,vars,3,1);
+            }
+            else
+            {
+                float vars[8] = {-p[0]+LineR[t]*p[2+t],-p[1]+LineX[t]*p[2+t],q[2+t],-x[0]+LineR[t]*x[2+t],-x[1]+LineX[t]*x[2+t],r[2+t],x[2+t],p[2+t]};
+                _SendToParent(nei_to_send,vars,8,1);
+
+            }
             if(_waitForUnicastPacket(neighborID,nodeID,OPF_HEADER,true,100))
             {
             	int j = nei2index[neighborID-1];
@@ -1199,26 +1328,38 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
                 {	 
                 	if (neighborID>nodeID)
                 	{
-                		float *tmp=_getPacketFromChild(3);
-                		uint8_t task = tmp[3];
+                		float *tmp=_getPacketFromChild(8);
+                		uint8_t task = tmp[8];
 	                    if (task==1)
 	                    {
 	                        received_from[j]=1;
 	                        new_q[0] += tmp[0];
                         	new_q[1] += tmp[1];
                         	new_q[2+j]+=tmp[2];
+                            new_r[0] += tmp[3];
+                            new_r[1] += tmp[4];
+                            new_r[2+j]+=tmp[5];
+                            new_x[2+j] = 0.5*(new_x[2+j]+tmp[6]);
+                            new_p[2+j] = 0.5*(new_p[2+j]+tmp[7]);
+                            Serial<<"Received from "<<neighborID<<endl;
 	                    }
                 	}
                 	else if (neighborID<nodeID)
                 	{
-                		float *tmp=_getPacketFromParent(3);
-                		uint8_t task = tmp[3];
-	                    if (task==1)
-	                    {
-	                        received_from[j]=1;	
-	                        new_q[0] += tmp[0];
-                        	new_q[1] += tmp[1];
-                        	new_q[2+j]+=tmp[2];
+                		float *tmp=_getPacketFromChild(8);
+                        uint8_t task = tmp[8];
+                        if (task==1)
+                        {
+                            received_from[j]=1;
+                            new_q[0] += tmp[0];
+                            new_q[1] += tmp[1];
+                            new_q[2+j]+=tmp[2];
+                            new_r[0] += tmp[3];
+                            new_r[1] += tmp[4];
+                            new_r[2+j]+=tmp[5];
+                            new_x[2+j] = 0.5*(new_x[2+j]+tmp[6]);
+                            new_p[2+j] = 0.5*(new_p[2+j]+tmp[7]);
+                            Serial<<"Received from "<<neighborID<<endl;
 	                    }
                 	}
                 }
@@ -1231,7 +1372,7 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 
         float mu2=p[0]*q[0]+p[1]*q[1];
         for (int i=2;i<2+deg;i++){mu2 += 0.5*p[i]*q[i];}
-
+        mu2 = float(mu2*factor);
          // str="mu2";_print_(str,mu2,6);
 
         startTime = myMillis()+SCHEDULE_OPF_DELAY;
@@ -1241,14 +1382,14 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
 	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 		}
-		// Serial<<"Start time is "<<startTime<<endl;
+		Serial<<"Start time is "<<startTime<<endl;
 		_waitToStart(startTime,true,-1);
 
         nu = 1;
-        float alpha2 = RunRatioConsensus(nodeID,&mu2,&nu,50,neighbors);
-        // str="alpha2";_print_(str,alpha2,6); 
-
-        // if (abs(alpha2)<=0.000001) break;
+        float alpha2 = RunRatioConsensus(nodeID,&mu2,&nu,num_iter_RatioCons,neighbors);
+         Serial<<"Factor "<<factor<<endl;
+        str="alpha2";_print_(str,alpha2,6);
+        // alpha2 = alpha2/factor; 
 
         float alpha = alpha1/alpha2;
         // str="alpha";_print_(str,alpha,6);
@@ -1259,7 +1400,7 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
         // str="r"; _print1Darray_(str,r,2+deg,6);
         mu1=r[0]*r[0]+r[1]*r[1];
 	    for (int i=2;i<2+deg;i++){mu1 += 0.5*r[i]*r[i];}
-
+        mu1 = float(mu1*factor);
         // str="mu1";_print_(str,mu1,6);
 
         startTime = myMillis()+SCHEDULE_OPF_DELAY;
@@ -1269,16 +1410,21 @@ float* OAgent_OPF::Conjugate_gradient(float*A, int rows, int cols, float*b, floa
 	    	if(isLeader()) scheduled = _ScheduleLeaderOPF(startTime,iterations);
 	    	else  scheduled = _ScheduleNonLeaderOPF(startTime,iterations);
 		}
-		// Serial<<"Start time is "<<startTime<<endl;
+		Serial<<"Start time is "<<startTime<<endl;
 		_waitToStart(startTime,true,-1);
 
         nu = 1;
         float alpha1_prev = alpha1;
-        alpha1 = RunRatioConsensus(nodeID,&mu1,&nu,50,neighbors);
-        // str="alpha1";_print_(str,alpha1,6); 
-        if (abs(alpha1)<=0.000005) break;
+        alpha1 = RunRatioConsensus(nodeID,&mu1,&nu,num_iter_RatioCons,neighbors);
+        Serial<<"Factor "<<factor<<endl;
+        str="alpha1";_print_(str,alpha1,6);
+        // alpha1 = alpha1/factor;
+
+        // if (abs(alpha1)<=0.000000001) break;
         float beta = alpha1/alpha1_prev;
         // str="beta";_print_(str,beta,6);
+
+        if (abs(alpha1)<=0.03) {factor = factor*10;alpha1=alpha1*10;}
         for (int i=0;i<2+deg;i++) 
         {
             p[i]=-r[i]+beta*p[i];
