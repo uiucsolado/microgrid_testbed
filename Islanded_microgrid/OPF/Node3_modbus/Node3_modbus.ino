@@ -78,14 +78,14 @@ void setup()  {
   //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
   
   g.configureLinkedList();  
-  s.setActiveDemand(0.4);
-  s.setReactiveDemand(0.3);
-  s.setMaxActivePower(11.9);
-  s.setMaxReactivePower(11.9);
-  s.setMinActivePower(-10);
-  s.setMinReactivePower(-10);
-  s.setMaxVoltage(11.21);
-  s.setMinVoltage(-10.81);
+  s.setActiveDemand(0.5);
+  s.setReactiveDemand(0.4);
+  s.setMaxActivePower(0.35);
+  s.setMaxReactivePower(0.35);
+  s.setMinActivePower(0);
+  s.setMinReactivePower(0);
+  s.setMaxVoltage(1.05*1.05);
+  s.setMinVoltage(0.95*0.95);
  
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);

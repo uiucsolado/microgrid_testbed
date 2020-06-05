@@ -79,14 +79,14 @@ void setup()  {
   
   g.configureLinkedList();
   s.setActiveDemand(0.5);
-  s.setReactiveDemand(0.4);
-  s.setMaxActivePower(11.1);
-  s.setMaxReactivePower(11.1);
-  s.setMinActivePower(-10);
-  s.setMinReactivePower(-10);
-  s.setMaxVoltage(11.21);
-  s.setMinVoltage(-10.81);
- 
+  s.setReactiveDemand(0.5);
+  s.setMaxActivePower(0.15);
+  s.setMaxReactivePower(0.15);
+  s.setMinActivePower(0);
+  s.setMinReactivePower(0);
+  s.setMaxVoltage(1.05*1.05);
+  s.setMinVoltage(0.95*0.95);
+
   digitalWrite(cPin,LOW);
   digitalWrite(sPin,LOW);
   
