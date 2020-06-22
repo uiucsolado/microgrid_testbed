@@ -1,5 +1,5 @@
 <ui_settings>
-    <version>2.1</version>
+    <version>2.5</version>
     <model_locked>False</model_locked>
     <canvas_bg_color>#ffffff</canvas_bg_color>
     <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -7,7 +7,7 @@
 # This code is always executed prior simulation start.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 import sys 
 sys.path.append("C:\Python27\Lib\site-packages\pysunspec-1.1.0.dev2-py2.7.egg")
@@ -178,7 +178,7 @@ irradiance_array = [944.0, 944.0, 944.0, 944.0, 944.0, 944.0, 944.0, 944.0, 944.
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 from math import atan, sqrt, pi
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -231,12 +231,12 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
         <component_data>
                 <id>08465980f25c11e6bd10dc4a3e45580c</id>
                 <name><![CDATA[Feeder 2 PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -249,9 +249,13 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
 
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>1776.0</x>
@@ -329,12 +333,12 @@ referenceCurves = [refCurveData1]
                 <name><![CDATA[Image component]]></name>
                 <type>Image</type>
                 <description><![CDATA[]]></description>
-                <image><![CDATA[Single_Line_Diagram_LL2017.png]]></image>
+                <image><![CDATA[..\Single_Line_Diagram_LL2017.png]]></image>
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>0.0</y>
+                    <x>0</x>
+                    <y>0</y>
                     <width>3450</width>
                     <height>1150</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -348,12 +352,12 @@ referenceCurves = [refCurveData1]
                 <name><![CDATA[Image component]]></name>
                 <type>Image</type>
                 <description><![CDATA[]]></description>
-                <image><![CDATA[electric-hazard.jpg]]></image>
+                <image><![CDATA[..\electric-hazard.jpg]]></image>
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3336.0</x>
-                    <y>272.0</y>
+                    <x>3336</x>
+                    <y>272</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -369,10 +373,10 @@ referenceCurves = [refCurveData1]
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 hil.set_contactor('3ph Fault 301.S1',swControl= True,swState= True)
 hil.wait_sec(0.05)
@@ -381,18 +385,22 @@ hil.set_contactor('3ph Fault 301.S1',swControl= True,swState= False)
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3368</x>
-                    <y>288</y>
+                    <x>3368.0</x>
+                    <y>288.0</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -403,12 +411,12 @@ widgetValue = None
                 <name><![CDATA[Image component]]></name>
                 <type>Image</type>
                 <description><![CDATA[]]></description>
-                <image><![CDATA[electric-hazard.jpg]]></image>
+                <image><![CDATA[..\electric-hazard.jpg]]></image>
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2232.0</x>
-                    <y>464.0</y>
+                    <x>2232</x>
+                    <y>464</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -422,12 +430,12 @@ widgetValue = None
                 <name><![CDATA[Image component]]></name>
                 <type>Image</type>
                 <description><![CDATA[]]></description>
-                <image><![CDATA[electric-hazard.jpg]]></image>
+                <image><![CDATA[..\electric-hazard.jpg]]></image>
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1432.0</x>
-                    <y>552.0</y>
+                    <x>1432</x>
+                    <y>552</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -443,10 +451,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 hil.set_contactor('3ph Fault 204.S1',swControl= True,swState= True)
 hil.wait_sec(0.05)
@@ -455,18 +463,22 @@ hil.set_contactor('3ph Fault 204.S1',swControl= True,swState= False)
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1464</x>
-                    <y>568</y>
+                    <x>1464.0</x>
+                    <y>568.0</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -479,10 +491,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 hil.set_contactor('3ph Fault 106.S1',swControl= True,swState= True)
 hil.wait_sec(0.05)
@@ -493,18 +505,22 @@ hil.set_contactor('3ph Fault 106.S1',swControl= True,swState= False)
 #hil.set_cp_input_value('User defined', 'Faults', '3ph Fault 106.ctrl', 0)]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>680</x>
-                    <y>720</y>
+                    <x>680.0</x>
+                    <y>720.0</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -515,12 +531,12 @@ widgetValue = None
                 <name><![CDATA[Image component]]></name>
                 <type>Image</type>
                 <description><![CDATA[]]></description>
-                <image><![CDATA[electric-hazard.jpg]]></image>
+                <image><![CDATA[..\electric-hazard.jpg]]></image>
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>896.0</x>
-                    <y>432.0</y>
+                    <x>896</x>
+                    <y>432</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -534,9 +550,15 @@ widgetValue = None
                 <name><![CDATA[DMS]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'166c54eeec8611e694104c348851fa7b', u'33833b30ec8611e680aa4c348851fa7b', u'9e3efe00ec8611e68a8d4c348851fa7b', u'946f21aeec8711e69b754c348851fa7b', u'b421c170ec8711e69c654c348851fa7b', u'e29fd23005af11e78998dc4a3e45580c']]]></components_ids>
+                <components_ids><![CDATA[['166c54eeec8611e694104c348851fa7b', '33833b30ec8611e680aa4c348851fa7b', '9e3efe00ec8611e68a8d4c348851fa7b', '946f21aeec8711e69b754c348851fa7b', 'b421c170ec8711e69c654c348851fa7b', 'e29fd23005af11e78998dc4a3e45580c']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>0.0</x>
                     <y>1152.0</y>
@@ -554,7 +576,7 @@ widgetValue = None
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 global dms_enable
 hil.wait_sec(3) #Wait a few seconds to allow the user to Start UDP script before enabling the DMS test sequence
@@ -565,7 +587,7 @@ ir_profile_running = True #enables the PV profile to run]]></on_click_code>
                 <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 global time_in_sec
 time_in_sec = 0
@@ -575,7 +597,7 @@ dms_enable = False]]></on_start_code>
                 <on_timer_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 #time_cmd(time, cmd_time, var, value)
 #dms_disconect = 'DMS_ENGINE.Disconnect'
@@ -615,10 +637,14 @@ if dms_enable:
 
 ]]></on_timer_code>
                 <run_each>1000</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>8</y>
+                    <x>0.0</x>
+                    <y>8.0</y>
                     <width>168</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -629,12 +655,18 @@ if dms_enable:
                 <name><![CDATA[DMS Override]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'39ac8840ec8611e6874a4c348851fa7b', u'39af9580ec8611e6ba1a4c348851fa7b', u'39b27bb0ec8611e68b5d4c348851fa7b', u'39b588f0ec8611e6a6904c348851fa7b', u'39b784c0ec8611e6b7d24c348851fa7b', u'39b95980ec8611e6a2b74c348851fa7b', u'39bb0730ec8611e681374c348851fa7b', u'39bc3fb0ec8611e6adc74c348851fa7b', u'39bd7830ec8611e6a8a94c348851fa7b', u'39beb0aeec8611e686234c348851fa7b', u'39c01040ec8611e6abf64c348851fa7b', u'39c16fcfec8611e6887e4c348851fa7b', u'c167a21eecbc11e6b4394c348851fa7b', u'c3949440ecbc11e685184c348851fa7b', u'c749ad00ecbc11e6bf844c348851fa7b']]]></components_ids>
+                <components_ids><![CDATA[['39ac8840ec8611e6874a4c348851fa7b', '39af9580ec8611e6ba1a4c348851fa7b', '39b27bb0ec8611e68b5d4c348851fa7b', '39b588f0ec8611e6a6904c348851fa7b', '39b784c0ec8611e6b7d24c348851fa7b', '39b95980ec8611e6a2b74c348851fa7b', '39bb0730ec8611e681374c348851fa7b', '39bc3fb0ec8611e6adc74c348851fa7b', '39bd7830ec8611e6a8a94c348851fa7b', '39beb0aeec8611e686234c348851fa7b', '39c01040ec8611e6abf64c348851fa7b', '39c16fcfec8611e6887e4c348851fa7b', 'c167a21eecbc11e6b4394c348851fa7b', 'c3949440ecbc11e685184c348851fa7b', 'c749ad00ecbc11e6bf844c348851fa7b']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
-                    <x>0</x>
-                    <y>80</y>
+                    <x>0.0</x>
+                    <y>80.0</y>
                     <width>264</width>
                     <height>504</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -648,28 +680,35 @@ if dms_enable:
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -697,28 +736,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Value', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Value', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -746,28 +792,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Request', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Request', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -795,28 +848,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Request', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Request', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -844,28 +904,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Reconnect', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Reconnect', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -893,28 +960,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Value', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Value', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -942,28 +1016,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Request', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Request', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -991,28 +1072,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Request', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Request', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1040,28 +1128,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Value', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Value', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1089,28 +1184,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Value', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Value', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1138,28 +1240,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Request', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Request', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1187,28 +1296,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Value', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Value', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1240,7 +1356,7 @@ widgetValue = None
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1293,8 +1409,8 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">Press button to enable DMS Test sequence.</span></p></body></html>]]></text>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>80</y>
+                    <x>0.0</x>
+                    <y>80.0</y>
                     <width>264</width>
                     <height>32</height>
                     <background_color><![CDATA[#55aaff]]></background_color>
@@ -1309,28 +1425,35 @@ p, li { white-space: pre-wrap; }
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Black Start Enable', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Black Start Enable', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1358,28 +1481,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.MicorGrid Controler Start', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.MicorGrid Controler Start', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1407,28 +1537,35 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Request To Sync To POI', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Request To Sync To POI', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -1460,7 +1597,7 @@ widgetValue = None
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1489,7 +1626,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1518,7 +1655,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1547,7 +1684,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1576,7 +1713,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1605,7 +1742,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1634,7 +1771,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1663,7 +1800,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1692,7 +1829,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1721,7 +1858,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1750,7 +1887,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1779,7 +1916,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1808,7 +1945,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1837,7 +1974,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1866,7 +2003,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1895,7 +2032,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1924,7 +2061,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1953,7 +2090,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -1982,7 +2119,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2011,7 +2148,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2040,7 +2177,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2069,7 +2206,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2098,7 +2235,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2127,7 +2264,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2156,7 +2293,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2185,7 +2322,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2214,7 +2351,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2243,7 +2380,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2272,7 +2409,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2301,7 +2438,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2330,7 +2467,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2359,7 +2496,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2388,7 +2525,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2417,7 +2554,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2446,7 +2583,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2475,7 +2612,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2504,7 +2641,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2533,7 +2670,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2562,7 +2699,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2591,7 +2728,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2620,7 +2757,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2649,7 +2786,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2678,7 +2815,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2707,7 +2844,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2736,7 +2873,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2765,7 +2902,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2794,7 +2931,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -2817,9 +2954,15 @@ displayValue = False
                 <name><![CDATA[Woodward - Diesel Genset]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'7242a1cfee0711e6b5034c34882a0abb', u'097ced2eee0811e6bbde4c34882a0abb', u'd9f48fdef15011e6b6e94c348851fa7b']]]></components_ids>
+                <components_ids><![CDATA[['7242a1cfee0711e6b5034c34882a0abb', '097ced2eee0811e6bbde4c34882a0abb', 'd9f48fdef15011e6b6e94c348851fa7b']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>272.0</x>
                     <y>1152.0</y>
@@ -2834,9 +2977,15 @@ displayValue = False
                 <name><![CDATA[Woodward Controls]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'8d82f34fee0711e680ef4c34882a0abb', u'ab3cd04fee0711e6acba4c34882a0abb', u'da90c000ee0711e6a3c84c34882a0abb', u'fc6bb040f2e411e6856cdc4a3e45580c']]]></components_ids>
+                <components_ids><![CDATA[['8d82f34fee0711e680ef4c34882a0abb', 'ab3cd04fee0711e6acba4c34882a0abb', 'da90c000ee0711e6a3c84c34882a0abb', 'fc6bb040f2e411e6856cdc4a3e45580c']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>8.0</x>
                     <y>8.0</y>
@@ -2853,10 +3002,10 @@ displayValue = False
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 hil.set_digital_output(1,name = 'digital input 1',invert = False,swControl = True, value = 0,device = 3)
@@ -2865,13 +3014,17 @@ hil.set_digital_output(1,name = 'digital input 1',invert = False,swControl = Tru
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -2889,10 +3042,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -2909,10 +3062,10 @@ elif inputValue == 'OFF':
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -2927,10 +3080,17 @@ elif inputValue == 'OFF':
     hil.set_digital_output(2,name = 'digital input 2',invert = False,swControl = True, value = 0,device = 3)    
     pass
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -2939,7 +3099,7 @@ widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
                 <inputValue><![CDATA[ON]]></inputValue>
-                <availableValues><![CDATA[[u'ON', u'OFF']]]></availableValues>
+                <availableValues><![CDATA[['ON', 'OFF']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -2957,10 +3117,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = True, value = 1,device = 3)
@@ -2973,13 +3133,17 @@ hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = Tru
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -2995,9 +3159,15 @@ widgetValue = None
                 <name><![CDATA[Woodward Digital Outputs]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'208eb02eee0811e69e3d4c34882a0abb', u'3a40e79eee0811e69a004c34882a0abb', u'49b3fba1ee0811e6b86b4c34882a0abb', u'5c3512f0ee0811e68b584c34882a0abb', u'69dd790fee0811e6b4184c34882a0abb', u'7b739421ee0811e682564c34882a0abb', u'9e0f711eee0811e6ba3d4c34882a0abb', u'abae1340ee0811e69dea4c34882a0abb', u'b9381bf0ee0811e688604c34882a0abb', u'c2a39bb0ee0811e6adbe4c34882a0abb', u'd087d251ee0811e6818e4c34882a0abb', u'ffe4e9c0ee0811e6aaf24c34882a0abb', u'0ff723f0ee0911e6a86d4c34882a0abb', u'245f23b0ee0911e6aa254c34882a0abb']]]></components_ids>
+                <components_ids><![CDATA[['208eb02eee0811e69e3d4c34882a0abb', '3a40e79eee0811e69a004c34882a0abb', '49b3fba1ee0811e6b86b4c34882a0abb', '5c3512f0ee0811e68b584c34882a0abb', '69dd790fee0811e6b4184c34882a0abb', '7b739421ee0811e682564c34882a0abb', '9e0f711eee0811e6ba3d4c34882a0abb', 'abae1340ee0811e69dea4c34882a0abb', 'b9381bf0ee0811e688604c34882a0abb', 'c2a39bb0ee0811e6adbe4c34882a0abb', 'd087d251ee0811e6818e4c34882a0abb', 'ffe4e9c0ee0811e6aaf24c34882a0abb', '0ff723f0ee0911e6a86d4c34882a0abb', '245f23b0ee0911e6aa254c34882a0abb']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>200.0</x>
                     <y>8.0</y>
@@ -3018,7 +3188,7 @@ widgetValue = None
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3047,7 +3217,7 @@ displayValue = False
                 <led_color>Yellow</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3076,7 +3246,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3105,7 +3275,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3134,7 +3304,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3163,7 +3333,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3192,7 +3362,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3221,7 +3391,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3250,7 +3420,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3279,7 +3449,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3308,7 +3478,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3337,7 +3507,7 @@ displayValue = False
                 <led_color>Yellow</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3366,7 +3536,7 @@ displayValue = False
                 <led_color>Red</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3395,7 +3565,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3418,9 +3588,15 @@ displayValue = False
                 <name><![CDATA[Woodward Controls]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'4582dfa1ee0911e692a94c34882a0abb', u'45837bdeee0911e6a8bf4c34882a0abb', u'4584181eee0911e68c524c34882a0abb', u'4584b461ee0911e6a1e74c34882a0abb']]]></components_ids>
+                <components_ids><![CDATA[['4582dfa1ee0911e692a94c34882a0abb', '45837bdeee0911e6a8bf4c34882a0abb', '4584181eee0911e68c524c34882a0abb', '4584b461ee0911e6a1e74c34882a0abb']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>8.0</x>
                     <y>8.0</y>
@@ -3437,10 +3613,10 @@ displayValue = False
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 hil.set_digital_output(1,name = 'digital input 1',invert = False,swControl = True, value = 0,device = 2)
@@ -3449,13 +3625,17 @@ hil.set_digital_output(1,name = 'digital input 1',invert = False,swControl = Tru
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -3473,10 +3653,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -3494,10 +3674,10 @@ elif inputValue == 'OFF':
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -3513,10 +3693,17 @@ elif inputValue == 'OFF':
     pass
 
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -3525,7 +3712,7 @@ widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
                 <inputValue><![CDATA[ON]]></inputValue>
-                <availableValues><![CDATA[[u'ON', u'OFF']]]></availableValues>
+                <availableValues><![CDATA[['ON', 'OFF']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -3543,10 +3730,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = True, value = 1,device = 2)
@@ -3559,13 +3746,17 @@ hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = Tru
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -3583,10 +3774,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 #Vf_stop is in per units on a base of 35V
 
@@ -3600,13 +3791,17 @@ hil.set_cp_input_value('User defined', 'Stop Gen2', 'NG GENSET.Exciter.Vf_stop',
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -3622,9 +3817,15 @@ widgetValue = None
                 <name><![CDATA[Woodward Digital Outputs]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'4585c5d1ee0911e6834f4c34882a0abb', u'4586620fee0911e69cab4c34882a0abb', u'4586d740ee0911e696474c34882a0abb', u'45874c70ee0911e6a2fb4c34882a0abb', u'4587c1a1ee0911e69b094c34882a0abb', u'458836d1ee0911e6810c4c34882a0abb', u'4588ac00ee0911e6a3934c34882a0abb', u'4589212eee0911e68b584c34882a0abb', u'4589bd70ee0911e6a3e14c34882a0abb', u'458a329eee0911e690b24c34882a0abb', u'458aa7cfee0911e6b4be4c34882a0abb', u'458b1d00ee0911e68b8f4c34882a0abb', u'458b9230ee0911e6a5214c34882a0abb', u'458c2e6eee0911e6bada4c34882a0abb']]]></components_ids>
+                <components_ids><![CDATA[['4585c5d1ee0911e6834f4c34882a0abb', '4586620fee0911e69cab4c34882a0abb', '4586d740ee0911e696474c34882a0abb', '45874c70ee0911e6a2fb4c34882a0abb', '4587c1a1ee0911e69b094c34882a0abb', '458836d1ee0911e6810c4c34882a0abb', '4588ac00ee0911e6a3934c34882a0abb', '4589212eee0911e68b584c34882a0abb', '4589bd70ee0911e6a3e14c34882a0abb', '458a329eee0911e690b24c34882a0abb', '458aa7cfee0911e6b4be4c34882a0abb', '458b1d00ee0911e68b8f4c34882a0abb', '458b9230ee0911e6a5214c34882a0abb', '458c2e6eee0911e6bada4c34882a0abb']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>200.0</x>
                     <y>8.0</y>
@@ -3645,7 +3846,7 @@ widgetValue = None
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3674,7 +3875,7 @@ displayValue = False
                 <led_color>Yellow</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3703,7 +3904,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3732,7 +3933,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3761,7 +3962,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3790,7 +3991,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3819,7 +4020,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3848,7 +4049,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3877,7 +4078,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3906,7 +4107,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3935,7 +4136,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3964,7 +4165,7 @@ displayValue = False
                 <led_color>Yellow</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -3993,7 +4194,7 @@ displayValue = False
                 <led_color>Red</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -4022,7 +4223,7 @@ displayValue = False
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -4045,9 +4246,15 @@ displayValue = False
                 <name><![CDATA[Woodward - Natural Gas Genset]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'45824361ee0911e680144c34882a0abb', u'4585298fee0911e68bfb4c34882a0abb', u'79ae9b6ef15111e6a1ec4c348851fa7b']]]></components_ids>
+                <components_ids><![CDATA[['45824361ee0911e680144c34882a0abb', '4585298fee0911e68bfb4c34882a0abb', '79ae9b6ef15111e6a1ec4c348851fa7b']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>2096.0</x>
                     <y>1152.0</y>
@@ -4062,9 +4269,15 @@ displayValue = False
                 <name><![CDATA[EPC - Battery Storage]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'5e96f061ee0b11e684dc4c34882a0abb', u'76f2bf8fee0b11e6849a4c34882a0abb', u'8c2eff40ee0b11e6a42e4c34882a0abb', u'b60fab6eee0b11e6978f4c34882a0abb', u'550614c0f23111e6af68dc4a3e45580c', u'550614c1f23111e69138dc4a3e45580c', u'550614c2f23111e6a3e3dc4a3e45580c', u'550614c3f23111e6b12edc4a3e45580c', u'550614c4f23111e6a59bdc4a3e45580c', u'f49a7670f25e11e6b7a3dc4a3e45580c', u'9090e51ef27111e6a769dc4a3e45580c', u'3a195af0f95711e693f7dc4a3e45580c', u'e631855efa3311e68a95dc4a3e45580c']]]></components_ids>
+                <components_ids><![CDATA[['5e96f061ee0b11e684dc4c34882a0abb', '76f2bf8fee0b11e6849a4c34882a0abb', '8c2eff40ee0b11e6a42e4c34882a0abb', 'b60fab6eee0b11e6978f4c34882a0abb', '550614c0f23111e6af68dc4a3e45580c', '550614c1f23111e69138dc4a3e45580c', '550614c2f23111e6a3e3dc4a3e45580c', '550614c3f23111e6b12edc4a3e45580c', '550614c4f23111e6a59bdc4a3e45580c', 'f49a7670f25e11e6b7a3dc4a3e45580c', '9090e51ef27111e6a769dc4a3e45580c', '3a195af0f95711e693f7dc4a3e45580c', 'e631855efa3311e68a95dc4a3e45580c']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>888.0</x>
                     <y>1152.0</y>
@@ -4082,7 +4295,7 @@ displayValue = False
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4118,7 +4331,7 @@ displayValue = Q
                 <data_type>Analog signal</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4155,7 +4368,7 @@ displayValue = hil.read_analog_signal(name = 'Ld1_grid_meas.Q_EPC_pu')*1.0e3
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4194,7 +4407,7 @@ displayValue = 0.0
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -4220,7 +4433,7 @@ displayValue = False
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4257,7 +4470,7 @@ displayValue = hil.read_analog_signal('Vrms_grid')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 from math import atan, sqrt, pi
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -4314,7 +4527,7 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4351,7 +4564,7 @@ displayValue = hil.read_analog_signal('Vrms_bus101')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4388,7 +4601,7 @@ displayValue = hil.read_analog_signal('Vrms_bus201')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4425,7 +4638,7 @@ displayValue = hil.read_analog_signal('Vrms_bus102')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4462,7 +4675,7 @@ displayValue = hil.read_analog_signal('Vrms_bus105')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4498,7 +4711,7 @@ displayValue = hil.read_analog_signal('Vrms_bus103')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4535,7 +4748,7 @@ displayValue = hil.read_analog_signal('Vrms_bus104')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4572,7 +4785,7 @@ displayValue = hil.read_analog_signal('Vrms_bus106')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4609,7 +4822,7 @@ displayValue = hil.read_analog_signal('Vrms_bus207')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4645,7 +4858,7 @@ displayValue = hil.read_analog_signal('Vrms_bus107')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4682,7 +4895,7 @@ displayValue = hil.read_analog_signal('Vrms_bus206')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4719,7 +4932,7 @@ displayValue = hil.read_analog_signal('Vrms_bus204')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4756,7 +4969,7 @@ displayValue = hil.read_analog_signal('Vrms_bus202')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4793,7 +5006,7 @@ displayValue = hil.read_analog_signal('Vrms_bus203')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4830,7 +5043,7 @@ displayValue = hil.read_analog_signal('Vrms_bus208')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4867,7 +5080,7 @@ displayValue = hil.read_analog_signal('Vrms_bus209')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4904,7 +5117,7 @@ displayValue = hil.read_analog_signal('Vrms_bus210')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4941,7 +5154,7 @@ displayValue = hil.read_analog_signal('Vrms_bus303')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -4978,7 +5191,7 @@ displayValue = hil.read_analog_signal('Vrms_bus305')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5015,7 +5228,7 @@ displayValue = hil.read_analog_signal('Vrms_bus205')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5052,7 +5265,7 @@ displayValue = hil.read_analog_signal('Vrms_bus302')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5089,7 +5302,7 @@ displayValue = hil.read_analog_signal('Vrms_bus306')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5126,7 +5339,7 @@ displayValue = hil.read_analog_signal('Vrms_bus301')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5163,7 +5376,7 @@ displayValue = hil.read_analog_signal('Vrms_bus307')/1000
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 from math import atan, sqrt, pi
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -5216,12 +5429,12 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
         <component_data>
                 <id>0ce34470f14f11e68ba14c348851fa7b</id>
                 <name><![CDATA[Feeder 1 PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5234,9 +5447,13 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
 
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>536.0</x>
@@ -5293,12 +5510,12 @@ referenceCurves = [refCurveData1]
         <component_data>
                 <id>d9f48fdef15011e6b6e94c348851fa7b</id>
                 <name><![CDATA[Diesel genset PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 import numpy as np
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -5312,9 +5529,13 @@ Q = hil.read_analog_signal(name = 'DIESEL GENSET.DIESEL_GCB_Measurements.Q_Gen1'
 displayValue = [ [P,Q], ['P [kW]','Q [kvar]'] ]
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
@@ -5371,12 +5592,12 @@ referenceCurves = [refCurveData1]
         <component_data>
                 <id>79ae9b6ef15111e6a1ec4c348851fa7b</id>
                 <name><![CDATA[Natural Gas genset PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 import numpy as np
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -5390,9 +5611,13 @@ Q = hil.read_analog_signal(name = 'NG GENSET.NG_GCB_Measurements.Q_Gen1')*4000.0
 displayValue = [ [P,Q], ['P [kW]','Q [kvar]'] ]
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>8.0</x>
@@ -5454,7 +5679,7 @@ referenceCurves = [refCurveData1]
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5471,6 +5696,7 @@ displayValue = hil.read_analog_signal('F3_Motor.IM_machine mechanical speed')*30
                 <unit><![CDATA[]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <updateRate>1000</updateRate>
+                <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>3224.0</x>
@@ -5495,7 +5721,7 @@ displayValue = hil.read_analog_signal('F3_Motor.IM_machine mechanical speed')*30
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5532,7 +5758,7 @@ displayValue = 0#hil.read_analog_signal(name = 'Ld1_grid_meas.P_EPC_pu')/1.0e3
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5569,7 +5795,7 @@ displayValue = 0#hil.read_analog_signal(name = 'Ld1_grid_meas.Q_EPC_pu')/1.0e3
                 <data_type>Analog signal</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5606,7 +5832,7 @@ displayValue = hil.read_analog_signal(name = 'Ld1_grid_meas.Q_EPC_pu')*1.0e3
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -5645,7 +5871,7 @@ displayValue = 0.0
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -5668,9 +5894,15 @@ displayValue = False
                 <name><![CDATA[EPC - PV]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'feb408cff15311e6b9fb4c348851fa7b', u'feb5b680f15311e689324c348851fa7b', u'feb6a0e1f15311e6aed24c348851fa7b', u'feb73d1ef15311e69ab34c348851fa7b', u'feb89cb0f15311e6997b4c348851fa7b', u'44c74f80f23511e698ecdc4a3e45580c', u'44c74f81f23511e6bb51dc4a3e45580c', u'44c74f82f23511e6b89fdc4a3e45580c', u'44c74f83f23511e691b9dc4a3e45580c', u'44c74f84f23511e68241dc4a3e45580c', u'7ae2f280f25e11e6948fdc4a3e45580c', u'9e58e130f27111e69d67dc4a3e45580c', u'6b9f8300f94e11e69809dc4a3e45580c']]]></components_ids>
+                <components_ids><![CDATA[['feb408cff15311e6b9fb4c348851fa7b', 'feb5b680f15311e689324c348851fa7b', 'feb6a0e1f15311e6aed24c348851fa7b', 'feb73d1ef15311e69ab34c348851fa7b', 'feb89cb0f15311e6997b4c348851fa7b', '44c74f80f23511e698ecdc4a3e45580c', '44c74f81f23511e6bb51dc4a3e45580c', '44c74f82f23511e6b89fdc4a3e45580c', '44c74f83f23511e691b9dc4a3e45580c', '44c74f84f23511e68241dc4a3e45580c', '7ae2f280f25e11e6948fdc4a3e45580c', '9e58e130f27111e69d67dc4a3e45580c', '6b9f8300f94e11e69809dc4a3e45580c']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>1496.0</x>
                     <y>1152.0</y>
@@ -5687,10 +5919,10 @@ displayValue = False
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5705,10 +5937,10 @@ elif inputValue == 'Off':
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5721,10 +5953,17 @@ elif inputValue == 'Off':
     hil.set_contactor('F3_Motor.CB.S1',swControl= True,swState= False)
 
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -5733,7 +5972,7 @@ widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
                 <inputValue><![CDATA[Off]]></inputValue>
-                <availableValues><![CDATA[[u'On', u'Off']]]></availableValues>
+                <availableValues><![CDATA[['On', 'Off']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
@@ -5752,7 +5991,7 @@ widgetValue = None
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 #stop, clear, run commands in UPS mode
 
@@ -5806,15 +6045,19 @@ print(ess_server.epc)
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_timer_code>
                 <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>184.0</x>
@@ -5831,10 +6074,10 @@ from typhoon.api import hil_control_panel as hil
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5845,10 +6088,10 @@ ess_server.epc.read()
 print(ess_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5857,10 +6100,17 @@ ess_server.epc.write()
 time.sleep(.5)
 ess_server.epc.read()
 print(ess_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -5888,10 +6138,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5920,10 +6170,10 @@ ess_server.epc.read()
 print(ess_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5932,10 +6182,17 @@ ess_server.epc.write()
 time.sleep(.5)
 ess_server.epc.read()
 print(ess_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -5963,10 +6220,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -5992,10 +6249,10 @@ ess_server.epc.read()
 print(ess_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6005,10 +6262,17 @@ ess_server.epc.write()
 time.sleep(.5)
 ess_server.epc.read()
 print(ess_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6021,8 +6285,8 @@ widgetValue = None
                 <unit><![CDATA[kW]]></unit>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>296.0</x>
-                    <y>80.0</y>
+                    <x>304</x>
+                    <y>80</y>
                     <width>216</width>
                     <height>40</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -6036,10 +6300,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6050,10 +6314,10 @@ ess_server.epc.read()
 print(ess_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6062,10 +6326,17 @@ ess_server.epc.write()
 time.sleep(.5)
 ess_server.epc.read()
 print(ess_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6093,10 +6364,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6107,10 +6378,10 @@ pv_server.epc.read()
 print(pv_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6119,10 +6390,17 @@ pv_server.epc.write()
 time.sleep(.5)
 pv_server.epc.read()
 print(pv_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6151,7 +6429,7 @@ widgetValue = None
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 #stop, clear, run commands in UPS
 '''
@@ -6213,15 +6491,19 @@ print(pv_server.epc)
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_timer_code>
                 <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>320.0</x>
@@ -6238,10 +6520,10 @@ from typhoon.api import hil_control_panel as hil
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6252,10 +6534,10 @@ pv_server.epc.read()
 print(pv_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6264,10 +6546,17 @@ pv_server.epc.write()
 time.sleep(.5)
 pv_server.epc.read()
 print(pv_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6295,10 +6584,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6309,17 +6598,24 @@ pv_server.epc.read()
 print(pv_server.epc)]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6347,10 +6643,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6361,10 +6657,10 @@ pv_server.epc.read()
 print(pv_server.epc)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6373,10 +6669,17 @@ pv_server.epc.write()
 time.sleep(.5)
 pv_server.epc.read()
 print(pv_server.epc)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6404,10 +6707,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6422,10 +6725,10 @@ elif inputValue == 'Off':
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -6438,10 +6741,17 @@ elif inputValue == 'Off':
     hil.set_contactor('F1_Motor.CB.S1',swControl= True,swState= False)
 
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -6450,7 +6760,7 @@ widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
                 <inputValue><![CDATA[Off]]></inputValue>
-                <availableValues><![CDATA[[u'On', u'Off']]]></availableValues>
+                <availableValues><![CDATA[['On', 'Off']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
@@ -6469,7 +6779,7 @@ widgetValue = None
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6486,6 +6796,7 @@ displayValue = hil.read_analog_signal('F1_Motor.IM_machine mechanical speed')*30
                 <unit><![CDATA[]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <updateRate>1000</updateRate>
+                <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>496.0</x>
@@ -6505,12 +6816,12 @@ displayValue = hil.read_analog_signal('F1_Motor.IM_machine mechanical speed')*30
         <component_data>
                 <id>d913d480f25b11e6b66adc4a3e45580c</id>
                 <name><![CDATA[Feeder 3 PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6523,9 +6834,13 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
 
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>2456.0</x>
@@ -6587,7 +6902,7 @@ referenceCurves = [refCurveData1]
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6604,6 +6919,7 @@ displayValue = hil.read_analog_signal(name = 'DIESEL GENSET.NG_Gen_machine mecha
                 <unit><![CDATA[]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <updateRate>1000</updateRate>
+                <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>784.0</x>
@@ -6628,7 +6944,7 @@ displayValue = hil.read_analog_signal(name = 'DIESEL GENSET.NG_Gen_machine mecha
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6645,6 +6961,7 @@ displayValue = hil.read_analog_signal(name = 'NG GENSET.NG_Gen_machine mechanica
                 <unit><![CDATA[]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <updateRate>1000</updateRate>
+                <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>2960.0</x>
@@ -6664,12 +6981,12 @@ displayValue = hil.read_analog_signal(name = 'NG GENSET.NG_Gen_machine mechanica
         <component_data>
                 <id>7ae2f280f25e11e6948fdc4a3e45580c</id>
                 <name><![CDATA[EPC - PV PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 import numpy as np
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -6685,9 +7002,13 @@ Q = hil.read_analog_signal(name = 'F2_CB11.MID_Rly1.SEL_787.Q')/1000.0
 displayValue = [ [P,Q], ['P [kW]','Q [kvar]'] ]
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
@@ -6744,12 +7065,12 @@ referenceCurves = [refCurveData1]
         <component_data>
                 <id>f49a7670f25e11e6b7a3dc4a3e45580c</id>
                 <name><![CDATA[EPC - ESS PQ]]></name>
-                <type>MultiTraceDisplay</type>
+                <type>TraceDisplay</type>
                 <description><![CDATA[None]]></description>
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 import numpy as np
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
@@ -6764,9 +7085,13 @@ Q = hil.read_analog_signal(name = 'ESS.Q')/1000.0
 displayValue = [ [P,Q], ['P [kW]','Q [kvar]'] ]
 
 ]]></code>
-                <signals><![CDATA[[u'P [kW]', u'Q [kvar]']]]></signals>
-                <updateRate>1000</updateRate>
-                <background_color>#ffffff</background_color>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
@@ -6828,7 +7153,7 @@ referenceCurves = [refCurveData1]
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6865,7 +7190,7 @@ displayValue = hil.read_analog_signal(name = 'F1_PCC.P')/1000.0
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6902,7 +7227,7 @@ displayValue = hil.read_analog_signal(name = 'F2_PCC.P')/1000.0
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6939,7 +7264,7 @@ displayValue = hil.read_analog_signal(name = 'F3_PCC.P')/1000.0
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -6977,7 +7302,7 @@ displayValue = P
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -7015,7 +7340,7 @@ displayValue = P
                 <data_type>Expression</data_type>
                 <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #-------------------------------------------------------------------
 
@@ -7051,10 +7376,10 @@ displayValue = hil.read_analog_signal('NG GENSET.Governor_and_Diesel_Engine.Actu
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 #Vf_stop is in per units on a base of 35V
@@ -7069,13 +7394,17 @@ hil.set_cp_input_value('User defined', 'Stop Gen2', 'DIESEL GENSET.Exciter.Vf_st
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
@@ -7093,10 +7422,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 hil.set_contactor('3ph Fault 103.S1',swControl= True,swState= True)
 hil.wait_sec(0.05)
@@ -7105,18 +7434,22 @@ hil.set_contactor('3ph Fault 103.S1',swControl= True,swState= False)
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>928</x>
-                    <y>448</y>
+                    <x>928.0</x>
+                    <y>448.0</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -7129,10 +7462,10 @@ widgetValue = None
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 hil.set_contactor('3ph Fault 208.S1',swControl= True,swState= True)
 hil.wait_sec(0.05)
@@ -7141,18 +7474,22 @@ hil.set_contactor('3ph Fault 208.S1',swControl= True,swState= False)
 ]]></on_use_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2264</x>
-                    <y>480</y>
+                    <x>2264.0</x>
+                    <y>480.0</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -7163,9 +7500,15 @@ widgetValue = None
                 <name><![CDATA[Relay control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'847a7e80f31211e6b1fcdc4a3e45580c']]]></components_ids>
+                <components_ids><![CDATA[['847a7e80f31211e6b1fcdc4a3e45580c']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>2712.0</x>
                     <y>1152.0</y>
@@ -7183,7 +7526,7 @@ widgetValue = None
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 for r in range(42):
 
@@ -7194,14 +7537,18 @@ for r in range(42):
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_timer_code>
                 <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>8.0</x>
@@ -7219,21 +7566,21 @@ from typhoon.api import hil_control_panel as hil
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 index = 0
 ]]></on_click_code>
                 <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 index = 0
 ]]></on_start_code>
                 <on_timer_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 
 
@@ -7251,10 +7598,14 @@ if ir_profile_running:
         
 ]]></on_timer_code>
                 <run_each>1000</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>8</x>
-                    <y>48</y>
+                    <x>8.0</x>
+                    <y>48.0</y>
                     <width>184</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -7265,9 +7616,15 @@ if ir_profile_running:
                 <name><![CDATA[Irradiance profile]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[[u'e6e24080f31c11e6977edc4a3e45580c', u'5c1a2fc0f31d11e6bd89dc4a3e45580c', u'02e1c351f31d11e69292dc4a3e45580c']]]></components_ids>
+                <components_ids><![CDATA[['e6e24080f31c11e6977edc4a3e45580c', '5c1a2fc0f31d11e6bd89dc4a3e45580c', '02e1c351f31d11e69292dc4a3e45580c']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
                     <x>2712.0</x>
                     <y>1264.0</y>
@@ -7288,7 +7645,7 @@ if ir_profile_running:
                 <led_color>Green</led_color>
                 <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 # NOTE: Only read functions are available from HIL Control Panel API
 #------------------------------------------------
 
@@ -7299,8 +7656,8 @@ displayValue = ir_profile_running
                 <updateRate>1000</updateRate>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>144</x>
-                    <y>8</y>
+                    <x>144.0</x>
+                    <y>8.0</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -7313,10 +7670,10 @@ displayValue = ir_profile_running
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -7333,10 +7690,10 @@ elif inputValue == 'Stopped':
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 # Function for printing text to console (e.g printf("Hello world"))
-from typhoon.utilities.misc import printf
+
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
@@ -7351,10 +7708,17 @@ elif inputValue == 'Stopped':
     ir_profile_running = False
 
 ]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
 # NOTE: Only read functions are available from the HIL Control Panel API
 # HIL Control Panel API
-import typhoon.api.hil as hil
+
 
 
 # Change widget value by setting this variable.
@@ -7363,7 +7727,7 @@ widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
                 <inputValue><![CDATA[Stopped]]></inputValue>
-                <availableValues><![CDATA[[u'Running', u'Stopped']]]></availableValues>
+                <availableValues><![CDATA[['Running', 'Stopped']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
@@ -7382,7 +7746,7 @@ widgetValue = None
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 #stop, clear, run commands in UPS
 '''
@@ -7425,15 +7789,19 @@ print(pv_server.epc)
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_timer_code>
                 <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>320.0</x>
@@ -7451,7 +7819,7 @@ from typhoon.api import hil_control_panel as hil
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 #stop, clear, run commands in UPS
 '''
@@ -7493,15 +7861,19 @@ print(ess_server.epc)
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_timer_code>
                 <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>296.0</x>
@@ -7519,7 +7891,7 @@ from typhoon.api import hil_control_panel as hil
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 '''
 #stop, clear, run commands in UPS mode
@@ -7572,15 +7944,19 @@ print(ess_server.epc)
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other two handlers
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 ]]></on_timer_code>
                 <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>368.0</x>
@@ -7598,7 +7974,7 @@ from typhoon.api import hil_control_panel as hil
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 
 # HIL Control Panel API
-from typhoon.api import hil_control_panel as hil
+
 
 #initialize the DMS registers before starting
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_mcgrid_ctrl_start, 0) #Stop  microgrid controller
@@ -7624,7 +8000,7 @@ hil.wait_sec(1)
 
 hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_mcgrid_ctrl_start, 1) #Start microgrid controller (this will start Gensets and ESS in grid connected mode, if everything went well)
 ]]></on_click_code>
-                <on_start_code active="False"><![CDATA[]]></on_start_code>
+                <on_start_code active="False"><![CDATA[None]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[
 
 
@@ -7633,10 +8009,14 @@ hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_mcgrid_ctrl_start, 1) #
 
 ]]></on_timer_code>
                 <run_each>1000</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>40</y>
+                    <x>0.0</x>
+                    <y>40.0</y>
                     <width>168</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>

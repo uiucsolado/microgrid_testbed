@@ -1122,6 +1122,7 @@ glbl_write 0xf8000244 0x0
 glbl_file_write 0x27800000 cop_1_app_imem.bin
 glbl_file_write 0x55000080 cop_1_app_fsa.bin
 glbl_file_write 0x20a00000 cop_2_app_imem.bin
+glbl_file_write 0xfffc0000 cop_2_app_dmem.bin
 
 
 REM disable can devices
@@ -1144,5 +1145,5 @@ app_file_write 0x0 app_init
 REM Download Linux APP
 app_file_write 0x5 mbus_server_app.elf
 
-rtds_write 0x00000027 0x00000096
+rtds_write 0x00000027 0x00000258
 rtds_write 0x00000040 0x00FFFFFF

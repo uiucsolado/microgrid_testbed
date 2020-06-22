@@ -1,4 +1,4 @@
-Model banshee_feeder_1_2_3_v3
+Model Banshee_Feeder_1_2_3_v3
 
 REM *****************************************:
 REM * Common entries:
@@ -1122,6 +1122,7 @@ glbl_write 0xf8000244 0x0
 glbl_file_write 0x27800000 cop_1_app_imem.bin
 glbl_file_write 0x55000080 cop_1_app_fsa.bin
 glbl_file_write 0x20a00000 cop_2_app_imem.bin
+glbl_file_write 0xfffc0000 cop_2_app_dmem.bin
 
 
 REM disable can devices

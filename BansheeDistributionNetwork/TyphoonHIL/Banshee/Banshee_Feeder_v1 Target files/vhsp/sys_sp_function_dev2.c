@@ -326,63 +326,63 @@ void TimerCounterHandler_0_sys_sp_cpu_dev2() {
     // Generated from the component: Vrms_bus301.rms_calc_fast
     _vrms_bus301_rms_calc_fast__v_sq_sum_state = _vrms_bus301_rms_calc_fast__v_sq_sum_state + _vrms_bus301_vinst_va1__out * _vrms_bus301_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus301_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus301_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus301_rms_calc_fast__var_eff_s = _vrms_bus301_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus301_rms_calc_fast__period = (float)166;
+        _vrms_bus301_rms_calc_fast__period = (float)333;
         _vrms_bus301_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus301.sys1
     // Generated from the component: Vrms_bus302.rms_calc_fast
     _vrms_bus302_rms_calc_fast__v_sq_sum_state = _vrms_bus302_rms_calc_fast__v_sq_sum_state + _vrms_bus302_vinst_va1__out * _vrms_bus302_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus302_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus302_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus302_rms_calc_fast__var_eff_s = _vrms_bus302_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus302_rms_calc_fast__period = (float)166;
+        _vrms_bus302_rms_calc_fast__period = (float)333;
         _vrms_bus302_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus302.sys1
     // Generated from the component: Vrms_bus303.rms_calc_fast
     _vrms_bus303_rms_calc_fast__v_sq_sum_state = _vrms_bus303_rms_calc_fast__v_sq_sum_state + _vrms_bus303_vinst_va1__out * _vrms_bus303_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus303_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus303_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus303_rms_calc_fast__var_eff_s = _vrms_bus303_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus303_rms_calc_fast__period = (float)166;
+        _vrms_bus303_rms_calc_fast__period = (float)333;
         _vrms_bus303_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus303.sys1
     // Generated from the component: Vrms_bus304.rms_calc_fast
     _vrms_bus304_rms_calc_fast__v_sq_sum_state = _vrms_bus304_rms_calc_fast__v_sq_sum_state + _vrms_bus304_vinst_va1__out * _vrms_bus304_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus304_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus304_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus304_rms_calc_fast__var_eff_s = _vrms_bus304_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus304_rms_calc_fast__period = (float)166;
+        _vrms_bus304_rms_calc_fast__period = (float)333;
         _vrms_bus304_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus304.sys1
     // Generated from the component: Vrms_bus305.rms_calc_fast
     _vrms_bus305_rms_calc_fast__v_sq_sum_state = _vrms_bus305_rms_calc_fast__v_sq_sum_state + _vrms_bus305_vinst_va1__out * _vrms_bus305_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus305_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus305_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus305_rms_calc_fast__var_eff_s = _vrms_bus305_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus305_rms_calc_fast__period = (float)166;
+        _vrms_bus305_rms_calc_fast__period = (float)333;
         _vrms_bus305_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus305.sys1
     // Generated from the component: Vrms_bus306.rms_calc_fast
     _vrms_bus306_rms_calc_fast__v_sq_sum_state = _vrms_bus306_rms_calc_fast__v_sq_sum_state + _vrms_bus306_vinst_va1__out * _vrms_bus306_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus306_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus306_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus306_rms_calc_fast__var_eff_s = _vrms_bus306_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus306_rms_calc_fast__period = (float)166;
+        _vrms_bus306_rms_calc_fast__period = (float)333;
         _vrms_bus306_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus306.sys1
     // Generated from the component: Vrms_bus307.rms_calc_fast
     _vrms_bus307_rms_calc_fast__v_sq_sum_state = _vrms_bus307_rms_calc_fast__v_sq_sum_state + _vrms_bus307_vinst_va1__out * _vrms_bus307_vinst_va1__out;
     //square sum and period update on period end
-    if (166 == _vrms_bus307_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus307_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus307_rms_calc_fast__var_eff_s = _vrms_bus307_rms_calc_fast__v_sq_sum_state;
-        _vrms_bus307_rms_calc_fast__period = (float)166;
+        _vrms_bus307_rms_calc_fast__period = (float)333;
         _vrms_bus307_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus307.sys1
@@ -427,37 +427,37 @@ void TimerCounterHandler_0_sys_sp_cpu_dev2() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.update.block.start
     // Generated from the component: Vrms_bus301.rms_calc_fast
-    if (166 == _vrms_bus301_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus301_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus301_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus301_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus302.rms_calc_fast
-    if (166 == _vrms_bus302_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus302_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus302_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus302_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus303.rms_calc_fast
-    if (166 == _vrms_bus303_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus303_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus303_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus303_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus304.rms_calc_fast
-    if (166 == _vrms_bus304_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus304_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus304_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus304_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus305.rms_calc_fast
-    if (166 == _vrms_bus305_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus305_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus305_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus305_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus306.rms_calc_fast
-    if (166 == _vrms_bus306_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus306_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus306_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus306_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus307.rms_calc_fast
-    if (166 == _vrms_bus307_rms_calc_fast__pc_cnt_1_state) {
+    if (333 == _vrms_bus307_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus307_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus307_rms_calc_fast__pc_cnt_1_state ++;

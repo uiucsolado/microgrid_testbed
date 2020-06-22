@@ -8462,7 +8462,7 @@ float _f1_cb9_mid_rly1_sel_787_r50512761_relays__trip27;
 float _f1_cb9_mid_rly1_sel_787_r50512761_relays__trip50;
 float _f1_cb9_mid_rly1_sel_787_r50512761_relays__trip51;
 float _f1_cb9_mid_rly1_sel_787_r50512761_relays__trip59;
-float _f1_cb9_mid_rly1_sel_787_sum3__out;
+X_UnInt32 _f1_cb9_mid_rly1_sel_787_sum3__out;
 X_UnInt32 _f1_relay_udp_stream_boolean_join1__out;
 float _f1_relay_udp_stream_f1_p_real__out[15];
 float _f1_relay_udp_stream_f1_p_reactive__out[15];

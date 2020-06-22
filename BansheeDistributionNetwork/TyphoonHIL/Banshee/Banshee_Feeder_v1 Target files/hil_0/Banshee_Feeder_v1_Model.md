@@ -5,7 +5,7 @@ REM * Common entries:
 REM *****************************************:
 
 REM Setting the simulation time step...
-rtds_write 0x00000000 0x00000096
+rtds_write 0x00000000 0x00000258
 
 REM Module block enable
 rtds_write 0x00000003 0x00010000
@@ -129,9 +129,9 @@ rtds_write 0x08240401 0x00000001
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
 rtds_write 0x080C0001 0x0000000F
-rtds_write 0x080C0004 0x3CA3D70A
+rtds_write 0x080C0004 0x3BA3D70A
 rtds_write 0x080C0005 0x3D710000
-rtds_write 0x08100000 0x00000032
+rtds_write 0x08100000 0x000000C8
 
 REM SPC0 FSM digital input pin assignments...
 
@@ -239,9 +239,9 @@ rtds_write 0x08640400 0x00000001
 REM SPC1 GDS compensation settings...
 rtds_write 0x084C0000 0x00000001
 rtds_write 0x084C0001 0x00000006
-rtds_write 0x084C0004 0x3CA3D70A
+rtds_write 0x084C0004 0x3BA3D70A
 rtds_write 0x084C0005 0x3D710000
-rtds_write 0x08500000 0x00000032
+rtds_write 0x08500000 0x000000C8
 
 REM SPC1 FSM digital input pin assignments...
 
@@ -697,7 +697,7 @@ glbl_write 0xf8000244 0x20
 glbl_write 0xf8000244 0x0
 glbl_file_write 0x27800000 cop_1_app_imem.bin
 glbl_file_write 0x55000080 cop_1_app_fsa.bin
-glbl_file_write 0xfffc0000 cop_2_app_imem.bin
+glbl_file_write 0x20a00000 cop_2_app_imem.bin
 # disable ETH0 Intr on Core0 CPU
 glbl_write 0xF8F01834 0x01000101
 
@@ -707,10 +707,10 @@ sys_command 0x0
 glbl_file_write 0x27000000 cop_3_app_imem.bin
 glbl_file_write 0x55000000 cop_3_app_fsa.bin
 glbl_write 0x40800000 0x4
-glbl_write 0xfffffff0 0xfffc0000
+glbl_write 0xfffffff0 0x20a00000
 
 
 REM Restart counter for collected Linux OS communication apps
 app_file_write 0x0 app_init
-rtds_write 0x00000027 0x00000096
+rtds_write 0x00000027 0x00000258
 rtds_write 0x00000040 0x00FFFFFF

@@ -1,4 +1,4 @@
-Model banshee_feeder_1_2_3_v3
+Model Banshee_Feeder_1_2_3_v3
 
 REM *****************************************:
 REM * Common entries:
