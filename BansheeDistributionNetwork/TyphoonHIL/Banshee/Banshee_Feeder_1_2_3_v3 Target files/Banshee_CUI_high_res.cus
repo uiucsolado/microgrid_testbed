@@ -337,8 +337,8 @@ referenceCurves = [refCurveData1]
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>0</y>
+                    <x>0.0</x>
+                    <y>0.0</y>
                     <width>3450</width>
                     <height>1150</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -356,8 +356,8 @@ referenceCurves = [refCurveData1]
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3336</x>
-                    <y>272</y>
+                    <x>3336.0</x>
+                    <y>272.0</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -415,8 +415,8 @@ widgetValue = None
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2232</x>
-                    <y>464</y>
+                    <x>2232.0</x>
+                    <y>464.0</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -434,8 +434,8 @@ widgetValue = None
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1432</x>
-                    <y>552</y>
+                    <x>1432.0</x>
+                    <y>552.0</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -535,8 +535,8 @@ widgetValue = None
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>896</x>
-                    <y>432</y>
+                    <x>896.0</x>
+                    <y>432.0</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -6285,8 +6285,8 @@ widgetValue = None
                 <unit><![CDATA[kW]]></unit>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>304</x>
-                    <y>80</y>
+                    <x>304.0</x>
+                    <y>80.0</y>
                     <width>216</width>
                     <height>40</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -7959,8 +7959,8 @@ print(ess_server.epc)
 ]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>368.0</x>
-                    <y>0.0</y>
+                    <x>368</x>
+                    <y>0</y>
                     <width>208</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>

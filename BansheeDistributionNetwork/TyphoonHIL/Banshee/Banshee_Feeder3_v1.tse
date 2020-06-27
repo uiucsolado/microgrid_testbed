@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 22-Jun-2020 @ 05:33:32 PM
+// Save timestamp: 26-Jun-2020 @ 11:28:59 AM
 //
 
-model "Banshee_Feeder3_v1" {
+model "banshee_feeder3_v1" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 1
@@ -6698,6 +6698,7 @@ pf_states=(uint)exp_imp<<1 | (uint)lag_lead<<2;
                     }
                     [
                         position = 9200, 8416
+                        size = 48, 48
                     ]
 
                     component gen_c_function bitwise_faults {
@@ -6713,6 +6714,7 @@ fault_status= (uint)Status<<1 | (uint)R25<<2 | (uint)R27<<3 | (uint)R50<<4 | (ui
                     }
                     [
                         position = 9200, 8272
+                        size = 48, 128
                     ]
 
                     component gen_sum Sum3 {
@@ -11923,6 +11925,7 @@ trip59 = R59;
                 }
                 [
                     position = 7432, 8024
+                    size = 64, 32
                 ]
 
                 component "core/Current Measurement" IC {
@@ -11931,6 +11934,7 @@ trip59 = R59;
                 }
                 [
                     position = 7496, 8120
+                    size = 64, 32
                 ]
 
                 component gen_bus_join "Bus Join1" {
@@ -11949,6 +11953,7 @@ trip59 = R59;
                 [
                     position = 7568, 8352
                     rotation = right
+                    size = 64, 32
                 ]
 
                 component gen_bus_join "Bus Join2" {
@@ -11966,6 +11971,7 @@ trip59 = R59;
                 [
                     position = 7648, 8288
                     rotation = right
+                    size = 64, 32
                 ]
 
                 component "core/Current Measurement" IA {
@@ -11974,6 +11980,7 @@ trip59 = R59;
                 }
                 [
                     position = 7368, 7928
+                    size = 64, 32
                 ]
 
                 component "core/Voltage Measurement" VA {
@@ -11984,6 +11991,7 @@ trip59 = R59;
                 [
                     position = 7728, 8224
                     rotation = right
+                    size = 64, 32
                 ]
 
                 component Subsystem res_for_meas {
@@ -12686,6 +12694,7 @@ trip59 = R59;
             }
             [
                 position = 8192, 8192
+                size = 12, 352
             ]
 
             port A {
@@ -12930,164 +12939,6 @@ trip59 = R59;
                 position = 8368, 8240
             ]
 
-            component "core/Four Phase Device Coupling" "Device Coupling 1" {
-                C1 = "10e-6"
-                R1 = "1"
-                snb_type_i = "none"
-            }
-            [
-                position = 8192, 8192
-                size = 32, 352
-            ]
-
-            component Subsystem "RC Snubber" {
-                layout = dynamic
-                component pas_capacitor C2 {
-                    capacitance = "C"
-                }
-                [
-                    position = 8192, 8240
-                    rotation = right
-                ]
-
-                component pas_resistor R2 {
-                    resistance = "R"
-                }
-                [
-                    position = 8192, 8144
-                    rotation = right
-                ]
-
-                component pas_resistor R1 {
-                    resistance = "R"
-                }
-                [
-                    position = 8120, 8144
-                    rotation = right
-                ]
-
-                component pas_capacitor C3 {
-                    capacitance = "C"
-                }
-                [
-                    position = 8264, 8240
-                    rotation = right
-                ]
-
-                component pas_capacitor C1 {
-                    capacitance = "C"
-                }
-                [
-                    position = 8120, 8240
-                    rotation = right
-                ]
-
-                component pas_resistor R3 {
-                    resistance = "R"
-                }
-                [
-                    position = 8264, 8144
-                    rotation = right
-                ]
-
-                port A {
-                    position = top:1
-                    kind = pe
-                }
-                [
-                    position = 8120, 8064
-                    rotation = right
-                ]
-
-                port B {
-                    position = top:2
-                    kind = pe
-                }
-                [
-                    position = 8192, 8064
-                    rotation = right
-                ]
-
-                port C {
-                    position = top:3
-                    kind = pe
-                }
-                [
-                    position = 8264, 8064
-                    rotation = right
-                ]
-
-                port N {
-                    position = bottom:2
-                    kind = pe
-                }
-                [
-                    position = 8192, 8320
-                    rotation = left
-                ]
-
-                junction Junction1 pe
-                [
-                    position = 8192, 8288
-                ]
-
-                junction Junction2 pe
-                [
-                    position = 8192, 8288
-                ]
-
-                connect C1.n_node Junction2 as Connection21
-                connect C1.p_node R1.n_node as Connection9
-                connect C2.n_node Junction1 as Connection18
-                connect C2.p_node R2.n_node as Connection10
-                connect C3.n_node Junction2 as Connection23
-                connect C3.p_node R3.n_node as Connection11
-                connect Junction1 N as Connection19
-                connect Junction2 Junction1 as Connection22
-                connect R1.p_node A as Connection13
-                connect R2.p_node B as Connection15
-                connect R3.p_node C as Connection16
-
-                C = "1e-6"
-                R = "10"
-
-                mask {
-                    R {
-                        label = "R"
-                        widget = edit
-                        type = generic
-                        default_value = "0"
-                        unit = "ohms"
-                        group = "General"
-                    }
-
-                    C {
-                        label = "C"
-                        widget = edit
-                        type = generic
-                        default_value = "0"
-                        unit = "F"
-                        group = "General"
-                    }
-
-                    CODE open
-                        from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
-                    
-                        dialog = RegularComponentPropertiesDialog(
-                            component=component,
-                            property_container=component.masks[-1],
-                            current_diagram=current_diagram
-                        )
-                        dialog.exec_()
-                        
-                    ENDCODE
-                }
-            }
-            [
-                position = 8072, 8280
-                size = 64, 48
-            ]
-
             port A {
                 position = left:1
                 kind = pe
@@ -13156,53 +13007,21 @@ trip59 = R59;
                 rotation = down
             ]
 
-            junction Junction1 pe
-            [
-                position = 8056, 8048
-            ]
-
-            junction Junction2 pe
-            [
-                position = 8072, 8144
-            ]
-
-            junction Junction3 pe
-            [
-                position = 8088, 8240
-            ]
-
-            junction Junction4 pe
-            [
-                position = 8072, 8336
-            ]
-
             comment Comment1 START <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><html><head><meta name="qrichtext" content="1" /><style type="text/css">p, li { white-space: pre-wrap; }</style></head><body style=" font-family:'Arial'; font-size:12pt; font-weight:400; font-style:normal;"><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1. R1-L1 to R3-L3 are series RL snubbers to remove AO problem during fault at bus 301. </p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">R = 0.1 ohm. L = 100uH</p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2.  At nominal feeder load (3.7MW) it consumes 10kW + j3.7kVAr @60Hz</p></body></html> ENDCOMMENT 
             [
                 position = 8288, 8280
             ]
 
-            connect B Junction2 as Connection12
-            connect C Junction3 as Connection15
-            connect "Device Coupling 1.a_in" Junction1 as Connection9
-            connect "Device Coupling 1.d_in" Junction4 as Connection18
-            connect "Device Coupling 1.b_out" R2.p_node as Connection52
-            connect Junction1 A as Connection10
-            connect Junction2 "Device Coupling 1.b_in" as Connection13
-            connect Junction3 "Device Coupling 1.c_in" as Connection16
-            connect Junction4 G as Connection19
             connect L1.p_node R1.n_node as Connection51
             connect L2.n_node b as Connection54
             connect L3.p_node R3.n_node as Connection58
-            connect R1.p_node "Device Coupling 1.a_out" as Connection49
             connect R2.n_node L2.p_node as Connection53
-            connect R3.p_node "Device Coupling 1.c_out" as Connection56
-            connect "RC Snubber.A" Junction1 as Connection11
-            connect "RC Snubber.B" Junction2 as Connection14
-            connect "RC Snubber.C" Junction3 as Connection17
-            connect "RC Snubber.N" Junction4 as Connection20
             connect a L1.n_node as Connection50
             connect c L3.n_node as Connection57
-            connect g "Device Coupling 1.d_out" as Connection4
+            connect A R1.p_node as Connection59
+            connect R2.p_node B as Connection60
+            connect C R3.p_node as Connection61
+            connect g G as Connection62
         }
         [
             position = 11704, 7600
@@ -21465,7 +21284,7 @@ trip59 = R59;
                 execution_rate = "Ts_gen"
             }
             [
-                position = 8040, 8080
+                position = 8040, 8064
             ]
 
             component "core/Triple Pole Single Throw Contactor" NG_GCB {
@@ -21578,7 +21397,7 @@ trip59 = R59;
                 invert = "true"
             }
             [
-                position = 8040, 8008
+                position = 8040, 7992
             ]
 
             component src_digital_input "Open MCB" {
@@ -21621,6 +21440,7 @@ trip59 = R59;
                 [
                     position = 8112, 8208
                     rotation = right
+                    size = 64, 32
                 ]
 
                 component "core/Externally Controlled Voltage Source" V_Delta_V {
@@ -22002,6 +21822,7 @@ trip59 = R59;
                 [
                     position = 8112, 8200
                     rotation = right
+                    size = 64, 32
                 ]
 
                 component sys_spc_marker "Core Marker2" {
@@ -22165,7 +21986,7 @@ trip59 = R59;
                 connect "SR Flip Flop1.out_n" Termination1.in as Connection141
             }
             [
-                position = 8216, 8056
+                position = 8216, 8040
                 size = 120, 64
             ]
 
@@ -22967,6 +22788,7 @@ trip59 = R59;
 
                     component gen_transport_delay "Transport Delay1" {
                         init_value = "Pm0"
+                        signal_out_type = "real"
                         time_delay = "Td"
                     }
                     [
@@ -22986,7 +22808,7 @@ trip59 = R59;
                         signal_type = "angular speed"
                     }
                     [
-                        position = 7904, 8120
+                        position = 7928, 8096
                     ]
 
                     component gen_probe grid_contactor_on_ {
@@ -23046,7 +22868,7 @@ trip59 = R59;
                         signal_type = "angular speed"
                     }
                     [
-                        position = 7968, 8160
+                        position = 8040, 8128
                     ]
 
                     component gen_product Product1 {
@@ -23277,12 +23099,12 @@ trip59 = R59;
 
                     junction Junction58 sp
                     [
-                        position = 7808, 8208
+                        position = 7824, 8208
                     ]
 
                     junction Junction59 sp
                     [
-                        position = 7936, 8208
+                        position = 8000, 8208
                     ]
 
                     junction Junction60 sp
@@ -23314,6 +23136,9 @@ trip59 = R59;
                     connect Junction59 gridtied_pid_output.in as Connection12
                     connect Junction60 Junction52 as Connection13
                     connect Junction61 switch.in2 as Connection14
+                    [
+                        breakpoints = 7936, 8176; 8040, 8176
+                    ]
                     connect Junction62 switch.out as Connection54
                     [
                         breakpoints = 8088, 8224
@@ -23362,7 +23187,7 @@ trip59 = R59;
                     component gen_probe NOx {
                     }
                     [
-                        position = 8248, 8264
+                        position = 8256, 8264
                     ]
 
                     component gen_bus_split "Bus Split1" {
@@ -23561,72 +23386,6 @@ trip59 = R59;
                     hide_name = True
                 ]
 
-                tag Goto2 {
-                    value = "F3_NGCHP_HEAT_REC"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 7224, 9008
-                    hide_name = True
-                ]
-
-                tag Goto3 {
-                    value = "F3_NGCHP_FUEL_USE"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 7224, 9032
-                    hide_name = True
-                ]
-
-                tag Goto4 {
-                    value = "F3_NGCHP_CHP_CO2"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 7224, 9056
-                    hide_name = True
-                ]
-
-                tag Goto5 {
-                    value = "F3_NGCHP_BOILER_HEAT"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8320, 9048
-                    hide_name = True
-                ]
-
-                tag Goto6 {
-                    value = "F3_NGCHP_CHP_HEAT"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 9184
-                    hide_name = True
-                ]
-
-                tag Goto7 {
-                    value = "F3_NGCHP_TEMP_ACT"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8280, 8992
-                    hide_name = True
-                ]
-
                 junction Junction6 sp
                 [
                     position = 7608, 8568
@@ -23677,45 +23436,19 @@ trip59 = R59;
                     position = 8240, 8944
                 ]
 
-                junction Junction72 sp
-                [
-                    position = 7128, 9080
-                ]
-
-                junction Junction73 sp
-                [
-                    position = 7136, 9096
-                ]
-
-                junction Junction74 sp
-                [
-                    position = 7144, 9112
-                ]
-
-                junction Junction75 sp
-                [
-                    position = 8224, 9088
-                ]
-
-                junction Junction76 sp
-                [
-                    position = 8264, 9232
-                ]
-
-                junction Junction77 sp
-                [
-                    position = 8216, 8944
-                ]
-
                 connect Boiler_heat_supply.in Junction70 as Connection448
                 connect "Bus Join2.out" Goto1 as Connection304
                 connect "Bus Join3.in1" Junction69 as Connection446
+                [
+                    breakpoints = 7264, 9064; 7264, 9280; 7272, 9280; 8264, 9280
+                ]
                 connect "Bus Join3.in2" Junction70 as Connection450
+                [
+                    breakpoints = 7272, 9080; 7272, 9312; 7272, 9312; 8224, 9312
+                ]
                 connect "Bus Join3.in" Junction71 as Connection461
-                connect "Bus Join3.in4" Junction74 as Connection472
                 connect "Bus Split1.out1" CHP.Enable_CHP_Heat as Connection465
                 connect "Bus Split1.out" CHP.Temp_Setpoint_F as Connection464
-                connect "CHP.Temp Actual" Junction77 as Connection481
                 connect CHP_heat_supply.in Junction69 as Connection444
                 connect Contactor_status "Woodward DEGOV.CB_Status" as Connection1
                 connect Delta_w_in Sum3.in as Connection2
@@ -23726,12 +23459,6 @@ trip59 = R59;
                 connect Gain4.out "Bus Join2.in2" as Connection259
                 connect Gain4.in Junction7 as Connection51
                 connect Gain6.out "Bus Join2.in3" as Connection313
-                connect Goto2 Junction72 as Connection468
-                connect Goto3 Junction73 as Connection471
-                connect Goto4 Junction74 as Connection474
-                connect Goto5 Junction75 as Connection477
-                connect Goto6 Junction76 as Connection480
-                connect Goto7 Junction77 as Connection483
                 connect Heat_Load.out CHP.Heat_load as Connection353
                 connect Junction50 Junction65 as Connection324
                 connect Junction50 "w to wpu.out" as Connection3
@@ -23743,16 +23470,8 @@ trip59 = R59;
                 connect Junction64 Tmech_SI.in as Connection293
                 connect Junction65 Sum3.in2 as Connection325
                 connect Junction66 Junction63 as Connection328
-                connect Junction69 Junction76 as Connection478
                 connect Junction7 Junction6 as Connection50
-                connect Junction70 Junction75 as Connection475
                 connect Junction71 Actual_Temp.in as Connection460
-                connect Junction72 CHP.Heat_recovery as Connection467
-                connect Junction73 "Bus Join3.in3" as Connection470
-                connect Junction74 thermal_data.CO2out as Connection473
-                connect Junction75 CHP.Boiler_Heat_Supplied as Connection476
-                connect Junction76 CHP.CHP_heat_supplied as Connection479
-                connect Junction77 Junction71 as Connection482
                 connect Modbus.Reg_in "Bus Join3.out" as Connection392
                 connect Modbus.Holding_out "Bus Split1.in" as Connection393
                 connect Product1.out Gain6.in as Connection323
@@ -23767,10 +23486,32 @@ trip59 = R59;
                 connect mfidot.out Gain1.in as Connection219
                 connect reset_integrator "Woodward DEGOV.Reset" as Connection12
                 connect thermal_data.Thermal_Data From14 as Connection246
-                connect thermal_data.Heat_rec1 Junction72 as Connection466
-                connect thermal_data.NG_usage Junction73 as Connection469
                 connect w_meas_in "w to wpu.in" as Connection13
                 connect wref.out Sum3.in1 as Connection15
+                connect Junction71 "CHP.Temp Actual" as Connection484
+                [
+                    breakpoints = 8240, 8944; 8216, 8944
+                ]
+                connect CHP.Boiler_Heat_Supplied Junction70 as Connection485
+                [
+                    breakpoints = 8224, 9088
+                ]
+                connect CHP.CHP_heat_supplied Junction69 as Connection486
+                [
+                    breakpoints = 8264, 9232
+                ]
+                connect CHP.Heat_recovery thermal_data.Heat_rec1 as Connection488
+                [
+                    breakpoints = 7272, 8944; 7128, 8944; 7128, 9008
+                ]
+                connect "Bus Join3.in3" thermal_data.NG_usage as Connection489
+                [
+                    breakpoints = 7136, 9096
+                ]
+                connect "Bus Join3.in4" thermal_data.CO2out as Connection487
+                [
+                    breakpoints = 7144, 9112
+                ]
             }
             [
                 position = 8432, 8168
@@ -23804,6 +23545,7 @@ trip59 = R59;
                     position = 8040, 8216
                     rotation = right
                     scale = -1, 1
+                    size = 64, 32
                 ]
 
                 component "core/Current Measurement" Ic {
@@ -23815,6 +23557,7 @@ trip59 = R59;
                 [
                     position = 8248, 8160
                     scale = -1, 1
+                    size = 64, 32
                 ]
 
                 component "core/Current Measurement" Ib {
@@ -23826,6 +23569,7 @@ trip59 = R59;
                 [
                     position = 8336, 8064
                     scale = -1, 1
+                    size = 64, 32
                 ]
 
                 component "core/Current Measurement" Ia {
@@ -23837,6 +23581,7 @@ trip59 = R59;
                 [
                     position = 8440, 7968
                     scale = -1, 1
+                    size = 64, 32
                 ]
 
                 component gen_probe S_Gen1 {
@@ -23872,6 +23617,7 @@ trip59 = R59;
                     position = 8168, 8360
                     rotation = right
                     scale = -1, 1
+                    size = 64, 32
                 ]
 
                 component gen_gain Gain9 {
@@ -23891,6 +23637,7 @@ trip59 = R59;
                     position = 8104, 8288
                     rotation = right
                     scale = -1, 1
+                    size = 64, 32
                 ]
 
                 component gen_gain normalize {
@@ -24726,7 +24473,7 @@ trip59 = R59;
 
             junction Junction115 sp
             [
-                position = 8320, 8056
+                position = 8320, 8040
             ]
 
             junction Junction116 sp
@@ -24753,7 +24500,7 @@ trip59 = R59;
             connect Governor_and_Diesel_Engine.T_out NG_Gen.load_in as Connection2670
             connect Governor_and_Diesel_Engine.w_meas_in NG_Gen.speed_out as Connection2689
             [
-                breakpoints = 8560, 8400; 8608, 8392
+                breakpoints = 8336, 8392; 8560, 8392; 8608, 8392
             ]
             connect Junction109 If.n_node as Connection78
             connect Junction109 NG_Gen.r_1 as Connection77
@@ -24928,6 +24675,7 @@ fault_status= (uint)Status<<1 | (uint)R25<<2 | (uint)R27<<3 | (uint)R50<<4 | (ui
                     }
                     [
                         position = 9200, 8272
+                        size = 48, 128
                     ]
 
                     component src_scada_input "Control Panel Input1" {
@@ -24974,6 +24722,7 @@ pf_states=(uint)exp_imp<<1 | (uint)lag_lead<<2;
                     }
                     [
                         position = 9200, 8416
+                        size = 48, 48
                     ]
 
                     component tm_delay "Unit Delay2" {
@@ -63905,7 +63654,7 @@ T = 0.1118*w+0.000861*powf(w,2)-3.371e-7*powf(w,3);
             connect g CB.g as Connection14
         }
         [
-            position = 12816, 8752
+            position = 12768, 8760
             size = 64, 104
         ]
 
@@ -64116,165 +63865,6 @@ T = 0.1118*w+0.000861*powf(w,2)-3.371e-7*powf(w,3);
 
         component Subsystem Coupling26 {
             layout = dynamic
-            component "core/Four Phase Core Coupling" "Core Coupling 3" {
-                C1 = "10e-6"
-                R1 = "1"
-                fixed_snb_i = "true"
-            }
-            [
-                position = 8192, 8192
-                size = 12, 352
-            ]
-
-            component Subsystem "RC Snubber" {
-                layout = dynamic
-                component pas_capacitor C1 {
-                    capacitance = "C"
-                }
-                [
-                    position = 8120, 8240
-                    rotation = right
-                ]
-
-                component pas_resistor R2 {
-                    resistance = "R"
-                }
-                [
-                    position = 8192, 8144
-                    rotation = right
-                ]
-
-                component pas_resistor R1 {
-                    resistance = "R"
-                }
-                [
-                    position = 8120, 8144
-                    rotation = right
-                ]
-
-                component pas_resistor R3 {
-                    resistance = "R"
-                }
-                [
-                    position = 8264, 8144
-                    rotation = right
-                ]
-
-                component pas_capacitor C3 {
-                    capacitance = "C"
-                }
-                [
-                    position = 8264, 8240
-                    rotation = right
-                ]
-
-                component pas_capacitor C2 {
-                    capacitance = "C"
-                }
-                [
-                    position = 8192, 8240
-                    rotation = right
-                ]
-
-                port A {
-                    position = top:1
-                    kind = pe
-                }
-                [
-                    position = 8120, 8064
-                    rotation = right
-                ]
-
-                port B {
-                    position = top:2
-                    kind = pe
-                }
-                [
-                    position = 8192, 8064
-                    rotation = right
-                ]
-
-                port C {
-                    position = top:3
-                    kind = pe
-                }
-                [
-                    position = 8264, 8064
-                    rotation = right
-                ]
-
-                port N {
-                    position = bottom:2
-                    kind = pe
-                }
-                [
-                    position = 8192, 8320
-                    rotation = left
-                ]
-
-                junction Junction1 pe
-                [
-                    position = 8192, 8288
-                ]
-
-                junction Junction2 pe
-                [
-                    position = 8192, 8288
-                ]
-
-                connect C1.n_node Junction2 as Connection21
-                connect C1.p_node R1.n_node as Connection11
-                connect C1.p_node R1.n_node as Connection10
-                connect C1.p_node R1.n_node as Connection9
-                connect C2.n_node Junction1 as Connection18
-                connect C3.n_node Junction2 as Connection23
-                connect Junction1 N as Connection19
-                connect Junction2 Junction1 as Connection22
-                connect R1.p_node A as Connection13
-                connect R2.p_node B as Connection15
-                connect R3.p_node C as Connection16
-                connect C2.p_node R2.n_node as Connection24
-                connect C3.p_node R3.n_node as Connection25
-
-                C = "10e-6"
-                R = "1"
-
-                mask {
-                    R {
-                        label = "R"
-                        widget = edit
-                        type = generic
-                        default_value = "0"
-                        unit = "ohms"
-                        group = "General"
-                    }
-
-                    C {
-                        label = "C"
-                        widget = edit
-                        type = generic
-                        default_value = "0"
-                        unit = "F"
-                        group = "General"
-                    }
-
-                    CODE open
-                        from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
-                    
-                        dialog = RegularComponentPropertiesDialog(
-                            component=component,
-                            property_container=component.masks[-1],
-                            current_diagram=current_diagram
-                        )
-                        dialog.exec_()
-                        
-                    ENDCODE
-                }
-            }
-            [
-                position = 8088, 8288
-                size = 64, 48
-            ]
 
             port A {
                 position = left:1
@@ -64344,42 +63934,10 @@ T = 0.1118*w+0.000861*powf(w,2)-3.371e-7*powf(w,3);
                 rotation = down
             ]
 
-            junction Junction1 pe
-            [
-                position = 8072, 8048
-            ]
-
-            junction Junction2 pe
-            [
-                position = 8088, 8144
-            ]
-
-            junction Junction3 pe
-            [
-                position = 8104, 8240
-            ]
-
-            junction Junction4 pe
-            [
-                position = 8088, 8336
-            ]
-
-            connect "Core Coupling 3.a_in" Junction1 as Connection9
-            connect "Core Coupling 3.b_in" Junction2 as Connection12
-            connect "Core Coupling 3.c_in" Junction3 as Connection15
-            connect "Core Coupling 3.a_out" a as Connection8
-            connect "Core Coupling 3.b_out" b as Connection7
-            connect "Core Coupling 3.c_out" c as Connection6
-            connect "Core Coupling 3.d_out" g as Connection2
-            connect G Junction4 as Connection18
-            connect Junction1 A as Connection10
-            connect Junction2 B as Connection13
-            connect Junction3 C as Connection16
-            connect Junction4 "Core Coupling 3.d_in" as Connection19
-            connect "RC Snubber.A" Junction1 as Connection11
-            connect "RC Snubber.B" Junction2 as Connection14
-            connect "RC Snubber.C" Junction3 as Connection17
-            connect "RC Snubber.N" Junction4 as Connection20
+            connect a A as Connection1
+            connect B b as Connection2
+            connect c C as Connection3
+            connect G g as Connection4
         }
         [
             position = 11704, 7056
@@ -65306,10 +64864,6 @@ T = 0.1118*w+0.000861*powf(w,2)-3.371e-7*powf(w,3);
             execution_rate = "inherit"
         }
 
-        gen_terminator {
-            execution_rate = "inherit"
-        }
-
         gen_transport_delay {
             time_delay = "0.1"
             init_value = "0"
@@ -65460,19 +65014,6 @@ T = 0.1118*w+0.000861*powf(w,2)-3.371e-7*powf(w,3);
             L2 = "0.1"
             fixed_snb_u = "false"
             cpl_connection = "star"
-        }
-
-        "core/Four Phase Device Coupling" {
-            snb_type_i = "R1"
-            R1 = "inf"
-            C1 = "1e-06"
-            C2 = "1e-06"
-            fixed_snb_i = "True"
-            snb_type_u = "R2"
-            R2 = "0.0"
-            L1 = "0.1"
-            L2 = "0.1"
-            fixed_snb_u = "True"
         }
 
         "core/Induction Machine with Squirrel Cage" {
