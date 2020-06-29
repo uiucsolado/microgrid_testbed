@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 27-Jun-2020 @ 10:10:33 PM
+// Save timestamp: 29-Jun-2020 @ 03:10:38 AM
 //
 
 model "mt_ho_cct" {
@@ -37,7 +37,7 @@ model "mt_ho_cct" {
                 execution_rate = "Ts"
             }
             [
-                position = 8008, 8048
+                position = 7896, 8112
                 hide_name = True
             ]
 
@@ -46,7 +46,7 @@ model "mt_ho_cct" {
                 threshold = "1"
             }
             [
-                position = 8080, 8192
+                position = 7976, 8224
                 hide_name = True
                 scale = 1, -1
             ]
@@ -56,7 +56,7 @@ model "mt_ho_cct" {
                 value = "w_0"
             }
             [
-                position = 8008, 8176
+                position = 7896, 8240
                 hide_name = True
             ]
 
@@ -64,21 +64,21 @@ model "mt_ho_cct" {
                 operator = "NOT"
             }
             [
-                position = 7584, 7952
+                position = 7504, 7928
                 rotation = right
                 hide_name = True
             ]
 
-            component gen_digital_probe "governor OFF" {
+            component gen_digital_probe "MT_sync OFF" {
             }
             [
-                position = 7640, 7984
+                position = 7576, 7960
             ]
 
-            component gen_digital_probe "governor ON" {
+            component gen_digital_probe "MT_sync ON" {
             }
             [
-                position = 7656, 7856
+                position = 7576, 7840
             ]
 
             component src_scada_input MT_sync {
@@ -90,7 +90,7 @@ model "mt_ho_cct" {
                 unit = ""
             }
             [
-                position = 7528, 7904
+                position = 7448, 7888
             ]
 
             component Subsystem "qd0(PU)" {
@@ -131,14 +131,7 @@ model "mt_ho_cct" {
                 component gen_probe E_F_M {
                 }
                 [
-                    position = 8760, 8464
-                    scale = -1, 1
-                ]
-
-                component gen_probe theta_G_M {
-                }
-                [
-                    position = 8608, 8288
+                    position = 8744, 8248
                     scale = -1, 1
                 ]
 
@@ -158,7 +151,7 @@ model "mt_ho_cct" {
                 component gen_probe E_dp_M {
                 }
                 [
-                    position = 8736, 7920
+                    position = 8744, 7952
                     scale = -1, 1
                 ]
 
@@ -376,7 +369,7 @@ model "mt_ho_cct" {
                     ]
                 }
                 [
-                    position = 8872, 8144
+                    position = 8880, 8144
                     scale = -1, 1
                     size = 96, 64
                 ]
@@ -810,172 +803,11 @@ model "mt_ho_cct" {
 
                 component Subsystem Governor {
                     layout = dynamic
-                    component Subsystem "Exciter Activation" {
-                        layout = dynamic
-                        component gen_abs Abs1 {
-                        }
-                        [
-                            position = 8096, 8240
-                            hide_name = True
-                        ]
-
-                        component gen_comparator Comparator1 {
-                        }
-                        [
-                            position = 8168, 8264
-                            hide_name = True
-                            scale = 1, -1
-                        ]
-
-                        component src_constant Constant1 {
-                            execution_rate = "Ts"
-                            value = "4*max_slip"
-                        }
-                        [
-                            position = 8096, 8288
-                            hide_name = True
-                        ]
-
-                        component gen_logic_op "Logical operator1" {
-                        }
-                        [
-                            position = 8376, 8232
-                            hide_name = True
-                        ]
-
-                        component gen_probe Exc_state {
-                        }
-                        [
-                            position = 8672, 8240
-                        ]
-
-                        component gen_probe "speed difference" {
-                        }
-                        [
-                            position = 8152, 8144
-                        ]
-
-                        component gen_c_function wait_to_trip {
-                            global_variables = "real time_acc;"
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "boolean inherit;Reset inherit"
-                            in_terminal_labels = "[(\'boolean\', True), (\'Reset\', True)]"
-                            in_terminal_properties = "inherit boolean;inherit Reset;"
-                            init_fnc = "/*Begin code section*/
-time_acc = 0;
-Trip = 0;
-/*End code section*/"
-                            no_feed_inputs = "[\'\']"
-                            no_feed_outputs = "[\'\']"
-                            out_terminal_dimensions = "inherit"
-                            out_terminal_dimensions_str = "Trip inherit"
-                            out_terminal_labels = "[(\'Trip\', True)]"
-                            out_terminal_properties = "int Trip;"
-                            output_fnc = "/*Begin code section*/
-if(time_acc>=5.0){
-    Trip = 1;
-}
-else{
-    time_acc += execution_rate*boolean;
-}
-if(Reset ==1){
-    time_acc = 0;
-    Trip = 0;
-}
-/*End code section*/"
-                        }
-                        [
-                            position = 8552, 8240
-                            size = 112, 48
-                        ]
-
-                        component "core/Edge Detection" "Edge Detection1" {
-                        }
-                        [
-                            position = 8448, 8248
-                            hide_name = True
-                            size = 32, 32
-                        ]
-
-                        port speed_difference {
-                            position = left:1
-                            kind = sp
-                            direction =  out
-                            sp_type {
-                                default = auto
-                                readonly = True
-                            }
-                        }
-                        [
-                            position = 7976, 8144
-                        ]
-
-                        tag "Exc state" {
-                            value = "ON/OFF"
-                            scope = masked_subsystem
-                            kind = sp
-                            direction = in
-                        }
-                        [
-                            position = 8680, 8176
-                            hide_name = True
-                        ]
-
-                        tag w_bus3 {
-                            value = "gov_sync"
-                            scope = masked_subsystem
-                            kind = sp
-                            direction = out
-                        }
-                        [
-                            position = 8280, 8208
-                            hide_name = True
-                            scale = 1, -1
-                        ]
-
-                        junction Junction5 sp
-                        [
-                            position = 8408, 8232
-                        ]
-
-                        junction Junction13 sp
-                        [
-                            position = 8632, 8240
-                        ]
-
-                        junction Junction14 sp
-                        [
-                            position = 8056, 8144
-                        ]
-
-                        connect Abs1.out Comparator1.in2 as Connection105
-                        connect Constant1.out Comparator1.in1 as Connection18
-                        connect "Edge Detection1.In1" Junction5 as Connection36
-                        connect "Edge Detection1.Out1" wait_to_trip.Reset as Connection33
-                        connect Junction5 wait_to_trip.boolean as Connection35
-                        connect "Logical operator1.in1" Comparator1.out as Connection21
-                        connect "Logical operator1.out" Junction5 as Connection34
-                        connect wait_to_trip.Trip Junction13 as Connection118
-                        connect "Exc state" Junction13 as Connection120
-                        connect Exc_state.in Junction13 as Connection121
-                        [
-                            breakpoints = 8632, 8240
-                        ]
-                        connect "speed difference.in" Junction14 as Connection123
-                        connect Junction14 speed_difference as Connection124
-                        connect Abs1.in Junction14 as Connection125
-                        connect w_bus3 "Logical operator1.in" as Connection126
-                    }
-                    [
-                        position = 8288, 8096
-                        size = 112, 64
-                    ]
-
                     component gen_gain Gain2 {
                         gain = "gov_Kp"
                     }
                     [
-                        position = 8232, 8216
+                        position = 8256, 8216
                         hide_name = True
                     ]
 
@@ -983,7 +815,7 @@ if(Reset ==1){
                         gain = "K"
                     }
                     [
-                        position = 8280, 8216
+                        position = 8304, 8216
                         hide_name = True
                     ]
 
@@ -991,7 +823,7 @@ if(Reset ==1){
                         gain = "pms/w_0"
                     }
                     [
-                        position = 7904, 8232
+                        position = 8024, 8248
                         hide_name = True
                     ]
 
@@ -1002,14 +834,14 @@ if(Reset ==1){
                         method = "Bilinear"
                     }
                     [
-                        position = 8328, 8216
+                        position = 8352, 8216
                         hide_name = True
                     ]
 
                     component gen_integrator Integrator1 {
                     }
                     [
-                        position = 8392, 8216
+                        position = 8416, 8216
                         hide_name = True
                     ]
 
@@ -1017,7 +849,7 @@ if(Reset ==1){
                         signs = "+-"
                     }
                     [
-                        position = 7984, 8200
+                        position = 8128, 8216
                         hide_name = True
                     ]
 
@@ -1028,7 +860,7 @@ if(Reset ==1){
                         method = "Bilinear"
                     }
                     [
-                        position = 8184, 8216
+                        position = 8200, 8216
                         hide_name = True
                     ]
 
@@ -1036,7 +868,7 @@ if(Reset ==1){
                         gain = "1/w_0"
                     }
                     [
-                        position = 7664, 8184
+                        position = 7784, 8200
                         hide_name = True
                     ]
 
@@ -1045,7 +877,7 @@ if(Reset ==1){
                         rising_limit = "inner_w_rise"
                     }
                     [
-                        position = 7728, 8184
+                        position = 7848, 8200
                         hide_name = True
                     ]
 
@@ -1053,27 +885,142 @@ if(Reset ==1){
                         signs = "++"
                     }
                     [
-                        position = 7800, 8192
+                        position = 7920, 8208
                         hide_name = True
                     ]
 
-                    component sys_signal_switch "Signal switch1" {
-                        criterion = "ctrl != threshold"
-                        threshold = "1"
-                    }
-                    [
-                        position = 8120, 8216
-                        hide_name = True
-                        scale = 1, -1
-                    ]
+                    component Subsystem "Exciter Activation" {
+                        layout = dynamic
+                        component gen_abs Abs1 {
+                        }
+                        [
+                            position = 8192, 8208
+                            hide_name = True
+                        ]
 
-                    component src_constant Constant2 {
-                        execution_rate = "Ts"
-                        value = "0"
+                        component gen_comparator Comparator1 {
+                        }
+                        [
+                            position = 8264, 8232
+                            hide_name = True
+                            scale = 1, -1
+                        ]
+
+                        component src_constant Constant1 {
+                            execution_rate = "Ts"
+                            value = "4*max_slip"
+                        }
+                        [
+                            position = 8192, 8256
+                            hide_name = True
+                        ]
+
+                        component gen_probe Exc_state {
+                        }
+                        [
+                            position = 8480, 8232
+                        ]
+
+                        component gen_probe "speed difference" {
+                        }
+                        [
+                            position = 8096, 8144
+                        ]
+
+                        component gen_c_function "Activate Exciter" {
+                            in_terminal_dimensions = "inherit"
+                            in_terminal_dimensions_str = "boolean inherit"
+                            in_terminal_labels = "[(\'boolean\', True)]"
+                            in_terminal_properties = "inherit boolean;"
+                            init_fnc = "/*Begin code section*/
+Activate = 0;
+/*End code section*/"
+                            no_feed_inputs = "[\'\']"
+                            no_feed_outputs = "[\'\']"
+                            out_terminal_dimensions = "inherit"
+                            out_terminal_dimensions_str = "Activate inherit"
+                            out_terminal_labels = "[(\'Activate\', True)]"
+                            out_terminal_properties = "int Activate;"
+                            output_fnc = "/*Begin code section*/
+if(boolean==1){
+    Activate = 1;
+}
+/*End code section*/"
+                        }
+                        [
+                            position = 8360, 8232
+                            size = 112, 48
+                        ]
+
+                        component gen_sum Sum1 {
+                            signs = "+-"
+                        }
+                        [
+                            position = 8008, 8144
+                            hide_name = True
+                        ]
+
+                        component src_constant Constant2 {
+                            execution_rate = "Ts"
+                        }
+                        [
+                            position = 7936, 8120
+                            hide_name = True
+                        ]
+
+                        port w_PU {
+                            label = "w_PU"
+                            position = left:1
+                            kind = sp
+                            direction =  out
+                            sp_type {
+                                default = auto
+                                readonly = True
+                            }
+                        }
+                        [
+                            position = 7936, 8168
+                        ]
+
+                        tag V_t4 {
+                            value = "exc_state"
+                            scope = masked_subsystem
+                            kind = sp
+                            direction = in
+                        }
+                        [
+                            position = 8480, 8176
+                            hide_name = True
+                        ]
+
+                        junction Junction14 sp
+                        [
+                            position = 8048, 8144
+                        ]
+
+                        junction Junction15 sp
+                        [
+                            position = 8432, 8232
+                        ]
+
+                        connect Abs1.out Comparator1.in2 as Connection105
+                        connect Constant1.out Comparator1.in1 as Connection18
+                        connect w_PU Sum1.in1 as Connection199
+                        connect "speed difference.in" Junction14 as Connection195
+                        connect Junction14 Sum1.out as Connection196
+                        connect Abs1.in Junction14 as Connection197
+                        connect Constant2.out Sum1.in as Connection201
+                        connect Exc_state.in Junction15 as Connection203
+                        connect Junction15 "Activate Exciter.Activate" as Connection204
+                        [
+                            breakpoints = 8440, 8232; 8440, 8232
+                        ]
+                        connect V_t4 Junction15 as Connection205
+                        connect Comparator1.out "Activate Exciter.boolean" as Connection206
                     }
                     [
-                        position = 8056, 8232
-                        hide_name = True
+                        position = 8128, 8272
+                        size = 88, 48
                     ]
 
                     port P_SV {
@@ -1100,7 +1047,7 @@ if(Reset ==1){
                         }
                     }
                     [
-                        position = 7600, 8184
+                        position = 7720, 8200
                     ]
 
                     port w_m {
@@ -1114,7 +1061,7 @@ if(Reset ==1){
                         }
                     }
                     [
-                        position = 7840, 8232
+                        position = 7960, 8248
                     ]
 
                     tag V_t3 {
@@ -1124,25 +1071,13 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 7712, 8216
+                        position = 7736, 8248
                         hide_name = True
-                    ]
-
-                    tag w_bus3 {
-                        value = "gov_sync"
-                        scope = masked_subsystem
-                        kind = sp
-                        direction = out
-                    }
-                    [
-                        position = 8048, 8296
-                        hide_name = True
-                        scale = 1, -1
                     ]
 
                     junction Junction1 sp
                     [
-                        position = 8152, 8216
+                        position = 8064, 8248
                     ]
 
                     connect "Discrete Transfer Function1.out" Gain2.in as Connection3
@@ -1152,23 +1087,23 @@ if(Reset ==1){
                     connect Integrator1.in "Discrete Transfer Function2.out" as Connection6
                     connect "Rate Limiter1.in" Gain4.out as Connection13
                     connect Integrator1.out P_SV as Connection14
-                    connect V_t3 Sum6.in1 as Connection185
                     connect w_ref Gain4.in as Connection186
                     connect "Rate Limiter1.out" Sum6.in as Connection187
                     connect Sum1.in Sum6.out as Connection193
                     [
-                        breakpoints = 7888, 8192
+                        breakpoints = 8008, 8208
                     ]
-                    connect Gain1.out Sum1.in1 as Connection192
+                    connect "Discrete Transfer Function1.in" Sum1.out as Connection194
+                    connect Sum1.in1 Junction1 as Connection201
                     [
-                        breakpoints = 7944, 8208
+                        breakpoints = 8064, 8224
                     ]
-                    connect w_bus3 "Signal switch1.in2" as Connection194
-                    connect Sum1.out "Signal switch1.in1" as Connection196
-                    connect Constant2.out "Signal switch1.in" as Connection197
-                    connect "Signal switch1.out" Junction1 as Connection198
-                    connect Junction1 "Discrete Transfer Function1.in" as Connection199
-                    connect "Exciter Activation.speed_difference" Junction1 as Connection200
+                    connect Junction1 Gain1.out as Connection202
+                    [
+                        breakpoints = 8064, 8248
+                    ]
+                    connect "Exciter Activation.w_PU" Junction1 as Connection203
+                    connect V_t3 Sum6.in1 as Connection204
                 }
                 [
                     position = 7416, 8528
@@ -1593,7 +1528,7 @@ if(Reset ==1){
                         threshold = "1"
                     }
                     [
-                        position = 7904, 8360
+                        position = 7976, 8360
                         hide_name = True
                     ]
 
@@ -1602,7 +1537,7 @@ if(Reset ==1){
                         value = "0"
                     }
                     [
-                        position = 7856, 8344
+                        position = 7928, 8344
                         hide_name = True
                     ]
 
@@ -1610,22 +1545,6 @@ if(Reset ==1){
                     }
                     [
                         position = 8136, 8384
-                    ]
-
-                    component gen_rel_op "Relational operator1" {
-                    }
-                    [
-                        position = 7600, 7904
-                        hide_name = True
-                    ]
-
-                    component src_constant Constant2 {
-                        execution_rate = "Ts"
-                        signal_type = "int"
-                    }
-                    [
-                        position = 7496, 7936
-                        hide_name = True
                     ]
 
                     component gen_probe V_R_M {
@@ -1639,7 +1558,7 @@ if(Reset ==1){
                         rising_limit = "V_rise"
                     }
                     [
-                        position = 7968, 8360
+                        position = 8040, 8360
                         hide_name = True
                     ]
 
@@ -1682,22 +1601,23 @@ if(Reset ==1){
                     component gen_digital_probe "exciter ON" {
                     }
                     [
-                        position = 7696, 7952
+                        position = 7880, 8232
                     ]
 
                     component gen_logic_op "Logical operator1" {
                         operator = "NOT"
                     }
                     [
-                        position = 7640, 8016
+                        position = 7792, 8176
                         rotation = right
                         hide_name = True
+                        scale = 1, -1
                     ]
 
                     component gen_digital_probe "exciter OFF" {
                     }
                     [
-                        position = 7696, 8056
+                        position = 7880, 8128
                     ]
 
                     component Subsystem PI {
@@ -1848,7 +1768,7 @@ if(Reset ==1){
                         signs = "++"
                     }
                     [
-                        position = 7720, 8352
+                        position = 7792, 8352
                         hide_name = True
                     ]
 
@@ -1856,7 +1776,7 @@ if(Reset ==1){
                         signs = "+-"
                     }
                     [
-                        position = 7808, 8376
+                        position = 7880, 8376
                         hide_name = True
                     ]
 
@@ -1885,7 +1805,7 @@ if(Reset ==1){
                         }
                     }
                     [
-                        position = 8144, 8480
+                        position = 8136, 8480
                     ]
 
                     port V_ref {
@@ -1899,7 +1819,7 @@ if(Reset ==1){
                         }
                     }
                     [
-                        position = 7632, 8328
+                        position = 7696, 8328
                     ]
 
                     tag R_F2 {
@@ -1975,7 +1895,7 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 8144, 7960
+                        position = 8136, 7960
                         hide_name = True
                     ]
 
@@ -1997,7 +1917,7 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 8144, 8200
+                        position = 8136, 8200
                         hide_name = True
                     ]
 
@@ -2019,7 +1939,7 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 8144, 8072
+                        position = 8136, 8072
                         hide_name = True
                     ]
 
@@ -2030,7 +1950,7 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 8144, 8440
+                        position = 8136, 8440
                         hide_name = True
                     ]
 
@@ -2045,17 +1965,6 @@ if(Reset ==1){
                         hide_name = True
                     ]
 
-                    tag "Exc state1" {
-                        value = "ON/OFF"
-                        scope = masked_subsystem
-                        kind = sp
-                        direction = out
-                    }
-                    [
-                        position = 7512, 7880
-                        hide_name = True
-                    ]
-
                     tag V_t3 {
                         value = "del_V"
                         scope = masked_subsystem
@@ -2063,18 +1972,7 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 7632, 8376
-                        hide_name = True
-                    ]
-
-                    tag V_t4 {
-                        value = "exc_state"
-                        scope = masked_subsystem
-                        kind = sp
-                        direction = in
-                    }
-                    [
-                        position = 7968, 7904
+                        position = 7696, 8376
                         hide_name = True
                     ]
 
@@ -2085,7 +1983,7 @@ if(Reset ==1){
                         direction = out
                     }
                     [
-                        position = 7720, 8400
+                        position = 7792, 8400
                         hide_name = True
                     ]
 
@@ -2144,6 +2042,28 @@ if(Reset ==1){
                         hide_name = True
                     ]
 
+                    tag V_t10 {
+                        value = "exc_state"
+                        scope = masked_subsystem
+                        kind = sp
+                        direction = out
+                    }
+                    [
+                        position = 7696, 8232
+                        hide_name = True
+                    ]
+
+                    tag V_t11 {
+                        value = "exc_state"
+                        scope = masked_subsystem
+                        kind = sp
+                        direction = out
+                    }
+                    [
+                        position = 7880, 8296
+                        hide_name = True
+                    ]
+
                     junction Junction4 sp
                     [
                         position = 8512, 8272
@@ -2164,21 +2084,6 @@ if(Reset ==1){
                         position = 8416, 7944
                     ]
 
-                    junction Junction20 sp
-                    [
-                        position = 7640, 7904
-                    ]
-
-                    junction Junction21 sp
-                    [
-                        position = 7640, 7952
-                    ]
-
-                    junction Junction22 sp
-                    [
-                        position = 7904, 7904
-                    ]
-
                     junction Junction23 sp
                     [
                         position = 8072, 8360
@@ -2186,11 +2091,15 @@ if(Reset ==1){
 
                     junction Junction24 sp
                     [
-                        position = 8072, 8368
+                        position = 8072, 8360
+                    ]
+
+                    junction Junction25 sp
+                    [
+                        position = 7792, 8232
                     ]
 
                     connect Constant1.out "|V|1.in" as Connection42
-                    connect Constant2.out "Relational operator1.in1" as Connection56
                     connect E_F Junction18 as Connection167
                     connect E_F1 Gain2.in as Connection4
                     connect E_F2 Gain3.in as Connection7
@@ -2234,19 +2143,7 @@ if(Reset ==1){
                     connect "exciter OFF.in" "Logical operator1.out" as Connection155
                     connect "|V|" Sum5.in1 as Connection120
                     connect "|V|1.out" "Rate Limit.in" as Connection48
-                    connect "Exc state1" "Relational operator1.in" as Connection176
-                    connect Junction20 "Relational operator1.out" as Connection179
-                    connect "Logical operator1.in" Junction21 as Connection181
-                    connect Junction21 Junction20 as Connection182
-                    connect "exciter ON.in" Junction21 as Connection183
-                    connect V_t3 Sum6.in1 as Connection185
                     connect V_ref Sum6.in as Connection186
-                    connect "|V|1.in2" Junction22 as Connection187
-                    connect Junction22 Junction20 as Connection188
-                    [
-                        breakpoints = 7904, 7904; 7728, 7904
-                    ]
-                    connect V_t4 Junction22 as Connection189
                     connect V_t2 Sum4.in1 as Connection75
                     connect Sum6.out Sum4.in as Connection191
                     connect Sum4.out "|V|1.in1" as Connection192
@@ -2260,180 +2157,16 @@ if(Reset ==1){
                     connect V_t7 Integrator2.reset as Connection202
                     connect V_t8 Integrator1.reset as Connection203
                     connect V_t9 PI.Reset as Connection204
+                    connect V_t10 Junction25 as Connection210
+                    connect Junction25 "exciter ON.in" as Connection211
+                    connect "Logical operator1.in" Junction25 as Connection212
+                    connect V_t11 "|V|1.in2" as Connection213
+                    connect V_t3 Sum6.in1 as Connection214
                 }
                 [
-                    position = 8872, 8520
+                    position = 8880, 8296
                     scale = -1, 1
                     size = 96, 64
-                ]
-
-                component Subsystem theta_G {
-                    layout = dynamic
-                    component gen_sum Sum1 {
-                        signs = "++"
-                    }
-                    [
-                        position = 8184, 8200
-                        hide_name = True
-                    ]
-
-                    component gen_gain Gain1 {
-                        gain = "-1"
-                    }
-                    [
-                        position = 7960, 8136
-                        hide_name = True
-                    ]
-
-                    component sys_signal_switch "Signal switch1" {
-                    }
-                    [
-                        position = 8096, 8144
-                        hide_name = True
-                    ]
-
-                    component src_constant Constant1 {
-                        execution_rate = "Ts"
-                        value = "0"
-                    }
-                    [
-                        position = 8008, 8104
-                        hide_name = True
-                    ]
-
-                    component gen_c_function remainder {
-                        global_variables = "real out;"
-                        in_terminal_dimensions = "inherit"
-                        in_terminal_dimensions_str = "in inherit"
-                        in_terminal_labels = "[(\'in\', True)]"
-                        init_fnc = "/*Begin code section*/
-out = 0;
-in = 0;
-/*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "output inherit"
-                        out_terminal_labels = "[(\'output\', True)]"
-                        out_terminal_properties = "real output;"
-                        output_fnc = "/*Begin code section*/
-output = out+0.0;
-/*End code section*/"
-                        parameters = "real Ts;"
-                        update_fnc = "/*Begin code section*/
-out = fmod(in,6.283185307179586);
-/*End code section*/"
-                    }
-                    [
-                        position = 8328, 8200
-                        hide_name = True
-                        size = 112, 48
-                    ]
-
-                    component gen_trigonometric "Trigonometric function2" {
-                        trigonometric_fn = "atan2"
-                    }
-                    [
-                        position = 8032, 8160
-                        hide_name = True
-                    ]
-
-                    component gen_integrator Integrator1 {
-                    }
-                    [
-                        position = 8032, 8256
-                        hide_name = True
-                    ]
-
-                    port w_e {
-                        label = "w_e"
-                        position = left:1
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7912, 8256
-                    ]
-
-                    port V_qG {
-                        label = "V_qG"
-                        position = left:auto
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7912, 8184
-                    ]
-
-                    port V_dG {
-                        label = "V_dG"
-                        position = left:auto
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7912, 8136
-                    ]
-
-                    port theta_G {
-                        label = "theta_G"
-                        position = right:1
-                        kind = sp
-                        direction =  in
-                        sp_type {
-                            default = inherit
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 8464, 8200
-                    ]
-
-                    port "Exc ON_OFF" {
-                        label = "ON/OFF"
-                        position = left:auto
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 8008, 8048
-                    ]
-
-                    connect Constant1.out "Signal switch1.in" as Connection18
-                    connect "Exc ON_OFF" "Signal switch1.in2" as Connection17
-                    connect Gain1.out "Trigonometric function2.in" as Connection112
-                    connect Integrator1.out Sum1.in1 as Connection122
-                    connect "Signal switch1.out" Sum1.in as Connection120
-                    connect "Trigonometric function2.out" "Signal switch1.in1" as Connection105
-                    connect V_dG Gain1.in as Connection6
-                    connect V_qG "Trigonometric function2.in1" as Connection113
-                    connect remainder.in Sum1.out as Connection117
-                    [
-                        breakpoints = 8256, 8200
-                    ]
-                    connect remainder.output theta_G as Connection5
-                    connect w_e Integrator1.in as Connection121
-                }
-                [
-                    position = 8744, 8336
-                    scale = -1, 1
-                    size = 96, 96
                 ]
 
                 component Subsystem "Phi_q_a 2" {
@@ -2992,30 +2725,6 @@ out = fmod(in,6.283185307179586);
                     position = 7888, 8840
                 ]
 
-                component gen_gain Gain3 {
-                    gain = "V_DQ"
-                }
-                [
-                    position = 7768, 8952
-                    hide_name = True
-                ]
-
-                component gen_gain Gain4 {
-                    gain = "V_DQ"
-                }
-                [
-                    position = 8272, 8992
-                    hide_name = True
-                ]
-
-                component gen_gain Gain5 {
-                    gain = "V_DQ"
-                }
-                [
-                    position = 8792, 9016
-                    hide_name = True
-                ]
-
                 component pas_resistor Rb {
                     resistance = "Rs"
                 }
@@ -3060,7 +2769,7 @@ out = fmod(in,6.283185307179586);
                 component "core/abc to dq" "abc to dq1" {
                 }
                 [
-                    position = 8304, 8552
+                    position = 8776, 8440
                     size = 48, 80
                 ]
 
@@ -3068,21 +2777,21 @@ out = fmod(in,6.283185307179586);
                     gain = "-1"
                 }
                 [
-                    position = 8376, 8552
+                    position = 8984, 8440
                     hide_name = True
                 ]
 
                 component gen_terminator Termination1 {
                 }
                 [
-                    position = 8472, 8584
+                    position = 9080, 8472
                     hide_name = True
                 ]
 
                 component gen_probe "|V|_M" {
                 }
                 [
-                    position = 8680, 8616
+                    position = 9008, 8544
                 ]
 
                 component "core/Voltage Measurement" Ea1 {
@@ -3115,38 +2824,16 @@ out = fmod(in,6.283185307179586);
                     size = 64, 32
                 ]
 
-                component "core/abc to dq" "abc to dq2" {
-                }
-                [
-                    position = 8304, 8688
-                    size = 48, 80
-                ]
-
-                component gen_gain Gain7 {
-                    gain = "-1"
-                }
-                [
-                    position = 8376, 8688
-                    hide_name = True
-                ]
-
-                component gen_terminator Termination2 {
-                }
-                [
-                    position = 8432, 8760
-                    hide_name = True
-                ]
-
                 component gen_probe VdG {
                 }
                 [
-                    position = 8568, 8728
+                    position = 8896, 8656
                 ]
 
                 component gen_probe VqG {
                 }
                 [
-                    position = 8568, 8616
+                    position = 8896, 8544
                     rotation = down
                     scale = -1, 1
                 ]
@@ -3246,7 +2933,7 @@ out = fmod(in,6.283185307179586);
                     connect d Junction1 as Connection148
                 }
                 [
-                    position = 8576, 8672
+                    position = 8904, 8600
                     hide_name = True
                     size = 80, 48
                 ]
@@ -3257,6 +2944,53 @@ out = fmod(in,6.283185307179586);
                 [
                     position = 9392, 8904
                     size = 64, 256
+                ]
+
+                component gen_gain Gain8 {
+                    gain = "V_DQ"
+                }
+                [
+                    position = 8184, 8304
+                    hide_name = True
+                ]
+
+                component gen_gain Gain9 {
+                    gain = "V_DQ"
+                }
+                [
+                    position = 8184, 8368
+                    hide_name = True
+                ]
+
+                component gen_gain Gain10 {
+                    gain = "1/I_DQ"
+                }
+                [
+                    position = 8880, 8408
+                    hide_name = True
+                ]
+
+                component gen_gain Gain11 {
+                    gain = "1/I_DQ"
+                }
+                [
+                    position = 8880, 8440
+                    hide_name = True
+                ]
+
+                component src_clock Clock1 {
+                    execution_rate = "Ts"
+                }
+                [
+                    position = 8096, 8552
+                    hide_name = True
+                ]
+
+                component gen_product Product1 {
+                }
+                [
+                    position = 8184, 8536
+                    hide_name = True
                 ]
 
                 port V_ref {
@@ -3270,7 +3004,7 @@ out = fmod(in,6.283185307179586);
                     }
                 }
                 [
-                    position = 9016, 8480
+                    position = 8992, 8272
                     scale = -1, 1
                 ]
 
@@ -3389,7 +3123,7 @@ out = fmod(in,6.283185307179586);
                     direction = in
                 }
                 [
-                    position = 8760, 8520
+                    position = 8744, 8296
                     hide_name = True
                     scale = -1, 1
                 ]
@@ -3412,7 +3146,7 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 9016, 8520
+                    position = 8992, 8320
                     hide_name = True
                     scale = -1, 1
                 ]
@@ -3426,18 +3160,6 @@ out = fmod(in,6.283185307179586);
                 [
                     position = 7376, 8328
                     hide_name = True
-                ]
-
-                tag w_e5 {
-                    value = "w_e"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8856, 8296
-                    hide_name = True
-                    scale = -1, 1
                 ]
 
                 tag I_q_a6 {
@@ -3459,7 +3181,7 @@ out = fmod(in,6.283185307179586);
                     direction = in
                 }
                 [
-                    position = 8736, 8000
+                    position = 8744, 8000
                     hide_name = True
                     scale = -1, 1
                 ]
@@ -3494,7 +3216,7 @@ out = fmod(in,6.283185307179586);
                     direction = in
                 }
                 [
-                    position = 8456, 8512
+                    position = 9064, 8408
                     hide_name = True
                 ]
 
@@ -3628,7 +3350,7 @@ out = fmod(in,6.283185307179586);
                     direction = in
                 }
                 [
-                    position = 8456, 8552
+                    position = 9064, 8440
                     hide_name = True
                 ]
 
@@ -3651,54 +3373,6 @@ out = fmod(in,6.283185307179586);
                 }
                 [
                     position = 8248, 8080
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag V_dG3 {
-                    value = "V_dG"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8856, 8352
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag V_qG3 {
-                    value = "V_qG"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8856, 8320
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag theta_G1 {
-                    value = "theta_G"
-                    scope = global
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8608, 8336
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag "Exc state2" {
-                    value = "ON/OFF"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8856, 8376
                     hide_name = True
                     scale = -1, 1
                 ]
@@ -3838,18 +3512,6 @@ out = fmod(in,6.283185307179586);
                     hide_name = True
                 ]
 
-                tag theta_bus1 {
-                    value = "theta_bus"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8208, 8456
-                    hide_name = True
-                    size = 77, 20
-                ]
-
                 tag V_a {
                     value = "E_a"
                     scope = local
@@ -3890,7 +3552,7 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 7688, 8952
+                    position = 7760, 8952
                     hide_name = True
                 ]
 
@@ -3901,7 +3563,7 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 8192, 8992
+                    position = 8264, 8992
                     hide_name = True
                 ]
 
@@ -3912,7 +3574,7 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 8712, 9016
+                    position = 8776, 9016
                     hide_name = True
                 ]
 
@@ -3956,7 +3618,7 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 8184, 8512
+                    position = 8672, 8400
                     hide_name = True
                 ]
 
@@ -3967,7 +3629,7 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 8184, 8536
+                    position = 8672, 8424
                     hide_name = True
                 ]
 
@@ -3978,20 +3640,8 @@ out = fmod(in,6.283185307179586);
                     direction = out
                 }
                 [
-                    position = 8184, 8568
+                    position = 8672, 8456
                     hide_name = True
-                ]
-
-                tag theta_bus2 {
-                    value = "theta_bus"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8184, 8592
-                    hide_name = True
-                    size = 60, 20
                 ]
 
                 tag "|V|1" {
@@ -4001,7 +3651,7 @@ out = fmod(in,6.283185307179586);
                     direction = in
                 }
                 [
-                    position = 8680, 8672
+                    position = 9008, 8600
                     hide_name = True
                 ]
 
@@ -4035,73 +3685,6 @@ out = fmod(in,6.283185307179586);
                     position = 9216, 9016
                 ]
 
-                tag I_a2 {
-                    value = "Ea1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8184, 8648
-                    hide_name = True
-                ]
-
-                tag I_b2 {
-                    value = "Eb1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8184, 8672
-                    hide_name = True
-                ]
-
-                tag I_c2 {
-                    value = "Ec1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8184, 8704
-                    hide_name = True
-                ]
-
-                tag theta_bus3 {
-                    value = "theta_bus"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8184, 8728
-                    hide_name = True
-                    size = 60, 20
-                ]
-
-                tag V_qG1 {
-                    value = "V_qG"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8456, 8664
-                    hide_name = True
-                ]
-
-                tag V_dG1 {
-                    value = "V_dG"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8456, 8688
-                    hide_name = True
-                ]
-
                 tag Connect5 {
                     value = "Connect"
                     scope = masked_subsystem
@@ -4110,6 +3693,39 @@ out = fmod(in,6.283185307179586);
                 }
                 [
                     position = 9280, 8760
+                    hide_name = True
+                ]
+
+                tag From41 {
+                    value = "E_d"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8672, 8616
+                    hide_name = True
+                ]
+
+                tag From40 {
+                    value = "E_q"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8672, 8584
+                    hide_name = True
+                ]
+
+                tag w_e8 {
+                    value = "w_e"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8096, 8520
                     hide_name = True
                 ]
 
@@ -4135,12 +3751,7 @@ out = fmod(in,6.283185307179586);
 
                 junction Junction15 sp
                 [
-                    position = 8808, 8520
-                ]
-
-                junction Junction16 sp
-                [
-                    position = 8664, 8336
+                    position = 8800, 8296
                 ]
 
                 junction Junction19 sp
@@ -4193,29 +3804,9 @@ out = fmod(in,6.283185307179586);
                     position = 9120, 9072
                 ]
 
-                junction Junction42 sp
-                [
-                    position = 8344, 8664
-                ]
-
-                junction Junction43 sp
-                [
-                    position = 8408, 8688
-                ]
-
-                junction Junction44 sp
-                [
-                    position = 8504, 8616
-                ]
-
-                junction Junction45 sp
-                [
-                    position = 8504, 8728
-                ]
-
                 junction Junction46 sp
                 [
-                    position = 8632, 8672
+                    position = 8960, 8600
                 ]
 
                 junction Junction47 pe
@@ -4233,6 +3824,21 @@ out = fmod(in,6.283185307179586);
                     position = 9120, 8960
                 ]
 
+                junction Junction50 sp
+                [
+                    position = 8800, 8584
+                ]
+
+                junction Junction51 sp
+                [
+                    position = 8800, 8616
+                ]
+
+                junction Junction52 sp
+                [
+                    position = 8264, 8536
+                ]
+
                 connect E_F Junction15 as Connection161
                 connect E_F1 E_qp.E_F as Connection53
                 connect E_F_M.in Junction15 as Connection163
@@ -4243,11 +3849,6 @@ out = fmod(in,6.283185307179586);
                 connect E_qp3 Phi_1d_a.E_qp as Connection34
                 connect E_qp_M.in Junction7 as Connection130
                 connect Engine.T_M2 Junction9 as Connection134
-                connect "Exc state2" "theta_G.Exc ON_OFF" as Connection176
-                connect Exciter.V_ref V_ref as Connection57
-                [
-                    breakpoints = 8936, 8504; 8936, 8480; 8984, 8480
-                ]
                 connect Gain1.out w_e1 as Connection18
                 connect I_d_a2 Phi_1d_a.I_d_a as Connection43
                 connect I_d_a3 E_qp.I_d_a as Connection44
@@ -4258,7 +3859,6 @@ out = fmod(in,6.283185307179586);
                 connect Junction10 Phi_1d_a1 as Connection138
                 connect Junction11 Phi_2q_a.Phi_2q_a as Connection141
                 connect Junction15 Exciter.E_F4 as Connection162
-                connect Junction16 theta_G.theta_G as Connection165
                 connect Junction19 E_dp.E_dp3 as Connection174
                 connect Junction20 Gain1.in as Connection180
                 connect Junction21 Junction20 as Connection183
@@ -4274,10 +3874,6 @@ out = fmod(in,6.283185307179586);
                 connect Phi_q_a4 w_m.Phi_q_a as Connection25
                 connect T_M w_m.T_M as Connection52
                 connect T_m_M.in Junction9 as Connection136
-                connect V_dG3 theta_G.V_dG as Connection122
-                connect V_qG3 theta_G.V_qG as Connection123
-                connect theta_G1 Junction16 as Connection164
-                connect w_e5 theta_G.w_e as Connection54
                 connect w_m.w_m2 Junction20 as Connection179
                 connect w_m1 Junction21 as Connection182
                 connect w_m_M.in Junction21 as Connection184
@@ -4303,20 +3899,11 @@ out = fmod(in,6.283185307179586);
                 connect Phi_d_a5 V_dG2.Phi_d_a as Connection106
                 connect Phi_q_a5 V_dG2.Phi_q_a as Connection107
                 connect w_e6 V_dG2.w_e as Connection108
-                connect theta_bus1 "dq to abc1.wt" as Connection207
                 connect Gain2.out "dq to abc1.q_input" as Connection208
-                connect V_qG2.V_qG "dq to abc1.d_input" as Connection209
-                connect V_dG2.V_d_a Gain2.in as Connection210
-                [
-                    breakpoints = 8152, 8448; 8152, 8384
-                ]
                 connect Constant1.out "dq to abc1.zero_input" as Connection211
                 connect V_b "dq to abc1.phase_b" as Connection212
                 connect V_c "dq to abc1.phase_c" as Connection213
                 connect V_a "dq to abc1.phase_a" as Connection214
-                connect V_a1 Gain3.in as Connection218
-                connect V_b1 Gain4.in as Connection220
-                connect V_c1 Gain5.in as Connection222
                 connect Ea.p_node Ra.p_node as Connection224
                 connect Eb.p_node Rb.p_node as Connection225
                 connect Ec.p_node Rc.p_node as Connection226
@@ -4326,19 +3913,13 @@ out = fmod(in,6.283185307179586);
                 connect I_a Ia1.out as Connection242
                 connect I_c Ic1.out as Connection244
                 connect Gain6.out I_d_a as Connection245
-                connect "abc to dq1.q_axis" Gain6.in as Connection246
-                connect "abc to dq1.d_axis" I_q_a as Connection247
-                [
-                    breakpoints = 8344, 8512; 8400, 8512
-                ]
                 connect "abc to dq1.zero_axis" Termination1.in as Connection248
                 [
-                    breakpoints = 8344, 8584; 8432, 8584
+                    breakpoints = 8816, 8472; 8904, 8472
                 ]
                 connect I_a1 "abc to dq1.va" as Connection249
                 connect I_b1 "abc to dq1.vb" as Connection250
                 connect I_c1 "abc to dq1.vc" as Connection251
-                connect theta_bus2 "abc to dq1.wt" as Connection252
                 connect Ib1.out I_b as Connection253
                 connect Ea.n_node Junction37 as Connection277
                 connect Ea1.n_node Junction37 as Connection279
@@ -4360,38 +3941,9 @@ out = fmod(in,6.283185307179586);
                 connect Ea_G Ea1.out as Connection295
                 connect Eb_G Eb1.out as Connection296
                 connect Ec_G Ec1.out as Connection297
-                connect "abc to dq2.q_axis" Gain7.in as Connection299
-                connect I_a2 "abc to dq2.va" as Connection302
-                connect I_b2 "abc to dq2.vb" as Connection303
-                connect I_c2 "abc to dq2.vc" as Connection304
-                connect theta_bus3 "abc to dq2.wt" as Connection305
-                connect V_qG1 Junction42 as Connection312
-                connect Junction42 "abc to dq2.d_axis" as Connection313
-                connect Termination2.in "abc to dq2.zero_axis" as Connection315
-                connect V_dG1 Junction43 as Connection316
-                connect Junction43 Gain7.out as Connection317
-                connect VqG.in Junction44 as Connection319
-                connect Junction44 Junction42 as Connection320
-                [
-                    breakpoints = 8344, 8616; 8344, 8664
-                ]
-                connect magnitude.q Junction44 as Connection321
-                connect VdG.in Junction45 as Connection322
-                connect Junction45 Junction43 as Connection323
-                [
-                    breakpoints = 8504, 8728; 8408, 8728
-                ]
-                connect magnitude.d Junction45 as Connection324
                 connect magnitude.magnitude Junction46 as Connection326
                 connect Junction46 "|V|1" as Connection327
                 connect "|V|_M.in" Junction46 as Connection328
-                connect theta_G_M.in Junction16 as Connection330
-                [
-                    breakpoints = 8664, 8288; 8664, 8336; 8664, 8336
-                ]
-                connect Gain5.out Ec.in as Connection331
-                connect Gain4.out Eb.in as Connection332
-                connect Gain3.out Ea.in as Connection333
                 connect S2.b_out V_bG as Connection349
                 connect V_cG S2.c_out as Connection350
                 connect V_aG S2.a_out as Connection351
@@ -4411,9 +3963,35 @@ out = fmod(in,6.283185307179586);
                 connect w_ref Governor.w_ref as Connection364
                 connect w_m2 Governor.w_m as Connection365
                 connect Governor.P_SV Engine.P_SV as Connection367
+                connect V_ref Exciter.V_ref as Connection368
+                connect V_qG2.V_qG Gain8.in as Connection377
+                connect Gain8.out "dq to abc1.d_input" as Connection378
+                connect V_dG2.V_d_a Gain9.in as Connection379
+                connect Gain9.out Gain2.in as Connection380
+                connect "abc to dq1.q_axis" Gain11.in as Connection381
+                connect Gain11.out Gain6.in as Connection382
+                connect Gain10.out I_q_a as Connection384
+                connect Gain10.in "abc to dq1.d_axis" as Connection385
+                connect V_a1 Ea.in as Connection390
+                connect V_b1 Eb.in as Connection391
+                connect V_c1 Ec.in as Connection392
+                connect From40 Junction50 as Connection395
+                connect Junction50 magnitude.q as Connection396
+                connect VqG.in Junction50 as Connection397
+                connect From41 Junction51 as Connection398
+                connect Junction51 magnitude.d as Connection399
+                connect VdG.in Junction51 as Connection400
+                connect w_e8 Product1.in as Connection401
+                connect Clock1.out Product1.in1 as Connection402
+                connect Product1.out Junction52 as Connection404
+                connect Junction52 "dq to abc1.wt" as Connection405
+                connect "abc to dq1.wt" Junction52 as Connection406
+                [
+                    breakpoints = 8736, 8536; 8264, 8536
+                ]
             }
             [
-                position = 8184, 8128
+                position = 8144, 8160
                 size = 96, 160
             ]
 
@@ -4832,7 +4410,7 @@ else{
                 connect f_diff.in Junction38 as Connection294
             }
             [
-                position = 8472, 7888
+                position = 8344, 7928
                 size = 64, 64
             ]
 
@@ -4841,7 +4419,7 @@ else{
                 frequency = "60"
             }
             [
-                position = 7440, 8096
+                position = 7456, 8096
                 hide_name = True
             ]
 
@@ -4851,7 +4429,7 @@ else{
                 phase = "-120"
             }
             [
-                position = 7440, 8152
+                position = 7456, 8152
                 hide_name = True
             ]
 
@@ -4861,7 +4439,7 @@ else{
                 phase = "120"
             }
             [
-                position = 7440, 8200
+                position = 7456, 8200
                 hide_name = True
             ]
 
@@ -4893,7 +4471,7 @@ else{
                 gain = "V_DQ"
             }
             [
-                position = 7536, 8096
+                position = 7544, 8096
                 hide_name = True
             ]
 
@@ -4901,7 +4479,7 @@ else{
                 gain = "V_DQ"
             }
             [
-                position = 7536, 8152
+                position = 7544, 8152
                 hide_name = True
             ]
 
@@ -4909,7 +4487,7 @@ else{
                 gain = "V_DQ"
             }
             [
-                position = 7536, 8200
+                position = 7544, 8200
                 hide_name = True
             ]
 
@@ -4949,10 +4527,10 @@ else{
                 ]
 
                 component gen_c_function "BE1-25A Synchronizer1" {
-                    in_terminal_dimensions = "inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "dV inherit;max_V inherit;max_slip inherit"
-                    in_terminal_labels = "[(\'dV\', True), (\'max_V\', True), (\'max_slip\', True)]"
-                    in_terminal_properties = "real dV;real max_V;real max_slip;"
+                    in_terminal_dimensions = "inherit"
+                    in_terminal_dimensions_str = "dV inherit"
+                    in_terminal_labels = "[(\'dV\', True)]"
+                    in_terminal_properties = "real dV;"
                     no_feed_inputs = "[\'\']"
                     no_feed_outputs = "[\'\']"
                     out_terminal_dimensions = "inherit"
@@ -4962,34 +4540,34 @@ else{
                     output_fnc = "/*Begin code section*/
 if (dV>=max_slip)
 {
-    del_V = max_V;
+    del_V = maxV_pds;
 }
 else if ((dV<max_slip) && (dV>=0))
 {
-    del_V = max_V*dV/max_slip;
+    del_V = maxV_pds*dV/max_slip;
 }
-else if ((dV<0) && (dV>=-1*max_slip))
+else if ((dV<0) && (dV>=-1*min_slip))
 {
-    del_V = max_V*dV/max_slip;
+    del_V = maxV_pds*dV/min_slip;
 }
-else if (dV < (-1*max_slip)) 
+else if (dV < (-1*min_slip)) 
 {
-    del_V = -1*max_V;
+    del_V = -1*maxV_pds;
 }
 /*End code section*/"
-                    parameters = "real Ts;"
+                    parameters = "real Ts;real max_slip;real min_slip;real maxV_pds;"
                 }
                 [
-                    position = 8384, 8672
+                    position = 8336, 8616
                     hide_name = True
-                    size = 144, 224
+                    size = 96, 96
                 ]
 
                 component tm_delay "Unit Delay4" {
                     signal_out_type = "real"
                 }
                 [
-                    position = 8720, 8688
+                    position = 8664, 8664
                     hide_name = True
                 ]
 
@@ -5026,7 +4604,7 @@ else if (dV < (-1*max_slip))
                     unit = ""
                 }
                 [
-                    position = 8800, 8192
+                    position = 8688, 8192
                 ]
 
                 component gen_terminator Termination1 {
@@ -5045,10 +4623,10 @@ else if (dV < (-1*max_slip))
                 ]
 
                 component gen_c_function "BE1-25A Synchronizer" {
-                    in_terminal_dimensions = "inherit;inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "df inherit;max_w inherit;max_slip inherit;angle_slip inherit"
-                    in_terminal_labels = "[(\'df\', True), (\'max_w\', True), (\'max_slip\', True), (\'angle_slip\', True)]"
-                    in_terminal_properties = "real df;real max_w;real max_slip;real angle_slip;"
+                    in_terminal_dimensions = "inherit;inherit"
+                    in_terminal_dimensions_str = "df inherit;angle_slip inherit"
+                    in_terminal_labels = "[(\'df\', True), (\'angle_slip\', True)]"
+                    in_terminal_properties = "real df;real angle_slip;"
                     no_feed_inputs = "[\'\']"
                     no_feed_outputs = "[\'\']"
                     out_terminal_dimensions = "inherit"
@@ -5058,27 +4636,28 @@ else if (dV < (-1*max_slip))
                     output_fnc = "/*Begin code section*/
 if (df>=max_slip)
 {
-    del_w = max_w;
+    del_w = maxw_pds;
 }
 else if ((df<max_slip) && (df>=0))
 {
-    del_w = max_w*(df+1e-4)/max_slip + (angle_slip);
+    del_w = maxw_pds*(df+1e-4)/max_slip + (angle_slip);
 }
-else if ((df<0) && (df > (-max_slip)))
+else if ((df<0) && (df > (-min_slip)))
 {
-    del_w = max_w*(df+1e-4)/max_slip  + (angle_slip);
+    del_w = maxw_pds*(df+1e-4)/min_slip  + (angle_slip);
 }
-else if (df <= (-1*max_slip))
+else if (df <= (-1*min_slip))
 {
-    del_w = -1*max_w;
+    del_w = -1*maxw_pds;
 }
 /*End code section*/"
-                    parameters = "real Ts;"
+                    parameters = "real Ts;real maxw_pds;real max_slip;real min_slip;"
                 }
                 [
-                    position = 8104, 8416
+                    position = 8112, 8400
                     hide_name = True
-                    size = 144, 224
+                    scale = 1, -1
+                    size = 136, 112
                 ]
 
                 component gen_product Product1 {
@@ -5090,10 +4669,10 @@ else if (df <= (-1*max_slip))
 
                 component gen_c_function "Hold after connect" {
                     global_variables = "real var;"
-                    in_terminal_dimensions = "inherit;inherit"
-                    in_terminal_dimensions_str = "in inherit;connect inherit"
-                    in_terminal_labels = "[(\'in\', True), (\'connect\', True)]"
-                    in_terminal_properties = "real in;int connect;"
+                    in_terminal_dimensions = "inherit;inherit;inherit"
+                    in_terminal_dimensions_str = "in inherit;connect inherit;MT_sync inherit"
+                    in_terminal_labels = "[(\'in\', True), (\'connect\', True), (\'MT_sync\', True)]"
+                    in_terminal_properties = "real in;int connect;inherit MT_sync;"
                     init_fnc = "/*Begin code section*/
 var = 0;
 /*End code section*/"
@@ -5106,16 +4685,16 @@ var = 0;
 out = var;
 /*End code section*/"
                     update_fnc = "/*Begin code section*/
-if (connect==0)
+if ((connect==0)&&(MT_sync==1))
     var = in;
 else
     var =0;
 /*End code section*/"
                 }
                 [
-                    position = 8328, 8424
+                    position = 8336, 8424
                     hide_name = True
-                    size = 96, 48
+                    size = 96, 96
                 ]
 
                 component gen_sum Sum4 {
@@ -5127,10 +4706,10 @@ else
 
                 component gen_c_function "Hold after connect1" {
                     global_variables = "real var;"
-                    in_terminal_dimensions = "inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "in inherit;connect inherit;exc_state inherit"
-                    in_terminal_labels = "[(\'in\', True), (\'connect\', True), (\'exc_state\', True)]"
-                    in_terminal_properties = "real in;int connect;inherit exc_state;"
+                    in_terminal_dimensions = "inherit;inherit;inherit;inherit"
+                    in_terminal_dimensions_str = "in inherit;connect inherit;MT_sync inherit;exc_state inherit"
+                    in_terminal_labels = "[(\'in\', True), (\'connect\', True), (\'MT_sync\', True), (\'exc_state\', True)]"
+                    in_terminal_properties = "real in;int connect;inherit MT_sync;inherit exc_state;"
                     init_fnc = "/*Begin code section*/
 var = 0;
 /*End code section*/"
@@ -5143,16 +4722,16 @@ var = 0;
 out = var;
 /*End code section*/"
                     update_fnc = "/*Begin code section*/
-if ((connect==0)&&(exc_state==1))
+if ((connect==0)&&(exc_state==1)&&(MT_sync==1))
     var = in;
 else
     var =0;
 /*End code section*/"
                 }
                 [
-                    position = 8624, 8688
+                    position = 8560, 8664
                     hide_name = True
-                    size = 96, 64
+                    size = 96, 136
                 ]
 
                 component gen_c_function "confine phase" {
@@ -5221,7 +4800,7 @@ if (in < 0)
                     value = "1e-3"
                 }
                 [
-                    position = 8064, 8112
+                    position = 8088, 8112
                     hide_name = True
                 ]
 
@@ -5230,15 +4809,6 @@ if (in < 0)
                 }
                 [
                     position = 7736, 8064
-                    hide_name = True
-                ]
-
-                component src_constant Constant4 {
-                    execution_rate = "Ts"
-                    value = "1e-4"
-                }
-                [
-                    position = 7968, 8448
                     hide_name = True
                 ]
 
@@ -5285,7 +4855,7 @@ out = in - (6.283185307179586*floor_in);
                 component tm_delay "Unit Delay2" {
                 }
                 [
-                    position = 7728, 8624
+                    position = 7608, 8624
                     rotation = right
                     hide_name = True
                 ]
@@ -5325,7 +4895,7 @@ out = in - (6.283185307179586*floor_in);
                     signal_out_type = "int"
                 }
                 [
-                    position = 8752, 8128
+                    position = 8688, 8128
                     hide_name = True
                 ]
 
@@ -5340,7 +4910,7 @@ out = in - (6.283185307179586*floor_in);
                 component gen_probe volt_diff3 {
                 }
                 [
-                    position = 8344, 8512
+                    position = 8336, 8512
                 ]
 
                 component gen_rel_op "Relational operator5" {
@@ -5376,35 +4946,6 @@ out = in - (6.283185307179586*floor_in);
                 [
                     position = 9016, 8208
                     hide_name = True
-                ]
-
-                component gen_c_function "stay connected" {
-                    global_variables = "real connect;"
-                    in_terminal_dimensions = "inherit"
-                    in_terminal_dimensions_str = "in inherit"
-                    in_terminal_labels = "[(\'in\', True)]"
-                    init_fnc = "/*Begin code section*/
-connect = 0;
-/*End code section*/"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "inherit"
-                    out_terminal_dimensions_str = "out inherit"
-                    out_terminal_labels = "[(\'out\', True)]"
-                    out_terminal_properties = "int out;"
-                    output_fnc = "/*Begin code section*/
-out = connect;
-/*End code section*/"
-                    parameters = "real Ts;"
-                    update_fnc = "/*Begin code section*/
-if (in==1)
-    connect = 1;
-/*End code section*/"
-                }
-                [
-                    position = 8696, 8128
-                    hide_name = True
-                    size = 48, 48
                 ]
 
                 component gen_logic_op "Logical operator2" {
@@ -5549,15 +5090,6 @@ if (in==1)
                     hide_name = True
                 ]
 
-                component src_constant Constant11 {
-                    execution_rate = "Ts"
-                    value = "6e-1"
-                }
-                [
-                    position = 8240, 8672
-                    hide_name = True
-                ]
-
                 component gen_digital_probe "Digital Probe5" {
                     override_signal_name = "True"
                     signal_name = "volt_sync3"
@@ -5578,7 +5110,7 @@ if (in==1)
                 component gen_abs Abs5 {
                 }
                 [
-                    position = 8032, 8128
+                    position = 8056, 8128
                     hide_name = True
                 ]
 
@@ -5617,7 +5149,7 @@ if (in==1)
                     signal_out_type = "real"
                 }
                 [
-                    position = 8408, 8424
+                    position = 8432, 8424
                     hide_name = True
                 ]
 
@@ -5626,24 +5158,6 @@ if (in==1)
                 }
                 [
                     position = 8160, 8120
-                    hide_name = True
-                ]
-
-                component src_constant Constant13 {
-                    execution_rate = "Ts"
-                    value = "1e-1"
-                }
-                [
-                    position = 8240, 8760
-                    hide_name = True
-                ]
-
-                component src_constant Constant3 {
-                    execution_rate = "Ts"
-                    value = "1e-3"
-                }
-                [
-                    position = 7968, 8384
                     hide_name = True
                 ]
 
@@ -5840,6 +5354,56 @@ out = in - (6.283185307179586*floor_in);
                     hide_name = True
                 ]
 
+                component gen_probe Vd_G {
+                }
+                [
+                    position = 7328, 8480
+                    scale = -1, 1
+                ]
+
+                component gen_probe Vq_G {
+                }
+                [
+                    position = 7432, 8472
+                    scale = -1, 1
+                ]
+
+                component gen_product Product5 {
+                }
+                [
+                    position = 8848, 8088
+                    hide_name = True
+                ]
+
+                component gen_c_function "stay connected" {
+                    global_variables = "real connect;"
+                    in_terminal_dimensions = "inherit"
+                    in_terminal_dimensions_str = "in inherit"
+                    in_terminal_labels = "[(\'in\', True)]"
+                    init_fnc = "/*Begin code section*/
+connect = 0;
+/*End code section*/"
+                    no_feed_inputs = "[\'\']"
+                    no_feed_outputs = "[\'\']"
+                    out_terminal_dimensions = "inherit"
+                    out_terminal_dimensions_str = "out inherit"
+                    out_terminal_labels = "[(\'out\', True)]"
+                    out_terminal_properties = "int out;"
+                    output_fnc = "/*Begin code section*/
+out = connect;
+/*End code section*/"
+                    parameters = "real Ts;"
+                    update_fnc = "/*Begin code section*/
+if (in==1)
+    connect = 1;
+/*End code section*/"
+                }
+                [
+                    position = 9000, 8080
+                    hide_name = True
+                    size = 48, 48
+                ]
+
                 port w_gen {
                     label = "generator speed"
                     position = left:3
@@ -5872,7 +5436,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8512, 8688
+                    position = 8440, 8648
                     hide_name = True
                 ]
 
@@ -5906,7 +5470,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 7664, 8616
+                    position = 7656, 8568
                     hide_name = True
                 ]
 
@@ -5939,7 +5503,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 7776, 8656
+                    position = 7656, 8656
                     hide_name = True
                 ]
 
@@ -5950,7 +5514,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8248, 8584
+                    position = 8192, 8616
                     hide_name = True
                 ]
 
@@ -5972,7 +5536,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 8504, 8424
+                    position = 8512, 8424
                     hide_name = True
                 ]
 
@@ -6006,7 +5570,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 8800, 8688
+                    position = 8744, 8664
                     hide_name = True
                 ]
 
@@ -6017,8 +5581,9 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8216, 8432
+                    position = 8224, 8424
                     hide_name = True
+                    size = 42, 20
                 ]
 
                 tag Goto29 {
@@ -6209,13 +5774,30 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8512, 8720
+                    position = 8440, 8712
                     hide_name = True
                 ]
 
-                junction Junction53 sp
+                tag MT_ON2 {
+                    value = "MT_sync"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
                 [
-                    position = 8800, 8128
+                    position = 8224, 8448
+                    hide_name = True
+                ]
+
+                tag MT_ON3 {
+                    value = "MT_sync"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8440, 8680
+                    hide_name = True
                 ]
 
                 junction Junction41 sp
@@ -6255,7 +5837,7 @@ out = in - (6.283185307179586*floor_in);
 
                 junction Junction45 sp
                 [
-                    position = 7728, 8656
+                    position = 7608, 8656
                 ]
 
                 junction Junction49 sp
@@ -6300,7 +5882,27 @@ out = in - (6.283185307179586*floor_in);
 
                 junction Junction56 sp
                 [
-                    position = 8296, 8584
+                    position = 8248, 8616
+                ]
+
+                junction Junction57 sp
+                [
+                    position = 7480, 8536
+                ]
+
+                junction Junction58 sp
+                [
+                    position = 7368, 8552
+                ]
+
+                junction Junction59 sp
+                [
+                    position = 8736, 8192
+                ]
+
+                junction Junction60 sp
+                [
+                    position = 8784, 8128
                 ]
 
                 connect "Digital Probe4.in" Junction38 as Connection366
@@ -6313,12 +5915,9 @@ out = in - (6.283185307179586*floor_in);
                 connect From39 Junction28 as Connection259
                 connect "abc to dq1.q_axis" Gain6.in as Connection319
                 connect From34 Current_abc_to_dq3.Ec as Connection280
-                connect "Unit Delay1.out" Junction53 as Connection448
                 connect From41 Limit1.in as Connection285
-                connect Constant4.out "BE1-25A Synchronizer.max_slip" as Connection67
                 connect w_gen Gain4.in as Connection240
                 connect Sum3.in1 From1 as Connection81
-                connect Junction53 "Signal switch1.in2" as Connection449
                 connect theta_bus2 Gain3.in as Connection241
                 connect Vc_G1 "abc to dq1.vc" as Connection222
                 connect angle_diff3.in Junction49 as Connection430
@@ -6329,7 +5928,6 @@ out = in - (6.283185307179586*floor_in);
                 connect Gain3.out Sum2.in1 as Connection64
                 connect "Mathematical function1.out" Sum3.in as Connection253
                 connect Va_G1 "abc to dq1.va" as Connection224
-                connect "Signal switch1.in" Junction53 as Connection450
                 connect theta_bus Junction45 as Connection404
                 connect Gain8.in Current_abc_to_dq3.Eq as Connection324
                 connect Goto29 Gain7.out as Connection321
@@ -6364,7 +5962,7 @@ out = in - (6.283185307179586*floor_in);
                 connect "Hold after connect.in" "BE1-25A Synchronizer.del_w" as Connection408
                 connect "Unit Delay3.out" Goto2 as Connection434
                 [
-                    breakpoints = 8448, 8424
+                    breakpoints = 8472, 8424
                 ]
                 connect theta_bus3 Current_abc_to_dq3.wt as Connection281
                 connect "Digital Probe6.in" "Logical operator2.out" as Connection454
@@ -6375,12 +5973,9 @@ out = in - (6.283185307179586*floor_in);
                 [
                     breakpoints = 7976, 8176
                 ]
-                connect "Unit Delay1.in" "stay connected.out" as Connection102
                 connect Limit2.out "Trigonometric function2.in1" as Connection398
                 connect Gain7.in Current_abc_to_dq3.Ed as Connection322
-                connect Goto33 Gain5.out as Connection380
                 connect Product3.out Sum5.in as Connection390
-                connect Constant3.out "BE1-25A Synchronizer.max_w" as Connection66
                 connect Junction38 "Relational operator2.out" as Connection365
                 [
                     breakpoints = 8288, 8120; 8288, 8120
@@ -6401,7 +5996,6 @@ out = in - (6.283185307179586*floor_in);
                 connect "Relational operator2.in1" Abs5.out as Connection357
                 connect Goto28 Gain8.out as Connection323
                 connect From42 Junction42 as Connection384
-                connect "Connect MT.out" "Signal switch1.in1" as Connection442
                 connect Junction52 Connect1 as Connection445
                 connect Junction43 From43 as Connection389
                 connect "Signal switch1.out" Junction52 as Connection444
@@ -6420,24 +6014,16 @@ out = in - (6.283185307179586*floor_in);
                 connect Junction45 "abc to dq1.wt" as Connection405
                 connect From35 Current_abc_to_dq3.Eb as Connection279
                 connect Gain4.out Sum2.in as Connection62
-                connect Goto32 Junction41 as Connection383
-                connect Constant13.out "BE1-25A Synchronizer1.max_slip" as Connection304
                 connect "confine phase1.in" "Trigonometric function1.out" as Connection290
                 connect Product1.in1 Junction26 as Connection249
                 connect "Hold after connect.out" "Unit Delay3.in" as Connection291
                 connect Junction41 PLL.q as Connection382
                 connect Connect3 "Hold after connect1.connect" as Connection354
-                connect "stay connected.in" "Logical operator1.out" as Connection92
                 connect Constant6.out "Relational operator1.in" as Connection69
                 connect Junction48 "Digital Probe3.in" as Connection425
                 [
                     breakpoints = 8256, 8056
                 ]
-                connect "Unit Delay2.in" PLL.wt as Connection348
-                [
-                    breakpoints = 7728, 8608; 7728, 8568
-                ]
-                connect "BE1-25A Synchronizer1.del_V" "Hold after connect1.in" as Connection356
                 connect Product1.out Sum4.in as Connection250
                 connect Junction46 Junction47 as Connection420
                 [
@@ -6452,7 +6038,6 @@ out = in - (6.283185307179586*floor_in);
                 connect "Relational operator1.in1" Junction50 as Connection431
                 connect frequency_diff3.in Junction47 as Connection422
                 connect Gain5.in "abc to dq1.d_axis" as Connection318
-                connect "BE1-25A Synchronizer1.max_V" Constant11.out as Connection305
                 connect "Relational operator4.out" Junction55 as Connection460
                 [
                     breakpoints = 8560, 8208
@@ -6465,10 +6050,31 @@ out = in - (6.283185307179586*floor_in);
                 connect theta_bus5 Junction56 as Connection464
                 connect Junction56 "BE1-25A Synchronizer1.dV" as Connection465
                 connect volt_diff3.in Junction56 as Connection466
-                connect V_t9 "Hold after connect1.exc_state" as Connection467
+                connect Goto32 Junction57 as Connection468
+                connect Junction57 Junction41 as Connection469
+                connect Vq_G.in Junction57 as Connection470
+                connect Goto33 Junction58 as Connection471
+                connect Junction58 Gain5.out as Connection472
+                connect Vd_G.in Junction58 as Connection473
+                connect PLL.wt "Unit Delay2.in" as Connection474
+                connect Product5.out "Signal switch1.in2" as Connection483
+                connect "Unit Delay1.in" "Logical operator1.out" as Connection484
+                connect "Connect MT.out" Junction59 as Connection486
+                connect Junction59 "Signal switch1.in1" as Connection487
+                connect Product5.in Junction59 as Connection488
+                connect "Unit Delay1.out" Junction60 as Connection489
+                connect Junction60 "Signal switch1.in" as Connection490
+                [
+                    breakpoints = 8784, 8128; 8784, 8160
+                ]
+                connect Product5.in1 Junction60 as Connection491
+                connect MT_ON2 "Hold after connect.MT_sync" as Connection492
+                connect V_t9 "Hold after connect1.exc_state" as Connection493
+                connect MT_ON3 "Hold after connect1.MT_sync" as Connection494
+                connect "Hold after connect1.in" "BE1-25A Synchronizer1.del_V" as Connection495
             }
             [
-                position = 8184, 7872
+                position = 8152, 7944
                 size = 112, 144
             ]
 
@@ -6477,7 +6083,7 @@ out = in - (6.283185307179586*floor_in);
                 threshold = "1"
             }
             [
-                position = 8080, 8064
+                position = 7976, 8096
                 hide_name = True
                 scale = 1, -1
             ]
@@ -6489,7 +6095,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = out
             }
             [
-                position = 8008, 8208
+                position = 7896, 8208
                 hide_name = True
                 scale = 1, -1
             ]
@@ -6525,7 +6131,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = in
             }
             [
-                position = 7624, 8152
+                position = 7640, 8152
                 hide_name = True
             ]
 
@@ -6536,7 +6142,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = in
             }
             [
-                position = 7624, 8096
+                position = 7640, 8096
                 hide_name = True
             ]
 
@@ -6547,7 +6153,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = in
             }
             [
-                position = 7616, 8200
+                position = 7640, 8200
                 hide_name = True
             ]
 
@@ -6570,7 +6176,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = out
             }
             [
-                position = 8032, 7872
+                position = 7992, 7944
                 hide_name = True
             ]
 
@@ -6581,40 +6187,40 @@ out = in - (6.283185307179586*floor_in);
                 direction = out
             }
             [
-                position = 8008, 8080
+                position = 7896, 8080
                 hide_name = True
             ]
 
             tag Connect6 {
-                value = "gov_sync"
+                value = "MT_sync"
                 scope = masked_subsystem
                 kind = sp
                 direction = in
             }
             [
-                position = 7656, 7904
+                position = 7576, 7888
                 hide_name = True
             ]
 
-            tag Connect2 {
-                value = "Connect"
+            tag MT_ON1 {
+                value = "MT_sync"
                 scope = masked_subsystem
                 kind = sp
                 direction = out
             }
             [
-                position = 8008, 8112
+                position = 7896, 8272
                 hide_name = True
             ]
 
-            tag Connect7 {
-                value = "Connect"
+            tag MT_ON2 {
+                value = "MT_sync"
                 scope = masked_subsystem
                 kind = sp
                 direction = out
             }
             [
-                position = 8008, 8240
+                position = 7896, 8144
                 hide_name = True
             ]
 
@@ -6630,15 +6236,15 @@ out = in - (6.283185307179586*floor_in);
 
             junction Junction47 sp
             [
-                position = 7584, 7904
+                position = 7504, 7888
             ]
 
             junction Junction48 sp
             [
-                position = 7584, 7904
+                position = 7504, 7888
             ]
 
-            connect "governor OFF.in" "Logical operator1.out" as Connection155
+            connect "MT_sync OFF.in" "Logical operator1.out" as Connection155
             connect Va_G.p_node "qd0(PU).V_aG" as Connection291
             connect Vb_G.p_node "qd0(PU).V_bG" as Connection293
             connect Va_G.n_node Junction45 as Connection294
@@ -6664,27 +6270,32 @@ out = in - (6.283185307179586*floor_in);
             connect V_q_a2 Gain5.out as Connection319
             connect "Sinusoidal Source2.out" Gain4.in as Connection325
             [
-                breakpoints = 7488, 8152
+                breakpoints = 7504, 8152
             ]
             connect "Sinusoidal Source3.out" Gain5.in as Connection327
             [
-                breakpoints = 7488, 8200
+                breakpoints = 7504, 8200
             ]
             connect "Sinusoidal Source1.out" Gain3.in as Connection328
             connect w_e7 "BE1-25A Synchronizer.w_gen" as Connection329
             connect "Signal switch2.out" "qd0(PU).V_ref" as Connection333
-            connect Constant1.out "Signal switch2.in1" as Connection335
-            connect From1 "Signal switch2.in" as Connection336
-            connect w_bus2 "Signal switch1.in" as Connection337
             connect MT_sync.out Junction47 as Connection342
             connect Junction47 Connect6 as Connection343
             connect "Logical operator1.in" Junction48 as Connection345
             connect Junction48 Junction47 as Connection346
-            connect "governor ON.in" Junction48 as Connection347
-            connect Constant2.out "Signal switch1.in1" as Connection348
-            connect Connect2 "Signal switch2.in2" as Connection349
-            connect Connect7 "Signal switch1.in2" as Connection350
+            connect "MT_sync ON.in" Junction48 as Connection347
             connect "Signal switch1.out" "qd0(PU).w_ref" as Connection351
+            connect Constant1.out "Signal switch2.in" as Connection360
+            connect From1 "Signal switch2.in1" as Connection361
+            connect Constant2.out "Signal switch1.in" as Connection362
+            connect w_bus2 "Signal switch1.in1" as Connection363
+            connect MT_ON1 "Signal switch1.in2" as Connection365
+            connect MT_ON2 "Signal switch2.in2" as Connection366
+
+            maxV_pds = "1e-2"
+            max_slip = "1e-3"
+            maxw_pds = "1e-2"
+            min_slip = "1e-3"
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br></br></p></body></html>"
@@ -7118,11 +6729,21 @@ out = in - (6.283185307179586*floor_in);
                     group = "6. Automatic Synchronizer"
                 }
 
-                max_pds {
-                    label = "Maximum difference signal"
+                maxV_pds {
+                    label = "Maximum difference signal (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "4"
+                    default_value = "1e-1"
+                    unit = "pu"
+                    group = "6. Automatic Synchronizer"
+                }
+
+                maxw_pds {
+                    label = "Maximum difference signal (frequency)"
+                    widget = edit
+                    type = generic
+                    default_value = "1e-1"
+                    unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
 
@@ -7188,7 +6809,8 @@ out = in - (6.283185307179586*floor_in);
                     exc_Ki = mdl.get_property_value(mdl.prop(item_handle, "exc_Ki"))
                     max_slip = mdl.get_property_value(mdl.prop(item_handle, "max_slip"))
                     min_slip = mdl.get_property_value(mdl.prop(item_handle, "min_slip"))
-                    max_pds = mdl.get_property_value(mdl.prop(item_handle, "max_pds"))
+                    maxV_pds = mdl.get_property_value(mdl.prop(item_handle, "maxV_pds"))
+                    maxw_pds = mdl.get_property_value(mdl.prop(item_handle, "maxw_pds"))
                     
                     w_m = w_0/pms
                     
@@ -7244,6 +6866,7 @@ out = in - (6.283185307179586*floor_in);
 
     logically_deleted {
         "Microturbine.25A_auto_sync"
+        "Microturbine.BE1-25A Synchronizer.stay connected"
     }
 
     default {
@@ -7357,6 +6980,11 @@ out = in - (6.283185307179586*floor_in);
             execution_rate = "inherit"
         }
 
+        gen_product {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
         gen_rate_limiter {
             rising_limit = "1"
             falling_limit = "-1"
@@ -7398,6 +7026,10 @@ out = in - (6.283185307179586*floor_in);
 
         pas_resistor {
             resistance = "1"
+        }
+
+        src_clock {
+            execution_rate = "100e-6"
         }
 
         src_clock {
@@ -7463,11 +7095,6 @@ out = in - (6.283185307179586*floor_in);
             visible = "True"
             override_signal_name = "False"
             signal_name = ""
-        }
-
-        "core/Edge Detection" {
-            edge = "both"
-            execution_rate = "inherit"
         }
 
         "core/Signal Controlled Voltage Source" {
