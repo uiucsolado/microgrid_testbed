@@ -500,7 +500,13 @@ double _microturbine_be1_25a_synchronizer_sum3__out;
 double _microturbine_signal_switch2__out;
 double _microturbine_qd0_pu__exciter_sum5__out;
 double _microturbine_qd0_pu__e_dp_sum2__out;
-double _microturbine_qd0_pu__v_qg2_differentiator1__out;
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__out;
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_coeff[2] = {49999.99999999999, -49999.99999999999};
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__a_coeff[2] = {1.0, -0.3678794411714424};
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__a_sum;
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_sum;
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__delay_line_in;
+X_UnInt32 _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i;
 double _microturbine_qd0_pu__e_qp_product2__out;
 double _microturbine_qd0_pu__phi_1d_a_gain1__out;
 double _microturbine_qd0_pu__v_dg2_gain1__out;
@@ -524,7 +530,13 @@ double _microturbine_qd0_pu__exciter_sum6__out;
 double _microturbine_qd0_pu__exciter_gain9__out;
 double _microturbine_qd0_pu__e_dp_product1__out;
 double _microturbine_qd0_pu__e_qp_sum2__out;
-double _microturbine_qd0_pu__v_dg2_differentiator1__out;
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__out;
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_coeff[2] = {49999.99999999999, -49999.99999999999};
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__a_coeff[2] = {1.0, -0.3678794411714424};
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__a_sum;
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_sum;
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__delay_line_in;
+X_UnInt32 _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i;
 double _microturbine_qd0_pu__v_qg2_sum2__out;
 double _microturbine_qd0_pu__w_m_sum1__out;
 double _microturbine_qd0_pu__exciter_gain1__out;
@@ -637,8 +649,8 @@ X_Int32 _microturbine_qd0_pu__exciter_pi_integrator1__reset_state;
 double _microturbine_qd0_pu__governor_rate_limiter1__prev_out;
 double _microturbine_qd0_pu__governor_rate_limiter1__out;
 int _microturbine_qd0_pu__governor_rate_limiter1__first_step;
-double _microturbine_qd0_pu__v_qg2_differentiator1__state;
-double _microturbine_qd0_pu__v_dg2_differentiator1__state;
+double _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__states[1];
+double _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__states[1];
 double _microturbine_qd0_pu__governor_discrete_transfer_function1__states[1];
 double _microturbine_qd0_pu__exciter_rate_limit__prev_out;
 double _microturbine_qd0_pu__exciter_rate_limit__out;
@@ -717,10 +729,14 @@ void ReInit_user_sp_cpu_dev0() {
     HIL_OutAO(0x4005, 0.0f);
     _microturbine_qd0_pu__governor_rate_limiter1__first_step = 1;
     HIL_OutAO(0x401a, 0.0f);
-    _microturbine_qd0_pu__v_qg2_differentiator1__state =  0.0f;
+    for (_microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i = 0; _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i < 1; _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i++) {
+        _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__states[_microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i] = 0.0;
+    }
     HIL_OutAO(0x4016, 0.0f);
     HIL_OutAO(0x4006, 0.0f);
-    _microturbine_qd0_pu__v_dg2_differentiator1__state =  0.0f;
+    for (_microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i = 0; _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i < 1; _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i++) {
+        _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__states[_microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i] = 0.0;
+    }
     HIL_OutAO(0x4002, 0.0f);
     HIL_OutAO(0x4007, 0.0f);
     for (_microturbine_qd0_pu__governor_discrete_transfer_function1__i = 0; _microturbine_qd0_pu__governor_discrete_transfer_function1__i < 1; _microturbine_qd0_pu__governor_discrete_transfer_function1__i++) {
@@ -1204,8 +1220,17 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     HIL_OutAO(0x401a, (float)_microturbine_qd0_pu__magnitude_mathematical_function1__out);
     // Generated from the component: Microturbine.qd0(PU).E_dp.Sum2
     _microturbine_qd0_pu__e_dp_sum2__out = _microturbine_qd0_pu__gain10__out - _microturbine_qd0_pu__e_dp_product2__out;
-    // Generated from the component: Microturbine.qd0(PU).V_qG2.Differentiator1
-    _microturbine_qd0_pu__v_qg2_differentiator1__out = (_microturbine_qd0_pu__v_qg2_gain1__out - _microturbine_qd0_pu__v_qg2_differentiator1__state) / 2e-05;
+    // Generated from the component: Microturbine.qd0(PU).V_qG2.Discrete Transfer Function1
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__a_sum = 0.0f;
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_sum = 0.0f;
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__delay_line_in = 0.0f;
+    for (_microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i = 0; _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i < 1; _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i++) {
+        _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_sum += _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_coeff[_microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i + 1] * _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__states[_microturbine_qd0_pu__v_qg2_discrete_transfer_function1__i];
+    }
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__a_sum += _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__states[0] * _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__a_coeff[1];
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__delay_line_in = _microturbine_qd0_pu__v_qg2_gain1__out - _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__a_sum;
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_sum += _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_coeff[0] * _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__delay_line_in;
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__out = _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__b_sum;
     // Generated from the component: Microturbine.qd0(PU).E_qp.Product2
     _microturbine_qd0_pu__e_qp_product2__out = (_microturbine_qd0_pu__e_qp_constant2__out * _microturbine_qd0_pu__e_qp_sum3__out);
     // Generated from the component: Microturbine.qd0(PU).Phi_1d_a.Gain1
@@ -1267,10 +1292,19 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _microturbine_qd0_pu__e_dp_product1__out = (_microturbine_qd0_pu__e_dp_constant1__out * _microturbine_qd0_pu__e_dp_sum2__out);
     // Generated from the component: Microturbine.qd0(PU).E_qp.Sum2
     _microturbine_qd0_pu__e_qp_sum2__out = _microturbine_qd0_pu__gain6__out - _microturbine_qd0_pu__e_qp_product2__out;
-    // Generated from the component: Microturbine.qd0(PU).V_dG2.Differentiator1
-    _microturbine_qd0_pu__v_dg2_differentiator1__out = (_microturbine_qd0_pu__v_dg2_gain1__out - _microturbine_qd0_pu__v_dg2_differentiator1__state) / 2e-05;
+    // Generated from the component: Microturbine.qd0(PU).V_dG2.Discrete Transfer Function1
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__a_sum = 0.0f;
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_sum = 0.0f;
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__delay_line_in = 0.0f;
+    for (_microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i = 0; _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i < 1; _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i++) {
+        _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_sum += _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_coeff[_microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i + 1] * _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__states[_microturbine_qd0_pu__v_dg2_discrete_transfer_function1__i];
+    }
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__a_sum += _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__states[0] * _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__a_coeff[1];
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__delay_line_in = _microturbine_qd0_pu__v_dg2_gain1__out - _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__a_sum;
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_sum += _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_coeff[0] * _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__delay_line_in;
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__out = _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__b_sum;
     // Generated from the component: Microturbine.qd0(PU).V_qG2.Sum2
-    _microturbine_qd0_pu__v_qg2_sum2__out = _microturbine_qd0_pu__v_qg2_product2__out + _microturbine_qd0_pu__v_qg2_differentiator1__out;
+    _microturbine_qd0_pu__v_qg2_sum2__out = _microturbine_qd0_pu__v_qg2_product2__out + _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__out;
     // Generated from the component: Microturbine.qd0(PU).w_m.Sum1
     _microturbine_qd0_pu__w_m_sum1__out = _microturbine_qd0_pu__w_m_product3__out - _microturbine_qd0_pu__w_m_product2__out;
     // Generated from the component: Microturbine.qd0(PU).Exciter.Gain1
@@ -1302,7 +1336,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Microturbine.qd0(PU).E_qp.Product1
     _microturbine_qd0_pu__e_qp_product1__out = (_microturbine_qd0_pu__e_qp_constant1__out * _microturbine_qd0_pu__e_qp_sum2__out);
     // Generated from the component: Microturbine.qd0(PU).V_dG2.Sum2
-    _microturbine_qd0_pu__v_dg2_sum2__out =  - _microturbine_qd0_pu__v_dg2_product2__out + _microturbine_qd0_pu__v_dg2_differentiator1__out;
+    _microturbine_qd0_pu__v_dg2_sum2__out =  - _microturbine_qd0_pu__v_dg2_product2__out + _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__out;
     // Generated from the component: Microturbine.qd0(PU).w_m.Sum2
     _microturbine_qd0_pu__w_m_sum2__out = _microturbine_qd0_pu__engine_integrator1__out - _microturbine_qd0_pu__w_m_sum1__out - _microturbine_qd0_pu__w_m_product1__out;
     // Generated from the component: Microturbine.qd0(PU).E_F_M
@@ -1537,12 +1571,12 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Microturbine.qd0(PU).Governor.Rate Limiter1
     _microturbine_qd0_pu__governor_rate_limiter1__prev_out = _microturbine_qd0_pu__governor_rate_limiter1__out;
     _microturbine_qd0_pu__governor_rate_limiter1__first_step = 0;
-    // Generated from the component: Microturbine.qd0(PU).V_qG2.Differentiator1
-    _microturbine_qd0_pu__v_qg2_differentiator1__state = _microturbine_qd0_pu__v_qg2_gain1__out;
+    // Generated from the component: Microturbine.qd0(PU).V_qG2.Discrete Transfer Function1
+    _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__states[0] = _microturbine_qd0_pu__v_qg2_discrete_transfer_function1__delay_line_in;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.confine phase
     // Generated from the component: Microturbine.BE1-25A Synchronizer.BE1-25A Synchronizer1
-    // Generated from the component: Microturbine.qd0(PU).V_dG2.Differentiator1
-    _microturbine_qd0_pu__v_dg2_differentiator1__state = _microturbine_qd0_pu__v_dg2_gain1__out;
+    // Generated from the component: Microturbine.qd0(PU).V_dG2.Discrete Transfer Function1
+    _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__states[0] = _microturbine_qd0_pu__v_dg2_discrete_transfer_function1__delay_line_in;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.BE1-25A Synchronizer
     // Generated from the component: Microturbine.qd0(PU).Governor.Discrete Transfer Function1
     _microturbine_qd0_pu__governor_discrete_transfer_function1__states[0] = _microturbine_qd0_pu__governor_discrete_transfer_function1__delay_line_in;

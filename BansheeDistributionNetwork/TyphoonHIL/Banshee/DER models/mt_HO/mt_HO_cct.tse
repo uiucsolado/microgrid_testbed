@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 29-Jun-2020 @ 06:16:37 PM
+// Save timestamp: 30-Jun-2020 @ 03:18:12 PM
 //
 
-model "mt_ho_cct" {
+model "mt_HO_cct" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 1
@@ -2451,17 +2451,20 @@ if(boolean==1){
                         hide_name = True
                     ]
 
-                    component gen_differentiator Differentiator1 {
-                    }
-                    [
-                        position = 8304, 8304
-                        hide_name = True
-                    ]
-
                     component tm_delay "Unit Delay1" {
                     }
                     [
                         position = 8440, 8264
+                        hide_name = True
+                    ]
+
+                    component gen_z_domain_transfer "Discrete Transfer Function1" {
+                        a_coeff = "[Ts,1]"
+                        b_coeff = "[1,0 ]"
+                        domain = "S-domain"
+                    }
+                    [
+                        position = 8304, 8304
                         hide_name = True
                     ]
 
@@ -2522,8 +2525,6 @@ if(boolean==1){
                     ]
 
                     connect Constant2.out Product3.in1 as Connection5
-                    connect Differentiator1.in Gain1.out as Connection19
-                    connect Differentiator1.out Sum2.in1 as Connection21
                     connect Gain1.in Phi_q_a as Connection17
                     connect Product2.in1 Phi_d_a as Connection13
                     connect Product2.out Sum2.in as Connection22
@@ -2531,6 +2532,8 @@ if(boolean==1){
                     connect Product3.in w_e as Connection11
                     connect Sum2.out "Unit Delay1.in" as Connection23
                     connect "Unit Delay1.out" V_qG as Connection24
+                    connect "Discrete Transfer Function1.in" Gain1.out as Connection25
+                    connect "Discrete Transfer Function1.out" Sum2.in1 as Connection26
                 }
                 [
                     position = 8096, 8304
@@ -2579,17 +2582,20 @@ if(boolean==1){
                         hide_name = True
                     ]
 
-                    component gen_differentiator Differentiator1 {
-                    }
-                    [
-                        position = 8232, 8312
-                        hide_name = True
-                    ]
-
                     component tm_delay "Unit Delay1" {
                     }
                     [
                         position = 8360, 8288
+                        hide_name = True
+                    ]
+
+                    component gen_z_domain_transfer "Discrete Transfer Function1" {
+                        a_coeff = "[Ts,1]"
+                        b_coeff = "[1,0 ]"
+                        domain = "S-domain"
+                    }
+                    [
+                        position = 8232, 8312
                         hide_name = True
                     ]
 
@@ -2650,15 +2656,15 @@ if(boolean==1){
                     ]
 
                     connect Constant2.out Product3.in1 as Connection5
-                    connect Differentiator1.in Gain1.out as Connection18
                     connect Gain1.in Phi_d_a as Connection16
                     connect Product2.in1 Phi_q_a as Connection13
                     connect Product2.out Sum2.in as Connection14
                     connect Product3.out Product2.in as Connection4
                     connect Product3.in w_e as Connection11
-                    connect Sum2.in1 Differentiator1.out as Connection17
                     connect "Unit Delay1.in" Sum2.out as Connection20
                     connect V_d_a "Unit Delay1.out" as Connection19
+                    connect Gain1.out "Discrete Transfer Function1.in" as Connection21
+                    connect "Discrete Transfer Function1.out" Sum2.in1 as Connection22
                 }
                 [
                     position = 8096, 8448
@@ -4260,7 +4266,7 @@ if(boolean==1){
                 connect Current_abc_to_dq3.wt theta_bus1 as Connection454
             }
             [
-                position = 8392, 8256
+                position = 8152, 8160
                 size = 96, 160
             ]
 
@@ -6924,10 +6930,6 @@ else if((connectMT==0)||(MTsync==0)){
             execution_rate = "inherit"
         }
 
-        gen_differentiator {
-            execution_rate = "inherit"
-        }
-
         gen_digital_probe {
             override_signal_name = "False"
             signal_name = ""
@@ -7046,17 +7048,21 @@ else if((connectMT==0)||(MTsync==0)){
             execution_rate = "inherit"
         }
 
+        gen_z_domain_transfer {
+            domain = "Z-domain"
+            method = "Zero-order hold"
+            b_coeff = "[1]"
+            a_coeff = "[1,-1]"
+            init_states = "0"
+            signal_out_type = "inherit"
+            execution_rate = "inherit"
+        }
+
         pas_resistor {
             resistance = "1"
         }
 
         src_clock {
-            execution_rate = "100e-6"
-        }
-
-        src_constant {
-            value = "1"
-            signal_type = "real"
             execution_rate = "100e-6"
         }
 
