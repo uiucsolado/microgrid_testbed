@@ -903,12 +903,12 @@
             <scada_input>
                 <name>Microturbine.BE1-25A Synchronizer.Connect MT</name>
                 <device>0</device>
-                <value>1.0</value>
+                <value>0</value>
             </scada_input>
             <scada_input>
                 <name>Microturbine.MT_sync</name>
                 <device>0</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
         </scada_inputs>
     </components>
