@@ -1,7 +1,54 @@
-m/BtQRLm9ftgMR9rHR/AXus2DaNEbfMAjCZqsznOt2Jp0Tg+M2cDsF9S94Hz7jCZfCWhSJy8TWaGVRnYKMWtxA==
-4deffe5f2b1ae2050dbc819cf2af29362eb75b225f75136785b16a83c5372087:7XBLC-KV06N-4PWIM-18JU3-75094
-4cd582e97e44e49da3d35123f445835360fbcaf87c271ad7e0ec9da67420f27d:C3LYX-FIEUS-PZ9W1-MHG8A-4C01E
-d946767de0d0a3bb0efb90b4edd2d48c537a98421dfe9c0056f39a78dabced6c:IP9CY-JZ23X-W4LRH-QVA6G-40AEC
+lJ3ht1ZEFknNQncJIhSkh/7m6uxDrR9D7gpliPht4/iuDkQqbDWWBOa/UoSWAvPYiOpYUw0tI0UYQrn0GHrz5A==
+{
+  "compilation_timestamp": "2020-06-25 12:30:13",
+  "sw_version": "2020.1 SP2",
+  "devices": [
+    {
+      "device_type": "HIL402",
+      "hw_id": "4deffe5f2b1ae2050dbc819cf2af29362eb75b225f75136785b16a83c5372087",
+      "activation_key": "7XBLC-KV06N-4PWIM-18JU3-75094",
+      "serial_no": "00402-02-00036",
+      "license_expiry": "2115-10-14",
+      "maintenance_expiry": null,
+      "supported": true,
+      "not_supported_reason": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL603",
+      "hw_id": "4cd582e97e44e49da3d35123f445835360fbcaf87c271ad7e0ec9da67420f27d",
+      "activation_key": "C3LYX-FIEUS-PZ9W1-MHG8A-4C01E",
+      "serial_no": "00603-00-00016",
+      "license_expiry": "2117-04-03",
+      "maintenance_expiry": null,
+      "supported": true,
+      "not_supported_reason": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL603",
+      "hw_id": "d946767de0d0a3bb0efb90b4edd2d48c537a98421dfe9c0056f39a78dabced6c",
+      "activation_key": "IP9CY-JZ23X-W4LRH-QVA6G-40AEC",
+      "serial_no": "00603-00-00031",
+      "license_expiry": "2117-11-14",
+      "maintenance_expiry": null,
+      "supported": true,
+      "not_supported_reason": null,
+      "toolboxes": []
+    },
+    {
+      "device_type": "HIL603",
+      "hw_id": "8229d571b2f879d4fb7237df9c43b9a278822c149ad18c56db4abdcbdef8070b",
+      "activation_key": "G859I-7VQYX-EFZ2M-J401K-FAA4B",
+      "serial_no": "00603-00-00027",
+      "license_expiry": "2119-02-19",
+      "maintenance_expiry": null,
+      "supported": true,
+      "not_supported_reason": null,
+      "toolboxes": []
+    }
+  ]
+}
 -----BEGIN SIGNATURE-----
-k0zxo8OkPw1AODtXIsn2q9qvQpSuSLsm8mu5EMt/z8+tWa8cPQ1SJVS5eAMD4s61+OzlF5348v/1J31c9sYbn4innhOGCnMKRBWHyBtzsf4HtEt20NExVL0ci1yL2j2UIrNYhZZF+4iCsbSTZpxPDoFrF5m77KDQxmekUgw2snwItSSahlKeRE+dojB/qHPCyPacYurh0ezM7z1/bBPZhUGzNxEUVIozVZ3I4Y/g12hRh0pClnoDSp1WVYq6SQOZStsWY4c7LisSbXnNdaq7M/kdC6rVNmEEPiynaconbUUGRk4EM0alkbQExFmVV6bUrm8i+eET7QRyhwcPidN8IA==
+hvQdlrFDMfrfKcfVoENQF2+gsAeEp3NPIcaEAsXLJIHztnOv1/rCZ+mI1lZQz5Ds5cE0m9xd9VSl7qQlbwZY6i5gcVdqDsOXETJlQcquagaHoY6RIkJGvHQBS1KVtydCzBKxc/GuoiTIEwGMorX+jNlZAnsPtcNZChdPqYJ5hKcxXH6q4fzhupEoIOxUnzTjpS0ovGfmLrYU0xEWHyKprFLrsBnV7zQUGQzP0YsFULqi4omUuPLrJPduB/H+GlwDIJLWefizmwU3CypQwmrvCSlVGmpDspOr25mx83C1M5NnVackSnJuO0O88dAyI1ij5tPMTefKoADBXXA86N5Y3Q==
 -----END SIGNATURE-----

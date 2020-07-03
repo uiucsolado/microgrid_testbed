@@ -1,6 +1,6 @@
 
 <model_description>
-    <sw_version>2018.3 SP1</sw_version>
+    <sw_version>2020.1 SP2</sw_version>
     <hw_properties>
         <revision>3</revision>
         <product_id>HIL603</product_id>
@@ -8,7 +8,7 @@
         <device_ao_limit_enable>True</device_ao_limit_enable>
         <device_id>0</device_id>
         <spc_out_mem_size>512</spc_out_mem_size>
-        <fw_support_limit>132254238</fw_support_limit>
+        <fw_support_limit>132383518</fw_support_limit>
     </hw_properties>
     <sim_setup>
         <sim_time_step>5e-07</sim_time_step>
@@ -22,6 +22,13 @@
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
+        </cell>
+        <cell>
+            <name>const_0V</name>
+            <address>34304</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
         </cell>
         <cell>
             <name>HIL0 analog input 1</name>
@@ -82,11 +89,11 @@
     </variables>
     <do_var_list>
         <cell>
-            <name>AO flag</name>
+            <name>HIL0 AO flag</name>
             <address>8</address>
         </cell>
         <cell>
-            <name>DTV flag</name>
+            <name>HIL0 DTV flag</name>
             <address>9</address>
         </cell>
         <cell>
@@ -238,189 +245,14 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[0.0001]</execution_rates>
+        <execution_rates>[[0.0001]]</execution_rates>
     </model_properties>
 
     <variables>
         <cell>
-            <name>Modbus5.Probe2</name>
-            <type>generic</type>
-            <address>16393</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus2.Probe2</name>
-            <type>generic</type>
-            <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus4.Probe1</name>
-            <type>generic</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus3.Probe1</name>
-            <type>generic</type>
-            <address>16388</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Bus5 Load</name>
-            <type>generic</type>
-            <address>16397</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.theta3</name>
-            <type>generic</type>
-            <address>16413</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Bus4 Load</name>
-            <type>generic</type>
-            <address>16396</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus1.Probe1</name>
-            <type>generic</type>
-            <address>16384</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Load - Bus 4.Freq_Bus4</name>
-            <type>generic</type>
-            <address>16405</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus3.Probe2</name>
-            <type>generic</type>
-            <address>16389</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.theta4</name>
-            <type>generic</type>
-            <address>16414</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Load - Bus 5.theta5</name>
-            <type>generic</type>
-            <address>16408</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Gen - Bus 2.Freq_Bus2</name>
-            <type>generic</type>
-            <address>16401</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>Modbus1.Probe2</name>
             <type>generic</type>
             <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Load - Bus 4.theta4</name>
-            <type>generic</type>
-            <address>16406</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus4.Probe2</name>
-            <type>generic</type>
-            <address>16391</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus6.Probe2</name>
-            <type>generic</type>
-            <address>16395</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Load - Bus 6.theta6</name>
-            <type>generic</type>
-            <address>16410</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus2.Probe1</name>
-            <type>generic</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.theta6</name>
-            <type>generic</type>
-            <address>16416</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus5.Probe1</name>
-            <type>generic</type>
-            <address>16392</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Gen - Bus 3.Freq_Bus3</name>
-            <type>generic</type>
-            <address>16403</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Gen - Bus 3.theta3</name>
-            <type>generic</type>
-            <address>16404</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Modbus6.Probe1</name>
-            <type>generic</type>
-            <address>16394</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Load - Bus 5.Freq_Bus5</name>
-            <type>generic</type>
-            <address>16407</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Gen - Bus 2.theta 2</name>
-            <type>generic</type>
-            <address>16402</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -432,37 +264,30 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>u3</name>
+            <name>Physical Model.Bus4 Load</name>
             <type>generic</type>
-            <address>16419</address>
+            <address>16396</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>u1</name>
+            <name>Modbus5.Probe1</name>
             <type>generic</type>
-            <address>16417</address>
+            <address>16392</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Physical Model.theta1</name>
+            <name>Physical Model.Gen - Bus 1.theta1</name>
             <type>generic</type>
-            <address>16411</address>
+            <address>16400</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Physical Model.theta5</name>
+            <name>Modbus4.Probe2</name>
             <type>generic</type>
-            <address>16415</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Physical Model.Gen - Bus 1.Freq_Bus1</name>
-            <type>generic</type>
-            <address>16399</address>
+            <address>16391</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -474,9 +299,156 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Physical Model.Load - Bus 4.Freq_Bus4</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Load - Bus 6.theta6</name>
+            <type>generic</type>
+            <address>16410</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Bus5 Load</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>u1</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>u3</name>
+            <type>generic</type>
+            <address>16419</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Load - Bus 5.Freq_Bus5</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus1.Probe1</name>
+            <type>generic</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus3.Probe2</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Gen - Bus 3.Freq_Bus3</name>
+            <type>generic</type>
+            <address>16403</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Gen - Bus 2.Freq_Bus2</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.theta6</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus2.Probe2</name>
+            <type>generic</type>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus6.Probe2</name>
+            <type>generic</type>
+            <address>16395</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Gen - Bus 3.theta3</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Load - Bus 5.theta5</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.theta5</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Physical Model.Load - Bus 6.Freq_Bus6</name>
             <type>generic</type>
             <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus5.Probe2</name>
+            <type>generic</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus2.Probe1</name>
+            <type>generic</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Gen - Bus 2.theta 2</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Gen - Bus 1.Freq_Bus1</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus4.Probe1</name>
+            <type>generic</type>
+            <address>16390</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -488,9 +460,44 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Physical Model.Gen - Bus 1.theta1</name>
+            <name>Physical Model.theta4</name>
             <type>generic</type>
-            <address>16400</address>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.theta3</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus3.Probe1</name>
+            <type>generic</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.theta1</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Modbus6.Probe1</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Physical Model.Load - Bus 4.theta4</name>
+            <type>generic</type>
+            <address>16406</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
