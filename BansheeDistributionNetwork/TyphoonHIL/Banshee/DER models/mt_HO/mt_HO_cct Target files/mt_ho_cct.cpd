@@ -11,56 +11,133 @@
         <fw_support_limit>132383518</fw_support_limit>
     </hw_properties>
     <sim_setup>
-        <sim_time_step>4e-06</sim_time_step>
+        <sim_time_step>2e-06</sim_time_step>
     </sim_setup>
     <pesb>
     </pesb>
     <variables>
         <cell>
-            <name>Microturbine.qd0(PU).Ea1</name>
+            <name>Microturbine.RL1.L1</name>
             <address>0</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL1.L2</name>
+            <address>1</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL1.L3</name>
+            <address>2</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL2.L1</name>
+            <address>3</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL2.L2</name>
+            <address>4</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL2.L3</name>
+            <address>5</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Va_G1</name>
+            <address>6</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Vb_G1</name>
+            <address>7</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Vc_G1</name>
+            <address>8</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Ea1</name>
+            <address>9</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Ea_phi</name>
+            <address>10</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).Eb1</name>
-            <address>1</address>
+            <address>11</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Eb_phi</name>
+            <address>12</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).Ec1</name>
-            <address>2</address>
+            <address>13</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Va_G1</name>
-            <address>3</address>
+            <name>Microturbine.qd0(PU).Ec_phi</name>
+            <address>14</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).Ia1</name>
-            <address>4</address>
+            <address>15</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).Ib1</name>
-            <address>5</address>
+            <address>16</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).Ic1</name>
-            <address>6</address>
+            <address>17</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -302,49 +379,35 @@
 
     <variables>
         <cell>
-            <name>Microturbine.qd0(PU).E_d</name>
-            <type>generic</type>
-            <address>16392</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Phi_2q_a_M</name>
-            <type>generic</type>
-            <address>16405</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
-            <type>generic</type>
-            <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).I_d_a1</name>
-            <type>generic</type>
-            <address>16402</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).E_dp_M</name>
-            <type>generic</type>
-            <address>16393</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).E_q</name>
+            <name>Microturbine.BE1-25A Synchronizer.frequency_diff3</name>
             <type>generic</type>
             <address>16394</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).|V|_M</name>
+            <name>Microturbine.BE1-25A Synchronizer.Eb-Vb</name>
+            <type>generic</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.Exciter Activation.speed difference</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).|E|</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).I_d_a1</name>
             <type>generic</type>
             <address>16410</address>
             <initial_condition>None</initial_condition>
@@ -353,54 +416,40 @@
         <cell>
             <name>Microturbine.qd0(PU).Phi_1d_a_M</name>
             <type>generic</type>
-            <address>16404</address>
+            <address>16412</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).T_m_M</name>
+            <name>Microturbine.BE1-25A Synchronizer.Vq_G</name>
             <type>generic</type>
-            <address>16408</address>
+            <address>16390</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Phi_q_a_M</name>
+            <name>Microturbine.BE1-25A Synchronizer.Ed-Vd</name>
             <type>generic</type>
-            <address>16407</address>
+            <address>16387</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Exciter.V_t_M</name>
+            <name>Microturbine.qd0(PU).Phi_d_a_M</name>
             <type>generic</type>
-            <address>16398</address>
+            <address>16414</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Exciter.V_R_M</name>
+            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
             <type>generic</type>
-            <address>16397</address>
+            <address>16393</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).I_q_a1</name>
-            <type>generic</type>
-            <address>16403</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).w_m_M</name>
-            <type>generic</type>
-            <address>16409</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Vd_G</name>
+            <name>Microturbine.BE1-25A Synchronizer.Ea-Va</name>
             <type>generic</type>
             <address>16384</address>
             <initial_condition>None</initial_condition>
@@ -409,84 +458,161 @@
         <cell>
             <name>Microturbine.BE1-25A Synchronizer.angle_diff3</name>
             <type>generic</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).E_F_M</name>
-            <type>generic</type>
             <address>16391</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Governor.Exciter Activation.speed difference</name>
-            <type>generic</type>
-            <address>16401</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.R_F_M</name>
-            <type>generic</type>
-            <address>16396</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Phi_d_a_M</name>
-            <type>generic</type>
-            <address>16406</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.Volt difference</name>
-            <type>generic</type>
-            <address>16399</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
-            <type>generic</type>
-            <address>16388</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Governor.Exciter Activation.Exc_state</name>
-            <type>generic</type>
-            <address>16400</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.BE1-25A Synchronizer.volt_diff3</name>
             <type>generic</type>
-            <address>16390</address>
+            <address>16395</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Vq_G</name>
+            <name>Microturbine.qd0(PU).Governor.Exciter Activation.Exc_state</name>
             <type>generic</type>
-            <address>16385</address>
+            <address>16408</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.BE1-25A Synchronizer.frequency_diff3</name>
+            <name>Microturbine.BE1-25A Synchronizer.w_G</name>
             <type>generic</type>
-            <address>16389</address>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.|V|</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).I_q_a1</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.R_F_M</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Phi_2q_a_M</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.V_t_M</name>
+            <type>generic</type>
+            <address>16406</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).E_dp_M</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).T_m_M</name>
+            <type>generic</type>
+            <address>16416</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).E_qp_M</name>
             <type>generic</type>
-            <address>16395</address>
+            <address>16403</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.w_bus</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).E_d</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.Volt difference</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).E_q</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Phi_q_a_M</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.V_R_M</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.Ec-Vc</name>
+            <type>generic</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.Vd_G</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
+            <type>generic</type>
+            <address>16392</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.Eq-Vq</name>
+            <type>generic</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).E_F_M</name>
+            <type>generic</type>
+            <address>16399</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -494,33 +620,8 @@
 
     <do_var_list>
         <cell>
-            <name>ang_sync3</name>
-            <address>2049</address>
-        </cell>
-
-        <cell>
-            <name>griddisconnect2</name>
-            <address>2052</address>
-        </cell>
-
-        <cell>
             <name>gridconnect2</name>
             <address>2048</address>
-        </cell>
-
-        <cell>
-            <name>freq_sync3</name>
-            <address>2050</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.exciter OFF</name>
-            <address>2055</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.exciter ON</name>
-            <address>2056</address>
         </cell>
 
         <cell>
@@ -529,8 +630,33 @@
         </cell>
 
         <cell>
+            <name>Microturbine.qd0(PU).Exciter.exciter ON</name>
+            <address>2056</address>
+        </cell>
+
+        <cell>
             <name>Microturbine.MT_sync OFF</name>
             <address>2053</address>
+        </cell>
+
+        <cell>
+            <name>freq_sync3</name>
+            <address>2050</address>
+        </cell>
+
+        <cell>
+            <name>griddisconnect2</name>
+            <address>2052</address>
+        </cell>
+
+        <cell>
+            <name>ang_sync3</name>
+            <address>2049</address>
+        </cell>
+
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.exciter OFF</name>
+            <address>2055</address>
         </cell>
 
         <cell>
@@ -542,8 +668,8 @@
 
     <scada_inputs>
         <scada_input>
-            <name>Microturbine.MT_sync</name>
-            <addr>1426063620</addr>
+            <name>Microturbine.qd0(PU).Connect Current</name>
+            <addr>1426063624</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -558,8 +684,18 @@
             <max>1.0</max>
             <def_value>1.0</def_value>
             <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Microturbine.MT_sync</name>
+            <addr>1426063620</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
             <widget_type>int</widget_type>
-            <format>unsigned_int</format>
+            <format>integer</format>
         </scada_input>
     </scada_inputs>
 
