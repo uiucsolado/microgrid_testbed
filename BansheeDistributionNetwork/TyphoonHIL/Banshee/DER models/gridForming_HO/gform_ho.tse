@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 02:59:47 PM
+// Save timestamp: 03-Jul-2020 @ 03:12:14 PM
 //
 
-model "gform_ho" {
+model "gform_ho_test" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 1
@@ -1374,7 +1374,7 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain4 {
-                            gain = "C_s"
+                            gain = "C_s*Z_DQ"
                         }
                         [
                             position = 8248, 8352
@@ -1474,7 +1474,7 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain6 {
-                            gain = "C_s"
+                            gain = "C_s*Z_DQ"
                         }
                         [
                             position = 8248, 8712
@@ -1841,7 +1841,7 @@ model "gform_ho" {
                     ]
 
                     component gen_gain Gain3 {
-                        gain = "R_s"
+                        gain = "R_s/Z_DQ"
                     }
                     [
                         position = 9272, 8496
@@ -1971,7 +1971,7 @@ model "gform_ho" {
                     ]
 
                     component gen_gain Gain4 {
-                        gain = "R_s"
+                        gain = "R_s/Z_DQ"
                     }
                     [
                         position = 9280, 8192
@@ -2009,7 +2009,7 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain7 {
-                            gain = "L_i"
+                            gain = "L_i/Z_DQ"
                         }
                         [
                             position = 8272, 8368
@@ -2070,7 +2070,7 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain6 {
-                            gain = "L_i"
+                            gain = "L_i/Z_DQ"
                         }
                         [
                             position = 8256, 8176
@@ -2620,7 +2620,7 @@ model "gform_ho" {
                     connect From38 Sum10.in as Connection285
                 }
                 [
-                    position = 7352, 7952
+                    position = 7360, 7952
                     size = 128, 152
                 ]
 
@@ -2632,7 +2632,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain17 {
-                    gain = "S*1.5/70e3"
+                    gain = "1.5"
                 }
                 [
                     position = 7168, 8496
@@ -2642,11 +2642,29 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain16 {
-                    gain = "S*1.5/70e3"
+                    gain = "1.5"
                 }
                 [
                     position = 7168, 8136
                     rotation = left
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_gain Gain18 {
+                    gain = "1/1.5"
+                }
+                [
+                    position = 8424, 7912
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_gain Gain19 {
+                    gain = "1/1.5"
+                }
+                [
+                    position = 8432, 8144
                     hide_name = True
                     scale = -1, 1
                 ]
@@ -2661,7 +2679,7 @@ model "gform_ho" {
                     }
                 }
                 [
-                    position = 8440, 8144
+                    position = 8600, 8144
                     scale = -1, 1
                 ]
 
@@ -2675,7 +2693,7 @@ model "gform_ho" {
                     }
                 }
                 [
-                    position = 8592, 7912
+                    position = 8528, 7912
                     scale = -1, 1
                 ]
 
@@ -2745,7 +2763,7 @@ model "gform_ho" {
                     direction = in
                 }
                 [
-                    position = 8592, 7976
+                    position = 8512, 7976
                     hide_name = True
                 ]
 
@@ -3312,7 +3330,6 @@ model "gform_ho" {
                 connect Junction230 From38 as Connection677
                 connect Product13.in1 Junction230 as Connection676
                 connect Sum4.out Gain4.in as Connection330
-                connect U_P "Frequency droop.U_P" as Connection984
                 connect Constant1.out Goto46 as Connection882
                 connect From5 Current_abc_to_dq.Xi_a2 as Connection38
                 connect Gain12.in "Current_abc_to_dq4.^Eq2" as Connection879
@@ -3330,7 +3347,6 @@ model "gform_ho" {
                 connect Gain16.in Junction270 as Connection994
                 connect Qpu.in Gain17.out as Connection995
                 connect Gain17.in Junction271 as Connection996
-                connect U_Q "Voltage droop.Q_ref1" as Connection997
                 connect Gain1.in Junction273 as Connection998
                 connect Junction273 Junction272 as Connection999
                 connect Goto48 Junction273 as Connection1000
@@ -3346,6 +3362,10 @@ model "gform_ho" {
                     breakpoints = 6856, 8232; 6856, 8232; 6856, 8232; 6856, 8280; 7112, 8280
                 ]
                 connect Goto37 Junction275 as Connection1008
+                connect U_P Gain19.in as Connection1009
+                connect Gain19.out "Frequency droop.U_P" as Connection1010
+                connect U_Q Gain18.in as Connection1011
+                connect Gain18.out "Voltage droop.Q_ref1" as Connection1012
             }
             [
                 position = 6816, 7568
