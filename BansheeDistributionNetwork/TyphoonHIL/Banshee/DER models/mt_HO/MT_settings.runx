@@ -14,7 +14,7 @@
         </pvs>
         <contactors>
             <contactor>
-                <name>Microturbine.qd0(PU).S2</name>
+                <name>Microturbine.S2</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>0</weight>
@@ -911,9 +911,9 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>Microturbine.qd0(PU).Connect Current</name>
+                <name>Microturbine.qd0(PU).Governor.AGC</name>
                 <device>0</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
         </scada_inputs>
     </components>

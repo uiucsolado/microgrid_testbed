@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 03:12:14 PM
+// Save timestamp: 03-Jul-2020 @ 06:17:43 PM
 //
 
-model "gform_ho_test" {
+model "gform_ho" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 1
@@ -86,7 +86,7 @@ model "gform_ho_test" {
             pf_3ph = "0.85"
         }
         [
-            position = 7168, 8168
+            position = 7168, 8144
             hide_name = True
             size = 104, 152
         ]
@@ -160,7 +160,7 @@ model "gform_ho_test" {
             position = 7816, 8352
         ]
 
-        component Subsystem "Grid forming inverter (averaged)2" {
+        component Subsystem "Grid forming inverter (averaged)" {
             layout = dynamic
             component pas_capacitor Cc1 {
                 capacitance = "C_s"
@@ -5584,7 +5584,7 @@ else if (connect==1)
 
             port Vc {
                 label = "Vc"
-                position = right:3
+                position = top:3
                 kind = pe
             }
             [
@@ -5594,7 +5594,7 @@ else if (connect==1)
 
             port Vb {
                 label = "Vb"
-                position = right:2
+                position = top:2
                 kind = pe
             }
             [
@@ -5614,7 +5614,7 @@ else if (connect==1)
 
             port Va {
                 label = "Va"
-                position = right:1
+                position = top:1
                 kind = pe
             }
             [
@@ -5623,7 +5623,7 @@ else if (connect==1)
             ]
 
             port setpoint_P {
-                position = left:1
+                position = right:1
                 kind = sp
                 direction =  out
                 sp_type {
@@ -5637,7 +5637,7 @@ else if (connect==1)
             ]
 
             port setpoint_Q {
-                position = left:1
+                position = right:2
                 kind = sp
                 direction =  out
                 sp_type {
@@ -6674,10 +6674,8 @@ else if (connect==1)
             }
         }
         [
-            position = 6624, 7976
-            rotation = down
-            scale = -1, -1
-            size = 224, 184
+            position = 6632, 8144
+            size = 240, 184
         ]
 
         component src_scada_input Pref {
@@ -6685,7 +6683,8 @@ else if (connect==1)
             unit = ""
         }
         [
-            position = 6464, 7904
+            position = 6808, 8072
+            scale = -1, 1
         ]
 
         component src_scada_input Qref {
@@ -6693,7 +6692,8 @@ else if (connect==1)
             unit = ""
         }
         [
-            position = 6464, 8048
+            position = 6808, 8216
+            scale = -1, 1
         ]
 
         tag V_d_a {
@@ -6836,17 +6836,17 @@ else if (connect==1)
         ]
         connect Junction64 Junction63 as Connection828
         connect Vb_G.n_node Junction64 as Connection829
-        connect "Grid forming inverter (averaged)2.Vb" RL1.P4 as Connection835
-        connect RL1.P2 "Grid forming inverter (averaged)2.Va" as Connection836
-        connect RL1.P6 "Grid forming inverter (averaged)2.Vc" as Connection837
+        connect "Grid forming inverter (averaged).Vb" RL1.P4 as Connection835
+        connect RL1.P2 "Grid forming inverter (averaged).Va" as Connection836
+        connect RL1.P6 "Grid forming inverter (averaged).Vc" as Connection837
         connect "Constant Impedance Load1.N" Junction65 as Connection838
         connect Junction65 Junction63 as Connection839
         [
             breakpoints = 7168, 8296; 7168, 8296; 7608, 8296
         ]
-        connect "Grid forming inverter (averaged)2.Ground" Junction65 as Connection840
-        connect Pref.out "Grid forming inverter (averaged)2.setpoint_P" as Connection841
-        connect Qref.out "Grid forming inverter (averaged)2.setpoint_Q" as Connection842
+        connect "Grid forming inverter (averaged).Ground" Junction65 as Connection840
+        connect Pref.out "Grid forming inverter (averaged).setpoint_P" as Connection841
+        connect Qref.out "Grid forming inverter (averaged).setpoint_Q" as Connection842
     }
 
     default {
@@ -7006,19 +7006,6 @@ else if (connect==1)
         src_constant {
             value = "1"
             signal_type = "real"
-            execution_rate = "100e-6"
-        }
-
-        src_scada_input {
-            addr = "0"
-            format = "real"
-            override_signal_name = "False"
-            signal_name = ""
-            signal_type = "real"
-            min = "-1e6"
-            max = "1e6"
-            def_value = "0"
-            unit = " "
             execution_rate = "100e-6"
         }
 

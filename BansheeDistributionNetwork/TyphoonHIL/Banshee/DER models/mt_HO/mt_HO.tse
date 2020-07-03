@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 01:59:56 PM
+// Save timestamp: 03-Jul-2020 @ 06:14:49 PM
 //
 
 model "mt_HO" {
@@ -10,7 +10,7 @@ model "mt_HO" {
         hil_device = "HIL603"
         hil_configuration_id = 1
         simulation_method = exact
-        simulation_time_step = 2e-6
+        simulation_time_step = .5e-6
         simulation_discret_scaling = 1.0
         dsp_timer_periods = 100e-6, 50e-3
         ss_calc_method = "systematic elimination"
@@ -2537,7 +2537,7 @@ model "mt_HO" {
                     ]
 
                     component gen_sum Sum10 {
-                        signs = "+-"
+                        signs = "++"
                     }
                     [
                         position = 8160, 8248
@@ -2563,7 +2563,7 @@ model "mt_HO" {
                         gain = "pms/w_0"
                     }
                     [
-                        position = 8280, 8736
+                        position = 7952, 8360
                         hide_name = True
                     ]
 
@@ -2571,7 +2571,7 @@ model "mt_HO" {
                         gain = "1/w_0"
                     }
                     [
-                        position = 8040, 8688
+                        position = 7760, 8312
                         hide_name = True
                     ]
 
@@ -2580,7 +2580,7 @@ model "mt_HO" {
                         rising_limit = "inner_w_rise"
                     }
                     [
-                        position = 8104, 8688
+                        position = 7824, 8312
                         hide_name = True
                     ]
 
@@ -2588,7 +2588,7 @@ model "mt_HO" {
                         signs = "++"
                     }
                     [
-                        position = 8176, 8696
+                        position = 7896, 8320
                         hide_name = True
                     ]
 
@@ -2722,61 +2722,8 @@ if(boolean==1){
                         connect Comparator1.out "Activate Exciter.boolean" as Connection206
                     }
                     [
-                        position = 8384, 8760
+                        position = 8048, 8384
                         size = 88, 48
-                    ]
-
-                    component gen_gain Gain27 {
-                        gain = "gov_Kp"
-                    }
-                    [
-                        position = 8520, 8704
-                        hide_name = True
-                    ]
-
-                    component gen_gain Gain3 {
-                        gain = "K"
-                    }
-                    [
-                        position = 8568, 8704
-                        hide_name = True
-                    ]
-
-                    component gen_z_domain_transfer "Discrete Transfer Function2" {
-                        a_coeff = "[T5*T6, (T5+T6), 1]"
-                        b_coeff = "[T4, 1]"
-                        domain = "S-domain"
-                        method = "Bilinear"
-                    }
-                    [
-                        position = 8616, 8704
-                        hide_name = True
-                    ]
-
-                    component gen_integrator Integrator1 {
-                    }
-                    [
-                        position = 8680, 8704
-                        hide_name = True
-                    ]
-
-                    component gen_sum Sum1 {
-                        signs = "+-"
-                    }
-                    [
-                        position = 8392, 8704
-                        hide_name = True
-                    ]
-
-                    component gen_z_domain_transfer "Discrete Transfer Function1" {
-                        a_coeff = "[T1*T2, T1, 1]"
-                        b_coeff = "[T3, 1]"
-                        domain = "S-domain"
-                        method = "Bilinear"
-                    }
-                    [
-                        position = 8464, 8704
-                        hide_name = True
                     ]
 
                     component gen_sum Sum7 {
@@ -2903,7 +2850,6 @@ if(boolean==1){
                     ]
 
                     component src_scada_input AGC {
-                        def_value = "1"
                         execution_rate = "Ts"
                         max = "2"
                         min = "-2"
@@ -2923,7 +2869,7 @@ if(boolean==1){
                         }
                     }
                     [
-                        position = 7976, 8688
+                        position = 7696, 8312
                     ]
 
                     port w_m3 {
@@ -2937,7 +2883,7 @@ if(boolean==1){
                         }
                     }
                     [
-                        position = 8216, 8736
+                        position = 7896, 8360
                     ]
 
                     port P_SV {
@@ -2950,7 +2896,7 @@ if(boolean==1){
                         }
                     }
                     [
-                        position = 8800, 8704
+                        position = 8896, 7760
                     ]
 
                     tag From13 {
@@ -2982,7 +2928,7 @@ if(boolean==1){
                         direction = out
                     }
                     [
-                        position = 7992, 8736
+                        position = 7712, 8360
                         hide_name = True
                     ]
 
@@ -3015,7 +2961,7 @@ if(boolean==1){
                         direction = in
                     }
                     [
-                        position = 8488, 8240
+                        position = 8648, 8240
                         hide_name = True
                     ]
 
@@ -3129,9 +3075,14 @@ if(boolean==1){
                         hide_name = True
                     ]
 
-                    junction Junction1 sp
+                    junction Junction2 sp
                     [
-                        position = 8320, 8736
+                        position = 8408, 7760
+                    ]
+
+                    junction Junction3 sp
+                    [
+                        position = 7984, 8360
                     ]
 
                     connect From3 Gain36.in as Connection748
@@ -3142,29 +3093,11 @@ if(boolean==1){
                     connect Sum7.out Sum10.in1 as Connection754
                     connect Integrator12.out Goto6 as Connection759
                     connect From13 Integrator12.in as Connection760
-                    connect Sum3.out Goto1 as Connection761
                     connect Gain28.in w_m3 as Connection7
                     connect "Rate Limiter1.in" Gain4.out as Connection13
                     connect w_ref Gain4.in as Connection186
                     connect "Rate Limiter1.out" Sum6.in as Connection187
                     connect V_t3 Sum6.in1 as Connection741
-                    connect Integrator11.out Goto5 as Connection767
-                    [
-                        breakpoints = 8408, 7760
-                    ]
-                    connect Integrator1.out P_SV as Connection770
-                    connect Gain28.out Junction1 as Connection771
-                    connect Junction1 "Exciter Activation.w_PU" as Connection772
-                    [
-                        breakpoints = 8320, 8736
-                    ]
-                    connect Sum1.in1 Junction1 as Connection773
-                    connect Sum1.in Sum6.out as Connection774
-                    connect "Discrete Transfer Function1.out" Gain27.in as Connection3
-                    connect "Discrete Transfer Function2.in" Gain3.out as Connection5
-                    connect Gain27.out Gain3.in as Connection4
-                    connect Integrator1.in "Discrete Transfer Function2.out" as Connection6
-                    connect "Discrete Transfer Function1.in" Sum1.out as Connection194
                     connect Sum2.out Gain29.in as Connection207
                     [
                         breakpoints = 7944, 8224
@@ -3189,6 +3122,17 @@ if(boolean==1){
                     connect Sum9.out Integrator11.in as Connection226
                     connect AGC.out Sum2.in as Connection230
                     connect From1 Sum2.in1 as Connection231
+                    connect Sum3.out Goto1 as Connection788
+                    connect Integrator11.out Junction2 as Connection790
+                    connect Junction2 Goto5 as Connection791
+                    [
+                        breakpoints = 8408, 7760; 8408, 7760; 8408, 7760
+                    ]
+                    connect P_SV Junction2 as Connection792
+                    connect Sum6.out Sum7.in as Connection797
+                    connect Gain28.out Junction3 as Connection799
+                    connect Junction3 Sum7.in1 as Connection800
+                    connect "Exciter Activation.w_PU" Junction3 as Connection801
                 }
                 [
                     position = 8256, 8272
@@ -6110,7 +6054,7 @@ else if((connectMT==0)||(MTsync==0)){
             ]
 
             port V_aG {
-                position = right:2
+                position = top:1
                 kind = pe
             }
             [
@@ -6119,7 +6063,7 @@ else if((connectMT==0)||(MTsync==0)){
             ]
 
             port V_bG {
-                position = right:2
+                position = top:2
                 kind = pe
             }
             [
@@ -6128,7 +6072,7 @@ else if((connectMT==0)||(MTsync==0)){
             ]
 
             port V_cG {
-                position = right:3
+                position = top:3
                 kind = pe
             }
             [
@@ -6562,13 +6506,8 @@ else if((connectMT==0)||(MTsync==0)){
             connect MT_ON1 Junction95 as Connection831
             connect Junction95 "Signal switch1.in2" as Connection832
 
-            T3 = "5"
-            V_ABC = "26e+3/np.sqrt(3)"
-            maxw_slip = "1e-3"
-            minw_slip = "0.5e-3"
-
             mask {
-                description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br></br></p></body></html>"
+                description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A diesel genset microturbine</p></body></html>"
 
                 S {
                     label = "Rated Power"
@@ -6583,7 +6522,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Rated RMS Voltage"
                     widget = edit
                     type = generic
-                    default_value = "277/np.sqrt(3)"
+                    default_value = "26e+3/np.sqrt(3)"
                     unit = "V"
                     group = "1. Synchronous Machine"
                 }
@@ -6769,7 +6708,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Governor Droop"
                     widget = edit
                     type = generic
-                    default_value = "0.1"
+                    default_value = "0.05"
                     group = "4. Governor and Engine"
                 }
 
@@ -6804,7 +6743,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Time constant 3"
                     widget = edit
                     type = generic
-                    default_value = "0.5001"
+                    default_value = "5e-1"
                     unit = "s"
                     group = "4. Governor and Engine"
                 }
@@ -7003,7 +6942,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Maximum slip (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "1e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -7012,7 +6951,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Minimum slip (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "0.5e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -7146,10 +7085,15 @@ else if((connectMT==0)||(MTsync==0)){
                     T_dopp = (1/(w_0*R_kd))*(X_lkd+(X_md*X_lfd/(X_md+X_lfd)))
                     T_qopp = (1/(w_0*R_kq1))*( X_lkq2+(X_mq*X_lkq1/(X_mq+X_lkq1)) )
                 ENDCODE
+
+                CODE define_icon
+                    mdl.set_component_icon_image(item_handle, 'diesel_genset_image.jpg')
+                    mdl.set_color(item_handle, "black")
+                ENDCODE
             }
         }
         [
-            position = 6592, 7976
+            position = 6592, 8152
             size = 304, 168
         ]
 
@@ -7472,73 +7416,6 @@ else if((connectMT==0)||(MTsync==0)){
         "Microturbine.qd0(PU).V_qG2.Discrete Transfer Function1"
         "Microturbine.qd0(PU).V_dG2.Termination1"
         "Microturbine.qd0(PU).V_dG2.Discrete Transfer Function1"
-        "Microturbine.qd0(PU).Governor.Gain36"
-        "Microturbine.qd0(PU).Governor.Sum10"
-        "Microturbine.qd0(PU).Governor.Gain30"
-        "Microturbine.qd0(PU).Governor.Integrator12"
-        "Microturbine.qd0(PU).Governor.Sum7"
-        "Microturbine.qd0(PU).Governor.Sum2"
-        "Microturbine.qd0(PU).Governor.Gain29"
-        "Microturbine.qd0(PU).Governor.Sum3"
-        "Microturbine.qd0(PU).Governor.Gain31"
-        "Microturbine.qd0(PU).Governor.Sum4"
-        "Microturbine.qd0(PU).Governor.Gain32"
-        "Microturbine.qd0(PU).Governor.Sum5"
-        "Microturbine.qd0(PU).Governor.Gain33"
-        "Microturbine.qd0(PU).Governor.Sum8"
-        "Microturbine.qd0(PU).Governor.Gain34"
-        "Microturbine.qd0(PU).Governor.Gain35"
-        "Microturbine.qd0(PU).Governor.Sum9"
-        "Microturbine.qd0(PU).Governor.Integrator9"
-        "Microturbine.qd0(PU).Governor.Integrator10"
-        "Microturbine.qd0(PU).Governor.Integrator11"
-        "Microturbine.qd0(PU).Governor.AGC"
-        "Microturbine.qd0(PU).Governor.From13"
-        "Microturbine.qd0(PU).Governor.Goto6"
-        "Microturbine.qd0(PU).Governor.From1"
-        "Microturbine.qd0(PU).Governor.From3"
-        "Microturbine.qd0(PU).Governor.Goto1"
-        "Microturbine.qd0(PU).Governor.From5"
-        "Microturbine.qd0(PU).Governor.Goto2"
-        "Microturbine.qd0(PU).Governor.From6"
-        "Microturbine.qd0(PU).Governor.From7"
-        "Microturbine.qd0(PU).Governor.From8"
-        "Microturbine.qd0(PU).Governor.From9"
-        "Microturbine.qd0(PU).Governor.Goto4"
-        "Microturbine.qd0(PU).Governor.From10"
-        "Microturbine.qd0(PU).Governor.From11"
-        "Microturbine.qd0(PU).Governor.Goto5"
-        "Microturbine.qd0(PU).Governor.Connection748"
-        "Microturbine.qd0(PU).Governor.Connection749"
-        "Microturbine.qd0(PU).Governor.Connection751"
-        "Microturbine.qd0(PU).Governor.Connection752"
-        "Microturbine.qd0(PU).Governor.Connection753"
-        "Microturbine.qd0(PU).Governor.Connection754"
-        "Microturbine.qd0(PU).Governor.Connection759"
-        "Microturbine.qd0(PU).Governor.Connection760"
-        "Microturbine.qd0(PU).Governor.Connection761"
-        "Microturbine.qd0(PU).Governor.Connection767"
-        "Microturbine.qd0(PU).Governor.Connection207"
-        "Microturbine.qd0(PU).Governor.Connection19"
-        "Microturbine.qd0(PU).Governor.Connection21"
-        "Microturbine.qd0(PU).Governor.Connection22"
-        "Microturbine.qd0(PU).Governor.Connection23"
-        "Microturbine.qd0(PU).Governor.Connection24"
-        "Microturbine.qd0(PU).Governor.Connection742"
-        "Microturbine.qd0(PU).Governor.Connection26"
-        "Microturbine.qd0(PU).Governor.Connection27"
-        "Microturbine.qd0(PU).Governor.Connection28"
-        "Microturbine.qd0(PU).Governor.Connection29"
-        "Microturbine.qd0(PU).Governor.Connection33"
-        "Microturbine.qd0(PU).Governor.Connection743"
-        "Microturbine.qd0(PU).Governor.Connection744"
-        "Microturbine.qd0(PU).Governor.Connection219"
-        "Microturbine.qd0(PU).Governor.Connection220"
-        "Microturbine.qd0(PU).Governor.Connection222"
-        "Microturbine.qd0(PU).Governor.Connection223"
-        "Microturbine.qd0(PU).Governor.Connection226"
-        "Microturbine.qd0(PU).Governor.Connection230"
-        "Microturbine.qd0(PU).Governor.Connection231"
     }
 
     default {
@@ -7862,7 +7739,5 @@ else if((connectMT==0)||(MTsync==0)){
         # The Schematic API is imported as 'mdl'
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
-        
-        test =1
     ENDCODE
 }

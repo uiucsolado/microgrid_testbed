@@ -1,11 +1,11 @@
-Model mt_HO
+Model mt_ho
 
 REM *****************************************:
 REM * Common entries:
 REM *****************************************:
 
 REM Setting the simulation time step...
-rtds_write 0x00000000 0x0000012C
+rtds_write 0x00000000 0x0000004B
 
 REM Module block enable
 rtds_write 0x00000003 0x00000000
@@ -120,9 +120,9 @@ rtds_write 0x08240400 0x00000001
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
 rtds_write 0x080C0001 0x00000006
-rtds_write 0x080C0004 0x3C23D70A
+rtds_write 0x080C0004 0x3D23D70A
 rtds_write 0x080C0005 0x3D710000
-rtds_write 0x08100000 0x00000064
+rtds_write 0x08100000 0x00000019
 
 REM SPC0 FSM digital input pin assignments...
 
@@ -697,5 +697,5 @@ glbl_write 0xfffffff0 0x20a00000
 
 REM Restart counter for collected Linux OS communication apps
 app_file_write 0x0 app_init
-rtds_write 0x00000027 0x0000012C
+rtds_write 0x00000027 0x0000004B
 rtds_write 0x00000040 0x00FFFFFF

@@ -112,8 +112,8 @@ referenceCurves = [refCurveData1]
                         <active_capture_preset>Default</active_capture_preset>
                         <active_scope_preset>Default</active_scope_preset>
                         <capture name="Default">
-                            <time_interval>3.2</time_interval>
-                            <sample_rate>250000.0</sample_rate>
+                            <time_interval>0.01</time_interval>
+                            <sample_rate>200000.0</sample_rate>
                             <background_color>white</background_color>
                             <layout>Grid</layout>
                             <legend>True</legend>
@@ -220,7 +220,7 @@ referenceCurves = [refCurveData1]
                             <layout>Grid</layout>
                             <legend>True</legend>
                             <show_viewports>4</show_viewports>
-                            <decimation>2</decimation>
+                            <decimation>6</decimation>
                             <time_base>0.005</time_base>
                             <analog_signals>
                             <analog>
@@ -254,7 +254,7 @@ referenceCurves = [refCurveData1]
                             <name>Ia1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -267,7 +267,7 @@ referenceCurves = [refCurveData1]
                             <name>Va1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -280,7 +280,7 @@ referenceCurves = [refCurveData1]
                             <name>Microturbine.Ic1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -302,8 +302,8 @@ referenceCurves = [refCurveData1]
                         </scope>
                         </presets>
                     <capture>
-                        <time_interval>3.2</time_interval>
-                        <sample_rate>250000.0</sample_rate>
+                        <time_interval>0.01</time_interval>
+                        <sample_rate>200000.0</sample_rate>
                         <background_color>white</background_color>
                         <layout>Grid</layout>
                         <legend>True</legend>
@@ -449,7 +449,7 @@ referenceCurves = [refCurveData1]
                             <name>Ia1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -462,7 +462,7 @@ referenceCurves = [refCurveData1]
                             <name>Va1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -475,7 +475,7 @@ referenceCurves = [refCurveData1]
                             <name>Microturbine.Ic1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -1306,8 +1306,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1200</x>
-                    <y>232</y>
+                    <x>1200.0</x>
+                    <y>232.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
