@@ -1,4 +1,4 @@
-Model mt_ho_cct
+Model mt_HO_cct
 
 REM *****************************************:
 REM * Common entries:

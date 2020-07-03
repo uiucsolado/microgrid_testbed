@@ -1,6 +1,6 @@
-2luQXBOyNAo5X7FfW6/2Ismirv1t1ag8YfnZ3TIT7L9/EJHL2Y+tG2LCDEUuvyBHeVgy0KVJZ2zOzNK2iEFrvg==
+s/imCGJLxTgJHqy0GQaG1qZnxz37xasIzCopUjm4gweyHT8G41pwRO3HZesK10ud3yHu0z28RumJ+f36HKPuJw==
 {
-  "compilation_timestamp": "2020-07-03 00:33:29",
+  "compilation_timestamp": "2020-07-03 01:45:51",
   "sw_version": "2020.1 SP2",
   "devices": [
     {
@@ -50,5 +50,5 @@
   ]
 }
 -----BEGIN SIGNATURE-----
-IpaOfQRT31npmatnvLh9xrQFJp27UPUm8vbn5VfPJNnd9XqyuyYQPERnNKTwArTylgiiQxcAZKnvRHqIRNZhbAcj39JCHhU9kupE3+go7awFs4n042XtfR6Qtmq7eoW93dfUKZdjdSP9k/usQAYaifB/9nSjZiUEH+007Ak4nt0ySjjbWyhGhYEbGHjc8P2p1Vkmu3uGTqivs5U4kuSJBC49kKO1awDJDHjFPXHAHmytuMf5Efe3Yq4/veIigjTJCh0PI4gX4+EoopycM82P/wtwEgjSpGpsrBA7xMl/y0bbR+WLbH8J0/oHQfOzPYXEmXsJJtBhWhcJtfpvej010Q==
+WWzuZBR7J3OFz9iDzLm7gfZNapfNgf9JsgjxGIjqEEyFYN7WgwkCpltWFipjUFf3tBinBiIOAPohueMB1pGOBZTYNBf57qJr0t9rhPNu0B7omDkj7V5Wa+3nxa+jLOvJrMmCieYMDmF6ECRID5NCJMBuFUAo2EoBmH697cCUKCGfVS/P2QF86dvHjd3EWCXwIc/K20XEcoIJlSwZrfUqN/MZUOdeIML02br4LBkGXR/jY3ZAbETS1iX7f5Y5SWyjcUL+n29MgJzeqsFDFqHrAtcyJoqiNunmrM8eyHlmSgQrRkRXPu/ALc0X0oNovy9ePAvptx9ugk8lqRybZMMJ4Q==
 -----END SIGNATURE-----
