@@ -45,7 +45,7 @@ SETTINGS_DIR = get_settings_dir_path()
                         <active_scope_preset>Default</active_scope_preset>
                         <capture name="Default">
                             <time_interval>0.01</time_interval>
-                            <sample_rate>250000</sample_rate>
+                            <sample_rate>250000.0</sample_rate>
                             <background_color>white</background_color>
                             <layout>Vertical</layout>
                             <legend>True</legend>
@@ -81,7 +81,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -92,7 +92,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -103,7 +103,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -114,7 +114,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -125,7 +125,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -136,7 +136,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -147,7 +147,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -158,7 +158,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -169,7 +169,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Ia1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -182,7 +182,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -205,7 +205,7 @@ SETTINGS_DIR = get_settings_dir_path()
                         </presets>
                     <capture>
                         <time_interval>0.01</time_interval>
-                        <sample_rate>250000</sample_rate>
+                        <sample_rate>250000.0</sample_rate>
                         <background_color>white</background_color>
                         <layout>Vertical</layout>
                         <legend>True</legend>
@@ -246,7 +246,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -257,7 +257,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -268,7 +268,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -279,7 +279,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -290,7 +290,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -301,7 +301,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -312,7 +312,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -323,7 +323,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -334,7 +334,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.Ia1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -347,7 +347,7 @@ SETTINGS_DIR = get_settings_dir_path()
                             <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -390,8 +390,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>848</x>
-                    <y>24</y>
+                    <x>784</x>
+                    <y>232</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -464,8 +464,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>832</x>
-                    <y>232</y>
+                    <x>1184</x>
+                    <y>240</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -538,8 +538,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>840</x>
-                    <y>448</y>
+                    <x>840.0</x>
+                    <y>448.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -613,8 +613,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>32</x>
-                    <y>152</y>
+                    <x>32.0</x>
+                    <y>152.0</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -644,8 +644,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>112</x>
-                    <y>152</y>
+                    <x>112.0</x>
+                    <y>152.0</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -677,8 +677,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>112</x>
-                    <y>80</y>
+                    <x>112.0</x>
+                    <y>80.0</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -709,8 +709,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>32</x>
-                    <y>80</y>
+                    <x>32.0</x>
+                    <y>80.0</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -728,8 +728,8 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt; font-weight:600;">Grid Connect</span></p></body></html>]]></text>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>32</x>
-                    <y>120</y>
+                    <x>32.0</x>
+                    <y>120.0</y>
                     <width>144</width>
                     <height>32</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -749,8 +749,8 @@ p, li { white-space: pre-wrap; }
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt; font-weight:600;">Grid Synchronize</span></p></body></html>]]></text>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>32</x>
-                    <y>48</y>
+                    <x>32.0</x>
+                    <y>48.0</y>
                     <width>144</width>
                     <height>32</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -777,8 +777,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>216</x>
-                    <y>136</y>
+                    <x>216.0</x>
+                    <y>136.0</y>
                     <width>112</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -803,8 +803,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>200</x>
-                    <y>136</y>
+                    <x>200.0</x>
+                    <y>136.0</y>
                     <width>104</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -829,8 +829,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>216</x>
-                    <y>96</y>
+                    <x>216.0</x>
+                    <y>96.0</y>
                     <width>112</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -855,8 +855,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>200</x>
-                    <y>96</y>
+                    <x>200.0</x>
+                    <y>96.0</y>
                     <width>104</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -885,8 +885,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>208</y>
+                    <x>0.0</x>
+                    <y>208.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -959,8 +959,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>16</x>
-                    <y>432</y>
+                    <x>16.0</x>
+                    <y>432.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1033,8 +1033,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>408</x>
-                    <y>208</y>
+                    <x>384</x>
+                    <y>216</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1107,8 +1107,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>432</x>
-                    <y>440</y>
+                    <x>432.0</x>
+                    <y>440.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1119,6 +1119,302 @@ displayValue = 0.0
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
                     <time_window>100</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>dc033a0abd6411ea8069509a4c4e2fb4</id>
+                <name><![CDATA[Power (real)]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.P1']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>456</x>
+                    <y>16</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>10ab4800bd6511ea8cb4509a4c4e2fb4</id>
+                <name><![CDATA[Power (reactive)]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Q1']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>880</x>
+                    <y>24</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>447b2406bd6611eaa485509a4c4e2fb4</id>
+                <name><![CDATA[Power (reactive) pu]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Qpu']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>736</x>
+                    <y>648</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>447b2407bd6611eaa974509a4c4e2fb4</id>
+                <name><![CDATA[Power (real) pu]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Ppu']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>304</x>
+                    <y>648</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>

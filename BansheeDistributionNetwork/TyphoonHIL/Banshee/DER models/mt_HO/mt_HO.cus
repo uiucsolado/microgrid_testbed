@@ -101,8 +101,8 @@ referenceCurves = [refCurveData1]
                 <hierarchy_position>1</hierarchy_position>
                 <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>144.0</x>
-                    <y>576.0</y>
+                    <x>144</x>
+                    <y>576</y>
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -249,14 +249,51 @@ referenceCurves = [refCurveData1]
                                 
                            </viewports>
                         </analog>
+                            <analog>
+                            <channel>2</channel>
+                            <name>Ia1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>3</channel>
+                            <name>Va1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>4</channel>
+                            <name>Microturbine.Ic1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
                             </analog_signals>
                             <digital_signals>
                             </digital_signals>
                             <trigger>
-                                <device>-1</device>
+                                <device>0</device>
                                 <is_force>False</is_force>
                                 <type>Analog</type>
-                                <source>None</source>
+                                <source>Microturbine.BE1-25A Synchronizer.del_V</source>
                                 <edge>Rising edge</edge>
                                 <treshold>0.0</treshold>
                                 <offset>50.0</offset>
@@ -374,7 +411,7 @@ referenceCurves = [refCurveData1]
                         <trigger>
                             <mode>Auto</mode>
                             <type>Analog</type>
-                            <source>None</source>
+                            <source>Microturbine.BE1-25A Synchronizer.del_V</source>
                             <edge>Rising edge</edge>
                             <treshold>0.0</treshold>
                             <offset>50.0</offset>
@@ -404,6 +441,43 @@ referenceCurves = [refCurveData1]
                             <viewports>
                                 
                                 <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>2</channel>
+                            <name>Ia1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>3</channel>
+                            <name>Va1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>4</channel>
+                            <name>Microturbine.Ic1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
                                 
                            </viewports>
                         </analog>
@@ -1223,7 +1297,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Microturbine.qd0(PU).Ea1', 'Microturbine.qd0(PU).Ea_phi', 'Microturbine.qd0(PU).Va_G1']]]></analog_signals>
+                <analog_signals><![CDATA[['Ia1']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1232,8 +1306,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1200.0</x>
-                    <y>232.0</y>
+                    <x>1200</x>
+                    <y>232</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>

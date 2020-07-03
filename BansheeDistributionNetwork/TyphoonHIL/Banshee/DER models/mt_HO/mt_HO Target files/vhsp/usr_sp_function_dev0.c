@@ -840,11 +840,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Microturbine.Ec1.Va1
     _microturbine_ec1_va1__out = (HIL_InFloat(0xc80000 + 0xa));
     // Generated from the component: Microturbine.Ia1.Ia1
-    _microturbine_ia1_ia1__out = (HIL_InFloat(0xc80000 + 0xf));
+    _microturbine_ia1_ia1__out = (HIL_InFloat(0xc80000 + 0x11));
     // Generated from the component: Microturbine.Ib1.Ia1
-    _microturbine_ib1_ia1__out = (HIL_InFloat(0xc80000 + 0x10));
+    _microturbine_ib1_ia1__out = (HIL_InFloat(0xc80000 + 0x12));
     // Generated from the component: Microturbine.Ic1.Ia1
-    _microturbine_ic1_ia1__out = (HIL_InFloat(0xc80000 + 0x11));
+    _microturbine_ic1_ia1__out = (HIL_InFloat(0xc80000 + 0x13));
     // Generated from the component: Microturbine.MT_sync
     _microturbine_mt_sync__out = XIo_InInt32(0x55000104);
     // Generated from the component: Microturbine.Va_G1.Va1

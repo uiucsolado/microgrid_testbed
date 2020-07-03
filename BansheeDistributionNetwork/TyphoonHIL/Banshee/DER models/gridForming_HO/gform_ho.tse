@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 11:09:23 AM
+// Save timestamp: 03-Jul-2020 @ 02:59:47 PM
 //
 
 model "gform_ho" {
@@ -270,7 +270,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain15 {
-                    gain = "S/1e3"
+                    gain = "S*1.5/1e3"
                 }
                 [
                     position = 7136, 8168
@@ -481,7 +481,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain14 {
-                    gain = "S/1e3"
+                    gain = "S*1.5/1e3"
                 }
                 [
                     position = 7136, 8456
@@ -2487,7 +2487,7 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 9008, 8384
+                        position = 9008, 8416
                         scale = -1, 1
                         size = 60, 20
                     ]
@@ -2632,7 +2632,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain17 {
-                    gain = "S/70e3"
+                    gain = "S*1.5/70e3"
                 }
                 [
                     position = 7168, 8496
@@ -2642,7 +2642,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain16 {
-                    gain = "S/70e3"
+                    gain = "S*1.5/70e3"
                 }
                 [
                     position = 7168, 8136
@@ -6654,19 +6654,26 @@ else if (connect==1)
             }
         }
         [
-            position = 6640, 7976
+            position = 6624, 7976
             rotation = down
             scale = -1, -1
-            size = 192, 184
+            size = 224, 184
         ]
 
-        component src_constant Constant1 {
+        component src_scada_input Pref {
             execution_rate = "20e-6"
-            value = "0"
+            unit = ""
         }
         [
-            position = 6384, 7976
-            hide_name = True
+            position = 6464, 7904
+        ]
+
+        component src_scada_input Qref {
+            execution_rate = "20e-6"
+            unit = ""
+        }
+        [
+            position = 6464, 8048
         ]
 
         tag V_d_a {
@@ -6773,11 +6780,6 @@ else if (connect==1)
             position = 7168, 8296
         ]
 
-        junction Junction66 sp
-        [
-            position = 6528, 7976
-        ]
-
         connect V_q_a Va_G.in as Connection312
         connect V_d_a Vb_G.in as Connection313
         connect V_d_a2 Vc_G.in as Connection314
@@ -6823,9 +6825,8 @@ else if (connect==1)
             breakpoints = 7168, 8296; 7168, 8296; 7608, 8296
         ]
         connect "Grid forming inverter (averaged)2.Ground" Junction65 as Connection840
-        connect Constant1.out Junction66 as Connection842
-        connect Junction66 "Grid forming inverter (averaged)2.setpoint_P" as Connection843
-        connect "Grid forming inverter (averaged)2.setpoint_Q" Junction66 as Connection844
+        connect Pref.out "Grid forming inverter (averaged)2.setpoint_P" as Connection841
+        connect Qref.out "Grid forming inverter (averaged)2.setpoint_Q" as Connection842
     }
 
     default {
@@ -6985,6 +6986,19 @@ else if (connect==1)
         src_constant {
             value = "1"
             signal_type = "real"
+            execution_rate = "100e-6"
+        }
+
+        src_scada_input {
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
             execution_rate = "100e-6"
         }
 

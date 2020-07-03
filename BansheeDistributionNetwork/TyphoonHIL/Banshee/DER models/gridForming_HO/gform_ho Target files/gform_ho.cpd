@@ -526,6 +526,62 @@
 
     <variables>
         <cell>
+            <name>Grid forming inverter (averaged)2.Controller.E_q1</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.P1</name>
+            <type>generic</type>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.|V|</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Vd_G</name>
+            <type>generic</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3</name>
+            <type>generic</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Ed-Vd</name>
             <type>generic</type>
             <address>16389</address>
@@ -540,37 +596,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Eb_1</name>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
             <type>generic</type>
-            <address>16421</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Ec_1</name>
-            <type>generic</type>
-            <address>16422</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
-            <type>generic</type>
-            <address>16411</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.volt_diff3</name>
-            <type>generic</type>
-            <address>16397</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Vd_G</name>
-            <type>generic</type>
-            <address>16391</address>
+            <address>16409</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -582,30 +610,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Q1</name>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.volt_diff3</name>
             <type>generic</type>
-            <address>16416</address>
+            <address>16397</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <name>Grid forming inverter (averaged)2.Controller.E_dREF1</name>
             <type>generic</type>
-            <address>16408</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
-            <type>generic</type>
-            <address>16407</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.E_d1</name>
-            <type>generic</type>
-            <address>16402</address>
+            <address>16403</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -617,6 +631,41 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.del_V</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.|E|</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.E_d</name>
+            <type>generic</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.w_bus</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Ea-Va</name>
             <type>generic</type>
             <address>16386</address>
@@ -624,9 +673,30 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Eq-Vq</name>
             <type>generic</type>
-            <address>16412</address>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Q1</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.E_q</name>
+            <type>generic</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.del_w</name>
+            <type>generic</type>
+            <address>16395</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -638,16 +708,51 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
+            <name>Grid forming inverter (averaged)2.Controller.Ppu</name>
             <type>generic</type>
-            <address>16413</address>
+            <address>16415</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Controller.E_q1</name>
+            <name>Grid forming inverter (averaged)2.Ec_1</name>
             <type>generic</type>
-            <address>16404</address>
+            <address>16422</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.w_G</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Ec-Vc</name>
+            <type>generic</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.frequency_diff3</name>
+            <type>generic</type>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged)2.Controller.Qpu</name>
+            <type>generic</type>
+            <address>16417</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -666,86 +771,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.del_w</name>
+            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
             <type>generic</type>
-            <address>16395</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Ec-Vc</name>
-            <type>generic</type>
-            <address>16388</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.E_d</name>
-            <type>generic</type>
-            <address>16384</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.E_q</name>
-            <type>generic</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.|E|</name>
-            <type>generic</type>
-            <address>16400</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Qpu</name>
-            <type>generic</type>
-            <address>16417</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.w_G</name>
-            <type>generic</type>
-            <address>16398</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Eq-Vq</name>
-            <type>generic</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
-            <type>generic</type>
-            <address>16409</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.E_dREF1</name>
-            <type>generic</type>
-            <address>16403</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.|V|</name>
-            <type>generic</type>
-            <address>16401</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.del_V</name>
-            <type>generic</type>
-            <address>16394</address>
+            <address>16410</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -757,44 +785,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.w_bus</name>
+            <name>Grid forming inverter (averaged)2.Controller.E_d1</name>
             <type>generic</type>
-            <address>16399</address>
+            <address>16402</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
+            <name>Grid forming inverter (averaged)2.Eb_1</name>
             <type>generic</type>
-            <address>16410</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3</name>
-            <type>generic</type>
-            <address>16393</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.Ppu</name>
-            <type>generic</type>
-            <address>16415</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.frequency_diff3</name>
-            <type>generic</type>
-            <address>16396</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged)2.Controller.P1</name>
-            <type>generic</type>
-            <address>16414</address>
+            <address>16421</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -804,6 +804,11 @@
         <cell>
             <name>Grid forming inverter (averaged)2.INV_sync OFF</name>
             <address>2053</address>
+        </cell>
+
+        <cell>
+            <name>volt_sync3</name>
+            <address>2051</address>
         </cell>
 
         <cell>
@@ -817,18 +822,13 @@
         </cell>
 
         <cell>
-            <name>freq_sync3</name>
-            <address>2050</address>
-        </cell>
-
-        <cell>
-            <name>volt_sync3</name>
-            <address>2051</address>
-        </cell>
-
-        <cell>
             <name>Grid forming inverter (averaged)2.INV_sync ON</name>
             <address>2054</address>
+        </cell>
+
+        <cell>
+            <name>freq_sync3</name>
+            <address>2050</address>
         </cell>
 
         <cell>
@@ -850,6 +850,16 @@
             <format>real</format>
         </scada_input>
         <scada_input>
+            <name>Qref</name>
+            <addr>1426063628</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
             <name>Grid forming inverter (averaged)2.INV_sync</name>
             <addr>1426063620</addr>
             <min>0.0</min>
@@ -858,6 +868,16 @@
             <unit></unit>
             <widget_type>int</widget_type>
             <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Pref</name>
+            <addr>1426063624</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
         </scada_input>
     </scada_inputs>
 

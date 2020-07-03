@@ -288,6 +288,7 @@ typedef double real;
 
 
 
+
 //@cmp.def.end
 
 
@@ -298,7 +299,6 @@ typedef double real;
 
 //@cmp.var.start
 // variables
-double _constant1__out = 0.0;
 double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_connect_inv__out;
 double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_constant6__out = 0.001;
 double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_constant7__out = 0.001;
@@ -337,14 +337,14 @@ double _grid_forming_inverter__averaged_2_vcg_va1__out;
 double _grid_forming_inverter__averaged_2_xi_a1_ia1__out;
 double _grid_forming_inverter__averaged_2_xi_b1_ia1__out;
 double _grid_forming_inverter__averaged_2_xi_c1_ia1__out;
+double _pref__out;
+double _qref__out;
 double _sinusoidal_source1__out;
 double _sinusoidal_source2__out;
 double _sinusoidal_source3__out;
 float _grid_forming_inverter__averaged_2_be1_25a_synchronizer_digital_probe1__tmp;
 X_Int32 _grid_forming_inverter__averaged_2_be1_25a_synchronizer_logical_operator2__out;
 double _grid_forming_inverter__averaged_2_gain1__out;
-double _grid_forming_inverter__averaged_2_controller_frequency_droop_sum1__out;
-double _grid_forming_inverter__averaged_2_controller_voltage_droop_sum2__out;
 double _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_comparator1__out;
 double _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_comparator1__out;
 double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha;
@@ -370,12 +370,12 @@ double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_abc_to_dq1_abc_to
 double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha;
 double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
 double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__gamma;
+double _grid_forming_inverter__averaged_2_controller_frequency_droop_sum1__out;
+double _grid_forming_inverter__averaged_2_controller_voltage_droop_sum2__out;
 double _gain3__out;
 double _gain5__out;
 double _gain4__out;
 float _grid_forming_inverter__averaged_2_be1_25a_synchronizer_digital_probe6__tmp;
-double _grid_forming_inverter__averaged_2_controller_frequency_droop_gain3__out;
-double _grid_forming_inverter__averaged_2_controller_voltage_droop_gain3__out;
 double _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_signal_switch1__out;
 double _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_signal_switch1__out;
 double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d;
@@ -406,6 +406,8 @@ double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq
 double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
 double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1;
 double _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2;
+double _grid_forming_inverter__averaged_2_controller_frequency_droop_gain3__out;
+double _grid_forming_inverter__averaged_2_controller_voltage_droop_gain3__out;
 double _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain5__out;
 double _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out;
 double _grid_forming_inverter__averaged_2_be1_25a_synchronizer_gain12__out;
@@ -740,7 +742,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Output block
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
-    // Generated from the component: Constant1
     // Generated from the component: Grid forming inverter (averaged)2.BE1-25A Synchronizer.Connect INV
     _grid_forming_inverter__averaged_2_be1_25a_synchronizer_connect_inv__out = XIo_InFloat(0x55000100);
     // Generated from the component: Grid forming inverter (averaged)2.BE1-25A Synchronizer.Constant6
@@ -803,6 +804,10 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged_2_xi_b1_ia1__out = (HIL_InFloat(0xc80000 + 0x20d));
     // Generated from the component: Grid forming inverter (averaged)2.Xi_c1.Ia1
     _grid_forming_inverter__averaged_2_xi_c1_ia1__out = (HIL_InFloat(0xc80000 + 0x20e));
+    // Generated from the component: Pref
+    _pref__out = XIo_InFloat(0x55000108);
+    // Generated from the component: Qref
+    _qref__out = XIo_InFloat(0x5500010c);
     // Generated from the component: Sinusoidal Source1
     _sinusoidal_source1__out = (1.0 * sin(2.0f * M_PI * _sinusoidal_source1__current_phase) + 0.0);
     // Generated from the component: Sinusoidal Source2
@@ -828,10 +833,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged_2_gain1__out = 0.5 * _grid_forming_inverter__averaged_2_constant1__out;
     // Generated from the component: Grid forming inverter (averaged)2.Controller.E_qREF1
     HIL_OutAO(0x4015, (float)_grid_forming_inverter__averaged_2_controller_constant1__out);
-    // Generated from the component: Grid forming inverter (averaged)2.Controller.Frequency droop.Sum1
-    _grid_forming_inverter__averaged_2_controller_frequency_droop_sum1__out = _constant1__out - _grid_forming_inverter__averaged_2_controller_integrator2__out;
-    // Generated from the component: Grid forming inverter (averaged)2.Controller.Voltage droop.Sum2
-    _grid_forming_inverter__averaged_2_controller_voltage_droop_sum2__out = _constant1__out - _grid_forming_inverter__averaged_2_controller_integrator3__out;
     // Generated from the component: Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Comparator1
     if (_grid_forming_inverter__averaged_2_constant1__out < _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit_zero__out) {
         _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_comparator1__out = 0;
@@ -888,6 +889,10 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _grid_forming_inverter__averaged_2_xi_a1_ia1__out - _grid_forming_inverter__averaged_2_xi_b1_ia1__out - _grid_forming_inverter__averaged_2_xi_c1_ia1__out) * 0.3333333333333333;
     _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta = (_grid_forming_inverter__averaged_2_xi_b1_ia1__out - _grid_forming_inverter__averaged_2_xi_c1_ia1__out) * 0.5773502691896258;
     _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__gamma = (_grid_forming_inverter__averaged_2_xi_a1_ia1__out + _grid_forming_inverter__averaged_2_xi_b1_ia1__out + _grid_forming_inverter__averaged_2_xi_c1_ia1__out) * 0.3333333333333333;
+    // Generated from the component: Grid forming inverter (averaged)2.Controller.Frequency droop.Sum1
+    _grid_forming_inverter__averaged_2_controller_frequency_droop_sum1__out = _pref__out - _grid_forming_inverter__averaged_2_controller_integrator2__out;
+    // Generated from the component: Grid forming inverter (averaged)2.Controller.Voltage droop.Sum2
+    _grid_forming_inverter__averaged_2_controller_voltage_droop_sum2__out = _qref__out - _grid_forming_inverter__averaged_2_controller_integrator3__out;
     // Generated from the component: Gain3
     _gain3__out = 391.91835884530855 * _sinusoidal_source1__out;
     // Generated from the component: Gain5
@@ -896,10 +901,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _gain4__out = 391.91835884530855 * _sinusoidal_source3__out;
     // Generated from the component: Grid forming inverter (averaged)2.BE1-25A Synchronizer.Digital Probe6
     HIL_OutInt32(0xf00404, _grid_forming_inverter__averaged_2_be1_25a_synchronizer_logical_operator2__out != 0x0);
-    // Generated from the component: Grid forming inverter (averaged)2.Controller.Frequency droop.Gain3
-    _grid_forming_inverter__averaged_2_controller_frequency_droop_gain3__out = 1.1309733552923256 * _grid_forming_inverter__averaged_2_controller_frequency_droop_sum1__out;
-    // Generated from the component: Grid forming inverter (averaged)2.Controller.Voltage droop.Gain3
-    _grid_forming_inverter__averaged_2_controller_voltage_droop_gain3__out = 0.0011308477645849007 * _grid_forming_inverter__averaged_2_controller_voltage_droop_sum2__out;
     // Generated from the component: Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Signal switch1
     _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_signal_switch1__out = (_grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_comparator1__out < 0.5f) ? _grid_forming_inverter__averaged_2_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_one__out : _grid_forming_inverter__averaged_2_constant1__out;
     // Generated from the component: Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Signal switch1
@@ -952,6 +953,10 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_grid_forming_inverter__averaged_2_controller_integrator1__out);
     _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d = _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha - _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
     _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q = _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha + _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _grid_forming_inverter__averaged_2_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Grid forming inverter (averaged)2.Controller.Frequency droop.Gain3
+    _grid_forming_inverter__averaged_2_controller_frequency_droop_gain3__out = 1.1309733552923256 * _grid_forming_inverter__averaged_2_controller_frequency_droop_sum1__out;
+    // Generated from the component: Grid forming inverter (averaged)2.Controller.Voltage droop.Gain3
+    _grid_forming_inverter__averaged_2_controller_voltage_droop_gain3__out = 0.0011308477645849007 * _grid_forming_inverter__averaged_2_controller_voltage_droop_sum2__out;
     // Generated from the component: Va_G.Vs1
     HIL_OutFloat(137101312, (float) _gain3__out);
     // Generated from the component: Vb_G.Vs1

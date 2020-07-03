@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 10:27:17 AM
+// Save timestamp: 03-Jul-2020 @ 01:59:56 PM
 //
 
 model "mt_HO" {
@@ -7208,7 +7208,7 @@ else if((connectMT==0)||(MTsync==0)){
             pf_3ph = "0.85"
         }
         [
-            position = 7168, 8168
+            position = 7168, 8192
             hide_name = True
             size = 104, 152
         ]
@@ -7280,6 +7280,22 @@ else if((connectMT==0)||(MTsync==0)){
         }
         [
             position = 7816, 8352
+        ]
+
+        component "core/Current Measurement" Ia1 {
+        }
+        [
+            position = 7136, 8056
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Va1 {
+        }
+        [
+            position = 7064, 8104
+            rotation = right
+            size = 64, 32
         ]
 
         tag V_d_a {
@@ -7386,6 +7402,16 @@ else if((connectMT==0)||(MTsync==0)){
             position = 7168, 8296
         ]
 
+        junction Junction66 pe
+        [
+            position = 7120, 7960
+        ]
+
+        junction Junction67 pe
+        [
+            position = 7064, 8296
+        ]
+
         connect V_q_a Va_G.in as Connection312
         connect V_d_a Vb_G.in as Connection313
         connect V_d_a2 Vc_G.in as Connection314
@@ -7404,9 +7430,7 @@ else if((connectMT==0)||(MTsync==0)){
         connect "Sinusoidal Source2.out" Gain5.in as Connection790
         connect Gain5.out V_d_a1 as Connection791
         connect Gain4.out V_q_a2 as Connection792
-        connect RL1.P1 Junction58 as Connection796
         connect Junction58 RL2.P2 as Connection797
-        connect "Constant Impedance Load1.A" Junction58 as Connection798
         connect RL1.P3 Junction59 as Connection799
         connect Junction59 RL2.P4 as Connection800
         connect "Constant Impedance Load1.B" Junction59 as Connection801
@@ -7433,7 +7457,14 @@ else if((connectMT==0)||(MTsync==0)){
         [
             breakpoints = 7168, 8296
         ]
-        connect Microturbine.ground Junction65 as Connection833
+        connect "Constant Impedance Load1.A" Ia1.n_node as Connection834
+        connect Ia1.p_node Junction58 as Connection835
+        connect RL1.P1 Junction66 as Connection836
+        connect Junction66 Junction58 as Connection837
+        connect Va1.p_node Junction66 as Connection838
+        connect Microturbine.ground Junction67 as Connection839
+        connect Junction67 Junction65 as Connection840
+        connect Va1.n_node Junction67 as Connection841
     }
 
     logically_deleted {
