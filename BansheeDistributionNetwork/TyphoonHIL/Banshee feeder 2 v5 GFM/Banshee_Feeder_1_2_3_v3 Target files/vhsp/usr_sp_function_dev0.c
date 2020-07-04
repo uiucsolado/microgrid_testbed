@@ -20,7 +20,7 @@
 // Header files from additional sources (Advanced C Function)
 // ----------------------------------------------------------------------------------------
 // generated using template: VirtualHIL/custom_defines.template----------------------------
-int i_send;
+
 typedef unsigned char X_UnInt8;
 typedef char X_Int8;
 typedef signed short X_Int16;
@@ -1756,27 +1756,6 @@ typedef double real;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
@@ -1912,8 +1891,6 @@ typedef double real;
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
-
-
 
 
 
@@ -2109,8 +2086,6 @@ typedef double real;
 
 
 
-
-
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
@@ -2127,47 +2102,6 @@ typedef double real;
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -3944,7 +3878,7 @@ float _ess_ess_ib_ia1__out;
 float _ess_ess_ic_ia1__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__clock1__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__constant10__out = 10.0;
-float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__constant11__out = 306.3278474454356;
+float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__constant11__out = 30.632784744543564;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__constant13__out = 0.1;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__constant3__out = 0.0008841941282883074;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__constant4__out = 0.0001;
@@ -5615,7 +5549,6 @@ float _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_
 float _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
 float _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1;
 float _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2;
-float _f2_relay_udp_stream_w____kw___gain__out;
 float _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_relational_operator1__out;
 float _f2_cb1_mid_rly1_sel_787_relay_param_reset_or__out;
 float _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_gain3__out;
@@ -5627,7 +5560,6 @@ float _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb1_mid_rly1_sel_787_gain8__out;
 float _f2_cb1_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion1__out;
 float _f2_cb1_mid_rly1_bus_split1__out;
 float _f2_cb1_mid_rly1_bus_split1__out1;
 float _f2_cb1_mid_rly1_bus_split1__out2;
@@ -5648,7 +5580,6 @@ float _f2_cb10_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb10_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb10_mid_rly1_sel_787_gain8__out;
 float _f2_cb10_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion10__out;
 float _f2_cb10_mid_rly1_bus_split1__out;
 float _f2_cb10_mid_rly1_bus_split1__out1;
 float _f2_cb10_mid_rly1_bus_split1__out2;
@@ -5672,7 +5603,6 @@ float _f2_cb11_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb11_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb11_mid_rly1_sel_787_gain8__out;
 float _f2_cb11_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion11__out;
 float _f2_cb11_mid_rly1_bus_split1__out;
 float _f2_cb11_mid_rly1_bus_split1__out1;
 float _f2_cb11_mid_rly1_bus_split1__out2;
@@ -5690,7 +5620,6 @@ float _f2_cb12_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb12_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb12_mid_rly1_sel_787_gain8__out;
 float _f2_cb12_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion12__out;
 float _f2_cb12_mid_rly1_bus_split1__out;
 float _f2_cb12_mid_rly1_bus_split1__out1;
 float _f2_cb12_mid_rly1_bus_split1__out2;
@@ -5711,7 +5640,6 @@ float _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb14_mid_rly1_sel_787_gain8__out;
 float _f2_cb14_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion14__out;
 float _f2_cb14_mid_rly1_bus_split1__out;
 float _f2_cb14_mid_rly1_bus_split1__out1;
 float _f2_cb14_mid_rly1_bus_split1__out2;
@@ -5729,7 +5657,6 @@ float _f2_cb15_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb15_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb15_mid_rly1_sel_787_gain8__out;
 float _f2_cb15_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion15__out;
 float _f2_cb15_mid_rly1_bus_split1__out;
 float _f2_cb15_mid_rly1_bus_split1__out1;
 float _f2_cb15_mid_rly1_bus_split1__out2;
@@ -5753,7 +5680,6 @@ float _f2_cb18_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb18_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb18_mid_rly1_sel_787_gain8__out;
 float _f2_cb18_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion18__out;
 float _f2_cb18_mid_rly1_bus_split1__out;
 float _f2_cb18_mid_rly1_bus_split1__out1;
 float _f2_cb18_mid_rly1_bus_split1__out2;
@@ -5766,7 +5692,6 @@ float _f2_cb18_mid_rly1_bus_split3__out2;
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_relational_operator1__out;
 float _f2_cb19_mid_rly1_sel_787_relay_param_reset_or__out;
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_gain3__out;
-float _f2_relay_udp_stream_f2_frequency_2__out[2];
 float _f2_cb19_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[10];
 float _f2_cb19_mid_rly1_sel_787_relay_param_islanded_param_bus_join1__out[10];
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out;
@@ -5775,7 +5700,6 @@ float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb19_mid_rly1_sel_787_gain8__out;
 float _f2_cb19_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion19__out;
 float _f2_cb19_mid_rly1_bus_split1__out;
 float _f2_cb19_mid_rly1_bus_split1__out1;
 float _f2_cb19_mid_rly1_bus_split1__out2;
@@ -5796,7 +5720,6 @@ float _f2_cb2_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb2_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb2_mid_rly1_sel_787_gain8__out;
 float _f2_cb2_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion2__out;
 float _f2_cb2_mid_rly1_bus_split1__out;
 float _f2_cb2_mid_rly1_bus_split1__out1;
 float _f2_cb2_mid_rly1_bus_split1__out2;
@@ -5817,7 +5740,6 @@ float _f2_cb3_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb3_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb3_mid_rly1_sel_787_gain8__out;
 float _f2_cb3_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion3__out;
 float _f2_cb3_mid_rly1_bus_split1__out;
 float _f2_cb3_mid_rly1_bus_split1__out1;
 float _f2_cb3_mid_rly1_bus_split1__out2;
@@ -5838,7 +5760,6 @@ float _f2_cb4_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb4_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb4_mid_rly1_sel_787_gain8__out;
 float _f2_cb4_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion4__out;
 float _f2_cb4_mid_rly1_bus_split1__out;
 float _f2_cb4_mid_rly1_bus_split1__out1;
 float _f2_cb4_mid_rly1_bus_split1__out2;
@@ -5859,7 +5780,6 @@ float _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb5_mid_rly1_sel_787_gain8__out;
 float _f2_cb5_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion5__out;
 float _f2_cb5_mid_rly1_bus_split1__out;
 float _f2_cb5_mid_rly1_bus_split1__out1;
 float _f2_cb5_mid_rly1_bus_split1__out2;
@@ -5877,7 +5797,6 @@ float _f2_cb6_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb6_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb6_mid_rly1_sel_787_gain8__out;
 float _f2_cb6_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion6__out;
 float _f2_cb6_mid_rly1_bus_split1__out;
 float _f2_cb6_mid_rly1_bus_split1__out1;
 float _f2_cb6_mid_rly1_bus_split1__out2;
@@ -5901,7 +5820,6 @@ float _f2_cb7_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb7_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb7_mid_rly1_sel_787_gain8__out;
 float _f2_cb7_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion7__out;
 float _f2_cb7_mid_rly1_bus_split1__out;
 float _f2_cb7_mid_rly1_bus_split1__out1;
 float _f2_cb7_mid_rly1_bus_split1__out2;
@@ -5922,7 +5840,6 @@ float _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb8_mid_rly1_sel_787_gain8__out;
 float _f2_cb8_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion8__out;
 float _f2_cb8_mid_rly1_bus_split1__out;
 float _f2_cb8_mid_rly1_bus_split1__out1;
 float _f2_cb8_mid_rly1_bus_split1__out2;
@@ -5935,7 +5852,6 @@ float _f2_cb8_mid_rly1_bus_split3__out2;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_relational_operator1__out;
 float _f2_cb9_mid_rly1_sel_787_relay_param_reset_or__out;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_gain3__out;
-float _f2_relay_udp_stream_f2_frequency_1__out[14];
 float _f2_cb9_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[10];
 float _f2_cb9_mid_rly1_sel_787_relay_param_islanded_param_bus_join1__out[10];
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out;
@@ -5944,7 +5860,6 @@ float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out2;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out3;
 float _f2_cb9_mid_rly1_sel_787_gain8__out;
 float _f2_cb9_mid_rly1_sel_787_not__out;
-X_Int32 _f2_relay_udp_stream_data_type_conversion9__out;
 float _f2_cb9_mid_rly1_bus_split1__out;
 float _f2_cb9_mid_rly1_bus_split1__out1;
 float _f2_cb9_mid_rly1_bus_split1__out2;
@@ -5978,7 +5893,6 @@ float _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_d
 float _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
 float _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1;
 float _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2;
-float _f2_relay_udp_stream_w____kw___gain1__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__digital_probe6__tmp;
 float _ess_grid_forming_inverter__averaged__c_function6__prev;
 float _ess_grid_forming_inverter__averaged__c_function6__in[2];
@@ -6004,7 +5918,6 @@ float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__gain
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__gain6__out;
 float _ess_grid_forming_inverter__averaged__controller_gain6__out;
 float _ess_grid_forming_inverter__averaged__controller_gain7__out;
-X_Int32 _udp_send_data_type_conversion6__out;
 float _f2_cb1_mid_rly1_sel_787_relay_param_reset_detect_change_relational_operator1__out;
 float _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fbus;
 float _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fline;
@@ -6774,12 +6687,10 @@ float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1
 
 
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__out;
-float _f2_relay_udp_stream_gain8__out[2];
 float _f2_cb19_mid_rly1_sel_787_relay_param_signal_switch1__out[10];
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_relational_operator1__out;
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_gain1__out;
 float _f2_cb19_mid_rly1_sel_787_gain7__out;
-X_Int32 _f2_relay_udp_stream_f2_breaker_2__out[2];
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_value;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_filtered_value;
@@ -7648,12 +7559,10 @@ float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1_
 
 
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__out;
-float _f2_relay_udp_stream_gain4__out[14];
 float _f2_cb9_mid_rly1_sel_787_relay_param_signal_switch1__out[10];
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_relational_operator1__out;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_gain1__out;
 float _f2_cb9_mid_rly1_sel_787_gain7__out;
-X_Int32 _f2_relay_udp_stream_f2_breaker_1__out[14];
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_value;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_filtered_value;
@@ -7800,7 +7709,6 @@ float _pv_grid_feeding_inverter__averaged__controller_gain10__out;
 float _pv_grid_feeding_inverter__averaged__controller_gain9__out;
 float _pv_grid_feeding_inverter__averaged__controller_gain6__out;
 float _pv_grid_feeding_inverter__averaged__controller_gain7__out;
-X_Int32 _udp_send_data_type_conversion10__out;
 float _ess_grid_forming_inverter__averaged__gain18__out;
 float _ess_grid_forming_inverter__averaged__gain17__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__limit1__out;
@@ -8100,7 +8008,6 @@ float _f2_cb19_mid_rly1_sel_787_r50512761_bus_split1__out8;
 float _f2_cb19_mid_rly1_sel_787_r50512761_bus_split1__out9;
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_product1__out;
 float _f2_cb19_mid_rly1_sel_787_sum3__out;
-X_UnInt32 _f2_relay_udp_stream_boolean_join2__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain10__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain7__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain8__out;
@@ -8405,7 +8312,6 @@ float _f2_cb9_mid_rly1_sel_787_r50512761_bus_split1__out8;
 float _f2_cb9_mid_rly1_sel_787_r50512761_bus_split1__out9;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_product1__out;
 float _f2_cb9_mid_rly1_sel_787_sum3__out;
-X_UnInt32 _f2_relay_udp_stream_boolean_join1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain10__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain7__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain8__out;
@@ -9244,13 +9150,8 @@ float _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip27;
 float _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip50;
 float _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip51;
 float _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip59;
-X_Int32 _udp_send_boolean_split3__out[3];
-X_UnInt32 _udp_send_boolean_split3__input;
-float _f2_relay_udp_stream_f2_p_real_2__out[2];
-float _f2_relay_udp_stream_f2_p_reactive_2__out[2];
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator2__out;
-float _f2_relay_udp_stream_f2_voltage_2__out[2];
 float _f2_cb19_mid_rly1_sel_787_bus_join1__out[25];
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[2] = {0.06283185307, 0.06283185307};
@@ -10073,13 +9974,8 @@ float _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip27;
 float _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip50;
 float _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip51;
 float _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip59;
-X_Int32 _udp_send_boolean_split2__out[16];
-X_UnInt32 _udp_send_boolean_split2__input;
-float _f2_relay_udp_stream_f2_p_real_1__out[14];
-float _f2_relay_udp_stream_f2_p_reactive_1__out[14];
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator2__out;
-float _f2_relay_udp_stream_f2_voltage_1__out[14];
 float _f2_cb9_mid_rly1_sel_787_bus_join1__out[25];
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[2] = {0.06283185307, 0.06283185307};
@@ -10160,8 +10056,10 @@ float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__conf
 
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__mathematical_function1__out;
-float _ess_grid_forming_inverter__averaged__controller_gain17__out;
-float _ess_grid_forming_inverter__averaged__controller_gain16__out;
+float _ess_grid_forming_inverter__averaged__controller_gain14__out;
+float _ess_grid_forming_inverter__averaged__controller_sum5__out;
+float _ess_grid_forming_inverter__averaged__controller_gain15__out;
+float _ess_grid_forming_inverter__averaged__controller_sum4__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__x;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__floor_in;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__in;
@@ -10314,10 +10212,7 @@ float _f2_cb19_mid_rly1_sel_787_gain4__out;
 float _f2_cb19_mid_rly1_sel_787_gain5__out;
 float _f2_cb19_mid_rly1_sel_787_gain6__out;
 float _f2_cb19_mid_rly1_sel_787_logical_operator1__out;
-float _f2_relay_udp_stream_w____kw1__out[2];
-float _f2_relay_udp_stream_var____kvar1__out[2];
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_logical_operator1__out;
-float _f2_relay_udp_stream_gain6__out[2];
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_normalize__in1;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_normalize__in2;
 
@@ -10469,10 +10364,7 @@ float _f2_cb9_mid_rly1_sel_787_gain4__out;
 float _f2_cb9_mid_rly1_sel_787_gain5__out;
 float _f2_cb9_mid_rly1_sel_787_gain6__out;
 float _f2_cb9_mid_rly1_sel_787_logical_operator1__out;
-float _f2_relay_udp_stream_w____kw__out[14];
-float _f2_relay_udp_stream_var____kvar__out[14];
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_logical_operator1__out;
-float _f2_relay_udp_stream_gain3__out[14];
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_normalize__in1;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_normalize__in2;
 
@@ -10501,10 +10393,8 @@ float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain9__out;
 float _ess_grid_forming_inverter__averaged__controller_frequency_droop_sum5__out;
 float _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum4__out;
-float _ess_grid_forming_inverter__averaged__controller_gain14__out;
-float _ess_grid_forming_inverter__averaged__controller_sum5__out;
-float _ess_grid_forming_inverter__averaged__controller_gain15__out;
-float _ess_grid_forming_inverter__averaged__controller_sum4__out;
+float _ess_grid_forming_inverter__averaged__controller_gain13__out;
+float _ess_grid_forming_inverter__averaged__controller_gain4__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum1__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum3__out;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out;
@@ -10587,8 +10477,6 @@ float _f2_cb18_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_kp__
 float _f2_cb18_mid_rly1_sel_787_relay_25_sync_check1_logical_operator3__out;
 float _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_logical_operator5__out;
 float _f2_cb19_mid_rly1_sel_787_state_condition_mng_not__out;
-float _f2_relay_udp_stream_gain7__out[2];
-float _f2_relay_udp_stream_gain5__out[2];
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_subsystem2_multiport_signal_switch1__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_subsystem3_multiport_signal_switch1__out;
 float _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_kd__out;
@@ -10677,8 +10565,6 @@ float _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_kp__o
 float _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_logical_operator3__out;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator5__out;
 float _f2_cb9_mid_rly1_sel_787_state_condition_mng_not__out;
-float _f2_relay_udp_stream_gain1__out[14];
-float _f2_relay_udp_stream_gain2__out[14];
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_subsystem2_multiport_signal_switch1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_subsystem3_multiport_signal_switch1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_kd__out;
@@ -10688,14 +10574,6 @@ float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_kd__o
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_ki__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_kp__out;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator3__out;
-float _udp_send_bus_split2__out;
-float _udp_send_bus_split2__out1;
-float _udp_send_bus_split2__out2;
-float _udp_send_bus_split2__out3;
-float _udp_send_bus_split2__out4;
-float _udp_send_bus_split2__out5;
-float _udp_send_bus_split2__out6;
-float _udp_send_bus_split2__out7;
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_kd__out;
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_ki__out;
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_kp__out;
@@ -10707,8 +10585,6 @@ float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum5__out;
 float _ess_grid_forming_inverter__averaged__controller_frequency_droop_sum4__out;
 float _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum3__out;
-float _ess_grid_forming_inverter__averaged__controller_gain13__out;
-float _ess_grid_forming_inverter__averaged__controller_gain4__out;
 float _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase__in;
 
 
@@ -10802,14 +10678,6 @@ float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_sum8_
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_sum8__out;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator4__out;
 float _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator7__out;
-X_Int32 _udp_send_data_type_conversion11__out;
-X_Int32 _udp_send_data_type_conversion12__out;
-X_Int32 _udp_send_data_type_conversion13__out;
-X_Int32 _udp_send_data_type_conversion15__out;
-float _udp_send_frequency_udp__out[17];
-float _udp_send_p_reactive_udp__out[17];
-float _udp_send_p_real_udp__out[17];
-float _udp_send_voltage_udp__out[17];
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum8__out;
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out;
 float _pv_grid_feeding_inverter__averaged__bus_join4__out[2];
@@ -11184,12 +11052,6 @@ float _f2_cb9_mid_rly1_sel_787_bitwise_faults__Status;
 
 
 X_UnInt32 _f2_cb9_mid_rly1_sel_787_bitwise_faults__fault_status;
-X_Int32 _udp_send_mux_udp__out[4];
-X_Int32 _udp_send_breaker_udp__out[20];
-X_Int32 _udp_send_data_type_conversion4__out[17];
-X_Int32 _udp_send_data_type_conversion2__out[17];
-X_Int32 _udp_send_data_type_conversion1__out[17];
-X_Int32 _udp_send_data_type_conversion3__out[17];
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_gain1__out;
 float _pv_grid_feeding_inverter__averaged__c_function5__prev;
 float _pv_grid_feeding_inverter__averaged__c_function5__in[2];
@@ -11242,7 +11104,6 @@ float _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_sum5_
 float _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_sum5__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_sum5__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_sum5__out;
-X_Int32 _udp_send_data_type_conversion5__out[20];
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum5__out;
 float _pv_grid_feeding_inverter__averaged__gain17__out;
 float _pv_grid_feeding_inverter__averaged__gain18__out;
@@ -11299,7 +11160,6 @@ float _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_limit
 float _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_limit1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_limit1__out;
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_limit1__out;
-X_Int32 _udp_send_udp_data__out[93];
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product4__out;
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product6__out;
@@ -11514,11 +11374,6 @@ float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrato
 
 
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrator__out;
-
-struct _udp_send_eth_ve_send1_struct_ {
-
-    int in[93];
-} _udp_send_eth_ve_send1_struct_;
 float _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum6__out;
 float _f2_pcc_pcc_measurements_three_phase_pll1_rate_limiter1__in_rate;
 float _f2_pcc_pcc_measurements_three_phase_pll1_integrator__in;
@@ -13828,13 +13683,11 @@ float _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[1];
 float _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[1];
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state;
-X_UnInt32 _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__filter_state;
 float _pv_grid_feeding_inverter__averaged__controller_pll2_pll_rate_limiter1__prev_out;
 float _pv_grid_feeding_inverter__averaged__controller_pll2_pll_rate_limiter1__out;
 int _pv_grid_feeding_inverter__averaged__controller_pll2_pll_rate_limiter1__first_step;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state;
-X_UnInt32 _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__filter_state;
 float _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__states[2];
 float _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_rate_limiter1__prev_out;
@@ -13970,10 +13823,8 @@ float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_lpf_lpf__
 float _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__states[2];
 float _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[2];
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state;
-X_UnInt32 _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state;
-X_UnInt32 _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active;
 float _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__filter_state;
 float _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state;
 X_UnInt32 _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active;
@@ -14377,10 +14228,10 @@ void ReInit_user_sp_cpu_dev0() {
     HIL_OutAO(0x4013, 0.0f);
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_comparator1__state = 0.0f;
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_comparator1__state = 0.0f;
-    HIL_OutAO(0x4024, 0.0f);
-    HIL_OutAO(0x4025, 0.0f);
     HIL_OutAO(0x4026, 0.0f);
-    HIL_OutAO(0x4029, 0.0f);
+    HIL_OutAO(0x4027, 0.0f);
+    HIL_OutAO(0x4028, 0.0f);
+    HIL_OutAO(0x402b, 0.0f);
     _ess_power_meter1__filter_1_output_k_minus_1 = 0.0;
     _ess_power_meter1__filter_1_input_k_minus_1 = 0.0;
     _ess_power_meter1__filter_1_output_k_minus_1Q = 0.0;
@@ -14468,10 +14319,10 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__PI = 3.1415926536;
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__PI2 = 2 * _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__PI;
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_comparator1__state = 0.0f;
-    HIL_OutAO(0x4081, 0.0f);
-    HIL_OutAO(0x4082, 0.0f);
     HIL_OutAO(0x4083, 0.0f);
-    HIL_OutAO(0x4086, 0.0f);
+    HIL_OutAO(0x4084, 0.0f);
+    HIL_OutAO(0x4085, 0.0f);
+    HIL_OutAO(0x4088, 0.0f);
     _pv_power_meter1__filter_1_output_k_minus_1 = 0.0;
     _pv_power_meter1__filter_1_input_k_minus_1 = 0.0;
     _pv_power_meter1__filter_1_output_k_minus_1Q = 0.0;
@@ -14479,48 +14330,48 @@ void ReInit_user_sp_cpu_dev0() {
     _pv_power_meter1__filter_1_output_k_minus_1P0 = 0.0;
     _pv_power_meter1__filter_1_input_k_minus_1P0 = 0.0;
     HIL_OutAO(0x4014, 0.0f);
-    HIL_OutAO(0x4020, 0.0f);
-    HIL_OutAO(0x402a, 0.0f);
-    HIL_OutAO(0x402b, 0.0f);
-    HIL_OutAO(0x402f, 0.0f);
+    HIL_OutAO(0x4022, 0.0f);
     HIL_OutAO(0x402c, 0.0f);
-    HIL_OutAO(0x4033, 0.0f);
-    HIL_OutAO(0x4030, 0.0f);
-    HIL_OutAO(0x4037, 0.0f);
-    HIL_OutAO(0x4034, 0.0f);
-    HIL_OutAO(0x403b, 0.0f);
-    HIL_OutAO(0x4038, 0.0f);
-    HIL_OutAO(0x403f, 0.0f);
-    HIL_OutAO(0x403c, 0.0f);
-    HIL_OutAO(0x4043, 0.0f);
-    HIL_OutAO(0x4040, 0.0f);
-    HIL_OutAO(0x4047, 0.0f);
-    HIL_OutAO(0x4044, 0.0f);
-    HIL_OutAO(0x404b, 0.0f);
-    HIL_OutAO(0x4048, 0.0f);
-    HIL_OutAO(0x404f, 0.0f);
-    HIL_OutAO(0x404c, 0.0f);
-    HIL_OutAO(0x4053, 0.0f);
-    HIL_OutAO(0x4050, 0.0f);
-    HIL_OutAO(0x4057, 0.0f);
-    HIL_OutAO(0x4054, 0.0f);
-    HIL_OutAO(0x405b, 0.0f);
-    HIL_OutAO(0x4058, 0.0f);
-    HIL_OutAO(0x405f, 0.0f);
-    HIL_OutAO(0x405c, 0.0f);
-    HIL_OutAO(0x4063, 0.0f);
-    HIL_OutAO(0x4060, 0.0f);
-    HIL_OutAO(0x4067, 0.0f);
-    HIL_OutAO(0x4064, 0.0f);
-    HIL_OutAO(0x406b, 0.0f);
-    HIL_OutAO(0x4068, 0.0f);
-    HIL_OutAO(0x4077, 0.0f);
-    HIL_OutAO(0x4087, 0.0f);
-    HIL_OutAO(0x4088, 0.0f);
+    HIL_OutAO(0x402d, 0.0f);
+    HIL_OutAO(0x4031, 0.0f);
+    HIL_OutAO(0x402e, 0.0f);
+    HIL_OutAO(0x4035, 0.0f);
+    HIL_OutAO(0x4032, 0.0f);
+    HIL_OutAO(0x4039, 0.0f);
+    HIL_OutAO(0x4036, 0.0f);
+    HIL_OutAO(0x403d, 0.0f);
+    HIL_OutAO(0x403a, 0.0f);
+    HIL_OutAO(0x4041, 0.0f);
+    HIL_OutAO(0x403e, 0.0f);
+    HIL_OutAO(0x4045, 0.0f);
+    HIL_OutAO(0x4042, 0.0f);
+    HIL_OutAO(0x4049, 0.0f);
+    HIL_OutAO(0x4046, 0.0f);
+    HIL_OutAO(0x404d, 0.0f);
+    HIL_OutAO(0x404a, 0.0f);
+    HIL_OutAO(0x4051, 0.0f);
+    HIL_OutAO(0x404e, 0.0f);
+    HIL_OutAO(0x4055, 0.0f);
+    HIL_OutAO(0x4052, 0.0f);
+    HIL_OutAO(0x4059, 0.0f);
+    HIL_OutAO(0x4056, 0.0f);
+    HIL_OutAO(0x405d, 0.0f);
+    HIL_OutAO(0x405a, 0.0f);
+    HIL_OutAO(0x4061, 0.0f);
+    HIL_OutAO(0x405e, 0.0f);
+    HIL_OutAO(0x4065, 0.0f);
+    HIL_OutAO(0x4062, 0.0f);
+    HIL_OutAO(0x4069, 0.0f);
+    HIL_OutAO(0x4066, 0.0f);
+    HIL_OutAO(0x406d, 0.0f);
+    HIL_OutAO(0x406a, 0.0f);
+    HIL_OutAO(0x4079, 0.0f);
+    HIL_OutAO(0x4089, 0.0f);
+    HIL_OutAO(0x408a, 0.0f);
     _ess_grid_forming_inverter__averaged__c_function6__prev = 50;
     _ess_grid_forming_inverter__averaged__c_function5__prev = 30;
-    HIL_OutAO(0x4021, 0.0f);
-    HIL_OutAO(0x4022, 0.0f);
+    HIL_OutAO(0x4023, 0.0f);
+    HIL_OutAO(0x4024, 0.0f);
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_rms_value1__square_sum = 0x0;
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_rms_value1__sample_cnt = 0x0;
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_rms_value1__filtered_value = 0x0;
@@ -15651,26 +15502,26 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_pcc_pcc_measurements_rms_value1__sample_cnt = 0x0;
     _f2_pcc_pcc_measurements_rms_value1__filtered_value = 0x0;
     _f2_pcc_pcc_measurements_rms_value1__out_state = 0x0;
-    HIL_OutAO(0x4076, 0.0f);
-    HIL_OutAO(0x4080, 0.0f);
+    HIL_OutAO(0x4078, 0.0f);
+    HIL_OutAO(0x4082, 0.0f);
     for (_pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__i = 0; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__i < 1; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__i++) {
         _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__states[_pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__i] = 0.0;
     }
     for (_pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_q__i = 0; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_q__i < 1; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_q__i++) {
         _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_q__states[_pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_q__i] = 0.0;
     }
-    HIL_OutAO(0x407e, 0.0f);
-    HIL_OutAO(0x407f, 0.0f);
-    HIL_OutAO(0x4027, 0.0f);
-    HIL_OutAO(0x4028, 0.0f);
+    HIL_OutAO(0x4080, 0.0f);
+    HIL_OutAO(0x4081, 0.0f);
+    HIL_OutAO(0x4029, 0.0f);
+    HIL_OutAO(0x402a, 0.0f);
     HIL_OutAO(0x4012, 0.0f);
     HIL_OutAO(0x4010, 0.0f);
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__pll_pid_controller1__integrator_state =  376.99111843077515;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__pll_pid_controller1__filter_state =  0.0;
-    HIL_OutAO(0x406c, 0.0f);
+    HIL_OutAO(0x406e, 0.0f);
     _f2_pcc_pcc_measurements_comparator1__state = 0.0f;
     _f2_pcc_pcc_measurements_comparator2__state = 0.0f;
-    HIL_OutAO(0x406d, 0.0f);
+    HIL_OutAO(0x406f, 0.0f);
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_normalize__in1 = 0;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_normalize__in2 = 0;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_normalize__pk = 0;
@@ -15695,8 +15546,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb1_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb1_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb1_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x402d, 0.0f);
-    HIL_OutAO(0x402e, 0.0f);
+    HIL_OutAO(0x402f, 0.0f);
+    HIL_OutAO(0x4030, 0.0f);
     for (_f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15729,8 +15580,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb10_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb10_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb10_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4031, 0.0f);
-    HIL_OutAO(0x4032, 0.0f);
+    HIL_OutAO(0x4033, 0.0f);
+    HIL_OutAO(0x4034, 0.0f);
     for (_f2_cb10_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb10_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb10_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb10_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb10_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15769,8 +15620,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb11_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb11_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb11_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4035, 0.0f);
-    HIL_OutAO(0x4036, 0.0f);
+    HIL_OutAO(0x4037, 0.0f);
+    HIL_OutAO(0x4038, 0.0f);
     for (_f2_cb11_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_abc_to_dq_lpf_d__i = 0; _f2_cb11_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_abc_to_dq_lpf_d__i < 1; _f2_cb11_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_abc_to_dq_lpf_d__i++) {
         _f2_cb11_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_abc_to_dq_lpf_d__states[_f2_cb11_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15797,8 +15648,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb12_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb12_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb12_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4039, 0.0f);
-    HIL_OutAO(0x403a, 0.0f);
+    HIL_OutAO(0x403b, 0.0f);
+    HIL_OutAO(0x403c, 0.0f);
     for (_f2_cb12_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb12_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb12_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb12_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb12_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15857,16 +15708,16 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb15_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb15_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb15_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x403d, 0.0f);
-    HIL_OutAO(0x403e, 0.0f);
+    HIL_OutAO(0x403f, 0.0f);
+    HIL_OutAO(0x4040, 0.0f);
     for (_f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
     for (_f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
         _f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_f2_cb14_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i] = 0.0;
     }
-    HIL_OutAO(0x4041, 0.0f);
-    HIL_OutAO(0x4042, 0.0f);
+    HIL_OutAO(0x4043, 0.0f);
+    HIL_OutAO(0x4044, 0.0f);
     for (_f2_cb15_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb15_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb15_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb15_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb15_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15899,8 +15750,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb18_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb18_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb18_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4045, 0.0f);
-    HIL_OutAO(0x4046, 0.0f);
+    HIL_OutAO(0x4047, 0.0f);
+    HIL_OutAO(0x4048, 0.0f);
     for (_f2_cb18_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb18_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb18_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb18_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb18_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15933,8 +15784,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb19_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb19_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4049, 0.0f);
-    HIL_OutAO(0x404a, 0.0f);
+    HIL_OutAO(0x404b, 0.0f);
+    HIL_OutAO(0x404c, 0.0f);
     for (_f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -15967,8 +15818,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb2_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb2_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb2_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x404d, 0.0f);
-    HIL_OutAO(0x404e, 0.0f);
+    HIL_OutAO(0x404f, 0.0f);
+    HIL_OutAO(0x4050, 0.0f);
     for (_f2_cb2_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb2_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb2_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb2_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb2_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16001,8 +15852,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb3_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb3_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb3_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4051, 0.0f);
-    HIL_OutAO(0x4052, 0.0f);
+    HIL_OutAO(0x4053, 0.0f);
+    HIL_OutAO(0x4054, 0.0f);
     for (_f2_cb3_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb3_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb3_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb3_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb3_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16035,8 +15886,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb4_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb4_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb4_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4055, 0.0f);
-    HIL_OutAO(0x4056, 0.0f);
+    HIL_OutAO(0x4057, 0.0f);
+    HIL_OutAO(0x4058, 0.0f);
     for (_f2_cb4_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb4_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb4_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb4_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb4_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16095,16 +15946,16 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb6_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb6_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb6_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4059, 0.0f);
-    HIL_OutAO(0x405a, 0.0f);
+    HIL_OutAO(0x405b, 0.0f);
+    HIL_OutAO(0x405c, 0.0f);
     for (_f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
     for (_f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
         _f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_f2_cb5_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_q__i] = 0.0;
     }
-    HIL_OutAO(0x405d, 0.0f);
-    HIL_OutAO(0x405e, 0.0f);
+    HIL_OutAO(0x405f, 0.0f);
+    HIL_OutAO(0x4060, 0.0f);
     for (_f2_cb6_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb6_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb6_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb6_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb6_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16137,8 +15988,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb7_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb7_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb7_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4061, 0.0f);
-    HIL_OutAO(0x4062, 0.0f);
+    HIL_OutAO(0x4063, 0.0f);
+    HIL_OutAO(0x4064, 0.0f);
     for (_f2_cb7_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb7_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb7_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb7_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb7_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16171,8 +16022,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb8_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb8_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb8_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4065, 0.0f);
-    HIL_OutAO(0x4066, 0.0f);
+    HIL_OutAO(0x4067, 0.0f);
+    HIL_OutAO(0x4068, 0.0f);
     for (_f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16205,8 +16056,8 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_r50512761_relays__bool_59 = 0;
     _f2_cb9_mid_rly1_sel_787_r50512761_relays__bool_51 = 0;
     _f2_cb9_mid_rly1_sel_787_r50512761_relays__bool_50 = 0;
-    HIL_OutAO(0x4069, 0.0f);
-    HIL_OutAO(0x406a, 0.0f);
+    HIL_OutAO(0x406b, 0.0f);
+    HIL_OutAO(0x406c, 0.0f);
     for (_f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
     }
@@ -16225,10 +16076,10 @@ void ReInit_user_sp_cpu_dev0() {
     for (_f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
         _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i] = 0.0;
     }
-    HIL_OutAO(0x406e, 0.0f);
-    HIL_OutAO(0x406f, 0.0f);
     HIL_OutAO(0x4070, 0.0f);
     HIL_OutAO(0x4071, 0.0f);
+    HIL_OutAO(0x4072, 0.0f);
+    HIL_OutAO(0x4073, 0.0f);
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__floor_in = 0;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__floor_in = 0;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__pll_confine_phase__floor_in = 0;
@@ -16347,18 +16198,19 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_pcc_pcc_measurements_three_phase_pll1_normalize__in1 = 0;
     _f2_pcc_pcc_measurements_three_phase_pll1_normalize__in2 = 0;
     _f2_pcc_pcc_measurements_three_phase_pll1_normalize__pk = 0;
+    HIL_OutAO(0x4020, 0.0f);
+    HIL_OutAO(0x401f, 0.0f);
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state = 0.0f;
-    HIL_OutAO(0x4079, 0.0f);
-    HIL_OutAO(0x4078, 0.0f);
-    HIL_OutAO(0x401e, 0.0f);
-    HIL_OutAO(0x401d, 0.0f);
+    HIL_OutAO(0x407b, 0.0f);
+    HIL_OutAO(0x407a, 0.0f);
     HIL_OutAO(0x400f, 0.0f);
+    HIL_OutAO(0x4018, 0.0f);
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state =  0.0;
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__filter_state =  0.0;
-    HIL_OutAO(0x407d, 0.0f);
-    HIL_OutAO(0x407c, 0.0f);
+    HIL_OutAO(0x407f, 0.0f);
+    HIL_OutAO(0x407e, 0.0f);
     HIL_OutAO(0x4011, 0.0f);
-    HIL_OutAO(0x401f, 0.0f);
+    HIL_OutAO(0x4021, 0.0f);
     HIL_OutAO(0x400d, 0.0f);
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__hold_after_connect1__var = 0;
     HIL_OutAO(0x4016, 0.0f);
@@ -16378,19 +16230,20 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb7_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__trip_out = _f2_cb7_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__initial_condition;
     _f2_cb8_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__trip_out = _f2_cb8_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__initial_condition;
     _f2_cb9_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__trip_out = _f2_cb9_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__initial_condition;
-    HIL_OutAO(0x407a, 0.0f);
+    HIL_OutAO(0x407c, 0.0f);
     _pv_grid_feeding_inverter__averaged__c_function5__prev = 5.0;
     _pv_grid_feeding_inverter__averaged__c_function3__prev = 5.0;
-    HIL_OutAO(0x4023, 0.0f);
-    HIL_OutAO(0x4085, 0.0f);
-    HIL_OutAO(0x4084, 0.0f);
+    HIL_OutAO(0x4025, 0.0f);
+    HIL_OutAO(0x4087, 0.0f);
+    HIL_OutAO(0x4086, 0.0f);
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_rate_limiter1__first_step = 1;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_integrator__out = 0;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_integrator__in = 0;
     HIL_OutAO(0x400e, 0.0f);
+    HIL_OutAO(0x4017, 0.0f);
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state =  0.0;
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__filter_state =  0.0;
-    HIL_OutAO(0x407b, 0.0f);
+    HIL_OutAO(0x407d, 0.0f);
     for (_pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i = 0; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i < 2; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i++) {
         _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__states[_pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i] = 15278.880894183112;
     }
@@ -16492,9 +16345,6 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_rate_limiter1__first_step = 1;
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrator__out = 0;
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrator__in = 0;
-    for (i_send = 0; i_send < 93; i_send++) {
-        _udp_send_eth_ve_send1_struct_.in[i_send] = 0;
-    }
     _f2_pcc_pcc_measurements_three_phase_pll1_rate_limiter1__first_step = 1;
     _f2_pcc_pcc_measurements_three_phase_pll1_integrator__out = 0;
     _f2_pcc_pcc_measurements_three_phase_pll1_integrator__in = 0;
@@ -16598,24 +16448,24 @@ void ReInit_user_sp_cpu_dev0() {
         _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] = 15278.880894183112;
     }
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__stay_connected__connect = 0;
-    HIL_OutAO(0x401a, 0.0f);
+    HIL_OutAO(0x401c, 0.0f);
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state =  0.0;
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state =  0.0;
-    HIL_OutAO(0x4019, 0.0f);
+    HIL_OutAO(0x401e, 0.0f);
+    HIL_OutAO(0x401b, 0.0f);
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state =  0.0;
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__filter_state =  0.0;
-    HIL_OutAO(0x401c, 0.0f);
-    HIL_OutAO(0x401b, 0.0f);
-    HIL_OutAO(0x4075, 0.0f);
+    HIL_OutAO(0x401d, 0.0f);
+    HIL_OutAO(0x4077, 0.0f);
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state =  0.0;
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state =  0.0;
-    HIL_OutAO(0x4074, 0.0f);
+    HIL_OutAO(0x4076, 0.0f);
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state =  0.0;
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__filter_state =  0.0;
-    HIL_OutAO(0x4018, 0.0f);
-    HIL_OutAO(0x4017, 0.0f);
-    HIL_OutAO(0x4073, 0.0f);
-    HIL_OutAO(0x4072, 0.0f);
+    HIL_OutAO(0x401a, 0.0f);
+    HIL_OutAO(0x4019, 0.0f);
+    HIL_OutAO(0x4075, 0.0f);
+    HIL_OutAO(0x4074, 0.0f);
     HIL_OutFloat(166461440, 0.0);
     HIL_OutFloat(166461441, 0.0);
     HIL_OutFloat(166461442, 0.0);
@@ -18310,7 +18160,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Frequency droop.Gain4
     _ess_grid_forming_inverter__averaged__controller_frequency_droop_gain4__out = 1.1309733552923256 * _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__unit_delay3__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Voltage droop.Gain4
-    _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain4__out = 0.001958685783886737 * _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__unit_delay4__out;
+    _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain4__out = 0.01958685783886737 * _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__unit_delay4__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Gain1
     _ess_grid_forming_inverter__averaged__gain1__out = 0.5 * _ess_grid_forming_inverter__averaged__constant1__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.E_qREF1
@@ -18336,9 +18186,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_comparator1__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_comparator1__state;
     }
     // Generated from the component: ESS.Grid forming inverter (averaged).Ea_1
-    HIL_OutAO(0x4024, _ess_grid_forming_inverter__averaged__ea1_va1__out);
+    HIL_OutAO(0x4026, _ess_grid_forming_inverter__averaged__ea1_va1__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Eb_1
-    HIL_OutAO(0x4025, _ess_grid_forming_inverter__averaged__eb1_va1__out);
+    HIL_OutAO(0x4027, _ess_grid_forming_inverter__averaged__eb1_va1__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Current_abc_to_dq3.abc to dq1.abc to alpha beta
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _ess_grid_forming_inverter__averaged__ea1_va1__out - _ess_grid_forming_inverter__averaged__eb1_va1__out - _ess_grid_forming_inverter__averaged__ec1_va1__out) * 0.3333333333333333;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta = (_ess_grid_forming_inverter__averaged__eb1_va1__out - _ess_grid_forming_inverter__averaged__ec1_va1__out) * 0.5773502691896258;
@@ -18348,7 +18198,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq2_abc_to_dq1_abc_to_alpha_beta__beta = (_ess_grid_forming_inverter__averaged__eb1_va1__out - _ess_grid_forming_inverter__averaged__ec1_va1__out) * 0.5773502691896258;
     _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq2_abc_to_dq1_abc_to_alpha_beta__gamma = (_ess_grid_forming_inverter__averaged__ea1_va1__out + _ess_grid_forming_inverter__averaged__eb1_va1__out + _ess_grid_forming_inverter__averaged__ec1_va1__out) * 0.3333333333333333;
     // Generated from the component: ESS.Grid forming inverter (averaged).Ec_1
-    HIL_OutAO(0x4026, _ess_grid_forming_inverter__averaged__ec1_va1__out);
+    HIL_OutAO(0x4028, _ess_grid_forming_inverter__averaged__ec1_va1__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Current_abc_to_dq4.abc to dq1.abc to alpha beta
     _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _ess_grid_forming_inverter__averaged__ia1_ia1__out - _ess_grid_forming_inverter__averaged__ib1_ia1__out - _ess_grid_forming_inverter__averaged__ic1_ia1__out) * 0.3333333333333333;
     _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta = (_ess_grid_forming_inverter__averaged__ib1_ia1__out - _ess_grid_forming_inverter__averaged__ic1_ia1__out) * 0.5773502691896258;
@@ -19349,15 +19199,15 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.2pi
     _pv_grid_feeding_inverter__averaged__controller_pll2_2pi__out = 6.28318530718 * _pv_grid_feeding_inverter__averaged__controller_pll2_pll_to_hz__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Ea_1
-    HIL_OutAO(0x4081, _pv_grid_feeding_inverter__averaged__ea1_va1__out);
+    HIL_OutAO(0x4083, _pv_grid_feeding_inverter__averaged__ea1_va1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Eb_1
-    HIL_OutAO(0x4082, _pv_grid_feeding_inverter__averaged__eb1_va1__out);
+    HIL_OutAO(0x4084, _pv_grid_feeding_inverter__averaged__eb1_va1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.abc to dq.abc to alpha beta
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_abc_to_alpha_beta__alpha = (2.0 * _pv_grid_feeding_inverter__averaged__ea1_va1__out - _pv_grid_feeding_inverter__averaged__eb1_va1__out - _pv_grid_feeding_inverter__averaged__ec1_va1__out) * 0.3333333333333333;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_abc_to_alpha_beta__beta = (_pv_grid_feeding_inverter__averaged__eb1_va1__out - _pv_grid_feeding_inverter__averaged__ec1_va1__out) * 0.5773502691896258;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_abc_to_alpha_beta__gamma = (_pv_grid_feeding_inverter__averaged__ea1_va1__out + _pv_grid_feeding_inverter__averaged__eb1_va1__out + _pv_grid_feeding_inverter__averaged__ec1_va1__out) * 0.3333333333333333;
     // Generated from the component: PV.Grid feeding inverter (averaged).Ec_1
-    HIL_OutAO(0x4083, _pv_grid_feeding_inverter__averaged__ec1_va1__out);
+    HIL_OutAO(0x4085, _pv_grid_feeding_inverter__averaged__ec1_va1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Current_abc_to_dq4.abc to dq1.abc to alpha beta
     _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _pv_grid_feeding_inverter__averaged__ia1_ia1__out - _pv_grid_feeding_inverter__averaged__ib1_ia1__out - _pv_grid_feeding_inverter__averaged__ic1_ia1__out) * 0.3333333333333333;
     _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta = (_pv_grid_feeding_inverter__averaged__ib1_ia1__out - _pv_grid_feeding_inverter__averaged__ic1_ia1__out) * 0.5773502691896258;
@@ -19418,7 +19268,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Frequency droop.del_P
     HIL_OutAO(0x4014, _ess_grid_forming_inverter__averaged__controller_frequency_droop_gain4__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Voltage droop.del_Q
-    HIL_OutAO(0x4020, _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain4__out);
+    HIL_OutAO(0x4022, _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain4__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Bus Join5
     _ess_grid_forming_inverter__averaged__bus_join5__out[0] = _ess_p_ref_ess__out;
     _ess_grid_forming_inverter__averaged__bus_join5__out[1] = _ess_grid_forming_inverter__averaged__gain20__out;
@@ -19466,11 +19316,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d = _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha - _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
     _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q = _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha + _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
     // Generated from the component: ESS.P
-    HIL_OutAO(0x402a, _ess_power_meter1__Pdc);
+    HIL_OutAO(0x402c, _ess_power_meter1__Pdc);
     // Generated from the component: ESS.Q
-    HIL_OutAO(0x402b, _ess_power_meter1__Qdc);
-    // Generated from the component: F2_RELAY UDP Stream.W -> kW * gain
-    _f2_relay_udp_stream_w____kw___gain__out = 0.01 * _ess_power_meter1__Pdc;
+    HIL_OutAO(0x402d, _ess_power_meter1__Qdc);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Relational operator1
     _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_relational_operator1__out = (_f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_constant2__out == _f2_cb1_mid_rly1_sel_787_relay_param_bus_split1__out) ? 1 : 0;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Relay_Param.Reset.or
@@ -19481,7 +19329,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x402f, _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4031, _f2_cb1_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb1_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb1_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb1_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb1_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19517,13 +19365,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8240481, 0x1);
     }
     // Generated from the component: F2_CB1.MID_Rly1.CB_state
-    HIL_OutAO(0x402c, _f2_cb1_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x402e, _f2_cb1_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Gain8
     _f2_cb1_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb1_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.not
     _f2_cb1_mid_rly1_sel_787_not__out = !_f2_cb1_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion1
-    _f2_relay_udp_stream_data_type_conversion1__out = (X_Int32)_f2_cb1_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB1.MID_Rly1.Bus Split1
     _f2_cb1_mid_rly1_bus_split1__out = _f2_cb1_meas1_bus_join2__out[0];
     _f2_cb1_mid_rly1_bus_split1__out1 = _f2_cb1_meas1_bus_join2__out[1];
@@ -19546,7 +19392,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb10_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4033, _f2_cb10_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4035, _f2_cb10_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb10_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb10_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb10_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb10_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19582,13 +19428,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8e40480, 0x1);
     }
     // Generated from the component: F2_CB10.MID_Rly1.CB_state
-    HIL_OutAO(0x4030, _f2_cb10_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4032, _f2_cb10_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.Gain8
     _f2_cb10_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb10_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.not
     _f2_cb10_mid_rly1_sel_787_not__out = !_f2_cb10_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion10
-    _f2_relay_udp_stream_data_type_conversion10__out = (X_Int32)_f2_cb10_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB10.MID_Rly1.Bus Split1
     _f2_cb10_mid_rly1_bus_split1__out = _f2_cb10_meas1_bus_join2__out[0];
     _f2_cb10_mid_rly1_bus_split1__out1 = _f2_cb10_meas1_bus_join2__out[1];
@@ -19615,7 +19459,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb11_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4037, _f2_cb11_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4039, _f2_cb11_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb11_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb11_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb11_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb11_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19651,13 +19495,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8e40481, 0x1);
     }
     // Generated from the component: F2_CB11.MID_Rly1.CB_state
-    HIL_OutAO(0x4034, _f2_cb11_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4036, _f2_cb11_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.Gain8
     _f2_cb11_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb11_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.not
     _f2_cb11_mid_rly1_sel_787_not__out = !_f2_cb11_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion11
-    _f2_relay_udp_stream_data_type_conversion11__out = (X_Int32)_f2_cb11_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB11.MID_Rly1.Bus Split1
     _f2_cb11_mid_rly1_bus_split1__out = _f2_cb11_meas1_bus_join2__out[0];
     _f2_cb11_mid_rly1_bus_split1__out1 = _f2_cb11_meas1_bus_join2__out[1];
@@ -19676,7 +19518,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb12_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x403b, _f2_cb12_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x403d, _f2_cb12_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb12_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb12_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb12_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb12_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19712,13 +19554,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8e40482, 0x1);
     }
     // Generated from the component: F2_CB12.MID_Rly1.CB_state
-    HIL_OutAO(0x4038, _f2_cb12_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x403a, _f2_cb12_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.Gain8
     _f2_cb12_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb12_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.not
     _f2_cb12_mid_rly1_sel_787_not__out = !_f2_cb12_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion12
-    _f2_relay_udp_stream_data_type_conversion12__out = (X_Int32)_f2_cb12_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB12.MID_Rly1.Bus Split1
     _f2_cb12_mid_rly1_bus_split1__out = _f2_cb12_meas1_bus_join2__out[0];
     _f2_cb12_mid_rly1_bus_split1__out1 = _f2_cb12_meas1_bus_join2__out[1];
@@ -19741,7 +19581,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x403f, _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4041, _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb14_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb14_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb14_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb14_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19777,13 +19617,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8640481, 0x1);
     }
     // Generated from the component: F2_CB14.MID_Rly1.CB_state
-    HIL_OutAO(0x403c, _f2_cb14_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x403e, _f2_cb14_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.Gain8
     _f2_cb14_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb14_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.not
     _f2_cb14_mid_rly1_sel_787_not__out = !_f2_cb14_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion14
-    _f2_relay_udp_stream_data_type_conversion14__out = (X_Int32)_f2_cb14_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB14.MID_Rly1.Bus Split1
     _f2_cb14_mid_rly1_bus_split1__out = _f2_cb14_meas1_bus_join2__out[0];
     _f2_cb14_mid_rly1_bus_split1__out1 = _f2_cb14_meas1_bus_join2__out[1];
@@ -19802,7 +19640,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb15_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4043, _f2_cb15_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4045, _f2_cb15_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb15_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb15_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb15_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb15_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19838,13 +19676,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x9640480, 0x1);
     }
     // Generated from the component: F2_CB15.MID_Rly1.CB_state
-    HIL_OutAO(0x4040, _f2_cb15_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4042, _f2_cb15_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.Gain8
     _f2_cb15_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb15_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.not
     _f2_cb15_mid_rly1_sel_787_not__out = !_f2_cb15_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion15
-    _f2_relay_udp_stream_data_type_conversion15__out = (X_Int32)_f2_cb15_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB15.MID_Rly1.Bus Split1
     _f2_cb15_mid_rly1_bus_split1__out = _f2_cb15_meas1_bus_join2__out[0];
     _f2_cb15_mid_rly1_bus_split1__out1 = _f2_cb15_meas1_bus_join2__out[1];
@@ -19871,7 +19707,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb18_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4047, _f2_cb18_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4049, _f2_cb18_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb18_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb18_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb18_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb18_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19907,13 +19743,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x9640481, 0x1);
     }
     // Generated from the component: F2_CB18.MID_Rly1.CB_state
-    HIL_OutAO(0x4044, _f2_cb18_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4046, _f2_cb18_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.Gain8
     _f2_cb18_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb18_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.not
     _f2_cb18_mid_rly1_sel_787_not__out = !_f2_cb18_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion18
-    _f2_relay_udp_stream_data_type_conversion18__out = (X_Int32)_f2_cb18_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB18.MID_Rly1.Bus Split1
     _f2_cb18_mid_rly1_bus_split1__out = _f2_cb18_meas1_bus_join2__out[0];
     _f2_cb18_mid_rly1_bus_split1__out1 = _f2_cb18_meas1_bus_join2__out[1];
@@ -19934,12 +19768,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination5
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Relay 25-Sync Check1.Gain3
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    // Generated from the component: F2_RELAY UDP Stream.F2_FREQUENCY_2
-    _f2_relay_udp_stream_f2_frequency_2__out[0] = _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_2__out[1] = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x404b, _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x404d, _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb19_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb19_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb19_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb19_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -19975,13 +19806,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x9240480, 0x1);
     }
     // Generated from the component: F2_CB19.MID_Rly1.CB_state
-    HIL_OutAO(0x4048, _f2_cb19_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x404a, _f2_cb19_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Gain8
     _f2_cb19_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb19_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.not
     _f2_cb19_mid_rly1_sel_787_not__out = !_f2_cb19_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion19
-    _f2_relay_udp_stream_data_type_conversion19__out = (X_Int32)_f2_cb19_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB19.MID_Rly1.Bus Split1
     _f2_cb19_mid_rly1_bus_split1__out = _f2_cb19_meas1_bus_join2__out[0];
     _f2_cb19_mid_rly1_bus_split1__out1 = _f2_cb19_meas1_bus_join2__out[1];
@@ -20004,7 +19833,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb2_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x404f, _f2_cb2_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4051, _f2_cb2_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb2_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb2_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb2_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb2_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20040,13 +19869,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x9240481, 0x1);
     }
     // Generated from the component: F2_CB2.MID_Rly1.CB_state
-    HIL_OutAO(0x404c, _f2_cb2_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x404e, _f2_cb2_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.Gain8
     _f2_cb2_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb2_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.not
     _f2_cb2_mid_rly1_sel_787_not__out = !_f2_cb2_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion2
-    _f2_relay_udp_stream_data_type_conversion2__out = (X_Int32)_f2_cb2_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB2.MID_Rly1.Bus Split1
     _f2_cb2_mid_rly1_bus_split1__out = _f2_cb2_meas1_bus_join2__out[0];
     _f2_cb2_mid_rly1_bus_split1__out1 = _f2_cb2_meas1_bus_join2__out[1];
@@ -20069,7 +19896,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb3_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4053, _f2_cb3_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4055, _f2_cb3_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb3_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb3_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb3_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb3_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20105,13 +19932,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8640482, 0x1);
     }
     // Generated from the component: F2_CB3.MID_Rly1.CB_state
-    HIL_OutAO(0x4050, _f2_cb3_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4052, _f2_cb3_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.Gain8
     _f2_cb3_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb3_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.not
     _f2_cb3_mid_rly1_sel_787_not__out = !_f2_cb3_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion3
-    _f2_relay_udp_stream_data_type_conversion3__out = (X_Int32)_f2_cb3_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB3.MID_Rly1.Bus Split1
     _f2_cb3_mid_rly1_bus_split1__out = _f2_cb3_meas1_bus_join2__out[0];
     _f2_cb3_mid_rly1_bus_split1__out1 = _f2_cb3_meas1_bus_join2__out[1];
@@ -20134,7 +19959,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb4_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4057, _f2_cb4_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4059, _f2_cb4_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb4_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb4_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb4_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb4_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20170,13 +19995,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8a40480, 0x1);
     }
     // Generated from the component: F2_CB4.MID_Rly1.CB_state
-    HIL_OutAO(0x4054, _f2_cb4_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4056, _f2_cb4_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.Gain8
     _f2_cb4_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb4_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.not
     _f2_cb4_mid_rly1_sel_787_not__out = !_f2_cb4_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion4
-    _f2_relay_udp_stream_data_type_conversion4__out = (X_Int32)_f2_cb4_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB4.MID_Rly1.Bus Split1
     _f2_cb4_mid_rly1_bus_split1__out = _f2_cb4_meas1_bus_join2__out[0];
     _f2_cb4_mid_rly1_bus_split1__out1 = _f2_cb4_meas1_bus_join2__out[1];
@@ -20199,7 +20022,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x405b, _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x405d, _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb5_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb5_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb5_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb5_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20235,13 +20058,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8240482, 0x1);
     }
     // Generated from the component: F2_CB5.MID_Rly1.CB_state
-    HIL_OutAO(0x4058, _f2_cb5_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x405a, _f2_cb5_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.Gain8
     _f2_cb5_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb5_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.not
     _f2_cb5_mid_rly1_sel_787_not__out = !_f2_cb5_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion5
-    _f2_relay_udp_stream_data_type_conversion5__out = (X_Int32)_f2_cb5_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB5.MID_Rly1.Bus Split1
     _f2_cb5_mid_rly1_bus_split1__out = _f2_cb5_meas1_bus_join2__out[0];
     _f2_cb5_mid_rly1_bus_split1__out1 = _f2_cb5_meas1_bus_join2__out[1];
@@ -20260,7 +20081,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb6_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x405f, _f2_cb6_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4061, _f2_cb6_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb6_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb6_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb6_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb6_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20296,13 +20117,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8240483, 0x1);
     }
     // Generated from the component: F2_CB6.MID_Rly1.CB_state
-    HIL_OutAO(0x405c, _f2_cb6_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x405e, _f2_cb6_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.Gain8
     _f2_cb6_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb6_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.not
     _f2_cb6_mid_rly1_sel_787_not__out = !_f2_cb6_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion6
-    _f2_relay_udp_stream_data_type_conversion6__out = (X_Int32)_f2_cb6_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB6.MID_Rly1.Bus Split1
     _f2_cb6_mid_rly1_bus_split1__out = _f2_cb6_meas1_bus_join2__out[0];
     _f2_cb6_mid_rly1_bus_split1__out1 = _f2_cb6_meas1_bus_join2__out[1];
@@ -20329,7 +20148,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb7_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4063, _f2_cb7_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4065, _f2_cb7_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb7_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb7_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb7_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb7_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20365,13 +20184,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8a40481, 0x1);
     }
     // Generated from the component: F2_CB7.MID_Rly1.CB_state
-    HIL_OutAO(0x4060, _f2_cb7_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4062, _f2_cb7_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.Gain8
     _f2_cb7_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb7_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.not
     _f2_cb7_mid_rly1_sel_787_not__out = !_f2_cb7_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion7
-    _f2_relay_udp_stream_data_type_conversion7__out = (X_Int32)_f2_cb7_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB7.MID_Rly1.Bus Split1
     _f2_cb7_mid_rly1_bus_split1__out = _f2_cb7_meas1_bus_join2__out[0];
     _f2_cb7_mid_rly1_bus_split1__out1 = _f2_cb7_meas1_bus_join2__out[1];
@@ -20394,7 +20211,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x4067, _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x4069, _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb8_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb8_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb8_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb8_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20430,13 +20247,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x8a40482, 0x1);
     }
     // Generated from the component: F2_CB8.MID_Rly1.CB_state
-    HIL_OutAO(0x4064, _f2_cb8_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x4066, _f2_cb8_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.Gain8
     _f2_cb8_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb8_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.not
     _f2_cb8_mid_rly1_sel_787_not__out = !_f2_cb8_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion8
-    _f2_relay_udp_stream_data_type_conversion8__out = (X_Int32)_f2_cb8_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB8.MID_Rly1.Bus Split1
     _f2_cb8_mid_rly1_bus_split1__out = _f2_cb8_meas1_bus_join2__out[0];
     _f2_cb8_mid_rly1_bus_split1__out1 = _f2_cb8_meas1_bus_join2__out[1];
@@ -20457,24 +20272,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination5
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay 25-Sync Check1.Gain3
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_gain3__out = 0.1 * _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    // Generated from the component: F2_RELAY UDP Stream.F2_FREQUENCY_1
-    _f2_relay_udp_stream_f2_frequency_1__out[0] = _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[1] = _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[2] = _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[3] = _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[4] = _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[5] = _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[6] = _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[7] = _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[8] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[9] = _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[10] = _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[11] = _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[12] = _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain11__out;
-    _f2_relay_udp_stream_f2_frequency_1__out[13] = _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain11__out;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Termination10
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out
-    HIL_OutAO(0x406b, _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
+    HIL_OutAO(0x406d, _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__out);
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay_Param.Grid_Tied_param.Bus Join1
     _f2_cb9_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] = _f2_cb9_mid_rly1_sel_787_relay_param_grid_tied_param_divide_sqrt3__out;
     _f2_cb9_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] = _f2_cb9_mid_rly1_sel_787_relay_param_ct_primary__out;
@@ -20510,13 +20310,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x9240482, 0x1);
     }
     // Generated from the component: F2_CB9.MID_Rly1.CB_state
-    HIL_OutAO(0x4068, _f2_cb9_mid_rly1_signal_switch1__out);
+    HIL_OutAO(0x406a, _f2_cb9_mid_rly1_signal_switch1__out);
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Gain8
     _f2_cb9_mid_rly1_sel_787_gain8__out = 4.0 * _f2_cb9_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.not
     _f2_cb9_mid_rly1_sel_787_not__out = !_f2_cb9_mid_rly1_signal_switch1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Data Type Conversion9
-    _f2_relay_udp_stream_data_type_conversion9__out = (X_Int32)_f2_cb9_mid_rly1_signal_switch1__out;
     // Generated from the component: F2_CB9.MID_Rly1.Bus Split1
     _f2_cb9_mid_rly1_bus_split1__out = _f2_cb9_meas1_bus_join2__out[0];
     _f2_cb9_mid_rly1_bus_split1__out1 = _f2_cb9_meas1_bus_join2__out[1];
@@ -20544,7 +20342,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Gain1
     _pv_grid_feeding_inverter__averaged__controller_gain1__out = 0.15915494309189535 * _pv_grid_feeding_inverter__averaged__controller_pll2_2pi__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.omega
-    HIL_OutAO(0x4077, _pv_grid_feeding_inverter__averaged__controller_pll2_2pi__out);
+    HIL_OutAO(0x4079, _pv_grid_feeding_inverter__averaged__controller_pll2_2pi__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.abc to dq.alpha beta to dq
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_alpha_beta_to_dq__k1 = cosf(_pv_grid_feeding_inverter__averaged__controller_pll2_pll_unit_delay1__out);
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_alpha_beta_to_dq__k2 = sinf(_pv_grid_feeding_inverter__averaged__controller_pll2_pll_unit_delay1__out);
@@ -20569,12 +20367,10 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 = sinf(_pv_grid_feeding_inverter__averaged__controller_pll2_pll_unit_delay1__out);
     _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d = _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha - _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
     _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q = _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha + _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
-    // Generated from the component: F2_RELAY UDP Stream.W -> kW * gain1
-    _f2_relay_udp_stream_w____kw___gain1__out = 0.01 * _pv_power_meter1__Pdc;
     // Generated from the component: PV.P_PV
-    HIL_OutAO(0x4087, _pv_power_meter1__Pdc);
+    HIL_OutAO(0x4089, _pv_power_meter1__Pdc);
     // Generated from the component: PV.Q_PV
-    HIL_OutAO(0x4088, _pv_power_meter1__Qdc);
+    HIL_OutAO(0x408a, _pv_power_meter1__Qdc);
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Digital Probe6
     HIL_OutInt32(0xf00404, _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__logical_operator2__out != 0x0);
     // Generated from the component: ESS.Grid forming inverter (averaged).C function6
@@ -20614,11 +20410,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain7
     _ess_grid_forming_inverter__averaged__controller_gain7__out = 0.0019586857838867367 * _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Xi_d
-    HIL_OutAO(0x4021, _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d);
+    HIL_OutAO(0x4023, _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Xi_q
-    HIL_OutAO(0x4022, _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q);
-    // Generated from the component: UDP Send.Data Type Conversion6
-    _udp_send_data_type_conversion6__out = (X_Int32)_f2_relay_udp_stream_w____kw___gain__out;
+    HIL_OutAO(0x4024, _ess_grid_forming_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Relay_Param.Reset.detect_change.Relational operator1
     _f2_cb1_mid_rly1_sel_787_relay_param_reset_detect_change_relational_operator1__out = (_f2_cb1_mid_rly1_sel_787_relay_param_reset_or__out != _f2_cb1_mid_rly1_sel_787_relay_param_reset_detect_change_unit_delay1__out) ? 1 : 0;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Freq Comparator.C function1
@@ -21913,9 +21707,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fbus = _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_gain3__out;
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fline = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_to_hz__out;
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__out = fabs(_f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fline - _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fbus);
-    // Generated from the component: F2_RELAY UDP Stream.Gain8
-    _f2_relay_udp_stream_gain8__out[0] = 100.0 * _f2_relay_udp_stream_f2_frequency_2__out[0];
-    _f2_relay_udp_stream_gain8__out[1] = 100.0 * _f2_relay_udp_stream_f2_frequency_2__out[1];
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Relay_Param.Signal switch1
     _f2_cb19_mid_rly1_sel_787_relay_param_signal_switch1__out[0] = (_f2_cb19_mid_rly1_sel_787_relay_param_bus_split1__out2 < 0.5) ? _f2_cb19_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] : _f2_cb19_mid_rly1_sel_787_relay_param_islanded_param_bus_join1__out[0];
     _f2_cb19_mid_rly1_sel_787_relay_param_signal_switch1__out[1] = (_f2_cb19_mid_rly1_sel_787_relay_param_bus_split1__out2 < 0.5) ? _f2_cb19_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] : _f2_cb19_mid_rly1_sel_787_relay_param_islanded_param_bus_join1__out[1];
@@ -21933,9 +21724,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_gain1__out = 0.01 * _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out1;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Gain7
     _f2_cb19_mid_rly1_sel_787_gain7__out = 2.0 * _f2_cb19_mid_rly1_sel_787_not__out;
-    // Generated from the component: F2_RELAY UDP Stream.F2_BREAKER_2
-    _f2_relay_udp_stream_f2_breaker_2__out[0] = _f2_relay_udp_stream_data_type_conversion18__out;
-    _f2_relay_udp_stream_f2_breaker_2__out[1] = _f2_relay_udp_stream_data_type_conversion19__out;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.RMS value1
     _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_filtered_value = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__filtered_value;
     _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__filtered_value = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_filtered_value * 0.1 + _f2_cb19_mid_rly1_bus_split1__out * 0.9;
@@ -23391,21 +23179,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fbus = _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_gain3__out;
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fline = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_to_hz__out;
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__out = fabs(_f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fline - _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_c_function1__fbus);
-    // Generated from the component: F2_RELAY UDP Stream.Gain4
-    _f2_relay_udp_stream_gain4__out[0] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[0];
-    _f2_relay_udp_stream_gain4__out[1] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[1];
-    _f2_relay_udp_stream_gain4__out[2] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[2];
-    _f2_relay_udp_stream_gain4__out[3] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[3];
-    _f2_relay_udp_stream_gain4__out[4] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[4];
-    _f2_relay_udp_stream_gain4__out[5] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[5];
-    _f2_relay_udp_stream_gain4__out[6] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[6];
-    _f2_relay_udp_stream_gain4__out[7] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[7];
-    _f2_relay_udp_stream_gain4__out[8] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[8];
-    _f2_relay_udp_stream_gain4__out[9] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[9];
-    _f2_relay_udp_stream_gain4__out[10] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[10];
-    _f2_relay_udp_stream_gain4__out[11] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[11];
-    _f2_relay_udp_stream_gain4__out[12] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[12];
-    _f2_relay_udp_stream_gain4__out[13] = 100.0 * _f2_relay_udp_stream_f2_frequency_1__out[13];
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay_Param.Signal switch1
     _f2_cb9_mid_rly1_sel_787_relay_param_signal_switch1__out[0] = (_f2_cb9_mid_rly1_sel_787_relay_param_bus_split1__out2 < 0.5) ? _f2_cb9_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[0] : _f2_cb9_mid_rly1_sel_787_relay_param_islanded_param_bus_join1__out[0];
     _f2_cb9_mid_rly1_sel_787_relay_param_signal_switch1__out[1] = (_f2_cb9_mid_rly1_sel_787_relay_param_bus_split1__out2 < 0.5) ? _f2_cb9_mid_rly1_sel_787_relay_param_grid_tied_param_bus_join1__out[1] : _f2_cb9_mid_rly1_sel_787_relay_param_islanded_param_bus_join1__out[1];
@@ -23423,21 +23196,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_gain1__out = 0.01 * _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out1;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Gain7
     _f2_cb9_mid_rly1_sel_787_gain7__out = 2.0 * _f2_cb9_mid_rly1_sel_787_not__out;
-    // Generated from the component: F2_RELAY UDP Stream.F2_BREAKER_1
-    _f2_relay_udp_stream_f2_breaker_1__out[0] = _f2_relay_udp_stream_data_type_conversion1__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[1] = _f2_relay_udp_stream_data_type_conversion2__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[2] = _f2_relay_udp_stream_data_type_conversion3__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[3] = _f2_relay_udp_stream_data_type_conversion4__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[4] = _f2_relay_udp_stream_data_type_conversion5__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[5] = _f2_relay_udp_stream_data_type_conversion6__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[6] = _f2_relay_udp_stream_data_type_conversion7__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[7] = _f2_relay_udp_stream_data_type_conversion8__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[8] = _f2_relay_udp_stream_data_type_conversion9__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[9] = _f2_relay_udp_stream_data_type_conversion10__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[10] = _f2_relay_udp_stream_data_type_conversion11__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[11] = _f2_relay_udp_stream_data_type_conversion12__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[12] = _f2_relay_udp_stream_data_type_conversion14__out;
-    _f2_relay_udp_stream_f2_breaker_1__out[13] = _f2_relay_udp_stream_data_type_conversion15__out;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.RMS value1
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_filtered_value = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__filtered_value;
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__filtered_value = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_rms_value1__previous_filtered_value * 0.1 + _f2_cb9_mid_rly1_bus_split1__out * 0.9;
@@ -23641,9 +23399,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Gain5
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out = 0.5 * _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_signal_switch1__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Vdc
-    HIL_OutAO(0x4076, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_signal_switch1__out);
+    HIL_OutAO(0x4078, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_signal_switch1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.f1
-    HIL_OutAO(0x4080, _pv_grid_feeding_inverter__averaged__controller_gain1__out);
+    HIL_OutAO(0x4082, _pv_grid_feeding_inverter__averaged__controller_gain1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.abc to dq.LPF_d
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__a_sum = 0.0f;
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_abc_to_dq_lpf_d__b_sum = 0.0f;
@@ -23679,19 +23437,17 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Gain7
     _pv_grid_feeding_inverter__averaged__controller_gain7__out = 0.0019586857838867367 * _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Xi_d
-    HIL_OutAO(0x407e, _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d);
+    HIL_OutAO(0x4080, _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Xi_q
-    HIL_OutAO(0x407f, _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q);
-    // Generated from the component: UDP Send.Data Type Conversion10
-    _udp_send_data_type_conversion10__out = (X_Int32)_f2_relay_udp_stream_w____kw___gain1__out;
+    HIL_OutAO(0x4081, _pv_grid_feeding_inverter__averaged__controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q);
     // Generated from the component: ESS.Grid forming inverter (averaged).Gain18
-    _ess_grid_forming_inverter__averaged__gain18__out = 5e-06 * _ess_grid_forming_inverter__averaged__c_function6__out;
+    _ess_grid_forming_inverter__averaged__gain18__out = 3.3333333333333337e-06 * _ess_grid_forming_inverter__averaged__c_function6__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Pref_probe
-    HIL_OutAO(0x4027, _ess_grid_forming_inverter__averaged__c_function6__out);
+    HIL_OutAO(0x4029, _ess_grid_forming_inverter__averaged__c_function6__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Gain17
-    _ess_grid_forming_inverter__averaged__gain17__out = 5e-06 * _ess_grid_forming_inverter__averaged__c_function5__out;
+    _ess_grid_forming_inverter__averaged__gain17__out = 3.3333333333333337e-06 * _ess_grid_forming_inverter__averaged__c_function5__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Qref_probe
-    HIL_OutAO(0x4028, _ess_grid_forming_inverter__averaged__c_function5__out);
+    HIL_OutAO(0x402a, _ess_grid_forming_inverter__averaged__c_function5__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Limit1
     if (_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__gain7__out < 1e-12) {
         _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__limit1__out = 1e-12;
@@ -24220,12 +23976,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_product1__out = (_f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out * _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_gain1__out);
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Sum3
     _f2_cb19_mid_rly1_sel_787_sum3__out = _f2_cb19_mid_rly1_sel_787_unit_delay4__out + _f2_cb19_mid_rly1_sel_787_gain7__out + _f2_cb19_mid_rly1_sel_787_gain8__out;
-    // Generated from the component: F2_RELAY UDP Stream.Boolean Join2
-    _f2_relay_udp_stream_boolean_join2__out = 0x0;
-    _f2_relay_udp_stream_boolean_join2__out <<= 1;
-    _f2_relay_udp_stream_boolean_join2__out += _f2_relay_udp_stream_f2_breaker_2__out[1] != 0x0;
-    _f2_relay_udp_stream_boolean_join2__out <<= 1;
-    _f2_relay_udp_stream_boolean_join2__out += _f2_relay_udp_stream_f2_breaker_2__out[0] != 0x0;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Gain10
     _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain10__out = 100.0 * _f2_cb19_mid_rly1_sel_787_calc_from_measurements_pq_power_meter1__k_factor;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Gain7
@@ -24746,36 +24496,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_product1__out = (_f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_bus_split1__out * _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_gain1__out);
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Sum3
     _f2_cb9_mid_rly1_sel_787_sum3__out = _f2_cb9_mid_rly1_sel_787_unit_delay4__out + _f2_cb9_mid_rly1_sel_787_gain7__out + _f2_cb9_mid_rly1_sel_787_gain8__out;
-    // Generated from the component: F2_RELAY UDP Stream.Boolean Join1
-    _f2_relay_udp_stream_boolean_join1__out = 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[13] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[12] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[11] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[10] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[9] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[8] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[7] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[6] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[5] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[4] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[3] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[2] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[1] != 0x0;
-    _f2_relay_udp_stream_boolean_join1__out <<= 1;
-    _f2_relay_udp_stream_boolean_join1__out += _f2_relay_udp_stream_f2_breaker_1__out[0] != 0x0;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Gain10
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain10__out = 100.0 * _f2_cb9_mid_rly1_sel_787_calc_from_measurements_pq_power_meter1__k_factor;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Gain7
@@ -24825,7 +24545,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay 25-Sync Check1.Gain2
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_gain2__out = 1.7320508075688772 * _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_rms_value2__out;
     // Generated from the component: F2_PCC.P
-    HIL_OutAO(0x406c, _f2_pcc_pcc_measurements_power_meter1__Pdc);
+    HIL_OutAO(0x406e, _f2_pcc_pcc_measurements_power_meter1__Pdc);
     // Generated from the component: F2_PCC.PCC Measurements.Comparator1
     if (_f2_pcc_pcc_measurements_power_meter1__Pdc < _f2_pcc_pcc_measurements_constant1__out) {
         _f2_pcc_pcc_measurements_comparator1__out = 0;
@@ -24846,7 +24566,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: F2_PCC.PCC Measurements.Termination7
     // Generated from the component: F2_PCC.PCC Measurements.Termination8
     // Generated from the component: F2_PCC.Q
-    HIL_OutAO(0x406d, _f2_pcc_pcc_measurements_power_meter1__Qdc);
+    HIL_OutAO(0x406f, _f2_pcc_pcc_measurements_power_meter1__Qdc);
     // Generated from the component: F2_PCC.W -> kW
     _f2_pcc_w____kw__out = 0.001 * _f2_pcc_pcc_measurements_power_meter1__Pdc;
     // Generated from the component: F2_PCC.var -> kvar
@@ -25052,9 +24772,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb1_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb1_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb1_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb1_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x402d, _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x402f, _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x402e, _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4030, _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb1_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb1_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -25295,9 +25015,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb10_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb10_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb10_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb10_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4031, _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4033, _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4032, _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4034, _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb10_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb10_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb10_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB10.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -25560,9 +25280,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb11_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb11_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb11_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb11_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4035, _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4037, _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4036, _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4038, _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb11_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb11_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb11_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB11.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -25781,9 +25501,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb12_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb12_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb12_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb12_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4039, _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x403b, _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x403a, _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x403c, _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb12_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb12_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb12_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB12.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -26194,9 +25914,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb15_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb15_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb15_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb15_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x403d, _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x403f, _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x403e, _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4040, _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb14_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb14_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb14_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB14.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -26267,9 +25987,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__Vline = _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_gain2__out;
     _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__out = fabs(_f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__Vline - _f2_cb14_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__Vbus);
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4041, _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4043, _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4042, _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4044, _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb15_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb15_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb15_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB15.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -26510,9 +26230,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb18_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb18_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb18_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb18_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4045, _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4047, _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4046, _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4048, _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb18_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb18_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb18_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB18.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -26752,31 +26472,14 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip51 = _f2_cb19_mid_rly1_sel_787_r50512761_relays__R51;
     _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb19_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb19_mid_rly1_sel_787_r50512761_relays__R59;
-    // Generated from the component: UDP Send.Boolean Split3
-    _udp_send_boolean_split3__input = _f2_relay_udp_stream_boolean_join2__out;
-    _udp_send_boolean_split3__out[0] = _udp_send_boolean_split3__input & 0x01;
-    _udp_send_boolean_split3__input >>= 1;
-    _udp_send_boolean_split3__out[1] = _udp_send_boolean_split3__input & 0x01;
-    _udp_send_boolean_split3__input >>= 1;
-    _udp_send_boolean_split3__out[2] = _udp_send_boolean_split3__input & 0x01;
-    _udp_send_boolean_split3__input >>= 1;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4049, _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain7__out);
-    // Generated from the component: F2_RELAY UDP Stream.F2_P_REAL_2
-    _f2_relay_udp_stream_f2_p_real_2__out[0] = _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_2__out[1] = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain7__out;
+    HIL_OutAO(0x404b, _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x404a, _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain8__out);
-    // Generated from the component: F2_RELAY UDP Stream.F2_P_REACTIVE_2
-    _f2_relay_udp_stream_f2_p_reactive_2__out[0] = _f2_cb18_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_2__out[1] = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain8__out;
+    HIL_OutAO(0x404c, _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
     _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator2__out = (_f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs2__out > _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
-    // Generated from the component: F2_RELAY UDP Stream.F2_VOLTAGE_2
-    _f2_relay_udp_stream_f2_voltage_2__out[0] = _f2_cb18_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_2__out[1] = _f2_cb19_mid_rly1_sel_787_normalize__out;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Bus Join1
     _f2_cb19_mid_rly1_sel_787_bus_join1__out[0] = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_three_phase_phasor1__out1;
     _f2_cb19_mid_rly1_sel_787_bus_join1__out[1] = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_gain1__out;
@@ -27013,9 +26716,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb2_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb2_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb2_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb2_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x404d, _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x404f, _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x404e, _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4050, _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb2_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb2_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb2_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB2.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -27256,9 +26959,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb3_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb3_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb3_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb3_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4051, _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4053, _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4052, _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4054, _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb3_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb3_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb3_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB3.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -27499,9 +27202,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb4_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb4_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb4_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb4_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4055, _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4057, _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4056, _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4058, _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb4_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb4_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb4_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB4.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -27912,9 +27615,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb6_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb6_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb6_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb6_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4059, _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x405b, _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x405a, _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x405c, _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb5_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb5_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb5_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB5.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -27985,9 +27688,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__Vline = _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_gain2__out;
     _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__out = fabs(_f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__Vline - _f2_cb5_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_c_function1__Vbus);
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x405d, _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x405f, _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x405e, _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4060, _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb6_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb6_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb6_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB6.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -28228,9 +27931,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb7_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb7_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb7_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb7_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4061, _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4063, _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4062, _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4064, _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb7_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb7_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb7_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB7.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -28471,9 +28174,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb8_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb8_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb8_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb8_mid_rly1_sel_787_r50512761_relays__R59;
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4065, _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain7__out);
+    HIL_OutAO(0x4067, _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x4066, _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain8__out);
+    HIL_OutAO(0x4068, _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb8_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb8_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb8_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB8.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
@@ -28713,93 +28416,14 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip51 = _f2_cb9_mid_rly1_sel_787_r50512761_relays__R51;
     _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip27 = _f2_cb9_mid_rly1_sel_787_r50512761_relays__R27;
     _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip59 = _f2_cb9_mid_rly1_sel_787_r50512761_relays__R59;
-    // Generated from the component: UDP Send.Boolean Split2
-    _udp_send_boolean_split2__input = _f2_relay_udp_stream_boolean_join1__out;
-    _udp_send_boolean_split2__out[0] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[1] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[2] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[3] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[4] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[5] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[6] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[7] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[8] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[9] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[10] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[11] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[12] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[13] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[14] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
-    _udp_send_boolean_split2__out[15] = _udp_send_boolean_split2__input & 0x01;
-    _udp_send_boolean_split2__input >>= 1;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.P
-    HIL_OutAO(0x4069, _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain7__out);
-    // Generated from the component: F2_RELAY UDP Stream.F2_P_REAL_1
-    _f2_relay_udp_stream_f2_p_real_1__out[0] = _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[1] = _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[2] = _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[3] = _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[4] = _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[5] = _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[6] = _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[7] = _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[8] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[9] = _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[10] = _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[11] = _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[12] = _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain7__out;
-    _f2_relay_udp_stream_f2_p_real_1__out[13] = _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain7__out;
+    HIL_OutAO(0x406b, _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain7__out);
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Q
-    HIL_OutAO(0x406a, _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain8__out);
-    // Generated from the component: F2_RELAY UDP Stream.F2_P_REACTIVE_1
-    _f2_relay_udp_stream_f2_p_reactive_1__out[0] = _f2_cb1_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[1] = _f2_cb2_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[2] = _f2_cb3_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[3] = _f2_cb4_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[4] = _f2_cb5_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[5] = _f2_cb6_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[6] = _f2_cb7_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[7] = _f2_cb8_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[8] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[9] = _f2_cb10_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[10] = _f2_cb11_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[11] = _f2_cb12_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[12] = _f2_cb14_mid_rly1_sel_787_calc_from_measurements_gain8__out;
-    _f2_relay_udp_stream_f2_p_reactive_1__out[13] = _f2_cb15_mid_rly1_sel_787_calc_from_measurements_gain8__out;
+    HIL_OutAO(0x406c, _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain8__out);
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator1
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out = (_f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs1__out > _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Relational operator2
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator2__out = (_f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_abs2__out > _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_constant1__out) ? 1 : 0;
-    // Generated from the component: F2_RELAY UDP Stream.F2_VOLTAGE_1
-    _f2_relay_udp_stream_f2_voltage_1__out[0] = _f2_cb1_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[1] = _f2_cb2_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[2] = _f2_cb3_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[3] = _f2_cb4_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[4] = _f2_cb5_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[5] = _f2_cb6_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[6] = _f2_cb7_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[7] = _f2_cb8_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[8] = _f2_cb9_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[9] = _f2_cb10_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[10] = _f2_cb11_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[11] = _f2_cb12_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[12] = _f2_cb14_mid_rly1_sel_787_normalize__out;
-    _f2_relay_udp_stream_f2_voltage_1__out[13] = _f2_cb15_mid_rly1_sel_787_normalize__out;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Bus Join1
     _f2_cb9_mid_rly1_sel_787_bus_join1__out[0] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_phasor1__out1;
     _f2_cb9_mid_rly1_sel_787_bus_join1__out[1] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_gain1__out;
@@ -28914,9 +28538,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum += _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_coeff[0] * _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__out = _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.E_d1
-    HIL_OutAO(0x406e, _pv_grid_feeding_inverter__averaged__controller_gain5__out);
+    HIL_OutAO(0x4070, _pv_grid_feeding_inverter__averaged__controller_gain5__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.E_dREF1
-    HIL_OutAO(0x406f, _pv_grid_feeding_inverter__averaged__controller_gain5__out);
+    HIL_OutAO(0x4071, _pv_grid_feeding_inverter__averaged__controller_gain5__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.squared_Vt2.Product1
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_squared_vt2_product1__out = (_pv_grid_feeding_inverter__averaged__controller_gain5__out * _pv_grid_feeding_inverter__averaged__controller_gain5__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Product111
@@ -28924,9 +28548,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Product12
     _pv_grid_feeding_inverter__averaged__controller_product12__out = (_pv_grid_feeding_inverter__averaged__controller_gain5__out * _pv_grid_feeding_inverter__averaged__controller_gain7__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.E_q1
-    HIL_OutAO(0x4070, _pv_grid_feeding_inverter__averaged__controller_gain8__out);
+    HIL_OutAO(0x4072, _pv_grid_feeding_inverter__averaged__controller_gain8__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.E_qREF1
-    HIL_OutAO(0x4071, _pv_grid_feeding_inverter__averaged__controller_gain8__out);
+    HIL_OutAO(0x4073, _pv_grid_feeding_inverter__averaged__controller_gain8__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.squared_Vt2.Product2
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_squared_vt2_product2__out = (_pv_grid_feeding_inverter__averaged__controller_gain8__out * _pv_grid_feeding_inverter__averaged__controller_gain8__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Product10
@@ -28947,7 +28571,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Frequency droop.Product1
     _ess_grid_forming_inverter__averaged__controller_frequency_droop_product1__out = (_ess_grid_forming_inverter__averaged__controller_frequency_droop_sum1__out) * 1.0 / (_ess_grid_forming_inverter__averaged__controller_frequency_droop_constant6__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Voltage droop.Gain3
-    _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain3__out = 0.001958685783886737 * _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum2__out;
+    _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain3__out = 0.01958685783886737 * _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum2__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).confine phase1
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__in = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__trigonometric_function1__out;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__x = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__in / 6.283185307179586;
@@ -28955,10 +28579,14 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__out = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__in - (6.283185307179586 * _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__floor_in);
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Mathematical function1
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__mathematical_function1__out = sqrtf(_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum4__out);
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain17
-    _ess_grid_forming_inverter__averaged__controller_gain17__out = 1.5 * _ess_grid_forming_inverter__averaged__controller_sum2__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain16
-    _ess_grid_forming_inverter__averaged__controller_gain16__out = 1.5 * _ess_grid_forming_inverter__averaged__controller_sum1__out;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain14
+    _ess_grid_forming_inverter__averaged__controller_gain14__out = 300000.0 * _ess_grid_forming_inverter__averaged__controller_sum2__out;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Sum5
+    _ess_grid_forming_inverter__averaged__controller_sum5__out = _ess_grid_forming_inverter__averaged__controller_sum2__out - _ess_grid_forming_inverter__averaged__controller_integrator3__out;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain15
+    _ess_grid_forming_inverter__averaged__controller_gain15__out = 300000.0 * _ess_grid_forming_inverter__averaged__controller_sum1__out;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Sum4
+    _ess_grid_forming_inverter__averaged__controller_sum4__out = _ess_grid_forming_inverter__averaged__controller_sum1__out - _ess_grid_forming_inverter__averaged__controller_integrator2__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).confine phase2
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__in = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__trigonometric_function2__out;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__x = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__in / 6.283185307179586;
@@ -29445,17 +29073,8 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_gain6__out = 16.0 * _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip59;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.Logical operator1
     _f2_cb19_mid_rly1_sel_787_logical_operator1__out = _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip50 || _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip51 || _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip27 || _f2_cb19_mid_rly1_sel_787_r50512761_relays__trip59 ;
-    // Generated from the component: F2_RELAY UDP Stream.W -> kW1
-    _f2_relay_udp_stream_w____kw1__out[0] = 0.001 * _f2_relay_udp_stream_f2_p_real_2__out[0];
-    _f2_relay_udp_stream_w____kw1__out[1] = 0.001 * _f2_relay_udp_stream_f2_p_real_2__out[1];
-    // Generated from the component: F2_RELAY UDP Stream.var -> kvar1
-    _f2_relay_udp_stream_var____kvar1__out[0] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_2__out[0];
-    _f2_relay_udp_stream_var____kvar1__out[1] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_2__out[1];
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Logical operator1
     _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_logical_operator1__out = _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out && _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator2__out ;
-    // Generated from the component: F2_RELAY UDP Stream.Gain6
-    _f2_relay_udp_stream_gain6__out[0] = 100.0 * _f2_relay_udp_stream_f2_voltage_2__out[0];
-    _f2_relay_udp_stream_gain6__out[1] = 100.0 * _f2_relay_udp_stream_f2_voltage_2__out[1];
     // Generated from the component: F2_CB19.MID_Rly1.ModBus Device1.comp_reg_in
     XIo_OutFloat(0x55000584, _f2_cb19_mid_rly1_sel_787_bus_join1__out[0]);
     XIo_OutFloat(0x55000588, _f2_cb19_mid_rly1_sel_787_bus_join1__out[1]);
@@ -29982,53 +29601,8 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_gain6__out = 16.0 * _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip59;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Logical operator1
     _f2_cb9_mid_rly1_sel_787_logical_operator1__out = _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip50 || _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip51 || _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip27 || _f2_cb9_mid_rly1_sel_787_r50512761_relays__trip59 ;
-    // Generated from the component: F2_RELAY UDP Stream.W -> kW
-    _f2_relay_udp_stream_w____kw__out[0] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[0];
-    _f2_relay_udp_stream_w____kw__out[1] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[1];
-    _f2_relay_udp_stream_w____kw__out[2] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[2];
-    _f2_relay_udp_stream_w____kw__out[3] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[3];
-    _f2_relay_udp_stream_w____kw__out[4] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[4];
-    _f2_relay_udp_stream_w____kw__out[5] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[5];
-    _f2_relay_udp_stream_w____kw__out[6] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[6];
-    _f2_relay_udp_stream_w____kw__out[7] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[7];
-    _f2_relay_udp_stream_w____kw__out[8] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[8];
-    _f2_relay_udp_stream_w____kw__out[9] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[9];
-    _f2_relay_udp_stream_w____kw__out[10] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[10];
-    _f2_relay_udp_stream_w____kw__out[11] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[11];
-    _f2_relay_udp_stream_w____kw__out[12] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[12];
-    _f2_relay_udp_stream_w____kw__out[13] = 0.001 * _f2_relay_udp_stream_f2_p_real_1__out[13];
-    // Generated from the component: F2_RELAY UDP Stream.var -> kvar
-    _f2_relay_udp_stream_var____kvar__out[0] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[0];
-    _f2_relay_udp_stream_var____kvar__out[1] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[1];
-    _f2_relay_udp_stream_var____kvar__out[2] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[2];
-    _f2_relay_udp_stream_var____kvar__out[3] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[3];
-    _f2_relay_udp_stream_var____kvar__out[4] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[4];
-    _f2_relay_udp_stream_var____kvar__out[5] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[5];
-    _f2_relay_udp_stream_var____kvar__out[6] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[6];
-    _f2_relay_udp_stream_var____kvar__out[7] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[7];
-    _f2_relay_udp_stream_var____kvar__out[8] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[8];
-    _f2_relay_udp_stream_var____kvar__out[9] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[9];
-    _f2_relay_udp_stream_var____kvar__out[10] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[10];
-    _f2_relay_udp_stream_var____kvar__out[11] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[11];
-    _f2_relay_udp_stream_var____kvar__out[12] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[12];
-    _f2_relay_udp_stream_var____kvar__out[13] = 0.001 * _f2_relay_udp_stream_f2_p_reactive_1__out[13];
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Logical operator1
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_logical_operator1__out = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator1__out && _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator2__out ;
-    // Generated from the component: F2_RELAY UDP Stream.Gain3
-    _f2_relay_udp_stream_gain3__out[0] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[0];
-    _f2_relay_udp_stream_gain3__out[1] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[1];
-    _f2_relay_udp_stream_gain3__out[2] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[2];
-    _f2_relay_udp_stream_gain3__out[3] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[3];
-    _f2_relay_udp_stream_gain3__out[4] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[4];
-    _f2_relay_udp_stream_gain3__out[5] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[5];
-    _f2_relay_udp_stream_gain3__out[6] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[6];
-    _f2_relay_udp_stream_gain3__out[7] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[7];
-    _f2_relay_udp_stream_gain3__out[8] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[8];
-    _f2_relay_udp_stream_gain3__out[9] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[9];
-    _f2_relay_udp_stream_gain3__out[10] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[10];
-    _f2_relay_udp_stream_gain3__out[11] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[11];
-    _f2_relay_udp_stream_gain3__out[12] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[12];
-    _f2_relay_udp_stream_gain3__out[13] = 100.0 * _f2_relay_udp_stream_f2_voltage_1__out[13];
     // Generated from the component: F2_CB9.MID_Rly1.ModBus Device1.comp_reg_in
     XIo_OutFloat(0x55000904, _f2_cb9_mid_rly1_sel_787_bus_join1__out[0]);
     XIo_OutFloat(0x55000908, _f2_cb9_mid_rly1_sel_787_bus_join1__out[1]);
@@ -30121,14 +29695,14 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__controller_frequency_droop_sum5__out = _ess_grid_forming_inverter__averaged__controller_frequency_droop_product1__out + _ess_grid_forming_inverter__averaged__controller_frequency_droop_gain4__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Voltage droop.Sum4
     _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum4__out = _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain3__out + _ess_grid_forming_inverter__averaged__controller_voltage_droop_gain4__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain14
-    _ess_grid_forming_inverter__averaged__controller_gain14__out = 200000.0 * _ess_grid_forming_inverter__averaged__controller_gain17__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Sum5
-    _ess_grid_forming_inverter__averaged__controller_sum5__out = _ess_grid_forming_inverter__averaged__controller_gain17__out - _ess_grid_forming_inverter__averaged__controller_integrator3__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain15
-    _ess_grid_forming_inverter__averaged__controller_gain15__out = 200000.0 * _ess_grid_forming_inverter__averaged__controller_gain16__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Sum4
-    _ess_grid_forming_inverter__averaged__controller_sum4__out = _ess_grid_forming_inverter__averaged__controller_gain16__out - _ess_grid_forming_inverter__averaged__controller_integrator2__out;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Q1
+    HIL_OutAO(0x4020, _ess_grid_forming_inverter__averaged__controller_gain14__out);
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain13
+    _ess_grid_forming_inverter__averaged__controller_gain13__out = 2.0 * _ess_grid_forming_inverter__averaged__controller_sum5__out;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.P1
+    HIL_OutAO(0x401f, _ess_grid_forming_inverter__averaged__controller_gain15__out);
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain4
+    _ess_grid_forming_inverter__averaged__controller_gain4__out = 2.0 * _ess_grid_forming_inverter__averaged__controller_sum4__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Sum1
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum1__out =  - _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase1__out + _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase2__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Sum3
@@ -30433,12 +30007,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_logical_operator5__out = _f2_cb19_mid_rly1_sel_787_logical_operator1__out || _f2_cb19_mid_rly1_sel_787_relay_25_sync_check1_relational_operator1__out ;
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.State Condition Mng.not
     _f2_cb19_mid_rly1_sel_787_state_condition_mng_not__out = !_f2_cb19_mid_rly1_sel_787_logical_operator1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Gain7
-    _f2_relay_udp_stream_gain7__out[0] = 10.0 * _f2_relay_udp_stream_w____kw1__out[0];
-    _f2_relay_udp_stream_gain7__out[1] = 10.0 * _f2_relay_udp_stream_w____kw1__out[1];
-    // Generated from the component: F2_RELAY UDP Stream.Gain5
-    _f2_relay_udp_stream_gain5__out[0] = 10.0 * _f2_relay_udp_stream_var____kvar1__out[0];
-    _f2_relay_udp_stream_gain5__out[1] = 10.0 * _f2_relay_udp_stream_var____kvar1__out[1];
     // Generated from the component: F2_CB19.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Subsystem2.Multiport signal switch1
     switch((X_UnInt32) _f2_cb19_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator3__out) {
     case 1:
@@ -30775,36 +30343,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator5__out = _f2_cb9_mid_rly1_sel_787_logical_operator1__out || _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_relational_operator1__out ;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.State Condition Mng.not
     _f2_cb9_mid_rly1_sel_787_state_condition_mng_not__out = !_f2_cb9_mid_rly1_sel_787_logical_operator1__out;
-    // Generated from the component: F2_RELAY UDP Stream.Gain1
-    _f2_relay_udp_stream_gain1__out[0] = 10.0 * _f2_relay_udp_stream_w____kw__out[0];
-    _f2_relay_udp_stream_gain1__out[1] = 10.0 * _f2_relay_udp_stream_w____kw__out[1];
-    _f2_relay_udp_stream_gain1__out[2] = 10.0 * _f2_relay_udp_stream_w____kw__out[2];
-    _f2_relay_udp_stream_gain1__out[3] = 10.0 * _f2_relay_udp_stream_w____kw__out[3];
-    _f2_relay_udp_stream_gain1__out[4] = 10.0 * _f2_relay_udp_stream_w____kw__out[4];
-    _f2_relay_udp_stream_gain1__out[5] = 10.0 * _f2_relay_udp_stream_w____kw__out[5];
-    _f2_relay_udp_stream_gain1__out[6] = 10.0 * _f2_relay_udp_stream_w____kw__out[6];
-    _f2_relay_udp_stream_gain1__out[7] = 10.0 * _f2_relay_udp_stream_w____kw__out[7];
-    _f2_relay_udp_stream_gain1__out[8] = 10.0 * _f2_relay_udp_stream_w____kw__out[8];
-    _f2_relay_udp_stream_gain1__out[9] = 10.0 * _f2_relay_udp_stream_w____kw__out[9];
-    _f2_relay_udp_stream_gain1__out[10] = 10.0 * _f2_relay_udp_stream_w____kw__out[10];
-    _f2_relay_udp_stream_gain1__out[11] = 10.0 * _f2_relay_udp_stream_w____kw__out[11];
-    _f2_relay_udp_stream_gain1__out[12] = 10.0 * _f2_relay_udp_stream_w____kw__out[12];
-    _f2_relay_udp_stream_gain1__out[13] = 10.0 * _f2_relay_udp_stream_w____kw__out[13];
-    // Generated from the component: F2_RELAY UDP Stream.Gain2
-    _f2_relay_udp_stream_gain2__out[0] = 10.0 * _f2_relay_udp_stream_var____kvar__out[0];
-    _f2_relay_udp_stream_gain2__out[1] = 10.0 * _f2_relay_udp_stream_var____kvar__out[1];
-    _f2_relay_udp_stream_gain2__out[2] = 10.0 * _f2_relay_udp_stream_var____kvar__out[2];
-    _f2_relay_udp_stream_gain2__out[3] = 10.0 * _f2_relay_udp_stream_var____kvar__out[3];
-    _f2_relay_udp_stream_gain2__out[4] = 10.0 * _f2_relay_udp_stream_var____kvar__out[4];
-    _f2_relay_udp_stream_gain2__out[5] = 10.0 * _f2_relay_udp_stream_var____kvar__out[5];
-    _f2_relay_udp_stream_gain2__out[6] = 10.0 * _f2_relay_udp_stream_var____kvar__out[6];
-    _f2_relay_udp_stream_gain2__out[7] = 10.0 * _f2_relay_udp_stream_var____kvar__out[7];
-    _f2_relay_udp_stream_gain2__out[8] = 10.0 * _f2_relay_udp_stream_var____kvar__out[8];
-    _f2_relay_udp_stream_gain2__out[9] = 10.0 * _f2_relay_udp_stream_var____kvar__out[9];
-    _f2_relay_udp_stream_gain2__out[10] = 10.0 * _f2_relay_udp_stream_var____kvar__out[10];
-    _f2_relay_udp_stream_gain2__out[11] = 10.0 * _f2_relay_udp_stream_var____kvar__out[11];
-    _f2_relay_udp_stream_gain2__out[12] = 10.0 * _f2_relay_udp_stream_var____kvar__out[12];
-    _f2_relay_udp_stream_gain2__out[13] = 10.0 * _f2_relay_udp_stream_var____kvar__out[13];
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Subsystem1.Subsystem2.Multiport signal switch1
     switch((X_UnInt32) _f2_cb9_mid_rly1_sel_787_calc_from_measurements_subsystem1_relational_operator3__out) {
     case 1:
@@ -30843,15 +30381,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Three phase PLL2.term_pk
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay 25-Sync Check1.Logical operator3
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator3__out = _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_voltage_comparator_relational_operator1__out && _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_freq_comparator_relational_operator1__out && _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_relational_operator1__out ;
-    // Generated from the component: UDP Send.Bus Split2
-    _udp_send_bus_split2__out = _f2_pcc_bus_join1__out[0];
-    _udp_send_bus_split2__out1 = _f2_pcc_bus_join1__out[1];
-    _udp_send_bus_split2__out2 = _f2_pcc_bus_join1__out[2];
-    _udp_send_bus_split2__out3 = _f2_pcc_bus_join1__out[3];
-    _udp_send_bus_split2__out4 = _f2_pcc_bus_join1__out[4];
-    _udp_send_bus_split2__out5 = _f2_pcc_bus_join1__out[5];
-    _udp_send_bus_split2__out6 = _f2_pcc_bus_join1__out[6];
-    _udp_send_bus_split2__out7 = _f2_pcc_bus_join1__out[7];
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Kd
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_kd__out = 1.0 * _f2_pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Ki
@@ -30868,7 +30397,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__out = _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state;
     }
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Et_sqr
-    HIL_OutAO(0x4079, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out);
+    HIL_OutAO(0x407b, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Gain19
     _pv_grid_feeding_inverter__averaged__controller_gain19__out = 300000.0 * _pv_grid_feeding_inverter__averaged__controller_sum2__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Gain18
@@ -30880,19 +30409,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum5
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum5__out = _pv_grid_feeding_inverter__averaged__controller_gain5__out - _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain9__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.sig1
-    HIL_OutAO(0x4078, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain9__out);
+    HIL_OutAO(0x407a, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain9__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Frequency droop.Sum4
     _ess_grid_forming_inverter__averaged__controller_frequency_droop_sum4__out = _ess_grid_forming_inverter__averaged__controller_frequency_droop_sum5__out + _ess_grid_forming_inverter__averaged__controller_frequency_droop_constant4__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Voltage droop.Sum3
     _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum3__out = _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum4__out + _ess_grid_forming_inverter__averaged__controller_voltage_droop_constant4__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Q1
-    HIL_OutAO(0x401e, _ess_grid_forming_inverter__averaged__controller_gain14__out);
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain13
-    _ess_grid_forming_inverter__averaged__controller_gain13__out = 2.0 * _ess_grid_forming_inverter__averaged__controller_sum5__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.P1
-    HIL_OutAO(0x401d, _ess_grid_forming_inverter__averaged__controller_gain15__out);
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Gain4
-    _ess_grid_forming_inverter__averaged__controller_gain4__out = 2.0 * _ess_grid_forming_inverter__averaged__controller_sum4__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).confine phase
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase__in = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum1__out;
     if (_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase__in > 0) {
@@ -30923,18 +30444,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     }
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).volt_diff3
     HIL_OutAO(0x400f, _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum3__out);
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Eq_err
+    HIL_OutAO(0x4018, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller4
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state + 0.03 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out;
-    if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int < -0.35) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = -0.35;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active = 1;
-    } else if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int > 0.35) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = 0.35;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active = 1;
-    } else {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active = 0;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.State Condition Mng.detect_change.Relational operator1
     _f2_cb1_mid_rly1_sel_787_state_condition_mng_detect_change_relational_operator1__out = (_f2_cb1_mid_rly1_sel_787_state_condition_mng_not__out != _f2_cb1_mid_rly1_sel_787_state_condition_mng_detect_change_unit_delay1__out) ? 1 : 0;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Three phase PLL1.PID.Sum8
@@ -31095,86 +30609,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator4__out = _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_sr_flip_flop1__out || _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator3__out ;
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.Relay 25-Sync Check1.Logical operator7
     _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator7__out = _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator5__out || _f2_cb9_mid_rly1_sel_787_relay_25_sync_check1_logical_operator3__out ;
-    // Generated from the component: UDP Send.Data Type Conversion11
-    _udp_send_data_type_conversion11__out = (X_Int32)_udp_send_bus_split2__out5;
-    // Generated from the component: UDP Send.Data Type Conversion12
-    _udp_send_data_type_conversion12__out = (X_Int32)_udp_send_bus_split2__out6;
-    // Generated from the component: UDP Send.Data Type Conversion13
-    _udp_send_data_type_conversion13__out = (X_Int32)_udp_send_bus_split2__out7;
-    // Generated from the component: UDP Send.Data Type Conversion15
-    _udp_send_data_type_conversion15__out = (X_Int32)_udp_send_bus_split2__out4;
-    // Generated from the component: UDP Send.FREQUENCY_UDP
-    _udp_send_frequency_udp__out[0] = _f2_relay_udp_stream_gain4__out[0];
-    _udp_send_frequency_udp__out[1] = _f2_relay_udp_stream_gain4__out[1];
-    _udp_send_frequency_udp__out[2] = _f2_relay_udp_stream_gain4__out[2];
-    _udp_send_frequency_udp__out[3] = _f2_relay_udp_stream_gain4__out[3];
-    _udp_send_frequency_udp__out[4] = _f2_relay_udp_stream_gain4__out[4];
-    _udp_send_frequency_udp__out[5] = _f2_relay_udp_stream_gain4__out[5];
-    _udp_send_frequency_udp__out[6] = _f2_relay_udp_stream_gain4__out[6];
-    _udp_send_frequency_udp__out[7] = _f2_relay_udp_stream_gain4__out[7];
-    _udp_send_frequency_udp__out[8] = _f2_relay_udp_stream_gain4__out[8];
-    _udp_send_frequency_udp__out[9] = _f2_relay_udp_stream_gain4__out[9];
-    _udp_send_frequency_udp__out[10] = _f2_relay_udp_stream_gain4__out[10];
-    _udp_send_frequency_udp__out[11] = _f2_relay_udp_stream_gain4__out[11];
-    _udp_send_frequency_udp__out[12] = _f2_relay_udp_stream_gain4__out[12];
-    _udp_send_frequency_udp__out[13] = _f2_relay_udp_stream_gain4__out[13];
-    _udp_send_frequency_udp__out[14] = _f2_relay_udp_stream_gain8__out[0];
-    _udp_send_frequency_udp__out[15] = _f2_relay_udp_stream_gain8__out[1];
-    _udp_send_frequency_udp__out[16] = _udp_send_bus_split2__out3;
-    // Generated from the component: UDP Send.P_REACTIVE_UDP
-    _udp_send_p_reactive_udp__out[0] = _f2_relay_udp_stream_gain2__out[0];
-    _udp_send_p_reactive_udp__out[1] = _f2_relay_udp_stream_gain2__out[1];
-    _udp_send_p_reactive_udp__out[2] = _f2_relay_udp_stream_gain2__out[2];
-    _udp_send_p_reactive_udp__out[3] = _f2_relay_udp_stream_gain2__out[3];
-    _udp_send_p_reactive_udp__out[4] = _f2_relay_udp_stream_gain2__out[4];
-    _udp_send_p_reactive_udp__out[5] = _f2_relay_udp_stream_gain2__out[5];
-    _udp_send_p_reactive_udp__out[6] = _f2_relay_udp_stream_gain2__out[6];
-    _udp_send_p_reactive_udp__out[7] = _f2_relay_udp_stream_gain2__out[7];
-    _udp_send_p_reactive_udp__out[8] = _f2_relay_udp_stream_gain2__out[8];
-    _udp_send_p_reactive_udp__out[9] = _f2_relay_udp_stream_gain2__out[9];
-    _udp_send_p_reactive_udp__out[10] = _f2_relay_udp_stream_gain2__out[10];
-    _udp_send_p_reactive_udp__out[11] = _f2_relay_udp_stream_gain2__out[11];
-    _udp_send_p_reactive_udp__out[12] = _f2_relay_udp_stream_gain2__out[12];
-    _udp_send_p_reactive_udp__out[13] = _f2_relay_udp_stream_gain2__out[13];
-    _udp_send_p_reactive_udp__out[14] = _f2_relay_udp_stream_gain5__out[0];
-    _udp_send_p_reactive_udp__out[15] = _f2_relay_udp_stream_gain5__out[1];
-    _udp_send_p_reactive_udp__out[16] = _udp_send_bus_split2__out1;
-    // Generated from the component: UDP Send.P_REAL_UDP
-    _udp_send_p_real_udp__out[0] = _f2_relay_udp_stream_gain1__out[0];
-    _udp_send_p_real_udp__out[1] = _f2_relay_udp_stream_gain1__out[1];
-    _udp_send_p_real_udp__out[2] = _f2_relay_udp_stream_gain1__out[2];
-    _udp_send_p_real_udp__out[3] = _f2_relay_udp_stream_gain1__out[3];
-    _udp_send_p_real_udp__out[4] = _f2_relay_udp_stream_gain1__out[4];
-    _udp_send_p_real_udp__out[5] = _f2_relay_udp_stream_gain1__out[5];
-    _udp_send_p_real_udp__out[6] = _f2_relay_udp_stream_gain1__out[6];
-    _udp_send_p_real_udp__out[7] = _f2_relay_udp_stream_gain1__out[7];
-    _udp_send_p_real_udp__out[8] = _f2_relay_udp_stream_gain1__out[8];
-    _udp_send_p_real_udp__out[9] = _f2_relay_udp_stream_gain1__out[9];
-    _udp_send_p_real_udp__out[10] = _f2_relay_udp_stream_gain1__out[10];
-    _udp_send_p_real_udp__out[11] = _f2_relay_udp_stream_gain1__out[11];
-    _udp_send_p_real_udp__out[12] = _f2_relay_udp_stream_gain1__out[12];
-    _udp_send_p_real_udp__out[13] = _f2_relay_udp_stream_gain1__out[13];
-    _udp_send_p_real_udp__out[14] = _f2_relay_udp_stream_gain7__out[0];
-    _udp_send_p_real_udp__out[15] = _f2_relay_udp_stream_gain7__out[1];
-    _udp_send_p_real_udp__out[16] = _udp_send_bus_split2__out;
-    // Generated from the component: UDP Send.VOLTAGE_UDP
-    _udp_send_voltage_udp__out[0] = _f2_relay_udp_stream_gain3__out[0];
-    _udp_send_voltage_udp__out[1] = _f2_relay_udp_stream_gain3__out[1];
-    _udp_send_voltage_udp__out[2] = _f2_relay_udp_stream_gain3__out[2];
-    _udp_send_voltage_udp__out[3] = _f2_relay_udp_stream_gain3__out[3];
-    _udp_send_voltage_udp__out[4] = _f2_relay_udp_stream_gain3__out[4];
-    _udp_send_voltage_udp__out[5] = _f2_relay_udp_stream_gain3__out[5];
-    _udp_send_voltage_udp__out[6] = _f2_relay_udp_stream_gain3__out[6];
-    _udp_send_voltage_udp__out[7] = _f2_relay_udp_stream_gain3__out[7];
-    _udp_send_voltage_udp__out[8] = _f2_relay_udp_stream_gain3__out[8];
-    _udp_send_voltage_udp__out[9] = _f2_relay_udp_stream_gain3__out[9];
-    _udp_send_voltage_udp__out[10] = _f2_relay_udp_stream_gain3__out[10];
-    _udp_send_voltage_udp__out[11] = _f2_relay_udp_stream_gain3__out[11];
-    _udp_send_voltage_udp__out[12] = _f2_relay_udp_stream_gain3__out[12];
-    _udp_send_voltage_udp__out[13] = _f2_relay_udp_stream_gain3__out[13];
-    _udp_send_voltage_udp__out[14] = _f2_relay_udp_stream_gain6__out[0];
-    _udp_send_voltage_udp__out[15] = _f2_relay_udp_stream_gain6__out[1];
-    _udp_send_voltage_udp__out[16] = _udp_send_bus_split2__out2;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Sum8
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum8__out = _f2_pcc_pcc_measurements_three_phase_pll1_pid_kd__out - _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Signal switch1
@@ -31183,12 +30617,12 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _pv_grid_feeding_inverter__averaged__bus_join4__out[0] = _pv_q_ref_pv__out;
     _pv_grid_feeding_inverter__averaged__bus_join4__out[1] = _pv_grid_feeding_inverter__averaged__controller_gain19__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Q1
-    HIL_OutAO(0x407d, _pv_grid_feeding_inverter__averaged__controller_gain19__out);
+    HIL_OutAO(0x407f, _pv_grid_feeding_inverter__averaged__controller_gain19__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Bus Join5
     _pv_grid_feeding_inverter__averaged__bus_join5__out[0] = _pv_p_ref_pv__out;
     _pv_grid_feeding_inverter__averaged__bus_join5__out[1] = _pv_grid_feeding_inverter__averaged__controller_gain18__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.P1
-    HIL_OutAO(0x407c, _pv_grid_feeding_inverter__averaged__controller_gain18__out);
+    HIL_OutAO(0x407e, _pv_grid_feeding_inverter__averaged__controller_gain18__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.PID.Sum5
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_sum5__out = _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_kp__out + _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_gain1__out + _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_integrator1__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Product4
@@ -31212,7 +30646,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Sum7
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_sum7__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain3__out + _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum3__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Voltage droop.E_1
-    HIL_OutAO(0x401f, _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum3__out);
+    HIL_OutAO(0x4021, _ess_grid_forming_inverter__averaged__controller_voltage_droop_sum3__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Abs4
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__abs4__out = fabsf(_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__confine_phase__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).angle_diff3
@@ -31753,108 +31187,10 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_bitwise_faults__Reset = _f2_cb9_mid_rly1_sel_787_relay_param_reset_detect_change_relational_operator1__out;
     _f2_cb9_mid_rly1_sel_787_bitwise_faults__Status = _f2_cb9_mid_rly1_sel_787_unit_delay4__out;
     _f2_cb9_mid_rly1_sel_787_bitwise_faults__fault_status = (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__Status << 1 | (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__R25 << 2 | (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__R27 << 3 | (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__R50 << 4 | (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__R51 << 5 | (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__R59 << 6 | (X_UnInt32)_f2_cb9_mid_rly1_sel_787_bitwise_faults__Reset << 7;
-    // Generated from the component: UDP Send.MUX_UDP
-    _udp_send_mux_udp__out[0] = _udp_send_data_type_conversion10__out;
-    _udp_send_mux_udp__out[1] = _udp_send_data_type_conversion11__out;
-    _udp_send_mux_udp__out[2] = _udp_send_data_type_conversion12__out;
-    _udp_send_mux_udp__out[3] = _udp_send_data_type_conversion13__out;
-    // Generated from the component: UDP Send.BREAKER_UDP
-    _udp_send_breaker_udp__out[0] = _udp_send_boolean_split2__out[0];
-    _udp_send_breaker_udp__out[1] = _udp_send_boolean_split2__out[1];
-    _udp_send_breaker_udp__out[2] = _udp_send_boolean_split2__out[2];
-    _udp_send_breaker_udp__out[3] = _udp_send_boolean_split2__out[3];
-    _udp_send_breaker_udp__out[4] = _udp_send_boolean_split2__out[4];
-    _udp_send_breaker_udp__out[5] = _udp_send_boolean_split2__out[5];
-    _udp_send_breaker_udp__out[6] = _udp_send_boolean_split2__out[6];
-    _udp_send_breaker_udp__out[7] = _udp_send_boolean_split2__out[7];
-    _udp_send_breaker_udp__out[8] = _udp_send_boolean_split2__out[8];
-    _udp_send_breaker_udp__out[9] = _udp_send_boolean_split2__out[9];
-    _udp_send_breaker_udp__out[10] = _udp_send_boolean_split2__out[10];
-    _udp_send_breaker_udp__out[11] = _udp_send_boolean_split2__out[11];
-    _udp_send_breaker_udp__out[12] = _udp_send_boolean_split2__out[12];
-    _udp_send_breaker_udp__out[13] = _udp_send_boolean_split2__out[13];
-    _udp_send_breaker_udp__out[14] = _udp_send_boolean_split2__out[14];
-    _udp_send_breaker_udp__out[15] = _udp_send_boolean_split2__out[15];
-    _udp_send_breaker_udp__out[16] = _udp_send_boolean_split3__out[0];
-    _udp_send_breaker_udp__out[17] = _udp_send_boolean_split3__out[1];
-    _udp_send_breaker_udp__out[18] = _udp_send_boolean_split3__out[2];
-    _udp_send_breaker_udp__out[19] = _udp_send_data_type_conversion15__out;
-    // Generated from the component: UDP Send.Data Type Conversion4
-    _udp_send_data_type_conversion4__out[0] = (X_Int32)_udp_send_frequency_udp__out[0];
-    _udp_send_data_type_conversion4__out[1] = (X_Int32)_udp_send_frequency_udp__out[1];
-    _udp_send_data_type_conversion4__out[2] = (X_Int32)_udp_send_frequency_udp__out[2];
-    _udp_send_data_type_conversion4__out[3] = (X_Int32)_udp_send_frequency_udp__out[3];
-    _udp_send_data_type_conversion4__out[4] = (X_Int32)_udp_send_frequency_udp__out[4];
-    _udp_send_data_type_conversion4__out[5] = (X_Int32)_udp_send_frequency_udp__out[5];
-    _udp_send_data_type_conversion4__out[6] = (X_Int32)_udp_send_frequency_udp__out[6];
-    _udp_send_data_type_conversion4__out[7] = (X_Int32)_udp_send_frequency_udp__out[7];
-    _udp_send_data_type_conversion4__out[8] = (X_Int32)_udp_send_frequency_udp__out[8];
-    _udp_send_data_type_conversion4__out[9] = (X_Int32)_udp_send_frequency_udp__out[9];
-    _udp_send_data_type_conversion4__out[10] = (X_Int32)_udp_send_frequency_udp__out[10];
-    _udp_send_data_type_conversion4__out[11] = (X_Int32)_udp_send_frequency_udp__out[11];
-    _udp_send_data_type_conversion4__out[12] = (X_Int32)_udp_send_frequency_udp__out[12];
-    _udp_send_data_type_conversion4__out[13] = (X_Int32)_udp_send_frequency_udp__out[13];
-    _udp_send_data_type_conversion4__out[14] = (X_Int32)_udp_send_frequency_udp__out[14];
-    _udp_send_data_type_conversion4__out[15] = (X_Int32)_udp_send_frequency_udp__out[15];
-    _udp_send_data_type_conversion4__out[16] = (X_Int32)_udp_send_frequency_udp__out[16];
-    // Generated from the component: UDP Send.Data Type Conversion2
-    _udp_send_data_type_conversion2__out[0] = (X_Int32)_udp_send_p_reactive_udp__out[0];
-    _udp_send_data_type_conversion2__out[1] = (X_Int32)_udp_send_p_reactive_udp__out[1];
-    _udp_send_data_type_conversion2__out[2] = (X_Int32)_udp_send_p_reactive_udp__out[2];
-    _udp_send_data_type_conversion2__out[3] = (X_Int32)_udp_send_p_reactive_udp__out[3];
-    _udp_send_data_type_conversion2__out[4] = (X_Int32)_udp_send_p_reactive_udp__out[4];
-    _udp_send_data_type_conversion2__out[5] = (X_Int32)_udp_send_p_reactive_udp__out[5];
-    _udp_send_data_type_conversion2__out[6] = (X_Int32)_udp_send_p_reactive_udp__out[6];
-    _udp_send_data_type_conversion2__out[7] = (X_Int32)_udp_send_p_reactive_udp__out[7];
-    _udp_send_data_type_conversion2__out[8] = (X_Int32)_udp_send_p_reactive_udp__out[8];
-    _udp_send_data_type_conversion2__out[9] = (X_Int32)_udp_send_p_reactive_udp__out[9];
-    _udp_send_data_type_conversion2__out[10] = (X_Int32)_udp_send_p_reactive_udp__out[10];
-    _udp_send_data_type_conversion2__out[11] = (X_Int32)_udp_send_p_reactive_udp__out[11];
-    _udp_send_data_type_conversion2__out[12] = (X_Int32)_udp_send_p_reactive_udp__out[12];
-    _udp_send_data_type_conversion2__out[13] = (X_Int32)_udp_send_p_reactive_udp__out[13];
-    _udp_send_data_type_conversion2__out[14] = (X_Int32)_udp_send_p_reactive_udp__out[14];
-    _udp_send_data_type_conversion2__out[15] = (X_Int32)_udp_send_p_reactive_udp__out[15];
-    _udp_send_data_type_conversion2__out[16] = (X_Int32)_udp_send_p_reactive_udp__out[16];
-    // Generated from the component: UDP Send.Data Type Conversion1
-    _udp_send_data_type_conversion1__out[0] = (X_Int32)_udp_send_p_real_udp__out[0];
-    _udp_send_data_type_conversion1__out[1] = (X_Int32)_udp_send_p_real_udp__out[1];
-    _udp_send_data_type_conversion1__out[2] = (X_Int32)_udp_send_p_real_udp__out[2];
-    _udp_send_data_type_conversion1__out[3] = (X_Int32)_udp_send_p_real_udp__out[3];
-    _udp_send_data_type_conversion1__out[4] = (X_Int32)_udp_send_p_real_udp__out[4];
-    _udp_send_data_type_conversion1__out[5] = (X_Int32)_udp_send_p_real_udp__out[5];
-    _udp_send_data_type_conversion1__out[6] = (X_Int32)_udp_send_p_real_udp__out[6];
-    _udp_send_data_type_conversion1__out[7] = (X_Int32)_udp_send_p_real_udp__out[7];
-    _udp_send_data_type_conversion1__out[8] = (X_Int32)_udp_send_p_real_udp__out[8];
-    _udp_send_data_type_conversion1__out[9] = (X_Int32)_udp_send_p_real_udp__out[9];
-    _udp_send_data_type_conversion1__out[10] = (X_Int32)_udp_send_p_real_udp__out[10];
-    _udp_send_data_type_conversion1__out[11] = (X_Int32)_udp_send_p_real_udp__out[11];
-    _udp_send_data_type_conversion1__out[12] = (X_Int32)_udp_send_p_real_udp__out[12];
-    _udp_send_data_type_conversion1__out[13] = (X_Int32)_udp_send_p_real_udp__out[13];
-    _udp_send_data_type_conversion1__out[14] = (X_Int32)_udp_send_p_real_udp__out[14];
-    _udp_send_data_type_conversion1__out[15] = (X_Int32)_udp_send_p_real_udp__out[15];
-    _udp_send_data_type_conversion1__out[16] = (X_Int32)_udp_send_p_real_udp__out[16];
-    // Generated from the component: UDP Send.Data Type Conversion3
-    _udp_send_data_type_conversion3__out[0] = (X_Int32)_udp_send_voltage_udp__out[0];
-    _udp_send_data_type_conversion3__out[1] = (X_Int32)_udp_send_voltage_udp__out[1];
-    _udp_send_data_type_conversion3__out[2] = (X_Int32)_udp_send_voltage_udp__out[2];
-    _udp_send_data_type_conversion3__out[3] = (X_Int32)_udp_send_voltage_udp__out[3];
-    _udp_send_data_type_conversion3__out[4] = (X_Int32)_udp_send_voltage_udp__out[4];
-    _udp_send_data_type_conversion3__out[5] = (X_Int32)_udp_send_voltage_udp__out[5];
-    _udp_send_data_type_conversion3__out[6] = (X_Int32)_udp_send_voltage_udp__out[6];
-    _udp_send_data_type_conversion3__out[7] = (X_Int32)_udp_send_voltage_udp__out[7];
-    _udp_send_data_type_conversion3__out[8] = (X_Int32)_udp_send_voltage_udp__out[8];
-    _udp_send_data_type_conversion3__out[9] = (X_Int32)_udp_send_voltage_udp__out[9];
-    _udp_send_data_type_conversion3__out[10] = (X_Int32)_udp_send_voltage_udp__out[10];
-    _udp_send_data_type_conversion3__out[11] = (X_Int32)_udp_send_voltage_udp__out[11];
-    _udp_send_data_type_conversion3__out[12] = (X_Int32)_udp_send_voltage_udp__out[12];
-    _udp_send_data_type_conversion3__out[13] = (X_Int32)_udp_send_voltage_udp__out[13];
-    _udp_send_data_type_conversion3__out[14] = (X_Int32)_udp_send_voltage_udp__out[14];
-    _udp_send_data_type_conversion3__out[15] = (X_Int32)_udp_send_voltage_udp__out[15];
-    _udp_send_data_type_conversion3__out[16] = (X_Int32)_udp_send_voltage_udp__out[16];
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Gain1
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_gain1__out = 714.2857 * _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum8__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Et_sqr_res
-    HIL_OutAO(0x407a, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out);
+    HIL_OutAO(0x407c, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).C function5
     _pv_grid_feeding_inverter__averaged__c_function5__in[0] = _pv_grid_feeding_inverter__averaged__bus_join4__out[0];
     _pv_grid_feeding_inverter__averaged__c_function5__in[1] = _pv_grid_feeding_inverter__averaged__bus_join4__out[1];
@@ -31874,7 +31210,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Sum2
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__sum2__out =  - _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__gain4__out + _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__gain3__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.f1
-    HIL_OutAO(0x4023, _ess_grid_forming_inverter__averaged__controller_gain1__out);
+    HIL_OutAO(0x4025, _ess_grid_forming_inverter__averaged__controller_gain1__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum10
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum10__out = _ess_grid_forming_inverter__averaged__controller_gain11__out - _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product6__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum13
@@ -31969,37 +31305,16 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: F2_CB9.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Three phase PLL2.PID.Sum5
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_sum5__out = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_kp__out + _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_gain1__out + _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_integrator1__out;
     // Generated from the component: F2_CB9.MID_Rly1.Term5
-    // Generated from the component: UDP Send.Data Type Conversion5
-    _udp_send_data_type_conversion5__out[0] = (X_Int32)_udp_send_breaker_udp__out[0];
-    _udp_send_data_type_conversion5__out[1] = (X_Int32)_udp_send_breaker_udp__out[1];
-    _udp_send_data_type_conversion5__out[2] = (X_Int32)_udp_send_breaker_udp__out[2];
-    _udp_send_data_type_conversion5__out[3] = (X_Int32)_udp_send_breaker_udp__out[3];
-    _udp_send_data_type_conversion5__out[4] = (X_Int32)_udp_send_breaker_udp__out[4];
-    _udp_send_data_type_conversion5__out[5] = (X_Int32)_udp_send_breaker_udp__out[5];
-    _udp_send_data_type_conversion5__out[6] = (X_Int32)_udp_send_breaker_udp__out[6];
-    _udp_send_data_type_conversion5__out[7] = (X_Int32)_udp_send_breaker_udp__out[7];
-    _udp_send_data_type_conversion5__out[8] = (X_Int32)_udp_send_breaker_udp__out[8];
-    _udp_send_data_type_conversion5__out[9] = (X_Int32)_udp_send_breaker_udp__out[9];
-    _udp_send_data_type_conversion5__out[10] = (X_Int32)_udp_send_breaker_udp__out[10];
-    _udp_send_data_type_conversion5__out[11] = (X_Int32)_udp_send_breaker_udp__out[11];
-    _udp_send_data_type_conversion5__out[12] = (X_Int32)_udp_send_breaker_udp__out[12];
-    _udp_send_data_type_conversion5__out[13] = (X_Int32)_udp_send_breaker_udp__out[13];
-    _udp_send_data_type_conversion5__out[14] = (X_Int32)_udp_send_breaker_udp__out[14];
-    _udp_send_data_type_conversion5__out[15] = (X_Int32)_udp_send_breaker_udp__out[15];
-    _udp_send_data_type_conversion5__out[16] = (X_Int32)_udp_send_breaker_udp__out[16];
-    _udp_send_data_type_conversion5__out[17] = (X_Int32)_udp_send_breaker_udp__out[17];
-    _udp_send_data_type_conversion5__out[18] = (X_Int32)_udp_send_breaker_udp__out[18];
-    _udp_send_data_type_conversion5__out[19] = (X_Int32)_udp_send_breaker_udp__out[19];
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Sum5
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum5__out = _f2_pcc_pcc_measurements_three_phase_pll1_pid_kp__out + _f2_pcc_pcc_measurements_three_phase_pll1_pid_gain1__out + _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Gain17
     _pv_grid_feeding_inverter__averaged__gain17__out = 5e-06 * _pv_grid_feeding_inverter__averaged__c_function5__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Qref_probe
-    HIL_OutAO(0x4085, _pv_grid_feeding_inverter__averaged__c_function5__out);
+    HIL_OutAO(0x4087, _pv_grid_feeding_inverter__averaged__c_function5__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Gain18
     _pv_grid_feeding_inverter__averaged__gain18__out = 5e-06 * _pv_grid_feeding_inverter__averaged__c_function3__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Pref_probe
-    HIL_OutAO(0x4084, _pv_grid_feeding_inverter__averaged__c_function3__out);
+    HIL_OutAO(0x4086, _pv_grid_feeding_inverter__averaged__c_function3__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.PID.Sum6
     _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_sum6__out =  - _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_sum5__out + _pv_grid_feeding_inverter__averaged__controller_pll2_pll_pid_limit1__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.Rate Limiter1
@@ -32057,18 +31372,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product3__out = (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum5__out) * 1.0 / (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Product4
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product4__out = (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum6__out) * 1.0 / (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out);
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Ed_err
+    HIL_OutAO(0x4017, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller3
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state + 0.03 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out;
-    if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int < -0.35) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = -0.35;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 1;
-    } else if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int > 0.35) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = 0.35;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 1;
-    } else {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 0;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Digital Probe3
     HIL_OutInt32(0xf00401, _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__relational_operator1__out != 0x0);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Three phase PLL1.PID.Limit1
@@ -32327,100 +31635,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     } else {
         _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_limit1__out = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_pid_sum5__out;
     }
-    // Generated from the component: UDP Send.UDP data
-    _udp_send_udp_data__out[0] = _udp_send_data_type_conversion1__out[0];
-    _udp_send_udp_data__out[1] = _udp_send_data_type_conversion1__out[1];
-    _udp_send_udp_data__out[2] = _udp_send_data_type_conversion1__out[2];
-    _udp_send_udp_data__out[3] = _udp_send_data_type_conversion1__out[3];
-    _udp_send_udp_data__out[4] = _udp_send_data_type_conversion1__out[4];
-    _udp_send_udp_data__out[5] = _udp_send_data_type_conversion1__out[5];
-    _udp_send_udp_data__out[6] = _udp_send_data_type_conversion1__out[6];
-    _udp_send_udp_data__out[7] = _udp_send_data_type_conversion1__out[7];
-    _udp_send_udp_data__out[8] = _udp_send_data_type_conversion1__out[8];
-    _udp_send_udp_data__out[9] = _udp_send_data_type_conversion1__out[9];
-    _udp_send_udp_data__out[10] = _udp_send_data_type_conversion1__out[10];
-    _udp_send_udp_data__out[11] = _udp_send_data_type_conversion1__out[11];
-    _udp_send_udp_data__out[12] = _udp_send_data_type_conversion1__out[12];
-    _udp_send_udp_data__out[13] = _udp_send_data_type_conversion1__out[13];
-    _udp_send_udp_data__out[14] = _udp_send_data_type_conversion1__out[14];
-    _udp_send_udp_data__out[15] = _udp_send_data_type_conversion1__out[15];
-    _udp_send_udp_data__out[16] = _udp_send_data_type_conversion1__out[16];
-    _udp_send_udp_data__out[17] = _udp_send_data_type_conversion2__out[0];
-    _udp_send_udp_data__out[18] = _udp_send_data_type_conversion2__out[1];
-    _udp_send_udp_data__out[19] = _udp_send_data_type_conversion2__out[2];
-    _udp_send_udp_data__out[20] = _udp_send_data_type_conversion2__out[3];
-    _udp_send_udp_data__out[21] = _udp_send_data_type_conversion2__out[4];
-    _udp_send_udp_data__out[22] = _udp_send_data_type_conversion2__out[5];
-    _udp_send_udp_data__out[23] = _udp_send_data_type_conversion2__out[6];
-    _udp_send_udp_data__out[24] = _udp_send_data_type_conversion2__out[7];
-    _udp_send_udp_data__out[25] = _udp_send_data_type_conversion2__out[8];
-    _udp_send_udp_data__out[26] = _udp_send_data_type_conversion2__out[9];
-    _udp_send_udp_data__out[27] = _udp_send_data_type_conversion2__out[10];
-    _udp_send_udp_data__out[28] = _udp_send_data_type_conversion2__out[11];
-    _udp_send_udp_data__out[29] = _udp_send_data_type_conversion2__out[12];
-    _udp_send_udp_data__out[30] = _udp_send_data_type_conversion2__out[13];
-    _udp_send_udp_data__out[31] = _udp_send_data_type_conversion2__out[14];
-    _udp_send_udp_data__out[32] = _udp_send_data_type_conversion2__out[15];
-    _udp_send_udp_data__out[33] = _udp_send_data_type_conversion2__out[16];
-    _udp_send_udp_data__out[34] = _udp_send_data_type_conversion3__out[0];
-    _udp_send_udp_data__out[35] = _udp_send_data_type_conversion3__out[1];
-    _udp_send_udp_data__out[36] = _udp_send_data_type_conversion3__out[2];
-    _udp_send_udp_data__out[37] = _udp_send_data_type_conversion3__out[3];
-    _udp_send_udp_data__out[38] = _udp_send_data_type_conversion3__out[4];
-    _udp_send_udp_data__out[39] = _udp_send_data_type_conversion3__out[5];
-    _udp_send_udp_data__out[40] = _udp_send_data_type_conversion3__out[6];
-    _udp_send_udp_data__out[41] = _udp_send_data_type_conversion3__out[7];
-    _udp_send_udp_data__out[42] = _udp_send_data_type_conversion3__out[8];
-    _udp_send_udp_data__out[43] = _udp_send_data_type_conversion3__out[9];
-    _udp_send_udp_data__out[44] = _udp_send_data_type_conversion3__out[10];
-    _udp_send_udp_data__out[45] = _udp_send_data_type_conversion3__out[11];
-    _udp_send_udp_data__out[46] = _udp_send_data_type_conversion3__out[12];
-    _udp_send_udp_data__out[47] = _udp_send_data_type_conversion3__out[13];
-    _udp_send_udp_data__out[48] = _udp_send_data_type_conversion3__out[14];
-    _udp_send_udp_data__out[49] = _udp_send_data_type_conversion3__out[15];
-    _udp_send_udp_data__out[50] = _udp_send_data_type_conversion3__out[16];
-    _udp_send_udp_data__out[51] = _udp_send_data_type_conversion4__out[0];
-    _udp_send_udp_data__out[52] = _udp_send_data_type_conversion4__out[1];
-    _udp_send_udp_data__out[53] = _udp_send_data_type_conversion4__out[2];
-    _udp_send_udp_data__out[54] = _udp_send_data_type_conversion4__out[3];
-    _udp_send_udp_data__out[55] = _udp_send_data_type_conversion4__out[4];
-    _udp_send_udp_data__out[56] = _udp_send_data_type_conversion4__out[5];
-    _udp_send_udp_data__out[57] = _udp_send_data_type_conversion4__out[6];
-    _udp_send_udp_data__out[58] = _udp_send_data_type_conversion4__out[7];
-    _udp_send_udp_data__out[59] = _udp_send_data_type_conversion4__out[8];
-    _udp_send_udp_data__out[60] = _udp_send_data_type_conversion4__out[9];
-    _udp_send_udp_data__out[61] = _udp_send_data_type_conversion4__out[10];
-    _udp_send_udp_data__out[62] = _udp_send_data_type_conversion4__out[11];
-    _udp_send_udp_data__out[63] = _udp_send_data_type_conversion4__out[12];
-    _udp_send_udp_data__out[64] = _udp_send_data_type_conversion4__out[13];
-    _udp_send_udp_data__out[65] = _udp_send_data_type_conversion4__out[14];
-    _udp_send_udp_data__out[66] = _udp_send_data_type_conversion4__out[15];
-    _udp_send_udp_data__out[67] = _udp_send_data_type_conversion4__out[16];
-    _udp_send_udp_data__out[68] = _udp_send_data_type_conversion5__out[0];
-    _udp_send_udp_data__out[69] = _udp_send_data_type_conversion5__out[1];
-    _udp_send_udp_data__out[70] = _udp_send_data_type_conversion5__out[2];
-    _udp_send_udp_data__out[71] = _udp_send_data_type_conversion5__out[3];
-    _udp_send_udp_data__out[72] = _udp_send_data_type_conversion5__out[4];
-    _udp_send_udp_data__out[73] = _udp_send_data_type_conversion5__out[5];
-    _udp_send_udp_data__out[74] = _udp_send_data_type_conversion5__out[6];
-    _udp_send_udp_data__out[75] = _udp_send_data_type_conversion5__out[7];
-    _udp_send_udp_data__out[76] = _udp_send_data_type_conversion5__out[8];
-    _udp_send_udp_data__out[77] = _udp_send_data_type_conversion5__out[9];
-    _udp_send_udp_data__out[78] = _udp_send_data_type_conversion5__out[10];
-    _udp_send_udp_data__out[79] = _udp_send_data_type_conversion5__out[11];
-    _udp_send_udp_data__out[80] = _udp_send_data_type_conversion5__out[12];
-    _udp_send_udp_data__out[81] = _udp_send_data_type_conversion5__out[13];
-    _udp_send_udp_data__out[82] = _udp_send_data_type_conversion5__out[14];
-    _udp_send_udp_data__out[83] = _udp_send_data_type_conversion5__out[15];
-    _udp_send_udp_data__out[84] = _udp_send_data_type_conversion5__out[16];
-    _udp_send_udp_data__out[85] = _udp_send_data_type_conversion5__out[17];
-    _udp_send_udp_data__out[86] = _udp_send_data_type_conversion5__out[18];
-    _udp_send_udp_data__out[87] = _udp_send_data_type_conversion5__out[19];
-    _udp_send_udp_data__out[88] = _udp_send_data_type_conversion6__out;
-    _udp_send_udp_data__out[89] = _udp_send_mux_udp__out[0];
-    _udp_send_udp_data__out[90] = _udp_send_mux_udp__out[1];
-    _udp_send_udp_data__out[91] = _udp_send_mux_udp__out[2];
-    _udp_send_udp_data__out[92] = _udp_send_mux_udp__out[3];
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Limit1
     if (_f2_pcc_pcc_measurements_three_phase_pll1_pid_sum5__out > 10000.0) {
         _f2_pcc_pcc_measurements_three_phase_pll1_pid_limit1__out = 10000.0;
@@ -32434,7 +31648,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product6
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product6__out = (_pv_grid_feeding_inverter__averaged__gain17__out * _pv_grid_feeding_inverter__averaged__controller_gain8__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Pref_probe
-    HIL_OutAO(0x407b, _pv_grid_feeding_inverter__averaged__gain18__out);
+    HIL_OutAO(0x407d, _pv_grid_feeding_inverter__averaged__gain18__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product3
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product3__out = (_pv_grid_feeding_inverter__averaged__controller_gain8__out * _pv_grid_feeding_inverter__averaged__gain18__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product5
@@ -33362,11 +32576,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
             _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrator__out += 6.283185307179586;
         }
     }
-    // Generated from the component: UDP Send.ETH VE Send1.Struct
-    for (i_send = 0; i_send < 93; i_send++) {
-        _udp_send_eth_ve_send1_struct_.in[i_send] = (int)_udp_send_udp_data__out[i_send];
-    }
-    // Generated from the component: UDP Send.SDM3
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Sum6
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum6__out =  - _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum5__out + _f2_pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.Rate Limiter1
@@ -33893,7 +33102,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__a_sum += _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__states[0] * _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__a_coeff[1];
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__delay_line_in = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_rate_limiter1__out - _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__a_sum;
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__out = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__b_sum;
-    // Generated from the component: UDP Send.ETH VE Send1.sys_out
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Kb
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_kb__out = 1.0 * _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum6__out;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.LPF.LPF
@@ -33917,33 +33125,19 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__stay_connected__in = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__logical_operator1__out;
     _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__stay_connected__out = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__stay_connected__connect;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Xi_q_ref
-    HIL_OutAO(0x401a, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain8__out);
+    HIL_OutAO(0x401c, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain8__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state + 0.01 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out;
-    if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int < -1.0) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = -1.0;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 1;
-    } else if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int > 1.0) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = 1.0;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 1;
-    } else {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 0;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.iq_err
+    HIL_OutAO(0x401e, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Xi_d_ref
-    HIL_OutAO(0x4019, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain7__out);
+    HIL_OutAO(0x401b, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain7__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller1
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state + 0.01 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out;
-    if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int < -1.0) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = -1.0;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 1;
-    } else if (_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int > 1.0) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = 1.0;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 1;
-    } else {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int;
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 0;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int;
+    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.id_err
+    HIL_OutAO(0x401d, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out);
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Three phase PLL1.PID.Sum7
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_sum7__out = _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_ki__out + _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_kb__out;
     // Generated from the component: F2_CB1.MID_Rly1.SEL_787.CALC FROM MEASUREMENTS.Three phase PLL2.PID.Sum7
@@ -34016,12 +33210,8 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_gain2__out = 0.6666666666666666 * _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product2__out;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum7
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum7__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out + _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product4__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl
-    HIL_OutAO(0x401c, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum3
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out = _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out + _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product3__out;
-    // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl
-    HIL_OutAO(0x401b, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Gain8
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain8__out = 510.54641240905954 * _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_power_loop_gain1__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum9
@@ -34035,7 +33225,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Gain5
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain5__out = 391.73715677734737 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Xi_q_ref
-    HIL_OutAO(0x4075, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain8__out);
+    HIL_OutAO(0x4077, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain8__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int = _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state + 0.01 * _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out;
     if (_pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int < -1.0) {
@@ -34049,7 +33239,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 0;
     }
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Xi_d_ref
-    HIL_OutAO(0x4074, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain7__out);
+    HIL_OutAO(0x4076, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain7__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller1
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int = _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state + 0.01 * _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out;
     if (_pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int < -1.0) {
@@ -34063,9 +33253,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 0;
     }
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Uq
-    HIL_OutAO(0x4018, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain6__out);
+    HIL_OutAO(0x401a, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain6__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Ud
-    HIL_OutAO(0x4017, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain5__out);
+    HIL_OutAO(0x4019, _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain5__out);
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.dq to abc.dq to abc1.dq to alpha beta
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k1 = cosf(_ess_grid_forming_inverter__averaged__controller_integrator1__out);
     _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k2 = sinf(_ess_grid_forming_inverter__averaged__controller_integrator1__out);
@@ -34110,9 +33300,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _ess_grid_forming_inverter__averaged__product1__out[1] = (_ess_grid_forming_inverter__averaged__controller_bus_join1__out[1]) * (_ess_grid_forming_inverter__averaged__gain1__out);
     _ess_grid_forming_inverter__averaged__product1__out[2] = (_ess_grid_forming_inverter__averaged__controller_bus_join1__out[2]) * (_ess_grid_forming_inverter__averaged__gain1__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Uq
-    HIL_OutAO(0x4073, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain10__out);
+    HIL_OutAO(0x4075, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain10__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Ud
-    HIL_OutAO(0x4072, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain11__out);
+    HIL_OutAO(0x4074, _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain11__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.dq to abc.dq to abc1.dq to alpha beta
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k1 = cosf(_pv_grid_feeding_inverter__averaged__controller_pll2_pll_unit_delay1__out);
     _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k2 = sinf(_pv_grid_feeding_inverter__averaged__controller_pll2_pll_unit_delay1__out);
@@ -40263,9 +39453,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).confine phase
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).BE1-25A Synchronizer1
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller4
-    if (!_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state += 2.0 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out * 0.001;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state += 2.0 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out * 0.001;
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).Hold after connect1
     if (_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__hold_after_connect1__connect == 0)_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__hold_after_connect1__var = _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__hold_after_connect1__in;
     else _ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__hold_after_connect1__var = 0;
@@ -40315,9 +39503,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.integrator
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).BE1-25A Synchronizer
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller3
-    if (!_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state += 2.0 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out * 0.001;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state += 2.0 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out * 0.001;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.PLL2.PLL.LPF.LPF
     for (_pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i = 1; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i > 0; _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i--) {
         _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__states[_pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i] = _pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__states[_pv_grid_feeding_inverter__averaged__controller_pll2_pll_lpf_lpf__i - 1];
@@ -40618,8 +39804,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__states[_f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__i] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__states[_f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__i - 1];
     }
     _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__states[0] = _f2_cb9_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__delay_line_in;
-    // Generated from the component: UDP Send.ETH VE Send1.sys_out
-    //Xil_DCacheFlushRange((X_UnInt32) &eth_msg_buff[0][0], 4 * 372 * sizeof(X_UnInt8));
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.LPF.LPF
     for (_f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 1; _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i > 0; _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i--) {
         _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] = _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i - 1];
@@ -40628,13 +39812,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).stay connected
     if (_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__stay_connected__in == 1)_ess_grid_forming_inverter__averaged__be1_25a_synchronizer__inverter__stay_connected__connect = 1;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
-    if (!_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 0.002 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out * 0.001;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 0.002 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out * 0.001;
     // Generated from the component: ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller1
-    if (!_ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active) {
-        _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 0.002 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out * 0.001;
-    }
+    _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 0.002 * _ess_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out * 0.001;
     // Generated from the component: PV.Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
     if (!_pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active) {
         _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 0.002 * _pv_grid_feeding_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out * 0.001;
@@ -40658,9 +39838,9 @@ void TimerCounterHandler_1_user_sp_cpu_dev0() {
     // Generated from the component: PV.Grid feeding inverter (averaged).Vrms.cpu_trans.Output
     _pv_grid_feeding_inverter__averaged__vrms_cpu_trans_output__out = XIo_InFloat(0x55000104);
     // Generated from the component: ESS.Grid forming inverter (averaged).Vrms_ess
-    HIL_OutAO(0x4029, _ess_grid_forming_inverter__averaged__vrms_cpu_trans_output__out);
+    HIL_OutAO(0x402b, _ess_grid_forming_inverter__averaged__vrms_cpu_trans_output__out);
     // Generated from the component: PV.Grid feeding inverter (averaged).Vrms_ess
-    HIL_OutAO(0x4086, _pv_grid_feeding_inverter__averaged__vrms_cpu_trans_output__out);
+    HIL_OutAO(0x4088, _pv_grid_feeding_inverter__averaged__vrms_cpu_trans_output__out);
     //@cmp.out.block.end
     //////////////////////////////////////////////////////////////////////////
     // Update block

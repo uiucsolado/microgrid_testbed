@@ -1030,10 +1030,10 @@ REM Setting the capture sample step...
 REM post SP Init calculation...
 rtds_write  
 rtds_write 0x00000041 0x000011C1
-rtds_write 0x00000005 0x00000007
+rtds_write 0x00000005 0x00000003
 glbl_write 0x41200008 0x00000001
 glbl_write 0x42200008 0x00000001
-glbl_write 0x43200008 0x00000001
+glbl_write 0x43200008 0x00000000
 rtds_write 0x00000043 0x00002710
 rtds_write 0x00000042 0x000003E7
 rtds_write 0x0000000A 0x00000001
@@ -1062,15 +1062,20 @@ glbl_write 0xf8000244 0x0
 glbl_file_write 0x27800000 cop_1_app_imem.bin
 glbl_file_write 0x55000080 cop_1_app_fsa.bin
 glbl_file_write 0x20a00000 cop_2_app_imem.bin
-# disable ETH0 Intr on Core0 CPU
-glbl_write 0xF8F01834 0x01000101
+glbl_file_write 0xfffc0000 cop_2_app_dmem.bin
 
 
-REM ifconfig eth0 down
-sys_command 0x0
-glbl_file_write 0x27000000 cop_3_app_imem.bin
-glbl_file_write 0x55000000 cop_3_app_fsa.bin
-glbl_write 0x40800000 0x4
+REM disable can devices
+sys_command 0x2
+
+
+REM ifconfig eth0 up
+sys_command 0x1
+
+
+REM enable ETH0 Intr on Core0 CPU
+glbl_write 0xF8F01834 0x01010101
+glbl_write 0x40800000 0x6
 glbl_write 0xfffffff0 0x20a00000
 
 
