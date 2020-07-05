@@ -33,8 +33,8 @@ SETTINGS_DIR = get_settings_dir_path()
                 <hierarchy_position>1</hierarchy_position>
                 <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>336</x>
-                    <y>64</y>
+                    <x>336.0</x>
+                    <y>64.0</y>
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -76,126 +76,14 @@ SETTINGS_DIR = get_settings_dir_path()
                             <decimation>1</decimation>
                             <time_base>0.005</time_base>
                             <analog_signals>
-                            <analog>
-                            <channel>0</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>2</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>3</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>4</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>5</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>6</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>7</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>8</channel>
-                            <name>Grid forming inverter (averaged)2.Ia1</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>9</channel>
-                            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
                             </analog_signals>
                             <digital_signals>
                             </digital_signals>
                             <trigger>
-                                <device>0</device>
+                                <device>-1</device>
                                 <is_force>False</is_force>
                                 <type>Analog</type>
-                                <source>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</source>
+                                <source>None</source>
                                 <edge>Rising edge</edge>
                                 <treshold>0.0</treshold>
                                 <offset>50.0</offset>
@@ -234,125 +122,13 @@ SETTINGS_DIR = get_settings_dir_path()
                         <trigger>
                             <mode>Auto</mode>
                             <type>Analog</type>
-                            <source>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</source>
+                            <source>None</source>
                             <edge>Rising edge</edge>
                             <treshold>0.0</treshold>
                             <offset>50.0</offset>
                         </trigger>
 
                          <analog_signals>
-                            <analog>
-                            <channel>0</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>2</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>3</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>4</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>5</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>6</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>7</channel>
-                            <name>Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>8</channel>
-                            <name>Grid forming inverter (averaged)2.Ia1</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>9</channel>
-                            <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
                             </analog_signals>
 
                         <digital_signals>
@@ -381,7 +157,7 @@ SETTINGS_DIR = get_settings_dir_path()
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.BE1-25A Synchronizer.volt_diff3']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.volt_diff3']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -390,8 +166,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>784</x>
-                    <y>232</y>
+                    <x>784.0</x>
+                    <y>232.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -455,7 +231,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.BE1-25A Synchronizer.frequency_diff3']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.frequency_diff3']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -464,8 +240,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1184</x>
-                    <y>240</y>
+                    <x>1184.0</x>
+                    <y>240.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -529,7 +305,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.BE1-25A Synchronizer.angle_diff3']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.angle_diff3']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -596,8 +372,8 @@ referenceCurves = [refCurveData1]
                 <description><![CDATA[]]></description>
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 # HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 1)
-hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronizer.Connect INV', 1)
+hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 1)
+hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 1)
 ]]></on_click_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other handlers.
@@ -627,8 +403,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
                 <description><![CDATA[]]></description>
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 # HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 1)
-hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronizer.Connect INV', 0)
+hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 1)
+hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 0)
 ]]></on_click_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other handlers.
@@ -659,7 +435,7 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 # HIL API is imported as 'hil'
 
-hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 0)]]></on_click_code>
+hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 0)]]></on_click_code>
                 <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other handlers.
 # HIL API is imported as 'hil'
@@ -672,8 +448,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 0)]]></o
                 <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
 # HIL API is imported as 'hil'
 
-hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 0)
-hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronizer.Connect INV', 0)
+hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 0)
+hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 0)
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
@@ -692,12 +468,12 @@ hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronize
                 <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
 # HIL API is imported as 'hil'
 
-hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 1)]]></on_click_code>
+hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 1)]]></on_click_code>
                 <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
 # NOTE: Variables specified here will be available in other handlers.
 # HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged)2.INV_sync', 0)
-hil.set_scada_input_value('Grid forming inverter (averaged)2.BE1-25A Synchronizer.Connect INV', 0)
+hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 0)
+hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 0)
 ]]></on_start_code>
                 <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
 # HIL API is imported as 'hil'
@@ -816,7 +592,7 @@ displayValue = False
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
                 <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged)2.INV_sync ON]]></signal_name>
+                <signal_name><![CDATA[Grid forming inverter (averaged).INV_sync ON]]></signal_name>
                 <hil_device>0</hil_device>
                 <led_color>Green</led_color>
                 <code><![CDATA[# HIL API is imported as 'hil'
@@ -842,7 +618,7 @@ displayValue = False
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
                 <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged)2.INV_sync OFF]]></signal_name>
+                <signal_name><![CDATA[Grid forming inverter (averaged).INV_sync OFF]]></signal_name>
                 <hil_device>0</hil_device>
                 <led_color>Red</led_color>
                 <code><![CDATA[# HIL API is imported as 'hil'
@@ -876,7 +652,7 @@ displayValue = False
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error', 'Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error', 'Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -950,7 +726,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error', 'Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error', 'Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1024,7 +800,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl', 'Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl', 'Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1033,8 +809,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>384</x>
-                    <y>216</y>
+                    <x>384.0</x>
+                    <y>224.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1098,7 +874,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl', 'Grid forming inverter (averaged)2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl', 'Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1160,7 +936,7 @@ referenceCurves = [refCurveData1]
             </component_data>
         <component_data>
                 <id>dc033a0abd6411ea8069509a4c4e2fb4</id>
-                <name><![CDATA[Power (real)]]></name>
+                <name><![CDATA[Real Power (W)]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
                 <data_type>Signals</data_type>
@@ -1172,7 +948,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.P1']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.P1']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1234,7 +1010,7 @@ referenceCurves = [refCurveData1]
             </component_data>
         <component_data>
                 <id>10ab4800bd6511ea8cb4509a4c4e2fb4</id>
-                <name><![CDATA[Power (reactive)]]></name>
+                <name><![CDATA[Reactive Power (Var)]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
                 <data_type>Signals</data_type>
@@ -1246,7 +1022,7 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Q1']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Q1']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1257,154 +1033,6 @@ displayValue = 0.0
                 <widget_settings>
                     <x>880</x>
                     <y>24</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>200</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>447b2406bd6611eaa485509a4c4e2fb4</id>
-                <name><![CDATA[Power (reactive) pu]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Qpu']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>736</x>
-                    <y>648</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>200</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>447b2407bd6611eaa974509a4c4e2fb4</id>
-                <name><![CDATA[Power (real) pu]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged)2.Controller.Ppu']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>304</x>
-                    <y>648</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>

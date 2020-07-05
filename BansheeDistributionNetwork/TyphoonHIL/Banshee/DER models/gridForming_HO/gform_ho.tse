@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 06:17:43 PM
+// Save timestamp: 04-Jul-2020 @ 11:19:52 AM
 //
 
 model "gform_ho" {
@@ -102,7 +102,7 @@ model "gform_ho" {
         ]
 
         component src_sine "Sinusoidal Source1" {
-            execution_rate = "20e-6"
+            execution_rate = "Ts"
             frequency = "60"
         }
         [
@@ -111,7 +111,7 @@ model "gform_ho" {
         ]
 
         component src_sine "Sinusoidal Source2" {
-            execution_rate = "20e-6"
+            execution_rate = "Ts"
             frequency = "60"
             phase = "-120"
         }
@@ -121,7 +121,7 @@ model "gform_ho" {
         ]
 
         component src_sine "Sinusoidal Source3" {
-            execution_rate = "20e-6"
+            execution_rate = "Ts"
             frequency = "60"
             phase = "120"
         }
@@ -270,7 +270,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain15 {
-                    gain = "S*1.5/1e3"
+                    gain = "S"
                 }
                 [
                     position = 7136, 8168
@@ -481,7 +481,7 @@ model "gform_ho" {
                 ]
 
                 component gen_gain Gain14 {
-                    gain = "S*1.5/1e3"
+                    gain = "S"
                 }
                 [
                     position = 7136, 8456
@@ -1374,10 +1374,11 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain4 {
-                            gain = "C_s*Z_DQ"
+                            gain = "Cs"
                         }
                         [
-                            position = 8248, 8352
+                            position = 8240, 8352
+                            hide_name = True
                             scale = -1, 1
                         ]
 
@@ -1474,10 +1475,11 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain6 {
-                            gain = "C_s*Z_DQ"
+                            gain = "Cs"
                         }
                         [
-                            position = 8248, 8712
+                            position = 8216, 8712
+                            hide_name = True
                             scale = -1, 1
                         ]
 
@@ -1531,6 +1533,7 @@ model "gform_ho" {
                         }
                         [
                             position = 8152, 8752
+                            hide_name = True
                             scale = -1, 1
                         ]
 
@@ -1550,6 +1553,24 @@ model "gform_ho" {
                         }
                         [
                             position = 8208, 8456
+                        ]
+
+                        component gen_gain Gain7 {
+                            gain = "1/w_0"
+                        }
+                        [
+                            position = 8240, 8280
+                            hide_name = True
+                            scale = -1, 1
+                        ]
+
+                        component gen_gain Gain8 {
+                            gain = "1/w_0"
+                        }
+                        [
+                            position = 8216, 8640
+                            hide_name = True
+                            scale = -1, 1
                         ]
 
                         port Xi_rd1 {
@@ -1647,7 +1668,8 @@ model "gform_ho" {
                             direction = out
                         }
                         [
-                            position = 8280, 8280
+                            position = 8336, 8280
+                            hide_name = True
                             scale = -1, 1
                         ]
 
@@ -1659,6 +1681,7 @@ model "gform_ho" {
                         }
                         [
                             position = 8280, 8640
+                            hide_name = True
                             scale = -1, 1
                         ]
 
@@ -1749,7 +1772,6 @@ model "gform_ho" {
                         connect Sum8.in1 Junction159 as Connection118
                         connect one.out "Signal switch1.in1" as Connection40
                         connect Gain6.in Junction159 as Connection120
-                        connect From33 Product6.in as Connection68
                         connect "^E_d" Junction159 as Connection216
                         connect Sum10.in1 Product6.out as Connection67
                         connect "Signal switch1.out" Gain5.in as Connection250
@@ -1759,7 +1781,6 @@ model "gform_ho" {
                         connect From36 Sum13.in as Connection260
                         connect Product5.in Sum10.out as Connection71
                         connect Sum11.in1 Junction158 as Connection115
-                        connect From35 Product8.in as Connection79
                         connect Xi_rq1 Sum12.out as Connection105
                         connect Sum9.in1 Product5.out as Connection243
                         connect Junction153 Product7.in1 as Connection93
@@ -1792,6 +1813,10 @@ model "gform_ho" {
                             breakpoints = 8232, 8504
                         ]
                         connect EQ_ctrl.in Junction175 as Connection282
+                        connect From33 Gain7.in as Connection283
+                        connect Gain7.out Product6.in as Connection284
+                        connect From35 Gain8.in as Connection285
+                        connect Gain8.out Product8.in as Connection286
                     }
                     [
                         position = 8864, 8400
@@ -2009,7 +2034,7 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain7 {
-                            gain = "L_i/Z_DQ"
+                            gain = "Li"
                         }
                         [
                             position = 8272, 8368
@@ -2070,7 +2095,7 @@ model "gform_ho" {
                         ]
 
                         component gen_gain Gain6 {
-                            gain = "L_i/Z_DQ"
+                            gain = "Li"
                         }
                         [
                             position = 8256, 8176
@@ -2162,6 +2187,24 @@ model "gform_ho" {
                         }
                         [
                             position = 8512, 8184
+                        ]
+
+                        component gen_gain Gain8 {
+                            gain = "1/w_0"
+                        }
+                        [
+                            position = 8264, 8112
+                            hide_name = True
+                            scale = -1, 1
+                        ]
+
+                        component gen_gain Gain9 {
+                            gain = "1/w_0"
+                        }
+                        [
+                            position = 8264, 8312
+                            hide_name = True
+                            scale = -1, 1
                         ]
 
                         port Uq1 {
@@ -2259,7 +2302,7 @@ model "gform_ho" {
                             direction = out
                         }
                         [
-                            position = 8272, 8112
+                            position = 8344, 8112
                             scale = -1, 1
                             size = 60, 20
                         ]
@@ -2307,7 +2350,7 @@ model "gform_ho" {
                             direction = out
                         }
                         [
-                            position = 8288, 8312
+                            position = 8360, 8312
                             scale = -1, 1
                             size = 60, 20
                         ]
@@ -2352,7 +2395,6 @@ model "gform_ho" {
                             position = 8288, 8040
                         ]
 
-                        connect From23 Product1.in as Connection1
                         connect Product4.out Sum7.in1 as Connection19
                         connect one.out "Signal switch1.in1" as Connection40
                         connect Sum6.out Product4.in as Connection27
@@ -2376,7 +2418,6 @@ model "gform_ho" {
                         connect Junction171 Product3.in1 as Connection253
                         connect Sum8.in1 Junction177 as Connection301
                         connect "PID controller1.out" Junction178 as Connection303
-                        connect From25 Product2.in as Connection2
                         connect "Signal switch1.out" Gain5.in as Connection250
                         connect Uq1 Sum7.out as Connection264
                         connect Product3.out Sum3.in1 as Connection17
@@ -2402,6 +2443,10 @@ model "gform_ho" {
                             breakpoints = 8240, 8040
                         ]
                         connect XiD_error.in Junction181 as Connection315
+                        connect From23 Gain8.in as Connection316
+                        connect Gain8.out Product1.in as Connection317
+                        connect From25 Gain9.in as Connection318
+                        connect Gain9.out Product2.in as Connection319
                     }
                     [
                         position = 8608, 8424
@@ -2631,42 +2676,42 @@ model "gform_ho" {
                     rotation = down
                 ]
 
+                component gen_gain Gain16 {
+                    gain = "S/S_i"
+                }
+                [
+                    position = 7168, 8120
+                    rotation = right
+                    hide_name = True
+                    scale = -1, -1
+                ]
+
                 component gen_gain Gain17 {
-                    gain = "1.5"
+                    gain = "S/S_i"
                 }
                 [
                     position = 7168, 8496
-                    rotation = right
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_gain Gain16 {
-                    gain = "1.5"
-                }
-                [
-                    position = 7168, 8136
                     rotation = left
                     hide_name = True
-                    scale = -1, 1
+                    scale = -1, -1
                 ]
 
                 component gen_gain Gain18 {
-                    gain = "1/1.5"
+                    gain = "1/S"
                 }
                 [
-                    position = 8424, 7912
+                    position = 8448, 7912
                     hide_name = True
-                    scale = -1, 1
+                    scale = -1, -1
                 ]
 
                 component gen_gain Gain19 {
-                    gain = "1/1.5"
+                    gain = "1/S"
                 }
                 [
-                    position = 8432, 8144
+                    position = 8456, 8144
                     hide_name = True
-                    scale = -1, 1
+                    scale = -1, -1
                 ]
 
                 port U_P {
@@ -2877,7 +2922,7 @@ model "gform_ho" {
                     direction = out
                 }
                 [
-                    position = 8064, 8520
+                    position = 8048, 8520
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3028,7 +3073,7 @@ model "gform_ho" {
                     direction = out
                 }
                 [
-                    position = 8064, 8392
+                    position = 8048, 8392
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3098,7 +3143,7 @@ model "gform_ho" {
                     direction = out
                 }
                 [
-                    position = 8064, 8480
+                    position = 8048, 8480
                     scale = -1, 1
                 ]
 
@@ -3131,7 +3176,7 @@ model "gform_ho" {
                     direction = out
                 }
                 [
-                    position = 8064, 8432
+                    position = 8048, 8432
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3210,16 +3255,6 @@ model "gform_ho" {
                     position = 7816, 8392
                 ]
 
-                junction Junction271 sp
-                [
-                    position = 7152, 8368
-                ]
-
-                junction Junction270 sp
-                [
-                    position = 7152, 8224
-                ]
-
                 junction Junction229 sp
                 [
                     position = 7520, 8256
@@ -3248,6 +3283,16 @@ model "gform_ho" {
                 junction Junction275 sp
                 [
                     position = 6856, 8232
+                ]
+
+                junction Junction276 sp
+                [
+                    position = 7152, 8224
+                ]
+
+                junction Junction277 sp
+                [
+                    position = 7152, 8368
                 ]
 
                 connect From10 Current_abc_to_dq2.Ec2 as Connection234
@@ -3311,19 +3356,15 @@ model "gform_ho" {
                 ]
                 connect Product10.in1 Junction228 as Connection681
                 connect Goto2 "Bus Join1.out" as Connection51
-                connect Junction268 Junction270 as Connection970
                 connect "Frequency droop.w1" Junction272 as Connection991
                 connect From35 "Current_abc_to_dq3.^Eb2" as Connection276
-                connect Junction270 Sum1.out as Connection971
                 connect Gain8.in Current_abc_to_dq2.Eq2 as Connection869
                 connect "Bus Join1.in1" "Outer Voltage Loop + Inner Current Loop.Ub1" as Connection838
                 connect Gain9.out Junction269 as Connection963
                 connect Gain6.out Goto22 as Connection961
-                connect Junction267 Junction271 as Connection973
                 connect From42 Junction258 as Connection859
                 connect Current_abc_to_dq2.Ea2 From8 as Connection236
                 connect From34 "Current_abc_to_dq3.^Ec2" as Connection279
-                connect Junction271 Sum2.out as Connection974
                 connect "Current_abc_to_dq3.^Ea2" From33 as Connection278
                 connect Junction269 Goto29 as Connection964
                 connect Junction258 "Outer Voltage Loop + Inner Current Loop.E_q_ref1" as Connection860
@@ -3343,10 +3384,6 @@ model "gform_ho" {
                 connect Goto28 Gain10.out as Connection874
                 connect Goto3 Junction158 as Connection292
                 connect Current_abc_to_dq.Xi_q2 Gain7.in as Connection866
-                connect Ppu.in Gain16.out as Connection993
-                connect Gain16.in Junction270 as Connection994
-                connect Qpu.in Gain17.out as Connection995
-                connect Gain17.in Junction271 as Connection996
                 connect Gain1.in Junction273 as Connection998
                 connect Junction273 Junction272 as Connection999
                 connect Goto48 Junction273 as Connection1000
@@ -3362,10 +3399,24 @@ model "gform_ho" {
                     breakpoints = 6856, 8232; 6856, 8232; 6856, 8232; 6856, 8280; 7112, 8280
                 ]
                 connect Goto37 Junction275 as Connection1008
-                connect U_P Gain19.in as Connection1009
-                connect Gain19.out "Frequency droop.U_P" as Connection1010
-                connect U_Q Gain18.in as Connection1011
-                connect Gain18.out "Voltage droop.Q_ref1" as Connection1012
+                connect Sum1.out Junction276 as Connection1014
+                connect Junction276 Junction268 as Connection1015
+                [
+                    breakpoints = 7152, 8224
+                ]
+                connect Sum2.out Junction277 as Connection1018
+                connect Junction277 Junction267 as Connection1019
+                [
+                    breakpoints = 7152, 8368
+                ]
+                connect Ppu.in Gain16.out as Connection1021
+                connect Gain16.in Junction276 as Connection1022
+                connect Qpu.in Gain17.out as Connection1023
+                connect Gain17.in Junction277 as Connection1024
+                connect U_Q Gain18.in as Connection1025
+                connect Gain18.out "Voltage droop.Q_ref1" as Connection1026
+                connect U_P Gain19.in as Connection1027
+                connect Gain19.out "Frequency droop.U_P" as Connection1028
             }
             [
                 position = 6816, 7568
@@ -6289,21 +6340,14 @@ else if (connect==1)
             connect Junction48 Junction47 as Connection346
             connect "INV_sync ON.in" Junction48 as Connection347
 
-            Ki_I = "2e-2"
-            Kp_I = "10e-2"
-            V_ABC = "277/np.sqrt(3)"
-            maxV_pds = "1e-2"
-            maxV_slip = "5e-3"
-            maxw_pds = "5e-1"
-            maxw_slip = "10e-3"
-            minV_slip = "2.5e-3"
-            minw_slip = "5e-3"
+            Kp_V = "30e-2"
+            Ts = "Ts"
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A grid-forming three-phase inverter with a frequency and voltage droop controller</p></body></html>"
 
                 S {
-                    label = "Rated Power "
+                    label = "Rated Power (System)"
                     widget = edit
                     type = generic
                     default_value = "200e3"
@@ -6311,11 +6355,19 @@ else if (connect==1)
                     group = "1. Three-phase Inverter"
                 }
 
+                S_i {
+                    label = "Rated Power (Inverter)"
+                    widget = edit
+                    type = generic
+                    default_value = "70e3"
+                    group = "1. Three-phase Inverter"
+                }
+
                 V_ABC {
                     label = "Rated Phase Voltage (RMS)"
                     widget = edit
                     type = generic
-                    default_value = "277"
+                    default_value = "277/np.sqrt(3)"
                     unit = "V"
                     group = "1. Three-phase Inverter"
                 }
@@ -6414,7 +6466,7 @@ else if (connect==1)
                     label = "Inner Loop Proportional Gain"
                     widget = edit
                     type = generic
-                    default_value = "10e-3"
+                    default_value = "10e-2"
                     group = "4. Cascaded Controller"
                 }
 
@@ -6422,7 +6474,7 @@ else if (connect==1)
                     label = "Inner Loop Integral Gain"
                     widget = edit
                     type = generic
-                    default_value = "2e-3"
+                    default_value = "2e-2"
                     group = "4. Cascaded Controller"
                 }
 
@@ -6505,7 +6557,7 @@ else if (connect==1)
                     label = "Maximum slip (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "5e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -6514,7 +6566,7 @@ else if (connect==1)
                     label = "Minimum slip (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "2.5e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -6523,7 +6575,7 @@ else if (connect==1)
                     label = "Maximum slip (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "10e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -6532,7 +6584,7 @@ else if (connect==1)
                     label = "Minimum slip (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "5e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -6541,7 +6593,7 @@ else if (connect==1)
                     label = "Maximum difference signal (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "1e-2"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -6550,7 +6602,7 @@ else if (connect==1)
                     label = "Maximum difference signal (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "5e-1"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -6569,6 +6621,7 @@ else if (connect==1)
 
                 CODE init
                     S = mdl.get_property_value(mdl.prop(item_handle, "S"))
+                    S_i = mdl.get_property_value(mdl.prop(item_handle, "S_i"))
                     V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
                     w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
                     Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
@@ -6596,6 +6649,14 @@ else if (connect==1)
                     Tfast = Ts
                     V_DQ = V_ABC*np.sqrt(2)
                     I_DQ = S/V_DQ
+                    Z_DQ = V_DQ/I_DQ
+                    C_DQ = 1/(Z_DQ*w_0)
+                    L_DQ = Z_DQ/w_0
+                    
+                    Rs = R_s/Z_DQ
+                    Cs = C_s/C_DQ
+                    Li = L_i/L_DQ
+                    
                     mP = w_0*(f_D/100)
                     nQ = V_DQ*(V_D/100)
                     D_f = 1/mP
@@ -6609,6 +6670,7 @@ else if (connect==1)
                 CODE pre_compile
                     # HEADER START
                     S = mdl.get_property_value(mdl.prop(item_handle, "S"))
+                    S_i = mdl.get_property_value(mdl.prop(item_handle, "S_i"))
                     V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
                     w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
                     Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
@@ -6679,8 +6741,10 @@ else if (connect==1)
         ]
 
         component src_scada_input Pref {
-            execution_rate = "20e-6"
-            unit = ""
+            execution_rate = "Ts"
+            max = "70e3"
+            min = "-70e3"
+            unit = "W"
         }
         [
             position = 6808, 8072
@@ -6688,8 +6752,10 @@ else if (connect==1)
         ]
 
         component src_scada_input Qref {
-            execution_rate = "20e-6"
-            unit = ""
+            execution_rate = "Ts"
+            max = "70e3"
+            min = "-70e3"
+            unit = "Vars"
         }
         [
             position = 6808, 8216
@@ -7227,5 +7293,6 @@ else if (connect==1)
         # The Schematic API is imported as 'mdl'
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
+        Ts = 20e-6
     ENDCODE
 }

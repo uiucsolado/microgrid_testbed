@@ -43,7 +43,7 @@ displayValue = 0.0
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>408.0</x>
-                    <y>448.0</y>
+                    <y>456.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -53,7 +53,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -101,18 +101,18 @@ referenceCurves = [refCurveData1]
                 <hierarchy_position>1</hierarchy_position>
                 <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>144</x>
-                    <y>576</y>
+                    <x>560</x>
+                    <y>672</y>
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
-                    <state>Scope</state>
+                    <state>Capture</state>
                     <layout>None</layout>
                     <presets>
                         <active_capture_preset>Default</active_capture_preset>
                         <active_scope_preset>Default</active_scope_preset>
                         <capture name="Default">
-                            <time_interval>0.01</time_interval>
+                            <time_interval>0.05</time_interval>
                             <sample_rate>200000.0</sample_rate>
                             <background_color>white</background_color>
                             <layout>Grid</layout>
@@ -120,20 +120,18 @@ referenceCurves = [refCurveData1]
                             <analog_signals>
                             <analog>
                             <channel>0</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.angle_diff3</name>
+                            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>3</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>1</channel>
-                            <name>Microturbine.qd0(PU).I_d_a1</name>
+                            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
@@ -144,67 +142,25 @@ referenceCurves = [refCurveData1]
                         </analog>
                             <analog>
                             <channel>2</channel>
-                            <name>Microturbine.qd0(PU).I_q_a1</name>
+                            <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
+                            <vertical_offset>0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
+                                
+                                <num_viewport>2</num_viewport>
                                 
                            </viewports>
                         </analog>
                             </analog_signals>
                             <digital_signals>
-                            <digital>
-                            <channel>0</channel>
-                            <name>ang_sync3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
-                            <digital>
-                            <channel>1</channel>
-                            <name>freq_sync3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
-                            <digital>
-                            <channel>2</channel>
-                            <name>volt_sync3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
-                            <digital>
-                            <channel>3</channel>
-                            <name>gridconnect2</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
                             </digital_signals>
                             <trigger>
                                 <device>0</device>
                                 <is_force>True</is_force>
                                 <type>Analog</type>
-                                <source>Microturbine.BE1-25A Synchronizer.angle_diff3</source>
+                                <source>Microturbine.BE1-25A Synchronizer.del_V</source>
                                 <edge>Rising edge</edge>
                                 <treshold>0.0</treshold>
                                 <offset>50.0</offset>
@@ -219,7 +175,7 @@ referenceCurves = [refCurveData1]
                             <background_color>white</background_color>
                             <layout>Grid</layout>
                             <legend>True</legend>
-                            <show_viewports>4</show_viewports>
+                            <show_viewports>2</show_viewports>
                             <decimation>6</decimation>
                             <time_base>0.005</time_base>
                             <analog_signals>
@@ -232,8 +188,6 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>2</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
@@ -245,44 +199,18 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>2</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>2</channel>
-                            <name>Ia1</name>
+                            <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
+                            <vertical_offset>0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>3</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>3</channel>
-                            <name>Va1</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>4</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>4</channel>
-                            <name>Microturbine.Ic1</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
+                                <num_viewport>2</num_viewport>
                                 
                            </viewports>
                         </analog>
@@ -302,14 +230,14 @@ referenceCurves = [refCurveData1]
                         </scope>
                         </presets>
                     <capture>
-                        <time_interval>0.01</time_interval>
+                        <time_interval>0.05</time_interval>
                         <sample_rate>200000.0</sample_rate>
                         <background_color>white</background_color>
                         <layout>Grid</layout>
                         <legend>True</legend>
                         <trigger>
                             <type>Analog</type>
-                            <source>Microturbine.BE1-25A Synchronizer.angle_diff3</source>
+                            <source>Microturbine.BE1-25A Synchronizer.del_V</source>
                             <edge>Rising edge</edge>
                             <treshold>0.0</treshold>
                             <offset>50.0</offset>
@@ -319,20 +247,18 @@ referenceCurves = [refCurveData1]
                         <analog_signals>
                             <analog>
                             <channel>0</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.angle_diff3</name>
+                            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>3</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>1</channel>
-                            <name>Microturbine.qd0(PU).I_d_a1</name>
+                            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
@@ -343,62 +269,20 @@ referenceCurves = [refCurveData1]
                         </analog>
                             <analog>
                             <channel>2</channel>
-                            <name>Microturbine.qd0(PU).I_q_a1</name>
+                            <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
+                            <vertical_offset>0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
+                                
+                                <num_viewport>2</num_viewport>
                                 
                            </viewports>
                         </analog>
                             </analog_signals>
 
                          <digital_signals>
-                            <digital>
-                            <channel>0</channel>
-                            <name>ang_sync3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
-                            <digital>
-                            <channel>1</channel>
-                            <name>freq_sync3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
-                            <digital>
-                            <channel>2</channel>
-                            <name>volt_sync3</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
-                            <digital>
-                            <channel>3</channel>
-                            <name>gridconnect2</name>
-                            <is_locked>False</is_locked>
-                            <vertical_offset>0.0</vertical_offset>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </digital>
                             </digital_signals>
 
                     </capture>
@@ -427,8 +311,6 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>2</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
@@ -440,44 +322,18 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>2</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>2</channel>
-                            <name>Ia1</name>
+                            <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
+                            <vertical_offset>0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>3</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>3</channel>
-                            <name>Va1</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>4</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>4</channel>
-                            <name>Microturbine.Ic1</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
+                                <num_viewport>2</num_viewport>
                                 
                            </viewports>
                         </analog>
@@ -518,7 +374,7 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>416.0</x>
+                    <x>400.0</x>
                     <y>16.0</y>
                     <width>400</width>
                     <height>200</height>
@@ -529,7 +385,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -603,7 +459,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -666,7 +522,7 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>824.0</x>
+                    <x>800.0</x>
                     <y>24.0</y>
                     <width>400</width>
                     <height>200</height>
@@ -677,7 +533,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -741,7 +597,7 @@ displayValue = 0.0
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>400.0</x>
-                    <y>232.0</y>
+                    <y>240.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -751,7 +607,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -811,7 +667,7 @@ displayValue = False
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>224.0</x>
-                    <y>32.0</y>
+                    <y>24.0</y>
                     <width>136</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -837,7 +693,7 @@ displayValue = False
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>272.0</x>
-                    <y>32.0</y>
+                    <y>24.0</y>
                     <width>112</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -869,7 +725,7 @@ hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]><
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>8.0</x>
-                    <y>40.0</y>
+                    <y>32.0</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -889,7 +745,7 @@ hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]><
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Microturbine.qd0(PU).E_d', 'Microturbine.qd0(PU).E_q', 'Microturbine.BE1-25A Synchronizer.Vd_G', 'Microturbine.BE1-25A Synchronizer.Vq_G']]]></analog_signals>
+                <analog_signals><![CDATA[['Microturbine.BE1-25A Synchronizer.Vd_G', 'Microturbine.BE1-25A Synchronizer.Vq_G']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -898,8 +754,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>808.0</x>
-                    <y>456.0</y>
+                    <x>800.0</x>
+                    <y>464.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -909,7 +765,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -968,8 +824,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>272.0</x>
-                    <y>72.0</y>
+                    <x>272</x>
+                    <y>64</y>
                     <width>112</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -994,8 +850,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>224.0</x>
-                    <y>72.0</y>
+                    <x>224</x>
+                    <y>64</y>
                     <width>136</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1027,7 +883,7 @@ hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]><
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>88.0</x>
-                    <y>40.0</y>
+                    <y>32.0</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1046,7 +902,7 @@ p, li { white-space: pre-wrap; }
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>8.0</x>
-                    <y>8.0</y>
+                    <y>0.0</y>
                     <width>144</width>
                     <height>32</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -1077,8 +933,8 @@ hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]><
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>88.0</x>
-                    <y>112.0</y>
+                    <x>88</x>
+                    <y>104</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1097,7 +953,7 @@ p, li { white-space: pre-wrap; }
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>8.0</x>
-                    <y>80.0</y>
+                    <y>72.0</y>
                     <width>144</width>
                     <height>32</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -1128,8 +984,8 @@ hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 1)]]><
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>8.0</x>
-                    <y>112.0</y>
+                    <x>8</x>
+                    <y>104</y>
                     <width>64</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1149,7 +1005,7 @@ hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 1)]]><
 displayValue = 0.0
 
 ]]></code>
-                <analog_signals><![CDATA[['Microturbine.qd0(PU).I_q_a1', 'Microturbine.qd0(PU).I_d_a1']]]></analog_signals>
+                <analog_signals><![CDATA[['Microturbine.qd0(PU).I_q_a1']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -1159,7 +1015,7 @@ displayValue = 0.0
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>368.0</y>
+                    <y>136.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1169,81 +1025,7 @@ displayValue = 0.0
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>0371701ebb1211eaa8ab509a4c4e2fb4</id>
-                <name><![CDATA[Grid Connection]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[[]]]></analog_signals>
-                <digital_signals><![CDATA[['gridconnect2']]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>168.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>20</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -1430,6 +1212,288 @@ referenceCurves = [refCurveData1]
 
 ]]></reference_curve_code>
                 </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>b8108ca6be2611eabe07509a4c4e2fb4</id>
+                <name><![CDATA[Generator Voltage (qd0)]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Microturbine.qd0(PU).Eq_phi']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>512.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>20</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>e57c54d0be2711ea96fe509a4c4e2fb4</id>
+                <name><![CDATA[Generator Voltage (qd0)]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Microturbine.qd0(PU).Ed_phi']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>704.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>20</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>11a7a38cbe2811eaadae509a4c4e2fb4</id>
+                <name><![CDATA[Generator Current (qd0)]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Microturbine.qd0(PU).I_d_a1']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>328.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>20</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>69c0d118be5111ea821f509a4c4e2fb4</id>
+                <name><![CDATA[ON]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.MT_sync', 1)
+hil.set_scada_input_value('Microturbine.Connect MT', 1)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>224</x>
+                    <y>104</y>
+                    <width>64</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>69c0d119be5111ea8da0509a4c4e2fb4</id>
+                <name><![CDATA[OFF]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.MT_sync', 1)
+hil.set_scada_input_value('Microturbine.Connect MT', 0)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>304</x>
+                    <y>104</y>
+                    <width>64</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
             </component_data>
         </components>
 </ui_settings>

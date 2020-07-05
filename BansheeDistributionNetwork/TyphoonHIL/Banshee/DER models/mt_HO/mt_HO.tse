@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 03-Jul-2020 @ 06:14:49 PM
+// Save timestamp: 04-Jul-2020 @ 04:16:26 PM
 //
 
 model "mt_HO" {
@@ -2131,7 +2131,7 @@ model "mt_HO" {
                     ]
 
                     component gen_gain Gain1 {
-                        gain = "1/w_0"
+                        gain = "0*1/w_0"
                     }
                     [
                         position = 8256, 8304
@@ -2228,7 +2228,7 @@ model "mt_HO" {
                     connect Differentiator1.in Gain1.out as Connection34
                 }
                 [
-                    position = 8152, 8448
+                    position = 8128, 8448
                     size = 80, 80
                 ]
 
@@ -2267,7 +2267,7 @@ model "mt_HO" {
                     ]
 
                     component gen_gain Gain1 {
-                        gain = "1/w_0"
+                        gain = "0*1/w_0"
                     }
                     [
                         position = 8176, 8344
@@ -2364,7 +2364,7 @@ model "mt_HO" {
                     connect Differentiator1.out Sum2.in1 as Connection28
                 }
                 [
-                    position = 8152, 8592
+                    position = 8128, 8592
                     size = 80, 80
                 ]
 
@@ -2381,7 +2381,7 @@ model "mt_HO" {
                     gain = "-1"
                 }
                 [
-                    position = 8288, 8512
+                    position = 8288, 8520
                     hide_name = True
                 ]
 
@@ -2390,7 +2390,7 @@ model "mt_HO" {
                     value = "0"
                 }
                 [
-                    position = 8240, 8544
+                    position = 8224, 8544
                     hide_name = True
                 ]
 
@@ -2428,7 +2428,7 @@ model "mt_HO" {
                     gain = "V_DQ"
                 }
                 [
-                    position = 8240, 8512
+                    position = 8224, 8504
                     hide_name = True
                 ]
 
@@ -2452,7 +2452,7 @@ model "mt_HO" {
                     execution_rate = "Ts"
                 }
                 [
-                    position = 8152, 8696
+                    position = 8128, 8696
                     hide_name = True
                 ]
 
@@ -3245,6 +3245,18 @@ if(boolean==1){
                     size = 80, 48
                 ]
 
+                component gen_probe Ed_phi {
+                }
+                [
+                    position = 8264, 8616
+                ]
+
+                component gen_probe Eq_phi {
+                }
+                [
+                    position = 8256, 8384
+                ]
+
                 port w_ref {
                     label = "w_ref"
                     position = left:5
@@ -3667,7 +3679,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8032, 8424
+                    position = 8008, 8424
                     hide_name = True
                 ]
 
@@ -3678,7 +3690,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8032, 8472
+                    position = 8008, 8472
                     hide_name = True
                 ]
 
@@ -3689,7 +3701,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8032, 8448
+                    position = 8008, 8448
                     hide_name = True
                 ]
 
@@ -3700,7 +3712,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8032, 8592
+                    position = 8008, 8592
                     hide_name = True
                 ]
 
@@ -3711,7 +3723,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8032, 8568
+                    position = 8008, 8568
                     hide_name = True
                 ]
 
@@ -3722,7 +3734,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8032, 8616
+                    position = 8008, 8616
                     hide_name = True
                 ]
 
@@ -3799,7 +3811,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 8152, 8664
+                    position = 8128, 8664
                     hide_name = True
                 ]
 
@@ -3924,6 +3936,16 @@ if(boolean==1){
                     position = 7600, 8544
                 ]
 
+                junction Junction73 sp
+                [
+                    position = 8192, 8592
+                ]
+
+                junction Junction74 sp
+                [
+                    position = 8192, 8448
+                ]
+
                 connect E_F Junction15 as Connection161
                 connect E_F1 E_qp.E_F as Connection53
                 connect E_F_M.in Junction15 as Connection163
@@ -3981,10 +4003,6 @@ if(boolean==1){
                 connect I_a1 "abc to dq1.va" as Connection249
                 connect I_b1 "abc to dq1.vb" as Connection250
                 connect I_c1 "abc to dq1.vc" as Connection251
-                connect V_qG2.V_qG Gain8.in as Connection377
-                connect Gain8.out "dq to abc1.d_input" as Connection378
-                connect V_dG2.V_d_a Gain9.in as Connection379
-                connect Gain9.out Gain2.in as Connection380
                 connect Gain11.out Gain6.in as Connection382
                 connect w_e8 Product1.in as Connection401
                 connect Clock1.out Product1.in1 as Connection402
@@ -4038,6 +4056,17 @@ if(boolean==1){
                 connect "|E|.in" Junction46 as Connection328
                 connect From41 magnitude.d as Connection745
                 connect From40 magnitude.q as Connection746
+                connect V_dG2.V_d_a Junction73 as Connection767
+                connect Junction73 Gain9.in as Connection768
+                connect Ed_phi.in Junction73 as Connection769
+                [
+                    breakpoints = 8232, 8616; 8192, 8616; 8192, 8592
+                ]
+                connect V_qG2.V_qG Junction74 as Connection770
+                connect Junction74 Gain8.in as Connection771
+                connect Eq_phi.in Junction74 as Connection772
+                connect Gain8.out "dq to abc1.d_input" as Connection773
+                connect Gain2.in Gain9.out as Connection774
             }
             [
                 position = 6376, 8016
@@ -5877,7 +5906,7 @@ else if((connectMT==0)||(MTsync==0)){
             component "core/Signal Controlled Voltage Source" Ea {
             }
             [
-                position = 6296, 8328
+                position = 6120, 8328
                 rotation = right
                 scale = -1, 1
                 size = 64, 32
@@ -5886,7 +5915,7 @@ else if((connectMT==0)||(MTsync==0)){
             component "core/Signal Controlled Voltage Source" Eb {
             }
             [
-                position = 6752, 8368
+                position = 6576, 8368
                 rotation = right
                 scale = -1, 1
                 size = 64, 32
@@ -5895,7 +5924,7 @@ else if((connectMT==0)||(MTsync==0)){
             component "core/Signal Controlled Voltage Source" Ec {
             }
             [
-                position = 7264, 8400
+                position = 7088, 8400
                 rotation = right
                 scale = -1, 1
                 size = 64, 32
@@ -5905,21 +5934,21 @@ else if((connectMT==0)||(MTsync==0)){
                 resistance = "Rs"
             }
             [
-                position = 6344, 8216
+                position = 6168, 8216
             ]
 
             component pas_resistor Rb {
                 resistance = "Rs"
             }
             [
-                position = 6816, 8280
+                position = 6640, 8280
             ]
 
             component pas_resistor Rc {
                 resistance = "Rs"
             }
             [
-                position = 7320, 8336
+                position = 7144, 8336
             ]
 
             component "core/Current Measurement" Ia1 {
@@ -5927,7 +5956,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 6440, 8216
+                position = 6264, 8216
                 size = 64, 32
             ]
 
@@ -5936,7 +5965,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 6912, 8280
+                position = 6736, 8280
                 size = 64, 32
             ]
 
@@ -5945,7 +5974,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 7416, 8336
+                position = 7240, 8336
                 size = 64, 32
             ]
 
@@ -5954,7 +5983,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 6496, 8328
+                position = 6320, 8328
                 rotation = right
                 size = 64, 32
             ]
@@ -5964,7 +5993,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 6976, 8360
+                position = 6800, 8360
                 rotation = right
                 size = 64, 32
             ]
@@ -5974,7 +6003,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 7528, 8392
+                position = 7352, 8392
                 rotation = right
                 size = 64, 32
             ]
@@ -5983,7 +6012,7 @@ else if((connectMT==0)||(MTsync==0)){
                 ctrl_src = "Model"
             }
             [
-                position = 7800, 8280
+                position = 7624, 8280
                 size = 64, 256
             ]
 
@@ -5991,7 +6020,7 @@ else if((connectMT==0)||(MTsync==0)){
                 execution_rate = "Ts"
             }
             [
-                position = 6160, 8328
+                position = 5984, 8328
                 rotation = right
                 size = 64, 32
             ]
@@ -6000,7 +6029,7 @@ else if((connectMT==0)||(MTsync==0)){
                 execution_rate = "Ts"
             }
             [
-                position = 6616, 8368
+                position = 6440, 8368
                 rotation = right
                 size = 64, 32
             ]
@@ -6009,7 +6038,7 @@ else if((connectMT==0)||(MTsync==0)){
                 execution_rate = "Ts"
             }
             [
-                position = 7128, 8400
+                position = 6952, 8400
                 rotation = right
                 size = 64, 32
             ]
@@ -6019,7 +6048,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 8112, 8232
+                position = 7928, 8232
                 rotation = right
                 size = 64, 32
             ]
@@ -6029,7 +6058,7 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 8000, 8328
+                position = 7816, 8328
                 rotation = right
                 size = 64, 32
             ]
@@ -6039,9 +6068,27 @@ else if((connectMT==0)||(MTsync==0)){
                 sig_output = "True"
             }
             [
-                position = 7888, 8424
+                position = 7704, 8424
                 rotation = right
                 size = 64, 32
+            ]
+
+            component "core/Three Phase Two Winding Transformer" Tr1 {
+                L1 = "L1_trans"
+                L2 = "L2_trans"
+                Lm = "20"
+                R1 = "R1_trans"
+                R2 = "R2_trans"
+                Rm = "1e5"
+                Sn = "S"
+                V1 = "V_ABC"
+                V2 = "V_G"
+                f = "w_0/(2*np.pi)"
+                input = "SI"
+            }
+            [
+                position = 8184, 8280
+                size = 126, 256
             ]
 
             port ground {
@@ -6143,7 +6190,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = out
             }
             [
-                position = 6216, 8328
+                position = 6040, 8328
                 hide_name = True
             ]
 
@@ -6154,7 +6201,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = out
             }
             [
-                position = 6672, 8368
+                position = 6496, 8368
                 hide_name = True
             ]
 
@@ -6165,7 +6212,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = out
             }
             [
-                position = 7184, 8400
+                position = 7008, 8400
                 hide_name = True
             ]
 
@@ -6176,7 +6223,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 6528, 8184
+                position = 6352, 8160
                 hide_name = True
             ]
 
@@ -6187,7 +6234,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 7008, 8256
+                position = 6832, 8256
                 hide_name = True
             ]
 
@@ -6198,7 +6245,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 7560, 8304
+                position = 7384, 8304
                 hide_name = True
             ]
 
@@ -6209,7 +6256,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 6568, 8328
+                position = 6392, 8328
             ]
 
             tag Eb_G {
@@ -6219,7 +6266,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 7064, 8360
+                position = 6888, 8360
             ]
 
             tag Ec_G {
@@ -6229,7 +6276,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 7608, 8392
+                position = 7432, 8392
             ]
 
             tag Connect5 {
@@ -6239,7 +6286,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = out
             }
             [
-                position = 7688, 8136
+                position = 7512, 8136
                 hide_name = True
             ]
 
@@ -6250,7 +6297,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 8072, 8328
+                position = 7888, 8328
                 hide_name = True
             ]
 
@@ -6261,7 +6308,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 8200, 8232
+                position = 8016, 8232
                 hide_name = True
             ]
 
@@ -6272,7 +6319,7 @@ else if((connectMT==0)||(MTsync==0)){
                 direction = in
             }
             [
-                position = 7960, 8424
+                position = 7776, 8424
                 hide_name = True
             ]
 
@@ -6288,107 +6335,102 @@ else if((connectMT==0)||(MTsync==0)){
 
             junction Junction37 pe
             [
-                position = 6496, 8464
+                position = 6320, 8464
             ]
 
             junction Junction38 pe
             [
-                position = 6752, 8464
+                position = 6576, 8464
             ]
 
             junction Junction39 pe
             [
-                position = 6976, 8464
+                position = 6800, 8464
             ]
 
             junction Junction40 pe
             [
-                position = 7264, 8464
+                position = 7088, 8464
             ]
 
             junction Junction58 pe
             [
-                position = 6976, 8280
+                position = 6800, 8280
             ]
 
             junction Junction49 pe
             [
-                position = 7528, 8336
+                position = 7352, 8336
             ]
 
             junction Junction64 pe
             [
-                position = 6296, 8216
+                position = 6120, 8216
             ]
 
             junction Junction65 pe
             [
-                position = 6296, 8464
+                position = 6120, 8464
             ]
 
             junction Junction66 pe
             [
-                position = 6752, 8280
+                position = 6576, 8280
             ]
 
             junction Junction67 pe
             [
-                position = 6616, 8464
+                position = 6440, 8464
             ]
 
             junction Junction68 pe
             [
-                position = 7264, 8336
+                position = 7088, 8336
             ]
 
             junction Junction69 pe
             [
-                position = 7128, 8464
+                position = 6952, 8464
             ]
 
             junction Junction87 pe
             [
-                position = 6496, 8216
+                position = 6320, 8216
             ]
 
-            junction Junction88 pe
+            junction Junction96 pe
             [
-                position = 8000, 8280
+                position = 7352, 8464
             ]
 
-            junction Junction89 pe
+            junction Junction97 pe
             [
-                position = 7888, 8376
+                position = 7704, 8464
             ]
 
-            junction Junction90 pe
+            junction Junction98 pe
             [
-                position = 8112, 8184
+                position = 7816, 8464
             ]
 
-            junction Junction91 pe
+            junction Junction99 pe
             [
-                position = 7528, 8464
+                position = 7928, 8184
             ]
 
-            junction Junction92 pe
+            junction Junction100 pe
             [
-                position = 7888, 8464
+                position = 7816, 8280
             ]
 
-            junction Junction93 pe
+            junction Junction101 pe
             [
-                position = 8112, 8464
+                position = 7704, 8376
             ]
 
-            junction Junction94 pe
+            junction Junction102 pe
             [
-                position = 8000, 8464
-            ]
-
-            junction Junction95 sp
-            [
-                position = 6288, 8128
+                position = 7928, 8464
             ]
 
             connect "MT_sync OFF.in" "Logical operator1.out" as Connection155
@@ -6411,11 +6453,11 @@ else if((connectMT==0)||(MTsync==0)){
             connect Eb.n_node Junction38 as Connection282
             connect Junction38 Junction39 as Connection286
             [
-                breakpoints = 6752, 8464; 6976, 8464
+                breakpoints = 6576, 8464; 6800, 8464
             ]
             connect Junction39 Eb1.n_node as Connection287
             [
-                breakpoints = 6976, 8448
+                breakpoints = 6800, 8448
             ]
             connect Ec.n_node Junction40 as Connection291
             connect Ea_G Ea1.out as Connection295
@@ -6424,7 +6466,7 @@ else if((connectMT==0)||(MTsync==0)){
             connect Eb1.p_node Junction58 as Connection352
             connect Junction58 Ib1.n_node as Connection353
             [
-                breakpoints = 6976, 8280
+                breakpoints = 6800, 8280
             ]
             connect S2.b_in Junction58 as Connection354
             connect Ic1.n_node Junction49 as Connection789
@@ -6446,7 +6488,7 @@ else if((connectMT==0)||(MTsync==0)){
             connect Junction37 Junction67 as Connection477
             connect Junction67 Junction38 as Connection478
             [
-                breakpoints = 6752, 8464; 6752, 8448
+                breakpoints = 6576, 8464; 6576, 8448
             ]
             connect Eb_phi.n_node Junction67 as Connection479
             connect Ec.p_node Junction68 as Connection480
@@ -6455,74 +6497,95 @@ else if((connectMT==0)||(MTsync==0)){
             connect Junction40 Junction69 as Connection483
             connect Junction69 Junction39 as Connection484
             [
-                breakpoints = 7128, 8464; 6976, 8464
+                breakpoints = 6952, 8464; 6800, 8464
             ]
             connect Ec_phi.n_node Junction69 as Connection485
             [
-                breakpoints = 7128, 8432; 7128, 8440
+                breakpoints = 6952, 8432; 6952, 8440
             ]
             connect I_a Ia1.out as Connection654
             connect I_b Ib1.out as Connection655
             connect I_c Ic1.out as Connection656
             [
-                breakpoints = 7416, 8312
+                breakpoints = 7240, 8312
             ]
             connect V_q_a3 Va_G1.out as Connection720
             connect V_d_a3 Vb_G1.out as Connection721
             connect Ia1.n_node Junction87 as Connection794
             connect Junction87 S2.a_in as Connection795
             connect Ea1.p_node Junction87 as Connection796
-            connect S2.b_out Junction88 as Connection798
-            [
-                breakpoints = 7848, 8280
-            ]
-            connect Junction88 Vb_G1.p_node as Connection799
-            connect V_bG Junction88 as Connection800
             connect V_q_a4 Vc_G1.out as Connection806
-            connect S2.c_out Junction89 as Connection811
-            connect Junction89 Vc_G1.p_node as Connection812
+            connect "Signal switch1.in2" MT_ON1 as Connection841
             [
-                breakpoints = 7888, 8376; 7888, 8376; 7888, 8376
+                breakpoints = 6288, 8128
             ]
-            connect V_cG Junction89 as Connection813
-            connect S2.a_out Junction90 as Connection815
+            connect Ec1.n_node Junction96 as Connection856
+            connect Junction96 Junction40 as Connection857
             [
-                breakpoints = 7848, 8184
+                breakpoints = 7352, 8464; 7352, 8464; 7352, 8464; 7352, 8464; 7088, 8464; 7088, 8464
             ]
-            connect Junction90 Va_G1.p_node as Connection816
-            connect V_aG Junction90 as Connection817
-            connect Ec1.n_node Junction91 as Connection819
-            connect Junction91 Junction40 as Connection820
+            connect Junction97 Junction96 as Connection860
+            connect Vc_G1.n_node Junction97 as Connection861
+            connect Junction98 Junction97 as Connection863
+            connect Vb_G1.n_node Junction98 as Connection864
+            connect S2.a_out Junction99 as Connection920
+            connect Junction99 Va_G1.p_node as Connection921
             [
-                breakpoints = 7528, 8464; 7528, 8464; 7264, 8464
+                breakpoints = 7928, 8184; 7928, 8184; 7928, 8184
             ]
-            connect Junction92 Junction91 as Connection823
-            connect Vc_G1.n_node Junction92 as Connection824
-            connect ground Junction93 as Connection825
-            connect Va_G1.n_node Junction93 as Connection827
-            connect Junction93 Junction94 as Connection828
-            connect Junction94 Junction92 as Connection829
-            connect Vb_G1.n_node Junction94 as Connection830
-            connect MT_ON1 Junction95 as Connection831
-            connect Junction95 "Signal switch1.in2" as Connection832
+            connect Tr1.prm_1 Junction99 as Connection922
+            connect Vb_G1.p_node Junction100 as Connection923
+            connect Junction100 S2.b_out as Connection924
+            [
+                breakpoints = 7816, 8280; 7816, 8280
+            ]
+            connect Tr1.prm_2 Junction100 as Connection925
+            connect S2.c_out Junction101 as Connection926
+            connect Junction101 Vc_G1.p_node as Connection927
+            [
+                breakpoints = 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376
+            ]
+            connect Tr1.prm_3 Junction101 as Connection928
+            connect Junction98 Junction102 as Connection929
+            [
+                breakpoints = 7816, 8464; 7816, 8464; 7816, 8464
+            ]
+            connect Junction102 Va_G1.n_node as Connection930
+            [
+                breakpoints = 7928, 8464; 7928, 8464; 7928, 8464; 7928, 8464
+            ]
+            connect Tr1.n1 Junction102 as Connection931
+            connect ground Tr1.n2 as Connection932
+            connect Tr1.sec_3 V_cG as Connection933
+            connect V_bG Tr1.sec_2 as Connection934
+            connect Tr1.sec_1 V_aG as Connection935
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A diesel genset microturbine</p></body></html>"
 
                 S {
-                    label = "Rated Power"
+                    label = "Rated Power (system)"
                     widget = edit
                     type = generic
-                    default_value = "835e+6"
+                    default_value = "835.0e6"
                     unit = "VA"
                     group = "1. Synchronous Machine"
                 }
 
                 V_ABC {
-                    label = "Rated RMS Voltage"
+                    label = "Rated RMS Voltage (genset line-line)"
                     widget = edit
                     type = generic
-                    default_value = "26e+3/np.sqrt(3)"
+                    default_value = "26.0e3/np.sqrt(3)"
+                    unit = "V"
+                    group = "1. Synchronous Machine"
+                }
+
+                V_G {
+                    label = "Rated RMS Voltage (system line-line)"
+                    widget = edit
+                    type = generic
+                    default_value = "13.8e3/np.sqrt(3)"
                     unit = "V"
                     group = "1. Synchronous Machine"
                 }
@@ -6531,7 +6594,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Nominal Frequency"
                     widget = edit
                     type = generic
-                    default_value = "2*np.pi*60"
+                    default_value = "2*np.pi*60.0"
                     unit = "rad/s"
                     group = "1. Synchronous Machine"
                 }
@@ -6540,7 +6603,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Pole-pairs"
                     widget = edit
                     type = generic
-                    default_value = "1"
+                    default_value = "1.0"
                     group = "1. Synchronous Machine"
                 }
 
@@ -6989,6 +7052,7 @@ else if((connectMT==0)||(MTsync==0)){
                 CODE init
                     S = mdl.get_property_value(mdl.prop(item_handle, "S"))
                     V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
+                    V_G = mdl.get_property_value(mdl.prop(item_handle, "V_G"))
                     w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
                     pms = mdl.get_property_value(mdl.prop(item_handle, "pms"))
                     Jm = mdl.get_property_value(mdl.prop(item_handle, "Jm"))
@@ -7047,6 +7111,13 @@ else if((connectMT==0)||(MTsync==0)){
                     T_nom = S/w_m
                     I_DQ = (2*S)/(3*V_DQ)
                     Z_DQ = V_DQ/I_DQ
+                    
+                    N1_N2 = V_ABC/np.float64(V_G)
+                    R1_trans = 3*1.1*(V_ABC**2)/S
+                    L1_trans = 3*(30*R1_trans/w_0)*(V_ABC**2)/S
+                    R2_trans = R1_trans/(N1_N2)
+                    L2_trans = L1_trans/(N1_N2)
+                    
                     X_q = w_0*(Lls+Lmq)/Z_DQ
                     X_d = w_0*(Lls+Lmd)/Z_DQ
                     X_ls = w_0*Lls/Z_DQ
@@ -7090,6 +7161,9 @@ else if((connectMT==0)||(MTsync==0)){
                     mdl.set_component_icon_image(item_handle, 'diesel_genset_image.jpg')
                     mdl.set_color(item_handle, "black")
                 ENDCODE
+
+                CODE pre_compile
+                ENDCODE
             }
         }
         [
@@ -7123,7 +7197,7 @@ else if((connectMT==0)||(MTsync==0)){
 
         component "core/RL Section" RL2 {
             inductance_per_l_mile = "1.6e-3"
-            length_mile = "1.5"
+            length_mile = "40"
             resistance_per_l_mile = "0.57"
         }
         [
@@ -7159,7 +7233,7 @@ else if((connectMT==0)||(MTsync==0)){
 
         component "core/RL Section" RL1 {
             inductance_per_l_mile = "1.6e-3"
-            length_mile = "1.5"
+            length_mile = "40"
             resistance_per_l_mile = "0.57"
         }
         [
@@ -7197,7 +7271,7 @@ else if((connectMT==0)||(MTsync==0)){
         ]
 
         component gen_gain Gain3 {
-            gain = "26e3*np.sqrt(2)/np.sqrt(3)"
+            gain = "V_grid*np.sqrt(2)/np.sqrt(3)"
         }
         [
             position = 7952, 8144
@@ -7205,7 +7279,7 @@ else if((connectMT==0)||(MTsync==0)){
         ]
 
         component gen_gain Gain4 {
-            gain = "26e3*np.sqrt(2)/np.sqrt(3)"
+            gain = "V_grid*np.sqrt(2)/np.sqrt(3)"
         }
         [
             position = 7952, 8240
@@ -7213,7 +7287,7 @@ else if((connectMT==0)||(MTsync==0)){
         ]
 
         component gen_gain Gain5 {
-            gain = "26e3*np.sqrt(2)/np.sqrt(3)"
+            gain = "V_grid*np.sqrt(2)/np.sqrt(3)"
         }
         [
             position = 7952, 8192
@@ -7683,6 +7757,49 @@ else if((connectMT==0)||(MTsync==0)){
             execution_rate = "inherit"
         }
 
+        "core/Three Phase Two Winding Transformer" {
+            input = "SC and OC tests"
+            core_sat = "False"
+            Sn = "160000.0"
+            f = "50.0"
+            V1 = "10000.0"
+            V2 = "400.0"
+            usc1 = "4.0"
+            Psc1 = "2350.0"
+            ioc1 = "0.7"
+            Poc1 = "460.0"
+            R1 = "4.58984375"
+            L1 = ".0370093710364"
+            R2 = ".00734375"
+            L2 = "5.92149936583e-05"
+            Rm = "217391.304348"
+            Lm = "311.709196788"
+            flux_vals_SI = "[1910.3, 2419.7]"
+            current_vals_SI = "[0.66653, 277.72]"
+            r1 = ".00734375"
+            l1 = ".0186029389059"
+            r2 = ".00734375"
+            l2 = ".0186029389059"
+            rm = "347.826086957"
+            lm = "156.68213163"
+            flux_vals_pu = "[1.2, 1.52]"
+            current_vals_pu = "[0.0024, 1]"
+            flux_vals_SCOC = "[1.2, 1.52]"
+            current_vals_SCOC = "[0.0024, 1]"
+            import_from_SI2SCOC = "Import from SI"
+            import_from_pu2SCOC = "Import from PU"
+            import_from_SCOC2SI = "Import from SC OC"
+            import_from_pu2SI = "Import from PU"
+            import_from_SCOC2pu = "Import from SC OC"
+            import_from_SI2pu = "Import from SI"
+            winding_1_connection = "Y"
+            winding_2_connection = "Y"
+            clock_number = "0"
+            embedded_cpl = "false"
+            coupling_type = "core"
+            Rshunt = "inf"
+        }
+
         "core/Triple Pole Single Throw Contactor" {
             ctrl_src = "Digital input"
             Sa = "1"
@@ -7739,5 +7856,7 @@ else if((connectMT==0)||(MTsync==0)){
         # The Schematic API is imported as 'mdl'
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
+        
+        V_grid = 13.8e3
     ENDCODE
 }

@@ -249,1047 +249,6 @@ widgetValue = None
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>f7cab000ec8511e68ea14c348851fa7b</id>
-                <name><![CDATA[DMS]]></name>
-                <type>Group</type>
-                <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['166c54eeec8611e694104c348851fa7b', '33833b30ec8611e680aa4c348851fa7b', '9e3efe00ec8611e68a8d4c348851fa7b', '946f21aeec8711e69b754c348851fa7b', 'b421c170ec8711e69c654c348851fa7b', 'e29fd23005af11e78998dc4a3e45580c']]]></components_ids>
-                <hierarchy_position>1</hierarchy_position>
-                <canvas_bg_color>#ffffff</canvas_bg_color>
-                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
-# available for use in all Macro and Expression scripts of the components owned by this widget.
-# This code is always executed prior simulation start.
-# HIL API is imported as 'hil'
-
-]]></initialization_code>
-                <widget_settings>
-                    <x>440.0</x>
-                    <y>880.0</y>
-                    <width>272</width>
-                    <height>608</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                    <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>166c54eeec8611e694104c348851fa7b</id>
-                <name><![CDATA[DMS Time Sequence]]></name>
-                <type>Macro</type>
-                <description><![CDATA[None]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-
-# HIL Control Panel API
-
-
-global dms_enable
-hil.wait_sec(3) #Wait a few seconds to allow the user to Start UDP script before enabling the DMS test sequence
-dms_enable = not dms_enable
-
-global ir_profile_running
-ir_profile_running = True #enables the PV profile to run]]></on_click_code>
-                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other two handlers
-# HIL Control Panel API
-
-
-global time_in_sec
-time_in_sec = 0
-
-global dms_enable
-dms_enable = False]]></on_start_code>
-                <on_timer_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-
-# HIL Control Panel API
-
-
-#time_cmd(time, cmd_time, var, value)
-#dms_disconect = 'DMS_ENGINE.Disconnect'
-#dms_reconect = 'DMS_ENGINE.Reconnect'
-#dms_exp_req = 'DMS_ENGINE.Export Request'
-#dms_exp_val = 'DMS_ENGINE.Export Value'
-#dms_import_req = 'DMS_ENGINE.Import Request'
-#dms_import_val = 'DMS_ENGINE.Import Value'
-#dms_pf_req = 'DMS_ENGINE.PF Request'
-#dms_pf_val = 'DMS_ENGINE.PF Value'
-#dms_var_req = 'DMS_ENGINE.VAR Request'
-#dms_var_val = 'DMS_ENGINE.VAR Value'
-#dms_dr_req = 'DMS_ENGINE.DR Request'
-#dms_dr_val = 'DMS_ENGINE.DR Value'
-global dms_enable
-global time_in_sec
-
-if dms_enable:
-    for values in dms_cmds:
-        if(time_in_sec == values[2]):
-            if (values[0][0:10] == 'DMS_ENGINE'):
-                hil.set_cp_input_value('User defined', 'DMS_ENGINE', values[0], values[1]) #for CP values
-            else:
-                hil.set_contactor(values[0],swControl= True,swState= values[1]) #force contactors
-
-
-    time_in_sec += 1
-    
-    if time_in_sec == loop_time:
-        time_in_sec = 0
-        
-
-
-
-
-
-
-]]></on_timer_code>
-                <run_each>1000</run_each>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-]]></on_stop_code>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>8.0</y>
-                    <width>168</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>33833b30ec8611e680aa4c348851fa7b</id>
-                <name><![CDATA[DMS Override]]></name>
-                <type>Group</type>
-                <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['39ac8840ec8611e6874a4c348851fa7b', '39af9580ec8611e6ba1a4c348851fa7b', '39b27bb0ec8611e68b5d4c348851fa7b', '39b588f0ec8611e6a6904c348851fa7b', '39b784c0ec8611e6b7d24c348851fa7b', '39b95980ec8611e6a2b74c348851fa7b', '39bb0730ec8611e681374c348851fa7b', '39bc3fb0ec8611e6adc74c348851fa7b', '39bd7830ec8611e6a8a94c348851fa7b', '39beb0aeec8611e686234c348851fa7b', '39c01040ec8611e6abf64c348851fa7b', '39c16fcfec8611e6887e4c348851fa7b', 'c167a21eecbc11e6b4394c348851fa7b', 'c3949440ecbc11e685184c348851fa7b', 'c749ad00ecbc11e6bf844c348851fa7b']]]></components_ids>
-                <hierarchy_position>2</hierarchy_position>
-                <canvas_bg_color>#ffffff</canvas_bg_color>
-                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
-# available for use in all Macro and Expression scripts of the components owned by this widget.
-# This code is always executed prior simulation start.
-# HIL API is imported as 'hil'
-
-]]></initialization_code>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>80.0</y>
-                    <width>264</width>
-                    <height>504</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                    <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39ac8840ec8611e6874a4c348851fa7b</id>
-                <name><![CDATA[DMS Disconect]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
-                <inputValueType>float</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>8.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39af9580ec8611e6ba1a4c348851fa7b</id>
-                <name><![CDATA[DMS  DR Value ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Value', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Value', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[12]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>416.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39b27bb0ec8611e68b5d4c348851fa7b</id>
-                <name><![CDATA[DMS VAR Request ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Request', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Request', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>328.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39b588f0ec8611e6a6904c348851fa7b</id>
-                <name><![CDATA[DMS  PF Request ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Request', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Request', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>232.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39b784c0ec8611e6b7d24c348851fa7b</id>
-                <name><![CDATA[DMS Reconnect]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Reconnect', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Reconnect', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>40.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39b95980ec8611e6a2b74c348851fa7b</id>
-                <name><![CDATA[DMS VAR Value ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Value', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.VAR Value', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[6]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>360.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39bb0730ec8611e681374c348851fa7b</id>
-                <name><![CDATA[DMS  Import Request ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Request', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Request', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>168.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39bc3fb0ec8611e6adc74c348851fa7b</id>
-                <name><![CDATA[DMS  DR Request ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Request', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.DR Request', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>384.0</y>
-                    <width>240</width>
-                    <height>40</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39bd7830ec8611e6a8a94c348851fa7b</id>
-                <name><![CDATA[DMS  Import Value ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Value', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Import Value', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[4000]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>200.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39beb0aeec8611e686234c348851fa7b</id>
-                <name><![CDATA[DMS Export Value ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Value', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Value', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>104.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39c01040ec8611e6abf64c348851fa7b</id>
-                <name><![CDATA[DMS Export Request ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Request', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Export Request', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>72.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>39c16fcfec8611e6887e4c348851fa7b</id>
-                <name><![CDATA[DMS  PF Value ]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Value', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.PF Value', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[1000]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>264.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>9e3efe00ec8611e68a8d4c348851fa7b</id>
-                <name><![CDATA[ ]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Expression</data_type>
-                <signal_name><![CDATA[]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-global dms_enable
-displayValue = dms_enable
-
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>176.0</x>
-                    <y>8.0</y>
-                    <width>88</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>946f21aeec8711e69b754c348851fa7b</id>
-                <name><![CDATA[Note component]]></name>
-                <type>TextNote</type>
-                <description><![CDATA[]]></description>
-                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DMS On</p></body></html>]]></text>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>192.0</x>
-                    <y>8.0</y>
-                    <width>48</width>
-                    <height>40</height>
-                    <background_color><![CDATA[#f0f0f0]]></background_color>
-                    <background_type><![CDATA[Transparent]]></background_type>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>b421c170ec8711e69c654c348851fa7b</id>
-                <name><![CDATA[Note component]]></name>
-                <type>TextNote</type>
-                <description><![CDATA[]]></description>
-                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">Press button to enable DMS Test sequence.</span></p></body></html>]]></text>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>80.0</y>
-                    <width>264</width>
-                    <height>32</height>
-                    <background_color><![CDATA[#55aaff]]></background_color>
-                    <background_type><![CDATA[Filled]]></background_type>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c167a21eecbc11e6b4394c348851fa7b</id>
-                <name><![CDATA[DMS Black Start Enable]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Black Start Enable', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Black Start Enable', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>136.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c3949440ecbc11e685184c348851fa7b</id>
-                <name><![CDATA[DMS MicroGrid Control Start]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.MicorGrid Controler Start', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.MicorGrid Controler Start', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>296.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c749ad00ecbc11e6bf844c348851fa7b</id>
-                <name><![CDATA[DMS Request To Sync  POI]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Request To Sync To POI', inputValue)]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Request To Sync To POI', inputValue)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0]]></inputValue>
-                <inputValueType>int</inputValueType>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>448.0</y>
-                    <width>240</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
                 <id>a4def5cfedf311e6ba0a4c34882a0abb</id>
                 <name><![CDATA[ ]]></name>
                 <type>LedDisplay</type>
@@ -1609,240 +568,11 @@ displayValue = False
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>45824361ee0911e680144c34882a0abb</id>
-                <name><![CDATA[Woodward Controls]]></name>
-                <type>Group</type>
-                <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['4582dfa1ee0911e692a94c34882a0abb', '45837bdeee0911e6a8bf4c34882a0abb', '4584181eee0911e68c524c34882a0abb', '4584b461ee0911e6a1e74c34882a0abb']]]></components_ids>
-                <hierarchy_position>2</hierarchy_position>
-                <canvas_bg_color>#ffffff</canvas_bg_color>
-                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
-# available for use in all Macro and Expression scripts of the components owned by this widget.
-# This code is always executed prior simulation start.
-# HIL API is imported as 'hil'
-
-]]></initialization_code>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>8.0</y>
-                    <width>192</width>
-                    <height>216</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                    <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4582dfa1ee0911e692a94c34882a0abb</id>
-                <name><![CDATA[Emergency Stop (DI1)]]></name>
-                <type>MacroButton</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-hil.set_digital_output(1,name = 'digital input 1',invert = False,swControl = True, value = 0,device = 2)
-hil.wait_sec(1)
-hil.set_digital_output(1,name = 'digital input 1',invert = False,swControl = True, value = 1,device = 2)
-]]></on_use_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-]]></on_stop_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>8.0</y>
-                    <width>168</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>45837bdeee0911e6a8bf4c34882a0abb</id>
-                <name><![CDATA[Start in Auto (DI2)]]></name>
-                <type>ComboBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-
-if inputValue == 'ON':
-    # do something when 'ON' is selected
-    hil.set_digital_output(2,name = 'digital input 2',invert = False,swControl = True, value = 1,device = 2)    
-    pass
-
-elif inputValue == 'OFF':
-    # do something when 'OFF' is selected
-    hil.set_digital_output(2,name = 'digital input 2',invert = False,swControl = True, value = 0,device = 2)    
-    pass
-
-]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-
-if inputValue == 'ON':
-    # do something when 'ON' is selected
-    hil.set_digital_output(2,name = 'digital input 2',invert = False,swControl = True, value = 1,device = 2)    
-    pass
-
-elif inputValue == 'OFF':
-    # do something when 'OFF' is selected
-    hil.set_digital_output(2,name = 'digital input 2',invert = False,swControl = True, value = 0,device = 2)    
-    pass
-
-]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[ON]]></inputValue>
-                <availableValues><![CDATA[['ON', 'OFF']]]></availableValues>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>40.0</y>
-                    <width>168</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4584181eee0911e68c524c34882a0abb</id>
-                <name><![CDATA[Alarm Ack (DI5)]]></name>
-                <type>MacroButton</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = True, value = 1,device = 2)
-hil.wait_sec(1)
-hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = True, value = 0,device = 2)
-hil.wait_sec(1)
-hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = True, value = 1,device = 2)
-hil.wait_sec(1)
-hil.set_digital_output(5,name = 'digital input 5',invert = False,swControl = True, value = 0,device = 2)
-]]></on_use_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-]]></on_stop_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>72.0</y>
-                    <width>168</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4584b461ee0911e6a1e74c34882a0abb</id>
-                <name><![CDATA[Stop Machine]]></name>
-                <type>MacroButton</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-#Vf_stop is in per units on a base of 35V
-
-hil.set_cp_input_value('User defined', 'Stop Gen2', 'NG GENSET.Exciter.Vf_stop', 1.0)
-hil.wait_msec(200.0)
-hil.set_cp_input_value('User defined', 'Stop Gen2', 'NG GENSET.Exciter.Vf_stop', 2.0)
-hil.wait_msec(200.0)
-hil.set_cp_input_value('User defined', 'Stop Gen2', 'NG GENSET.Exciter.Vf_stop', 10.0)
-hil.wait_msec(2000.0)
-hil.set_cp_input_value('User defined', 'Stop Gen2', 'NG GENSET.Exciter.Vf_stop', 0.0)
-]]></on_use_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-]]></on_stop_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>104.0</y>
-                    <width>168</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
                 <id>4585298fee0911e68bfb4c34882a0abb</id>
-                <name><![CDATA[Woodward Digital Outputs]]></name>
+                <name><![CDATA[Woodward Startup Control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['4585c5d1ee0911e6834f4c34882a0abb', '4586620fee0911e69cab4c34882a0abb', '4586d740ee0911e696474c34882a0abb', '45874c70ee0911e6a2fb4c34882a0abb', '4587c1a1ee0911e69b094c34882a0abb', '458836d1ee0911e6810c4c34882a0abb', '4588ac00ee0911e6a3934c34882a0abb', '4589212eee0911e68b584c34882a0abb', '4589bd70ee0911e6a3e14c34882a0abb', '458a329eee0911e690b24c34882a0abb', '458aa7cfee0911e6b4be4c34882a0abb', '458b1d00ee0911e68b8f4c34882a0abb', '458b9230ee0911e6a5214c34882a0abb', '458c2e6eee0911e6bada4c34882a0abb']]]></components_ids>
+                <components_ids><![CDATA[['458c2e6eee0911e6bada4c34882a0abb', '8911d18cbe4011eab013509a4c4e2fb4', '9be535a6be4011eab1c6509a4c4e2fb4', '9be535a7be4011ea828d509a4c4e2fb4', 'a8de8930be4011ea8d09509a4c4e2fb4', 'a8de8931be4011eaaf80509a4c4e2fb4', '16ec12a4be4111ea871c509a4c4e2fb4', '16ec12a6be4111ea8b23509a4c4e2fb4', '16ec12a7be4111ea96e7509a4c4e2fb4', '16ec12a8be4111ea9d55509a4c4e2fb4', '16ec12a9be4111eaa106509a4c4e2fb4', '4177d81abe4111eaa871509a4c4e2fb4']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1852,389 +582,12 @@ widgetValue = None
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>200.0</x>
-                    <y>8.0</y>
-                    <width>400</width>
-                    <height>216</height>
+                    <x>432</x>
+                    <y>256</y>
+                    <width>448</width>
+                    <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4585c5d1ee0911e6834f4c34882a0abb</id>
-                <name><![CDATA[Ready for Operation (DO1)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 1]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>0.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4586620fee0911e69cab4c34882a0abb</id>
-                <name><![CDATA[Centralized alarm, horn (DO2)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 2]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Yellow</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>24.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4586d740ee0911e696474c34882a0abb</id>
-                <name><![CDATA[Starter, crank (DO3)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 3]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>48.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>45874c70ee0911e6a2fb4c34882a0abb</id>
-                <name><![CDATA[Fuel Solenoid, valve (DO4)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 4]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>72.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4587c1a1ee0911e69b094c34882a0abb</id>
-                <name><![CDATA[Preglow (DO5)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 5]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>96.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>458836d1ee0911e6810c4c34882a0abb</id>
-                <name><![CDATA[GCB status]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[NG GENSET.NG_GCB_fb]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>152.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4588ac00ee0911e6a3934c34882a0abb</id>
-                <name><![CDATA[Close GCB (DO6)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 6]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>120.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4589212eee0911e68b584c34882a0abb</id>
-                <name><![CDATA[Open GCB (DO7)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 7]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>0.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4589bd70ee0911e6a3e14c34882a0abb</id>
-                <name><![CDATA[Close MCB (DO8)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 8]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>24.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>458a329eee0911e690b24c34882a0abb</id>
-                <name><![CDATA[Open MCB (DO9)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 9]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>48.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>458aa7cfee0911e6b4be4c34882a0abb</id>
-                <name><![CDATA[Aux services, lube pump (DO10)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 10]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>72.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>458b1d00ee0911e68b8f4c34882a0abb</id>
-                <name><![CDATA[Warning signal (DO11)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 11]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Yellow</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>96.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>458b9230ee0911e6a5214c34882a0abb</id>
-                <name><![CDATA[Fatal Error (DO12)]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[HIL2 digital input 12]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>120.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
             </component_data>
         <component_data>
@@ -2256,22 +609,22 @@ displayValue = False
 # True -> On, False -> Off
 displayValue = False
 ]]></code>
-                <updateRate>1000</updateRate>
+                <updateRate>500</updateRate>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>200.0</x>
-                    <y>152.0</y>
-                    <width>184</width>
+                    <x>272</x>
+                    <y>72</y>
+                    <width>152</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
             </component_data>
         <component_data>
                 <id>45815900ee0911e681fa4c34882a0abb</id>
-                <name><![CDATA[Woodward - Natural Gas Genset]]></name>
+                <name><![CDATA[Woodward - Diesel Genset]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['45824361ee0911e680144c34882a0abb', '4585298fee0911e68bfb4c34882a0abb', '79ae9b6ef15111e6a1ec4c348851fa7b']]]></components_ids>
+                <components_ids><![CDATA[['4585298fee0911e68bfb4c34882a0abb', 'e420f4d2be4111eaaa80509a4c4e2fb4', 'e79b42d4be4311ea9368509a4c4e2fb4', '59ef9134be4411eaa7c2509a4c4e2fb4', '1dec833abe4511ea9dc0509a4c4e2fb4']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -2281,10 +634,10 @@ displayValue = False
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>776.0</x>
-                    <y>880.0</y>
-                    <width>616</width>
-                    <height>608</height>
+                    <x>600</x>
+                    <y>328</y>
+                    <width>896</width>
+                    <height>848</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <collapsed>False</collapsed>
                 </widget_settings>
@@ -2557,8 +910,8 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                 <phasors_data>
                     </phasors_data>
                 <widget_settings>
-                    <x>2424</x>
-                    <y>112</y>
+                    <x>2424.0</x>
+                    <y>112.0</y>
                     <width>328</width>
                     <height>304</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2567,88 +920,6 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                     <range_max>6000.0</range_max>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>79ae9b6ef15111e6a1ec4c348851fa7b</id>
-                <name><![CDATA[Natural Gas genset PQ]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Expression</data_type>
-                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
-# HIL Control Panel API
-
-import numpy as np
-# NOTE: Only read functions are available from HIL Control Panel API
-#-------------------------------------------------------------------
-
-# mandatory variable used for storing values
-# that will be displayed
-# e.g displayValue = [ [sigVal1,sigVal2,sigVal3], ["Signal 1 name","Signal 2 name","Signal 3 name"] ]
-P = hil.read_analog_signal(name = 'NG GENSET.NG_GCB_Measurements.P_Gen1')*4000.0
-Q = hil.read_analog_signal(name = 'NG GENSET.NG_GCB_Measurements.Q_Gen1')*4000.0
-
-displayValue = [ [P,Q], ['P [kW]','Q [kvar]'] ]
-
-]]></code>
-                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>1000</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>224.0</y>
-                    <width>592</width>
-                    <height>352</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-1000.0</y_range_min>
-                    <y_range_max>4000.0</y_range_max>
-                    <time_window>60</time_window>
-                    <auto_scale_enabled>False</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
                 </advance_widget_settings>
             </component_data>
         <component_data>
@@ -2962,125 +1233,6 @@ displayValue = hil.read_analog_signal('NG GENSET.Governor_and_Diesel_Engine.Actu
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>7bd534f0f31211e694f1dc4a3e45580c</id>
-                <name><![CDATA[Relay control]]></name>
-                <type>Group</type>
-                <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['847a7e80f31211e6b1fcdc4a3e45580c']]]></components_ids>
-                <hierarchy_position>1</hierarchy_position>
-                <canvas_bg_color>#ffffff</canvas_bg_color>
-                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
-# available for use in all Macro and Expression scripts of the components owned by this widget.
-# This code is always executed prior simulation start.
-# HIL API is imported as 'hil'
-
-]]></initialization_code>
-                <widget_settings>
-                    <x>1392.0</x>
-                    <y>880.0</y>
-                    <width>216</width>
-                    <height>104</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                    <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>847a7e80f31211e6b1fcdc4a3e45580c</id>
-                <name><![CDATA[Relay trip reset]]></name>
-                <type>Macro</type>
-                <description><![CDATA[None]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-
-# HIL Control Panel API
-
-
-for r in range(42):
-
-    soft_relay_clients[r].write_registers(2001, [1]) #toggle reset
-    time.sleep(0.1)
-    soft_relay_clients[r].write_registers(2001, [0]) #toggle reset
-]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other two handlers
-# HIL Control Panel API
-
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-
-# HIL Control Panel API
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-]]></on_stop_code>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>8.0</y>
-                    <width>176</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>e29fd23005af11e78998dc4a3e45580c</id>
-                <name><![CDATA[Black Start]]></name>
-                <type>Macro</type>
-                <description><![CDATA[This button will only work properly if the microgrid controller has been put in STOP status, and the EasyGen controller 'Remote Ack' bit is low]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-
-# HIL Control Panel API
-
-
-#initialize the DMS registers before starting
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_mcgrid_ctrl_start, 0) #Stop  microgrid controller
-
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_req_to_sync, 0) #Req to sync in quiescent state
-hil.wait_sec(1)
-
-hil.set_contactor(motor_F3,swControl= True,swState= False) #open motor contactors
-hil.set_contactor(motor_F1,swControl= True,swState= False) #open motor contactors
-
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_disconect, 1) #disconnect F1
-hil.wait_sec(1)
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_disconect, 2) #disconnect F2
-hil.wait_sec(1)
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_disconect, 3) #disconnect F3
-hil.wait_sec(1)
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_disconect, 0) #disconnect in quiescent state
-hil.wait_sec(1)
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_req_to_sync, 5) #Req to sync all SEL POI relays
-hil.wait_sec(2)
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_req_to_sync, 0) #Req to sync in quiescent state
-hil.wait_sec(1)
-
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', dms_mcgrid_ctrl_start, 1) #Start microgrid controller (this will start Gensets and ESS in grid connected mode, if everything went well)
-]]></on_click_code>
-                <on_start_code active="False"><![CDATA[None]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[
-
-
-
-
-
-]]></on_timer_code>
-                <run_each>1000</run_each>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-]]></on_stop_code>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>40.0</y>
-                    <width>168</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
                 <id>e23b9430f14d11e69dd84c348851fa7b</id>
                 <name><![CDATA[ ]]></name>
                 <type>DigitalDisplay</type>
@@ -3152,6 +1304,668 @@ displayValue = hil.read_analog_signal('Vrms_bus304')/1000
                     <green_range>(0, 0, 0, 0)</green_range>
                     <orange_range>(0, 0, 0, 0)</orange_range>
                     <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>8911d18cbe4011eab013509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[HIL2 digital input 8]]></signal_name>
+                <hil_device>2</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#------------------------------------------------
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>1000</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>336</x>
+                    <y>72</y>
+                    <width>56</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>9be535a6be4011eab1c6509a4c4e2fb4</id>
+                <name><![CDATA[GCB status]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[NG_MCB.NG_MCB_fb]]></signal_name>
+                <hil_device>2</hil_device>
+                <led_color>Green</led_color>
+                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#------------------------------------------------
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>272</x>
+                    <y>120</y>
+                    <width>152</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>9be535a7be4011ea828d509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[HIL2 digital input 8]]></signal_name>
+                <hil_device>2</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#------------------------------------------------
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>1000</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>336</x>
+                    <y>120</y>
+                    <width>56</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>a8de8930be4011ea8d09509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[HIL2 digital input 8]]></signal_name>
+                <hil_device>2</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#------------------------------------------------
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>1000</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>336</x>
+                    <y>24</y>
+                    <width>56</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>a8de8931be4011eaaf80509a4c4e2fb4</id>
+                <name><![CDATA[Genset sync status]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[NG_MCB.NG_MCB_fb]]></signal_name>
+                <hil_device>2</hil_device>
+                <led_color>Green</led_color>
+                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#------------------------------------------------
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>272</x>
+                    <y>24</y>
+                    <width>152</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>16ec12a4be4111ea871c509a4c4e2fb4</id>
+                <name><![CDATA[OFF]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+
+hil.set_scada_input_value('Microturbine.MT_sync', 0)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+hil.set_scada_input_value('Microturbine.MT_sync', 0)
+hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>112</x>
+                    <y>32</y>
+                    <width>64</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>16ec12a6be4111ea8b23509a4c4e2fb4</id>
+                <name><![CDATA[OFF]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.MT_sync', 1)
+hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>112</x>
+                    <y>120</y>
+                    <width>64</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>16ec12a7be4111ea96e7509a4c4e2fb4</id>
+                <name><![CDATA[ON]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+
+hil.set_scada_input_value('Microturbine.MT_sync', 1)]]></on_click_code>
+                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+
+hil.set_scada_input_value('Microturbine.MT_sync', 0)
+hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>32</x>
+                    <y>32</y>
+                    <width>64</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>16ec12a8be4111ea9d55509a4c4e2fb4</id>
+                <name><![CDATA[Note component]]></name>
+                <type>TextNote</type>
+                <description><![CDATA[]]></description>
+                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:9pt; font-weight:600;">Genset Auto Sync</span></p></body></html>]]></text>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>24</x>
+                    <y>8</y>
+                    <width>144</width>
+                    <height>32</height>
+                    <background_color><![CDATA[#f0f0f0]]></background_color>
+                    <background_type><![CDATA[Transparent]]></background_type>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>16ec12a9be4111eaa106509a4c4e2fb4</id>
+                <name><![CDATA[ON]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.MT_sync', 1)
+hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 1)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>32</x>
+                    <y>120</y>
+                    <width>64</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>4177d81abe4111eaa871509a4c4e2fb4</id>
+                <name><![CDATA[Note component]]></name>
+                <type>TextNote</type>
+                <description><![CDATA[]]></description>
+                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:9pt; font-weight:600;">Genset Connect</span></p></body></html>]]></text>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>24</x>
+                    <y>96</y>
+                    <width>144</width>
+                    <height>32</height>
+                    <background_color><![CDATA[#f0f0f0]]></background_color>
+                    <background_type><![CDATA[Transparent]]></background_type>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>e420f4d2be4111eaaa80509a4c4e2fb4</id>
+                <name><![CDATA[Woodward Control]]></name>
+                <type>Group</type>
+                <description><![CDATA[None]]></description>
+                <components_ids><![CDATA[['064b14a8be4211eaacac509a4c4e2fb4', '40ad4f02be4211eaa978509a4c4e2fb4', 'd4ca4f58be4211eab7df509a4c4e2fb4']]]></components_ids>
+                <hierarchy_position>2</hierarchy_position>
+                <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
+                <widget_settings>
+                    <x>48</x>
+                    <y>256</y>
+                    <width>328</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                    <collapsed>False</collapsed>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>064b14a8be4211eaacac509a4c4e2fb4</id>
+                <name><![CDATA[AGC signal]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).Governor.AGC', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[p.u.]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>24</x>
+                    <y>120</y>
+                    <width>264</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>40ad4f02be4211eaa978509a4c4e2fb4</id>
+                <name><![CDATA[Reference Voltage]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[p.u.]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>24</x>
+                    <y>8</y>
+                    <width>264</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>d4ca4f58be4211eab7df509a4c4e2fb4</id>
+                <name><![CDATA[Reference Frequency]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).wref', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[rad/s]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>24</x>
+                    <y>64</y>
+                    <width>264</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>e79b42d4be4311ea9368509a4c4e2fb4</id>
+                <name><![CDATA[Genset Output Power]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+data = {
+    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
+    "analog_names": [],
+    
+    # analog data values: [aVal1,aVal2,aVal3]
+    "analog_values": [],
+    
+    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
+    "digital_names": [],
+    
+    # digital data values: [dVal1,dVal2,aVal3]
+    "digital_values": [],
+    }
+displayValue = data
+]]></code>
+                <analog_signals><![CDATA[['CIL_F3_Interruptible6.Lb', 'CIL_F3_Interruptible6.Lc']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>2</hierarchy_position>
+                <widget_settings>
+                    <x>0</x>
+                    <y>456</y>
+                    <width>880</width>
+                    <height>360</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>10</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>59ef9134be4411eaa7c2509a4c4e2fb4</id>
+                <name><![CDATA[Speed]]></name>
+                <type>Gauge</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <signal_name><![CDATA[]]></signal_name>
+                <unit><![CDATA[rpm]]></unit>
+                <automatic_unit>False</automatic_unit>
+                <updateRate>500</updateRate>
+                <decimals>2</decimals>
+                <hierarchy_position>2</hierarchy_position>
+                <widget_settings>
+                    <x>480</x>
+                    <y>24</y>
+                    <width>352</width>
+                    <height>224</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <min>0.0</min>
+                    <max>100.0</max>
+                    <warning_range>(0, 0, 0, 0)</warning_range>
+                    <critical_range>(0, 0, 0, 0)</critical_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>1dec833abe4511ea9dc0509a4c4e2fb4</id>
+                <name><![CDATA[Line-to-Line Voltage]]></name>
+                <type>Gauge</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <signal_name><![CDATA[]]></signal_name>
+                <unit><![CDATA[kV]]></unit>
+                <automatic_unit>False</automatic_unit>
+                <updateRate>500</updateRate>
+                <decimals>2</decimals>
+                <hierarchy_position>2</hierarchy_position>
+                <widget_settings>
+                    <x>32</x>
+                    <y>24</y>
+                    <width>368</width>
+                    <height>224</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <min>0.0</min>
+                    <max>100.0</max>
+                    <warning_range>(0, 0, 0, 0)</warning_range>
+                    <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
             </component_data>
         </components>

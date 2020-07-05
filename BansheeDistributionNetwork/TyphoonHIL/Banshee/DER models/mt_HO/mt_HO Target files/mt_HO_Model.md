@@ -1,4 +1,4 @@
-Model mt_ho
+Model mt_HO
 
 REM *****************************************:
 REM * Common entries:
@@ -119,7 +119,7 @@ rtds_write 0x08240400 0x00000001
 
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x00000006
+rtds_write 0x080C0001 0x0000000C
 rtds_write 0x080C0004 0x3D23D70A
 rtds_write 0x080C0005 0x3D710000
 rtds_write 0x08100000 0x00000019

@@ -14,7 +14,7 @@
         </pvs>
         <contactors>
             <contactor>
-                <name>Grid forming inverter (averaged)2.S2</name>
+                <name>Grid forming inverter (averaged).S2</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>0</weight>
@@ -542,7 +542,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>Grid forming inverter (averaged)2.INV_sync OFF</name>
+                	<name>Grid forming inverter (averaged).INV_sync OFF</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -554,7 +554,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>Grid forming inverter (averaged)2.INV_sync ON</name>
+                	<name>Grid forming inverter (averaged).INV_sync ON</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -566,7 +566,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>Grid forming inverter (averaged)2.S2_fb</name>
+                	<name>Grid forming inverter (averaged).S2_fb</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -901,19 +901,19 @@
         </batteries>
         <scada_inputs>
             <scada_input>
-                <name>Grid forming inverter (averaged)2.BE1-25A Synchronizer.Connect INV</name>
+                <name>Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>Grid forming inverter (averaged)2.INV_sync</name>
+                <name>Grid forming inverter (averaged).INV_sync</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Pref</name>
                 <device>0</device>
-                <value>0.005</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Qref</name>
