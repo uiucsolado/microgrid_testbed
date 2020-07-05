@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 05-Jul-2020 @ 02:03:58 AM
+// Save timestamp: 05-Jul-2020 @ 02:30:31 AM
 //
 
-model "Banshee_Feeder3_v2" {
+model "banshee_feeder3_v2" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 1
@@ -52704,7 +52704,7 @@ out=fabs(fline-fbus);
             L_sequence_imperial = "L_cable11"
             L_sequence_metric = "[[0.0020, 0.0, 0.0], [0.0, 3.0953e-4, 0.0], [0.0, 0.0, 3.0953e-4]]"
             Length_metric = "1.6764"
-            Length_miles = "l_F1DG"
+            Length_miles = "(l_F1DG*0)+20"
             R_sequence_imperial = "R_cable11"
             R_sequence_metric = "[[1.1405, 0.0, 0.0], [0.0, 0.0749, 0.0], [0.0, 0.0, 0.0749]]"
             model_def = "Sequence"

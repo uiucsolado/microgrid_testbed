@@ -11,20 +11,6 @@
     <components>
         <inputs>
             <input>
-                <name>NG GENSET.V_noise_immunity</name>
-                <device>0</device>
-            	<input_type>OnePhaseInput</input_type>
-                <waveform_type>Constant</waveform_type>
-                <waveform></waveform>
-                <constant_value>0.0</constant_value>
-                <rms>0.0</rms>
-                <frequency>50.0</frequency>
-                <phase>0.0</phase>
-                <use_harmonics>False</use_harmonics>
-                <harmonics>[]</harmonics>
-                <harmonics_type>per_rms_unit_harmonics</harmonics_type>
-            </input>
-            <input>
                 <name>Vs1</name>
                 <device>0</device>
                 <input_address>2</input_address>
@@ -49,6 +35,15 @@
                 <weight>0</weight>
                 <site>0</site>
                 <is_enabled>True</is_enabled>
+                <is_closed>False</is_closed>
+            </contactor>
+            <contactor>
+                <name>DG_MCB.DG_MCB</name>
+                <type>three_phase_breaker</type>
+                <device>0</device>
+                <weight>0</weight>
+                <site>5</site>
+                <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -85,7 +80,7 @@
                 <weight>0</weight>
                 <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB5.Brk.S1</name>
@@ -151,22 +146,13 @@
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
-                <name>NG GENSET.NG_GCB</name>
+                <name>Microturbine.S2</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>1</weight>
-                <site>2</site>
-                <is_enabled>True</is_enabled>
+                <site>5</site>
+                <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>NG_MCB.NG_MCB</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>2</weight>
-                <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
             </contactor>
         </contactors>
         <dtsm_contactors>
@@ -174,27 +160,6 @@
         <machines>
             <machine>
                 <name>F3_Motor.IM</name>
-                <device>0</device>
-                <control_enabled>False</control_enabled>
-                <ext_model_load_type>0</ext_model_load_type>
-                <site>1</site>
-                <init_values>[]</init_values>
-                <constant_torque>0.0</constant_torque>
-                <linear_torque>0.0</linear_torque>
-                <square_torque>0.0</square_torque>
-                <constant_torque_type>1</constant_torque_type>
-                <external_torque_type>0</external_torque_type>
-                <load_source>0</load_source>
-                <load_type>0</load_type>
-                <machine_speed>0.0</machine_speed>
-                <initial_speed>0.0</initial_speed>
-                <initial_angle>0.0</initial_angle>
-                <initial_encoder_offset>0.0</initial_encoder_offset>
-                <initial_resolver_offset>0.0</initial_resolver_offset>
-                <machine_gauge>{}</machine_gauge>
-            </machine>
-            <machine>
-                <name>NG GENSET.NG_Gen</name>
                 <device>0</device>
                 <control_enabled>False</control_enabled>
                 <ext_model_load_type>0</ext_model_load_type>
@@ -1091,7 +1056,7 @@
             <scada_input>
                 <name>3ph Fault 301.ctrl</name>
                 <device>0</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>F3_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
@@ -1139,54 +1104,39 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_Motor.Control Panel Input1</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Exciter.Vf_stop</name>
+                <name>F3_PCC.Close PCC</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>NG GENSET.Exciter.Vref</name>
+                <name>Microturbine.Connect MCB</name>
                 <device>0</device>
                 <value>1.0</value>
             </scada_input>
             <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.CHP.SIMHIL</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.Heat_Load</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.mfidot</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.Reset</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.SIMEnable_CHP</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.SIMTempSetPoint_CHP</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>NG GENSET.Governor_and_Diesel_Engine.wref</name>
+                <name>Microturbine.Connect MT</name>
                 <device>0</device>
                 <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine.MT_sync</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine.qd0(PU).Governor.AGC</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine.qd0(PU).Vref</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine.qd0(PU).wref</name>
+                <device>0</device>
+                <value>376.99111843077515</value>
             </scada_input>
         </scada_inputs>
     </components>
