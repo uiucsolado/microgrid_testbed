@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 04-Jul-2020 @ 04:16:26 PM
+// Save timestamp: 05-Jul-2020 @ 12:47:24 AM
 //
 
-model "mt_HO" {
+model "mt_HO_test" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 1
@@ -58,41 +58,6 @@ model "mt_HO" {
             [
                 position = 6208, 8096
                 hide_name = True
-            ]
-
-            component gen_logic_op "Logical operator1" {
-                operator = "NOT"
-            }
-            [
-                position = 6816, 8024
-                rotation = right
-                hide_name = True
-            ]
-
-            component gen_digital_probe "MT_sync OFF" {
-            }
-            [
-                position = 6888, 8056
-            ]
-
-            component gen_digital_probe "MT_sync ON" {
-            }
-            [
-                position = 6888, 7952
-                rotation = down
-                scale = -1, 1
-            ]
-
-            component src_scada_input MT_sync {
-                execution_rate = "Ts"
-                format = "int"
-                max = "1"
-                min = "0"
-                signal_type = "int"
-                unit = ""
-            }
-            [
-                position = 6760, 7984
             ]
 
             component Subsystem "qd0(PU)" {
@@ -4073,6 +4038,221 @@ if(boolean==1){
                 size = 96, 160
             ]
 
+            component sys_signal_switch "Signal switch2" {
+                criterion = "ctrl != threshold"
+                threshold = "1"
+            }
+            [
+                position = 6288, 7952
+                hide_name = True
+                scale = 1, -1
+            ]
+
+            component "core/Signal Controlled Voltage Source" Ea {
+            }
+            [
+                position = 6120, 8328
+                rotation = right
+                scale = -1, 1
+                size = 64, 32
+            ]
+
+            component "core/Signal Controlled Voltage Source" Eb {
+            }
+            [
+                position = 6576, 8368
+                rotation = right
+                scale = -1, 1
+                size = 64, 32
+            ]
+
+            component "core/Signal Controlled Voltage Source" Ec {
+            }
+            [
+                position = 7088, 8400
+                rotation = right
+                scale = -1, 1
+                size = 64, 32
+            ]
+
+            component pas_resistor Ra {
+                resistance = "Rs"
+            }
+            [
+                position = 6168, 8216
+            ]
+
+            component pas_resistor Rb {
+                resistance = "Rs"
+            }
+            [
+                position = 6640, 8280
+            ]
+
+            component pas_resistor Rc {
+                resistance = "Rs"
+            }
+            [
+                position = 7144, 8336
+            ]
+
+            component "core/Current Measurement" Ia1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 6264, 8216
+                size = 64, 32
+            ]
+
+            component "core/Current Measurement" Ib1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 6736, 8280
+                size = 64, 32
+            ]
+
+            component "core/Current Measurement" Ic1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 7240, 8336
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Ea1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 6320, 8328
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Eb1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 6800, 8360
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Ec1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 7352, 8392
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Triple Pole Single Throw Contactor" S2 {
+                ctrl_src = "Model"
+            }
+            [
+                position = 7624, 8280
+                size = 64, 256
+            ]
+
+            component "core/Voltage Measurement" Ea_phi {
+                execution_rate = "Ts"
+            }
+            [
+                position = 5984, 8328
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Eb_phi {
+                execution_rate = "Ts"
+            }
+            [
+                position = 6440, 8368
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Ec_phi {
+                execution_rate = "Ts"
+            }
+            [
+                position = 6952, 8400
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Va_G1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 7928, 8232
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Vb_G1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 7816, 8328
+                rotation = right
+                size = 64, 32
+            ]
+
+            component "core/Voltage Measurement" Vc_G1 {
+                execution_rate = "Ts"
+                sig_output = "True"
+            }
+            [
+                position = 7704, 8424
+                rotation = right
+                size = 64, 32
+            ]
+
+            component gen_logic_op "Logical operator1" {
+                operator = "NOT"
+            }
+            [
+                position = 6920, 8112
+                rotation = right
+                hide_name = True
+            ]
+
+            component gen_digital_probe "MT_sync OFF" {
+            }
+            [
+                position = 6992, 8144
+            ]
+
+            component gen_digital_probe "MT_sync ON" {
+            }
+            [
+                position = 6992, 8040
+                rotation = down
+                scale = -1, 1
+            ]
+
+            component src_scada_input MT_sync {
+                execution_rate = "Ts"
+                format = "int"
+                max = "1"
+                min = "0"
+                signal_type = "int"
+                unit = ""
+            }
+            [
+                position = 6864, 8072
+            ]
+
             component Subsystem "BE1-25A Synchronizer" {
                 layout = dynamic
                 component gen_trigonometric "Trigonometric function2" {
@@ -4171,17 +4351,6 @@ else if (dV <= (-1*maxV_slip))
                 [
                     position = 7736, 8176
                     hide_name = True
-                ]
-
-                component src_scada_input "Connect MT" {
-                    def_value = "1"
-                    execution_rate = "Ts"
-                    max = "1"
-                    min = "0"
-                    unit = ""
-                }
-                [
-                    position = 8688, 8176
                 ]
 
                 component gen_terminator Termination1 {
@@ -5084,17 +5253,6 @@ else if((connectMT==0)||(MTsync==0)){
                     hide_name = True
                 ]
 
-                tag Connect3 {
-                    value = "Connect"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8440, 8648
-                    hide_name = True
-                ]
-
                 tag From43 {
                     value = "Vd_G"
                     scope = local
@@ -5207,7 +5365,7 @@ else if((connectMT==0)||(MTsync==0)){
                 ]
 
                 tag Connect2 {
-                    value = "Connect"
+                    value = "Connected"
                     scope = masked_subsystem
                     kind = sp
                     direction = out
@@ -5215,7 +5373,7 @@ else if((connectMT==0)||(MTsync==0)){
                 [
                     position = 8224, 8416
                     hide_name = True
-                    size = 42, 20
+                    size = 58, 20
                 ]
 
                 tag From44 {
@@ -5546,6 +5704,29 @@ else if((connectMT==0)||(MTsync==0)){
                     hide_name = True
                 ]
 
+                tag Connect5 {
+                    value = "Connect MT"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8688, 8176
+                    hide_name = True
+                ]
+
+                tag Connect6 {
+                    value = "Connected"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8440, 8648
+                    hide_name = True
+                    size = 58, 20
+                ]
+
                 junction Junction41 sp
                 [
                     position = 7480, 8576
@@ -5756,7 +5937,6 @@ else if((connectMT==0)||(MTsync==0)){
                 connect Product1.in1 Junction26 as Connection249
                 connect "Hold after connect.out" "Unit Delay3.in" as Connection291
                 connect Junction41 PLL.q as Connection382
-                connect Connect3 "Hold after connect1.connect" as Connection354
                 connect Constant6.out "Relational operator1.in" as Connection69
                 connect Product1.out Sum4.in as Connection250
                 connect Junction42 Product4.in1 as Connection392
@@ -5780,7 +5960,6 @@ else if((connectMT==0)||(MTsync==0)){
                 connect V_t9 "Hold after connect1.exc_state" as Connection493
                 connect MT_ON3 "Hold after connect1.MT_sync" as Connection494
                 connect "Hold after connect1.in" "BE1-25A Synchronizer1.del_V" as Connection495
-                connect "Connect MT.out" "stay connected1.connectMT" as Connection504
                 connect Connect1 Junction63 as Connection508
                 connect MT_ON4 "stay connected1.MTsync" as Connection512
                 connect w_e7 Gain4.in as Connection513
@@ -5887,208 +6066,174 @@ else if((connectMT==0)||(MTsync==0)){
                 ]
                 connect Junction63 "Unit Delay5.out" as Connection623
                 connect "Unit Delay5.in" "stay connected1.out" as Connection624
+                connect Connect5 "stay connected1.connectMT" as Connection625
+                connect Connect6 "Hold after connect1.connect" as Connection626
             }
             [
-                position = 7016, 8008
+                position = 6664, 8064
                 size = 112, 144
             ]
 
-            component sys_signal_switch "Signal switch2" {
-                criterion = "ctrl != threshold"
-                threshold = "1"
+            component Subsystem CB_control {
+                layout = dynamic
+                component gen_logic_op "Logical operator1" {
+                }
+                [
+                    position = 8176, 8256
+                    hide_name = True
+                ]
+
+                component gen_logic_op "Logical operator2" {
+                }
+                [
+                    position = 8088, 8232
+                    hide_name = True
+                ]
+
+                port CB_status {
+                    label = "CB_status"
+                    position = top:1
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8280, 8256
+                ]
+
+                port Close_GCB {
+                    label = "Close_GCB"
+                    position = left:1
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7912, 8208
+                ]
+
+                port Close_MCB {
+                    label = "Close_MCB"
+                    position = left:3
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7912, 8264
+                ]
+
+                port MCB_control {
+                    label = "MCB_control"
+                    position = right:1
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8024, 8304
+                ]
+
+                tag Connect5 {
+                    value = "Connect"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8088, 8280
+                    hide_name = True
+                ]
+
+                tag Connect6 {
+                    value = "Connect MT"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8184, 8216
+                    hide_name = True
+                ]
+
+                tag Connect1 {
+                    value = "Connected"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8280, 8320
+                    hide_name = True
+                ]
+
+                junction Junction3 sp
+                [
+                    position = 8136, 8232
+                ]
+
+                junction Junction4 sp
+                [
+                    position = 8232, 8256
+                ]
+
+                junction Junction5 sp
+                [
+                    position = 7992, 8264
+                ]
+
+                connect Connect5 "Logical operator1.in1" as Connection18
+                connect "Logical operator2.out" Junction3 as Connection29
+                connect Junction3 "Logical operator1.in" as Connection30
+                connect Connect6 Junction3 as Connection31
+                connect "Logical operator1.out" Junction4 as Connection32
+                connect Junction4 CB_status as Connection33
+                connect Connect1 Junction4 as Connection34
+                [
+                    breakpoints = 8232, 8320; 8232, 8256
+                ]
+                connect Close_GCB "Logical operator2.in" as Connection35
+                connect Close_MCB Junction5 as Connection37
+                connect Junction5 "Logical operator2.in1" as Connection38
+                connect MCB_control Junction5 as Connection39
             }
             [
-                position = 6288, 7952
-                hide_name = True
-                scale = 1, -1
+                position = 7288, 8104
+                size = 176, 96
             ]
 
-            component "core/Signal Controlled Voltage Source" Ea {
-            }
-            [
-                position = 6120, 8328
-                rotation = right
-                scale = -1, 1
-                size = 64, 32
-            ]
-
-            component "core/Signal Controlled Voltage Source" Eb {
-            }
-            [
-                position = 6576, 8368
-                rotation = right
-                scale = -1, 1
-                size = 64, 32
-            ]
-
-            component "core/Signal Controlled Voltage Source" Ec {
-            }
-            [
-                position = 7088, 8400
-                rotation = right
-                scale = -1, 1
-                size = 64, 32
-            ]
-
-            component pas_resistor Ra {
-                resistance = "Rs"
-            }
-            [
-                position = 6168, 8216
-            ]
-
-            component pas_resistor Rb {
-                resistance = "Rs"
-            }
-            [
-                position = 6640, 8280
-            ]
-
-            component pas_resistor Rc {
-                resistance = "Rs"
-            }
-            [
-                position = 7144, 8336
-            ]
-
-            component "core/Current Measurement" Ia1 {
+            component src_scada_input "Connect MT" {
+                def_value = "1"
                 execution_rate = "Ts"
-                sig_output = "True"
+                max = "1"
+                min = "0"
+                unit = ""
             }
             [
-                position = 6264, 8216
-                size = 64, 32
+                position = 7144, 8072
             ]
 
-            component "core/Current Measurement" Ib1 {
+            component src_scada_input "Connect MCB" {
+                def_value = "1"
                 execution_rate = "Ts"
-                sig_output = "True"
+                max = "1"
+                min = "0"
+                unit = ""
             }
             [
-                position = 6736, 8280
-                size = 64, 32
-            ]
-
-            component "core/Current Measurement" Ic1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 7240, 8336
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Ea1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 6320, 8328
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Eb1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 6800, 8360
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Ec1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 7352, 8392
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Triple Pole Single Throw Contactor" S2 {
-                ctrl_src = "Model"
-            }
-            [
-                position = 7624, 8280
-                size = 64, 256
-            ]
-
-            component "core/Voltage Measurement" Ea_phi {
-                execution_rate = "Ts"
-            }
-            [
-                position = 5984, 8328
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Eb_phi {
-                execution_rate = "Ts"
-            }
-            [
-                position = 6440, 8368
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Ec_phi {
-                execution_rate = "Ts"
-            }
-            [
-                position = 6952, 8400
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Va_G1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 7928, 8232
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Vb_G1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 7816, 8328
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Voltage Measurement" Vc_G1 {
-                execution_rate = "Ts"
-                sig_output = "True"
-            }
-            [
-                position = 7704, 8424
-                rotation = right
-                size = 64, 32
-            ]
-
-            component "core/Three Phase Two Winding Transformer" Tr1 {
-                L1 = "L1_trans"
-                L2 = "L2_trans"
-                Lm = "20"
-                R1 = "R1_trans"
-                R2 = "R2_trans"
-                Rm = "1e5"
-                Sn = "S"
-                V1 = "V_ABC"
-                V2 = "V_G"
-                f = "w_0/(2*np.pi)"
-                input = "SI"
-            }
-            [
-                position = 8184, 8280
-                size = 126, 256
+                position = 7144, 8136
             ]
 
             port ground {
@@ -6127,6 +6272,19 @@ else if((connectMT==0)||(MTsync==0)){
                 scale = -1, 1
             ]
 
+            port "MCB Control" {
+                position = left:auto
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 7432, 8104
+            ]
+
             tag w_bus2 {
                 value = "w_bus"
                 scope = masked_subsystem
@@ -6147,17 +6305,6 @@ else if((connectMT==0)||(MTsync==0)){
             }
             [
                 position = 6208, 7936
-                hide_name = True
-            ]
-
-            tag Connect6 {
-                value = "MT_sync"
-                scope = masked_subsystem
-                kind = sp
-                direction = in
-            }
-            [
-                position = 6888, 7984
                 hide_name = True
             ]
 
@@ -6279,17 +6426,6 @@ else if((connectMT==0)||(MTsync==0)){
                 position = 7432, 8392
             ]
 
-            tag Connect5 {
-                value = "Connect"
-                scope = masked_subsystem
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7512, 8136
-                hide_name = True
-            ]
-
             tag V_d_a3 {
                 value = "VbG"
                 scope = masked_subsystem
@@ -6323,14 +6459,15 @@ else if((connectMT==0)||(MTsync==0)){
                 hide_name = True
             ]
 
-            junction Junction47 sp
+            tag Connect6 {
+                value = "MT_sync"
+                scope = masked_subsystem
+                kind = sp
+                direction = in
+            }
             [
-                position = 6816, 7984
-            ]
-
-            junction Junction48 sp
-            [
-                position = 6816, 7984
+                position = 6992, 8072
+                hide_name = True
             ]
 
             junction Junction37 pe
@@ -6425,20 +6562,24 @@ else if((connectMT==0)||(MTsync==0)){
 
             junction Junction101 pe
             [
-                position = 7704, 8376
+                position = 7928, 8464
             ]
 
             junction Junction102 pe
             [
-                position = 7928, 8464
+                position = 7704, 8376
             ]
 
-            connect "MT_sync OFF.in" "Logical operator1.out" as Connection155
-            connect MT_sync.out Junction47 as Connection342
-            connect Junction47 Connect6 as Connection343
-            connect "Logical operator1.in" Junction48 as Connection345
-            connect Junction48 Junction47 as Connection346
-            connect "MT_sync ON.in" Junction48 as Connection347
+            junction Junction47 sp
+            [
+                position = 6920, 8072
+            ]
+
+            junction Junction48 sp
+            [
+                position = 6920, 8072
+            ]
+
             connect "Signal switch1.out" "qd0(PU).w_ref" as Connection351
             connect Constant1.out "Signal switch2.in" as Connection360
             connect From1 "Signal switch2.in1" as Connection361
@@ -6472,7 +6613,6 @@ else if((connectMT==0)||(MTsync==0)){
             connect Ic1.n_node Junction49 as Connection789
             connect Junction49 S2.c_in as Connection790
             connect Ec1.p_node Junction49 as Connection791
-            connect Connect5 S2.ctrl_in as Connection792
             connect V_a1 Ea.in as Connection390
             connect V_b1 Eb.in as Connection391
             connect V_c1 Ec.in as Connection392
@@ -6528,37 +6668,46 @@ else if((connectMT==0)||(MTsync==0)){
             connect Vc_G1.n_node Junction97 as Connection861
             connect Junction98 Junction97 as Connection863
             connect Vb_G1.n_node Junction98 as Connection864
-            connect S2.a_out Junction99 as Connection920
-            connect Junction99 Va_G1.p_node as Connection921
+            connect Va_G1.p_node Junction99 as Connection940
+            connect Junction99 S2.a_out as Connection941
             [
-                breakpoints = 7928, 8184; 7928, 8184; 7928, 8184
+                breakpoints = 7928, 8184; 7928, 8184; 7928, 8184; 7928, 8184
             ]
-            connect Tr1.prm_1 Junction99 as Connection922
-            connect Vb_G1.p_node Junction100 as Connection923
-            connect Junction100 S2.b_out as Connection924
+            connect V_aG Junction99 as Connection942
+            connect S2.b_out Junction100 as Connection943
+            connect Junction100 Vb_G1.p_node as Connection944
             [
-                breakpoints = 7816, 8280; 7816, 8280
+                breakpoints = 7816, 8280; 7816, 8280; 7816, 8280
             ]
-            connect Tr1.prm_2 Junction100 as Connection925
-            connect S2.c_out Junction101 as Connection926
-            connect Junction101 Vc_G1.p_node as Connection927
+            connect V_bG Junction100 as Connection945
+            connect Junction98 Junction101 as Connection946
             [
-                breakpoints = 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376
+                breakpoints = 7816, 8464; 7816, 8464; 7816, 8464; 7816, 8464
             ]
-            connect Tr1.prm_3 Junction101 as Connection928
-            connect Junction98 Junction102 as Connection929
+            connect Junction101 Va_G1.n_node as Connection947
             [
-                breakpoints = 7816, 8464; 7816, 8464; 7816, 8464
+                breakpoints = 7928, 8464; 7928, 8464; 7928, 8464; 7928, 8464; 7928, 8464
             ]
-            connect Junction102 Va_G1.n_node as Connection930
+            connect ground Junction101 as Connection948
+            connect S2.c_out Junction102 as Connection949
+            connect Junction102 Vc_G1.p_node as Connection950
             [
-                breakpoints = 7928, 8464; 7928, 8464; 7928, 8464; 7928, 8464
+                breakpoints = 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376; 7704, 8376
             ]
-            connect Tr1.n1 Junction102 as Connection931
-            connect ground Tr1.n2 as Connection932
-            connect Tr1.sec_3 V_cG as Connection933
-            connect V_bG Tr1.sec_2 as Connection934
-            connect Tr1.sec_1 V_aG as Connection935
+            connect V_cG Junction102 as Connection951
+            connect "MT_sync OFF.in" "Logical operator1.out" as Connection155
+            connect MT_sync.out Junction47 as Connection342
+            connect Junction47 Connect6 as Connection343
+            connect "Logical operator1.in" Junction48 as Connection345
+            connect Junction48 Junction47 as Connection346
+            connect "MT_sync ON.in" Junction48 as Connection347
+            connect "Connect MT.out" CB_control.Close_GCB as Connection850
+            connect "Connect MCB.out" CB_control.Close_MCB as Connection851
+            connect CB_control.MCB_control "MCB Control" as Connection852
+            connect CB_control.CB_status S2.ctrl_in as Connection952
+
+            S = "235e+6"
+            V_ABC = "13.8e+3/np.sqrt(3)"
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A diesel genset microturbine</p></body></html>"
@@ -6567,25 +6716,16 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Rated Power (system)"
                     widget = edit
                     type = generic
-                    default_value = "835.0e6"
+                    default_value = "835e+6"
                     unit = "VA"
                     group = "1. Synchronous Machine"
                 }
 
                 V_ABC {
-                    label = "Rated RMS Voltage (genset line-line)"
+                    label = "Rated RMS Voltage (genset)"
                     widget = edit
                     type = generic
-                    default_value = "26.0e3/np.sqrt(3)"
-                    unit = "V"
-                    group = "1. Synchronous Machine"
-                }
-
-                V_G {
-                    label = "Rated RMS Voltage (system line-line)"
-                    widget = edit
-                    type = generic
-                    default_value = "13.8e3/np.sqrt(3)"
+                    default_value = "26e+3/np.sqrt(3)"
                     unit = "V"
                     group = "1. Synchronous Machine"
                 }
@@ -6594,7 +6734,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Nominal Frequency"
                     widget = edit
                     type = generic
-                    default_value = "2*np.pi*60.0"
+                    default_value = "2*np.pi*60"
                     unit = "rad/s"
                     group = "1. Synchronous Machine"
                 }
@@ -6603,7 +6743,7 @@ else if((connectMT==0)||(MTsync==0)){
                     label = "Pole-pairs"
                     widget = edit
                     type = generic
-                    default_value = "1.0"
+                    default_value = "1"
                     group = "1. Synchronous Machine"
                 }
 
@@ -7052,7 +7192,6 @@ else if((connectMT==0)||(MTsync==0)){
                 CODE init
                     S = mdl.get_property_value(mdl.prop(item_handle, "S"))
                     V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
-                    V_G = mdl.get_property_value(mdl.prop(item_handle, "V_G"))
                     w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
                     pms = mdl.get_property_value(mdl.prop(item_handle, "pms"))
                     Jm = mdl.get_property_value(mdl.prop(item_handle, "Jm"))
@@ -7111,13 +7250,6 @@ else if((connectMT==0)||(MTsync==0)){
                     T_nom = S/w_m
                     I_DQ = (2*S)/(3*V_DQ)
                     Z_DQ = V_DQ/I_DQ
-                    
-                    N1_N2 = V_ABC/np.float64(V_G)
-                    R1_trans = 3*1.1*(V_ABC**2)/S
-                    L1_trans = 3*(30*R1_trans/w_0)*(V_ABC**2)/S
-                    R2_trans = R1_trans/(N1_N2)
-                    L2_trans = L1_trans/(N1_N2)
-                    
                     X_q = w_0*(Lls+Lmq)/Z_DQ
                     X_d = w_0*(Lls+Lmd)/Z_DQ
                     X_ls = w_0*Lls/Z_DQ
@@ -7160,9 +7292,6 @@ else if((connectMT==0)||(MTsync==0)){
                 CODE define_icon
                     mdl.set_component_icon_image(item_handle, 'diesel_genset_image.jpg')
                     mdl.set_color(item_handle, "black")
-                ENDCODE
-
-                CODE pre_compile
                 ENDCODE
             }
         }
@@ -7271,7 +7400,7 @@ else if((connectMT==0)||(MTsync==0)){
         ]
 
         component gen_gain Gain3 {
-            gain = "V_grid*np.sqrt(2)/np.sqrt(3)"
+            gain = "V_G*np.sqrt(2)/np.sqrt(3)"
         }
         [
             position = 7952, 8144
@@ -7279,7 +7408,7 @@ else if((connectMT==0)||(MTsync==0)){
         ]
 
         component gen_gain Gain4 {
-            gain = "V_grid*np.sqrt(2)/np.sqrt(3)"
+            gain = "V_G*np.sqrt(2)/np.sqrt(3)"
         }
         [
             position = 7952, 8240
@@ -7287,7 +7416,7 @@ else if((connectMT==0)||(MTsync==0)){
         ]
 
         component gen_gain Gain5 {
-            gain = "V_grid*np.sqrt(2)/np.sqrt(3)"
+            gain = "V_G*np.sqrt(2)/np.sqrt(3)"
         }
         [
             position = 7952, 8192
@@ -7314,6 +7443,12 @@ else if((connectMT==0)||(MTsync==0)){
             position = 7064, 8104
             rotation = right
             size = 64, 32
+        ]
+
+        component gen_terminator Termination1 {
+        }
+        [
+            position = 6400, 8200
         ]
 
         tag V_d_a {
@@ -7483,6 +7618,7 @@ else if((connectMT==0)||(MTsync==0)){
         connect Microturbine.ground Junction67 as Connection839
         connect Junction67 Junction65 as Connection840
         connect Va1.n_node Junction67 as Connection841
+        connect Termination1.in "Microturbine.MCB Control" as Connection842
     }
 
     logically_deleted {
@@ -7757,49 +7893,6 @@ else if((connectMT==0)||(MTsync==0)){
             execution_rate = "inherit"
         }
 
-        "core/Three Phase Two Winding Transformer" {
-            input = "SC and OC tests"
-            core_sat = "False"
-            Sn = "160000.0"
-            f = "50.0"
-            V1 = "10000.0"
-            V2 = "400.0"
-            usc1 = "4.0"
-            Psc1 = "2350.0"
-            ioc1 = "0.7"
-            Poc1 = "460.0"
-            R1 = "4.58984375"
-            L1 = ".0370093710364"
-            R2 = ".00734375"
-            L2 = "5.92149936583e-05"
-            Rm = "217391.304348"
-            Lm = "311.709196788"
-            flux_vals_SI = "[1910.3, 2419.7]"
-            current_vals_SI = "[0.66653, 277.72]"
-            r1 = ".00734375"
-            l1 = ".0186029389059"
-            r2 = ".00734375"
-            l2 = ".0186029389059"
-            rm = "347.826086957"
-            lm = "156.68213163"
-            flux_vals_pu = "[1.2, 1.52]"
-            current_vals_pu = "[0.0024, 1]"
-            flux_vals_SCOC = "[1.2, 1.52]"
-            current_vals_SCOC = "[0.0024, 1]"
-            import_from_SI2SCOC = "Import from SI"
-            import_from_pu2SCOC = "Import from PU"
-            import_from_SCOC2SI = "Import from SC OC"
-            import_from_pu2SI = "Import from PU"
-            import_from_SCOC2pu = "Import from SC OC"
-            import_from_SI2pu = "Import from SI"
-            winding_1_connection = "Y"
-            winding_2_connection = "Y"
-            clock_number = "0"
-            embedded_cpl = "false"
-            coupling_type = "core"
-            Rshunt = "inf"
-        }
-
         "core/Triple Pole Single Throw Contactor" {
             ctrl_src = "Digital input"
             Sa = "1"
@@ -7857,6 +7950,6 @@ else if((connectMT==0)||(MTsync==0)){
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
         
-        V_grid = 13.8e3
+        V_G = 13800
     ENDCODE
 }

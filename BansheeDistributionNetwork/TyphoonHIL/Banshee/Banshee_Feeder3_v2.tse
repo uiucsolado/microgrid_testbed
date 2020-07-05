@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 04-Jul-2020 @ 07:07:40 PM
+// Save timestamp: 05-Jul-2020 @ 02:03:58 AM
 //
 
 model "Banshee_Feeder3_v2" {
@@ -25,9 +25,9 @@ model "Banshee_Feeder3_v2" {
         sys_sp_rate_1 = 5e-05
         sys_sp_rate_2 = 0.05
         sys_real_type_precision = "default"
-        user_real_type_precision = "single precision"
+        user_real_type_precision = "double precision"
         sys_cpu_optimization = "high"
-        user_cpu_optimization = "high"
+        user_cpu_optimization = "medium"
     }
 
     component Subsystem Root {
@@ -40,6 +40,7 @@ model "Banshee_Feeder3_v2" {
         ]
 
         component "core/Three Phase Voltage Source" Vs1 {
+            init_frequency = "60.0"
         }
         [
             position = 8584, 6800
@@ -64691,8 +64692,8 @@ out = in - (6.283185307179586*floor_in);
                         enb_anti_windup_out = "True"
                         enb_output_limit_out = "True"
                         int_init_value = "2*np.pi*60"
-                        ki = "0.2"
-                        kp = "0.1"
+                        ki = "2"
+                        kp = "5"
                         lower_sat_lim = "2*np.pi*59.5"
                         upper_sat_lim = "2*np.pi*60.5"
                     }
@@ -66698,6 +66699,7 @@ else if((connectMT==0)||(MTsync==0)){
             connect ground Junction105 as Connection971
 
             S = "235e+6"
+            Ts = "Ts_gen"
             V_ABC = "13.8e+3/np.sqrt(3)"
 
             mask {
@@ -67287,8 +67289,105 @@ else if((connectMT==0)||(MTsync==0)){
             }
         }
         [
-            position = 12256, 9024
+            position = 12256, 9120
             size = 200, 96
+        ]
+
+        component Subsystem Coupling_genset {
+            layout = dynamic
+            component "core/Four Phase Core Coupling" "Core Coupling 1" {
+                C1 = "88.42e-6"
+                R1 = "1"
+                fixed_snb_i = "true"
+                fixed_snb_u = "true"
+            }
+            [
+                position = 8192, 8192
+                size = 12, 352
+            ]
+
+            port A {
+                position = left:1
+                kind = pe
+            }
+            [
+                position = 8136, 8048
+            ]
+
+            port B {
+                position = left:2
+                kind = pe
+            }
+            [
+                position = 8136, 8144
+            ]
+
+            port C {
+                position = left:3
+                kind = pe
+            }
+            [
+                position = 8136, 8240
+            ]
+
+            port G {
+                position = left:4
+                kind = pe
+            }
+            [
+                position = 8136, 8336
+            ]
+
+            port a {
+                position = right:1
+                kind = pe
+            }
+            [
+                position = 8248, 8048
+                rotation = down
+            ]
+
+            port b {
+                position = right:2
+                kind = pe
+            }
+            [
+                position = 8248, 8144
+                rotation = down
+            ]
+
+            port c {
+                position = right:3
+                kind = pe
+            }
+            [
+                position = 8248, 8240
+                rotation = down
+            ]
+
+            port g {
+                position = right:4
+                kind = pe
+            }
+            [
+                position = 8248, 8336
+                rotation = down
+            ]
+
+            connect "Core Coupling 1.a_in" A as Connection5
+            connect "Core Coupling 1.b_in" B as Connection7
+            connect "Core Coupling 1.c_in" C as Connection1
+            connect "Core Coupling 1.d_in" G as Connection4
+            connect "Core Coupling 1.a_out" a as Connection8
+            connect "Core Coupling 1.b_out" b as Connection2
+            connect "Core Coupling 1.c_out" c as Connection3
+            connect "Core Coupling 1.d_out" g as Connection6
+        }
+        [
+            position = 12264, 8480
+            rotation = right
+            scale = -1, 1
+            size = 48, 80
         ]
 
         tag Tag26 {
@@ -67512,14 +67611,39 @@ else if((connectMT==0)||(MTsync==0)){
             scale = -1, 1
         ]
 
-        tag Tag82 {
+        tag Tag83 {
             value = "GroundF3_3"
             scope = global
             kind = pe
         }
         [
-            position = 12184, 9120
+            position = 12384, 8432
             hide_name = True
+            scale = -1, 1
+        ]
+
+        tag "Electric Tag1" {
+            value = "GroundGenset"
+            scope = global
+            kind = pe
+        }
+        [
+            position = 12368, 8528
+            hide_name = True
+            scale = -1, 1
+            size = 78, 20
+        ]
+
+        tag "Electric Tag2" {
+            value = "GroundGenset"
+            scope = global
+            kind = pe
+        }
+        [
+            position = 12328, 9208
+            hide_name = True
+            scale = -1, 1
+            size = 78, 20
         ]
 
         junction Junction9 pe
@@ -67592,11 +67716,6 @@ else if((connectMT==0)||(MTsync==0)){
             position = 11920, 8432
         ]
 
-        junction Junction385 pe
-        [
-            position = 11936, 8416
-        ]
-
         junction Junction465 pe
         [
             position = 11080, 8640
@@ -67667,16 +67786,6 @@ else if((connectMT==0)||(MTsync==0)){
             position = 11520, 8568
         ]
 
-        junction Junction550 pe
-        [
-            position = 12088, 8448
-        ]
-
-        junction Junction551 pe
-        [
-            position = 12120, 8432
-        ]
-
         junction Junction552 pe
         [
             position = 12920, 8536
@@ -67695,6 +67804,21 @@ else if((connectMT==0)||(MTsync==0)){
         junction Junction556 pe
         [
             position = 11696, 7736
+        ]
+
+        junction Junction557 pe
+        [
+            position = 11904, 8408
+        ]
+
+        junction Junction558 pe
+        [
+            position = 11920, 8392
+        ]
+
+        junction Junction559 pe
+        [
+            position = 11936, 8376
         ]
 
         connect CIL_F3_Critical6.C Feeder3_trafo4.c2 as Connection3455
@@ -67782,10 +67906,6 @@ else if((connectMT==0)||(MTsync==0)){
         ]
         connect Feeder3_line1.b_in Junction288 as Connection3142
         connect Feeder3_line1.c_in Junction289 as Connection3145
-        connect Feeder3_line2.b_in Junction384 as Connection3653
-        [
-            breakpoints = 11920, 8376; 11920, 8392
-        ]
         connect Feeder3_line3.b_out F3_CB4.b as Connection3330
         connect Feeder3_line3.c_in Feeder3_trafo5.C1 as Connection1661
         connect Feeder3_line3.b_in Feeder3_trafo5.B1 as Connection1666
@@ -67801,7 +67921,6 @@ else if((connectMT==0)||(MTsync==0)){
         connect Feeder3_trafo3.a2 Junction548 as Connection4342
         connect Feeder3_trafo4.b2 CIL_F3_Critical6.B as Connection3454
         connect Feeder3_trafo4.A1 Junction383 as Connection3650
-        connect Feeder3_trafo4.C1 Junction385 as Connection3656
         connect Feeder3_trafo5.A1 Feeder3_line3.a_in as Connection1663
         connect Feeder3_trafo5.c2 Junction305 as Connection3236
         connect Feeder3_trafo5.b2 Junction306 as Connection3239
@@ -67834,15 +67953,7 @@ else if((connectMT==0)||(MTsync==0)){
         [
             breakpoints = 11936, 7752; 11936, 7752; 12184, 7752; 12184, 7752; 12184, 7752; 12184, 7752; 12184, 7752
         ]
-        connect Junction383 Feeder3_line2.a_in as Connection3651
-        [
-            breakpoints = 11904, 8392; 11904, 8376
-        ]
         connect Junction384 Feeder3_trafo4.B1 as Connection3654
-        connect Junction385 Feeder3_line2.c_in as Connection3657
-        [
-            breakpoints = 11936, 8408; 11936, 8360
-        ]
         connect Junction465 Feeder3_trafo2.a2 as Connection3947
         [
             breakpoints = 11080, 8608; 11080, 8608
@@ -67884,8 +67995,6 @@ else if((connectMT==0)||(MTsync==0)){
         ]
         connect Junction542 Junction288 as Connection4324
         connect Junction543 Junction287 as Connection4328
-        connect Junction550 Junction383 as Connection4349
-        connect Junction551 Junction384 as Connection4352
         connect Junction552 Junction349 as Connection4355
         connect Junction553 Junction306 as Connection4358
         connect Junction555 Coupling4.B as Connection4384
@@ -67898,9 +68007,6 @@ else if((connectMT==0)||(MTsync==0)){
         [
             breakpoints = 11696, 7736; 11920, 7736; 11920, 7736
         ]
-        connect DG_MCB.C Junction385 as Connection3658
-        connect DG_MCB.A Junction550 as Connection4348
-        connect DG_MCB.B Junction551 as Connection4351
         connect Tag22 Coupling1.G as Connection1993
         connect Tag23 Coupling1.g as Connection1994
         connect Tag24 Feeder3_trafo1.Ground as Connection1995
@@ -67924,8 +68030,6 @@ else if((connectMT==0)||(MTsync==0)){
         connect Vrms_bus302.p_node Junction543 as Connection4329
         connect Vrms_bus305.p_node Junction548 as Connection4344
         connect Vrms_bus305.n_node Junction549 as Connection4347
-        connect Vrms_bus306.p_node Junction550 as Connection4350
-        connect Vrms_bus306.n_node Junction551 as Connection4353
         connect Vrms_bus307.p_node Junction552 as Connection4356
         connect Vrms_bus307.n_node Junction553 as Connection4359
         connect Vs1.a_node Junction493 as Connection4150
@@ -68003,14 +68107,51 @@ else if((connectMT==0)||(MTsync==0)){
         [
             breakpoints = 11904, 7720; 11904, 7720
         ]
-        connect Tag82 Microturbine.ground as Connection4563
         connect "Microturbine.MCB Control" DG_MCB.DG_MCB_Control as Connection4564
         connect Feeder3_lineNGG.b_out DG_MCB.b as Connection4565
         connect Feeder3_lineNGG.c_out DG_MCB.c as Connection4566
         connect Feeder3_lineNGG.a_out DG_MCB.a as Connection4567
-        connect Feeder3_lineNGG.a_in Microturbine.V_aG as Connection4568
-        connect Feeder3_lineNGG.b_in Microturbine.V_bG as Connection4569
-        connect Feeder3_lineNGG.c_in Microturbine.V_cG as Connection4570
+        connect Tag83 Coupling_genset.G as Connection4574
+        connect "Electric Tag1" Coupling_genset.g as Connection4575
+        connect "Electric Tag2" Microturbine.ground as Connection4576
+        connect Feeder3_lineNGG.a_in Microturbine.V_aG as Connection4577
+        connect Feeder3_lineNGG.b_in Microturbine.V_bG as Connection4578
+        connect Feeder3_lineNGG.c_in Microturbine.V_cG as Connection4579
+        connect Junction384 Vrms_bus306.n_node as Connection4581
+        [
+            breakpoints = 11920, 8432; 12120, 8432
+        ]
+        connect Junction383 Vrms_bus306.p_node as Connection4580
+        [
+            breakpoints = 11904, 8448; 12088, 8448
+        ]
+        connect Coupling_genset.a DG_MCB.A as Connection4583
+        connect DG_MCB.B Coupling_genset.b as Connection4584
+        connect Coupling_genset.c DG_MCB.C as Connection4585
+        connect Junction383 Junction557 as Connection4586
+        connect Junction557 Feeder3_line2.a_in as Connection4587
+        [
+            breakpoints = 11904, 8392; 11904, 8376
+        ]
+        connect Coupling_genset.A Junction557 as Connection4588
+        connect Feeder3_line2.b_in Junction558 as Connection4589
+        [
+            breakpoints = 11920, 8376
+        ]
+        connect Junction558 Junction384 as Connection4590
+        [
+            breakpoints = 11920, 8392
+        ]
+        connect Coupling_genset.B Junction558 as Connection4591
+        connect Feeder3_line2.c_in Junction559 as Connection4592
+        [
+            breakpoints = 11936, 8360
+        ]
+        connect Junction559 Feeder3_trafo4.C1 as Connection4593
+        [
+            breakpoints = 11936, 8408; 11936, 8416
+        ]
+        connect Coupling_genset.C Junction559 as Connection4594
     }
 
     logically_deleted {
@@ -68090,15 +68231,6 @@ else if((connectMT==0)||(MTsync==0)){
             execution_rate = "inherit"
         }
 
-        gen_digital_probe {
-            override_signal_name = "False"
-            signal_name = ""
-            streaming_en = "False"
-            addr = "0"
-            streaming_er_idx = "0"
-            execution_rate = "inherit"
-        }
-
         gen_gain {
             gain = "1"
             multiplication = "Element-wise(K.*u)"
@@ -68121,12 +68253,6 @@ else if((connectMT==0)||(MTsync==0)){
         gen_limiter {
             upper_limit = "[\'inf\']"
             lower_limit = "[\'-inf\']"
-            execution_rate = "inherit"
-        }
-
-        gen_logic_op {
-            operator = "AND"
-            inputs = "2"
             execution_rate = "inherit"
         }
 
@@ -68207,10 +68333,6 @@ else if((connectMT==0)||(MTsync==0)){
             execution_rate = "inherit"
         }
 
-        gen_terminator {
-            execution_rate = "inherit"
-        }
-
         gen_trigonometric {
             trigonometric_fn = "sin"
             execution_rate = "inherit"
@@ -68256,19 +68378,6 @@ else if((connectMT==0)||(MTsync==0)){
         src_constant {
             value = "1"
             signal_type = "real"
-            execution_rate = "100e-6"
-        }
-
-        src_scada_input {
-            addr = "0"
-            format = "real"
-            override_signal_name = "False"
-            signal_name = ""
-            signal_type = "real"
-            min = "-1e6"
-            max = "1e6"
-            def_value = "0"
-            unit = " "
             execution_rate = "100e-6"
         }
 
@@ -68634,8 +68743,8 @@ else if((connectMT==0)||(MTsync==0)){
         # Numpy module is imported as 'np'
         # Scipy module is imported as 'sp'
         
-        Ts = 1e-3
-        Ts_gen = 1e-3
+        Ts = 20e-6
+        Ts_gen = 20e-6
         sys_f = 60.0    # Hz
         sys_w = 2.0*np.pi*sys_f    #rad/s
         ft2mi = 1.0/5280.0     #mi/ft

@@ -350,7 +350,7 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus305.Vinst.Va1
     _vrms_bus305_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x616));
     // Generated from the component: Vrms_bus306.Vinst.Va1
-    _vrms_bus306_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x426));
+    _vrms_bus306_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x40e));
     // Generated from the component: Vrms_bus307.Vinst.Va1
     _vrms_bus307_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x821));
     // Generated from the component: Vrms_grid.Vinst.Va1
