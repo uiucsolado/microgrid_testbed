@@ -38,22 +38,13 @@
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>DG_MCB.DG_MCB</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
                 <name>F3_CB1.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>0</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB2.Brk.S1</name>
@@ -61,8 +52,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB3.Brk.S1</name>
@@ -70,7 +61,7 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
@@ -146,11 +137,20 @@
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
-                <name>Microturbine.S2</name>
+                <name>Microturbine.S4</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>1</weight>
-                <site>5</site>
+                <site>2</site>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
+            </contactor>
+            <contactor>
+                <name>NG_MCB.NG_MCB</name>
+                <type>three_phase_breaker</type>
+                <device>0</device>
+                <weight>2</weight>
+                <site>2</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
@@ -1104,7 +1104,12 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_PCC.Close PCC</name>
+                <name>F3_Motor.Control Panel Input1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine.CB_control.Grid_Islanded</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
@@ -1115,11 +1120,6 @@
             </scada_input>
             <scada_input>
                 <name>Microturbine.Connect MT</name>
-                <device>0</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Microturbine.MT_sync</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
@@ -1136,7 +1136,12 @@
             <scada_input>
                 <name>Microturbine.qd0(PU).wref</name>
                 <device>0</device>
-                <value>376.99111843077515</value>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine.ref_ctrl</name>
+                <device>0</device>
+                <value>0.0</value>
             </scada_input>
         </scada_inputs>
     </components>

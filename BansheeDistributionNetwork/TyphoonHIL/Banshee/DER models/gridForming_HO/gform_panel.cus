@@ -166,8 +166,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>784.0</x>
-                    <y>232.0</y>
+                    <x>0</x>
+                    <y>704</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -240,8 +240,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1184.0</x>
-                    <y>240.0</y>
+                    <x>832</x>
+                    <y>712</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -314,8 +314,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>840.0</x>
-                    <y>448.0</y>
+                    <x>408</x>
+                    <y>720</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -364,279 +364,6 @@ referenceCurves = [refCurveData1]
 
 ]]></reference_curve_code>
                 </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>dfee9d1ebd4111ea861d509a4c4e2fb4</id>
-                <name><![CDATA[ON]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 1)
-hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 1)
-]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-]]></on_stop_code>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>32.0</x>
-                    <y>152.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>dfee9d1fbd4111eaac95509a4c4e2fb4</id>
-                <name><![CDATA[OFF]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 1)
-hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 0)
-]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-]]></on_stop_code>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>112.0</x>
-                    <y>152.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>dfee9d20bd4111eab5c6509a4c4e2fb4</id>
-                <name><![CDATA[OFF]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 0)]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 0)
-hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 0)
-]]></on_stop_code>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>112.0</x>
-                    <y>80.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>dfee9d21bd4111eabc83509a4c4e2fb4</id>
-                <name><![CDATA[ON]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 1)]]></on_click_code>
-                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged).INV_sync', 0)
-hil.set_scada_input_value('Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV', 0)
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-]]></on_stop_code>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>32.0</x>
-                    <y>80.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>dfee9d22bd4111eaa774509a4c4e2fb4</id>
-                <name><![CDATA[Note component]]></name>
-                <type>TextNote</type>
-                <description><![CDATA[]]></description>
-                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt; font-weight:600;">Grid Connect</span></p></body></html>]]></text>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>32.0</x>
-                    <y>120.0</y>
-                    <width>144</width>
-                    <height>32</height>
-                    <background_color><![CDATA[#f0f0f0]]></background_color>
-                    <background_type><![CDATA[Transparent]]></background_type>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>dfee9d23bd4111eabca4509a4c4e2fb4</id>
-                <name><![CDATA[Note component]]></name>
-                <type>TextNote</type>
-                <description><![CDATA[]]></description>
-                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt; font-weight:600;">Grid Synchronize</span></p></body></html>]]></text>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>32.0</x>
-                    <y>48.0</y>
-                    <width>144</width>
-                    <height>32</height>
-                    <background_color><![CDATA[#f0f0f0]]></background_color>
-                    <background_type><![CDATA[Transparent]]></background_type>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c2c13fd0bd4211eaa721509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[gridconnect2]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>216.0</x>
-                    <y>136.0</y>
-                    <width>112</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c2c13fd1bd4211eaba75509a4c4e2fb4</id>
-                <name><![CDATA[Grid Connection]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[griddisconnect2]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>136.0</y>
-                    <width>104</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c2c13fd2bd4211eaa198509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged).INV_sync ON]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>216.0</x>
-                    <y>96.0</y>
-                    <width>112</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>c2c13fd3bd4211eaa800509a4c4e2fb4</id>
-                <name><![CDATA[Inverter Sync]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged).INV_sync OFF]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>200.0</x>
-                    <y>96.0</y>
-                    <width>104</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
             </component_data>
         <component_data>
                 <id>7d256180bd4411ea9c6a509a4c4e2fb4</id>
@@ -957,8 +684,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>456</x>
-                    <y>16</y>
+                    <x>456.0</x>
+                    <y>16.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1031,8 +758,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>880</x>
-                    <y>24</y>
+                    <x>880.0</x>
+                    <y>24.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1081,6 +808,502 @@ referenceCurves = [refCurveData1]
 
 ]]></reference_curve_code>
                 </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>62502d5ec61c11eaa8c6509a4c4e2fb4</id>
+                <name><![CDATA[Disconnect]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_stop_code>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>32</x>
+                    <y>128</y>
+                    <width>96</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>62502d5fc61c11eaad18509a4c4e2fb4</id>
+                <name><![CDATA[Connect]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 1)]]></on_click_code>
+                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>32</x>
+                    <y>80</y>
+                    <width>96</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>94a07f7ec61c11ea8ba1509a4c4e2fb4</id>
+                <name><![CDATA[Ready to sync]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.INV_sync ON]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Blue</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>216</x>
+                    <y>32</y>
+                    <width>96</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>94a0a668c61c11eab44c509a4c4e2fb4</id>
+                <name><![CDATA[Grid Islanded]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.Grid_Islanded ON]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Yellow</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>216</x>
+                    <y>0</y>
+                    <width>96</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>a273a1c0c61c11eaa3a0509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.GCB OFF]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>216</x>
+                    <y>104</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>a273a1c1c61c11ea99a6509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.GCB ON]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Green</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>160</x>
+                    <y>104</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>ae575df0c61c11eab4d4509a4c4e2fb4</id>
+                <name><![CDATA[Microgrid mode]]></name>
+                <type>ComboBoxMacro</type>
+                <description><![CDATA[]]></description>
+                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
+# NOTE: entered value is available through variable 'inputValue'
+
+if inputValue == 'Islanded':
+    # do something when 'Case 1' is selected
+    hil.set_scada_input_value('Grid forming inverter (averaged).CB_control.Grid_Islanded', 1)
+    pass
+elif inputValue == 'Grid-connected':
+    # do something when 'Case 2' is selected
+    hil.set_scada_input_value('Grid forming inverter (averaged).CB_control.Grid_Islanded', 0)
+    pass
+
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = 'Islanded'
+]]></on_start_code>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = 'Islanded'
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[Islanded]]></inputValue>
+                <availableValues><![CDATA[['Islanded', 'Grid-connected']]]></availableValues>
+                <unit><![CDATA[]]></unit>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>8</x>
+                    <y>0</y>
+                    <width>192</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>5d1751bac61d11eaa1bd509a4c4e2fb4</id>
+                <name><![CDATA[PLL voltage]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+data = {
+    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
+    "analog_names": [],
+    
+    # analog data values: [aVal1,aVal2,aVal3]
+    "analog_values": [],
+    
+    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
+    "digital_names": [],
+    
+    # digital data values: [dVal1,dVal2,aVal3]
+    "digital_values": [],
+    }
+displayValue = data
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.Vd_G', 'Grid forming inverter (averaged).BE1-25A Synchronizer.Vq_G']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>872</x>
+                    <y>208</y>
+                    <width>536</width>
+                    <height>248</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-0.5</y_range_min>
+                    <y_range_max>1.1</y_range_max>
+                    <time_window>10</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>5d1751bbc61d11ea8c53509a4c4e2fb4</id>
+                <name><![CDATA[PLL frequency]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+data = {
+    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
+    "analog_names": [],
+    
+    # analog data values: [aVal1,aVal2,aVal3]
+    "analog_values": [],
+    
+    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
+    "digital_names": [],
+    
+    # digital data values: [dVal1,dVal2,aVal3]
+    "digital_values": [],
+    }
+displayValue = data
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.omegaPLL']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>872</x>
+                    <y>456</y>
+                    <width>536</width>
+                    <height>248</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-0.5</y_range_min>
+                    <y_range_max>1.1</y_range_max>
+                    <time_window>10</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>01853b66c61e11ea95ba509a4c4e2fb4</id>
+                <name><![CDATA[VF control]]></name>
+                <type>CheckBoxMacro</type>
+                <description><![CDATA[]]></description>
+                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
+# NOTE: entered value is available through variable 'inputValue'
+
+if inputValue:
+    # do something when checkbox is checked
+    hil.set_scada_input_value('Grid forming inverter (averaged).ref_ctrl', 1)
+
+    pass
+else:
+    # do something when checkbox is unchecked
+    hil.set_scada_input_value('Grid forming inverter (averaged).ref_ctrl', 0)
+    pass
+
+]]></on_use_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[False]]></inputValue>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>8</x>
+                    <y>24</y>
+                    <width>112</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>01853b67c61e11ea9a09509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[ref_ctrl ON]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Green</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>112</x>
+                    <y>24</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>01853b68c61e11ea9585509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[ref_ctrl OFF]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>136</x>
+                    <y>24</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
             </component_data>
         </components>
 </ui_settings>

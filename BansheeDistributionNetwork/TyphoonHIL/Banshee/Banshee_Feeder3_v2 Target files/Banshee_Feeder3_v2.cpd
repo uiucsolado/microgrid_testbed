@@ -647,127 +647,253 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr1.L1</name>
+            <name>NG_MCB.C4</name>
             <address>1024</address>
-            <type>current</type>
+            <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr1.Lm</name>
+            <name>NG_MCB.C5</name>
             <address>1025</address>
-            <type>current</type>
+            <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr2.L1</name>
+            <name>NG_MCB.C6</name>
             <address>1026</address>
-            <type>current</type>
+            <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr2.L2</name>
+            <name>Feeder3_line2.L2</name>
             <address>1027</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr2.Lm</name>
+            <name>Feeder3_line2.L3</name>
             <address>1028</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr3.L1</name>
+            <name>Feeder3_trafo4.Tr1.tr1.L1</name>
             <address>1029</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr3.L2</name>
+            <name>Feeder3_trafo4.Tr1.tr1.Lm</name>
             <address>1030</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Feeder3_trafo4.Tr1.tr3.Lm</name>
+            <name>Feeder3_trafo4.Tr1.tr2.L1</name>
             <address>1031</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling_genset.Core Coupling 1.cpl1.V_msr</name>
-            <address>1492</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
+            <name>Feeder3_trafo4.Tr1.tr2.L2</name>
+            <address>1032</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling_genset.Core Coupling 1.cpl2.V_msr</name>
-            <address>1493</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
+            <name>Feeder3_trafo4.Tr1.tr2.Lm</name>
+            <address>1033</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling_genset.Core Coupling 1.cpl3.V_msr</name>
-            <address>1494</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
+            <name>Feeder3_trafo4.Tr1.tr3.L1</name>
+            <address>1034</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Feeder3_trafo4.Tr1.tr3.L2</name>
+            <address>1035</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Feeder3_trafo4.Tr1.tr3.Lm</name>
+            <address>1036</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL.L1</name>
+            <address>1037</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL.L2</name>
+            <address>1038</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.RL.L3</name>
+            <address>1039</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas1.VA</name>
-            <address>1032</address>
+            <address>1040</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas1.VB</name>
-            <address>1033</address>
+            <address>1041</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas1.VC</name>
-            <address>1034</address>
+            <address>1042</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas2.VA</name>
-            <address>1035</address>
+            <address>1043</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas2.VB</name>
-            <address>1036</address>
+            <address>1044</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas2.VC</name>
-            <address>1037</address>
+            <address>1045</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ea1</name>
+            <address>1046</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ea_phi</name>
+            <address>1047</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Eb1</name>
+            <address>1048</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Eb_phi</name>
+            <address>1049</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ec1</name>
+            <address>1050</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ec_phi</name>
+            <address>1051</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Va_G1</name>
+            <address>1052</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Vb_G1</name>
+            <address>1053</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Vc_G1</name>
+            <address>1054</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VA_busbar</name>
+            <address>1055</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VA_grid_2</name>
+            <address>1056</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VB_grid_2</name>
+            <address>1057</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VC_grid_2</name>
+            <address>1058</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_bus306.Vinst</name>
-            <address>1038</address>
+            <address>1059</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -795,21 +921,84 @@
         </cell>
         <cell>
             <name>F3_CB3.Meas1.IA</name>
-            <address>1039</address>
+            <address>1060</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas1.IB</name>
-            <address>1040</address>
+            <address>1061</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_CB3.Meas1.IC</name>
-            <address>1041</address>
+            <address>1062</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ia1</name>
+            <address>1063</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ib1</name>
+            <address>1064</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Ic1</name>
+            <address>1065</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.IA_MCB</name>
+            <address>1066</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.IB_MCB</name>
+            <address>1067</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.IC_MCB</name>
+            <address>1068</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.Ia_grid</name>
+            <address>1069</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.Ib_grid</name>
+            <address>1070</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.Ic_grid</name>
+            <address>1071</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -1508,265 +1697,6 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>DG_MCB.C4</name>
-            <address>2560</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.C5</name>
-            <address>2561</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.C6</name>
-            <address>2562</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Feeder3_lineNGG.L1</name>
-            <address>2563</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Feeder3_lineNGG.L2</name>
-            <address>2564</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Feeder3_lineNGG.L3</name>
-            <address>2565</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VA_busbar</name>
-            <address>2566</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VA_grid_2</name>
-            <address>2567</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VB_grid_2</name>
-            <address>2568</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VC_grid_2</name>
-            <address>2569</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ea1</name>
-            <address>2570</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ea_phi</name>
-            <address>2571</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Eb1</name>
-            <address>2572</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Eb_phi</name>
-            <address>2573</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ec1</name>
-            <address>2574</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ec_phi</name>
-            <address>2575</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.VAn</name>
-            <address>2576</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.VBn</name>
-            <address>2577</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.VCn</name>
-            <address>2578</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Va_G1</name>
-            <address>2579</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Vb_G1</name>
-            <address>2580</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Vc_G1</name>
-            <address>2581</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling_genset.Core Coupling 1.cpl1.I_msr</name>
-            <address>3016</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling_genset.Core Coupling 1.cpl2.I_msr</name>
-            <address>3017</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling_genset.Core Coupling 1.cpl3.I_msr</name>
-            <address>3018</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.IA_MCB</name>
-            <address>2582</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.IB_MCB</name>
-            <address>2583</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.IC_MCB</name>
-            <address>2584</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.Ia_grid</name>
-            <address>2585</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.Ib_grid</name>
-            <address>2586</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.Ic_grid</name>
-            <address>2587</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ia1</name>
-            <address>2588</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ib1</name>
-            <address>2589</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Ic1</name>
-            <address>2590</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.IA</name>
-            <address>2591</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.IB</name>
-            <address>2592</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.IC</name>
-            <address>2593</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>const_0V</name>
             <address>34304</address>
             <type>voltage</type>
@@ -2008,6 +1938,14 @@
             <address>1054</address>
         </cell>
         <cell>
+            <name>Microturbine.S4_fb</name>
+            <address>1055</address>
+        </cell>
+        <cell>
+            <name>NG_MCB.NG_MCB_fb</name>
+            <address>1056</address>
+        </cell>
+        <cell>
             <name>F3_CB2.Brk.S1_fb</name>
             <address>1069</address>
         </cell>
@@ -2027,14 +1965,6 @@
             <name>F3_Motor.CB.S1_fb</name>
             <address>1086</address>
         </cell>
-        <cell>
-            <name>DG_MCB.DG_MCB_fb</name>
-            <address>1099</address>
-        </cell>
-        <cell>
-            <name>Microturbine.S2_fb</name>
-            <address>1100</address>
-        </cell>
     </do_var_list>
     <sources>
         <cell>
@@ -2042,7 +1972,7 @@
             <type>3phase</type>
             <address>[0, 1, 2]</address>
             <unit>V</unit>
-            <init_settings>['Sine', 0.0, 60.0, 0.0]</init_settings>
+            <init_settings>['Sine', 0.0, 50.0, 0.0]</init_settings>
         </cell>
     </sources>
     <machines>
@@ -2111,6 +2041,18 @@
             <site>2</site>
         </cell>
         <cell>
+            <name>Microturbine.S4</name>
+            <type>three_phase_breaker</type>
+            <weight>1</weight>
+            <site>2</site>
+        </cell>
+        <cell>
+            <name>NG_MCB.NG_MCB</name>
+            <type>three_phase_breaker</type>
+            <weight>2</weight>
+            <site>2</site>
+        </cell>
+        <cell>
             <name>F3_CB2.Brk.S1</name>
             <type>three_phase_breaker</type>
             <weight>0</weight>
@@ -2140,18 +2082,6 @@
             <weight>2</weight>
             <site>4</site>
         </cell>
-        <cell>
-            <name>DG_MCB.DG_MCB</name>
-            <type>three_phase_breaker</type>
-            <weight>0</weight>
-            <site>5</site>
-        </cell>
-        <cell>
-            <name>Microturbine.S2</name>
-            <type>three_phase_breaker</type>
-            <weight>1</weight>
-            <site>5</site>
-        </cell>
     </contactors>
     <dtv>
         <spc_dtv>
@@ -2163,315 +2093,98 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[2e-05]]</execution_rates>
+        <execution_rates>[[2e-05, 0.0001]]</execution_rates>
     </model_properties>
 
     <variables>
         <cell>
-            <name>Microturbine.qd0(PU).E_qp_M</name>
-            <type>generic</type>
-            <address>16463</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
-            <type>generic</type>
-            <address>16451</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Eb-Vb</name>
-            <type>generic</type>
-            <address>16443</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.w_bus</name>
-            <type>generic</type>
-            <address>16455</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.angle_diff3</name>
-            <type>generic</type>
-            <address>16449</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Ea-Va</name>
-            <type>generic</type>
-            <address>16442</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.activate_logic</name>
-            <type>generic</type>
-            <address>16407</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.w_G</name>
-            <type>generic</type>
-            <address>16454</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus307</name>
-            <type>voltage</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB9.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16435</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB5.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16420</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Vq_G</name>
-            <type>generic</type>
-            <address>16448</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Phi_d_a_M</name>
-            <type>generic</type>
-            <address>16476</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus305</name>
-            <type>voltage</type>
-            <address>16388</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB4.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16414</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).I_d_a1</name>
-            <type>generic</type>
-            <address>16472</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.POWER_P</name>
-            <type>generic</type>
-            <address>16457</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.E_d</name>
-            <type>generic</type>
-            <address>16440</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).|E|</name>
-            <type>generic</type>
-            <address>16480</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB4.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16415</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus303</name>
-            <type>voltage</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).I_q_a1</name>
-            <type>generic</type>
-            <address>16473</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Ed-Vd</name>
-            <type>generic</type>
-            <address>16445</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
-            <type>generic</type>
-            <address>16450</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB2.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16401</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB7.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16428</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB2.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16399</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB6.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16425</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.E_q</name>
-            <type>generic</type>
-            <address>16441</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.V_t_M</name>
-            <type>generic</type>
-            <address>16468</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Vd_G</name>
+            <name>Microturbine.BE1-25A Synchronizer.theta_E</name>
             <type>generic</type>
             <address>16447</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.Three-phase Meter1.POWER_PF</name>
-            <type>generic</type>
-            <address>16458</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.trip_cmd</name>
-            <type>generic</type>
-            <address>16412</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.enable_</name>
-            <type>generic</type>
-            <address>16409</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).w_M</name>
-            <type>generic</type>
-            <address>16479</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB6.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16424</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16398</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.volt_diff3</name>
-            <type>generic</type>
-            <address>16453</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VC_grid2rms</name>
-            <type>generic</type>
-            <address>16394</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.detect_change_</name>
             <type>generic</type>
-            <address>16408</address>
+            <address>16405</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.P</name>
+            <name>F3_CB9.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16431</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB2.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).I_q_a1</name>
+            <type>generic</type>
+            <address>16478</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.activate_logic</name>
             <type>generic</type>
             <address>16404</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vrms_bus302</name>
-            <type>voltage</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Eq_phi</name>
-            <type>generic</type>
-            <address>16465</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB5.MID_Rly1.CB_state</name>
+            <name>F3_CB5.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
             <type>generic</type>
             <address>16418</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16395</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB2.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).w_m.Te</name>
+            <type>generic</type>
+            <address>16484</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB4.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB2.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB6.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16422</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2483,107 +2196,156 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Phi_q_a_M</name>
+            <name>Microturbine.BE1-25A Synchronizer.volt_diff3</name>
             <type>generic</type>
-            <address>16477</address>
+            <address>16449</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB8.MID_Rly1.SEL_787.Q</name>
+            <name>Microturbine.BE1-25A Synchronizer.omegaPLL</name>
             <type>generic</type>
-            <address>16432</address>
+            <address>16445</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).|V|</name>
+            <name>Microturbine.qd0(PU).Eq_phi</name>
             <type>generic</type>
-            <address>16481</address>
+            <address>16463</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB5.MID_Rly1.SEL_787.P</name>
+            <name>F3_CB4.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB9.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16433</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB6.MID_Rly1.CB_state</name>
             <type>generic</type>
             <address>16419</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Governor.Exciter Activation.speed difference</name>
+            <name>F3_CB3.MID_Rly1.SEL_787.P</name>
             <type>generic</type>
-            <address>16471</address>
+            <address>16401</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Exciter.Volt difference</name>
+            <name>Microturbine.qd0(PU).Governor.P_a2</name>
             <type>generic</type>
-            <address>16469</address>
+            <address>16472</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.op_mode_</name>
-            <type>generic</type>
-            <address>16410</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB1.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16395</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VB_grid2rms</name>
-            <type>generic</type>
-            <address>16393</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Ec-Vc</name>
-            <type>generic</type>
-            <address>16444</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.POWER_Q</name>
-            <type>generic</type>
-            <address>16459</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.CB_state</name>
+            <name>F3_CB3.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
             <type>generic</type>
             <address>16403</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB6.MID_Rly1.SEL_787.P</name>
+            <name>Microturbine.BE1-25A Synchronizer.E_q</name>
+            <type>generic</type>
+            <address>16438</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Three-phase Meter1.POWER_PF</name>
+            <type>generic</type>
+            <address>16455</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB5.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.w_bus</name>
+            <type>generic</type>
+            <address>16451</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.Exciter Activation.speed difference</name>
+            <type>generic</type>
+            <address>16470</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus305</name>
+            <type>voltage</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.trip_cmd</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.thetaPLL</name>
+            <type>generic</type>
+            <address>16446</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Three-phase Meter1.Q_pu</name>
+            <type>generic</type>
+            <address>16459</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB7.MID_Rly1.CB_state</name>
             <type>generic</type>
             <address>16423</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB7.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <name>F3_CB3.MID_Rly1.CB_state</name>
             <type>generic</type>
-            <address>16429</address>
+            <address>16400</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).E_F_M</name>
+            <name>F3_CB8.MID_Rly1.SEL_787.P</name>
             <type>generic</type>
-            <address>16461</address>
+            <address>16428</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus302</name>
+            <type>voltage</type>
+            <address>16385</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2595,233 +2357,65 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB2.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16402</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_PCC.P</name>
-            <type>generic</type>
-            <address>16438</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_PCC.Q</name>
-            <type>generic</type>
-            <address>16439</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.V_R_M</name>
-            <type>generic</type>
-            <address>16467</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).T_m_M</name>
-            <type>generic</type>
-            <address>16478</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Governor.Exciter Activation.Exc_state</name>
-            <type>generic</type>
-            <address>16470</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB4.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16416</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_grid</name>
+            <name>Vrms_bus307</name>
             <type>voltage</type>
-            <address>16391</address>
+            <address>16390</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.trip_in</name>
+            <name>F3_CB7.MID_Rly1.SEL_787.Q</name>
             <type>generic</type>
-            <address>16413</address>
+            <address>16425</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB1.MID_Rly1.SEL_787.Q</name>
+            <name>Microturbine.qd0(PU).I_d_a1</name>
             <type>generic</type>
-            <address>16397</address>
+            <address>16477</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB2.MID_Rly1.SEL_787.P</name>
+            <name>Microturbine.BE1-25A Synchronizer.w_G</name>
             <type>generic</type>
-            <address>16400</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.Three-phase Meter1.POWER_S</name>
-            <type>generic</type>
-            <address>16460</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Ed_phi</name>
-            <type>generic</type>
-            <address>16464</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16406</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).Phi_1d_a_M</name>
-            <type>generic</type>
-            <address>16474</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB7.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16426</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB5.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16421</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB8.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16431</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.r_25</name>
-            <type>generic</type>
-            <address>16411</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB3.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16405</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB1.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16396</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DG_MCB.VA_grid2rms</name>
-            <type>generic</type>
-            <address>16392</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB8.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16430</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB7.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16427</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.Eq-Vq</name>
-            <type>generic</type>
-            <address>16446</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.qd0(PU).E_dp_M</name>
-            <type>generic</type>
-            <address>16462</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Microturbine.BE1-25A Synchronizer.|V|</name>
-            <type>generic</type>
-            <address>16456</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_CB8.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16433</address>
+            <address>16450</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Microturbine.qd0(PU).Phi_2q_a_M</name>
             <type>generic</type>
-            <address>16475</address>
+            <address>16480</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.qd0(PU).Exciter.R_F_M</name>
+            <name>Microturbine.BE1-25A Synchronizer.theta_V</name>
             <type>generic</type>
-            <address>16466</address>
+            <address>16448</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB9.MID_Rly1.CB_state</name>
+            <name>Microturbine.qd0(PU).Governor.P_b1</name>
             <type>generic</type>
-            <address>16434</address>
+            <address>16473</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB4.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <name>Microturbine.BE1-25A Synchronizer.frequency_diff3</name>
             <type>generic</type>
-            <address>16417</address>
+            <address>16444</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB6.MID_Rly1.CB_state</name>
+            <name>Microturbine.qd0(PU).|E|</name>
             <type>generic</type>
-            <address>16422</address>
+            <address>16486</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2833,23 +2427,422 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Microturbine.BE1-25A Synchronizer.frequency_diff3</name>
+            <name>F3_CB1.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16392</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VB_grid2rms</name>
+            <type>generic</type>
+            <address>16489</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.enable_</name>
+            <type>generic</type>
+            <address>16406</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.Vq_G</name>
+            <type>generic</type>
+            <address>16440</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.V_R_M</name>
+            <type>generic</type>
+            <address>16467</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.op_mode_</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.|V|</name>
             <type>generic</type>
             <address>16452</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Microturbine.Three-phase Meter1.P_pu</name>
+            <type>generic</type>
+            <address>16458</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.MTsync_PROBE</name>
+            <type>generic</type>
+            <address>16453</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB8.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16427</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_grid</name>
+            <type>voltage</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.E_f_M</name>
+            <type>generic</type>
+            <address>16464</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB6.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16421</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_PCC.P</name>
+            <type>generic</type>
+            <address>16435</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VA_grid2rms</name>
+            <type>generic</type>
+            <address>16488</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB9.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16432</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.E_t_M</name>
+            <type>generic</type>
+            <address>16465</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB5.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).w_m.Tm</name>
+            <type>generic</type>
+            <address>16485</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.State Condition Mng.r_25</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).|V|</name>
+            <type>generic</type>
+            <address>16487</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.R_F_M</name>
+            <type>generic</type>
+            <address>16466</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.P_a1</name>
+            <type>generic</type>
+            <address>16471</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).E_F_M</name>
+            <type>generic</type>
+            <address>16460</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB6.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16420</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB4.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Three-phase Meter1.POWER_P</name>
+            <type>generic</type>
+            <address>16454</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Three-phase Meter1.POWER_S</name>
+            <type>generic</type>
+            <address>16457</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.trip_in</name>
+            <type>generic</type>
+            <address>16410</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>F3_CB9.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16434</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.frequency_diff</name>
+            <type>generic</type>
+            <address>16476</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>NG_MCB.VC_grid2rms</name>
+            <type>generic</type>
+            <address>16490</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus303</name>
+            <type>voltage</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).E_qp_M</name>
+            <type>generic</type>
+            <address>16461</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.voltage_diff</name>
+            <type>generic</type>
+            <address>16468</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.E_d</name>
             <type>generic</type>
             <address>16437</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_CB9.MID_Rly1.SEL_787.Q</name>
+            <name>F3_CB4.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB8.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16430</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
+            <type>generic</type>
+            <address>16443</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.Vd_G</name>
+            <type>generic</type>
+            <address>16439</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB2.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB7.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16426</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Phi_1d_a_M</name>
+            <type>generic</type>
+            <address>16479</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.P_sv</name>
+            <type>generic</type>
+            <address>16475</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB7.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16424</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).w_M</name>
+            <type>generic</type>
+            <address>16483</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_PCC.Q</name>
             <type>generic</type>
             <address>16436</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.Three-phase Meter1.POWER_Q</name>
+            <type>generic</type>
+            <address>16456</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB3.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB1.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.angle_diff3</name>
+            <type>generic</type>
+            <address>16441</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB5.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB8.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16429</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.Exciter Activation.Exc_state</name>
+            <type>generic</type>
+            <address>16469</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Phi_d_a_M</name>
+            <type>generic</type>
+            <address>16481</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_CB1.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Ed_phi</name>
+            <type>generic</type>
+            <address>16462</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Governor.P_b2</name>
+            <type>generic</type>
+            <address>16474</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.qd0(PU).Phi_q_a_M</name>
+            <type>generic</type>
+            <address>16482</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
+            <type>generic</type>
+            <address>16442</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2857,63 +2850,63 @@
 
     <do_var_list>
         <cell>
+            <name>Microturbine.CB_control.Grid_Islanded OFF</name>
+            <address>2055</address>
+        </cell>
+
+        <cell>
+            <name>ang_sync3</name>
+            <address>2049</address>
+        </cell>
+
+        <cell>
+            <name>Microturbine.CB_control.GCB ON</name>
+            <address>2054</address>
+        </cell>
+
+        <cell>
             <name>Microturbine.CB_control.MCB ON</name>
             <address>2058</address>
         </cell>
 
         <cell>
-            <name>F3_PCC.PCC Disconnected</name>
-            <address>2049</address>
-        </cell>
-
-        <cell>
-            <name>volt_sync3</name>
-            <address>2053</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.MT_sync ON</name>
-            <address>2060</address>
-        </cell>
-
-        <cell>
-            <name>griddisconnect2</name>
-            <address>2054</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.exciter ON</name>
+            <name>ref_ctrl OFF</name>
             <address>2062</address>
         </cell>
 
         <cell>
-            <name>ang_sync3</name>
-            <address>2051</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.MT_sync OFF</name>
-            <address>2059</address>
-        </cell>
-
-        <cell>
             <name>freq_sync3</name>
-            <address>2052</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.CB_control.GCB ON</name>
-            <address>2056</address>
-        </cell>
-
-        <cell>
-            <name>Microturbine.qd0(PU).Exciter.exciter OFF</name>
-            <address>2061</address>
+            <address>2050</address>
         </cell>
 
         <cell>
             <name>Microturbine.CB_control.GCB OFF</name>
-            <address>2055</address>
+            <address>2053</address>
+        </cell>
+
+        <cell>
+            <name>Microturbine.CB_control.Grid_Islanded ON</name>
+            <address>2056</address>
+        </cell>
+
+        <cell>
+            <name>volt_sync3</name>
+            <address>2051</address>
+        </cell>
+
+        <cell>
+            <name>griddisconnect2</name>
+            <address>2052</address>
+        </cell>
+
+        <cell>
+            <name>gridconnect2</name>
+            <address>2048</address>
+        </cell>
+
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.exciter OFF</name>
+            <address>2063</address>
         </cell>
 
         <cell>
@@ -2922,27 +2915,57 @@
         </cell>
 
         <cell>
-            <name>F3_PCC.PCC Connected</name>
-            <address>2048</address>
+            <name>Microturbine.CB_control.MT_sync ON</name>
+            <address>2060</address>
         </cell>
 
         <cell>
-            <name>gridconnect2</name>
-            <address>2050</address>
+            <name>ref_ctrl ON</name>
+            <address>2061</address>
+        </cell>
+
+        <cell>
+            <name>Microturbine.qd0(PU).Exciter.exciter ON</name>
+            <address>2064</address>
+        </cell>
+
+        <cell>
+            <name>Microturbine.CB_control.MT_sync OFF</name>
+            <address>2059</address>
         </cell>
 
     </do_var_list>
 
     <scada_inputs>
         <scada_input>
-            <name>F3_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063644</addr>
+            <name>Microturbine.CB_control.Grid_Islanded</name>
+            <addr>1426063660</addr>
             <min>0.0</min>
             <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microturbine.qd0(PU).Governor.AGC</name>
+            <addr>1426063672</addr>
+            <min>-3.0</min>
+            <max>3.0</max>
             <def_value>0.0</def_value>
             <unit></unit>
             <widget_type>float</widget_type>
             <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Microturbine.ref_ctrl</name>
+            <addr>1426063684</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
         </scada_input>
         <scada_input>
             <name>F3_CB4.MID_Rly1.SEL_787.Control Panel Input1</name>
@@ -2955,8 +2978,8 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F3_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063620</addr>
+            <name>F3_CB8.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063648</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -2965,10 +2988,30 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Microturbine.qd0(PU).Vref</name>
-            <addr>1426063676</addr>
-            <min>0.8</min>
-            <max>2.0</max>
+            <name>Microturbine.Connect MCB</name>
+            <addr>1426063664</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>3ph Fault 301.ctrl</name>
+            <addr>1426063616</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microturbine.qd0(PU).wref</name>
+            <addr>1426063680</addr>
+            <min>0.7</min>
+            <max>1.3</max>
             <def_value>1.0</def_value>
             <unit>pu</unit>
             <widget_type>float</widget_type>
@@ -2985,66 +3028,6 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Microturbine.Connect MCB</name>
-            <addr>1426063660</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>1.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F3_CB5.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063636</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Microturbine.qd0(PU).Governor.AGC</name>
-            <addr>1426063672</addr>
-            <min>-2.0</min>
-            <max>2.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Microturbine.MT_sync</name>
-            <addr>1426063668</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F3_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063640</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Microturbine.Connect MT</name>
-            <addr>1426063664</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>1.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
             <name>F3_CB3.MID_Rly1.SEL_787.Control Panel Input1</name>
             <addr>1426063628</addr>
             <min>0.0</min>
@@ -3055,17 +3038,7 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Microturbine.qd0(PU).wref</name>
-            <addr>1426063680</addr>
-            <min>263.8937829015426</min>
-            <max>490.0884539600077</max>
-            <def_value>376.99111843077515</def_value>
-            <unit>rad/s</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F3_PCC.Close PCC</name>
+            <name>F3_Motor.Control Panel Input1</name>
             <addr>1426063656</addr>
             <min>0.0</min>
             <max>1.0</max>
@@ -3085,8 +3058,8 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F3_CB8.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063648</addr>
+            <name>F3_CB5.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063636</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3095,14 +3068,54 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>3ph Fault 301.ctrl</name>
-            <addr>1426063616</addr>
+            <name>F3_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063644</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
             <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Microturbine.Connect MT</name>
+            <addr>1426063668</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Microturbine.qd0(PU).Vref</name>
+            <addr>1426063676</addr>
+            <min>0.8</min>
+            <max>2.0</max>
+            <def_value>1.0</def_value>
+            <unit>pu</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F3_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063640</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F3_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063620</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
         </scada_input>
     </scada_inputs>
 
@@ -3110,17 +3123,17 @@
     <dsp_monitors>
         <monitor>
             <type>internal</type>
-            <execution_rates>[5e-05, 0.05]</execution_rates>
-            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.05)']</execution_rate_labels>
-            <timer_counters>[7000.0, 7000000.0]</timer_counters>
+            <execution_rates>[0.0001, 0.05]</execution_rates>
+            <execution_rate_labels>['ER0 (0.0001)', 'ER1 (0.05)']</execution_rate_labels>
+            <timer_counters>[14000.0, 7000000.0]</timer_counters>
 
             
         </monitor>
         <monitor>
             <type>user</type>
-            <execution_rates>[2e-05]</execution_rates>
-            <execution_rate_labels>['ER0 (2e-05)']</execution_rate_labels>
-            <timer_counters>[2800.0000000000005]</timer_counters>
+            <execution_rates>[2e-05, 0.0001]</execution_rates>
+            <execution_rate_labels>['ER0 (2e-05)', 'ER1 (0.0001)']</execution_rate_labels>
+            <timer_counters>[2800.0000000000005, 14000.0]</timer_counters>
 
             
         </monitor>

@@ -11,34 +11,6 @@
     <components>
         <inputs>
             <input>
-                <name>ESS.Vdc_</name>
-                <device>0</device>
-            	<input_type>OnePhaseInput</input_type>
-                <waveform_type>Constant</waveform_type>
-                <waveform></waveform>
-                <constant_value>800.0</constant_value>
-                <rms>0.0</rms>
-                <frequency>50.0</frequency>
-                <phase>0.0</phase>
-                <use_harmonics>False</use_harmonics>
-                <harmonics>[]</harmonics>
-                <harmonics_type>per_rms_unit_harmonics</harmonics_type>
-            </input>
-            <input>
-                <name>PV.Vdc_</name>
-                <device>0</device>
-            	<input_type>OnePhaseInput</input_type>
-                <waveform_type>Constant</waveform_type>
-                <waveform></waveform>
-                <constant_value>800.0</constant_value>
-                <rms>0.0</rms>
-                <frequency>50.0</frequency>
-                <phase>0.0</phase>
-                <use_harmonics>False</use_harmonics>
-                <harmonics>[]</harmonics>
-                <harmonics_type>per_rms_unit_harmonics</harmonics_type>
-            </input>
-            <input>
                 <name>Vs1</name>
                 <device>0</device>
                 <input_address>2</input_address>
@@ -75,15 +47,6 @@
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>ESS.MX1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>7</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
                 <name>F2_CB1.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
@@ -108,7 +71,7 @@
                 <weight>1</weight>
                 <site>3</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB12.Brk.S1</name>
@@ -189,7 +152,7 @@
                 <weight>2</weight>
                 <site>0</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB6.Brk.S1</name>
@@ -237,11 +200,11 @@
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
-                <name>PV.MX1</name>
+                <name>Grid forming inverter (averaged).S2</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>0</weight>
-                <site>6</site>
+                <site>7</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
@@ -765,7 +728,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>ESS.MX1_fb</name>
+                	<name>ang_sync3</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -813,7 +776,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>ESS.Three Phase Inverter1.IGBT Leg2_vout_cmp</name>
+                	<name>F2_CB12.Brk.S1_fb</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -1119,106 +1082,6 @@
             </digital_channel>
         </digital_channels>
         <switching_blocks>
-            <switching_block>
-                <name>ESS.Three Phase Inverter1</name>
-                <type>igbt_leg</type>
-                <device>0</device>
-                <site>7</site>
-                <switches>
-                    <switch>
-                        <name>Sa_bot</name>
-                        <device>0</device>
-                        <weight>[0]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sa_top</name>
-                        <device>0</device>
-                        <weight>[1]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sb_bot</name>
-                        <device>0</device>
-                        <weight>[6]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sb_top</name>
-                        <device>0</device>
-                        <weight>[7]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sc_bot</name>
-                        <device>0</device>
-                        <weight>[12]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sc_top</name>
-                        <device>0</device>
-                        <weight>[13]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                </switches>
-            </switching_block>
-            <switching_block>
-                <name>PV.Three Phase Inverter1</name>
-                <type>igbt_leg</type>
-                <device>0</device>
-                <site>6</site>
-                <switches>
-                    <switch>
-                        <name>Sa_bot</name>
-                        <device>0</device>
-                        <weight>[0]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sa_top</name>
-                        <device>0</device>
-                        <weight>[1]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sb_bot</name>
-                        <device>0</device>
-                        <weight>[6]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sb_top</name>
-                        <device>0</device>
-                        <weight>[7]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sc_bot</name>
-                        <device>0</device>
-                        <weight>[12]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                    <switch>
-                        <name>Sc_top</name>
-                        <device>0</device>
-                        <weight>[13]</weight>
-                        <software_control>False</software_control>
-                        <software_value>0</software_value>
-                    </switch>
-                </switches>
-            </switching_block>
         </switching_blocks>
         <batteries>
         </batteries>
@@ -1235,16 +1098,6 @@
             </scada_input>
             <scada_input>
                 <name>F2_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB10.MID_Rly1.SEL_787.Control Panel Input1</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB11.MID_Rly1.SEL_787.Control Panel Input1</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
@@ -1310,6 +1163,56 @@
             </scada_input>
             <scada_input>
                 <name>F2_CB9.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid feeding inverter (averaged).Connect GFL</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).CB_control.Grid_Islanded</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).Connect GFM</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).Controller.Frequency droop.wref</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).Controller.Voltage droop.Vref</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).ref_ctrl</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Pref_feed</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Pref_form</name>
+                <device>0</device>
+                <value>10.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Qref_feed</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Qref_form</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>

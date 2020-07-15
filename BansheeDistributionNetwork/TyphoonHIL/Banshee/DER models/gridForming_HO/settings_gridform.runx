@@ -542,7 +542,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>Grid forming inverter (averaged).INV_sync OFF</name>
+                	<name>Grid forming inverter (averaged).CB_control.GCB OFF</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -554,7 +554,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>Grid forming inverter (averaged).INV_sync ON</name>
+                	<name>Grid forming inverter (averaged).CB_control.GCB ON</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -566,7 +566,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>Grid forming inverter (averaged).S2_fb</name>
+                	<name>Grid forming inverter (averaged).CB_control.Grid_Islanded OFF</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -578,7 +578,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>gridconnect2</name>
+                	<name>Grid forming inverter (averaged).CB_control.Grid_Islanded ON</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -590,7 +590,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>griddisconnect2</name>
+                	<name>Grid forming inverter (averaged).CB_control.INV_sync OFF</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -602,7 +602,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 AO flag</name>
+                	<name>Grid forming inverter (averaged).CB_control.INV_sync ON</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -614,7 +614,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 1</name>
+                	<name>Grid forming inverter (averaged).S2_fb</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -626,7 +626,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 10</name>
+                	<name>gridconnect2</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -638,7 +638,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 11</name>
+                	<name>griddisconnect2</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -650,7 +650,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 12</name>
+                	<name>HIL0 AO flag</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -662,7 +662,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 13</name>
+                	<name>HIL0 digital input 1</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -674,7 +674,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 14</name>
+                	<name>HIL0 digital input 10</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -686,7 +686,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 15</name>
+                	<name>HIL0 digital input 11</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -698,7 +698,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 16</name>
+                	<name>HIL0 digital input 12</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -710,7 +710,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 17</name>
+                	<name>HIL0 digital input 13</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -722,7 +722,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 18</name>
+                	<name>HIL0 digital input 14</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -734,7 +734,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 19</name>
+                	<name>HIL0 digital input 15</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -746,7 +746,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 2</name>
+                	<name>HIL0 digital input 16</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -758,7 +758,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 20</name>
+                	<name>HIL0 digital input 17</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -770,7 +770,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 21</name>
+                	<name>HIL0 digital input 18</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -782,7 +782,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 22</name>
+                	<name>HIL0 digital input 19</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -794,7 +794,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 23</name>
+                	<name>HIL0 digital input 2</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -806,7 +806,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 24</name>
+                	<name>HIL0 digital input 20</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -818,7 +818,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 25</name>
+                	<name>HIL0 digital input 21</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -830,7 +830,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 26</name>
+                	<name>HIL0 digital input 22</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -842,7 +842,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 27</name>
+                	<name>HIL0 digital input 23</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -854,7 +854,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 28</name>
+                	<name>HIL0 digital input 24</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -866,7 +866,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 29</name>
+                	<name>HIL0 digital input 25</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -878,7 +878,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 3</name>
+                	<name>HIL0 digital input 26</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -890,7 +890,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 30</name>
+                	<name>HIL0 digital input 27</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -901,12 +901,27 @@
         </batteries>
         <scada_inputs>
             <scada_input>
-                <name>Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV</name>
+                <name>Grid forming inverter (averaged).CB_control.Grid_Islanded</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).Connect GFM</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>Grid forming inverter (averaged).INV_sync</name>
+                <name>Grid forming inverter (averaged).Controller.Frequency droop.wref</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).Controller.Voltage droop.Vref</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Grid forming inverter (averaged).ref_ctrl</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>

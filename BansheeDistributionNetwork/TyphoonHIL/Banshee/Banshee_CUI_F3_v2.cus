@@ -417,7 +417,7 @@ displayValue = False
                 <name><![CDATA[Woodward Startup Control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['458c2e6eee0911e6bada4c34882a0abb', '8911d18cbe4011eab013509a4c4e2fb4', '9be535a6be4011eab1c6509a4c4e2fb4', '9be535a7be4011ea828d509a4c4e2fb4', 'a8de8930be4011ea8d09509a4c4e2fb4', 'a8de8931be4011eaaf80509a4c4e2fb4', '16ec12a4be4111ea871c509a4c4e2fb4', '16ec12a6be4111ea8b23509a4c4e2fb4', '16ec12a7be4111ea96e7509a4c4e2fb4', '16ec12a8be4111ea9d55509a4c4e2fb4', '16ec12a9be4111eaa106509a4c4e2fb4', '4177d81abe4111eaa871509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['8a78dde2c07d11ea8655509a4c4e2fb4', '8a78dde3c07d11eab176509a4c4e2fb4', '8a78dde4c07d11eabff5509a4c4e2fb4', '8a78dde5c07d11ea8d5d509a4c4e2fb4', '8a78dde6c07d11ea9444509a4c4e2fb4']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -427,41 +427,12 @@ displayValue = False
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>16.0</x>
-                    <y>24.0</y>
-                    <width>360</width>
-                    <height>176</height>
+                    <x>40.0</x>
+                    <y>16.0</y>
+                    <width>184</width>
+                    <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>458c2e6eee0911e6bada4c34882a0abb</id>
-                <name><![CDATA[MCB status]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Microturbine.CB_control.MCB ON]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>192.0</x>
-                    <y>16.0</y>
-                    <width>152</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
             </component_data>
         <component_data>
@@ -479,9 +450,9 @@ displayValue = False
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>1000</x>
-                    <y>376</y>
-                    <width>656</width>
+                    <x>1000.0</x>
+                    <y>360.0</y>
+                    <width>576</width>
                     <height>696</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <collapsed>False</collapsed>
@@ -659,7 +630,7 @@ displayValue = hil.read_analog_signal('Vrms_bus301')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2792.0</x>
+                    <x>2800.0</x>
                     <y>368.0</y>
                     <width>112</width>
                     <height>56</height>
@@ -1031,323 +1002,11 @@ displayValue = hil.read_analog_signal('Vrms_bus304')/1000
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>8911d18cbe4011eab013509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Microturbine.CB_control.MCB OFF]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>256.0</x>
-                    <y>16.0</y>
-                    <width>56</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>9be535a6be4011eab1c6509a4c4e2fb4</id>
-                <name><![CDATA[GCB status]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Microturbine.CB_control.GCB ON]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>192.0</x>
-                    <y>96.0</y>
-                    <width>152</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>9be535a7be4011ea828d509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Microturbine.CB_control.GCB OFF]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>256.0</x>
-                    <y>96.0</y>
-                    <width>56</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>a8de8930be4011ea8d09509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Microturbine.MT_sync OFF]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>1000</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>256.0</x>
-                    <y>56.0</y>
-                    <width>56</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>a8de8931be4011eaaf80509a4c4e2fb4</id>
-                <name><![CDATA[Genset sync status]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[None]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Microturbine.MT_sync ON]]></signal_name>
-                <hil_device>2</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-# NOTE: Only read functions are available from HIL Control Panel API
-#------------------------------------------------
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>192.0</x>
-                    <y>56.0</y>
-                    <width>152</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>16ec12a4be4111ea871c509a4c4e2fb4</id>
-                <name><![CDATA[OFF]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Microturbine.MT_sync', 0)]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Microturbine.MT_sync', 0)
-hil.set_scada_input_value('Microturbine.BE1-25A Synchronizer.Connect MT', 0)]]></on_stop_code>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>96.0</x>
-                    <y>24.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>16ec12a6be4111ea8b23509a4c4e2fb4</id>
-                <name><![CDATA[OFF]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Microturbine.MT_sync', 1)
-hil.set_scada_input_value('Microturbine.Connect MT', 0)]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-]]></on_stop_code>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>96.0</x>
-                    <y>96.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>16ec12a7be4111ea96e7509a4c4e2fb4</id>
-                <name><![CDATA[ON]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Microturbine.MT_sync', 1)]]></on_click_code>
-                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-
-hil.set_scada_input_value('Microturbine.MT_sync', 0)
-hil.set_scada_input_value('Microturbine.Connect MT', 0)
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-]]></on_stop_code>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>16.0</x>
-                    <y>24.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>16ec12a8be4111ea9d55509a4c4e2fb4</id>
-                <name><![CDATA[Note component]]></name>
-                <type>TextNote</type>
-                <description><![CDATA[]]></description>
-                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:9pt; font-weight:600;">Genset Auto Sync</span></p></body></html>]]></text>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>0.0</y>
-                    <width>144</width>
-                    <height>32</height>
-                    <background_color><![CDATA[#f0f0f0]]></background_color>
-                    <background_type><![CDATA[Transparent]]></background_type>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>16ec12a9be4111eaa106509a4c4e2fb4</id>
-                <name><![CDATA[ON]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Microturbine.MT_sync', 1)
-hil.set_scada_input_value('Microturbine.Connect MT', 1)]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-]]></on_stop_code>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>16.0</x>
-                    <y>96.0</y>
-                    <width>64</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>4177d81abe4111eaa871509a4c4e2fb4</id>
-                <name><![CDATA[Note component]]></name>
-                <type>TextNote</type>
-                <description><![CDATA[]]></description>
-                <text><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Arial'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:9pt; font-weight:600;">Genset Connect</span></p></body></html>]]></text>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>72.0</y>
-                    <width>144</width>
-                    <height>32</height>
-                    <background_color><![CDATA[#f0f0f0]]></background_color>
-                    <background_type><![CDATA[Transparent]]></background_type>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
                 <id>e420f4d2be4111eaaa80509a4c4e2fb4</id>
                 <name><![CDATA[Woodward Control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['064b14a8be4211eaacac509a4c4e2fb4', '40ad4f02be4211eaa978509a4c4e2fb4', 'd4ca4f58be4211eab7df509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['064b14a8be4211eaacac509a4c4e2fb4', '40ad4f02be4211eaa978509a4c4e2fb4', 'd4ca4f58be4211eab7df509a4c4e2fb4', '8e0edd8ac53711ea88ef509a4c4e2fb4', 'cbe309dcc53711ea8178509a4c4e2fb4', 'cbe331dec53711eaa4d1509a4c4e2fb4']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1357,7 +1016,7 @@ p, li { white-space: pre-wrap; }
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>392.0</x>
+                    <x>312.0</x>
                     <y>16.0</y>
                     <width>240</width>
                     <height>200</height>
@@ -1415,7 +1074,7 @@ widgetValue = None
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>120.0</y>
+                    <y>128.0</y>
                     <width>232</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -1436,8 +1095,7 @@ widgetValue = None
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Vref', inputValue)
-]]></on_use_code>
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
 
@@ -1447,7 +1105,7 @@ hil.set_scada_input_value('Microturbine.qd0(PU).Vref', inputValue)
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
                 <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
 # HIL API is imported as 'hil'
 
@@ -1465,14 +1123,14 @@ widgetValue = None
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[1.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[p.u.]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>8.0</y>
+                    <y>48.0</y>
                     <width>232</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -1504,7 +1162,7 @@ hil.set_scada_input_value('Microturbine.qd0(PU).wref', inputValue)
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_cp_input_value('User defined', 'DMS_ENGINE', 'DMS_ENGINE.Disconnect', inputValue)]]></on_start_code>
+hil.set_scada_input_value('Microturbine.qd0(PU).wref', 1)]]></on_start_code>
                 <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
 # HIL API is imported as 'hil'
 
@@ -1522,14 +1180,14 @@ widgetValue = None
 # NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
 widgetValue = None
 ]]></on_timer_code>
-                <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[1.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[rad/s]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>64.0</y>
+                    <y>88.0</y>
                     <width>232</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -1572,10 +1230,10 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>384.0</y>
-                    <width>640</width>
-                    <height>280</height>
+                    <x>8.0</x>
+                    <y>408.0</y>
+                    <width>536</width>
+                    <height>248</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
                 <advance_widget_settings>
@@ -1644,7 +1302,7 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>376.0</x>
+                    <x>304.0</x>
                     <y>216.0</y>
                     <width>256</width>
                     <height>176</height>
@@ -1679,8 +1337,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>64.0</x>
-                    <y>216.0</y>
+                    <x>8.0</x>
+                    <y>224.0</y>
                     <width>256</width>
                     <height>168</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1714,8 +1372,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2728</x>
-                    <y>1032</y>
+                    <x>2728.0</x>
+                    <y>1032.0</y>
                     <width>248</width>
                     <height>144</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1727,6 +1385,392 @@ displayValue = 0.0
                     <warning_range>(0, 0, 0, 0)</warning_range>
                     <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>8a78dde2c07d11ea8655509a4c4e2fb4</id>
+                <name><![CDATA[Connect]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.Connect MT', 1)]]></on_click_code>
+                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.Connect MT', 0)]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>32.0</x>
+                    <y>88.0</y>
+                    <width>120</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>8a78dde3c07d11eab176509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Microturbine.CB_control.GCB ON]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Green</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>48.0</x>
+                    <y>48.0</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>8a78dde4c07d11eabff5509a4c4e2fb4</id>
+                <name><![CDATA[Disconnect]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.Connect MT', 0)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Microturbine.Connect MT', 0)]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>32.0</x>
+                    <y>120.0</y>
+                    <width>120</width>
+                    <height>40</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>8a78dde5c07d11ea8d5d509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Microturbine.CB_control.GCB OFF]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>80.0</x>
+                    <y>48.0</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>8a78dde6c07d11ea9444509a4c4e2fb4</id>
+                <name><![CDATA[Genset mode]]></name>
+                <type>ComboBoxMacro</type>
+                <description><![CDATA[]]></description>
+                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
+# NOTE: entered value is available through variable 'inputValue'
+
+if inputValue == 'Islanded':
+    # do something when 'Case 1' is selected
+    hil.set_scada_input_value('Microturbine.CB_control.Grid_Islanded', 1)
+    pass
+elif inputValue == 'Grid-connected':
+    # do something when 'Case 2' is selected
+    hil.set_scada_input_value('Microturbine.CB_control.Grid_Islanded', 0)
+    pass
+
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = 'Islanded'
+]]></on_start_code>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = 'Islanded'
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[Islanded]]></inputValue>
+                <availableValues><![CDATA[['Islanded', 'Grid-connected']]]></availableValues>
+                <unit><![CDATA[]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>8.0</x>
+                    <y>8.0</y>
+                    <width>160</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>8e0edd8ac53711ea88ef509a4c4e2fb4</id>
+                <name><![CDATA[VF control]]></name>
+                <type>CheckBoxMacro</type>
+                <description><![CDATA[]]></description>
+                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
+# NOTE: entered value is available through variable 'inputValue'
+
+if inputValue:
+    # do something when checkbox is checked
+    hil.set_scada_input_value('Microturbine.ref_ctrl', 1)
+    pass
+else:
+    # do something when checkbox is unchecked
+    hil.set_scada_input_value('Microturbine.ref_ctrl', 0)
+    pass
+
+]]></on_use_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[False]]></inputValue>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>8.0</y>
+                    <width>152</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>cbe309dcc53711ea8178509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[ref_ctrl ON]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Green</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>144.0</x>
+                    <y>8.0</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>cbe331dec53711eaa4d1509a4c4e2fb4</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[ref_ctrl OFF]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>168.0</x>
+                    <y>8.0</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>5731f4fec53a11ea925d509a4c4e2fb4</id>
+                <name><![CDATA[Capture/Scope]]></name>
+                <type>Capture/Scope</type>
+                <description><![CDATA[]]></description>
+                <hierarchy_position>1</hierarchy_position>
+                <working_mode>windowed</working_mode>
+                <widget_settings>
+                    <x>1224.0</x>
+                    <y>1088.0</y>
+                    <width>120</width>
+                    <height>120</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                    <state>Scope</state>
+                    <layout>None</layout>
+                    <presets>
+                        <active_capture_preset>Default</active_capture_preset>
+                        <active_scope_preset>Default</active_scope_preset>
+                        <capture name="Default">
+                            <time_interval>0.01</time_interval>
+                            <sample_rate>250000.0</sample_rate>
+                            <background_color>white</background_color>
+                            <layout>Grid</layout>
+                            <legend>True</legend>
+                            <analog_signals>
+                            </analog_signals>
+                            <digital_signals>
+                            </digital_signals>
+                            <trigger>
+                                <device>-1</device>
+                                <is_force>False</is_force>
+                                <type>Analog</type>
+                                <source>None</source>
+                                <edge>Rising edge</edge>
+                                <treshold>0.0</treshold>
+                                <offset>0.0</offset>
+                                <useFirstTrigger>False</useFirstTrigger>
+                            </trigger>
+                            <plotting_options in_use="False">
+                                <subplots>
+                                    </subplots>
+                            </plotting_options>
+                        </capture>
+                        <scope name="Default">
+                            <background_color>white</background_color>
+                            <layout>Grid</layout>
+                            <legend>True</legend>
+                            <show_viewports>4</show_viewports>
+                            <decimation>1</decimation>
+                            <time_base>0.005</time_base>
+                            <analog_signals>
+                            </analog_signals>
+                            <digital_signals>
+                            </digital_signals>
+                            <trigger>
+                                <device>-1</device>
+                                <is_force>False</is_force>
+                                <type>Analog</type>
+                                <source>None</source>
+                                <edge>Rising edge</edge>
+                                <treshold>0.0</treshold>
+                                <offset>50.0</offset>
+                                <useFirstTrigger>False</useFirstTrigger>
+                            </trigger>
+                        </scope>
+                        </presets>
+                    <capture>
+                        <time_interval>0.01</time_interval>
+                        <sample_rate>250000.0</sample_rate>
+                        <background_color>white</background_color>
+                        <layout>Grid</layout>
+                        <legend>True</legend>
+                        <trigger>
+                            <type>Analog</type>
+                            <source>None</source>
+                            <edge>Rising edge</edge>
+                            <treshold>0.0</treshold>
+                            <offset>0.0</offset>
+                            <useFirstTrigger>False</useFirstTrigger>
+                        </trigger>
+
+                        <analog_signals>
+                            </analog_signals>
+
+                         <digital_signals>
+                            </digital_signals>
+
+                    </capture>
+
+                    <scope>
+                        <time_base>0.005 </time_base>
+                        <background_color>white</background_color>
+                        <layout>Grid</layout>
+                        <legend>True</legend>
+                        <trigger>
+                            <mode>Auto</mode>
+                            <type>Analog</type>
+                            <source>None</source>
+                            <edge>Rising edge</edge>
+                            <treshold>0.0</treshold>
+                            <offset>50.0</offset>
+                        </trigger>
+
+                         <analog_signals>
+                            </analog_signals>
+
+                        <digital_signals>
+                            </digital_signals>
+
+                    </scope>
+                    <plotting_options in_use="False">
+                    
+                        <subplots>
+                            </subplots>
+                    </plotting_options>
+                </widget_settings>
+
             </component_data>
         </components>
 </ui_settings>

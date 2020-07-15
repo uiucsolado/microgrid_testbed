@@ -1,0 +1,222 @@
+version = 4.2
+
+//
+// Saved by sw version: 2020.1 SP2
+// Save timestamp: 10-Jul-2020 @ 05:17:31 AM
+//
+
+model "Test_current_source" {
+    configuration {
+        hil_device = "HIL603"
+        hil_configuration_id = 1
+        simulation_method = exact
+        simulation_time_step = auto
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        device_ao_limit_enable = True
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "internal memory"
+        data_section = "internal memory"
+        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "default"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "high"
+    }
+
+    component Subsystem Root {
+        component "core/Signal Controlled Current Source" Isp1 {
+        }
+        [
+            position = 8304, 8272
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Va1 {
+        }
+        [
+            position = 8512, 8248
+            rotation = right
+            size = 64, 32
+        ]
+
+        component src_sine "Sinusoidal Source1" {
+            amplitude = "13800"
+            execution_rate = "Ts"
+            frequency = "60"
+        }
+        [
+            position = 8184, 8272
+            hide_name = True
+        ]
+
+        component "core/Single Pole Single Throw Contactor" S1 {
+            ctrl_src = "Model"
+        }
+        [
+            position = 8584, 8184
+            size = 64, 32
+        ]
+
+        component pas_resistor R2 {
+            resistance = "1/1000"
+        }
+        [
+            position = 8720, 8248
+            rotation = left
+            scale = -1, 1
+        ]
+
+        component src_scada_input switch {
+            execution_rate = "Ts"
+            format = "int"
+            max = "1"
+            min = "0"
+            signal_type = "int"
+            unit = ""
+        }
+        [
+            position = 8464, 8104
+        ]
+
+        component "core/Current Measurement" Ia1 {
+        }
+        [
+            position = 8384, 8184
+            size = 64, 32
+        ]
+
+        junction Junction2 pe
+        [
+            position = 8512, 8360
+        ]
+
+        junction Junction3 pe
+        [
+            position = 8512, 8184
+        ]
+
+        connect "Sinusoidal Source1.out" Isp1.in as Connection4
+        connect R2.n_node S1.a_out as Connection8
+        connect Va1.n_node Junction2 as Connection9
+        connect Junction2 Isp1.n_node as Connection10
+        [
+            breakpoints = 8512, 8360; 8304, 8360
+        ]
+        connect R2.p_node Junction2 as Connection11
+        connect switch.out S1.ctrl_in as Connection12
+        connect Va1.p_node Junction3 as Connection14
+        connect Junction3 S1.a_in as Connection15
+        [
+            breakpoints = 8512, 8184
+        ]
+        connect Isp1.p_node Ia1.p_node as Connection16
+        connect Ia1.n_node Junction3 as Connection17
+    }
+
+    default {
+        pas_resistor {
+            resistance = "1"
+        }
+
+        src_scada_input {
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
+            execution_rate = "100e-6"
+        }
+
+        src_sine {
+            amplitude = "1"
+            dc_offset = "0"
+            frequency = "50"
+            phase = "0"
+            execution_rate = "100e-6"
+        }
+
+        "core/Current Measurement" {
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+
+        "core/Signal Controlled Current Source" {
+            execution_rate = "inherit"
+        }
+
+        "core/Single Pole Single Throw Contactor" {
+            ctrl_src = "Digital input"
+            Sa = "1"
+            Sa_logic = "active high"
+            enable_fb_out = "False"
+            fb_out_type = "real"
+            execution_rate = "inherit"
+            initial_state = "off"
+            on_delay = "0"
+            off_delay = "0"
+            switching = "any current"
+        }
+
+        "core/Voltage Measurement" {
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        # The Schematic API is imported as 'mdl'
+        # To get the model file path, use 'mdl.get_model_file_path()'
+        # To print information to the console, use info()
+        
+        Ts = 20e-6
+    ENDCODE
+}
