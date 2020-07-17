@@ -1392,8 +1392,8 @@ widgetValue = None
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>8</x>
-                    <y>0</y>
+                    <x>8.0</x>
+                    <y>0.0</y>
                     <width>152</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1420,8 +1420,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>472.0</y>
+                    <x>0</x>
+                    <y>472</y>
                     <width>216</width>
                     <height>152</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1448,15 +1448,15 @@ displayValue = 0.0
 displayValue = 0.0
 
 ]]></code>
-                <signal_name><![CDATA[Microturbine.qd0(PU).w_M]]></signal_name>
+                <signal_name><![CDATA[Microturbine.qd0(PU).Governor.w_M]]></signal_name>
                 <unit><![CDATA[rpm]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
                 <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>216.0</x>
-                    <y>472.0</y>
+                    <x>216</x>
+                    <y>472</y>
                     <width>232</width>
                     <height>152</height>
                     <appearance><![CDATA[Flat]]></appearance>

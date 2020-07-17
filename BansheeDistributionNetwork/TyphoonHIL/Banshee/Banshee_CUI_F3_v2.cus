@@ -797,7 +797,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[On]]></inputValue>
+                <inputValue><![CDATA[Off]]></inputValue>
                 <availableValues><![CDATA[['On', 'Off']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
@@ -1068,13 +1068,13 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValue><![CDATA[0.01]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[p.u.]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>128.0</y>
+                    <x>0</x>
+                    <y>128</y>
                     <width>232</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -1592,11 +1592,11 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[False]]></inputValue>
+                <inputValue><![CDATA[True]]></inputValue>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>8.0</y>
+                    <x>0</x>
+                    <y>8</y>
                     <width>152</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1662,8 +1662,8 @@ displayValue = False
                 <hierarchy_position>1</hierarchy_position>
                 <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>1224.0</x>
-                    <y>1088.0</y>
+                    <x>752</x>
+                    <y>624</y>
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1701,7 +1701,7 @@ displayValue = False
                             <background_color>white</background_color>
                             <layout>Grid</layout>
                             <legend>True</legend>
-                            <show_viewports>4</show_viewports>
+                            <show_viewports>1</show_viewports>
                             <decimation>1</decimation>
                             <time_base>0.005</time_base>
                             <analog_signals>
