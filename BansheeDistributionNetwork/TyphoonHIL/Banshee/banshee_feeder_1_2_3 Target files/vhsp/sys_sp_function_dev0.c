@@ -119,6 +119,17 @@ typedef double real;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 //@cmp.def.end
 
 
@@ -131,6 +142,7 @@ typedef double real;
 // variables
 float _vrms_bus101_vinst_va1__out;
 float _vrms_bus102_vinst_va1__out;
+float _vrms_bus103_vinst_va1__out;
 float _vrms_bus104_vinst_va1__out;
 float _vrms_bus105_vinst_va1__out;
 float _vrms_bus106_vinst_va1__out;
@@ -142,6 +154,9 @@ float _vrms_bus101_rms_calc_slow__var_rms;
 float _vrms_bus102_rms_calc_fast__var_eff_s;
 X_UnInt32 _vrms_bus102_rms_calc_fast__period;
 float _vrms_bus102_rms_calc_slow__var_rms;
+float _vrms_bus103_rms_calc_fast__var_eff_s;
+X_UnInt32 _vrms_bus103_rms_calc_fast__period;
+float _vrms_bus103_rms_calc_slow__var_rms;
 float _vrms_bus104_rms_calc_fast__var_eff_s;
 X_UnInt32 _vrms_bus104_rms_calc_fast__period;
 float _vrms_bus104_rms_calc_slow__var_rms;
@@ -169,6 +184,10 @@ float _vrms_bus102_rt1_output__out =  0.0;
 
 float _vrms_bus102_rt2_output__out =  0.0;
 
+float _vrms_bus103_rt1_output__out =  0.0;
+
+float _vrms_bus103_rt2_output__out =  0.0;
+
 float _vrms_bus104_rt1_output__out =  0.0;
 
 float _vrms_bus104_rt2_output__out =  0.0;
@@ -195,6 +214,9 @@ float _vrms_bus101_rms_calc_fast__var_filt;
 float _vrms_bus102_rms_calc_fast__v_sq_sum_state;
 X_UnInt32 _vrms_bus102_rms_calc_fast__pc_cnt_1_state;
 float _vrms_bus102_rms_calc_fast__var_filt;
+float _vrms_bus103_rms_calc_fast__v_sq_sum_state;
+X_UnInt32 _vrms_bus103_rms_calc_fast__pc_cnt_1_state;
+float _vrms_bus103_rms_calc_fast__var_filt;
 float _vrms_bus104_rms_calc_fast__v_sq_sum_state;
 X_UnInt32 _vrms_bus104_rms_calc_fast__pc_cnt_1_state;
 float _vrms_bus104_rms_calc_fast__var_filt;
@@ -223,6 +245,8 @@ void ReInit_sys_sp_cpu_dev0() {
     _vrms_bus101_rt2_output__out =  0.0;
     _vrms_bus102_rt1_output__out =  0.0;
     _vrms_bus102_rt2_output__out =  0.0;
+    _vrms_bus103_rt1_output__out =  0.0;
+    _vrms_bus103_rt2_output__out =  0.0;
     _vrms_bus104_rt1_output__out =  0.0;
     _vrms_bus104_rt2_output__out =  0.0;
     _vrms_bus105_rt1_output__out =  0.0;
@@ -243,6 +267,11 @@ void ReInit_sys_sp_cpu_dev0() {
     _vrms_bus102_rms_calc_fast__var_filt = 0.0f;
     _vrms_bus102_rms_calc_fast__v_sq_sum_state = 0.0f;
     _vrms_bus102_rms_calc_fast__pc_cnt_1_state = 0;
+    _vrms_bus103_rms_calc_fast__var_eff_s = 0;
+    _vrms_bus103_rms_calc_fast__period = 0;
+    _vrms_bus103_rms_calc_fast__var_filt = 0.0f;
+    _vrms_bus103_rms_calc_fast__v_sq_sum_state = 0.0f;
+    _vrms_bus103_rms_calc_fast__pc_cnt_1_state = 0;
     _vrms_bus104_rms_calc_fast__var_eff_s = 0;
     _vrms_bus104_rms_calc_fast__period = 0;
     _vrms_bus104_rms_calc_fast__var_filt = 0.0f;
@@ -275,6 +304,7 @@ void ReInit_sys_sp_cpu_dev0() {
     HIL_OutAO(0x4004, 0.0f);
     HIL_OutAO(0x4005, 0.0f);
     HIL_OutAO(0x4006, 0.0f);
+    HIL_OutAO(0x4007, 0.0f);
     //@cmp.init.block.end
 }
 
@@ -310,19 +340,21 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: Vrms_bus101.Vinst.Va1
-    _vrms_bus101_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x824));
+    _vrms_bus101_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xa32));
     // Generated from the component: Vrms_bus102.Vinst.Va1
-    _vrms_bus102_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x225));
+    _vrms_bus102_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x425));
+    // Generated from the component: Vrms_bus103.Vinst.Va1
+    _vrms_bus103_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x12));
     // Generated from the component: Vrms_bus104.Vinst.Va1
-    _vrms_bus104_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x226));
+    _vrms_bus104_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x426));
     // Generated from the component: Vrms_bus105.Vinst.Va1
-    _vrms_bus105_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x422));
+    _vrms_bus105_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x622));
     // Generated from the component: Vrms_bus106.Vinst.Va1
-    _vrms_bus106_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x22));
+    _vrms_bus106_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x222));
     // Generated from the component: Vrms_bus107.Vinst.Va1
-    _vrms_bus107_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x612));
+    _vrms_bus107_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x812));
     // Generated from the component: Vrms_grid.Vinst.Va1
-    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x825));
+    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xa33));
     // Generated from the component: Vrms_bus101.rms_calc_fast
     _vrms_bus101_rms_calc_fast__v_sq_sum_state = _vrms_bus101_rms_calc_fast__v_sq_sum_state + _vrms_bus101_vinst_va1__out * _vrms_bus101_vinst_va1__out;
     //square sum and period update on period end
@@ -341,6 +373,15 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
         _vrms_bus102_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus102.sys1
+    // Generated from the component: Vrms_bus103.rms_calc_fast
+    _vrms_bus103_rms_calc_fast__v_sq_sum_state = _vrms_bus103_rms_calc_fast__v_sq_sum_state + _vrms_bus103_vinst_va1__out * _vrms_bus103_vinst_va1__out;
+    //square sum and period update on period end
+    if (166 == _vrms_bus103_rms_calc_fast__pc_cnt_1_state) {
+        _vrms_bus103_rms_calc_fast__var_eff_s = _vrms_bus103_rms_calc_fast__v_sq_sum_state;
+        _vrms_bus103_rms_calc_fast__period = (float)166;
+        _vrms_bus103_rms_calc_fast__v_sq_sum_state = 0.0f;
+    }
+    // Generated from the component: Vrms_bus103.sys1
     // Generated from the component: Vrms_bus104.rms_calc_fast
     _vrms_bus104_rms_calc_fast__v_sq_sum_state = _vrms_bus104_rms_calc_fast__v_sq_sum_state + _vrms_bus104_vinst_va1__out * _vrms_bus104_vinst_va1__out;
     //square sum and period update on period end
@@ -396,6 +437,11 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus102.rt2.Input
     _vrms_bus102_rt2_output__out = _vrms_bus102_rms_calc_fast__period;
     // Generated from the component: Vrms_bus102.t1
+    // Generated from the component: Vrms_bus103.rt1.Input
+    _vrms_bus103_rt1_output__out = _vrms_bus103_rms_calc_fast__var_eff_s;
+    // Generated from the component: Vrms_bus103.rt2.Input
+    _vrms_bus103_rt2_output__out = _vrms_bus103_rms_calc_fast__period;
+    // Generated from the component: Vrms_bus103.t1
     // Generated from the component: Vrms_bus104.rt1.Input
     _vrms_bus104_rt1_output__out = _vrms_bus104_rms_calc_fast__var_eff_s;
     // Generated from the component: Vrms_bus104.rt2.Input
@@ -436,6 +482,11 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
         _vrms_bus102_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus102_rms_calc_fast__pc_cnt_1_state ++;
+    // Generated from the component: Vrms_bus103.rms_calc_fast
+    if (166 == _vrms_bus103_rms_calc_fast__pc_cnt_1_state) {
+        _vrms_bus103_rms_calc_fast__pc_cnt_1_state = 0;
+    }
+    _vrms_bus103_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus104.rms_calc_fast
     if (166 == _vrms_bus104_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus104_rms_calc_fast__pc_cnt_1_state = 0;
@@ -475,6 +526,8 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus101.rt2.Output
     // Generated from the component: Vrms_bus102.rt1.Output
     // Generated from the component: Vrms_bus102.rt2.Output
+    // Generated from the component: Vrms_bus103.rt1.Output
+    // Generated from the component: Vrms_bus103.rt2.Output
     // Generated from the component: Vrms_bus104.rt1.Output
     // Generated from the component: Vrms_bus104.rt2.Output
     // Generated from the component: Vrms_bus105.rt1.Output
@@ -498,6 +551,13 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     }
     else {
         _vrms_bus102_rms_calc_slow__var_rms = 0.0f;
+    }
+    // Generated from the component: Vrms_bus103.rms_calc_slow
+    if(_vrms_bus103_rt2_output__out > 0.0f) {
+        _vrms_bus103_rms_calc_slow__var_rms = sqrtf(_vrms_bus103_rt1_output__out / _vrms_bus103_rt2_output__out);
+    }
+    else {
+        _vrms_bus103_rms_calc_slow__var_rms = 0.0f;
     }
     // Generated from the component: Vrms_bus104.rms_calc_slow
     if(_vrms_bus104_rt2_output__out > 0.0f) {
@@ -540,20 +600,23 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus102.rms
     HIL_OutAO(0x4001, _vrms_bus102_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus102.sys2
+    // Generated from the component: Vrms_bus103.rms
+    HIL_OutAO(0x4002, _vrms_bus103_rms_calc_slow__var_rms);
+    // Generated from the component: Vrms_bus103.sys2
     // Generated from the component: Vrms_bus104.rms
-    HIL_OutAO(0x4002, _vrms_bus104_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4003, _vrms_bus104_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus104.sys2
     // Generated from the component: Vrms_bus105.rms
-    HIL_OutAO(0x4003, _vrms_bus105_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4004, _vrms_bus105_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus105.sys2
     // Generated from the component: Vrms_bus106.rms
-    HIL_OutAO(0x4004, _vrms_bus106_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4005, _vrms_bus106_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus106.sys2
     // Generated from the component: Vrms_bus107.rms
-    HIL_OutAO(0x4005, _vrms_bus107_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4006, _vrms_bus107_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus107.sys2
     // Generated from the component: Vrms_grid.rms
-    HIL_OutAO(0x4006, _vrms_grid_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4007, _vrms_grid_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_grid.sys2
     //@cmp.out.block.end
     //////////////////////////////////////////////////////////////////////////

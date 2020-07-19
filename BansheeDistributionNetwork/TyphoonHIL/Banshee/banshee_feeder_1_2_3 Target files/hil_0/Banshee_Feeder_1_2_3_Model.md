@@ -11,8 +11,8 @@ REM Module block enable
 rtds_write 0x00000003 0x00010001
 rtds_file_write 0x00820000 indm_v2_imem.txt
 rtds_file_write 0x00810010 indm_v2_gprst.txt
-rtds_write 0x00810000 0x0000060C
-rtds_write 0x00810001 0x0000060E
+rtds_write 0x00810000 0x0000080C
+rtds_write 0x00810001 0x0000080E
 rtds_write 0x00810400 0x40400000
 rtds_write 0x00810401 0x00000000
 rtds_write 0x00810402 0x3F7FF66F
@@ -157,7 +157,7 @@ rtds_file_write 0x08082000 SPC0_MAC1.txt
 rtds_file_write 0x08084000 SPC0_MAC2.txt
 rtds_file_write 0x08086000 SPC0_MAC3.txt
 
-rtds_write 0x08100004 0x00000001
+rtds_write 0x08100004 0x00000007
 REM SPC0 Contactors initialization...
 rtds_write 0x08240000 0x00000000
 rtds_write 0x08240080 0x00000000
@@ -168,10 +168,28 @@ rtds_write 0x08240280 0x00000000
 rtds_write 0x08240300 0x00000000
 rtds_write 0x08240380 0x00000000
 rtds_write 0x08240400 0x00000001
+rtds_write 0x08240001 0x00000000
+rtds_write 0x08240081 0x00000007
+rtds_write 0x08240101 0x00000000
+rtds_write 0x08240181 0x00000000
+rtds_write 0x08240201 0x00000000
+rtds_write 0x08240281 0x00000000
+rtds_write 0x08240301 0x00000000
+rtds_write 0x08240381 0x00000000
+rtds_write 0x08240401 0x00000001
+rtds_write 0x08240002 0x00000000
+rtds_write 0x08240082 0x00000000
+rtds_write 0x08240102 0x00000000
+rtds_write 0x08240182 0x00000000
+rtds_write 0x08240202 0x00000000
+rtds_write 0x08240282 0x00000000
+rtds_write 0x08240302 0x00000000
+rtds_write 0x08240382 0x00000000
+rtds_write 0x08240402 0x00000001
 
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x0000001C
+rtds_write 0x080C0001 0x00000005
 rtds_write 0x080C0004 0x3BA3D70A
 rtds_write 0x080C0005 0x3D710000
 rtds_write 0x08100000 0x000000C8
@@ -181,24 +199,6 @@ REM SPC0 FSM digital input pin assignments...
 REM SPC0 Comparators initialization...
 
 REM SPC0 DTSM initialization...
-rtds_write 0x08280000 0x00000000
-rtds_write 0x08280080 0x00000001
-rtds_write 0x08280180 0x00000000
-rtds_write 0x08280200 0x00000000
-rtds_write 0x08280280 0x00000000
-rtds_write 0x08280300 0x00000000
-rtds_write 0x08280001 0x00000000
-rtds_write 0x08280081 0x00000001
-rtds_write 0x08280181 0x00000000
-rtds_write 0x08280201 0x00000000
-rtds_write 0x08280281 0x00000000
-rtds_write 0x08280301 0x00000000
-rtds_write 0x08280002 0x00000000
-rtds_write 0x08280082 0x00000001
-rtds_write 0x08280182 0x00000000
-rtds_write 0x08280202 0x00000000
-rtds_write 0x08280282 0x00000000
-rtds_write 0x08280302 0x00000000
 
 REM *****************************************:
 REM * SPC1 entries:
@@ -285,7 +285,7 @@ rtds_file_write 0x08482000 SPC1_MAC1.txt
 rtds_file_write 0x08484000 SPC1_MAC2.txt
 rtds_file_write 0x08486000 SPC1_MAC3.txt
 
-rtds_write 0x08500004 0x00000007
+rtds_write 0x08500004 0x00000001
 REM SPC1 Contactors initialization...
 rtds_write 0x08640000 0x00000000
 rtds_write 0x08640080 0x00000000
@@ -296,28 +296,10 @@ rtds_write 0x08640280 0x00000000
 rtds_write 0x08640300 0x00000000
 rtds_write 0x08640380 0x00000000
 rtds_write 0x08640400 0x00000001
-rtds_write 0x08640001 0x00000000
-rtds_write 0x08640081 0x00000000
-rtds_write 0x08640101 0x00000000
-rtds_write 0x08640181 0x00000000
-rtds_write 0x08640201 0x00000000
-rtds_write 0x08640281 0x00000000
-rtds_write 0x08640301 0x00000000
-rtds_write 0x08640381 0x00000000
-rtds_write 0x08640401 0x00000001
-rtds_write 0x08640002 0x00000000
-rtds_write 0x08640082 0x00000000
-rtds_write 0x08640102 0x00000000
-rtds_write 0x08640182 0x00000000
-rtds_write 0x08640202 0x00000000
-rtds_write 0x08640282 0x00000000
-rtds_write 0x08640302 0x00000000
-rtds_write 0x08640382 0x00000000
-rtds_write 0x08640402 0x00000001
 
 REM SPC1 GDS compensation settings...
 rtds_write 0x084C0000 0x00000001
-rtds_write 0x084C0001 0x00000012
+rtds_write 0x084C0001 0x0000001C
 rtds_write 0x084C0004 0x3BA3D70A
 rtds_write 0x084C0005 0x3D710000
 rtds_write 0x08500000 0x000000C8
@@ -327,6 +309,24 @@ REM SPC1 FSM digital input pin assignments...
 REM SPC1 Comparators initialization...
 
 REM SPC1 DTSM initialization...
+rtds_write 0x08680000 0x00000000
+rtds_write 0x08680080 0x00000001
+rtds_write 0x08680180 0x00000000
+rtds_write 0x08680200 0x00000000
+rtds_write 0x08680280 0x00000000
+rtds_write 0x08680300 0x00000000
+rtds_write 0x08680001 0x00000000
+rtds_write 0x08680081 0x00000001
+rtds_write 0x08680181 0x00000000
+rtds_write 0x08680201 0x00000000
+rtds_write 0x08680281 0x00000000
+rtds_write 0x08680301 0x00000000
+rtds_write 0x08680002 0x00000000
+rtds_write 0x08680082 0x00000001
+rtds_write 0x08680182 0x00000000
+rtds_write 0x08680202 0x00000000
+rtds_write 0x08680282 0x00000000
+rtds_write 0x08680302 0x00000000
 
 REM *****************************************:
 REM * SPC2 entries:
@@ -445,7 +445,7 @@ rtds_write 0x08A40402 0x00000001
 
 REM SPC2 GDS compensation settings...
 rtds_write 0x088C0000 0x00000001
-rtds_write 0x088C0001 0x00000010
+rtds_write 0x088C0001 0x00000012
 rtds_write 0x088C0004 0x3BA3D70A
 rtds_write 0x088C0005 0x3D710000
 rtds_write 0x08900000 0x000000C8
@@ -541,7 +541,7 @@ rtds_file_write 0x08C82000 SPC3_MAC1.txt
 rtds_file_write 0x08C84000 SPC3_MAC2.txt
 rtds_file_write 0x08C86000 SPC3_MAC3.txt
 
-rtds_write 0x08D00004 0x00000003
+rtds_write 0x08D00004 0x00000007
 REM SPC3 Contactors initialization...
 rtds_write 0x08E40000 0x00000000
 rtds_write 0x08E40080 0x00000000
@@ -560,11 +560,20 @@ rtds_write 0x08E40201 0x00000000
 rtds_write 0x08E40281 0x00000000
 rtds_write 0x08E40301 0x00000000
 rtds_write 0x08E40381 0x00000000
-rtds_write 0x08E40401 0x00000000
+rtds_write 0x08E40401 0x00000001
+rtds_write 0x08E40002 0x00000000
+rtds_write 0x08E40082 0x00000000
+rtds_write 0x08E40102 0x00000000
+rtds_write 0x08E40182 0x00000000
+rtds_write 0x08E40202 0x00000000
+rtds_write 0x08E40282 0x00000000
+rtds_write 0x08E40302 0x00000000
+rtds_write 0x08E40382 0x00000000
+rtds_write 0x08E40402 0x00000001
 
 REM SPC3 GDS compensation settings...
 rtds_write 0x08CC0000 0x00000001
-rtds_write 0x08CC0001 0x00000005
+rtds_write 0x08CC0001 0x00000010
 rtds_write 0x08CC0004 0x3BA3D70A
 rtds_write 0x08CC0005 0x3D710000
 rtds_write 0x08D00000 0x000000C8
@@ -660,7 +669,7 @@ rtds_file_write 0x09082000 SPC4_MAC1.txt
 rtds_file_write 0x09084000 SPC4_MAC2.txt
 rtds_file_write 0x09086000 SPC4_MAC3.txt
 
-rtds_write 0x09100004 0x00000007
+rtds_write 0x09100004 0x00000003
 REM SPC4 Contactors initialization...
 rtds_write 0x09240000 0x00000000
 rtds_write 0x09240080 0x00000000
@@ -679,20 +688,11 @@ rtds_write 0x09240201 0x00000000
 rtds_write 0x09240281 0x00000000
 rtds_write 0x09240301 0x00000000
 rtds_write 0x09240381 0x00000000
-rtds_write 0x09240401 0x00000001
-rtds_write 0x09240002 0x00000000
-rtds_write 0x09240082 0x00000000
-rtds_write 0x09240102 0x00000000
-rtds_write 0x09240182 0x00000000
-rtds_write 0x09240202 0x00000000
-rtds_write 0x09240282 0x00000000
-rtds_write 0x09240302 0x00000000
-rtds_write 0x09240382 0x00000000
-rtds_write 0x09240402 0x00000001
+rtds_write 0x09240401 0x00000000
 
 REM SPC4 GDS compensation settings...
 rtds_write 0x090C0000 0x00000001
-rtds_write 0x090C0001 0x0000000C
+rtds_write 0x090C0001 0x00000005
 rtds_write 0x090C0004 0x3BA3D70A
 rtds_write 0x090C0005 0x3D710000
 rtds_write 0x09100000 0x000000C8
@@ -710,7 +710,7 @@ REM *****************************************:
 REM SPC5 Topology Selector (TS) initialization...
 rtds_file_write 0x09580000 SPC5_red_table.txt
 
-rtds_write 0x09500020 0x00000000
+rtds_write 0x09500020 0x00000001
 rtds_write 0x09500021 0x00000000
 rtds_write 0x09500023 0x00000000
 rtds_write 0x09500024 0x00000000
@@ -731,7 +731,7 @@ rtds_write 0x0950003A 0x00000000
 rtds_write 0x0950003B 0x00000000
 rtds_file_write 0x09540000 trivial_imem.txt
 rtds_file_write 0x09542000 trivial_lut.txt
-rtds_write 0x09500040 0x00000000
+rtds_write 0x09500040 0x00000001
 rtds_write 0x09500041 0x00000000
 rtds_write 0x09500043 0x00000000
 rtds_write 0x09500044 0x00000000
@@ -752,7 +752,7 @@ rtds_write 0x0950005A 0x00000000
 rtds_write 0x0950005B 0x00000000
 rtds_file_write 0x09548000 trivial_imem.txt
 rtds_file_write 0x0954A000 trivial_lut.txt
-rtds_write 0x09500060 0x00000000
+rtds_write 0x09500060 0x00000001
 rtds_write 0x09500061 0x00000000
 rtds_write 0x09500063 0x00000000
 rtds_write 0x09500064 0x00000000
@@ -788,15 +788,51 @@ rtds_file_write 0x09482000 SPC5_MAC1.txt
 rtds_file_write 0x09484000 SPC5_MAC2.txt
 rtds_file_write 0x09486000 SPC5_MAC3.txt
 
-rtds_write 0x09500004 0x00000000
+rtds_write 0x09500004 0x0000000F
 REM SPC5 Contactors initialization...
+rtds_write 0x09640000 0x00000000
+rtds_write 0x09640080 0x00000000
+rtds_write 0x09640100 0x00000000
+rtds_write 0x09640180 0x00000000
+rtds_write 0x09640200 0x00000000
+rtds_write 0x09640280 0x00000000
+rtds_write 0x09640300 0x00000000
+rtds_write 0x09640380 0x00000000
+rtds_write 0x09640400 0x00000001
+rtds_write 0x09640001 0x00000000
+rtds_write 0x09640081 0x00000000
+rtds_write 0x09640101 0x00000000
+rtds_write 0x09640181 0x00000000
+rtds_write 0x09640201 0x00000000
+rtds_write 0x09640281 0x00000000
+rtds_write 0x09640301 0x00000000
+rtds_write 0x09640381 0x00000000
+rtds_write 0x09640401 0x00000001
+rtds_write 0x09640002 0x00000000
+rtds_write 0x09640082 0x00000000
+rtds_write 0x09640102 0x00000000
+rtds_write 0x09640182 0x00000000
+rtds_write 0x09640202 0x00000000
+rtds_write 0x09640282 0x00000000
+rtds_write 0x09640302 0x00000000
+rtds_write 0x09640382 0x00000000
+rtds_write 0x09640402 0x00000001
+rtds_write 0x09640003 0x00000000
+rtds_write 0x09640083 0x00000000
+rtds_write 0x09640103 0x00000000
+rtds_write 0x09640183 0x00000000
+rtds_write 0x09640203 0x00000000
+rtds_write 0x09640283 0x00000000
+rtds_write 0x09640303 0x00000000
+rtds_write 0x09640383 0x00000000
+rtds_write 0x09640403 0x00000001
 
 REM SPC5 GDS compensation settings...
-rtds_write 0x094C0000 0x00000000
-rtds_write 0x094C0001 0x00000000
-rtds_write 0x094C0004 0x00000000
-rtds_write 0x094C0005 0x00000000
-rtds_write 0x09500000 0x00000000
+rtds_write 0x094C0000 0x00000001
+rtds_write 0x094C0001 0x00000014
+rtds_write 0x094C0004 0x3BA3D70A
+rtds_write 0x094C0005 0x3D710000
+rtds_write 0x09500000 0x000000C8
 
 REM SPC5 FSM digital input pin assignments...
 
@@ -1072,6 +1108,3 @@ app_file_write 0x0 app_init
 
 REM Download Linux APP
 app_file_write 0x5 mbus_server_app.elf
-
-rtds_write 0x00000027 0x00000258
-rtds_write 0x00000040 0x00FFFFFF

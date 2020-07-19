@@ -873,12 +873,21 @@ rtds_file_write 0x09882000 SPC6_MAC1.txt
 rtds_file_write 0x09884000 SPC6_MAC2.txt
 rtds_file_write 0x09886000 SPC6_MAC3.txt
 
-rtds_write 0x09900004 0x00000000
+rtds_write 0x09900004 0x00000001
 REM SPC6 Contactors initialization...
+rtds_write 0x09A40000 0x00000000
+rtds_write 0x09A40080 0x00000000
+rtds_write 0x09A40100 0x00000000
+rtds_write 0x09A40180 0x00000000
+rtds_write 0x09A40200 0x00000000
+rtds_write 0x09A40280 0x00000000
+rtds_write 0x09A40300 0x00000000
+rtds_write 0x09A40380 0x00000000
+rtds_write 0x09A40400 0x00000001
 
 REM SPC6 GDS compensation settings...
 rtds_write 0x098C0000 0x00000001
-rtds_write 0x098C0001 0x0000000F
+rtds_write 0x098C0001 0x00000009
 rtds_write 0x098C0004 0x3BA3D70A
 rtds_write 0x098C0005 0x3D710000
 rtds_write 0x09900000 0x000000C8
@@ -988,7 +997,7 @@ rtds_write 0x09E40400 0x00000001
 
 REM SPC7 GDS compensation settings...
 rtds_write 0x09CC0000 0x00000001
-rtds_write 0x09CC0001 0x0000000F
+rtds_write 0x09CC0001 0x00000009
 rtds_write 0x09CC0004 0x3BA3D70A
 rtds_write 0x09CC0005 0x3D710000
 rtds_write 0x09D00000 0x000000C8
@@ -1066,6 +1075,3 @@ app_file_write 0x0 app_init
 
 REM Download Linux APP
 app_file_write 0x5 mbus_server_app.elf
-
-rtds_write 0x00000027 0x00000258
-rtds_write 0x00000040 0x00FFFFFF

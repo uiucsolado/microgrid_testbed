@@ -70,7 +70,7 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>0</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -3203,9 +3203,9 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB9.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB9.Brk.F3_CB9</name>
                 <device>1</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F3_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
@@ -3213,9 +3213,9 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB2.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB2.Brk.F3_CB2</name>
                 <device>2</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F3_CB3.MID_Rly1.SEL_787.Control Panel Input1</name>
@@ -3223,14 +3223,14 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB4.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB4.Brk.F3_CB4</name>
                 <device>2</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB5.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB5.Brk.F3_CB5</name>
                 <device>2</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F3_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
@@ -3256,6 +3256,11 @@
                 <name>F3_Motor.Control Panel Input1</name>
                 <device>2</device>
                 <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F3_PCC.PCC_CB</name>
+                <device>0</device>
+                <value>1</value>
             </scada_input>
             <scada_input>
                 <name>Grid feeding inverter (averaged).Connect GFL</name>
@@ -3305,7 +3310,7 @@
             <scada_input>
                 <name>Microturbine.qd0(PU).Governor.AGC</name>
                 <device>2</device>
-                <value>0.01</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Microturbine.qd0(PU).Vref</name>
@@ -3320,12 +3325,12 @@
             <scada_input>
                 <name>Microturbine.ref_ctrl</name>
                 <device>2</device>
-                <value>1.0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Pref_feed</name>
                 <device>1</device>
-                <value>20.0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Pref_form</name>
@@ -3335,7 +3340,7 @@
             <scada_input>
                 <name>Qref_feed</name>
                 <device>1</device>
-                <value>20.0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Qref_form</name>
