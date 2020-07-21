@@ -45,7 +45,7 @@ SETTINGS_DIR = get_settings_dir_path()
                         <active_scope_preset>Default</active_scope_preset>
                         <capture name="Default">
                             <time_interval>0.01</time_interval>
-                            <sample_rate>250000.0</sample_rate>
+                            <sample_rate>250000</sample_rate>
                             <background_color>white</background_color>
                             <layout>Vertical</layout>
                             <legend>True</legend>
@@ -93,7 +93,7 @@ SETTINGS_DIR = get_settings_dir_path()
                         </presets>
                     <capture>
                         <time_interval>0.01</time_interval>
-                        <sample_rate>250000.0</sample_rate>
+                        <sample_rate>250000</sample_rate>
                         <background_color>white</background_color>
                         <layout>Vertical</layout>
                         <legend>True</legend>
@@ -166,8 +166,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>704</y>
+                    <x>0.0</x>
+                    <y>704.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -240,8 +240,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>832</x>
-                    <y>712</y>
+                    <x>832.0</x>
+                    <y>704.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -314,8 +314,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>408</x>
-                    <y>720</y>
+                    <x>408.0</x>
+                    <y>720.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -831,8 +831,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]
 hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>32</x>
-                    <y>128</y>
+                    <x>32.0</x>
+                    <y>128.0</y>
                     <width>96</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -861,8 +861,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)
 ]]></on_stop_code>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>32</x>
-                    <y>80</y>
+                    <x>32.0</x>
+                    <y>80.0</y>
                     <width>96</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -887,8 +887,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>216</x>
-                    <y>32</y>
+                    <x>216.0</x>
+                    <y>32.0</y>
                     <width>96</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -913,8 +913,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>216</x>
-                    <y>0</y>
+                    <x>216.0</x>
+                    <y>0.0</y>
                     <width>96</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -939,8 +939,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>216</x>
-                    <y>104</y>
+                    <x>216.0</x>
+                    <y>104.0</y>
                     <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -965,8 +965,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>160</x>
-                    <y>104</y>
+                    <x>160.0</x>
+                    <y>104.0</y>
                     <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1019,8 +1019,8 @@ widgetValue = None
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>8</x>
-                    <y>0</y>
+                    <x>8.0</x>
+                    <y>0.0</y>
                     <width>192</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1062,8 +1062,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>872</x>
-                    <y>208</y>
+                    <x>872.0</x>
+                    <y>208.0</y>
                     <width>536</width>
                     <height>248</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1149,8 +1149,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>872</x>
-                    <y>456</y>
+                    <x>872.0</x>
+                    <y>456.0</y>
                     <width>536</width>
                     <height>248</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1243,11 +1243,11 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[False]]></inputValue>
+                <inputValue><![CDATA[True]]></inputValue>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>8</x>
-                    <y>24</y>
+                    <x>8.0</x>
+                    <y>24.0</y>
                     <width>112</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1272,8 +1272,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>112</x>
-                    <y>24</y>
+                    <x>112.0</x>
+                    <y>24.0</y>
                     <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1298,12 +1298,57 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>136</x>
-                    <y>24</y>
+                    <x>136.0</x>
+                    <y>24.0</y>
                     <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
+            </component_data>
+        <component_data>
+                <id>66ded930cad711eaa68bd89ef3221e8e</id>
+                <name><![CDATA[Sync]]></name>
+                <type>PhasorGraphDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# e.g displayValue = [ ['Phasor 1 name', Phasor 1 phase, Phasor 1 magnitude],
+#                      ['Phasor X name', Phasor X phase, Phasor X magnitude] ]
+displayValue = []
+
+]]></code>
+                <signals><![CDATA[]]></signals>
+                <updateRate>500</updateRate>
+                <background_color>#ffffff</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <phasors_data>
+                    <phasor>
+                        <display_name><![CDATA[Voltage Ratio]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_|V|]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                    </phasor>
+                    <phasor>
+                        <display_name><![CDATA[Frequency Ratio]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_w]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                    </phasor>
+                    </phasors_data>
+                <widget_settings>
+                    <x>1312.0</x>
+                    <y>8.0</y>
+                    <width>280</width>
+                    <height>192</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <range_max>20.0</range_max>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                </advance_widget_settings>
             </component_data>
         </components>
 </ui_settings>

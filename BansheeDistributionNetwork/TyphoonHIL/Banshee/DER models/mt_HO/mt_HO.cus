@@ -101,8 +101,8 @@ referenceCurves = [refCurveData1]
                 <hierarchy_position>1</hierarchy_position>
                 <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>2464</x>
-                    <y>80</y>
+                    <x>2464.0</x>
+                    <y>80.0</y>
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -120,28 +120,6 @@ referenceCurves = [refCurveData1]
                             <analog_signals>
                             <analog>
                             <channel>0</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>2</channel>
                             <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -154,7 +132,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>3</channel>
+                            <channel>1</channel>
                             <name>Microturbine.Va_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -167,7 +145,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>4</channel>
+                            <channel>2</channel>
                             <name>Microturbine.Eb1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -180,7 +158,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>5</channel>
+                            <channel>3</channel>
                             <name>Microturbine.Vb_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -193,7 +171,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>6</channel>
+                            <channel>4</channel>
                             <name>Microturbine.Ec1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -206,7 +184,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>7</channel>
+                            <channel>5</channel>
                             <name>Microturbine.Vc_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -222,13 +200,13 @@ referenceCurves = [refCurveData1]
                             <digital_signals>
                             </digital_signals>
                             <trigger>
-                                <device>0</device>
-                                <is_force>True</is_force>
+                                <device>-1</device>
+                                <is_force>False</is_force>
                                 <type>Analog</type>
-                                <source>Microturbine.BE1-25A Synchronizer.del_V</source>
+                                <source>None</source>
                                 <edge>Rising edge</edge>
                                 <treshold>0.0</treshold>
-                                <offset>50.0</offset>
+                                <offset>0.0</offset>
                                 <useFirstTrigger>False</useFirstTrigger>
                             </trigger>
                             <plotting_options in_use="False">
@@ -246,28 +224,6 @@ referenceCurves = [refCurveData1]
                             <analog_signals>
                             <analog>
                             <channel>0</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>2</channel>
                             <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -280,7 +236,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>3</channel>
+                            <channel>1</channel>
                             <name>Microturbine.Va_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -293,7 +249,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>4</channel>
+                            <channel>2</channel>
                             <name>Microturbine.Eb1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -306,7 +262,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>5</channel>
+                            <channel>3</channel>
                             <name>Microturbine.Vb_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -319,7 +275,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>6</channel>
+                            <channel>4</channel>
                             <name>Microturbine.Ec1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -332,7 +288,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>7</channel>
+                            <channel>5</channel>
                             <name>Microturbine.Vc_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -344,27 +300,14 @@ referenceCurves = [refCurveData1]
                                 
                            </viewports>
                         </analog>
-                            <analog>
-                            <channel>8</channel>
-                            <name>Microturbine.qd0(PU).Governor.Exciter Activation.Exc_state</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>4</num_viewport>
-                                
-                           </viewports>
-                        </analog>
                             </analog_signals>
                             <digital_signals>
                             </digital_signals>
                             <trigger>
-                                <device>0</device>
+                                <device>-1</device>
                                 <is_force>False</is_force>
                                 <type>Analog</type>
-                                <source>Microturbine.BE1-25A Synchronizer.del_V</source>
+                                <source>None</source>
                                 <edge>Rising edge</edge>
                                 <treshold>0.0</treshold>
                                 <offset>50.0</offset>
@@ -380,38 +323,16 @@ referenceCurves = [refCurveData1]
                         <legend>True</legend>
                         <trigger>
                             <type>Analog</type>
-                            <source>Microturbine.BE1-25A Synchronizer.del_V</source>
+                            <source>None</source>
                             <edge>Rising edge</edge>
                             <treshold>0.0</treshold>
-                            <offset>50.0</offset>
+                            <offset>0.0</offset>
                             <useFirstTrigger>False</useFirstTrigger>
                         </trigger>
 
                         <analog_signals>
                             <analog>
                             <channel>0</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>2</channel>
                             <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -424,7 +345,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>3</channel>
+                            <channel>1</channel>
                             <name>Microturbine.Va_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -437,7 +358,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>4</channel>
+                            <channel>2</channel>
                             <name>Microturbine.Eb1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -450,7 +371,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>5</channel>
+                            <channel>3</channel>
                             <name>Microturbine.Vb_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -463,7 +384,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>6</channel>
+                            <channel>4</channel>
                             <name>Microturbine.Ec1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -476,7 +397,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>7</channel>
+                            <channel>5</channel>
                             <name>Microturbine.Vc_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -503,7 +424,7 @@ referenceCurves = [refCurveData1]
                         <trigger>
                             <mode>Auto</mode>
                             <type>Analog</type>
-                            <source>Microturbine.BE1-25A Synchronizer.del_V</source>
+                            <source>None</source>
                             <edge>Rising edge</edge>
                             <treshold>0.0</treshold>
                             <offset>50.0</offset>
@@ -512,28 +433,6 @@ referenceCurves = [refCurveData1]
                          <analog_signals>
                             <analog>
                             <channel>0</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_V</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name>Microturbine.BE1-25A Synchronizer.del_w</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>2</channel>
                             <name>Microturbine.Ea1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -546,7 +445,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>3</channel>
+                            <channel>1</channel>
                             <name>Microturbine.Va_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -559,7 +458,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>4</channel>
+                            <channel>2</channel>
                             <name>Microturbine.Eb1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -572,7 +471,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>5</channel>
+                            <channel>3</channel>
                             <name>Microturbine.Vb_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -585,7 +484,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>6</channel>
+                            <channel>4</channel>
                             <name>Microturbine.Ec1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -598,7 +497,7 @@ referenceCurves = [refCurveData1]
                            </viewports>
                         </analog>
                             <analog>
-                            <channel>7</channel>
+                            <channel>5</channel>
                             <name>Microturbine.Vc_G1</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
@@ -607,19 +506,6 @@ referenceCurves = [refCurveData1]
                             <viewports>
                                 
                                 <num_viewport>3</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>8</channel>
-                            <name>Microturbine.qd0(PU).Governor.Exciter Activation.Exc_state</name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0.0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>4</num_viewport>
                                 
                            </viewports>
                         </analog>
@@ -660,8 +546,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>400.0</x>
-                    <y>16.0</y>
+                    <x>400</x>
+                    <y>16</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1155,8 +1041,8 @@ hil.set_scada_input_value('Microturbine.Connect MT', 0)]]></on_start_code>
 ]]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>24.0</x>
-                    <y>56.0</y>
+                    <x>24</x>
+                    <y>56</y>
                     <width>120</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1181,8 +1067,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>48.0</x>
-                    <y>32.0</y>
+                    <x>48</x>
+                    <y>32</y>
                     <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1286,8 +1172,8 @@ hil.set_scada_input_value('grid_connect', 0)]]></on_start_code>
 # HIL API is imported as 'hil']]></on_stop_code>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>16.0</x>
-                    <y>40.0</y>
+                    <x>16</x>
+                    <y>40</y>
                     <width>104</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1338,8 +1224,8 @@ displayValue = False
                 <updateRate>500</updateRate>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>40.0</x>
-                    <y>8.0</y>
+                    <x>40</x>
+                    <y>8</y>
                     <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1392,8 +1278,8 @@ widgetValue = None
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>8.0</x>
-                    <y>0.0</y>
+                    <x>8</x>
+                    <y>0</y>
                     <width>152</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1413,7 +1299,7 @@ widgetValue = None
 displayValue = 0.0
 
 ]]></code>
-                <signal_name><![CDATA[Microturbine.qd0(PU).|V|]]></signal_name>
+                <signal_name><![CDATA[Microturbine.|V|]]></signal_name>
                 <unit><![CDATA[kV]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
@@ -1448,7 +1334,7 @@ displayValue = 0.0
 displayValue = 0.0
 
 ]]></code>
-                <signal_name><![CDATA[Microturbine.qd0(PU).Governor.w_M]]></signal_name>
+                <signal_name><![CDATA[Microturbine.w_M]]></signal_name>
                 <unit><![CDATA[rpm]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
@@ -1566,8 +1452,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>240.0</y>
+                    <x>0</x>
+                    <y>240</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2133,6 +2019,51 @@ refCurveData1 = {
 referenceCurves = [refCurveData1]
 
 ]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>8474a1a4cb8711ea9b35d89ef3221e8e</id>
+                <name><![CDATA[Sync]]></name>
+                <type>PhasorGraphDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# e.g displayValue = [ ['Phasor 1 name', Phasor 1 phase, Phasor 1 magnitude],
+#                      ['Phasor X name', Phasor X phase, Phasor X magnitude] ]
+displayValue = []
+
+]]></code>
+                <signals><![CDATA[]]></signals>
+                <updateRate>500</updateRate>
+                <background_color>#ffffff</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <phasors_data>
+                    <phasor>
+                        <display_name><![CDATA[Bus Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Microturbine.BE1-25A Synchronizer.|V|]]></magnitude_signal>
+                        <phase_signal><![CDATA[Microturbine.BE1-25A Synchronizer.theta_V]]></phase_signal>
+                    </phasor>
+                    <phasor>
+                        <display_name><![CDATA[Generator Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Microturbine.BE1-25A Synchronizer.|E|]]></magnitude_signal>
+                        <phase_signal><![CDATA[Microturbine.BE1-25A Synchronizer.theta_E]]></phase_signal>
+                    </phasor>
+                    </phasors_data>
+                <widget_settings>
+                    <x>48</x>
+                    <y>1056</y>
+                    <width>392</width>
+                    <height>232</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <range_max>20.0</range_max>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
                 </advance_widget_settings>
             </component_data>
         </components>

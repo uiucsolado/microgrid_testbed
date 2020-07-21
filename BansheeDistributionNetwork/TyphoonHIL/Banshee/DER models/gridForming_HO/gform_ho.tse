@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 15-Jul-2020 @ 05:36:07 PM
+// Save timestamp: 20-Jul-2020 @ 06:49:20 PM
 //
 
 model "gform_ho" {
@@ -22,7 +22,7 @@ model "gform_ho" {
         enb_dep_sw_detect = False
         code_section = "external memory"
         data_section = "internal memory"
-        sys_sp_rate_1 = 0.0005
+        sys_sp_rate_1 = 5e-05
         sys_sp_rate_2 = 0.05
         sys_real_type_precision = "default"
         user_real_type_precision = "double precision"
@@ -56,9 +56,9 @@ model "gform_ho" {
         ]
 
         component "core/RL Section" RL2 {
-            inductance_per_l_mile = "1.6e-3"
+            inductance_per_l_mile = "0.26e-3"
             length_mile = "1.5"
-            resistance_per_l_mile = "0.57"
+            resistance_per_l_mile = "0.1"
         }
         [
             position = 7400, 7976
@@ -92,9 +92,9 @@ model "gform_ho" {
         ]
 
         component "core/RL Section" RL1 {
-            inductance_per_l_mile = "1.6e-3"
-            length_mile = "1.5"
-            resistance_per_l_mile = "0.57"
+            inductance_per_l_mile = "0.26e-3"
+            length_mile = "1"
+            resistance_per_l_mile = "0.1"
         }
         [
             position = 6952, 7976
@@ -161,7 +161,7 @@ model "gform_ho" {
         ]
 
         component src_scada_input Pref {
-            execution_rate = "Ts"
+            execution_rate = "Ts_gen"
             max = "70e3"
             min = "-70e3"
             unit = "W"
@@ -172,7 +172,7 @@ model "gform_ho" {
         ]
 
         component src_scada_input Qref {
-            execution_rate = "Ts"
+            execution_rate = "Ts_gen"
             max = "70e3"
             min = "-70e3"
             unit = "Vars"
@@ -190,13 +190,6 @@ model "gform_ho" {
             [
                 position = 8176, 8352
                 rotation = right
-            ]
-
-            component pas_resistor Rgridb_1 {
-                resistance = "R"
-            }
-            [
-                position = 9248, 8000
             ]
 
             component "core/Signal Controlled Voltage Source" Vc_inv {
@@ -231,12 +224,6 @@ model "gform_ho" {
             [
                 position = 9024, 7904
                 size = 64, 32
-            ]
-
-            component gen_probe Ea_1 {
-            }
-            [
-                position = 8352, 8176
             ]
 
             component pas_inductor L0b1 {
@@ -705,7 +692,7 @@ model "gform_ho" {
                         signs = "+-"
                     }
                     [
-                        position = 8024, 8168
+                        position = 8024, 8248
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -714,7 +701,7 @@ model "gform_ho" {
                         signs = "++"
                     }
                     [
-                        position = 7880, 8216
+                        position = 7880, 8296
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -723,7 +710,7 @@ model "gform_ho" {
                         gain = "1/D_f"
                     }
                     [
-                        position = 7952, 8168
+                        position = 7952, 8248
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -736,7 +723,7 @@ model "gform_ho" {
                         unit = "pu"
                     }
                     [
-                        position = 8016, 8224
+                        position = 8016, 8304
                         scale = -1, 1
                     ]
 
@@ -744,14 +731,14 @@ model "gform_ho" {
                         gain = "w_0"
                     }
                     [
-                        position = 7952, 8224
+                        position = 7952, 8304
                         hide_name = True
                         scale = -1, 1
                     ]
 
                     component sys_signal_switch "Signal switch3" {
-                        criterion = "ctrl != threshold"
-                        threshold = "1"
+                        criterion = "ctrl > threshold"
+                        threshold = "0.5"
                     }
                     [
                         position = 7632, 8248
@@ -764,7 +751,7 @@ model "gform_ho" {
                         threshold = "1"
                     }
                     [
-                        position = 7792, 8280
+                        position = 7736, 8184
                         hide_name = True
                         scale = -1, -1
                     ]
@@ -774,7 +761,7 @@ model "gform_ho" {
                         value = "w_0"
                     }
                     [
-                        position = 7904, 8296
+                        position = 7848, 8200
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -783,7 +770,7 @@ model "gform_ho" {
                         gain = "w_0"
                     }
                     [
-                        position = 7856, 8264
+                        position = 7800, 8168
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -813,7 +800,7 @@ model "gform_ho" {
                         }
                     }
                     [
-                        position = 8112, 8144
+                        position = 8112, 8224
                         scale = -1, 1
                     ]
 
@@ -824,13 +811,13 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 8112, 8192
+                        position = 8112, 8272
                         hide_name = True
                         scale = -1, 1
                     ]
 
                     tag MT_ON3 {
-                        value = "ref_ctrl"
+                        value = "Connected"
                         scope = masked_subsystem
                         kind = sp
                         direction = out
@@ -848,7 +835,7 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 7936, 8264
+                        position = 7880, 8168
                         hide_name = True
                         scale = -1, -1
                     ]
@@ -860,7 +847,7 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 7904, 8328
+                        position = 7848, 8232
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -870,15 +857,15 @@ model "gform_ho" {
                     connect Gain3.out Sum4.in as Connection391
                     connect Gain3.in Sum1.out as Connection392
                     connect wref.out Gain4.in as Connection404
-                    connect "Signal switch4.out" "Signal switch3.in" as Connection411
                     connect MT_ON3 "Signal switch3.in2" as Connection412
+                    connect Gain4.out Sum4.in1 as Connection418
+                    connect w1 "Signal switch3.out" as Connection420
+                    connect "Signal switch3.in" Sum4.out as Connection421
                     connect Constant3.out "Signal switch4.in" as Connection415
                     connect MT_ON4 "Signal switch4.in2" as Connection417
-                    connect Gain4.out Sum4.in1 as Connection418
-                    connect Sum4.out "Signal switch3.in1" as Connection419
-                    connect w1 "Signal switch3.out" as Connection420
-                    connect w_bus3 Gain5.in as Connection421
-                    connect Gain5.out "Signal switch4.in1" as Connection422
+                    connect w_bus3 Gain5.in as Connection422
+                    connect Gain5.out "Signal switch4.in1" as Connection423
+                    connect "Signal switch4.out" "Signal switch3.in1" as Connection424
                 }
                 [
                     position = 8296, 8184
@@ -922,7 +909,7 @@ model "gform_ho" {
                         signs = "+-"
                     }
                     [
-                        position = 8064, 8160
+                        position = 8064, 8264
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -931,7 +918,7 @@ model "gform_ho" {
                         gain = "1/D_V"
                     }
                     [
-                        position = 7984, 8160
+                        position = 7984, 8264
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -939,7 +926,7 @@ model "gform_ho" {
                     component gen_sum Sum4 {
                     }
                     [
-                        position = 7872, 8208
+                        position = 7872, 8312
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -947,13 +934,23 @@ model "gform_ho" {
                     component src_scada_input Vref {
                         def_value = "1"
                         execution_rate = "Ts"
-                        max = "2"
+                        max = "5"
                         min = "0.8"
                         unit = "pu"
                     }
                     [
-                        position = 7992, 8216
+                        position = 7992, 8320
                         scale = -1, 1
+                    ]
+
+                    component sys_signal_switch "Signal switch2" {
+                        criterion = "ctrl > threshold"
+                        threshold = "0.5"
+                    }
+                    [
+                        position = 7640, 8240
+                        hide_name = True
+                        scale = -1, -1
                     ]
 
                     component sys_signal_switch "Signal switch1" {
@@ -961,7 +958,7 @@ model "gform_ho" {
                         threshold = "1"
                     }
                     [
-                        position = 7760, 8272
+                        position = 7760, 8184
                         hide_name = True
                         scale = -1, -1
                     ]
@@ -970,19 +967,9 @@ model "gform_ho" {
                         execution_rate = "Ts"
                     }
                     [
-                        position = 7872, 8288
+                        position = 7872, 8200
                         hide_name = True
                         scale = -1, 1
-                    ]
-
-                    component sys_signal_switch "Signal switch2" {
-                        criterion = "ctrl != threshold"
-                        threshold = "1"
-                    }
-                    [
-                        position = 7640, 8240
-                        hide_name = True
-                        scale = -1, -1
                     ]
 
                     port E_magnitude {
@@ -1011,7 +998,7 @@ model "gform_ho" {
                         }
                     }
                     [
-                        position = 8208, 8136
+                        position = 8208, 8240
                         scale = -1, 1
                     ]
 
@@ -1022,7 +1009,19 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 8208, 8184
+                        position = 8208, 8288
+                        hide_name = True
+                        scale = -1, 1
+                    ]
+
+                    tag MT_ON2 {
+                        value = "Connected"
+                        scope = masked_subsystem
+                        kind = sp
+                        direction = out
+                    }
+                    [
+                        position = 7872, 8360
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -1034,7 +1033,7 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 7872, 8256
+                        position = 7872, 8168
                         hide_name = True
                         scale = -1, -1
                     ]
@@ -1046,19 +1045,7 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 7872, 8320
-                        hide_name = True
-                        scale = -1, 1
-                    ]
-
-                    tag MT_ON2 {
-                        value = "ref_ctrl"
-                        scope = masked_subsystem
-                        kind = sp
-                        direction = out
-                    }
-                    [
-                        position = 7872, 8360
+                        position = 7872, 8232
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -1068,13 +1055,13 @@ model "gform_ho" {
                     connect Q_ref1 Sum2.in as Connection360
                     connect Gain3.out Sum4.in as Connection362
                     connect Vref.out Sum4.in1 as Connection368
-                    connect Constant2.out "Signal switch1.in" as Connection399
                     connect MT_ON2 "Signal switch2.in2" as Connection401
-                    connect "Signal switch1.out" "Signal switch2.in" as Connection404
+                    connect E_magnitude "Signal switch2.out" as Connection412
+                    connect "Signal switch2.in" Sum4.out as Connection413
+                    connect Constant2.out "Signal switch1.in" as Connection399
                     connect w_bus2 "Signal switch1.in1" as Connection409
                     connect MT_ON1 "Signal switch1.in2" as Connection410
-                    connect Sum4.out "Signal switch2.in1" as Connection411
-                    connect E_magnitude "Signal switch2.out" as Connection412
+                    connect "Signal switch1.out" "Signal switch2.in1" as Connection414
                 }
                 [
                     position = 8296, 7944
@@ -2423,7 +2410,7 @@ model "gform_ho" {
                         connect Gain9.out Product2.in as Connection319
                     }
                     [
-                        position = 8608, 8424
+                        position = 8624, 8424
                         size = 96, 184
                     ]
 
@@ -2741,6 +2728,8 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component gen_rate_limiter "Rate Limiter1" {
+                    falling_limit = "-100"
+                    rising_limit = "100"
                 }
                 [
                     position = 8512, 7912
@@ -2749,6 +2738,8 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component gen_rate_limiter "Rate Limiter2" {
+                    falling_limit = "-100"
+                    rising_limit = "100"
                 }
                 [
                     position = 8520, 8144
@@ -3479,7 +3470,7 @@ out = in - (6.283185307179586*floor_in);
                 connect E_mag.in Junction278 as Connection1039
             }
             [
-                position = 6816, 7568
+                position = 6816, 7496
                 size = 296, 128
             ]
 
@@ -3505,21 +3496,6 @@ out = in - (6.283185307179586*floor_in);
             [
                 position = 7744, 7904
                 rotation = down
-            ]
-
-            component "core/Three Phase Two Winding Transformer" Tr1 {
-                Poc1 = "344.99999999952564"
-                Psc1 = "1762.5"
-                Sn = "120000"
-                V1 = "277/np.sqrt(3)"
-                V2 = "480/np.sqrt(3)"
-                current_vals_SCOC = "[0.0024, 1.0]"
-                ioc1 = "0.6999999999992988"
-                usc1 = "3.9999999999957394"
-            }
-            [
-                position = 10088, 8000
-                size = 126, 256
             ]
 
             component pas_resistor Rt0b1 {
@@ -3550,26 +3526,12 @@ out = in - (6.283185307179586*floor_in);
                 rotation = down
             ]
 
-            component pas_inductor Lgrida_1 {
-                inductance = "L"
-            }
-            [
-                position = 9144, 7904
-                rotation = down
-            ]
-
             component gen_bus_split "Bus Split1" {
                 outputs = "3"
             }
             [
                 position = 6912, 7760
                 hide_name = True
-            ]
-
-            component gen_probe Ec_1 {
-            }
-            [
-                position = 8512, 8400
             ]
 
             component "core/Signal Controlled Voltage Source" Va_inv {
@@ -3597,19 +3559,6 @@ out = in - (6.283185307179586*floor_in);
                 position = 7632, 8000
             ]
 
-            component gen_probe Eb_1 {
-            }
-            [
-                position = 8400, 8288
-            ]
-
-            component pas_resistor Rgrida_1 {
-                resistance = "R"
-            }
-            [
-                position = 9248, 7904
-            ]
-
             component "core/Voltage Measurement" Vb2 {
                 execution_rate = "Ts"
                 sig_output = "True"
@@ -3621,13 +3570,6 @@ out = in - (6.283185307179586*floor_in);
                 size = 64, 32
             ]
 
-            component pas_resistor Rgridc_1 {
-                resistance = "R"
-            }
-            [
-                position = 9248, 8096
-            ]
-
             component "core/Signal Controlled Voltage Source" Vb_inv {
             }
             [
@@ -3635,14 +3577,6 @@ out = in - (6.283185307179586*floor_in);
                 rotation = right
                 scale = -1, 1
                 size = 64, 32
-            ]
-
-            component pas_inductor Lgridc_1 {
-                inductance = "L"
-            }
-            [
-                position = 9144, 8096
-                rotation = down
             ]
 
             component "core/Voltage Measurement" VaG {
@@ -3775,7 +3709,7 @@ out = in - (6.283185307179586*floor_in);
 
             component src_constant Constant1 {
                 execution_rate = "Ts"
-                value = "900"
+                value = "1000"
             }
             [
                 position = 6624, 8232
@@ -3810,14 +3744,6 @@ out = in - (6.283185307179586*floor_in);
             [
                 position = 6744, 7792
                 hide_name = True
-            ]
-
-            component pas_inductor Lgridb_1 {
-                inductance = "L"
-            }
-            [
-                position = 9144, 8000
-                rotation = down
             ]
 
             component "core/Current Measurement" Xi_c1 {
@@ -4047,26 +3973,10 @@ if (in < 0)
                     hide_name = True
                 ]
 
-                component gen_probe frequency_diff3 {
-                }
-                [
-                    position = 7920, 8128
-                    scale = -1, 1
-                ]
-
                 component gen_product Product4 {
                 }
                 [
                     position = 7264, 8384
-                    hide_name = True
-                ]
-
-                component gen_digital_probe "Digital Probe3" {
-                    override_signal_name = "True"
-                    signal_name = "ang_sync3"
-                }
-                [
-                    position = 8616, 8040
                     hide_name = True
                 ]
 
@@ -4133,12 +4043,6 @@ if (in < 0)
                     hide_name = True
                 ]
 
-                component gen_probe volt_diff3 {
-                }
-                [
-                    position = 8352, 8512
-                ]
-
                 component src_constant Constant6 {
                     execution_rate = "Ts"
                     value = "5e-3"
@@ -4148,48 +4052,11 @@ if (in < 0)
                     hide_name = True
                 ]
 
-                component gen_digital_probe "Digital Probe1" {
-                    override_signal_name = "True"
-                    signal_name = "gridconnect2"
-                }
-                [
-                    position = 9104, 8208
-                    hide_name = True
-                ]
-
-                component gen_logic_op "Logical operator2" {
-                    inputs = "4"
-                    operator = "NOT"
-                }
-                [
-                    position = 9040, 8248
-                    rotation = right
-                    hide_name = True
-                ]
-
                 component gen_gain Gain6 {
                     gain = "-1/V_DQ"
                 }
                 [
                     position = 7376, 8592
-                    hide_name = True
-                ]
-
-                component gen_digital_probe "Digital Probe4" {
-                    override_signal_name = "True"
-                    signal_name = "freq_sync3"
-                }
-                [
-                    position = 8616, 8008
-                    hide_name = True
-                ]
-
-                component gen_digital_probe "Digital Probe5" {
-                    override_signal_name = "True"
-                    signal_name = "volt_sync3"
-                }
-                [
-                    position = 8616, 8072
                     hide_name = True
                 ]
 
@@ -4206,12 +4073,6 @@ if (in < 0)
                 [
                     position = 8056, 8128
                     hide_name = True
-                ]
-
-                component gen_probe angle_diff3 {
-                }
-                [
-                    position = 8056, 7952
                 ]
 
                 component gen_sum Sum3 {
@@ -4374,47 +4235,12 @@ out = in - (6.283185307179586*floor_in);
                     hide_name = True
                 ]
 
-                component gen_digital_probe "Digital Probe6" {
-                    override_signal_name = "True"
-                    signal_name = "griddisconnect2"
-                }
-                [
-                    position = 9104, 8280
-                    hide_name = True
-                ]
-
                 component gen_math_fnc "Mathematical function2" {
                     mathematical_fn = "sqrt"
                 }
                 [
                     position = 7416, 8352
                     hide_name = True
-                ]
-
-                component gen_probe Vd_G {
-                }
-                [
-                    position = 7328, 8480
-                    scale = -1, 1
-                ]
-
-                component gen_probe Vq_G {
-                }
-                [
-                    position = 7432, 8472
-                    scale = -1, 1
-                ]
-
-                component gen_probe del_w {
-                }
-                [
-                    position = 8496, 8352
-                ]
-
-                component gen_probe del_V {
-                }
-                [
-                    position = 8744, 8584
                 ]
 
                 component gen_c_function "stay connected1" {
@@ -4449,40 +4275,6 @@ else if((connectINV==0)||(INVsync==0)){
                     position = 8832, 8176
                     hide_name = True
                     size = 160, 104
-                ]
-
-                component gen_probe "|V|" {
-                }
-                [
-                    position = 7512, 8304
-                ]
-
-                component gen_probe w_G {
-                }
-                [
-                    position = 7824, 8160
-                    rotation = down
-                    scale = -1, 1
-                ]
-
-                component gen_probe w_bus {
-                }
-                [
-                    position = 7824, 8240
-                ]
-
-                component gen_probe E_d {
-                }
-                [
-                    position = 7496, 8720
-                ]
-
-                component gen_probe E_q {
-                }
-                [
-                    position = 7496, 8848
-                    rotation = down
-                    scale = -1, 1
                 ]
 
                 component gen_gain Gain7 {
@@ -4551,30 +4343,6 @@ else if (df <= (-1*maxw_slip))
                     hide_name = True
                     scale = 1, -1
                     size = 128, 112
-                ]
-
-                component gen_probe thetaPLL {
-                }
-                [
-                    position = 7680, 8680
-                ]
-
-                component gen_probe omegaPLL {
-                }
-                [
-                    position = 7680, 8624
-                ]
-
-                component gen_probe theta_E {
-                }
-                [
-                    position = 7592, 7960
-                ]
-
-                component gen_probe theta_V {
-                }
-                [
-                    position = 7592, 8048
                 ]
 
                 component gen_c_function "Hold after connect2" {
@@ -5402,18 +5170,6 @@ out = in - (6.283185307179586*floor_in);
                     hide_name = True
                 ]
 
-                component gen_probe w_sync {
-                }
-                [
-                    position = 8864, 8376
-                ]
-
-                component gen_probe "|V|_sync" {
-                }
-                [
-                    position = 9104, 8616
-                ]
-
                 component gen_comparator Comparator1 {
                 }
                 [
@@ -6036,11 +5792,6 @@ out = in - (6.283185307179586*floor_in);
                     position = 7480, 8592
                 ]
 
-                junction Junction38 sp
-                [
-                    position = 8304, 8120
-                ]
-
                 junction Junction42 sp
                 [
                     position = 7216, 8392
@@ -6051,69 +5802,9 @@ out = in - (6.283185307179586*floor_in);
                     position = 7216, 8312
                 ]
 
-                junction Junction49 sp
-                [
-                    position = 7872, 8048
-                ]
-
                 junction Junction35 sp
                 [
                     position = 8424, 8192
-                ]
-
-                junction Junction56 sp
-                [
-                    position = 8280, 8616
-                ]
-
-                junction Junction57 sp
-                [
-                    position = 7480, 8536
-                ]
-
-                junction Junction58 sp
-                [
-                    position = 7368, 8544
-                ]
-
-                junction Junction63 sp
-                [
-                    position = 9040, 8176
-                ]
-
-                junction Junction66 sp
-                [
-                    position = 8552, 8136
-                ]
-
-                junction Junction67 sp
-                [
-                    position = 8576, 8040
-                ]
-
-                junction Junction69 sp
-                [
-                    position = 7456, 8352
-                ]
-
-                junction Junction71 sp
-                [
-                    position = 7784, 8176
-                ]
-
-                junction Junction73 sp
-                [
-                    position = 7992, 8128
-                ]
-
-                junction Junction78 sp
-                [
-                    position = 9040, 8208
-                ]
-
-                junction Junction61 sp
-                [
-                    position = 7376, 8736
                 ]
 
                 junction Junction81 sp
@@ -6121,49 +5812,9 @@ out = in - (6.283185307179586*floor_in);
                     position = 7992, 8200
                 ]
 
-                junction Junction85 sp
-                [
-                    position = 7640, 8600
-                ]
-
-                junction Junction86 sp
-                [
-                    position = 7520, 8088
-                ]
-
-                junction Junction87 sp
-                [
-                    position = 7520, 8000
-                ]
-
-                junction Junction88 sp
-                [
-                    position = 8432, 8416
-                ]
-
-                junction Junction90 sp
-                [
-                    position = 7784, 8224
-                ]
-
                 junction Junction99 sp
                 [
                     position = 7200, 8640
-                ]
-
-                junction Junction100 sp
-                [
-                    position = 7616, 8680
-                ]
-
-                junction Junction101 sp
-                [
-                    position = 7376, 8832
-                ]
-
-                junction Junction102 sp
-                [
-                    position = 8664, 8648
                 ]
 
                 junction Junction28 sp
@@ -6179,16 +5830,6 @@ out = in - (6.283185307179586*floor_in);
                 junction Junction104 sp
                 [
                     position = 7456, 8224
-                ]
-
-                junction Junction105 sp
-                [
-                    position = 8816, 8432
-                ]
-
-                junction Junction106 sp
-                [
-                    position = 9056, 8664
                 ]
 
                 junction Junction107 sp
@@ -6213,10 +5854,9 @@ out = in - (6.283185307179586*floor_in);
 
                 junction Junction111 sp
                 [
-                    position = 7872, 7976
+                    position = 7776, 8048
                 ]
 
-                connect "Digital Probe4.in" Junction38 as Connection366
                 connect From41 Limit1.in as Connection285
                 connect Sum3.in1 From1 as Connection81
                 connect Abs2.out "Relational operator4.in" as Connection84
@@ -6224,16 +5864,10 @@ out = in - (6.283185307179586*floor_in);
                 connect Goto30 Junction35 as Connection308
                 connect From45 "Trigonometric function2.in" as Connection401
                 connect Constant7.out "Relational operator2.in" as Connection70
-                connect Junction49 Abs4.in as Connection429
                 connect Abs2.in Junction35 as Connection306
                 connect From44 Limit2.in as Connection402
-                connect "Digital Probe6.in" "Logical operator2.out" as Connection454
                 connect Limit2.out "Trigonometric function2.in1" as Connection398
                 connect Product3.out Sum5.in as Connection390
-                connect Junction38 "Relational operator2.out" as Connection365
-                [
-                    breakpoints = 8288, 8120; 8288, 8120
-                ]
                 connect Product3.in Junction43 as Connection386
                 connect Limit1.out "Trigonometric function1.in1" as Connection286
                 connect From40 "Trigonometric function1.in" as Connection284
@@ -6244,68 +5878,19 @@ out = in - (6.283185307179586*floor_in);
                 connect Product3.in1 Junction43 as Connection391
                 connect Gain6.out Junction41 as Connection381
                 connect Junction35 Sum3.out as Connection307
-                connect "confine phase.in" Sum1.out as Connection146
                 connect Product4.out Sum5.in1 as Connection388
                 connect Constant9.out "Relational operator4.in1" as Connection85
                 connect Product4.in Junction42 as Connection385
-                connect "confine phase.out" Junction49 as Connection428
                 connect Junction41 PLL.d as Connection382
                 connect Constant6.out "Relational operator1.in" as Connection69
                 connect Junction42 Product4.in1 as Connection392
-                connect "Logical operator1.in1" Junction38 as Connection364
-                [
-                    breakpoints = 8576, 8120
-                ]
-                connect theta_bus5 Junction56 as Connection464
-                connect Junction56 "BE1-25A Synchronizer1.dV" as Connection465
-                connect volt_diff3.in Junction56 as Connection466
-                connect Goto32 Junction57 as Connection468
-                connect Junction57 Junction41 as Connection469
-                connect Vq_G.in Junction57 as Connection470
-                connect Goto33 Junction58 as Connection471
-                connect Junction58 Gain5.out as Connection472
-                connect Vd_G.in Junction58 as Connection473
                 connect PLL.wt "Unit Delay2.in" as Connection474
                 connect MT_ON2 "Hold after connect.INV_sync" as Connection492
                 connect MT_ON3 "Hold after connect1.INV_sync" as Connection494
                 connect "Hold after connect1.in" "BE1-25A Synchronizer1.del_V" as Connection495
-                connect Connect1 Junction63 as Connection508
                 connect MT_ON4 "stay connected1.INVsync" as Connection512
                 connect w_e7 Gain4.in as Connection513
-                connect "Logical operator1.in2" Junction66 as Connection530
-                connect Junction66 "Relational operator4.out" as Connection531
-                connect "Digital Probe5.in" Junction66 as Connection532
-                connect "Relational operator1.out" Junction67 as Connection534
-                connect Junction67 "Logical operator1.in" as Connection535
-                connect "Digital Probe3.in" Junction67 as Connection536
                 connect "Logical operator1.out" "stay connected1.ready" as Connection537
-                connect "Mathematical function2.out" Junction69 as Connection544
-                connect Junction69 "|V|1" as Connection545
-                [
-                    breakpoints = 7456, 8352
-                ]
-                connect "|V|.in" Junction69 as Connection546
-                connect Gain4.out Junction71 as Connection550
-                connect Junction71 Sum2.in as Connection551
-                connect w_G.in Junction71 as Connection552
-                connect Abs5.in Junction73 as Connection557
-                connect frequency_diff3.in Junction73 as Connection559
-                connect Junction63 Junction78 as Connection609
-                [
-                    breakpoints = 9040, 8176
-                ]
-                connect Junction78 "Logical operator2.in" as Connection610
-                [
-                    breakpoints = 9040, 8208
-                ]
-                connect "Digital Probe1.in" Junction78 as Connection611
-                connect Goto29 Junction61 as Connection444
-                connect Junction61 Gain7.out as Connection445
-                connect E_d.in Junction61 as Connection618
-                [
-                    breakpoints = 7472, 8720; 7376, 8720; 7376, 8736
-                ]
-                connect Junction63 "Unit Delay5.out" as Connection623
                 connect "Unit Delay5.in" "stay connected1.out" as Connection624
                 connect Connect5 "stay connected1.connectINV" as Connection625
                 connect Connect6 "Hold after connect1.connect" as Connection626
@@ -6318,39 +5903,14 @@ out = in - (6.283185307179586*floor_in);
                 [
                     breakpoints = 7968, 8200
                 ]
-                connect Junction81 Junction73 as Connection635
-                [
-                    breakpoints = 7992, 8200; 7992, 8128
-                ]
                 connect "BE1-25A Synchronizer2.df" Junction81 as Connection636
-                connect PLL.w Junction85 as Connection649
-                connect omegaPLL.in Junction85 as Connection651
-                connect "Trigonometric function2.out" Junction86 as Connection654
-                connect Junction86 Sum1.in1 as Connection655
-                connect theta_V.in Junction86 as Connection656
-                connect "Trigonometric function1.out" Junction87 as Connection657
-                connect Junction87 Sum1.in as Connection658
-                connect theta_E.in Junction87 as Connection659
                 connect Connect3 "Hold after connect2.connect" as Connection1234
                 connect w_bus2 Sum9.in as Connection1235
                 connect Sum9.out "Hold after connect2.in" as Connection1237
-                connect del_w.in Junction88 as Connection1239
-                connect Junction88 "Hold after connect.out" as Connection1240
-                [
-                    breakpoints = 8432, 8416
-                ]
-                connect Sum9.in1 Junction88 as Connection1241
                 connect Connect7 "Hold after connect3.connect" as Connection1243
                 connect Sum10.out "Hold after connect3.in" as Connection1244
                 connect From47 Sum10.in as Connection1246
                 connect Gain13.out w_bus1 as Connection1252
-                connect w_bus3 Junction90 as Connection1254
-                connect Junction90 Sum2.in1 as Connection1255
-                connect w_bus.in Junction90 as Connection1256
-                connect Gain13.in Junction85 as Connection1340
-                [
-                    breakpoints = 7640, 8600
-                ]
                 connect From33 "abc to qd1.a" as Connection1356
                 connect "abc to qd1.b" From35 as Connection1357
                 connect From34 "abc to qd1.c" as Connection1358
@@ -6364,21 +5924,6 @@ out = in - (6.283185307179586*floor_in);
                 connect "abc to qd.a" Va_G1 as Connection1366
                 connect "abc to qd.theta" Junction99 as Connection1375
                 connect theta_bus Junction99 as Connection1377
-                connect Junction99 Junction100 as Connection1382
-                [
-                    breakpoints = 7200, 8640
-                ]
-                connect Junction100 "Unit Delay2.out" as Connection1383
-                [
-                    breakpoints = 7616, 8680; 7616, 8680
-                ]
-                connect thetaPLL.in Junction100 as Connection1384
-                connect Gain12.out Junction101 as Connection1386
-                connect Junction101 Goto28 as Connection1387
-                connect E_q.in Junction101 as Connection1388
-                connect "Hold after connect1.out" Junction102 as Connection1390
-                connect Junction102 Sum10.in1 as Connection1391
-                connect del_V.in Junction102 as Connection1392
                 connect From39 Junction28 as Connection259
                 connect Product2.out Sum4.in1 as Connection251
                 connect Sum4.out "Mathematical function1.in" as Connection252
@@ -6395,12 +5940,6 @@ out = in - (6.283185307179586*floor_in);
                 connect "Unit Delay7.in" "Hold after connect3.out" as Connection1405
                 connect "|E|.in" Gain14.out as Connection1406
                 connect Gain14.in Junction104 as Connection1407
-                connect "Unit Delay6.out" Junction105 as Connection1408
-                connect Junction105 Goto34 as Connection1409
-                connect w_sync.in Junction105 as Connection1410
-                connect Goto35 Junction106 as Connection1411
-                connect Junction106 "Unit Delay7.out" as Connection1412
-                connect "|V|_sync.in" Junction106 as Connection1413
                 connect From50 Product5.in as Connection1414
                 connect Comparator1.out "Signal switch1.in2" as Connection1417
                 connect "Signal switch1.out" Product5.in1 as Connection1418
@@ -6422,10 +5961,92 @@ out = in - (6.283185307179586*floor_in);
                 connect sync_w.in Product6.out as Connection1436
                 connect w_e8 Gain15.in as Connection1437
                 connect Gain15.out Product6.in as Connection1438
-                connect angle_diff3.in Junction111 as Connection1439
-                connect Junction111 Junction49 as Connection1440
-                connect Gain16.in Junction111 as Connection1441
                 connect Gain16.out sync_theta.in as Connection1442
+                connect "confine phase.in" Junction111 as Connection1444
+                connect Junction111 Sum1.out as Connection1445
+                connect Gain16.in Junction111 as Connection1446
+                connect Sum9.in1 "Hold after connect.out" as Connection1447
+                [
+                    breakpoints = 8432, 8416; 8432, 8416
+                ]
+                connect Goto34 "Unit Delay6.out" as Connection1448
+                [
+                    breakpoints = 8864, 8432; 8816, 8432
+                ]
+                connect Sum10.in1 "Hold after connect1.out" as Connection1449
+                [
+                    breakpoints = 8664, 8648
+                ]
+                connect "Unit Delay7.out" Goto35 as Connection1450
+                [
+                    breakpoints = 9056, 8664
+                ]
+                connect "Relational operator4.out" "Logical operator1.in2" as Connection1452
+                [
+                    breakpoints = 8552, 8136
+                ]
+                connect "Logical operator1.in" "Relational operator1.out" as Connection1454
+                [
+                    breakpoints = 8576, 8040
+                ]
+                connect "Relational operator2.out" "Logical operator1.in1" as Connection1453
+                [
+                    breakpoints = 8288, 8120; 8288, 8120; 8304, 8120; 8576, 8120
+                ]
+                connect theta_bus5 "BE1-25A Synchronizer1.dV" as Connection1455
+                connect PLL.w Gain13.in as Connection1457
+                [
+                    breakpoints = 7640, 8600; 7640, 8600
+                ]
+                connect Junction99 "Unit Delay2.out" as Connection1456
+                [
+                    breakpoints = 7200, 8640; 7200, 8640; 7616, 8680; 7616, 8680; 7616, 8680
+                ]
+                connect Goto28 Gain12.out as Connection1459
+                [
+                    breakpoints = 7432, 8832; 7376, 8832
+                ]
+                connect Gain7.out Goto29 as Connection1458
+                [
+                    breakpoints = 7376, 8736
+                ]
+                connect Gain5.out Goto33 as Connection1461
+                [
+                    breakpoints = 7368, 8544
+                ]
+                connect Junction41 Goto32 as Connection1460
+                [
+                    breakpoints = 7480, 8592; 7480, 8536
+                ]
+                connect "|V|1" "Mathematical function2.out" as Connection1462
+                [
+                    breakpoints = 7512, 8352; 7456, 8352; 7456, 8352
+                ]
+                connect Sum1.in "Trigonometric function1.out" as Connection1463
+                [
+                    breakpoints = 7520, 8000
+                ]
+                connect Sum1.in1 "Trigonometric function2.out" as Connection1464
+                [
+                    breakpoints = 7520, 8088
+                ]
+                connect "confine phase.out" Abs4.in as Connection1465
+                [
+                    breakpoints = 7872, 8048
+                ]
+                connect Abs5.in Junction81 as Connection1466
+                [
+                    breakpoints = 7992, 8128; 7992, 8128; 7992, 8200
+                ]
+                connect Gain4.out Sum2.in as Connection1467
+                [
+                    breakpoints = 7784, 8176
+                ]
+                connect w_bus3 Sum2.in1 as Connection1468
+                [
+                    breakpoints = 7640, 8224; 7784, 8224
+                ]
+                connect Connect1 "Unit Delay5.out" as Connection1469
             }
             [
                 position = 9200, 7608
@@ -7018,59 +6639,15 @@ else
                 connect "Logical operator1.in" Junction124 as Connection1205
                 connect Junction124 Junction123 as Connection1206
                 connect Connect6 Junction124 as Connection1207
-                connect Connect1 "Unit Delay2.out" as Connection1208
                 connect "Unit Delay2.in" Junction119 as Connection1209
+                connect "Unit Delay2.out" Connect1 as Connection1213
+                [
+                    breakpoints = 8560, 8296
+                ]
             }
             [
                 position = 9200, 7768
                 size = 176, 96
-            ]
-
-            component src_scada_input ref_ctrl {
-                execution_rate = "Ts"
-                format = "int"
-                max = "1"
-                min = "0"
-                signal_type = "int"
-                unit = ""
-            }
-            [
-                position = 8264, 7528
-            ]
-
-            component gen_logic_op "Logical operator2" {
-            }
-            [
-                position = 8352, 7552
-                hide_name = True
-            ]
-
-            component gen_digital_probe "Digital Probe1" {
-                override_signal_name = "True"
-                signal_name = "ref_ctrl ON"
-            }
-            [
-                position = 8496, 7552
-                hide_name = True
-            ]
-
-            component gen_logic_op "Logical operator3" {
-                inputs = "4"
-                operator = "NOT"
-            }
-            [
-                position = 8424, 7592
-                rotation = right
-                hide_name = True
-            ]
-
-            component gen_digital_probe "Digital Probe6" {
-                override_signal_name = "True"
-                signal_name = "ref_ctrl OFF"
-            }
-            [
-                position = 8488, 7624
-                hide_name = True
             ]
 
             port Vc {
@@ -7349,29 +6926,6 @@ else
                 size = 60, 20
             ]
 
-            tag Connect6 {
-                value = "ref_ctrl"
-                scope = masked_subsystem
-                kind = sp
-                direction = in
-            }
-            [
-                position = 8496, 7504
-                hide_name = True
-            ]
-
-            tag Connect7 {
-                value = "Connected"
-                scope = masked_subsystem
-                kind = sp
-                direction = out
-            }
-            [
-                position = 8264, 7576
-                hide_name = True
-                size = 58, 20
-            ]
-
             junction Junction173 pe
             [
                 position = 8176, 8096
@@ -7412,11 +6966,6 @@ else
                 position = 7168, 8688
             ]
 
-            junction Junction284 sp
-            [
-                position = 8480, 8352
-            ]
-
             junction Junction195 pe
             [
                 position = 8096, 8688
@@ -7435,26 +6984,6 @@ else
             junction Junction292 pe
             [
                 position = 8096, 8688
-            ]
-
-            junction Junction306 pe
-            [
-                position = 9616, 7904
-            ]
-
-            junction Junction307 pe
-            [
-                position = 9744, 8000
-            ]
-
-            junction Junction283 sp
-            [
-                position = 8368, 8256
-            ]
-
-            junction Junction308 pe
-            [
-                position = 9864, 8096
             ]
 
             junction Junction212 pe
@@ -7480,11 +7009,6 @@ else
             junction Junction289 pe
             [
                 position = 7600, 8688
-            ]
-
-            junction Junction311 sp
-            [
-                position = 8304, 8144
             ]
 
             junction Junction312 pe
@@ -7529,22 +7053,17 @@ else
 
             junction Junction320 pe
             [
-                position = 10056, 8688
+                position = 9616, 7904
             ]
 
             junction Junction321 pe
             [
-                position = 10120, 8688
+                position = 9744, 8000
             ]
 
-            junction Junction322 sp
+            junction Junction322 pe
             [
-                position = 8424, 7552
-            ]
-
-            junction Junction323 sp
-            [
-                position = 8424, 7552
+                position = 9864, 8096
             ]
 
             connect Ea1.n_node Junction292 as Connection1069
@@ -7553,7 +7072,6 @@ else
             ]
             connect Xi_b1.out Goto44 as Connection374
             connect La1.p_node Ia1.p_node as Connection665
-            connect Lgridc_1.p_node Rgridc_1.p_node as Connection1240
             connect Product1.in1 Gain1.out as Connection1073
             connect Vc_inv.n_node Junction290 as Connection1060
             connect Junction291 Junction290 as Connection1064
@@ -7561,13 +7079,9 @@ else
                 breakpoints = 7088, 8688; 7168, 8688
             ]
             connect "Bus Split1.out1" Vb_inv.in as Connection1071
-            connect Eb_1.in Junction283 as Connection952
-            connect S2.a_out Junction306 as Connection1268
             connect Rt0a1.n_node Junction161 as Connection366
-            connect Ib1.n_node Lgridb_1.n_node as Connection1237
             connect Va2.n_node Junction289 as Connection1057
             connect R0b1.n_node L0b1.n_node as Connection385
-            connect Lgrida_1.p_node Rgrida_1.p_node as Connection1236
             connect Junction207 Junction215 as Connection1222
             [
                 breakpoints = 8096, 8688; 8096, 8688; 8096, 8688; 8096, 8688; 8096, 8688; 8096, 8688
@@ -7575,9 +7089,7 @@ else
             connect Xi_a1.n_node Junction161 as Connection314
             connect Xi_b1.n_node Junction160 as Connection388
             connect Goto35 Xi_a1.out as Connection342
-            connect Lgridb_1.p_node Rgridb_1.p_node as Connection1238
             connect Xi_c1.out Goto38 as Connection313
-            connect Junction283 Eb1.out as Connection951
             connect setpoint_P Controller.U_P as Connection1289
             connect From3 Gain1.in as Connection1072
             connect Junction192 Junction194 as Connection459
@@ -7586,7 +7098,6 @@ else
             [
                 breakpoints = 7840, 8480; 7824, 8480
             ]
-            connect Rgridc_1.n_node S2.c_in as Connection1243
             connect Junction213 Cb1.p_node as Connection613
             [
                 breakpoints = 8096, 8304; 8096, 8304; 8096, 8304
@@ -7601,15 +7112,7 @@ else
                 breakpoints = 8096, 8688; 8096, 8688; 8096, 8688; 8096, 8544; 8016, 8544
             ]
             connect L0c1.p_node Xi_c1.p_node as Connection328
-            connect Ic1.n_node Lgridc_1.n_node as Connection1239
             connect Va2.out Goto34 as Connection624
-            connect VbG.p_node Junction307 as Connection1271
-            connect Ia1.n_node Lgrida_1.n_node as Connection1235
-            connect Vb Tr1.sec_2 as Connection1278
-            connect Junction306 VaG.p_node as Connection1269
-            [
-                breakpoints = 9616, 7904
-            ]
             connect R0c1.n_node L0c1.n_node as Connection330
             connect Junction195 Junction194 as Connection463
             connect Junction207 Junction198 as Connection574
@@ -7618,20 +7121,14 @@ else
             ]
             connect Cb1.n_node Junction212 as Connection602
             connect VbG.out Vb_G as Connection1126
-            connect S2.c_out Junction308 as Connection1274
             connect Vb2.p_node Junction213 as Connection614
             [
                 breakpoints = 7920, 8304; 8096, 8304
             ]
             connect "Bus Split1.out2" Vc_inv.in as Connection1053
-            connect Tr1.prm_2 Junction307 as Connection1279
             connect Junction290 Junction289 as Connection1061
             [
                 breakpoints = 7168, 8688; 7600, 8688
-            ]
-            connect Junction307 S2.b_out as Connection1272
-            [
-                breakpoints = 9744, 8000
             ]
             connect "Bus Split1.out" Va_inv.in as Connection1051
             connect Eb1.n_node Junction195 as Connection462
@@ -7639,20 +7136,16 @@ else
             connect Vc_inv.p_node R0c1.p_node as Connection1054
             connect Va_G VaG.out as Connection1125
             connect Vc2.p_node Junction216 as Connection627
-            connect Va Tr1.sec_1 as Connection1280
             connect Lb1.p_node Ib1.p_node as Connection664
             connect Vc2.n_node Junction215 as Connection623
             connect Vb_inv.p_node R0b1.p_node as Connection1055
             connect Rc1.n_node Lc1.n_node as Connection399
-            connect Goto40 Junction283 as Connection950
             connect L0a1.p_node Xi_a1.p_node as Connection378
-            connect Vc Tr1.sec_3 as Connection1276
             connect Junction198 Junction199 as Connection537
             [
                 breakpoints = 8096, 8688; 8096, 8688; 8096, 8688; 8096, 8688; 8096, 8688
             ]
             connect Vb2.out Goto42 as Connection616
-            connect Tr1.prm_1 Junction306 as Connection1281
             connect Xi_c1.n_node Junction173 as Connection304
             connect Junction212 Junction192 as Connection603
             connect Rt0c1.p_node Junction216 as Connection625
@@ -7661,22 +7154,13 @@ else
             ]
             connect Product1.out "Bus Split1.in" as Connection1075
             connect Vb_inv.n_node Junction291 as Connection1063
-            connect Ec_1.in Junction284 as Connection956
-            [
-                breakpoints = 8480, 8384; 8480, 8352
-            ]
             connect La1.n_node Ra1.n_node as Connection401
             connect Va_inv.n_node Junction291 as Connection1065
             [
                 breakpoints = 7008, 8688; 7088, 8688
             ]
             connect L0b1.p_node Xi_b1.p_node as Connection372
-            connect Junction308 VcG.p_node as Connection1275
-            [
-                breakpoints = 9864, 8096
-            ]
             connect L0a1.n_node R0a1.n_node as Connection355
-            connect Rgridb_1.n_node S2.b_in as Connection1242
             connect Ia1.out Goto32 as Connection666
             connect Junction289 Junction212 as Connection1058
             [
@@ -7686,31 +7170,21 @@ else
             connect Rb1.n_node Lb1.n_node as Connection354
             connect Junction192 Junction292 as Connection1067
             connect Vb2.n_node Junction215 as Connection621
-            connect Junction284 Ec1.out as Connection955
-            [
-                breakpoints = 8480, 8352; 8480, 8272
-            ]
             connect Junction292 Cc1.n_node as Connection1068
             [
                 breakpoints = 8096, 8688; 8096, 8688; 8096, 8544; 8176, 8544
             ]
-            connect Goto30 Junction284 as Connection954
             connect Junction216 Cc1.p_node as Connection626
             [
                 breakpoints = 8176, 8304; 8176, 8304; 8176, 8304
             ]
-            connect Rgrida_1.n_node S2.a_in as Connection1241
             connect Vc_G VcG.out as Connection1127
             connect Rt0c1.n_node Junction173 as Connection327
             connect Junction198 Junction195 as Connection477
             [
                 breakpoints = 8096, 8688; 8096, 8688
             ]
-            connect Tr1.prm_3 Junction308 as Connection1277
             connect setpoint_Q Controller.U_Q as Connection1290
-            connect Goto41 Junction311 as Connection1292
-            connect Junction311 Ea1.out as Connection1293
-            connect Ea_1.in Junction311 as Connection1294
             connect Rt0a1.p_node Junction312 as Connection1296
             connect Junction312 Ca1.p_node as Connection1297
             connect Va2.p_node Junction312 as Connection1298
@@ -7746,33 +7220,52 @@ else
             connect VbG.n_node Junction318 as Connection1322
             connect Junction319 Junction318 as Connection1324
             connect VcG.n_node Junction319 as Connection1325
-            connect Junction320 Junction319 as Connection1327
-            connect Tr1.n1 Junction320 as Connection1328
-            connect Ground Junction321 as Connection1329
-            connect Junction321 Junction320 as Connection1330
-            connect Tr1.n2 Junction321 as Connection1331
             connect "Connect GFM.out" CB_control.Close_GCB as Connection1050
-            connect Connect7 "Logical operator2.in1" as Connection1333
-            connect ref_ctrl.out "Logical operator2.in" as Connection1334
-            connect "Digital Probe6.in" "Logical operator3.out" as Connection454
-            connect "Logical operator2.out" Junction322 as Connection1336
-            connect Junction322 "Digital Probe1.in" as Connection1337
-            connect "Logical operator3.in" Junction323 as Connection1339
-            connect Junction323 Junction322 as Connection1340
-            connect Connect6 Junction323 as Connection1341
             connect CB_control.CB_status S2.ctrl_in as Connection1342
+            connect Junction319 Ground as Connection1343
+            [
+                breakpoints = 9864, 8688; 10056, 8688; 10120, 8688
+            ]
+            connect S2.a_out Junction320 as Connection1347
+            connect Junction320 VaG.p_node as Connection1348
+            [
+                breakpoints = 9616, 7904; 9616, 7904
+            ]
+            connect Va Junction320 as Connection1349
+            connect VbG.p_node Junction321 as Connection1350
+            connect Junction321 S2.b_out as Connection1351
+            [
+                breakpoints = 9744, 8000; 9744, 8000
+            ]
+            connect Vb Junction321 as Connection1352
+            connect VcG.p_node Junction322 as Connection1353
+            connect Junction322 S2.c_out as Connection1354
+            [
+                breakpoints = 9864, 8096; 9864, 8096
+            ]
+            connect Vc Junction322 as Connection1355
+            connect Ia1.n_node S2.a_in as Connection1356
+            connect Ib1.n_node S2.b_in as Connection1357
+            connect Ic1.n_node S2.c_in as Connection1358
+            connect Eb1.out Goto40 as Connection1359
+            [
+                breakpoints = 8368, 8256
+            ]
+            connect Ea1.out Goto41 as Connection1360
+            [
+                breakpoints = 8304, 8144
+            ]
+            connect Ec1.out Goto30 as Connection1361
+            [
+                breakpoints = 8480, 8272; 8480, 8352; 8480, 8352
+            ]
 
-            Ki_PLL = "2"
-            Kp_PLL = "5"
-            L_o = "1e-4"
-            PLL_max = "2*np.pi*63"
-            PLL_min = "2*np.pi*57"
-            maxV_pds = "5e-3"
-            maxV_slip = "2e-3"
-            maxw_pds = "8e-3"
-            maxw_slip = "2e-3"
-            minV_slip = "0.5e-4"
-            minw_slip = "0.5e-3"
+            Imax = "1"
+            Imin = "-1"
+            Ki_I = "1.5e-3/1e-3"
+            Kp_I = "10e-6/1e-3"
+            R_i = "1.5e-3"
+            maxw_pds = "5e-3"
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A grid-forming three-phase inverter with a frequency and voltage droop controller</p></body></html>"
@@ -7781,7 +7274,7 @@ else
                     label = "Rated Power (System)"
                     widget = edit
                     type = generic
-                    default_value = "200e3"
+                    default_value = "15.5e6"
                     unit = "VA"
                     group = "1. Three-phase Inverter"
                 }
@@ -7790,7 +7283,8 @@ else
                     label = "Rated Power (Inverter)"
                     widget = edit
                     type = generic
-                    default_value = "70e3"
+                    default_value = "3e6"
+                    unit = "VA"
                     group = "1. Three-phase Inverter"
                 }
 
@@ -7798,7 +7292,7 @@ else
                     label = "Rated Phase Voltage (RMS)"
                     widget = edit
                     type = generic
-                    default_value = "277/np.sqrt(3)"
+                    default_value = "480/np.sqrt(3)"
                     unit = "V"
                     group = "1. Three-phase Inverter"
                 }
@@ -7825,7 +7319,7 @@ else
                     label = "Input Resistance"
                     widget = edit
                     type = generic
-                    default_value = "0.1"
+                    default_value = "0.5e-3"
                     unit = "Ω"
                     group = "2. LCL filter"
                 }
@@ -7834,7 +7328,7 @@ else
                     label = "Input Inductance"
                     widget = edit
                     type = generic
-                    default_value = "6e-3"
+                    default_value = "10e-6"
                     unit = "H"
                     group = "2. LCL filter"
                 }
@@ -7843,7 +7337,7 @@ else
                     label = "Shunt Resistance"
                     widget = edit
                     type = generic
-                    default_value = "15e-3"
+                    default_value = "1e-3"
                     unit = "Ω"
                     group = "2. LCL filter"
                 }
@@ -7852,7 +7346,7 @@ else
                     label = "Shunt Capacitance"
                     widget = edit
                     type = generic
-                    default_value = "150e-6"
+                    default_value = "300e-6"
                     unit = "F"
                     group = "2. LCL filter"
                 }
@@ -7861,7 +7355,7 @@ else
                     label = "Output Resistance"
                     widget = edit
                     type = generic
-                    default_value = "0.03"
+                    default_value = "0.3e-3"
                     unit = "Ω"
                     group = "2. LCL filter"
                 }
@@ -7870,34 +7364,16 @@ else
                     label = "Output Inductance"
                     widget = edit
                     type = generic
-                    default_value = "0.3e-3"
+                    default_value = "8e-6"
                     unit = "H"
                     group = "2. LCL filter"
-                }
-
-                R {
-                    label = "Resistance"
-                    widget = edit
-                    type = generic
-                    default_value = "0.35"
-                    unit = "Ω"
-                    group = "3. Electrical Line"
-                }
-
-                L {
-                    label = "Inductance"
-                    widget = edit
-                    type = generic
-                    default_value = "1.5e-3"
-                    unit = "H"
-                    group = "3. Electrical Line"
                 }
 
                 Kp_I {
                     label = "Inner Loop Proportional Gain"
                     widget = edit
                     type = generic
-                    default_value = "10e-2"
+                    default_value = "10e-6/500e-3"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7905,7 +7381,7 @@ else
                     label = "Inner Loop Integral Gain"
                     widget = edit
                     type = generic
-                    default_value = "2e-2"
+                    default_value = "0.5e-3/500e-3"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7913,7 +7389,7 @@ else
                     label = "Inner Loop Upper Limit"
                     widget = edit
                     type = generic
-                    default_value = "1"
+                    default_value = "1/500"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7921,7 +7397,7 @@ else
                     label = "Inner Loop Lower Limit"
                     widget = edit
                     type = generic
-                    default_value = "-1"
+                    default_value = "-1/500"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7929,7 +7405,7 @@ else
                     label = "Outer Loop Proportional Gain"
                     widget = edit
                     type = generic
-                    default_value = "30e-2"
+                    default_value = "0.1092"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7937,7 +7413,7 @@ else
                     label = "Outer Loop Integral Gain"
                     widget = edit
                     type = generic
-                    default_value = "2"
+                    default_value = "0.1092*132.4743"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7945,7 +7421,7 @@ else
                     label = "Outer Loop Upper Limit"
                     widget = edit
                     type = generic
-                    default_value = "0.35"
+                    default_value = "1"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7953,7 +7429,7 @@ else
                     label = "Outer Loop Lower Limit"
                     widget = edit
                     type = generic
-                    default_value = "-0.35"
+                    default_value = "-1"
                     group = "4. Cascaded Controller"
                 }
 
@@ -7988,7 +7464,7 @@ else
                     label = "Maximum slip (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "5e-3"
+                    default_value = "2e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -7997,7 +7473,7 @@ else
                     label = "Minimum slip (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "2.5e-3"
+                    default_value = "0.5e-4"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -8006,7 +7482,7 @@ else
                     label = "Maximum slip (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "10e-3"
+                    default_value = "2e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -8015,7 +7491,7 @@ else
                     label = "Minimum slip (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "5e-3"
+                    default_value = "0.5e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -8024,7 +7500,7 @@ else
                     label = "Maximum difference signal (voltage)"
                     widget = edit
                     type = generic
-                    default_value = "1e-2"
+                    default_value = "5e-3"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -8033,7 +7509,7 @@ else
                     label = "Maximum difference signal (frequency)"
                     widget = edit
                     type = generic
-                    default_value = "5e-1"
+                    default_value = "1e-2"
                     unit = "pu"
                     group = "6. Automatic Synchronizer"
                 }
@@ -8042,7 +7518,7 @@ else
                     label = "Proportional Gain"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "5"
                     group = "7. Phase Locked Loop"
                 }
 
@@ -8050,7 +7526,7 @@ else
                     label = "Integral Gain"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "2"
                     group = "7. Phase Locked Loop"
                 }
 
@@ -8058,7 +7534,7 @@ else
                     label = "Saturation Upper Limit"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "2*np.pi*63"
                     group = "7. Phase Locked Loop"
                 }
 
@@ -8066,7 +7542,7 @@ else
                     label = "Saturation Lower Limit"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "2*np.pi*57"
                     group = "7. Phase Locked Loop"
                 }
 
@@ -8094,8 +7570,6 @@ else
                     C_s = mdl.get_property_value(mdl.prop(item_handle, "C_s"))
                     R_o = mdl.get_property_value(mdl.prop(item_handle, "R_o"))
                     L_o = mdl.get_property_value(mdl.prop(item_handle, "L_o"))
-                    R = mdl.get_property_value(mdl.prop(item_handle, "R"))
-                    L = mdl.get_property_value(mdl.prop(item_handle, "L"))
                     Kp_I = mdl.get_property_value(mdl.prop(item_handle, "Kp_I"))
                     Ki_I = mdl.get_property_value(mdl.prop(item_handle, "Ki_I"))
                     Imax = mdl.get_property_value(mdl.prop(item_handle, "Imax"))
@@ -8121,10 +7595,15 @@ else
                     
                     Tfast = Ts
                     V_DQ = V_ABC*np.sqrt(2)
-                    I_DQ = S/V_DQ
+                    I_DQ = 2*S/(3*V_DQ)
                     Z_DQ = V_DQ/I_DQ
                     C_DQ = 1/(Z_DQ*w_0)
                     L_DQ = Z_DQ/w_0
+                    
+                    Kp_I = Kp_I/Z_DQ
+                    Ki_I = Ki_I*C_DQ
+                    Kp_V = Kp_V*Z_DQ
+                    Ki_V = Ki_V*L_DQ
                     
                     Rs = R_s/Z_DQ
                     Cs = C_s/C_DQ
@@ -8141,80 +7620,20 @@ else
                 ENDCODE
 
                 CODE pre_compile
-                    # HEADER START
-                    S = mdl.get_property_value(mdl.prop(item_handle, "S"))
-                    S_i = mdl.get_property_value(mdl.prop(item_handle, "S_i"))
-                    V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
-                    w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
-                    Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
-                    R_i = mdl.get_property_value(mdl.prop(item_handle, "R_i"))
-                    L_i = mdl.get_property_value(mdl.prop(item_handle, "L_i"))
-                    R_s = mdl.get_property_value(mdl.prop(item_handle, "R_s"))
-                    C_s = mdl.get_property_value(mdl.prop(item_handle, "C_s"))
-                    R_o = mdl.get_property_value(mdl.prop(item_handle, "R_o"))
-                    L_o = mdl.get_property_value(mdl.prop(item_handle, "L_o"))
-                    R = mdl.get_property_value(mdl.prop(item_handle, "R"))
-                    L = mdl.get_property_value(mdl.prop(item_handle, "L"))
-                    Kp_I = mdl.get_property_value(mdl.prop(item_handle, "Kp_I"))
-                    Ki_I = mdl.get_property_value(mdl.prop(item_handle, "Ki_I"))
-                    Imax = mdl.get_property_value(mdl.prop(item_handle, "Imax"))
-                    Imin = mdl.get_property_value(mdl.prop(item_handle, "Imin"))
-                    Kp_V = mdl.get_property_value(mdl.prop(item_handle, "Kp_V"))
-                    Ki_V = mdl.get_property_value(mdl.prop(item_handle, "Ki_V"))
-                    Vmax = mdl.get_property_value(mdl.prop(item_handle, "Vmax"))
-                    Vmin = mdl.get_property_value(mdl.prop(item_handle, "Vmin"))
-                    f_D = mdl.get_property_value(mdl.prop(item_handle, "f_D"))
-                    V_D = mdl.get_property_value(mdl.prop(item_handle, "V_D"))
-                    T_m = mdl.get_property_value(mdl.prop(item_handle, "T_m"))
-                    maxV_slip = mdl.get_property_value(mdl.prop(item_handle, "maxV_slip"))
-                    minV_slip = mdl.get_property_value(mdl.prop(item_handle, "minV_slip"))
-                    maxw_slip = mdl.get_property_value(mdl.prop(item_handle, "maxw_slip"))
-                    minw_slip = mdl.get_property_value(mdl.prop(item_handle, "minw_slip"))
-                    maxV_pds = mdl.get_property_value(mdl.prop(item_handle, "maxV_pds"))
-                    maxw_pds = mdl.get_property_value(mdl.prop(item_handle, "maxw_pds"))
-                    Kp_PLL = mdl.get_property_value(mdl.prop(item_handle, "Kp_PLL"))
-                    Ki_PLL = mdl.get_property_value(mdl.prop(item_handle, "Ki_PLL"))
-                    PLL_max = mdl.get_property_value(mdl.prop(item_handle, "PLL_max"))
-                    PLL_min = mdl.get_property_value(mdl.prop(item_handle, "PLL_min"))
-                    # HEADER STOP
-                    S = mdl.get_property_value(mdl.prop(item_handle, "S"))
-                    V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
-                    w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
-                    Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
-                    R_i = mdl.get_property_value(mdl.prop(item_handle, "R_i"))
-                    L_i = mdl.get_property_value(mdl.prop(item_handle, "L_i"))
-                    R_s = mdl.get_property_value(mdl.prop(item_handle, "R_s"))
-                    C_s = mdl.get_property_value(mdl.prop(item_handle, "C_s"))
-                    R_o = mdl.get_property_value(mdl.prop(item_handle, "R_o"))
-                    L_o = mdl.get_property_value(mdl.prop(item_handle, "L_o"))
-                    R = mdl.get_property_value(mdl.prop(item_handle, "R"))
-                    L = mdl.get_property_value(mdl.prop(item_handle, "L"))
-                    Kp_I = mdl.get_property_value(mdl.prop(item_handle, "Kp_I"))
-                    Ki_I = mdl.get_property_value(mdl.prop(item_handle, "Ki_I"))
-                    Imax = mdl.get_property_value(mdl.prop(item_handle, "Imax"))
-                    Imin = mdl.get_property_value(mdl.prop(item_handle, "Imin"))
-                    Kp_V = mdl.get_property_value(mdl.prop(item_handle, "Kp_V"))
-                    Ki_V = mdl.get_property_value(mdl.prop(item_handle, "Ki_V"))
-                    Vmax = mdl.get_property_value(mdl.prop(item_handle, "Vmax"))
-                    Vmin = mdl.get_property_value(mdl.prop(item_handle, "Vmin"))
-                    f_D = mdl.get_property_value(mdl.prop(item_handle, "f_D"))
-                    V_D = mdl.get_property_value(mdl.prop(item_handle, "V_D"))
-                    T_m = mdl.get_property_value(mdl.prop(item_handle, "T_m"))
-                    
-                    
-                    Tfast = Ts
-                    V_DQ = V_ABC*np.sqrt(2)
-                    I_DQ = S/V_DQ
-                    mP = w_0*(f_D/100)
-                    nQ = V_DQ*(V_D/100)
-                    D_f = 1/mP
-                    D_V = 1/nQ
                 ENDCODE
             }
         }
         [
-            position = 6656, 8152
+            position = 6672, 8152
             size = 168, 112
+        ]
+
+        component sys_hil_marker "Device Marker1" {
+            hw_configuration_id = "2"
+            override_hw_settings = "True"
+        }
+        [
+            position = 6760, 7920
         ]
 
         tag V_d_a {
@@ -8321,6 +7740,11 @@ else
             position = 7168, 8296
         ]
 
+        junction Junction66 pe
+        [
+            position = 6760, 7960
+        ]
+
         connect V_q_a Va_G.in as Connection312
         connect V_d_a Vb_G.in as Connection313
         connect V_d_a2 Vc_G.in as Connection314
@@ -8357,17 +7781,22 @@ else
         ]
         connect Junction64 Junction63 as Connection828
         connect Vb_G.n_node Junction64 as Connection829
-        connect Pref.out "Grid forming inverter (averaged).setpoint_P" as Connection853
-        connect Qref.out "Grid forming inverter (averaged).setpoint_Q" as Connection854
-        connect "Constant Impedance Load1.N" Junction65 as Connection855
-        connect Junction65 Junction63 as Connection856
+        connect Pref.out "Grid forming inverter (averaged).setpoint_P" as Connection862
+        connect Qref.out "Grid forming inverter (averaged).setpoint_Q" as Connection863
+        connect Junction63 Junction65 as Connection864
         [
-            breakpoints = 7168, 8296; 7168, 8296; 7168, 8296; 7168, 8296; 7608, 8296
+            breakpoints = 7608, 8296; 7608, 8296
         ]
-        connect "Grid forming inverter (averaged).Ground" Junction65 as Connection857
-        connect "Grid forming inverter (averaged).Va" RL1.P2 as Connection858
-        connect "Grid forming inverter (averaged).Vb" RL1.P4 as Connection859
-        connect "Grid forming inverter (averaged).Vc" RL1.P6 as Connection860
+        connect Junction65 "Constant Impedance Load1.N" as Connection865
+        [
+            breakpoints = 7168, 8296; 7168, 8296; 7168, 8296; 7168, 8296; 7168, 8296
+        ]
+        connect "Grid forming inverter (averaged).Ground" Junction65 as Connection866
+        connect "Grid forming inverter (averaged).Vb" RL1.P4 as Connection868
+        connect "Grid forming inverter (averaged).Vc" RL1.P6 as Connection869
+        connect "Grid forming inverter (averaged).Va" Junction66 as Connection870
+        connect Junction66 RL1.P2 as Connection871
+        connect "Device Marker1.node" Junction66 as Connection872
     }
 
     default {
@@ -8557,6 +7986,30 @@ else
             execution_rate = "100e-6"
         }
 
+        sys_hil_marker {
+            hil_device_id = "0"
+            override_hw_settings = "False"
+            hw_configuration_id = "1"
+            override_sim_settings = "False"
+            simulation_method = "exact"
+            simulation_time_step = "auto"
+            ss_calc_method = "systematic elimination"
+            enb_pole_shift = "True"
+            enb_gds_oversampling = "True"
+            show_modes = "False"
+            cpl_stb = "False"
+            cpl_dynamics_analysis = "False"
+            enb_dep_sw_detect = "False"
+            override_user_sp_settings = "False"
+            user_cpu_optimization = "high"
+            code_section = "Internal Memory"
+            data_section = "Internal Memory"
+            override_sys_sp_settings = "False"
+            sys_cpu_optimization = "high"
+            sys_sp_rate_1 = "100e-6"
+            sys_sp_rate_2 = "50e-3"
+        }
+
         sys_signal_switch {
             criterion = "ctrl >= threshold"
             threshold = "0"
@@ -8641,49 +8094,6 @@ else
             execution_rate = "inherit"
         }
 
-        "core/Three Phase Two Winding Transformer" {
-            input = "SC and OC tests"
-            core_sat = "False"
-            Sn = "160000.0"
-            f = "50.0"
-            V1 = "10000.0"
-            V2 = "400.0"
-            usc1 = "4.0"
-            Psc1 = "2350.0"
-            ioc1 = "0.7"
-            Poc1 = "460.0"
-            R1 = "4.58984375"
-            L1 = ".0370093710364"
-            R2 = ".00734375"
-            L2 = "5.92149936583e-05"
-            Rm = "217391.304348"
-            Lm = "311.709196788"
-            flux_vals_SI = "[1910.3, 2419.7]"
-            current_vals_SI = "[0.66653, 277.72]"
-            r1 = ".00734375"
-            l1 = ".0186029389059"
-            r2 = ".00734375"
-            l2 = ".0186029389059"
-            rm = "347.826086957"
-            lm = "156.68213163"
-            flux_vals_pu = "[1.2, 1.52]"
-            current_vals_pu = "[0.0024, 1]"
-            flux_vals_SCOC = "[1.2, 1.52]"
-            current_vals_SCOC = "[0.0024, 1]"
-            import_from_SI2SCOC = "Import from SI"
-            import_from_pu2SCOC = "Import from PU"
-            import_from_SCOC2SI = "Import from SC OC"
-            import_from_pu2SI = "Import from PU"
-            import_from_SCOC2pu = "Import from SC OC"
-            import_from_SI2pu = "Import from SI"
-            winding_1_connection = "Y"
-            winding_2_connection = "Y"
-            clock_number = "0"
-            embedded_cpl = "false"
-            coupling_type = "core"
-            Rshunt = "inf"
-        }
-
         "core/Triple Pole Single Throw Contactor" {
             ctrl_src = "Digital input"
             Sa = "1"
@@ -8740,6 +8150,7 @@ else
         # The Schematic API is imported as 'mdl'
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
-        Ts = 20e-6
+        Ts = 1e-3
+        Ts_gen = 40e-6
     ENDCODE
 }
