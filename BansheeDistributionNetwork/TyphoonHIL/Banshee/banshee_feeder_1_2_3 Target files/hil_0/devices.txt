@@ -1,7 +1,7 @@
-yCKa0ilvIeK0y6TXBrEu9DBoNFE3Dn4WX6E2ZxN5oDAPfFEQyR8bzHsqxFTAC2Nu6bTEhFr8BgswBY4jcFzTHw==
+7rl4TioUIIWHHDLMHyRQ3B/pUMgeavRhJBFY75kqhIz+mdBXfPjhe3GKjq5vYQPnPDpXH1IaEUQI3Roz4W3WKw==
 {
-  "compilation_timestamp": "2020-07-19 10:55:13",
-  "sw_version": "2020.1 SP2",
+  "compilation_timestamp": "2020-07-30 13:12:18",
+  "sw_version": "2020.2",
   "devices": [
     {
       "device_type": "HIL402",
@@ -46,9 +46,20 @@ yCKa0ilvIeK0y6TXBrEu9DBoNFE3Dn4WX6E2ZxN5oDAPfFEQyR8bzHsqxFTAC2Nu6bTEhFr8BgswBY4j
       "supported": true,
       "not_supported_reason": null,
       "toolboxes": []
+    },
+    {
+      "device_type": "HIL603",
+      "hw_id": "cfed15b1ca37929293f610979e550d63528d528a67f31ee148c678b965e79c53",
+      "activation_key": "ZIH40-56JPW-3TBNE-QVRFS-A6D97",
+      "serial_no": "00603-00-00017",
+      "license_expiry": "2119-07-23",
+      "maintenance_expiry": null,
+      "supported": true,
+      "not_supported_reason": null,
+      "toolboxes": []
     }
   ]
 }
 -----BEGIN SIGNATURE-----
-XEBsOg1uLggEFBeYXe/BqNvP/11VuA+uaGNNBJPxo+Q9Q8Kigl9Fd3V+0DU4SYJ/np+AqjftsEtuwaz1v5X+u132F8KHD4IHBnSD2t63xgSsU4Ew2WuisgolLl5S7qeEgTr1H9yZwDW4kgJEK9dCnnS6d8EjzQuuG6JEpL2NAPTX2McNRuPx7t19spMCNtZ1EHxgUtr2oZQWe8VZFwg2oZCo7z3aRarHRl/WYiSmZClTz3xFFeHgy6Ktmtf5oPZClkOzGO0FZFXGndCz+cbyYJrdsFF+1i+zkpaaqRRVkF8r4t29m/hKSCXVEAuj4HmF4aPv0HW0hXcy9nLlXfXYhA==
+eBMq2HHR9jwu1K1hc+69cefTSauOdy7vGF84enaIARaOHRBi23xk18yAdjfj5okCD2eHNeRcOzgW5M6pxc6mvco8kddlE183j8nVL2sCeiKuqOAFmlK07KJYLIb9oZ8Dvzval5AsJTEDI9PcA7Fa6I0PabhUXDrS5+nkeR8XYX/VLnsfJURFiRVspHTRFaNBdonh3I1dm1g19T6/yjXV5bIX6ZKCByxfm5WXmqV69SEViy3ap3dCq/knnb6ttBa4a3HaNONpwBqnSAvw5iFeb5vAi9N7d78SVpJCSFYgj8KD+a1+k7npjqVjTcWL6MfDVYcYWqcMQ5Oot49lSg+Yuw==
 -----END SIGNATURE-----

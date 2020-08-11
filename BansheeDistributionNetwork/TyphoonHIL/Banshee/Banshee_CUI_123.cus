@@ -103,8 +103,8 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1776</x>
-                    <y>0</y>
+                    <x>1776.0</x>
+                    <y>0.0</y>
                     <width>480</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -178,16 +178,16 @@ referenceCurves = [refCurveData1]
                 <name><![CDATA[Image component]]></name>
                 <type>Image</type>
                 <description><![CDATA[]]></description>
-                <image><![CDATA[bansheeFeeder_123.png]]></image>
+                <image><![CDATA[Single_Line_Diagram_LL2017.png]]></image>
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>0.0</y>
+                    <x>0</x>
+                    <y>0</y>
                     <width>3450</width>
                     <height>1150</height>
                     <background_color><![CDATA[#8f8f8f]]></background_color>
-                    <background_type><![CDATA[Filled]]></background_type>
+                    <background_type><![CDATA[Transparent]]></background_type>
                     <is_background>True</is_background>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
@@ -654,8 +654,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>848</x>
-                    <y>512</y>
+                    <x>848.0</x>
+                    <y>512.0</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2729,8 +2729,8 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>536</x>
-                    <y>0</y>
+                    <x>536.0</x>
+                    <y>0.0</y>
                     <width>480</width>
                     <height>168</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3036,8 +3036,8 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2456</x>
-                    <y>0</y>
+                    <x>2456.0</x>
+                    <y>0.0</y>
                     <width>496</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3694,8 +3694,8 @@ hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]
 hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_stop_code>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>80</x>
-                    <y>80</y>
+                    <x>80.0</x>
+                    <y>80.0</y>
                     <width>96</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3817,8 +3817,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>400</y>
+                    <x>0.0</x>
+                    <y>400.0</y>
                     <width>376</width>
                     <height>272</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4315,8 +4315,8 @@ widgetValue = None
                 <unit><![CDATA[W]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>152</x>
-                    <y>80</y>
+                    <x>152.0</x>
+                    <y>80.0</y>
                     <width>128</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -4676,8 +4676,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>64</x>
-                    <y>192</y>
+                    <x>64.0</x>
+                    <y>192.0</y>
                     <width>280</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -5474,8 +5474,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>408</y>
+                    <x>0.0</x>
+                    <y>408.0</y>
                     <width>416</width>
                     <height>248</height>
                     <appearance><![CDATA[Flat]]></appearance>
