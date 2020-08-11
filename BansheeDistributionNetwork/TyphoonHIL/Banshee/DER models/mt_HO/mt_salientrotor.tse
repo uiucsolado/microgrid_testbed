@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 21-Jul-2020 @ 02:51:18 PM
+// Save timestamp: 11-Aug-2020 @ 02:53:28 PM
 //
 
 model "mt_salientrotor" {
@@ -1169,724 +1169,6 @@ else
                 hide_name = True
             ]
 
-            component Subsystem Governor {
-                layout = dynamic
-                component gen_gain Gain36 {
-                    gain = "1/T1"
-                }
-                [
-                    position = 8248, 8160
-                    hide_name = True
-                ]
-
-                component gen_sum Sum10 {
-                    signs = "++"
-                }
-                [
-                    position = 8160, 8248
-                    hide_name = True
-                ]
-
-                component gen_gain Gain30 {
-                    gain = "1/T1"
-                }
-                [
-                    position = 8320, 8248
-                    hide_name = True
-                ]
-
-                component gen_integrator Integrator12 {
-                }
-                [
-                    position = 8680, 8456
-                    hide_name = True
-                ]
-
-                component gen_gain Gain28 {
-                    gain = "pms/w_0"
-                }
-                [
-                    position = 7800, 8376
-                    hide_name = True
-                ]
-
-                component Subsystem "Exciter Activation" {
-                    layout = dynamic
-                    component gen_abs Abs1 {
-                    }
-                    [
-                        position = 8192, 8208
-                        hide_name = True
-                    ]
-
-                    component gen_comparator Comparator1 {
-                    }
-                    [
-                        position = 8264, 8232
-                        hide_name = True
-                        scale = 1, -1
-                    ]
-
-                    component src_constant Constant1 {
-                        execution_rate = "Ts"
-                        value = "4*maxw_slip"
-                    }
-                    [
-                        position = 8192, 8256
-                        hide_name = True
-                    ]
-
-                    component gen_probe "speed difference" {
-                    }
-                    [
-                        position = 8096, 8144
-                    ]
-
-                    component gen_c_function "Activate Exciter" {
-                        in_terminal_dimensions = "inherit"
-                        in_terminal_dimensions_str = "boolean inherit"
-                        in_terminal_labels = "[(\'boolean\', True)]"
-                        in_terminal_properties = "inherit boolean;"
-                        init_fnc = "/*Begin code section*/
-Activate = 0;
-/*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "Activate inherit"
-                        out_terminal_labels = "[(\'Activate\', True)]"
-                        out_terminal_properties = "int Activate;"
-                        output_fnc = "/*Begin code section*/
-if(boolean==1){
-    Activate = 1;
-}
-/*End code section*/"
-                    }
-                    [
-                        position = 8360, 8232
-                        size = 112, 48
-                    ]
-
-                    component gen_sum Sum1 {
-                        signs = "+-"
-                    }
-                    [
-                        position = 8008, 8144
-                        hide_name = True
-                    ]
-
-                    component src_constant Constant2 {
-                        execution_rate = "Ts"
-                    }
-                    [
-                        position = 7936, 8120
-                        hide_name = True
-                    ]
-
-                    port w_PU {
-                        label = "w_PU"
-                        position = left:1
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7936, 8168
-                    ]
-
-                    port "exciter state" {
-                        position = auto:auto
-                        kind = sp
-                        direction =  in
-                        sp_type {
-                            default = inherit
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 8480, 8232
-                    ]
-
-                    junction Junction14 sp
-                    [
-                        position = 8048, 8144
-                    ]
-
-                    connect Abs1.out Comparator1.in2 as Connection105
-                    connect Constant1.out Comparator1.in1 as Connection18
-                    connect w_PU Sum1.in1 as Connection199
-                    connect "speed difference.in" Junction14 as Connection195
-                    connect Junction14 Sum1.out as Connection196
-                    connect Abs1.in Junction14 as Connection197
-                    connect Constant2.out Sum1.in as Connection201
-                    connect Comparator1.out "Activate Exciter.boolean" as Connection206
-                    connect "Activate Exciter.Activate" "exciter state" as Connection207
-                }
-                [
-                    position = 7912, 8376
-                    size = 112, 48
-                ]
-
-                component gen_sum Sum7 {
-                    signs = "+-"
-                }
-                [
-                    position = 7896, 8320
-                    hide_name = True
-                ]
-
-                component gen_sum Sum2 {
-                    signs = "+-"
-                }
-                [
-                    position = 7896, 8224
-                    hide_name = True
-                ]
-
-                component gen_gain Gain29 {
-                    gain = "R_D"
-                }
-                [
-                    position = 7992, 8224
-                    hide_name = True
-                ]
-
-                component gen_sum Sum3 {
-                    signs = "-+"
-                }
-                [
-                    position = 8376, 8240
-                    hide_name = True
-                ]
-
-                component gen_gain Gain31 {
-                    gain = "T3"
-                }
-                [
-                    position = 7992, 8048
-                    hide_name = True
-                ]
-
-                component gen_sum Sum4 {
-                }
-                [
-                    position = 8072, 7992
-                    hide_name = True
-                ]
-
-                component gen_gain Gain32 {
-                    gain = "K*gov_Kp"
-                }
-                [
-                    position = 8176, 7992
-                    hide_name = True
-                ]
-
-                component gen_sum Sum5 {
-                    signs = "+-"
-                }
-                [
-                    position = 8288, 7976
-                    hide_name = True
-                ]
-
-                component gen_gain Gain33 {
-                    gain = "1/(T5+T6)"
-                }
-                [
-                    position = 8408, 7976
-                    hide_name = True
-                ]
-
-                component gen_sum Sum8 {
-                    signs = "--"
-                }
-                [
-                    position = 8512, 7952
-                    hide_name = True
-                ]
-
-                component gen_gain Gain34 {
-                    gain = "(T5+T6)/(T5*T6)"
-                }
-                [
-                    position = 8608, 7952
-                    hide_name = True
-                ]
-
-                component gen_gain Gain35 {
-                    gain = "T4"
-                }
-                [
-                    position = 7992, 7784
-                    hide_name = True
-                ]
-
-                component gen_sum Sum9 {
-                }
-                [
-                    position = 8064, 7760
-                    hide_name = True
-                ]
-
-                component gen_integrator Integrator9 {
-                }
-                [
-                    position = 8680, 8376
-                    hide_name = True
-                ]
-
-                component gen_integrator Integrator10 {
-                }
-                [
-                    position = 8696, 7952
-                    hide_name = True
-                ]
-
-                component gen_integrator Integrator11 {
-                }
-                [
-                    position = 8288, 7760
-                    hide_name = True
-                ]
-
-                component src_scada_input AGC {
-                    execution_rate = "Ts"
-                    max = "S"
-                    min = "-S"
-                    unit = "W"
-                }
-                [
-                    position = 7680, 8232
-                ]
-
-                component gen_probe P_b2 {
-                }
-                [
-                    position = 8568, 8480
-                    scale = -1, 1
-                ]
-
-                component gen_probe P_a2 {
-                }
-                [
-                    position = 8568, 8400
-                    scale = -1, 1
-                ]
-
-                component gen_probe P_a1 {
-                }
-                [
-                    position = 8776, 8400
-                ]
-
-                component gen_probe P_b1 {
-                }
-                [
-                    position = 8776, 8480
-                ]
-
-                component gen_probe P_sv {
-                }
-                [
-                    position = 8800, 7816
-                ]
-
-                component gen_probe frequency_diff {
-                }
-                [
-                    position = 8376, 8320
-                ]
-
-                component src_constant "AGC offset" {
-                    execution_rate = "Ts"
-                    value = "18345.5+400.3"
-                }
-                [
-                    position = 7688, 8168
-                ]
-
-                component gen_sum Sum11 {
-                    signs = "++"
-                }
-                [
-                    position = 7760, 8200
-                    hide_name = True
-                ]
-
-                component gen_rate_limiter "Rate Limiter2" {
-                    falling_limit = "inner_w_fall"
-                    rising_limit = "inner_w_rise"
-                }
-                [
-                    position = 8016, 8320
-                    hide_name = True
-                ]
-
-                component gen_gain Gain37 {
-                    gain = "1/S"
-                }
-                [
-                    position = 7816, 8200
-                    hide_name = True
-                ]
-
-                port w_ref {
-                    position = left:1
-                    kind = sp
-                    direction =  out
-                    sp_type {
-                        default = auto
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7728, 8312
-                ]
-
-                port w_m3 {
-                    label = "w_m"
-                    position = left:2
-                    kind = sp
-                    direction =  out
-                    sp_type {
-                        default = auto
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7728, 8376
-                ]
-
-                port P_SV {
-                    position = auto:auto
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 8800, 7760
-                ]
-
-                port "exciter state" {
-                    label = "exc ON/OFF"
-                    position = bottom:auto
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 8016, 8376
-                ]
-
-                tag From13 {
-                    value = "P_b2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8568, 8456
-                    hide_name = True
-                ]
-
-                tag Goto6 {
-                    value = "P_b1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8776, 8456
-                    hide_name = True
-                ]
-
-                tag From1 {
-                    value = "P_SV"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 7800, 8248
-                    hide_name = True
-                    size = 54, 20
-                ]
-
-                tag From3 {
-                    value = "P_b1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8160, 8160
-                    hide_name = True
-                ]
-
-                tag Goto1 {
-                    value = "P_b2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8648, 8240
-                    hide_name = True
-                ]
-
-                tag From5 {
-                    value = "P_a2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8568, 8376
-                    hide_name = True
-                ]
-
-                tag Goto2 {
-                    value = "P_a1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8776, 8376
-                    hide_name = True
-                ]
-
-                tag From6 {
-                    value = "P_b2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 7888, 8048
-                    hide_name = True
-                ]
-
-                tag From7 {
-                    value = "P_b1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 7888, 7944
-                    hide_name = True
-                ]
-
-                tag From8 {
-                    value = "P_a1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 7928
-                    hide_name = True
-                ]
-
-                tag From9 {
-                    value = "P_a2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8400, 7928
-                    hide_name = True
-                ]
-
-                tag Goto4 {
-                    value = "P_a2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8800, 7952
-                    hide_name = True
-                ]
-
-                tag From10 {
-                    value = "P_a2"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 7888, 7784
-                    hide_name = True
-                ]
-
-                tag From11 {
-                    value = "P_a1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 7888, 7736
-                    hide_name = True
-                ]
-
-                tag Goto5 {
-                    value = "P_SV"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8400, 7848
-                    hide_name = True
-                ]
-
-                junction Junction3 sp
-                [
-                    position = 7832, 8376
-                ]
-
-                junction Junction4 sp
-                [
-                    position = 8352, 7760
-                ]
-
-                junction Junction5 sp
-                [
-                    position = 8624, 8456
-                ]
-
-                junction Junction6 sp
-                [
-                    position = 8624, 8376
-                ]
-
-                junction Junction7 sp
-                [
-                    position = 8728, 8376
-                ]
-
-                junction Junction8 sp
-                [
-                    position = 8728, 8456
-                ]
-
-                junction Junction9 sp
-                [
-                    position = 8728, 7760
-                ]
-
-                junction Junction10 sp
-                [
-                    position = 8120, 8320
-                ]
-
-                connect From3 Gain36.in as Connection748
-                connect Gain36.out Sum3.in as Connection749
-                connect Gain30.out Sum3.in1 as Connection752
-                connect Gain28.in w_m3 as Connection7
-                connect Sum2.out Gain29.in as Connection207
-                [
-                    breakpoints = 7944, 8224
-                ]
-                connect From6 Gain31.in as Connection19
-                connect From7 Sum4.in as Connection21
-                connect Gain31.out Sum4.in1 as Connection22
-                connect Sum4.out Gain32.in as Connection23
-                connect Gain32.out Sum5.in1 as Connection24
-                connect From8 Sum5.in as Connection742
-                connect Sum5.out Gain33.in as Connection26
-                connect Gain33.out Sum8.in1 as Connection27
-                connect From9 Sum8.in as Connection28
-                connect Sum8.out Gain34.in as Connection29
-                connect Gain35.in From10 as Connection33
-                connect Gain35.out Sum9.in1 as Connection743
-                connect Sum9.in From11 as Connection744
-                [
-                    breakpoints = 8024, 7736; 7936, 7736
-                ]
-                connect Integrator10.out Goto4 as Connection222
-                connect Gain34.out Integrator10.in as Connection223
-                connect Sum9.out Integrator11.in as Connection226
-                connect Sum3.out Goto1 as Connection788
-                connect Gain28.out Junction3 as Connection799
-                connect Junction3 Sum7.in1 as Connection800
-                [
-                    breakpoints = 7832, 8376; 7832, 8344
-                ]
-                connect "Exciter Activation.w_PU" Junction3 as Connection801
-                connect Integrator11.out Junction4 as Connection821
-                connect Junction4 Goto5 as Connection822
-                [
-                    breakpoints = 8352, 7760
-                ]
-                connect From13 Junction5 as Connection824
-                connect Junction5 Integrator12.in as Connection825
-                connect P_b2.in Junction5 as Connection826
-                connect From5 Junction6 as Connection827
-                connect Junction6 Integrator9.in as Connection828
-                connect P_a2.in Junction6 as Connection829
-                connect Integrator9.out Junction7 as Connection830
-                connect Junction7 Goto2 as Connection831
-                connect P_a1.in Junction7 as Connection832
-                connect Integrator12.out Junction8 as Connection833
-                connect Junction8 Goto6 as Connection834
-                connect P_b1.in Junction8 as Connection835
-                connect P_SV Junction9 as Connection836
-                connect Junction9 Junction4 as Connection837
-                connect P_sv.in Junction9 as Connection838
-                connect Junction10 Sum10.in1 as Connection842
-                connect frequency_diff.in Junction10 as Connection843
-                connect "AGC offset.out" Sum11.in as Connection846
-                connect From1 Sum2.in1 as Connection849
-                connect w_ref Sum7.in as Connection853
-                connect Sum7.out "Rate Limiter2.in" as Connection854
-                connect "Rate Limiter2.out" Junction10 as Connection855
-                connect Gain30.in Sum10.out as Connection856
-                connect Gain29.out Sum10.in as Connection857
-                connect AGC.out Sum11.in1 as Connection858
-                connect Sum11.out Gain37.in as Connection859
-                connect Gain37.out Sum2.in as Connection860
-                connect "Exciter Activation.exciter state" "exciter state" as Connection861
-
-                mask {
-                    description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DEGOV1 model</p></body></html>"
-
-                    CODE open
-                        from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
-                    
-                        dialog = RegularComponentPropertiesDialog(
-                            component=component,
-                            property_container=component.masks[-1],
-                            current_diagram=current_diagram
-                        )
-                        dialog.exec_()
-                        
-                    ENDCODE
-
-                    CODE define_icon
-                        mdl.disp_component_icon_text(item_handle, "DEGOV1")
-                    ENDCODE
-                }
-            }
-            [
-                position = 6744, 8048
-                size = 144, 136
-            ]
-
             component src_scada_input wref {
                 def_value = "1"
                 execution_rate = "Ts"
@@ -2737,7 +2019,7 @@ if(boolean==1){
                 scale = -1, 1
             ]
 
-            component Subsystem "Synchonous Machine" {
+            component Subsystem "Synchronous Machine" {
                 layout = dynamic
                 component gen_gain Gain1 {
                     gain = "pms"
@@ -8005,6 +7287,1124 @@ out = in - (6.283185307179586*floor_in);
                 size = 112, 144
             ]
 
+            component Subsystem GovernorX {
+                layout = dynamic
+                component gen_sum Sum10 {
+                    signs = "++"
+                }
+                [
+                    position = 8160, 8248
+                    hide_name = True
+                ]
+
+                component gen_gain Gain28 {
+                    gain = "pms/w_0"
+                }
+                [
+                    position = 7800, 8376
+                    hide_name = True
+                ]
+
+                component Subsystem "Exciter Activation" {
+                    layout = dynamic
+                    component gen_abs Abs1 {
+                    }
+                    [
+                        position = 8192, 8208
+                        hide_name = True
+                    ]
+
+                    component gen_comparator Comparator1 {
+                    }
+                    [
+                        position = 8264, 8232
+                        hide_name = True
+                        scale = 1, -1
+                    ]
+
+                    component src_constant Constant1 {
+                        execution_rate = "Ts"
+                        value = "4*maxw_slip"
+                    }
+                    [
+                        position = 8192, 8256
+                        hide_name = True
+                    ]
+
+                    component gen_probe "speed difference" {
+                    }
+                    [
+                        position = 8096, 8144
+                    ]
+
+                    component gen_c_function "Activate Exciter" {
+                        in_terminal_dimensions = "inherit"
+                        in_terminal_dimensions_str = "boolean inherit"
+                        in_terminal_labels = "[(\'boolean\', True)]"
+                        in_terminal_properties = "inherit boolean;"
+                        init_fnc = "/*Begin code section*/
+Activate = 0;
+/*End code section*/"
+                        no_feed_inputs = "[\'\']"
+                        no_feed_outputs = "[\'\']"
+                        out_terminal_dimensions = "inherit"
+                        out_terminal_dimensions_str = "Activate inherit"
+                        out_terminal_labels = "[(\'Activate\', True)]"
+                        out_terminal_properties = "int Activate;"
+                        output_fnc = "/*Begin code section*/
+if(boolean==1){
+    Activate = 1;
+}
+/*End code section*/"
+                    }
+                    [
+                        position = 8360, 8232
+                        size = 112, 48
+                    ]
+
+                    component gen_sum Sum1 {
+                        signs = "+-"
+                    }
+                    [
+                        position = 8008, 8144
+                        hide_name = True
+                    ]
+
+                    component src_constant Constant2 {
+                        execution_rate = "Ts"
+                    }
+                    [
+                        position = 7936, 8120
+                        hide_name = True
+                    ]
+
+                    port w_PU {
+                        label = "w_PU"
+                        position = left:1
+                        kind = sp
+                        direction =  out
+                        sp_type {
+                            default = auto
+                            readonly = True
+                        }
+                    }
+                    [
+                        position = 7936, 8168
+                    ]
+
+                    port "exciter state" {
+                        position = auto:auto
+                        kind = sp
+                        direction =  in
+                        sp_type {
+                            default = inherit
+                            readonly = True
+                        }
+                    }
+                    [
+                        position = 8480, 8232
+                    ]
+
+                    junction Junction14 sp
+                    [
+                        position = 8048, 8144
+                    ]
+
+                    connect Abs1.out Comparator1.in2 as Connection105
+                    connect Constant1.out Comparator1.in1 as Connection18
+                    connect w_PU Sum1.in1 as Connection199
+                    connect "speed difference.in" Junction14 as Connection195
+                    connect Junction14 Sum1.out as Connection196
+                    connect Abs1.in Junction14 as Connection197
+                    connect Constant2.out Sum1.in as Connection201
+                    connect Comparator1.out "Activate Exciter.boolean" as Connection206
+                    connect "Activate Exciter.Activate" "exciter state" as Connection207
+                }
+                [
+                    position = 7912, 8376
+                    size = 112, 48
+                ]
+
+                component gen_sum Sum7 {
+                    signs = "+-"
+                }
+                [
+                    position = 7896, 8320
+                    hide_name = True
+                ]
+
+                component gen_sum Sum2 {
+                    signs = "+-"
+                }
+                [
+                    position = 7896, 8224
+                    hide_name = True
+                ]
+
+                component gen_gain Gain29 {
+                    gain = "R_D"
+                }
+                [
+                    position = 7992, 8224
+                    hide_name = True
+                ]
+
+                component src_scada_input AGC {
+                    execution_rate = "Ts"
+                    max = "S"
+                    min = "-S"
+                    unit = "W"
+                }
+                [
+                    position = 7680, 8232
+                ]
+
+                component gen_probe P_sv {
+                }
+                [
+                    position = 8592, 8288
+                ]
+
+                component gen_probe frequency_diff {
+                }
+                [
+                    position = 8376, 8320
+                ]
+
+                component src_constant "AGC offset" {
+                    execution_rate = "Ts"
+                    value = "18345.5+400.3"
+                }
+                [
+                    position = 7688, 8168
+                ]
+
+                component gen_sum Sum11 {
+                    signs = "++"
+                }
+                [
+                    position = 7760, 8200
+                    hide_name = True
+                ]
+
+                component gen_rate_limiter "Rate Limiter2" {
+                    falling_limit = "inner_w_fall"
+                    rising_limit = "inner_w_rise"
+                }
+                [
+                    position = 8016, 8320
+                    hide_name = True
+                ]
+
+                component gen_gain Gain37 {
+                    gain = "1/S"
+                }
+                [
+                    position = 7816, 8200
+                    hide_name = True
+                ]
+
+                component gen_gain Gain2 {
+                    gain = "gov_Kp"
+                }
+                [
+                    position = 8288, 8248
+                    hide_name = True
+                ]
+
+                component gen_gain Gain3 {
+                    gain = "K"
+                }
+                [
+                    position = 8336, 8248
+                    hide_name = True
+                ]
+
+                component gen_z_domain_transfer "Discrete Transfer Function2" {
+                    a_coeff = "[T5*T6, (T5+T6), 1]"
+                    b_coeff = "[T4, 1]"
+                    domain = "S-domain"
+                    method = "Bilinear"
+                }
+                [
+                    position = 8384, 8248
+                    hide_name = True
+                ]
+
+                component gen_integrator Integrator1 {
+                }
+                [
+                    position = 8448, 8248
+                    hide_name = True
+                ]
+
+                component gen_z_domain_transfer "Discrete Transfer Function1" {
+                    a_coeff = "[T1*T2, T1, 1]"
+                    b_coeff = "[T3, 1]"
+                    domain = "S-domain"
+                    method = "Bilinear"
+                }
+                [
+                    position = 8240, 8248
+                    hide_name = True
+                ]
+
+                port w_ref {
+                    position = left:1
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7728, 8312
+                ]
+
+                port w_m3 {
+                    label = "w_m"
+                    position = left:2
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7728, 8376
+                ]
+
+                port P_SV {
+                    position = auto:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8592, 8232
+                ]
+
+                port "exciter state" {
+                    label = "exc ON/OFF"
+                    position = bottom:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8016, 8376
+                ]
+
+                tag From1 {
+                    value = "P_SV"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 7800, 8248
+                    hide_name = True
+                    size = 54, 20
+                ]
+
+                junction Junction3 sp
+                [
+                    position = 7832, 8376
+                ]
+
+                junction Junction10 sp
+                [
+                    position = 8120, 8320
+                ]
+
+                junction Junction11 sp
+                [
+                    position = 8560, 8248
+                ]
+
+                connect Gain28.in w_m3 as Connection7
+                connect Sum2.out Gain29.in as Connection207
+                [
+                    breakpoints = 7944, 8224
+                ]
+                connect Gain28.out Junction3 as Connection799
+                connect Junction3 Sum7.in1 as Connection800
+                [
+                    breakpoints = 7832, 8376; 7832, 8344
+                ]
+                connect "Exciter Activation.w_PU" Junction3 as Connection801
+                connect Junction10 Sum10.in1 as Connection842
+                connect frequency_diff.in Junction10 as Connection843
+                connect "AGC offset.out" Sum11.in as Connection846
+                connect From1 Sum2.in1 as Connection849
+                connect w_ref Sum7.in as Connection853
+                connect Sum7.out "Rate Limiter2.in" as Connection854
+                connect "Rate Limiter2.out" Junction10 as Connection855
+                connect Gain29.out Sum10.in as Connection857
+                connect AGC.out Sum11.in1 as Connection858
+                connect Sum11.out Gain37.in as Connection859
+                connect Gain37.out Sum2.in as Connection860
+                connect "Exciter Activation.exciter state" "exciter state" as Connection861
+                connect "Discrete Transfer Function1.out" Gain2.in as Connection3
+                connect "Discrete Transfer Function2.in" Gain3.out as Connection5
+                connect Gain2.out Gain3.in as Connection4
+                connect Integrator1.in "Discrete Transfer Function2.out" as Connection6
+                connect "Discrete Transfer Function1.in" Sum10.out as Connection862
+                connect Integrator1.out Junction11 as Connection864
+                connect Junction11 P_sv.in as Connection865
+                connect P_SV Junction11 as Connection866
+
+                mask {
+                    description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DEGOV1 model</p></body></html>"
+
+                    CODE open
+                        from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
+                    
+                        dialog = RegularComponentPropertiesDialog(
+                            component=component,
+                            property_container=component.masks[-1],
+                            current_diagram=current_diagram
+                        )
+                        dialog.exec_()
+                        
+                    ENDCODE
+
+                    CODE define_icon
+                        mdl.disp_component_icon_text(item_handle, "DEGOV1")
+                    ENDCODE
+                }
+            }
+            [
+                position = 6760, 8048
+                size = 144, 136
+            ]
+
+            component Subsystem Governor {
+                layout = dynamic
+                component gen_gain Gain36 {
+                    gain = "1/T1"
+                }
+                [
+                    position = 8248, 8160
+                    hide_name = True
+                ]
+
+                component gen_sum Sum10 {
+                    signs = "++"
+                }
+                [
+                    position = 8160, 8248
+                    hide_name = True
+                ]
+
+                component gen_gain Gain30 {
+                    gain = "1/T1"
+                }
+                [
+                    position = 8320, 8248
+                    hide_name = True
+                ]
+
+                component gen_integrator Integrator12 {
+                }
+                [
+                    position = 8680, 8456
+                    hide_name = True
+                ]
+
+                component gen_gain Gain28 {
+                    gain = "pms/w_0"
+                }
+                [
+                    position = 7800, 8376
+                    hide_name = True
+                ]
+
+                component Subsystem "Exciter Activation" {
+                    layout = dynamic
+                    component gen_abs Abs1 {
+                    }
+                    [
+                        position = 8192, 8208
+                        hide_name = True
+                    ]
+
+                    component gen_comparator Comparator1 {
+                    }
+                    [
+                        position = 8264, 8232
+                        hide_name = True
+                        scale = 1, -1
+                    ]
+
+                    component src_constant Constant1 {
+                        execution_rate = "Ts"
+                        value = "4*maxw_slip"
+                    }
+                    [
+                        position = 8192, 8256
+                        hide_name = True
+                    ]
+
+                    component gen_probe "speed difference" {
+                    }
+                    [
+                        position = 8096, 8144
+                    ]
+
+                    component gen_c_function "Activate Exciter" {
+                        in_terminal_dimensions = "inherit"
+                        in_terminal_dimensions_str = "boolean inherit"
+                        in_terminal_labels = "[(\'boolean\', True)]"
+                        in_terminal_properties = "inherit boolean;"
+                        init_fnc = "/*Begin code section*/
+Activate = 0;
+/*End code section*/"
+                        no_feed_inputs = "[\'\']"
+                        no_feed_outputs = "[\'\']"
+                        out_terminal_dimensions = "inherit"
+                        out_terminal_dimensions_str = "Activate inherit"
+                        out_terminal_labels = "[(\'Activate\', True)]"
+                        out_terminal_properties = "int Activate;"
+                        output_fnc = "/*Begin code section*/
+if(boolean==1){
+    Activate = 1;
+}
+/*End code section*/"
+                    }
+                    [
+                        position = 8360, 8232
+                        size = 112, 48
+                    ]
+
+                    component gen_sum Sum1 {
+                        signs = "+-"
+                    }
+                    [
+                        position = 8008, 8144
+                        hide_name = True
+                    ]
+
+                    component src_constant Constant2 {
+                        execution_rate = "Ts"
+                    }
+                    [
+                        position = 7936, 8120
+                        hide_name = True
+                    ]
+
+                    port w_PU {
+                        label = "w_PU"
+                        position = left:1
+                        kind = sp
+                        direction =  out
+                        sp_type {
+                            default = auto
+                            readonly = True
+                        }
+                    }
+                    [
+                        position = 7936, 8168
+                    ]
+
+                    port "exciter state" {
+                        position = auto:auto
+                        kind = sp
+                        direction =  in
+                        sp_type {
+                            default = inherit
+                            readonly = True
+                        }
+                    }
+                    [
+                        position = 8480, 8232
+                    ]
+
+                    junction Junction14 sp
+                    [
+                        position = 8048, 8144
+                    ]
+
+                    connect Abs1.out Comparator1.in2 as Connection105
+                    connect Constant1.out Comparator1.in1 as Connection18
+                    connect w_PU Sum1.in1 as Connection199
+                    connect "speed difference.in" Junction14 as Connection195
+                    connect Junction14 Sum1.out as Connection196
+                    connect Abs1.in Junction14 as Connection197
+                    connect Constant2.out Sum1.in as Connection201
+                    connect Comparator1.out "Activate Exciter.boolean" as Connection206
+                    connect "Activate Exciter.Activate" "exciter state" as Connection207
+                }
+                [
+                    position = 7912, 8376
+                    size = 112, 48
+                ]
+
+                component gen_sum Sum7 {
+                    signs = "+-"
+                }
+                [
+                    position = 7896, 8320
+                    hide_name = True
+                ]
+
+                component gen_sum Sum2 {
+                    signs = "+-"
+                }
+                [
+                    position = 7896, 8224
+                    hide_name = True
+                ]
+
+                component gen_gain Gain29 {
+                    gain = "R_D"
+                }
+                [
+                    position = 7992, 8224
+                    hide_name = True
+                ]
+
+                component gen_sum Sum3 {
+                    signs = "-+"
+                }
+                [
+                    position = 8376, 8240
+                    hide_name = True
+                ]
+
+                component gen_gain Gain31 {
+                    gain = "T3"
+                }
+                [
+                    position = 7992, 8048
+                    hide_name = True
+                ]
+
+                component gen_sum Sum4 {
+                }
+                [
+                    position = 8072, 7992
+                    hide_name = True
+                ]
+
+                component gen_gain Gain32 {
+                    gain = "K*gov_Kp"
+                }
+                [
+                    position = 8176, 7992
+                    hide_name = True
+                ]
+
+                component gen_sum Sum5 {
+                    signs = "+-"
+                }
+                [
+                    position = 8288, 7976
+                    hide_name = True
+                ]
+
+                component gen_gain Gain33 {
+                    gain = "1/(T5+T6)"
+                }
+                [
+                    position = 8408, 7976
+                    hide_name = True
+                ]
+
+                component gen_sum Sum8 {
+                    signs = "--"
+                }
+                [
+                    position = 8512, 7952
+                    hide_name = True
+                ]
+
+                component gen_gain Gain34 {
+                    gain = "(T5+T6)/(T5*T6)"
+                }
+                [
+                    position = 8608, 7952
+                    hide_name = True
+                ]
+
+                component gen_gain Gain35 {
+                    gain = "T4"
+                }
+                [
+                    position = 7992, 7784
+                    hide_name = True
+                ]
+
+                component gen_sum Sum9 {
+                }
+                [
+                    position = 8064, 7760
+                    hide_name = True
+                ]
+
+                component gen_integrator Integrator9 {
+                }
+                [
+                    position = 8680, 8376
+                    hide_name = True
+                ]
+
+                component gen_integrator Integrator10 {
+                }
+                [
+                    position = 8696, 7952
+                    hide_name = True
+                ]
+
+                component gen_integrator Integrator11 {
+                }
+                [
+                    position = 8288, 7760
+                    hide_name = True
+                ]
+
+                component src_scada_input AGC {
+                    execution_rate = "Ts"
+                    max = "S"
+                    min = "-S"
+                    unit = "W"
+                }
+                [
+                    position = 7680, 8232
+                ]
+
+                component gen_probe P_b2 {
+                }
+                [
+                    position = 8568, 8480
+                    scale = -1, 1
+                ]
+
+                component gen_probe P_a2 {
+                }
+                [
+                    position = 8568, 8400
+                    scale = -1, 1
+                ]
+
+                component gen_probe P_a1 {
+                }
+                [
+                    position = 8776, 8400
+                ]
+
+                component gen_probe P_b1 {
+                }
+                [
+                    position = 8776, 8480
+                ]
+
+                component gen_probe P_sv {
+                }
+                [
+                    position = 8800, 7816
+                ]
+
+                component gen_probe frequency_diff {
+                }
+                [
+                    position = 8376, 8320
+                ]
+
+                component src_constant "AGC offset" {
+                    execution_rate = "Ts"
+                    value = "18345.5+400.3"
+                }
+                [
+                    position = 7688, 8168
+                ]
+
+                component gen_sum Sum11 {
+                    signs = "++"
+                }
+                [
+                    position = 7760, 8200
+                    hide_name = True
+                ]
+
+                component gen_rate_limiter "Rate Limiter2" {
+                    falling_limit = "inner_w_fall"
+                    rising_limit = "inner_w_rise"
+                }
+                [
+                    position = 8016, 8320
+                    hide_name = True
+                ]
+
+                component gen_gain Gain37 {
+                    gain = "1/S"
+                }
+                [
+                    position = 7816, 8200
+                    hide_name = True
+                ]
+
+                port w_ref {
+                    position = left:1
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7728, 8312
+                ]
+
+                port w_m3 {
+                    label = "w_m"
+                    position = left:2
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7728, 8376
+                ]
+
+                port P_SV {
+                    position = auto:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8800, 7760
+                ]
+
+                port "exciter state" {
+                    label = "exc ON/OFF"
+                    position = bottom:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8016, 8376
+                ]
+
+                tag From13 {
+                    value = "P_b2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8568, 8456
+                    hide_name = True
+                ]
+
+                tag Goto6 {
+                    value = "P_b1"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8776, 8456
+                    hide_name = True
+                ]
+
+                tag From1 {
+                    value = "P_SV"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 7800, 8248
+                    hide_name = True
+                    size = 54, 20
+                ]
+
+                tag From3 {
+                    value = "P_b1"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8160, 8160
+                    hide_name = True
+                ]
+
+                tag Goto1 {
+                    value = "P_b2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8648, 8240
+                    hide_name = True
+                ]
+
+                tag From5 {
+                    value = "P_a2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8568, 8376
+                    hide_name = True
+                ]
+
+                tag Goto2 {
+                    value = "P_a1"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8776, 8376
+                    hide_name = True
+                ]
+
+                tag From6 {
+                    value = "P_b2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 7888, 8048
+                    hide_name = True
+                ]
+
+                tag From7 {
+                    value = "P_b1"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 7888, 7944
+                    hide_name = True
+                ]
+
+                tag From8 {
+                    value = "P_a1"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 7928
+                    hide_name = True
+                ]
+
+                tag From9 {
+                    value = "P_a2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8400, 7928
+                    hide_name = True
+                ]
+
+                tag Goto4 {
+                    value = "P_a2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8800, 7952
+                    hide_name = True
+                ]
+
+                tag From10 {
+                    value = "P_a2"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 7888, 7784
+                    hide_name = True
+                ]
+
+                tag From11 {
+                    value = "P_a1"
+                    scope = masked_subsystem
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 7888, 7736
+                    hide_name = True
+                ]
+
+                tag Goto5 {
+                    value = "P_SV"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8400, 7848
+                    hide_name = True
+                ]
+
+                junction Junction3 sp
+                [
+                    position = 7832, 8376
+                ]
+
+                junction Junction4 sp
+                [
+                    position = 8352, 7760
+                ]
+
+                junction Junction5 sp
+                [
+                    position = 8624, 8456
+                ]
+
+                junction Junction6 sp
+                [
+                    position = 8624, 8376
+                ]
+
+                junction Junction7 sp
+                [
+                    position = 8728, 8376
+                ]
+
+                junction Junction8 sp
+                [
+                    position = 8728, 8456
+                ]
+
+                junction Junction9 sp
+                [
+                    position = 8728, 7760
+                ]
+
+                junction Junction10 sp
+                [
+                    position = 8120, 8320
+                ]
+
+                connect From3 Gain36.in as Connection748
+                connect Gain36.out Sum3.in as Connection749
+                connect Gain30.out Sum3.in1 as Connection752
+                connect Gain28.in w_m3 as Connection7
+                connect Sum2.out Gain29.in as Connection207
+                [
+                    breakpoints = 7944, 8224
+                ]
+                connect From6 Gain31.in as Connection19
+                connect From7 Sum4.in as Connection21
+                connect Gain31.out Sum4.in1 as Connection22
+                connect Sum4.out Gain32.in as Connection23
+                connect Gain32.out Sum5.in1 as Connection24
+                connect From8 Sum5.in as Connection742
+                connect Sum5.out Gain33.in as Connection26
+                connect Gain33.out Sum8.in1 as Connection27
+                connect From9 Sum8.in as Connection28
+                connect Sum8.out Gain34.in as Connection29
+                connect Gain35.in From10 as Connection33
+                connect Gain35.out Sum9.in1 as Connection743
+                connect Sum9.in From11 as Connection744
+                [
+                    breakpoints = 8024, 7736; 7936, 7736
+                ]
+                connect Integrator10.out Goto4 as Connection222
+                connect Gain34.out Integrator10.in as Connection223
+                connect Sum9.out Integrator11.in as Connection226
+                connect Sum3.out Goto1 as Connection788
+                connect Gain28.out Junction3 as Connection799
+                connect Junction3 Sum7.in1 as Connection800
+                [
+                    breakpoints = 7832, 8376; 7832, 8344
+                ]
+                connect "Exciter Activation.w_PU" Junction3 as Connection801
+                connect Integrator11.out Junction4 as Connection821
+                connect Junction4 Goto5 as Connection822
+                [
+                    breakpoints = 8352, 7760
+                ]
+                connect From13 Junction5 as Connection824
+                connect Junction5 Integrator12.in as Connection825
+                connect P_b2.in Junction5 as Connection826
+                connect From5 Junction6 as Connection827
+                connect Junction6 Integrator9.in as Connection828
+                connect P_a2.in Junction6 as Connection829
+                connect Integrator9.out Junction7 as Connection830
+                connect Junction7 Goto2 as Connection831
+                connect P_a1.in Junction7 as Connection832
+                connect Integrator12.out Junction8 as Connection833
+                connect Junction8 Goto6 as Connection834
+                connect P_b1.in Junction8 as Connection835
+                connect P_SV Junction9 as Connection836
+                connect Junction9 Junction4 as Connection837
+                connect P_sv.in Junction9 as Connection838
+                connect Junction10 Sum10.in1 as Connection842
+                connect frequency_diff.in Junction10 as Connection843
+                connect "AGC offset.out" Sum11.in as Connection846
+                connect From1 Sum2.in1 as Connection849
+                connect w_ref Sum7.in as Connection853
+                connect Sum7.out "Rate Limiter2.in" as Connection854
+                connect "Rate Limiter2.out" Junction10 as Connection855
+                connect Gain30.in Sum10.out as Connection856
+                connect Gain29.out Sum10.in as Connection857
+                connect AGC.out Sum11.in1 as Connection858
+                connect Sum11.out Gain37.in as Connection859
+                connect Gain37.out Sum2.in as Connection860
+                connect "Exciter Activation.exciter state" "exciter state" as Connection861
+
+                mask {
+                    description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DEGOV1 model</p></body></html>"
+
+                    CODE open
+                        from typhoon.apps.schematic_editor.dialogs.component_property_dialogs.general import RegularComponentPropertiesDialog
+                    
+                        dialog = RegularComponentPropertiesDialog(
+                            component=component,
+                            property_container=component.masks[-1],
+                            current_diagram=current_diagram
+                        )
+                        dialog.exec_()
+                        
+                    ENDCODE
+
+                    CODE define_icon
+                        mdl.disp_component_icon_text(item_handle, "DEGOV1")
+                    ENDCODE
+                }
+            }
+            [
+                position = 6760, 7840
+                size = 144, 136
+            ]
+
             port ground {
                 position = bottom:auto
                 kind = pe
@@ -8299,11 +8699,6 @@ out = in - (6.283185307179586*floor_in);
                 position = 6376, 8144
             ]
 
-            junction Junction211 sp
-            [
-                position = 6744, 8160
-            ]
-
             junction Junction212 pe
             [
                 position = 8544, 8512
@@ -8340,17 +8735,14 @@ out = in - (6.283185307179586*floor_in);
             connect Vb_G1.n_node Junction201 as Connection1719
             connect Junction202 Junction201 as Connection1721
             connect Va_G1.n_node Junction202 as Connection1722
-            connect Engine.T_M2 "Synchonous Machine.Torque" as Connection1415
+            connect Engine.T_M2 "Synchronous Machine.Torque" as Connection1415
             connect "|V|.in" Gain17.out as Connection1416
             connect Gain1.out w_e1 as Connection1418
-            connect V_F.n_node "Synchonous Machine.- E_F" as Connection1419
-            connect "Synchonous Machine.Speed (rpm)" Junction78 as Connection1421
+            connect V_F.n_node "Synchronous Machine.- E_F" as Connection1419
+            connect "Synchronous Machine.Speed (rpm)" Junction78 as Connection1421
             connect Junction78 Gain1.in as Connection1422
             connect w_M.in Junction78 as Connection1423
-            connect Governor.w_m3 Gain18.out as Connection1425
             connect Gain18.in w_m2 as Connection1426
-            connect Engine.P_SV Governor.P_SV as Connection742
-            connect Governor.w_ref "|V|4.out" as Connection744
             connect wref.out "|V|4.in" as Connection1327
             connect "|V|3.out" Exciter.E_ref as Connection532
             connect "|V|2" Junction76 as Connection781
@@ -8358,7 +8750,7 @@ out = in - (6.283185307179586*floor_in);
             connect Gain17.in Junction76 as Connection784
             connect Vref.out "|V|3.in" as Connection1329
             connect Exciter.V_F V_F.in as Connection1388
-            connect V_F.p_node "Synchonous Machine.+ E_F" as Connection1410
+            connect V_F.p_node "Synchronous Machine.+ E_F" as Connection1410
             connect "Signal switch2.out" "|V|3.in1" as Connection1774
             connect "Signal switch1.out" "|V|4.in1" as Connection1775
             connect Junction201 Junction203 as Connection1781
@@ -8369,26 +8761,26 @@ out = in - (6.283185307179586*floor_in);
             [
                 breakpoints = 8312, 8512
             ]
-            connect "Synchonous Machine.Ea" Junction204 as Connection1787
+            connect "Synchronous Machine.Ea" Junction204 as Connection1787
             connect Junction204 RL.P2 as Connection1788
             [
                 breakpoints = 7368, 8192; 7880, 8192
             ]
             connect Ea1.p_node Junction204 as Connection1789
-            connect "Synchonous Machine.ground" Junction205 as Connection1790
+            connect "Synchronous Machine.ground" Junction205 as Connection1790
             connect Ea1.n_node Junction205 as Connection1792
             connect Junction205 Junction206 as Connection1793
             connect Eb1.n_node Junction206 as Connection1795
             connect Junction206 Junction207 as Connection1796
             connect Junction207 Junction203 as Connection1797
             connect Ec1.n_node Junction207 as Connection1798
-            connect "Synchonous Machine.Ec" Junction208 as Connection1799
+            connect "Synchronous Machine.Ec" Junction208 as Connection1799
             connect Junction208 RL.P6 as Connection1800
             [
                 breakpoints = 7848, 8368; 7848, 8368; 7880, 8368
             ]
             connect Ec1.p_node Junction208 as Connection1801
-            connect "Synchonous Machine.Eb" Junction209 as Connection1810
+            connect "Synchronous Machine.Eb" Junction209 as Connection1810
             connect Junction209 Eb1.p_node as Connection1811
             [
                 breakpoints = 7616, 8280; 7616, 8280
@@ -8400,9 +8792,6 @@ out = in - (6.283185307179586*floor_in);
             [
                 breakpoints = 6376, 7960; 6376, 8144
             ]
-            connect Exciter.exc_state Junction211 as Connection1817
-            connect Junction211 "Governor.exciter state" as Connection1818
-            connect w_e2 Junction211 as Connection1819
             connect V_cG "Three-phase Meter1.C-" as Connection1820
             connect "Three-phase Meter1.C+" Junction176 as Connection1821
             connect Junction175 "Three-phase Meter1.A+" as Connection1822
@@ -8412,6 +8801,13 @@ out = in - (6.283185307179586*floor_in);
             connect ground Junction212 as Connection1826
             connect Junction212 Junction202 as Connection1827
             connect "Three-phase Meter1.GND" Junction212 as Connection1828
+            connect w_e2 Exciter.exc_state as Connection1829
+            [
+                breakpoints = 6792, 8160; 6744, 8160
+            ]
+            connect "|V|4.out" GovernorX.w_ref as Connection1830
+            connect GovernorX.w_m3 Gain18.out as Connection1831
+            connect GovernorX.P_SV Engine.P_SV as Connection1832
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A salient-pole synchronous machine with DEGOV1 governor and IEEE type DC1A exciter, powered by a diesel genset</p></body></html>"
@@ -9281,9 +9677,10 @@ out = in - (6.283185307179586*floor_in);
     }
 
     logically_deleted {
-        "Microturbine.Synchonous Machine.V_qG2.Differentiator1"
-        "Microturbine.Synchonous Machine.V_dG2.Differentiator1"
+        "Microturbine.Synchronous Machine.V_qG2.Differentiator1"
+        "Microturbine.Synchronous Machine.V_dG2.Differentiator1"
         "Microturbine.BE1-25A Synchronizer.BE1-25A Synchronizer (modified)"
+        "Microturbine.Governor"
     }
 
     default {
