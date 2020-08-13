@@ -128,7 +128,7 @@ rtds_write 0x08240401 0x00000001
 
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x00000006
+rtds_write 0x080C0001 0x00000003
 rtds_write 0x080C0004 0x3BA3D70A
 rtds_write 0x080C0005 0x3D710000
 rtds_write 0x08100000 0x000000C8
@@ -860,9 +860,6 @@ REM post SP Init calculation...
 rtds_write  
 rtds_write 0x00000041 0x000011C1
 rtds_write 0x00000005 0x00000002
-glbl_write 0x41200008 0x00000000
-glbl_write 0x42200008 0x00000001
-glbl_write 0x43200008 0x00000000
 rtds_write 0x00000043 0x00002710
 rtds_write 0x00000042 0x000001F3
 rtds_write 0x0000000A 0x00000001
@@ -888,8 +885,14 @@ glbl_write 0xf8000244 0x2
 glbl_write 0xf8000244 0x22
 glbl_write 0xf8000244 0x20
 glbl_write 0xf8000244 0x0
-glbl_file_write 0x20a00000 cop_2_app_imem.bin
-glbl_file_write 0xfffc0000 cop_2_app_dmem.bin
+glbl_file_write 0x15000000 user_sp_cpu_0_imem.bin
+glbl_file_write 0xfffc0000 user_sp_cpu_0_dmem.bin
+
+
+REM special case for HIL402 for eth ve and SV
+
+
+REM sys_command 0x0
 
 
 REM disable can devices
@@ -903,7 +906,7 @@ sys_command 0x1
 REM enable ETH0 Intr on Core0 CPU
 glbl_write 0xF8F01834 0x01010101
 glbl_write 0x40800000 0x7
-glbl_write 0xfffffff0 0x20a00000
+glbl_write 0xfffffff0 0x15000000
 
 
 REM Restart counter for collected Linux OS communication apps
