@@ -1,4 +1,4 @@
-Model banshee_feeder_1_2_3
+Model Banshee_Feeder_1_2_3
 
 REM *****************************************:
 REM * Common entries:
@@ -1108,3 +1108,6 @@ app_file_write 0x0 app_init
 
 REM Download Linux APP
 app_file_write 0x5 mbus_server_app.elf
+
+rtds_write 0x00000027 0x00000258
+rtds_write 0x00000040 0x00FFFFFF

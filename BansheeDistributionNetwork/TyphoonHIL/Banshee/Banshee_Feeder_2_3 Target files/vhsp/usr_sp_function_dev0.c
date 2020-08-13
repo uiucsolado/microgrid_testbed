@@ -1409,8 +1409,6 @@ typedef double real;
 
 
 
-
-
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
@@ -1678,11 +1676,6 @@ typedef double real;
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
-
-
-
-
-
 
 
 
@@ -3998,8 +3991,6 @@ double _grid_feeding_inverter__averaged__vc2_va1__out;
 double _grid_feeding_inverter__averaged__xi_a1_ia1__out;
 double _grid_feeding_inverter__averaged__xi_b1_ia1__out;
 double _grid_feeding_inverter__averaged__xi_c1_ia1__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_constant10__out = 1e-06;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_constant11__out = 1e-06;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_constant6__out = 0.005;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_constant7__out = 0.001;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_constant9__out = 0.05;
@@ -8871,7 +8862,7 @@ double _grid_feeding_inverter__averaged__controller_pll_pll1_confine_phase__in;
 double _grid_feeding_inverter__averaged__controller_pll_pll1_confine_phase__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_trigonometric_function1__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_sum4__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__out;
+double _grid_forming_inverter__averaged__be1_25a_synchronizer_gain18__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__x;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__floor_in;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__in;
@@ -8915,10 +8906,9 @@ double _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq
 double _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__q;
 double _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1;
 double _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2;
+double _grid_forming_inverter__averaged__be1_25a_synchronizer_gain17__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_sum1__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_signal_switch2__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__out;
 double _grid_forming_inverter__averaged__cb_control_hold_after_connect2__var;
 double _grid_forming_inverter__averaged__cb_control_hold_after_connect2__in1;
 double _grid_forming_inverter__averaged__cb_control_hold_after_connect2__in2;
@@ -8957,7 +8947,6 @@ double _grid_feeding_inverter__averaged__controller_gain6__out;
 double _grid_feeding_inverter__averaged__controller_gain7__out;
 double _grid_feeding_inverter__averaged__controller_gain11__out;
 double _grid_feeding_inverter__averaged__controller_gain12__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_gain16__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_confine_phase__in;
 
 
@@ -8965,7 +8954,6 @@ double _grid_forming_inverter__averaged__be1_25a_synchronizer_confine_phase__out
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_gain14__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_sum3__out;
 double _grid_forming_inverter__averaged__cb_control_sum9__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_signal_switch1__out;
 X_Int32 _grid_forming_inverter__averaged__cb_control_logical_operator10__out;
 X_Int32 _grid_forming_inverter__averaged__cb_control_logical_operator7__out;
 double _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_pid_sum6__out;
@@ -9139,7 +9127,6 @@ double _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchroniz
 
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V;
 double _grid_forming_inverter__averaged__cb_control_abs6__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_product5__out;
 X_Int32 _grid_forming_inverter__averaged__cb_control_logical_operator11__out;
 float _grid_forming_inverter__averaged__cb_control_grid_islanded_on__tmp;
 X_Int32 _grid_forming_inverter__averaged__cb_control_logical_operator5__out;
@@ -9420,7 +9407,6 @@ double _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect
 
 
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_gain15__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_gain4__out;
 double _grid_forming_inverter__averaged__cb_control_gain13__out;
 double _grid_forming_inverter__averaged__controller_gain1__out;
@@ -9435,7 +9421,6 @@ double _grid_forming_inverter__averaged__controller_integrator__in;
 double _grid_forming_inverter__averaged__controller_integrator__out;
 double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_sum7__out;
 double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_sum3__out;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_product6__out;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_sum2__out;
 double _grid_forming_inverter__averaged__cb_control_sum10__out;
 double _grid_forming_inverter__averaged__controller_confine_phase__x;
@@ -11152,9 +11137,7 @@ double _grid_feeding_inverter__averaged__controller_pll_pll1_pid_controller1__fi
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_pid_controller1__integrator_state;
 X_UnInt32 _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_pid_controller1__av_active;
 double _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_pid_controller1__filter_state;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__state;
 double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_outer_power_loop_comparator1__state;
-double _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__state;
 double _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_rate_limiter1__prev_out;
 double _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_rate_limiter1__out;
 int _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_rate_limiter1__first_step;
@@ -11661,7 +11644,7 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__PI2 = 2 * _f2_cb8_mid_rly1_sel_787_relay_25_sync_check1_phase_comparator_c_function1__PI;
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_comparator1__state = 0.0f;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_abc_to_qd1_confine_phase__floor_in = 0;
-    HIL_OutAO(0x404a, 0.0f);
+    HIL_OutAO(0x404b, 0.0f);
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_comparator1__state = 0.0f;
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_comparator1__state = 0.0f;
     _grid_forming_inverter__averaged__controller_rate_limiter2__first_step = 1;
@@ -13156,11 +13139,13 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb8_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__trip_out = _f2_cb8_mid_rly1_sel_787_state_condition_mng_trip_out_mng_fnc__initial_condition;
     HIL_OutAO(0x4041, 0.0f);
     _grid_feeding_inverter__averaged__controller_pll_pll1_confine_phase__floor_in = 0;
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__state = 0.0f;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__floor_in = 0;
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_outer_power_loop_comparator1__state = 0.0f;
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__state = 0.0f;
+    HIL_OutAO(0x4043, 0.0f);
+    HIL_OutAO(0x4046, 0.0f);
     _grid_forming_inverter__averaged__cb_control_hold_after_connect2__var = 1;
+    HIL_OutAO(0x4042, 0.0f);
+    HIL_OutAO(0x4045, 0.0f);
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_rate_limiter1__first_step = 1;
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_integrator__out = 0;
     _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_integrator__in = 0;
@@ -13240,8 +13225,7 @@ void ReInit_user_sp_cpu_dev0() {
     _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrator__out = 0;
     _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_integrator__in = 0;
     HIL_OutAO(0x403e, 0.0f);
-    HIL_OutAO(0x4042, 0.0f);
-    HIL_OutAO(0x4045, 0.0f);
+    HIL_OutAO(0x4044, 0.0f);
     for (_f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_lpf_lpf__i = 0; _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_lpf_lpf__i < 2; _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_lpf_lpf__i++) {
         _f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_lpf_lpf__states[_f2_cb1_mid_rly1_sel_787_calc_from_measurements_three_phase_pll1_lpf_lpf__i] = 15278.880894183112;
     }
@@ -13320,7 +13304,6 @@ void ReInit_user_sp_cpu_dev0() {
     for (_f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__i = 0; _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__i < 2; _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__i++) {
         _f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__states[_f2_cb8_mid_rly1_sel_787_calc_from_measurements_three_phase_pll2_lpf_lpf__i] = 15278.880894183112;
     }
-    HIL_OutAO(0x4044, 0.0f);
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect1__var = 0;
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state =  0.0;
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state =  0.0;
@@ -13330,40 +13313,39 @@ void ReInit_user_sp_cpu_dev0() {
     HIL_OutAO(0x403f, 0.0f);
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__var = 0;
     _grid_forming_inverter__averaged__controller_integrator__var = 0;
-    HIL_OutAO(0x4047, 0.0f);
     HIL_OutAO(0x4048, 0.0f);
-    HIL_OutAO(0x4057, 0.0f);
-    _grid_forming_inverter__averaged__controller_confine_phase__floor_in = 0;
-    HIL_OutAO(0x4043, 0.0f);
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect__var = 0;
     HIL_OutAO(0x4049, 0.0f);
-    HIL_OutAO(0x4046, 0.0f);
+    HIL_OutAO(0x4058, 0.0f);
+    _grid_forming_inverter__averaged__controller_confine_phase__floor_in = 0;
+    _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect__var = 0;
+    HIL_OutAO(0x404a, 0.0f);
+    HIL_OutAO(0x4047, 0.0f);
     _grid_forming_inverter__averaged__be1_25a_synchronizer_stay_connected1__connect = 0;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect2__var = 0;
     _grid_forming_inverter__averaged__cb_control_stay_connected1__var = 0;
-    HIL_OutAO(0x4055, 0.0f);
     HIL_OutAO(0x4056, 0.0f);
-    HIL_OutAO(0x4053, 0.0f);
+    HIL_OutAO(0x4057, 0.0f);
     HIL_OutAO(0x4054, 0.0f);
-    HIL_OutAO(0x404c, 0.0f);
+    HIL_OutAO(0x4055, 0.0f);
+    HIL_OutAO(0x404d, 0.0f);
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state =  0.0;
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__filter_state =  0.0;
-    HIL_OutAO(0x404e, 0.0f);
+    HIL_OutAO(0x404f, 0.0f);
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state =  0.0;
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__filter_state =  0.0;
     HIL_OutFloat(162267136, 0.0);
     HIL_OutFloat(162267137, 0.0);
     HIL_OutFloat(162267138, 0.0);
-    HIL_OutAO(0x404b, 0.0f);
-    HIL_OutAO(0x404d, 0.0f);
+    HIL_OutAO(0x404c, 0.0f);
+    HIL_OutAO(0x404e, 0.0f);
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state =  0.0;
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__filter_state =  0.0;
-    HIL_OutAO(0x4050, 0.0f);
+    HIL_OutAO(0x4051, 0.0f);
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state =  0.0;
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state =  0.0;
+    HIL_OutAO(0x4053, 0.0f);
+    HIL_OutAO(0x4050, 0.0f);
     HIL_OutAO(0x4052, 0.0f);
-    HIL_OutAO(0x404f, 0.0f);
-    HIL_OutAO(0x4051, 0.0f);
     HIL_OutFloat(166461440, 0.0);
     HIL_OutFloat(166461441, 0.0);
     HIL_OutFloat(166461442, 0.0);
@@ -13449,8 +13431,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_feeding_inverter__averaged__xi_b1_ia1__out = (HIL_InFloat(0xc80000 + 0xc13));
     // Generated from the component: Grid feeding inverter (averaged).Xi_c1.Ia1
     _grid_feeding_inverter__averaged__xi_c1_ia1__out = (HIL_InFloat(0xc80000 + 0xc14));
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Constant10
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Constant11
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Constant6
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Constant7
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Constant9
@@ -13587,7 +13567,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Grid forming inverter (averaged).Gain1
     _grid_forming_inverter__averaged__gain1__out = 0.5 * _grid_forming_inverter__averaged__constant1__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.E_qREF1
-    HIL_OutAO(0x404a, (float)_grid_forming_inverter__averaged__controller_constant1__out);
+    HIL_OutAO(0x404b, (float)_grid_forming_inverter__averaged__controller_constant1__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Frequency droop.Gain4
     _grid_forming_inverter__averaged__controller_frequency_droop_gain4__out = 376.99111843077515 * _grid_forming_inverter__averaged__controller_frequency_droop_wref__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Comparator1
@@ -13630,11 +13610,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     } else {
         _grid_forming_inverter__averaged__controller_rate_limiter2__out = _pref_form__out;
         _grid_forming_inverter__averaged__controller_rate_limiter2__in_rate = _pref_form__out - _grid_forming_inverter__averaged__controller_rate_limiter2__prev_out;
-        if (_grid_forming_inverter__averaged__controller_rate_limiter2__in_rate > 0.02) {
-            _grid_forming_inverter__averaged__controller_rate_limiter2__out = _grid_forming_inverter__averaged__controller_rate_limiter2__prev_out + (0.02);
+        if (_grid_forming_inverter__averaged__controller_rate_limiter2__in_rate > 0.002) {
+            _grid_forming_inverter__averaged__controller_rate_limiter2__out = _grid_forming_inverter__averaged__controller_rate_limiter2__prev_out + (0.002);
         }
-        if (_grid_forming_inverter__averaged__controller_rate_limiter2__in_rate < -0.02) {
-            _grid_forming_inverter__averaged__controller_rate_limiter2__out = _grid_forming_inverter__averaged__controller_rate_limiter2__prev_out + (-0.02);
+        if (_grid_forming_inverter__averaged__controller_rate_limiter2__in_rate < -0.002) {
+            _grid_forming_inverter__averaged__controller_rate_limiter2__out = _grid_forming_inverter__averaged__controller_rate_limiter2__prev_out + (-0.002);
         }
     }
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.Gain8
@@ -13645,11 +13625,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     } else {
         _grid_forming_inverter__averaged__controller_rate_limiter1__out = _qref_form__out;
         _grid_forming_inverter__averaged__controller_rate_limiter1__in_rate = _qref_form__out - _grid_forming_inverter__averaged__controller_rate_limiter1__prev_out;
-        if (_grid_forming_inverter__averaged__controller_rate_limiter1__in_rate > 0.02) {
-            _grid_forming_inverter__averaged__controller_rate_limiter1__out = _grid_forming_inverter__averaged__controller_rate_limiter1__prev_out + (0.02);
+        if (_grid_forming_inverter__averaged__controller_rate_limiter1__in_rate > 0.002) {
+            _grid_forming_inverter__averaged__controller_rate_limiter1__out = _grid_forming_inverter__averaged__controller_rate_limiter1__prev_out + (0.002);
         }
-        if (_grid_forming_inverter__averaged__controller_rate_limiter1__in_rate < -0.02) {
-            _grid_forming_inverter__averaged__controller_rate_limiter1__out = _grid_forming_inverter__averaged__controller_rate_limiter1__prev_out + (-0.02);
+        if (_grid_forming_inverter__averaged__controller_rate_limiter1__in_rate < -0.002) {
+            _grid_forming_inverter__averaged__controller_rate_limiter1__out = _grid_forming_inverter__averaged__controller_rate_limiter1__prev_out + (-0.002);
         }
     }
     // Generated from the component: Grid feeding inverter (averaged).GCB OFF
@@ -13885,14 +13865,8 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged__be1_25a_synchronizer_trigonometric_function1__out = atan2(_grid_forming_inverter__averaged__be1_25a_synchronizer_gain12__out, _grid_forming_inverter__averaged__be1_25a_synchronizer_limit1__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Sum4
     _grid_forming_inverter__averaged__be1_25a_synchronizer_sum4__out = _grid_forming_inverter__averaged__be1_25a_synchronizer_product1__out + _grid_forming_inverter__averaged__be1_25a_synchronizer_product2__out;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Comparator2
-    if (_grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out < _grid_forming_inverter__averaged__be1_25a_synchronizer_constant11__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__out = 0;
-    } else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out > _grid_forming_inverter__averaged__be1_25a_synchronizer_constant11__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__out = 1;
-    } else {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__out = _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__state;
-    }
+    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Gain18
+    _grid_forming_inverter__averaged__be1_25a_synchronizer_gain18__out = 57.29577951308232 * _grid_forming_inverter__averaged__be1_25a_synchronizer_trigonometric_function2__out;
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.PLL.confine phase
     _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__in = _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_c_function1__out;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__x = _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_confine_phase__in / 6.283185307179586;
@@ -13920,20 +13894,16 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_grid_feeding_inverter__averaged__controller_pll_pll1_confine_phase__out);
     _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__d = _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2 * _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha - _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1 * _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta;
     _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__q = _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1 * _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha + _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2 * _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Gain17
+    _grid_forming_inverter__averaged__be1_25a_synchronizer_gain17__out = 57.29577951308232 * _grid_forming_inverter__averaged__be1_25a_synchronizer_trigonometric_function1__out;
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Sum1
     _grid_forming_inverter__averaged__be1_25a_synchronizer_sum1__out =  - _grid_forming_inverter__averaged__be1_25a_synchronizer_trigonometric_function1__out + _grid_forming_inverter__averaged__be1_25a_synchronizer_trigonometric_function2__out;
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Mathematical function1
     _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out = sqrt(_grid_forming_inverter__averaged__be1_25a_synchronizer_sum4__out);
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Signal switch2
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_signal_switch2__out = (_grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__out > 0.5f) ? _grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out : _grid_forming_inverter__averaged__be1_25a_synchronizer_constant11__out;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Comparator1
-    if (_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out < _grid_forming_inverter__averaged__be1_25a_synchronizer_constant10__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__out = 0;
-    } else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out > _grid_forming_inverter__averaged__be1_25a_synchronizer_constant10__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__out = 1;
-    } else {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__out = _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__state;
-    }
+    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V
+    HIL_OutAO(0x4043, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_gain18__out);
+    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu
+    HIL_OutAO(0x4046, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out);
     // Generated from the component: Grid forming inverter (averaged).CB_control.Hold after connect2
     _grid_forming_inverter__averaged__cb_control_hold_after_connect2__in1 = _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out;
     _grid_forming_inverter__averaged__cb_control_hold_after_connect2__in2 = _grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out;
@@ -13950,8 +13920,8 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_feeding_inverter__averaged__controller_gain11__out = 3.792758311406212e-05 * _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__d;
     // Generated from the component: Grid feeding inverter (averaged).Controller.Gain12
     _grid_feeding_inverter__averaged__controller_gain12__out = 3.792758311406212e-05 * _grid_feeding_inverter__averaged__controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__q;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Gain16
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_gain16__out = 57.29577951308232 * _grid_forming_inverter__averaged__be1_25a_synchronizer_sum1__out;
+    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E
+    HIL_OutAO(0x4042, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_gain17__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.confine phase
     _grid_forming_inverter__averaged__be1_25a_synchronizer_confine_phase__in = _grid_forming_inverter__averaged__be1_25a_synchronizer_sum1__out;
     if (_grid_forming_inverter__averaged__be1_25a_synchronizer_confine_phase__in > 0) {
@@ -13966,10 +13936,10 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged__be1_25a_synchronizer_gain14__out = 391.91835884530855 * _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out;
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Sum3
     _grid_forming_inverter__averaged__be1_25a_synchronizer_sum3__out =  - _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out + _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out;
+    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu
+    HIL_OutAO(0x4045, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out);
     // Generated from the component: Grid forming inverter (averaged).CB_control.Sum9
     _grid_forming_inverter__averaged__cb_control_sum9__out =  - _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out + _grid_forming_inverter__averaged__cb_control_constant1__out;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Signal switch1
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_signal_switch1__out = (_grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__out > 0.5f) ? _grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out : _grid_forming_inverter__averaged__be1_25a_synchronizer_constant10__out;
     // Generated from the component: Grid forming inverter (averaged).CB_control.Logical operator10
     _grid_forming_inverter__averaged__cb_control_logical_operator10__out = !_grid_forming_inverter__averaged__cb_control_hold_after_connect2__out;
     // Generated from the component: Grid forming inverter (averaged).CB_control.Logical operator7
@@ -13992,35 +13962,31 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_feeding_inverter__averaged__controller_product12__out = (_grid_feeding_inverter__averaged__controller_gain5__out * _grid_feeding_inverter__averaged__controller_gain7__out);
     // Generated from the component: Grid feeding inverter (averaged).Controller.Product13
     _grid_feeding_inverter__averaged__controller_product13__out = (_grid_feeding_inverter__averaged__controller_gain8__out * _grid_feeding_inverter__averaged__controller_gain7__out);
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta
-    HIL_OutAO(0x4042, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_gain16__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Abs4
     _grid_forming_inverter__averaged__be1_25a_synchronizer_abs4__out = fabs(_grid_forming_inverter__averaged__be1_25a_synchronizer_confine_phase__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.|E|
-    HIL_OutAO(0x4045, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_gain14__out);
+    HIL_OutAO(0x4044, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_gain14__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Abs2
     _grid_forming_inverter__averaged__be1_25a_synchronizer_abs2__out = fabs(_grid_forming_inverter__averaged__be1_25a_synchronizer_sum3__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.BE1-25A Synchronizer1
     _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV = _grid_forming_inverter__averaged__be1_25a_synchronizer_sum3__out;
-    if (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > 0.002) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.005;
+    if (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > 0.001) {
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.006;
     }
-    else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= 0.002) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > 0)) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.005 * _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV / 0.002;
+    else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= 0.001) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > 0)) {
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.006 * _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV / 0.001;
     }
-    else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= 0) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > -1 * (0.002 - 5e-05))) {
+    else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= 0) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > -1 * (0.001 - 5e-05))) {
         _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0;
     }
-    else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= (-1 * (0.002 - 5e-05))) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > (-1 * 0.002))) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.005 * (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV + (0.002 - 5e-05)) / 5e-05;
+    else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= (-1 * (0.001 - 5e-05))) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV > (-1 * 0.001))) {
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.006 * (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV + (0.001 - 5e-05)) / 5e-05;
     }
-    else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= (-1 * 0.002)) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = -1 * 0.005;
+    else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__dV <= (-1 * 0.001)) {
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer1__del_V = -1 * 0.006;
     }
     // Generated from the component: Grid forming inverter (averaged).CB_control.Abs6
     _grid_forming_inverter__averaged__cb_control_abs6__out = fabs(_grid_forming_inverter__averaged__cb_control_sum9__out);
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Product5
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_product5__out = (_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function1__out * _grid_forming_inverter__averaged__be1_25a_synchronizer_signal_switch1__out);
     // Generated from the component: Grid forming inverter (averaged).CB_control.Logical operator11
     _grid_forming_inverter__averaged__cb_control_logical_operator11__out = _grid_forming_inverter__averaged__cb_control_logical_operator10__out && _grid_forming_inverter__averaged__cb_control_logical_operator9__out ;
     // Generated from the component: Grid forming inverter (averaged).CB_control.Grid_Islanded ON
@@ -14045,8 +14011,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged__be1_25a_synchronizer_relational_operator4__out = (_grid_forming_inverter__averaged__be1_25a_synchronizer_abs2__out < _grid_forming_inverter__averaged__be1_25a_synchronizer_constant9__out) ? 1 : 0;
     // Generated from the component: Grid forming inverter (averaged).CB_control.Relational operator5
     _grid_forming_inverter__averaged__cb_control_relational_operator5__out = (_grid_forming_inverter__averaged__cb_control_abs6__out < _grid_forming_inverter__averaged__cb_control_constant10__out) ? 1 : 0;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.sync_|V|
-    HIL_OutAO(0x4044, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_product5__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Hold after connect1
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect1__INV_sync = _grid_forming_inverter__averaged__cb_control_logical_operator11__out;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect1__connect = _grid_forming_inverter__averaged__cb_control_unit_delay2__out;
@@ -14118,8 +14082,6 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__connect = _grid_forming_inverter__averaged__cb_control_unit_delay2__out;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__in = _grid_forming_inverter__averaged__be1_25a_synchronizer_sum10__out;
     _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__out = _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__var;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Gain15
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_gain15__out = 0.0026525823848649226 * _grid_forming_inverter__averaged__controller_frequency_droop_signal_switch3__out;
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Gain4
     _grid_forming_inverter__averaged__be1_25a_synchronizer_gain4__out = 0.0026525823848649226 * _grid_forming_inverter__averaged__controller_frequency_droop_signal_switch3__out;
     // Generated from the component: Grid forming inverter (averaged).CB_control.Gain13
@@ -14138,21 +14100,19 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged__controller_integrator__in = _grid_forming_inverter__averaged__controller_frequency_droop_signal_switch3__out;
     _grid_forming_inverter__averaged__controller_integrator__out = _grid_forming_inverter__averaged__controller_integrator__var;
     // Generated from the component: Grid forming inverter (averaged).Controller.E_dREF1
-    HIL_OutAO(0x4047, (float)_grid_forming_inverter__averaged__controller_voltage_droop_signal_switch2__out);
-    // Generated from the component: Grid forming inverter (averaged).Controller.E_mag
     HIL_OutAO(0x4048, (float)_grid_forming_inverter__averaged__controller_voltage_droop_signal_switch2__out);
+    // Generated from the component: Grid forming inverter (averaged).Controller.E_mag
+    HIL_OutAO(0x4049, (float)_grid_forming_inverter__averaged__controller_voltage_droop_signal_switch2__out);
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Sum7
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_sum7__out = _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out + _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_product4__out;
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Sum3
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_sum3__out = _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out + _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_product3__out;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Product6
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_product6__out = (_grid_forming_inverter__averaged__be1_25a_synchronizer_gain15__out * _grid_forming_inverter__averaged__be1_25a_synchronizer_signal_switch2__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Sum2
     _grid_forming_inverter__averaged__be1_25a_synchronizer_sum2__out =  - _grid_forming_inverter__averaged__be1_25a_synchronizer_gain4__out + _grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out;
     // Generated from the component: Grid forming inverter (averaged).CB_control.Sum10
     _grid_forming_inverter__averaged__cb_control_sum10__out =  - _grid_forming_inverter__averaged__cb_control_constant1__out + _grid_forming_inverter__averaged__cb_control_gain13__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.f1
-    HIL_OutAO(0x4057, (float)_grid_forming_inverter__averaged__controller_gain1__out);
+    HIL_OutAO(0x4058, (float)_grid_forming_inverter__averaged__controller_gain1__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.confine phase
     _grid_forming_inverter__averaged__controller_confine_phase__in = _grid_forming_inverter__averaged__controller_integrator__out;
     _grid_forming_inverter__averaged__controller_confine_phase__x = _grid_forming_inverter__averaged__controller_confine_phase__in / 6.283185307179586;
@@ -14162,26 +14122,24 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch5__out = (_grid_feeding_inverter__averaged__connect_gfl__out > 0.5) ? _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_sum7__out : _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_constant4__out;
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Signal switch4
     _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch4__out = (_grid_feeding_inverter__averaged__connect_gfl__out > 0.5) ? _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_sum3__out : _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_constant3__out;
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.sync_w
-    HIL_OutAO(0x4043, (float)_grid_forming_inverter__averaged__be1_25a_synchronizer_product6__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Abs5
     _grid_forming_inverter__averaged__be1_25a_synchronizer_abs5__out = fabs(_grid_forming_inverter__averaged__be1_25a_synchronizer_sum2__out);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.BE1-25A Synchronizer2
     _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df = _grid_forming_inverter__averaged__be1_25a_synchronizer_sum2__out;
     if (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df > 0.002) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = 1.125 * 0.01;
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = 1.125 * 0.012;
     }
     else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df <= 0.002) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df > 0)) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = 0.01 * _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df / 0.002 + (0.125 * 0.01);
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = 0.012 * _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df / 0.002 + (0.125 * 0.012);
     }
     else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df <= 0) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df > (-0.0005))) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = (0.125 * 0.01) * (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df) / 0.0005 + (0.125 * 0.01);
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = (0.125 * 0.012) * (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df) / 0.0005 + (0.125 * 0.012);
     }
     else if ((_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df <= (-1 * 0.0005)) && (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df > (-1 * 0.002))) {
         _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = 0;
     }
     else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df <= (-1 * 0.002)) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = (0.002 + _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df) * 0.01 / 0.002;
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__del_w = (0.002 + _grid_forming_inverter__averaged__be1_25a_synchronizer_be1_25a_synchronizer2__df) * 0.012 / 0.002;
     }
     // Generated from the component: Grid forming inverter (averaged).CB_control.Abs7
     _grid_forming_inverter__averaged__cb_control_abs7__out = fabs(_grid_forming_inverter__averaged__cb_control_sum10__out);
@@ -14250,11 +14208,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Gain6
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain6__out = 0.25361815693042594 * _grid_forming_inverter__averaged__controller_gain7__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.E_q1
-    HIL_OutAO(0x4049, (float)_grid_forming_inverter__averaged__controller_gain8__out);
+    HIL_OutAO(0x404a, (float)_grid_forming_inverter__averaged__controller_gain8__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Gain4
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain4__out = 0.0016811371681248505 * _grid_forming_inverter__averaged__controller_gain10__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.E_d1
-    HIL_OutAO(0x4046, (float)_grid_forming_inverter__averaged__controller_gain9__out);
+    HIL_OutAO(0x4047, (float)_grid_forming_inverter__averaged__controller_gain9__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Gain6
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain6__out = 0.0016811371681248505 * _grid_forming_inverter__averaged__controller_gain9__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Sum10
@@ -14353,15 +14311,15 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum11
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_sum8__out - _grid_forming_inverter__averaged__controller_gain10__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Q1
-    HIL_OutAO(0x4055, (float)_grid_forming_inverter__averaged__controller_gain14__out);
+    HIL_OutAO(0x4056, (float)_grid_forming_inverter__averaged__controller_gain14__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Qpu
-    HIL_OutAO(0x4056, (float)_grid_forming_inverter__averaged__controller_gain17__out);
+    HIL_OutAO(0x4057, (float)_grid_forming_inverter__averaged__controller_gain17__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Gain13
     _grid_forming_inverter__averaged__controller_gain13__out = 2.0 * _grid_forming_inverter__averaged__controller_sum5__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.P1
-    HIL_OutAO(0x4053, (float)_grid_forming_inverter__averaged__controller_gain15__out);
+    HIL_OutAO(0x4054, (float)_grid_forming_inverter__averaged__controller_gain15__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Ppu
-    HIL_OutAO(0x4054, (float)_grid_forming_inverter__averaged__controller_gain16__out);
+    HIL_OutAO(0x4055, (float)_grid_forming_inverter__averaged__controller_gain16__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Gain4
     _grid_forming_inverter__averaged__controller_gain4__out = 2.0 * _grid_forming_inverter__averaged__controller_sum4__out;
     // Generated from the component: Grid feeding inverter (averaged).Bus Split1
@@ -14380,7 +14338,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         HIL_OutInt32(0x9e40480, 0x1);
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error
-    HIL_OutAO(0x404c, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out);
+    HIL_OutAO(0x404d, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller3
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state + 0.1092 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out;
     if (_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int < -1.0) {
@@ -14394,7 +14352,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 0;
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error
-    HIL_OutAO(0x404e, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out);
+    HIL_OutAO(0x404f, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller4
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state + 0.1092 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out;
     if (_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int < -1.0) {
@@ -14416,11 +14374,11 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Grid forming inverter (averaged).CB_control.GCB OFF
     HIL_OutInt32(0xf00402, _grid_forming_inverter__averaged__cb_control_logical_operator3__out != 0x0);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl
-    HIL_OutAO(0x404b, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out);
+    HIL_OutAO(0x404c, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum9
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum9__out = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out + _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product5__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl
-    HIL_OutAO(0x404d, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out);
+    HIL_OutAO(0x404e, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum12
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum12__out = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out + _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product7__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum8
@@ -14440,7 +14398,7 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 0;
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error
-    HIL_OutAO(0x4050, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out);
+    HIL_OutAO(0x4051, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state + 0.01 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out;
     if (_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int < -1.0) {
@@ -14454,15 +14412,15 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
         _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 0;
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error
-    HIL_OutAO(0x4052, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out);
+    HIL_OutAO(0x4053, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum3
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out + _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product3__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl
-    HIL_OutAO(0x404f, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out);
+    HIL_OutAO(0x4050, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum7
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum7__out = _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out + _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product4__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl
-    HIL_OutAO(0x4051, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out);
+    HIL_OutAO(0x4052, (float)_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out);
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Gain5
     _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_gain5__out = 391.91835884530855 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out;
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Gain6
@@ -14514,9 +14472,9 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     // Generated from the component: Grid forming inverter (averaged).CB_control.Unit Delay2
     _grid_forming_inverter__averaged__cb_control_unit_delay2__state = _grid_forming_inverter__averaged__cb_control_stay_connected1__action;
     // Generated from the component: Grid forming inverter (averaged).Controller.Integrator2
-    _grid_forming_inverter__averaged__controller_integrator2__state += _grid_forming_inverter__averaged__controller_gain4__out * 0.0002;
+    _grid_forming_inverter__averaged__controller_integrator2__state += _grid_forming_inverter__averaged__controller_gain4__out * 2e-05;
     // Generated from the component: Grid forming inverter (averaged).Controller.Integrator3
-    _grid_forming_inverter__averaged__controller_integrator3__state += _grid_forming_inverter__averaged__controller_gain13__out * 0.0002;
+    _grid_forming_inverter__averaged__controller_integrator3__state += _grid_forming_inverter__averaged__controller_gain13__out * 2e-05;
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Comparator1
     if (_grid_feeding_inverter__averaged__constant1__out < _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_limit_zero__out) {
         _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_comparator1__state = 0;
@@ -14544,35 +14502,23 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     _grid_forming_inverter__averaged__controller_rate_limiter1__first_step = 0;
     // Generated from the component: Grid feeding inverter (averaged).Controller.PLL.PLL1.PID controller1
     if (!_grid_feeding_inverter__averaged__controller_pll_pll1_pid_controller1__av_active) {
-        _grid_feeding_inverter__averaged__controller_pll_pll1_pid_controller1__integrator_state += 2.0 * _grid_feeding_inverter__averaged__controller_pll_gain6__out * 0.0002;
+        _grid_feeding_inverter__averaged__controller_pll_pll1_pid_controller1__integrator_state += 2.0 * _grid_feeding_inverter__averaged__controller_pll_gain6__out * 2e-05;
     }
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.PLL.PID controller1
     if (!_grid_forming_inverter__averaged__be1_25a_synchronizer_pll_pid_controller1__av_active) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_pid_controller1__integrator_state += 2.0 * _grid_forming_inverter__averaged__be1_25a_synchronizer_gain6__out * 0.0002;
+        _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_pid_controller1__integrator_state += 2.0 * _grid_forming_inverter__averaged__be1_25a_synchronizer_gain6__out * 2e-05;
     }
     // Generated from the component: Grid feeding inverter (averaged).Controller.PLL.PLL1.C function1
-    _grid_feeding_inverter__averaged__controller_pll_pll1_c_function1__var += (0.0002 * _grid_feeding_inverter__averaged__controller_pll_pll1_c_function1__in);
+    _grid_feeding_inverter__averaged__controller_pll_pll1_c_function1__var += (2e-05 * _grid_feeding_inverter__averaged__controller_pll_pll1_c_function1__in);
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.PLL.C function1
-    _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_c_function1__var += (0.0002 * _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_c_function1__in);
+    _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_c_function1__var += (2e-05 * _grid_forming_inverter__averaged__be1_25a_synchronizer_pll_c_function1__in);
     // Generated from the component: Grid feeding inverter (averaged).Controller.PLL.PLL1.confine phase
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Comparator2
-    if (_grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out < _grid_forming_inverter__averaged__be1_25a_synchronizer_constant11__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__state = 0;
-    } else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_gain13__out > _grid_forming_inverter__averaged__be1_25a_synchronizer_constant11__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator2__state = 1;
-    }
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.PLL.confine phase
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.outer power loop.Comparator1
     if (_grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_squared_vt2_sum3__out < _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_outer_power_loop_limit_zero__out) {
         _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_outer_power_loop_comparator1__state = 0;
     } else if (_grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_squared_vt2_sum3__out > _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_outer_power_loop_limit_zero__out) {
         _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_outer_power_loop_comparator1__state = 1;
-    }
-    // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Comparator1
-    if (_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out < _grid_forming_inverter__averaged__be1_25a_synchronizer_constant10__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__state = 0;
-    } else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_mathematical_function2__out > _grid_forming_inverter__averaged__be1_25a_synchronizer_constant10__out) {
-        _grid_forming_inverter__averaged__be1_25a_synchronizer_comparator1__state = 1;
     }
     // Generated from the component: Grid forming inverter (averaged).CB_control.Hold after connect2
     if ((_grid_forming_inverter__averaged__cb_control_hold_after_connect2__in1 < 1.05) && (_grid_forming_inverter__averaged__cb_control_hold_after_connect2__in1 > 0.95) && (_grid_forming_inverter__averaged__cb_control_hold_after_connect2__in2 < 1.005) && (_grid_forming_inverter__averaged__cb_control_hold_after_connect2__in2 > 0.995))_grid_forming_inverter__averaged__cb_control_hold_after_connect2__var = 0;
@@ -14584,16 +14530,16 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     else if (_grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect1__INV_sync == 0)_grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect1__var = 0;
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.PID controller2
     if (!_grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active) {
-        _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 1.0 * _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch3__out * 0.0002;
+        _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 1.0 * _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch3__out * 2e-05;
     }
     // Generated from the component: Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.PID controller1
     if (!_grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active) {
-        _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 1.0 * _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch2__out * 0.0002;
+        _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 1.0 * _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch2__out * 2e-05;
     }
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Hold after connect3
     if (_grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__connect == 0)_grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__var = _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect3__in;
     // Generated from the component: Grid forming inverter (averaged).Controller.integrator
-    _grid_forming_inverter__averaged__controller_integrator__var += (0.0002 * _grid_forming_inverter__averaged__controller_integrator__in);
+    _grid_forming_inverter__averaged__controller_integrator__var += (2e-05 * _grid_forming_inverter__averaged__controller_integrator__in);
     // Generated from the component: Grid forming inverter (averaged).Controller.confine phase
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.BE1-25A Synchronizer2
     // Generated from the component: Grid forming inverter (averaged).BE1-25A Synchronizer.Hold after connect
@@ -14617,19 +14563,19 @@ void TimerCounterHandler_0_user_sp_cpu_dev0() {
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller3
     if (!_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active) {
-        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state += 14.46619356 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out * 0.0002;
+        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state += 14.46619356 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out * 2e-05;
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller4
     if (!_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active) {
-        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state += 14.46619356 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out * 0.0002;
+        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state += 14.46619356 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out * 2e-05;
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller1
     if (!_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active) {
-        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 1.5 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out * 0.0002;
+        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 1.5 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out * 2e-05;
     }
     // Generated from the component: Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
     if (!_grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active) {
-        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 1.5 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out * 0.0002;
+        _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 1.5 * _grid_forming_inverter__averaged__controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out * 2e-05;
     }
     //@cmp.update.block.end
 }

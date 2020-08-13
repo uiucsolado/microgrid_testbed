@@ -15,6 +15,6 @@
     </target_files_directories>
 
     <model_properties>
-        <execution_rates>[[5e-05, 0.0002, 0.001, 0.05], [5e-05, 0.0002, 0.001, 0.05]]</execution_rates>
+        <execution_rates>[[2e-05, 5e-05, 0.001, 0.05], [2e-05, 5e-05, 0.00012, 0.001, 0.05]]</execution_rates>
     </model_properties>
 </model_description>

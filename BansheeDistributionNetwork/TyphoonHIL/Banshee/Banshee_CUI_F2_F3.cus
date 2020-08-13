@@ -2242,8 +2242,8 @@ widgetValue = None
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>0.0</y>
+                    <x>0</x>
+                    <y>0</y>
                     <width>240</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2407,8 +2407,8 @@ widgetValue = None
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>24.0</x>
-                    <y>16.0</y>
+                    <x>24</x>
+                    <y>16</y>
                     <width>184</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2450,8 +2450,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>408.0</y>
+                    <x>0</x>
+                    <y>408</y>
                     <width>416</width>
                     <height>248</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2515,15 +2515,15 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <signal_name><![CDATA[Microturbine.qd0(PU).|V|]]></signal_name>
+                <signal_name><![CDATA[Microturbine.BE1-25A Synchronizer.|E|]]></signal_name>
                 <unit><![CDATA[kV]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>144.0</x>
-                    <y>224.0</y>
+                    <x>96</x>
+                    <y>248</y>
                     <width>256</width>
                     <height>168</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2890,8 +2890,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>72.0</x>
-                    <y>208.0</y>
+                    <x>72</x>
+                    <y>208</y>
                     <width>280</width>
                     <height>192</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3013,19 +3013,19 @@ displayValue = []
                 <hierarchy_position>2</hierarchy_position>
                 <phasors_data>
                     <phasor>
-                        <display_name><![CDATA[Voltage Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_|V|]]></magnitude_signal>
-                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                        <display_name><![CDATA[Bus Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V]]></phase_signal>
                     </phasor>
                     <phasor>
-                        <display_name><![CDATA[Frequency Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_w]]></magnitude_signal>
-                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                        <display_name><![CDATA[Generator Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E]]></phase_signal>
                     </phasor>
                     </phasors_data>
                 <widget_settings>
-                    <x>480.0</x>
-                    <y>0.0</y>
+                    <x>480</x>
+                    <y>0</y>
                     <width>280</width>
                     <height>192</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3607,8 +3607,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>440.0</x>
-                    <y>192.0</y>
+                    <x>440</x>
+                    <y>192</y>
                     <width>272</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3852,19 +3852,19 @@ displayValue = []
                 <hierarchy_position>2</hierarchy_position>
                 <phasors_data>
                     <phasor>
-                        <display_name><![CDATA[Voltage Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Microturbine.BE1-25A Synchronizer.sync_|V|]]></magnitude_signal>
-                        <phase_signal><![CDATA[Microturbine.BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                        <display_name><![CDATA[Generator Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Microturbine.BE1-25A Synchronizer.|E|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Microturbine.BE1-25A Synchronizer.theta_E]]></phase_signal>
                     </phasor>
                     <phasor>
-                        <display_name><![CDATA[Frequency Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Microturbine.BE1-25A Synchronizer.sync_w]]></magnitude_signal>
-                        <phase_signal><![CDATA[Microturbine.BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                        <display_name><![CDATA[Bus Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Microturbine.BE1-25A Synchronizer.|V|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Microturbine.BE1-25A Synchronizer.theta_V]]></phase_signal>
                     </phasor>
                     </phasors_data>
                 <widget_settings>
-                    <x>496.0</x>
-                    <y>0.0</y>
+                    <x>496</x>
+                    <y>0</y>
                     <width>392</width>
                     <height>232</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4096,7 +4096,7 @@ data = {
     }
 displayValue = data
 ]]></code>
-                <analog_signals><![CDATA[['Microturbine.Three-phase Meter1.Q']]]></analog_signals>
+                <analog_signals><![CDATA[['Microturbine.Three-phase Meter1.POWER_Q']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -4105,8 +4105,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>408.0</x>
-                    <y>408.0</y>
+                    <x>408</x>
+                    <y>408</y>
                     <width>480</width>
                     <height>256</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4170,15 +4170,15 @@ referenceCurves = [refCurveData1]
 displayValue = 0.0
 
 ]]></code>
-                <signal_name><![CDATA[Microturbine.qd0(PU).w_M]]></signal_name>
+                <signal_name><![CDATA[Microturbine.w_M]]></signal_name>
                 <unit><![CDATA[rpm]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>520.0</x>
-                    <y>216.0</y>
+                    <x>520</x>
+                    <y>216</y>
                     <width>256</width>
                     <height>176</height>
                     <appearance><![CDATA[Flat]]></appearance>

@@ -2741,140 +2741,14 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[0.0002, 0.001]]</execution_rates>
+        <execution_rates>[[2e-05, 0.001]]</execution_rates>
     </model_properties>
 
     <variables>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.E_mag</name>
+            <name>F2_CB19.MID_Rly1.SEL_787.P</name>
             <type>generic</type>
-            <address>16456</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Ppu</name>
-            <type>generic</type>
-            <address>16468</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB5.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16430</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus205</name>
-            <type>voltage</type>
-            <address>16388</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB5.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16433</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
-            <type>generic</type>
-            <address>16465</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus209</name>
-            <type>voltage</type>
-            <address>16392</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.E_dREF1</name>
-            <type>generic</type>
-            <address>16455</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB5.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16432</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.sync_w</name>
-            <type>generic</type>
-            <address>16451</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB14.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16404</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB19.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16417</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB6.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16435</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Qpu</name>
-            <type>generic</type>
-            <address>16470</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
-            <type>generic</type>
-            <address>16463</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.sync_|V|</name>
-            <type>generic</type>
-            <address>16452</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus204</name>
-            <type>voltage</type>
-            <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus207</name>
-            <type>voltage</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB3.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16422</address>
+            <address>16415</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2886,247 +2760,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <name>F2_CB5.MID_Rly1.CB_state</name>
             <type>generic</type>
-            <address>16397</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.P1</name>
-            <type>generic</type>
-            <address>16447</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB3.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16423</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB8.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16442</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.f1</name>
-            <type>generic</type>
-            <address>16471</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB12.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16399</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB8.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16444</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB19.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16414</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus206</name>
-            <type>voltage</type>
-            <address>16389</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB2.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16418</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus202</name>
-            <type>voltage</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.P1</name>
-            <type>generic</type>
-            <address>16467</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB4.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16427</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB8.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16443</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB2.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16421</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB2.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16419</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB14.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16405</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB4.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16429</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB19.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16416</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.E_d1</name>
-            <type>generic</type>
-            <address>16454</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB12.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16401</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus201</name>
-            <type>voltage</type>
-            <address>16384</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB3.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16425</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB5.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16431</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.Q1</name>
-            <type>generic</type>
-            <address>16448</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB8.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16445</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB7.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16441</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB15.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16407</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB18.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16411</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB15.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16408</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB6.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16437</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
-            <type>generic</type>
-            <address>16462</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB1.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16396</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB6.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16436</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|</name>
-            <type>generic</type>
-            <address>16453</address>
+            <address>16430</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3138,86 +2774,23 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
-            <type>generic</type>
-            <address>16459</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB3.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16424</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus203</name>
-            <type>voltage</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB1.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16394</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB18.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16412</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB4.MID_Rly1.CB_state</name>
-            <type>generic</type>
-            <address>16426</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
             <type>generic</type>
-            <address>16460</address>
+            <address>16461</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
+            <name>F2_CB2.MID_Rly1.CB_state</name>
             <type>generic</type>
-            <address>16466</address>
+            <address>16418</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.|E|</name>
+            <name>F2_CB12.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
             <type>generic</type>
-            <address>16446</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus210</name>
-            <type>voltage</type>
-            <address>16393</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB2.MID_Rly1.SEL_787.Q</name>
-            <type>generic</type>
-            <address>16420</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.f1</name>
-            <type>generic</type>
-            <address>16449</address>
+            <address>16401</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3229,9 +2802,107 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB15.MID_Rly1.CB_state</name>
+            <name>F2_CB6.MID_Rly1.SEL_787.Q</name>
             <type>generic</type>
-            <address>16406</address>
+            <address>16436</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB8.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16442</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.f1</name>
+            <type>generic</type>
+            <address>16449</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|</name>
+            <type>generic</type>
+            <address>16452</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus202</name>
+            <type>voltage</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_dREF1</name>
+            <type>generic</type>
+            <address>16456</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus210</name>
+            <type>voltage</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <type>generic</type>
+            <address>16462</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB15.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB19.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB12.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_d1</name>
+            <type>generic</type>
+            <address>16455</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus204</name>
+            <type>voltage</type>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB18.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Qpu</name>
+            <type>generic</type>
+            <address>16471</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3243,37 +2914,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB4.MID_Rly1.SEL_787.Q</name>
+            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.|E|</name>
             <type>generic</type>
-            <address>16428</address>
+            <address>16446</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB18.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <name>F2_CB15.MID_Rly1.CB_state</name>
             <type>generic</type>
-            <address>16413</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB15.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
-            <type>generic</type>
-            <address>16409</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta</name>
-            <type>generic</type>
-            <address>16450</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
-            <type>generic</type>
-            <address>16461</address>
+            <address>16406</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3292,9 +2942,58 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB14.MID_Rly1.CB_state</name>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E</name>
             <type>generic</type>
-            <address>16402</address>
+            <address>16450</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_qREF1</name>
+            <type>generic</type>
+            <address>16459</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB19.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB2.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16419</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB3.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16422</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
+            <type>generic</type>
+            <address>16460</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_ctrl</name>
+            <type>generic</type>
+            <address>16466</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB5.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16432</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3306,42 +3005,14 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB12.MID_Rly1.SEL_787.Q</name>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu</name>
             <type>generic</type>
-            <address>16400</address>
+            <address>16454</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.Q1</name>
-            <type>generic</type>
-            <address>16469</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
-            <type>generic</type>
-            <address>16464</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB19.MID_Rly1.SEL_787.P</name>
-            <type>generic</type>
-            <address>16415</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus208</name>
-            <type>voltage</type>
-            <address>16391</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.E_q1</name>
+            <name>Grid forming inverter (averaged).Controller.E_mag</name>
             <type>generic</type>
             <address>16457</address>
             <initial_condition>None</initial_condition>
@@ -3355,9 +3026,345 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.E_qREF1</name>
+            <name>Vrms_bus201</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB2.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16421</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB8.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16443</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB12.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB5.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16431</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB4.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16428</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB14.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus206</name>
+            <type>voltage</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB6.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16435</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB6.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16437</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB15.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB1.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
+            <type>generic</type>
+            <address>16463</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB1.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB4.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16429</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus203</name>
+            <type>voltage</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB8.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16444</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_q1</name>
             <type>generic</type>
             <address>16458</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus207</name>
+            <type>voltage</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB1.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
+            <type>generic</type>
+            <address>16464</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB3.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16424</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB3.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16425</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB18.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.P1</name>
+            <type>generic</type>
+            <address>16447</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Q1</name>
+            <type>generic</type>
+            <address>16470</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB4.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16427</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus209</name>
+            <type>voltage</type>
+            <address>16392</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V</name>
+            <type>generic</type>
+            <address>16451</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB7.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16441</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus205</name>
+            <type>voltage</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB15.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB14.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB8.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16445</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB2.MID_Rly1.SEL_787.Q</name>
+            <type>generic</type>
+            <address>16420</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB5.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16433</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.f1</name>
+            <type>generic</type>
+            <address>16472</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB19.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB3.MID_Rly1.SEL_787.P</name>
+            <type>generic</type>
+            <address>16423</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+            <type>generic</type>
+            <address>16448</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB4.MID_Rly1.CB_state</name>
+            <type>generic</type>
+            <address>16426</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Ppu</name>
+            <type>generic</type>
+            <address>16469</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
+            <type>generic</type>
+            <address>16467</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB18.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_CB14.MID_Rly1.SEL_787.Relay 25-Sync Check1.Phase Comparator.c_out</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus208</name>
+            <type>voltage</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_error</name>
+            <type>generic</type>
+            <address>16465</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu</name>
+            <type>generic</type>
+            <address>16453</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.P1</name>
+            <type>generic</type>
+            <address>16468</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3370,8 +3377,8 @@
         </cell>
 
         <cell>
-            <name>Grid forming inverter (averaged).CB_control.GCB OFF</name>
-            <address>2050</address>
+            <name>Grid forming inverter (averaged).CB_control.Grid_Islanded ON</name>
+            <address>2053</address>
         </cell>
 
         <cell>
@@ -3380,18 +3387,8 @@
         </cell>
 
         <cell>
-            <name>Grid forming inverter (averaged).CB_control.Grid_Islanded OFF</name>
-            <address>2052</address>
-        </cell>
-
-        <cell>
-            <name>Grid feeding inverter (averaged).GCB OFF</name>
-            <address>2048</address>
-        </cell>
-
-        <cell>
-            <name>Grid forming inverter (averaged).CB_control.GCB ON</name>
-            <address>2051</address>
+            <name>Grid forming inverter (averaged).CB_control.GCB OFF</name>
+            <address>2050</address>
         </cell>
 
         <cell>
@@ -3400,13 +3397,93 @@
         </cell>
 
         <cell>
-            <name>Grid forming inverter (averaged).CB_control.Grid_Islanded ON</name>
-            <address>2053</address>
+            <name>Grid forming inverter (averaged).CB_control.Grid_Islanded OFF</name>
+            <address>2052</address>
+        </cell>
+
+        <cell>
+            <name>Grid forming inverter (averaged).CB_control.GCB ON</name>
+            <address>2051</address>
+        </cell>
+
+        <cell>
+            <name>Grid feeding inverter (averaged).GCB OFF</name>
+            <address>2048</address>
         </cell>
 
     </do_var_list>
 
     <scada_inputs>
+        <scada_input>
+            <name>F2_CB3.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063652</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB9.Brk.F3_CB9</name>
+            <addr>1426063676</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB2.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063648</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Grid feeding inverter (averaged).Connect GFL</name>
+            <addr>1426063680</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>unsigned_int</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063664</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Qref_feed</name>
+            <addr>1426063708</addr>
+            <min>-70000.0</min>
+            <max>70000.0</max>
+            <def_value>0.0</def_value>
+            <unit>vars</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063668</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
         <scada_input>
             <name>F2_CB5.MID_Rly1.SEL_787.Control Panel Input1</name>
             <addr>1426063660</addr>
@@ -3418,8 +3495,28 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB19.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063644</addr>
+            <name>F2_CB12.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063628</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Pref_form</name>
+            <addr>1426063704</addr>
+            <min>-70000.0</min>
+            <max>70000.0</max>
+            <def_value>0.0</def_value>
+            <unit>W</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB8.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063672</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3438,12 +3535,22 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Grid forming inverter (averaged).Controller.Frequency droop.wref</name>
-            <addr>1426063692</addr>
-            <min>0.7</min>
-            <max>1.3</max>
+            <name>Grid forming inverter (averaged).Connect GFM</name>
+            <addr>1426063688</addr>
+            <min>0.0</min>
+            <max>1.0</max>
             <def_value>1.0</def_value>
-            <unit>pu</unit>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB19.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063644</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
             <widget_type>float</widget_type>
             <format>real</format>
         </scada_input>
@@ -3458,8 +3565,18 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063668</addr>
+            <name>Grid forming inverter (averaged).Controller.Frequency droop.wref</name>
+            <addr>1426063692</addr>
+            <min>0.7</min>
+            <max>1.3</max>
+            <def_value>1.0</def_value>
+            <unit>pu</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB15.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063636</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3468,34 +3585,14 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Qref_form</name>
-            <addr>1426063712</addr>
-            <min>-70000.0</min>
-            <max>70000.0</max>
-            <def_value>0.0</def_value>
-            <unit>Vars</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063664</addr>
+            <name>3ph Fault 208.ctrl</name>
+            <addr>1426063620</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
             <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB4.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063656</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
+            <widget_type>int</widget_type>
+            <format>integer</format>
         </scada_input>
         <scada_input>
             <name>Grid forming inverter (averaged).Controller.Voltage droop.Vref</name>
@@ -3518,81 +3615,21 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB2.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063648</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB12.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063628</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Qref_feed</name>
-            <addr>1426063708</addr>
+            <name>Qref_form</name>
+            <addr>1426063712</addr>
             <min>-70000.0</min>
             <max>70000.0</max>
             <def_value>0.0</def_value>
-            <unit>vars</unit>
+            <unit>Vars</unit>
             <widget_type>float</widget_type>
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB3.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063652</addr>
+            <name>F2_CB4.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063656</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB8.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063672</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Grid forming inverter (averaged).Connect GFM</name>
-            <addr>1426063688</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>1.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>3ph Fault 208.ctrl</name>
-            <addr>1426063620</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB9.Brk.F3_CB9</name>
-            <addr>1426063676</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>1.0</def_value>
             <unit></unit>
             <widget_type>float</widget_type>
             <format>real</format>
@@ -3608,36 +3645,6 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>Grid feeding inverter (averaged).Connect GFL</name>
-            <addr>1426063680</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>unsigned_int</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB14.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063632</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Pref_form</name>
-            <addr>1426063704</addr>
-            <min>-70000.0</min>
-            <max>70000.0</max>
-            <def_value>0.0</def_value>
-            <unit>W</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
             <name>Pref_feed</name>
             <addr>1426063700</addr>
             <min>-70000.0</min>
@@ -3648,8 +3655,8 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB15.MID_Rly1.SEL_787.Control Panel Input1</name>
-            <addr>1426063636</addr>
+            <name>F2_CB14.MID_Rly1.SEL_787.Control Panel Input1</name>
+            <addr>1426063632</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3671,9 +3678,9 @@
         </monitor>
         <monitor>
             <type>user</type>
-            <execution_rates>[0.0002, 0.001]</execution_rates>
-            <execution_rate_labels>['ER0 (0.0002)', 'ER1 (0.001)']</execution_rate_labels>
-            <timer_counters>[28000.0, 140000.0]</timer_counters>
+            <execution_rates>[2e-05, 0.001]</execution_rates>
+            <execution_rate_labels>['ER0 (2e-05)', 'ER1 (0.001)']</execution_rate_labels>
+            <timer_counters>[2800.0000000000005, 140000.0]</timer_counters>
 
             
         </monitor>
