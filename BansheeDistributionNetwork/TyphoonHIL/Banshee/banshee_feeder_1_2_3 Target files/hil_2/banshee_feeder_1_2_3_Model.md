@@ -1,4 +1,4 @@
-Model Banshee_Feeder_1_2_3
+Model banshee_feeder_1_2_3
 
 REM *****************************************:
 REM * Common entries:
@@ -11,8 +11,8 @@ REM Module block enable
 rtds_write 0x00000003 0x00000001
 rtds_file_write 0x00820000 indm_v2_imem.txt
 rtds_file_write 0x00810010 indm_v2_gprst.txt
-rtds_write 0x00810000 0x0000081B
-rtds_write 0x00810001 0x0000081D
+rtds_write 0x00810000 0x00000820
+rtds_write 0x00810001 0x00000822
 rtds_write 0x00810400 0x40400000
 rtds_write 0x00810401 0x00000000
 rtds_write 0x00810402 0x3F7FF66F
@@ -44,6 +44,7 @@ rtds_write 0x0081041B 0x00000000
 rtds_write 0x00800001 4e-06
 rtds_write 0x00800011 1.2525442304681383e-07
 rtds_write 0x00800012 0.5
+rtds_write 0x00800017 1.0
 rtds_write 0x00800005 0x00000000
 rtds_write 0x00800020 0x00000007
 rtds_write 0x0080001E 0.0
@@ -308,7 +309,7 @@ rtds_write 0x08640403 0x00000001
 
 REM SPC1 GDS compensation settings...
 rtds_write 0x084C0000 0x00000001
-rtds_write 0x084C0001 0x00000014
+rtds_write 0x084C0001 0x0000001F
 rtds_write 0x084C0004 0x3BA3D70A
 rtds_write 0x084C0005 0x3D710000
 rtds_write 0x08500000 0x000000C8
@@ -436,7 +437,7 @@ rtds_write 0x08A40402 0x00000001
 
 REM SPC2 GDS compensation settings...
 rtds_write 0x088C0000 0x00000001
-rtds_write 0x088C0001 0x00000010
+rtds_write 0x088C0001 0x0000000F
 rtds_write 0x088C0004 0x3BA3D70A
 rtds_write 0x088C0005 0x3D710000
 rtds_write 0x08900000 0x000000C8
@@ -555,7 +556,7 @@ rtds_write 0x08E40401 0x00000001
 
 REM SPC3 GDS compensation settings...
 rtds_write 0x08CC0000 0x00000001
-rtds_write 0x08CC0001 0x0000000A
+rtds_write 0x08CC0001 0x0000000D
 rtds_write 0x08CC0004 0x3BA3D70A
 rtds_write 0x08CC0005 0x3D710000
 rtds_write 0x08D00000 0x000000C8
@@ -683,7 +684,7 @@ rtds_write 0x09240402 0x00000000
 
 REM SPC4 GDS compensation settings...
 rtds_write 0x090C0000 0x00000001
-rtds_write 0x090C0001 0x0000000E
+rtds_write 0x090C0001 0x00000011
 rtds_write 0x090C0004 0x3BA3D70A
 rtds_write 0x090C0005 0x3D710000
 rtds_write 0x09100000 0x000000C8
@@ -701,7 +702,7 @@ REM *****************************************:
 REM SPC5 Topology Selector (TS) initialization...
 rtds_file_write 0x09580000 SPC5_red_table.txt
 
-rtds_write 0x09500020 0x00000000
+rtds_write 0x09500020 0x00000001
 rtds_write 0x09500021 0x00000000
 rtds_write 0x09500023 0x00000000
 rtds_write 0x09500024 0x00000000
@@ -722,7 +723,7 @@ rtds_write 0x0950003A 0x00000000
 rtds_write 0x0950003B 0x00000000
 rtds_file_write 0x09540000 trivial_imem.txt
 rtds_file_write 0x09542000 trivial_lut.txt
-rtds_write 0x09500040 0x00000000
+rtds_write 0x09500040 0x00000001
 rtds_write 0x09500041 0x00000000
 rtds_write 0x09500043 0x00000000
 rtds_write 0x09500044 0x00000000
@@ -743,7 +744,7 @@ rtds_write 0x0950005A 0x00000000
 rtds_write 0x0950005B 0x00000000
 rtds_file_write 0x09548000 trivial_imem.txt
 rtds_file_write 0x0954A000 trivial_lut.txt
-rtds_write 0x09500060 0x00000000
+rtds_write 0x09500060 0x00000001
 rtds_write 0x09500061 0x00000000
 rtds_write 0x09500063 0x00000000
 rtds_write 0x09500064 0x00000000
@@ -783,11 +784,11 @@ rtds_write 0x09500004 0x00000000
 REM SPC5 Contactors initialization...
 
 REM SPC5 GDS compensation settings...
-rtds_write 0x094C0000 0x00000000
+rtds_write 0x094C0000 0x00000001
 rtds_write 0x094C0001 0x00000000
-rtds_write 0x094C0004 0x00000000
-rtds_write 0x094C0005 0x00000000
-rtds_write 0x09500000 0x00000000
+rtds_write 0x094C0004 0x3BA3D70A
+rtds_write 0x094C0005 0x3D710000
+rtds_write 0x09500000 0x000000C8
 
 REM SPC5 FSM digital input pin assignments...
 
@@ -1011,9 +1012,6 @@ REM post SP Init calculation...
 rtds_write  
 rtds_write 0x00000041 0x000011C1
 rtds_write 0x00000005 0x00000003
-glbl_write 0x41200008 0x00000001
-glbl_write 0x42200008 0x00000001
-glbl_write 0x43200008 0x00000000
 rtds_write 0x00000043 0x00002710
 rtds_write 0x00000042 0x000001F3
 rtds_write 0x0000000A 0x00000001
@@ -1039,10 +1037,16 @@ glbl_write 0xf8000244 0x2
 glbl_write 0xf8000244 0x22
 glbl_write 0xf8000244 0x20
 glbl_write 0xf8000244 0x0
-glbl_file_write 0x27800000 cop_1_app_imem.bin
-glbl_file_write 0x55000080 cop_1_app_fsa.bin
-glbl_file_write 0x20a00000 cop_2_app_imem.bin
-glbl_file_write 0xfffc0000 cop_2_app_dmem.bin
+glbl_file_write 0x17000000 sys_sp_cpu_0_imem.bin
+glbl_file_write 0x55000080 sys_sp_cpu_0_fsa.bin
+glbl_file_write 0x15000000 user_sp_cpu_0_imem.bin
+glbl_file_write 0xfffc0000 user_sp_cpu_0_dmem.bin
+
+
+REM special case for HIL402 for eth ve and SV
+
+
+REM sys_command 0x0
 
 
 REM disable can devices
@@ -1056,7 +1060,7 @@ sys_command 0x1
 REM enable ETH0 Intr on Core0 CPU
 glbl_write 0xF8F01834 0x01010101
 glbl_write 0x40800000 0x6
-glbl_write 0xfffffff0 0x20a00000
+glbl_write 0xfffffff0 0x15000000
 
 
 REM Restart counter for collected Linux OS communication apps
@@ -1065,5 +1069,5 @@ app_file_write 0x0 app_init
 REM Download Linux APP
 app_file_write 0x5 mbus_server_app.elf
 
-rtds_write 0x00000027 0x00000258
+rtds_write 0x00000027 0x0000012C
 rtds_write 0x00000040 0x00FFFFFF

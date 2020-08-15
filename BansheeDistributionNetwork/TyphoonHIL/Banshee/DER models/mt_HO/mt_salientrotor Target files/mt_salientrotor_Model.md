@@ -247,7 +247,7 @@ REM *****************************************:
 REM SPC2 Topology Selector (TS) initialization...
 rtds_file_write 0x08980000 SPC2_red_table.txt
 
-rtds_write 0x08900020 0x00000001
+rtds_write 0x08900020 0x00000000
 rtds_write 0x08900021 0x00000000
 rtds_write 0x08900023 0x00000000
 rtds_write 0x08900024 0x00000000
@@ -268,7 +268,7 @@ rtds_write 0x0890003A 0x00000000
 rtds_write 0x0890003B 0x00000000
 rtds_file_write 0x08940000 trivial_imem.txt
 rtds_file_write 0x08942000 trivial_lut.txt
-rtds_write 0x08900040 0x00000001
+rtds_write 0x08900040 0x00000000
 rtds_write 0x08900041 0x00000000
 rtds_write 0x08900043 0x00000000
 rtds_write 0x08900044 0x00000000
@@ -289,7 +289,7 @@ rtds_write 0x0890005A 0x00000000
 rtds_write 0x0890005B 0x00000000
 rtds_file_write 0x08948000 trivial_imem.txt
 rtds_file_write 0x0894A000 trivial_lut.txt
-rtds_write 0x08900060 0x00000001
+rtds_write 0x08900060 0x00000000
 rtds_write 0x08900061 0x00000000
 rtds_write 0x08900063 0x00000000
 rtds_write 0x08900064 0x00000000
@@ -329,11 +329,11 @@ rtds_write 0x08900004 0x00000000
 REM SPC2 Contactors initialization...
 
 REM SPC2 GDS compensation settings...
-rtds_write 0x088C0000 0x00000001
+rtds_write 0x088C0000 0x00000000
 rtds_write 0x088C0001 0x00000000
-rtds_write 0x088C0004 0x3BA3D70A
-rtds_write 0x088C0005 0x3D710000
-rtds_write 0x08900000 0x000000C8
+rtds_write 0x088C0004 0x00000000
+rtds_write 0x088C0005 0x00000000
+rtds_write 0x08900000 0x00000000
 
 REM SPC2 FSM digital input pin assignments...
 
@@ -348,7 +348,7 @@ REM *****************************************:
 REM SPC3 Topology Selector (TS) initialization...
 rtds_file_write 0x08D80000 SPC3_red_table.txt
 
-rtds_write 0x08D00020 0x00000001
+rtds_write 0x08D00020 0x00000000
 rtds_write 0x08D00021 0x00000000
 rtds_write 0x08D00023 0x00000000
 rtds_write 0x08D00024 0x00000000
@@ -369,7 +369,7 @@ rtds_write 0x08D0003A 0x00000000
 rtds_write 0x08D0003B 0x00000000
 rtds_file_write 0x08D40000 trivial_imem.txt
 rtds_file_write 0x08D42000 trivial_lut.txt
-rtds_write 0x08D00040 0x00000001
+rtds_write 0x08D00040 0x00000000
 rtds_write 0x08D00041 0x00000000
 rtds_write 0x08D00043 0x00000000
 rtds_write 0x08D00044 0x00000000
@@ -390,7 +390,7 @@ rtds_write 0x08D0005A 0x00000000
 rtds_write 0x08D0005B 0x00000000
 rtds_file_write 0x08D48000 trivial_imem.txt
 rtds_file_write 0x08D4A000 trivial_lut.txt
-rtds_write 0x08D00060 0x00000001
+rtds_write 0x08D00060 0x00000000
 rtds_write 0x08D00061 0x00000000
 rtds_write 0x08D00063 0x00000000
 rtds_write 0x08D00064 0x00000000
@@ -430,11 +430,11 @@ rtds_write 0x08D00004 0x00000000
 REM SPC3 Contactors initialization...
 
 REM SPC3 GDS compensation settings...
-rtds_write 0x08CC0000 0x00000001
+rtds_write 0x08CC0000 0x00000000
 rtds_write 0x08CC0001 0x00000000
-rtds_write 0x08CC0004 0x3BA3D70A
-rtds_write 0x08CC0005 0x3D710000
-rtds_write 0x08D00000 0x000000C8
+rtds_write 0x08CC0004 0x00000000
+rtds_write 0x08CC0005 0x00000000
+rtds_write 0x08D00000 0x00000000
 
 REM SPC3 FSM digital input pin assignments...
 

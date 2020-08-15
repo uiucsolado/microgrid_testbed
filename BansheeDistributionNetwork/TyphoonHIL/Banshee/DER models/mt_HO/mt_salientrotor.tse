@@ -2,13 +2,13 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.2
-// Save timestamp: 13-Aug-2020 @ 12:07:28 AM
+// Save timestamp: 14-Aug-2020 @ 04:52:44 PM
 //
 
 model "mt_salientrotor" {
     configuration {
         hil_device = "HIL603"
-        hil_configuration_id = 1
+        hil_configuration_id = 2
         simulation_method = exact
         simulation_time_step = 4e-6
         simulation_discret_scaling = 1.0
@@ -22,7 +22,7 @@ model "mt_salientrotor" {
         enb_dep_sw_detect = False
         code_section = "external memory"
         data_section = "internal memory"
-        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_1 = 5e-05
         sys_sp_rate_2 = 0.05
         sys_real_type_precision = "default"
         user_real_type_precision = "double precision"
@@ -226,6 +226,14 @@ model "mt_salientrotor" {
             position = 7168, 7976
             hide_name = True
             size = 64, 256
+        ]
+
+        component sys_hil_marker "Device Marker1" {
+            hw_configuration_id = "2"
+            override_hw_settings = "True"
+        }
+        [
+            position = 6624, 7896
         ]
 
         component Subsystem Microturbine {
@@ -1047,7 +1055,7 @@ else
                 gain = "pms*(2*np.pi)/60"
             }
             [
-                position = 7120, 8072
+                position = 7136, 8072
                 hide_name = True
                 scale = -1, 1
             ]
@@ -1055,7 +1063,7 @@ else
             component gen_probe w_M {
             }
             [
-                position = 7216, 8072
+                position = 7232, 8072
             ]
 
             component gen_gain Gain18 {
@@ -4559,20 +4567,6 @@ var += (Ts*in);
                     size = 64, 32
                 ]
 
-                component "core/Four Phase Core Coupling" "Core Coupling MT_out" {
-                }
-                [
-                    position = 8448, 8912
-                    size = 12, 352
-                ]
-
-                component "core/Single Phase Core Coupling" "Core Coupling MT_in" {
-                }
-                [
-                    position = 6696, 8600
-                    size = 12, 256
-                ]
-
                 component gen_gain Gain17 {
                     gain = "60/(2*np.pi)"
                 }
@@ -5136,7 +5130,7 @@ var += (Ts*in);
 
                 junction Junction89 sp
                 [
-                    position = 7392, 9256
+                    position = 7384, 9256
                 ]
 
                 junction Junction91 sp
@@ -5154,22 +5148,16 @@ var += (Ts*in);
                     position = 7824, 9160
                 ]
 
-                junction Junction94 pe
-                [
-                    position = 8184, 9056
-                ]
-
                 junction Junction95 pe
                 [
                     position = 8048, 9056
                 ]
 
-                connect "Core Coupling MT_out.b_out" Eb as Connection1429
-                connect "Core Coupling MT_out.c_out" Ec as Connection1427
-                connect "Core Coupling MT_out.d_out" ground as Connection1425
-                connect "Core Coupling MT_out.a_out" Ea as Connection1428
-                connect "Core Coupling MT_in.b_in" "- E_F" as Connection1430
-                connect "Core Coupling MT_in.a_in" "+ E_F" as Connection1426
+                junction Junction96 pe
+                [
+                    position = 8184, 9056
+                ]
+
                 connect E_qp.E_qp3 Junction7 as Connection128
                 connect E_qp3 Phi_1d_a.E_qp as Connection34
                 connect E_qp_M.in Junction7 as Connection130
@@ -5259,19 +5247,8 @@ var += (Ts*in);
                 [
                     breakpoints = 8048, 8864
                 ]
-                connect "Core Coupling MT_in.b_out" E_F.n_node as Connection1422
-                connect Ic1.n_node "Core Coupling MT_out.c_in" as Connection1550
-                connect "Core Coupling MT_in.a_out" E_F.p_node as Connection1424
-                connect Ec1.n_node Junction94 as Connection1552
-                connect Junction94 "Core Coupling MT_out.d_in" as Connection1553
-                [
-                    breakpoints = 8184, 9056; 8304, 9056; 8304, 9056; 8424, 9056
-                ]
-                connect Ib1.n_node "Core Coupling MT_out.b_in" as Connection1555
                 connect Eb1.n_node Junction95 as Connection1556
-                connect Junction95 Junction94 as Connection1557
                 connect Ea1.n_node Junction95 as Connection1558
-                connect Ia1.n_node "Core Coupling MT_out.a_in" as Connection1559
                 connect V_a1 Ea1.in as Connection1560
                 connect Gain17.in Junction20 as Connection1563
                 [
@@ -5281,9 +5258,20 @@ var += (Ts*in);
                 connect "Rate Transition1.out" w_m.T_M as Connection1565
                 connect "Speed (rpm)" "Rate Transition2.out" as Connection1566
                 connect "Rate Transition2.in" Gain17.out as Connection1567
+                connect E_F.p_node "+ E_F" as Connection1568
+                connect E_F.n_node "- E_F" as Connection1569
+                connect Ec1.n_node Junction96 as Connection1571
+                connect Junction96 Junction95 as Connection1572
+                [
+                    breakpoints = 8184, 9056
+                ]
+                connect ground Junction96 as Connection1573
+                connect Ec Ic1.n_node as Connection1574
+                connect Eb Ib1.n_node as Connection1575
+                connect Ea Ia1.n_node as Connection1576
             }
             [
-                position = 7104, 8272
+                position = 7104, 8280
                 size = 208, 216
             ]
 
@@ -6830,7 +6818,7 @@ out = in - (6.283185307179586*floor_in);
                 component gen_probe "|E|" {
                 }
                 [
-                    position = 8120, 8592
+                    position = 8128, 8544
                 ]
 
                 component Subsystem magnitude {
@@ -6939,6 +6927,21 @@ out = in - (6.283185307179586*floor_in);
                 [
                     position = 7568, 7960
                     hide_name = True
+                ]
+
+                component gen_gain Gain18 {
+                    gain = "V_ABC*np.sqrt(3)/1000"
+                }
+                [
+                    position = 8072, 8600
+                    rotation = left
+                    hide_name = True
+                ]
+
+                component gen_probe "|E| pu" {
+                }
+                [
+                    position = 8120, 8720
                 ]
 
                 tag From43 {
@@ -7567,6 +7570,11 @@ out = in - (6.283185307179586*floor_in);
                     position = 7472, 8472
                 ]
 
+                junction Junction104 sp
+                [
+                    position = 8072, 8648
+                ]
+
                 connect "Digital Probe4.in" Junction38 as Connection366
                 connect From41 Limit1.in as Connection285
                 connect Sum3.in1 From1 as Connection81
@@ -7727,7 +7735,6 @@ out = in - (6.283185307179586*floor_in);
                 connect E_q.in Junction101 as Connection1388
                 connect magnitude.magnitude Junction46 as Connection326
                 connect Junction46 "|V|5" as Connection327
-                connect "|E|.in" Junction46 as Connection328
                 connect From52 magnitude.d as Connection745
                 connect From53 magnitude.q as Connection746
                 connect "confine phase.in" Sum1.out as Connection1446
@@ -7754,6 +7761,10 @@ out = in - (6.283185307179586*floor_in);
                 connect Goto35 "Hold after connect3.out" as Connection1476
                 connect Goto34 "Hold after connect2.out" as Connection1477
                 connect "Unit Delay5.in" "stay connected1.out" as Connection1478
+                connect "|E|.in" Gain18.out as Connection1479
+                connect Gain18.in Junction104 as Connection1481
+                connect Junction104 Junction46 as Connection1482
+                connect "|E| pu.in" Junction104 as Connection1483
             }
             [
                 position = 8024, 7936
@@ -8502,7 +8513,7 @@ if(boolean==1){
                 }
             }
             [
-                position = 6760, 7648
+                position = 6744, 7848
                 size = 144, 136
             ]
 
@@ -8515,15 +8526,6 @@ if(boolean==1){
             [
                 position = 8560, 8280
                 size = 56, 240
-            ]
-
-            port ground {
-                position = bottom:auto
-                kind = pe
-            }
-            [
-                position = 8680, 8512
-                scale = -1, 1
             ]
 
             port V_aG {
@@ -8696,7 +8698,7 @@ if(boolean==1){
                 direction = in
             }
             [
-                position = 7224, 8024
+                position = 7240, 8024
                 rotation = down
                 hide_name = True
                 scale = -1, 1
@@ -8799,7 +8801,7 @@ if(boolean==1){
 
             junction Junction221 sp
             [
-                position = 7168, 8072
+                position = 7184, 8072
             ]
 
             junction Junction222 pe
@@ -8815,11 +8817,6 @@ if(boolean==1){
             junction Junction224 pe
             [
                 position = 8440, 8184
-            ]
-
-            junction Junction225 pe
-            [
-                position = 8560, 8512
             ]
 
             connect Constant1.out "Signal switch2.in" as Connection360
@@ -8934,12 +8931,10 @@ if(boolean==1){
             ]
             connect "Three-phase Meter1.A+" Junction224 as Connection1892
             connect "Three-phase Meter1.A-" V_aG as Connection1893
-            connect ground Junction225 as Connection1894
-            connect Junction225 Junction202 as Connection1895
+            connect Junction202 "Three-phase Meter1.GND" as Connection1897
             [
-                breakpoints = 8544, 8512; 8544, 8512; 8440, 8512
+                breakpoints = 8440, 8512; 8440, 8512; 8544, 8512; 8544, 8512; 8560, 8512
             ]
-            connect "Three-phase Meter1.GND" Junction225 as Connection1896
 
             Ts_sys = "Ts"
 
@@ -9593,16 +9588,8 @@ if(boolean==1){
             }
         }
         [
-            position = 6600, 8120
+            position = 6512, 8096
             size = 200, 96
-        ]
-
-        component sys_hil_marker "Device Marker1" {
-            hw_configuration_id = "2"
-            override_hw_settings = "True"
-        }
-        [
-            position = 6624, 7896
         ]
 
         tag V_d_a {
@@ -9716,22 +9703,17 @@ if(boolean==1){
 
         junction Junction132 pe
         [
-            position = 6832, 7976
+            position = 6624, 7960
         ]
 
         junction Junction133 pe
         [
-            position = 6864, 7992
+            position = 6832, 7976
         ]
 
         junction Junction134 pe
         [
-            position = 6832, 8296
-        ]
-
-        junction Junction135 pe
-        [
-            position = 6624, 7960
+            position = 6864, 7992
         ]
 
         connect V_q_a Va_G.in as Connection312
@@ -9789,34 +9771,35 @@ if(boolean==1){
         [
             breakpoints = 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 7040, 7960; 7120, 7960
         ]
-        connect S4.b_in Junction132 as Connection1130
-        connect Junction132 "Constant Impedance Load1.B" as Connection1131
+        connect Junction63 "Constant Impedance Load1.N" as Connection1143
         [
-            breakpoints = 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976
+            breakpoints = 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296
         ]
-        connect Microturbine.V_bG Junction132 as Connection1132
-        connect S4.c_in Junction133 as Connection1133
+        connect Termination1.in "Microturbine.MCB Control" as Connection1147
+        connect Junction131 Junction132 as Connection1148
+        [
+            breakpoints = 6800, 7960
+        ]
+        connect Junction132 "Device Marker1.node" as Connection1149
+        [
+            breakpoints = 6624, 7960
+        ]
+        connect Microturbine.V_aG Junction132 as Connection1150
+        connect S4.b_in Junction133 as Connection1151
+        connect Junction133 "Constant Impedance Load1.B" as Connection1152
+        [
+            breakpoints = 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976
+        ]
+        connect Microturbine.V_bG Junction133 as Connection1153
+        connect S4.c_in Junction134 as Connection1154
         [
             breakpoints = 7120, 7992
         ]
-        connect Junction133 "Constant Impedance Load1.C" as Connection1134
+        connect Junction134 "Constant Impedance Load1.C" as Connection1155
         [
-            breakpoints = 6864, 7992; 6864, 7992; 6864, 7992
+            breakpoints = 6864, 7992; 6864, 7992; 6864, 7992; 6864, 7992
         ]
-        connect Microturbine.V_cG Junction133 as Connection1135
-        connect Junction63 Junction134 as Connection1136
-        [
-            breakpoints = 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296
-        ]
-        connect Junction134 "Constant Impedance Load1.N" as Connection1137
-        [
-            breakpoints = 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296
-        ]
-        connect Microturbine.ground Junction134 as Connection1138
-        connect Termination1.in "Microturbine.MCB Control" as Connection1139
-        connect Microturbine.V_aG Junction135 as Connection1140
-        connect Junction135 Junction131 as Connection1141
-        connect "Device Marker1.node" Junction135 as Connection1142
+        connect Microturbine.V_cG Junction134 as Connection1156
     }
 
     logically_deleted {
@@ -10091,20 +10074,6 @@ if(boolean==1){
             signal_name = ""
         }
 
-        "core/Four Phase Core Coupling" {
-            snb_type_i = "none"
-            R1 = "100e3"
-            C1 = "1e-06"
-            C2 = "1e-06"
-            fixed_snb_i = "false"
-            snb_type_u = "none"
-            R2 = "0.1"
-            L1 = "0.1"
-            L2 = "0.1"
-            fixed_snb_u = "false"
-            cpl_connection = "star"
-        }
-
         "core/RL Section" {
             model_def = "R-L"
             unit_sys = "imperial"
@@ -10132,19 +10101,6 @@ if(boolean==1){
 
         "core/Signal Controlled Voltage Source" {
             execution_rate = "inherit"
-        }
-
-        "core/Single Phase Core Coupling" {
-            snb_type_i = "none"
-            R1 = "100000.0"
-            C1 = "1e-06"
-            C2 = "1e-06"
-            fixed_snb_i = "false"
-            snb_type_u = "none"
-            R2 = "0.1"
-            L1 = "0.1"
-            L2 = "0.1"
-            fixed_snb_u = "false"
         }
 
         "core/Three-phase Meter" {

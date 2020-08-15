@@ -1,603 +1,603 @@
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../src/main.o -c ../src/main.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../src/modbus_reply.o -c ../src/modbus_reply.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../src_gen/hashmap_control.o -c ../src_gen/hashmap_control.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus.o -c ../../../thirdparty_libs/libmodbus/modbus.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus-data.o -c ../../../thirdparty_libs/libmodbus/modbus-data.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus-rtu.o -c ../../../thirdparty_libs/libmodbus/modbus-rtu.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus-tcp.o -c ../../../thirdparty_libs/libmodbus/modbus-tcp.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/hashmap/hashmap.o -c ../../../thirdparty_libs/hashmap/hashmap.c
-arm-xilinx-linux-gnueabi-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../bsp/hil-mappings.o -c ../../bsp/hil-mappings.c
-arm-xilinx-linux-gnueabi-gcc  -lpthread ../src/main.o ../src/modbus_reply.o ../src_gen/hashmap_control.o ../../../thirdparty_libs/libmodbus/modbus.o ../../../thirdparty_libs/libmodbus/modbus-data.o ../../../thirdparty_libs/libmodbus/modbus-rtu.o ../../../thirdparty_libs/libmodbus/modbus-tcp.o ../../../thirdparty_libs/hashmap/hashmap.o ../../bsp/hil-mappings.o   -o mbus_server_app.elf -O2
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../src/main.o -c ../src/main.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../src/modbus_reply.o -c ../src/modbus_reply.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../src_gen/hashmap_control.o -c ../src_gen/hashmap_control.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus.o -c ../../../thirdparty_libs/libmodbus/modbus.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus-data.o -c ../../../thirdparty_libs/libmodbus/modbus-data.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus-rtu.o -c ../../../thirdparty_libs/libmodbus/modbus-rtu.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/libmodbus/modbus-tcp.o -c ../../../thirdparty_libs/libmodbus/modbus-tcp.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../../thirdparty_libs/hashmap/hashmap.o -c ../../../thirdparty_libs/hashmap/hashmap.c
+arm-linux-gnueabihf-gcc -s -Wall -Iport -I../../../thirdparty_libs/libmodbus -I../../../thirdparty_libs/hashmap -I../src_gen -I../../bsp -I../include -O2 -pthread -o ../../bsp/hil-mappings.o -c ../../bsp/hil-mappings.c
+arm-linux-gnueabihf-gcc  -lpthread ../src/main.o ../src/modbus_reply.o ../src_gen/hashmap_control.o ../../../thirdparty_libs/libmodbus/modbus.o ../../../thirdparty_libs/libmodbus/modbus-data.o ../../../thirdparty_libs/libmodbus/modbus-rtu.o ../../../thirdparty_libs/libmodbus/modbus-tcp.o ../../../thirdparty_libs/hashmap/hashmap.o ../../bsp/hil-mappings.o   -o mbus_server_app.elf -O2
 
-In file included from ../src/main.c:34:0:
-../src_gen/modbus_config.h:106:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x55000218 },
-                                          ^
-../src_gen/modbus_config.h:106:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:108:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x55000214 },
-                                          ^
-../src_gen/modbus_config.h:108:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:109:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000154 },
-                                          ^
-../src_gen/modbus_config.h:109:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_out_hil_addr') [enabled by default]
-In file included from ../src/main.c:34:0:
-../src_gen/modbus_config.h:116:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x5500021c },
-                                          ^
-../src_gen/modbus_config.h:116:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:132:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x550002f8 },
-                                          ^
-../src_gen/modbus_config.h:132:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:134:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x550002f4 },
-                                          ^
-../src_gen/modbus_config.h:134:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:135:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000174 },
-                                          ^
-../src_gen/modbus_config.h:135:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:142:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x550002fc },
-                                          ^
-../src_gen/modbus_config.h:142:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:158:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x55000288 },
-                                          ^
-../src_gen/modbus_config.h:158:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:160:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x55000284 },
-                                          ^
-../src_gen/modbus_config.h:160:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:161:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000164 },
-                                          ^
-../src_gen/modbus_config.h:161:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:168:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x5500028c },
-                                          ^
-../src_gen/modbus_config.h:168:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:184:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x55000368 },
-                                          ^
-../src_gen/modbus_config.h:184:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:186:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x55000364 },
-                                          ^
-../src_gen/modbus_config.h:186:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:187:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000184 },
-                                          ^
-../src_gen/modbus_config.h:187:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:194:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x5500036c },
-                                          ^
-../src_gen/modbus_config.h:194:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:210:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x550003d8 },
-                                          ^
-../src_gen/modbus_config.h:210:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:212:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x550003d4 },
-                                          ^
-../src_gen/modbus_config.h:212:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:213:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000194 },
-                                          ^
-../src_gen/modbus_config.h:213:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:220:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x550003dc },
-                                          ^
-../src_gen/modbus_config.h:220:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:236:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x550001a8 },
-                                          ^
-../src_gen/modbus_config.h:236:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:238:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x550001a4 },
-                                          ^
-../src_gen/modbus_config.h:238:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:239:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000144 },
-                                          ^
-../src_gen/modbus_config.h:239:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:246:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x550001ac },
-                                          ^
-../src_gen/modbus_config.h:246:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:394:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:394:49: warning: (near initialization for 'ModBus_config.Mbus[0].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:397:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:397:49: warning: (near initialization for 'ModBus_config.Mbus[0].register_32') [enabled by default]
-../src_gen/modbus_config.h:398:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:398:49: warning: (near initialization for 'ModBus_config.Mbus[0].register_64') [enabled by default]
-../src_gen/modbus_config.h:400:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:400:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:401:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:401:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:402:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:402:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:405:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:405:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:406:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:406:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:456:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:456:49: warning: (near initialization for 'ModBus_config.Mbus[1].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:459:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:459:49: warning: (near initialization for 'ModBus_config.Mbus[1].register_32') [enabled by default]
-../src_gen/modbus_config.h:460:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:460:49: warning: (near initialization for 'ModBus_config.Mbus[1].register_64') [enabled by default]
-../src_gen/modbus_config.h:462:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:462:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:463:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:463:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:464:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:464:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:467:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:467:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:468:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:468:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:518:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:518:49: warning: (near initialization for 'ModBus_config.Mbus[2].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:521:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:521:49: warning: (near initialization for 'ModBus_config.Mbus[2].register_32') [enabled by default]
-../src_gen/modbus_config.h:522:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:522:49: warning: (near initialization for 'ModBus_config.Mbus[2].register_64') [enabled by default]
-../src_gen/modbus_config.h:524:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:524:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:525:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:525:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:526:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:526:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:529:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:529:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:530:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:530:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:580:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:580:49: warning: (near initialization for 'ModBus_config.Mbus[3].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:583:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:583:49: warning: (near initialization for 'ModBus_config.Mbus[3].register_32') [enabled by default]
-../src_gen/modbus_config.h:584:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:584:49: warning: (near initialization for 'ModBus_config.Mbus[3].register_64') [enabled by default]
-../src_gen/modbus_config.h:586:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:586:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:587:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:587:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:588:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:588:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:591:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:591:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:592:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:592:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:642:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:642:49: warning: (near initialization for 'ModBus_config.Mbus[4].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:645:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:645:49: warning: (near initialization for 'ModBus_config.Mbus[4].register_32') [enabled by default]
-../src_gen/modbus_config.h:646:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:646:49: warning: (near initialization for 'ModBus_config.Mbus[4].register_64') [enabled by default]
-../src_gen/modbus_config.h:648:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:648:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:649:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:649:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:650:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:650:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:653:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:653:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:654:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:654:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:704:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:704:49: warning: (near initialization for 'ModBus_config.Mbus[5].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:707:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:707:49: warning: (near initialization for 'ModBus_config.Mbus[5].register_32') [enabled by default]
-../src_gen/modbus_config.h:708:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:708:49: warning: (near initialization for 'ModBus_config.Mbus[5].register_64') [enabled by default]
-../src_gen/modbus_config.h:710:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:710:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:711:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:711:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:712:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:712:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:715:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:715:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:716:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:716:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_out_64') [enabled by default]
-../src/main.c: In function 'thread_function':
-../src/main.c:685:39: warning: unused variable 'unit_id' [-Wunused-variable]
-                         unsigned char unit_id = query[ctx_ptr[id]->backend->header_length - 1];
-                                       ^
-In file included from ../src/modbus_reply.c:2:0:
-../src_gen/modbus_config.h:106:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x55000218 },
-                                          ^
-../src_gen/modbus_config.h:106:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:108:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x55000214 },
-                                          ^
-../src_gen/modbus_config.h:108:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:109:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000154 },
-                                          ^
-../src_gen/modbus_config.h:109:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_out_hil_addr') [enabled by default]
-In file included from ../src/modbus_reply.c:2:0:
-../src_gen/modbus_config.h:116:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x5500021c },
-                                          ^
-../src_gen/modbus_config.h:116:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[0].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:132:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x550002f8 },
-                                          ^
-../src_gen/modbus_config.h:132:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:134:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x550002f4 },
-                                          ^
-../src_gen/modbus_config.h:134:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:135:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000174 },
-                                          ^
-../src_gen/modbus_config.h:135:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:142:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x550002fc },
-                                          ^
-../src_gen/modbus_config.h:142:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[1].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:158:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x55000288 },
-                                          ^
-../src_gen/modbus_config.h:158:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:160:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x55000284 },
-                                          ^
-../src_gen/modbus_config.h:160:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:161:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000164 },
-                                          ^
-../src_gen/modbus_config.h:161:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:168:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x5500028c },
-                                          ^
-../src_gen/modbus_config.h:168:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[2].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:184:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x55000368 },
-                                          ^
-../src_gen/modbus_config.h:184:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:186:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x55000364 },
-                                          ^
-../src_gen/modbus_config.h:186:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:187:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000184 },
-                                          ^
-../src_gen/modbus_config.h:187:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:194:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x5500036c },
-                                          ^
-../src_gen/modbus_config.h:194:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[3].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:210:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x550003d8 },
-                                          ^
-../src_gen/modbus_config.h:210:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:212:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x550003d4 },
-                                          ^
-../src_gen/modbus_config.h:212:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:213:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000194 },
-                                          ^
-../src_gen/modbus_config.h:213:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:220:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x550003dc },
-                                          ^
-../src_gen/modbus_config.h:220:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[4].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:236:42: warning: excess elements in array initializer [enabled by default]
-             /* discrete_hil_addr */      { 0x550001a8 },
-                                          ^
-../src_gen/modbus_config.h:236:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].discrete_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:238:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_in_hil_addr */       { 0x550001a4 },
-                                          ^
-../src_gen/modbus_config.h:238:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:239:42: warning: excess elements in array initializer [enabled by default]
-             /* coil_out_hil_addr */      { 0x55000144 },
-                                          ^
-../src_gen/modbus_config.h:239:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_out_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:246:42: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_hil_addr */    { 0x550001ac },
-                                          ^
-../src_gen/modbus_config.h:246:42: warning: (near initialization for 'ModBus_HIL_config.MbusHIL[5].holding_in_hil_addr') [enabled by default]
-../src_gen/modbus_config.h:394:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:394:49: warning: (near initialization for 'ModBus_config.Mbus[0].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:397:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:397:49: warning: (near initialization for 'ModBus_config.Mbus[0].register_32') [enabled by default]
-../src_gen/modbus_config.h:398:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:398:49: warning: (near initialization for 'ModBus_config.Mbus[0].register_64') [enabled by default]
-../src_gen/modbus_config.h:400:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:400:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:401:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:401:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:402:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:402:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:405:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:405:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:406:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:406:49: warning: (near initialization for 'ModBus_config.Mbus[0].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:456:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:456:49: warning: (near initialization for 'ModBus_config.Mbus[1].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:459:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:459:49: warning: (near initialization for 'ModBus_config.Mbus[1].register_32') [enabled by default]
-../src_gen/modbus_config.h:460:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:460:49: warning: (near initialization for 'ModBus_config.Mbus[1].register_64') [enabled by default]
-../src_gen/modbus_config.h:462:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:462:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:463:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:463:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:464:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:464:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:467:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:467:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:468:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:468:49: warning: (near initialization for 'ModBus_config.Mbus[1].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:518:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:518:49: warning: (near initialization for 'ModBus_config.Mbus[2].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:521:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:521:49: warning: (near initialization for 'ModBus_config.Mbus[2].register_32') [enabled by default]
-../src_gen/modbus_config.h:522:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:522:49: warning: (near initialization for 'ModBus_config.Mbus[2].register_64') [enabled by default]
-../src_gen/modbus_config.h:524:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:524:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:525:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:525:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:526:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:526:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:529:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:529:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:530:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:530:49: warning: (near initialization for 'ModBus_config.Mbus[2].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:580:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:580:49: warning: (near initialization for 'ModBus_config.Mbus[3].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:583:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:583:49: warning: (near initialization for 'ModBus_config.Mbus[3].register_32') [enabled by default]
-../src_gen/modbus_config.h:584:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:584:49: warning: (near initialization for 'ModBus_config.Mbus[3].register_64') [enabled by default]
-../src_gen/modbus_config.h:586:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:586:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:587:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:587:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:588:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:588:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:591:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:591:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:592:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:592:49: warning: (near initialization for 'ModBus_config.Mbus[3].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:642:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:642:49: warning: (near initialization for 'ModBus_config.Mbus[4].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:645:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:645:49: warning: (near initialization for 'ModBus_config.Mbus[4].register_32') [enabled by default]
-../src_gen/modbus_config.h:646:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:646:49: warning: (near initialization for 'ModBus_config.Mbus[4].register_64') [enabled by default]
-../src_gen/modbus_config.h:648:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:648:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:649:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:649:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:650:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:650:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:653:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:653:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:654:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:654:49: warning: (near initialization for 'ModBus_config.Mbus[4].holding_out_64') [enabled by default]
-../src_gen/modbus_config.h:704:49: warning: excess elements in array initializer [enabled by default]
-             /* coil_out initialisation */       { 0 },
-                                                 ^
-../src_gen/modbus_config.h:704:49: warning: (near initialization for 'ModBus_config.Mbus[5].coil_out_init') [enabled by default]
-../src_gen/modbus_config.h:707:49: warning: excess elements in array initializer [enabled by default]
-             /* register_32 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:707:49: warning: (near initialization for 'ModBus_config.Mbus[5].register_32') [enabled by default]
-../src_gen/modbus_config.h:708:49: warning: excess elements in array initializer [enabled by default]
-             /* register_64 initialization */    { 0 },
-                                                 ^
-../src_gen/modbus_config.h:708:49: warning: (near initialization for 'ModBus_config.Mbus[5].register_64') [enabled by default]
-../src_gen/modbus_config.h:710:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_16 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:710:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_in_16') [enabled by default]
-../src_gen/modbus_config.h:711:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_32 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:711:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_in_32') [enabled by default]
-../src_gen/modbus_config.h:712:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_in_64 initialization */  { 0 },
-                                                 ^
-../src_gen/modbus_config.h:712:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_in_64') [enabled by default]
-../src_gen/modbus_config.h:715:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_32 initialization */ { 0 },
-                                                 ^
-../src_gen/modbus_config.h:715:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_out_32') [enabled by default]
-../src_gen/modbus_config.h:716:49: warning: excess elements in array initializer [enabled by default]
-             /* holding_out_64 initialization */ { 0 }
-                                                 ^
-../src_gen/modbus_config.h:716:49: warning: (near initialization for 'ModBus_config.Mbus[5].holding_out_64') [enabled by default]
-In file included from ../src/modbus_reply.c:4:0:
-../src/modbus_reply.c: In function 'update_hil_value':
-../../bsp/hil-unit.h:105:75: warning: 'hil_data_float' may be used uninitialized in this function [-Wmaybe-uninitialized]
- #define XIo_OutFloat(OutputPtr, Value)  (*(volatile float *)((OutputPtr)) = (Value))
-                                                                           ^
-../src/modbus_reply.c:1143:11: note: 'hil_data_float' was declared here
-     float hil_data_float;
-           ^
+In file included from ../src/main.c:34:
+../src_gen/modbus_config.h:106:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x550001e0 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:106:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].discrete_hil_addr')
+../src_gen/modbus_config.h:108:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x550001dc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:108:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_in_hil_addr')
+../src_gen/modbus_config.h:109:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x5500017c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:109:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_out_hil_addr')
+In file included from ../src/main.c:34:
+../src_gen/modbus_config.h:116:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x550001e4 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:116:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].holding_in_hil_addr')
+../src_gen/modbus_config.h:132:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x550002c0 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:132:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].discrete_hil_addr')
+../src_gen/modbus_config.h:134:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x550002bc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:134:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_in_hil_addr')
+../src_gen/modbus_config.h:135:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x5500019c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:135:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_out_hil_addr')
+../src_gen/modbus_config.h:142:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x550002c4 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:142:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].holding_in_hil_addr')
+../src_gen/modbus_config.h:158:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x55000410 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:158:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].discrete_hil_addr')
+../src_gen/modbus_config.h:160:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500040c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:160:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_in_hil_addr')
+../src_gen/modbus_config.h:161:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x550001cc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:161:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_out_hil_addr')
+../src_gen/modbus_config.h:168:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x55000414 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:168:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].holding_in_hil_addr')
+../src_gen/modbus_config.h:184:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x550003a0 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:184:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].discrete_hil_addr')
+../src_gen/modbus_config.h:186:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500039c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:186:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_in_hil_addr')
+../src_gen/modbus_config.h:187:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x550001bc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:187:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_out_hil_addr')
+../src_gen/modbus_config.h:194:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x550003a4 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:194:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].holding_in_hil_addr')
+../src_gen/modbus_config.h:210:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x55000250 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:210:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].discrete_hil_addr')
+../src_gen/modbus_config.h:212:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500024c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:212:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_in_hil_addr')
+../src_gen/modbus_config.h:213:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x5500018c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:213:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_out_hil_addr')
+../src_gen/modbus_config.h:220:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x55000254 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:220:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].holding_in_hil_addr')
+../src_gen/modbus_config.h:236:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x55000330 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:236:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].discrete_hil_addr')
+../src_gen/modbus_config.h:238:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500032c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:238:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_in_hil_addr')
+../src_gen/modbus_config.h:239:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x550001ac },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:239:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_out_hil_addr')
+../src_gen/modbus_config.h:246:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x55000334 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:246:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].holding_in_hil_addr')
+../src_gen/modbus_config.h:394:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:394:51: note: (near initialization for 'ModBus_config.Mbus[0].coil_out_init')
+../src_gen/modbus_config.h:397:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:397:51: note: (near initialization for 'ModBus_config.Mbus[0].register_32')
+../src_gen/modbus_config.h:398:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:398:51: note: (near initialization for 'ModBus_config.Mbus[0].register_64')
+../src_gen/modbus_config.h:400:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:400:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_in_16')
+../src_gen/modbus_config.h:401:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:401:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_in_32')
+../src_gen/modbus_config.h:402:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:402:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_in_64')
+../src_gen/modbus_config.h:405:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:405:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_out_32')
+../src_gen/modbus_config.h:406:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:406:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_out_64')
+../src_gen/modbus_config.h:456:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:456:51: note: (near initialization for 'ModBus_config.Mbus[1].coil_out_init')
+../src_gen/modbus_config.h:459:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:459:51: note: (near initialization for 'ModBus_config.Mbus[1].register_32')
+../src_gen/modbus_config.h:460:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:460:51: note: (near initialization for 'ModBus_config.Mbus[1].register_64')
+../src_gen/modbus_config.h:462:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:462:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_in_16')
+../src_gen/modbus_config.h:463:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:463:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_in_32')
+../src_gen/modbus_config.h:464:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:464:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_in_64')
+../src_gen/modbus_config.h:467:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:467:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_out_32')
+../src_gen/modbus_config.h:468:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:468:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_out_64')
+../src_gen/modbus_config.h:518:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:518:51: note: (near initialization for 'ModBus_config.Mbus[2].coil_out_init')
+../src_gen/modbus_config.h:521:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:521:51: note: (near initialization for 'ModBus_config.Mbus[2].register_32')
+../src_gen/modbus_config.h:522:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:522:51: note: (near initialization for 'ModBus_config.Mbus[2].register_64')
+../src_gen/modbus_config.h:524:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:524:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_in_16')
+../src_gen/modbus_config.h:525:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:525:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_in_32')
+../src_gen/modbus_config.h:526:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:526:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_in_64')
+../src_gen/modbus_config.h:529:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:529:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_out_32')
+../src_gen/modbus_config.h:530:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:530:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_out_64')
+../src_gen/modbus_config.h:580:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:580:51: note: (near initialization for 'ModBus_config.Mbus[3].coil_out_init')
+../src_gen/modbus_config.h:583:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:583:51: note: (near initialization for 'ModBus_config.Mbus[3].register_32')
+../src_gen/modbus_config.h:584:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:584:51: note: (near initialization for 'ModBus_config.Mbus[3].register_64')
+../src_gen/modbus_config.h:586:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:586:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_in_16')
+../src_gen/modbus_config.h:587:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:587:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_in_32')
+../src_gen/modbus_config.h:588:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:588:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_in_64')
+../src_gen/modbus_config.h:591:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:591:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_out_32')
+../src_gen/modbus_config.h:592:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:592:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_out_64')
+../src_gen/modbus_config.h:642:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:642:51: note: (near initialization for 'ModBus_config.Mbus[4].coil_out_init')
+../src_gen/modbus_config.h:645:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:645:51: note: (near initialization for 'ModBus_config.Mbus[4].register_32')
+../src_gen/modbus_config.h:646:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:646:51: note: (near initialization for 'ModBus_config.Mbus[4].register_64')
+../src_gen/modbus_config.h:648:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:648:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_in_16')
+../src_gen/modbus_config.h:649:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:649:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_in_32')
+../src_gen/modbus_config.h:650:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:650:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_in_64')
+../src_gen/modbus_config.h:653:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:653:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_out_32')
+../src_gen/modbus_config.h:654:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:654:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_out_64')
+../src_gen/modbus_config.h:704:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:704:51: note: (near initialization for 'ModBus_config.Mbus[5].coil_out_init')
+../src_gen/modbus_config.h:707:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:707:51: note: (near initialization for 'ModBus_config.Mbus[5].register_32')
+../src_gen/modbus_config.h:708:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:708:51: note: (near initialization for 'ModBus_config.Mbus[5].register_64')
+../src_gen/modbus_config.h:710:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:710:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_in_16')
+../src_gen/modbus_config.h:711:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:711:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_in_32')
+../src_gen/modbus_config.h:712:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:712:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_in_64')
+../src_gen/modbus_config.h:715:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:715:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_out_32')
+../src_gen/modbus_config.h:716:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:716:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_out_64')
+../src/main.c: In function 'thread_function':
+../src/main.c:686:39: warning: unused variable 'unit_id' [-Wunused-variable]
+                         unsigned char unit_id = query[ctx_ptr[id]->backend->header_length - 1];
+                                       ^~~~~~~
+In file included from ../src/modbus_reply.c:2:
+../src_gen/modbus_config.h:106:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x550001e0 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:106:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].discrete_hil_addr')
+../src_gen/modbus_config.h:108:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x550001dc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:108:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_in_hil_addr')
+../src_gen/modbus_config.h:109:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x5500017c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:109:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].coil_out_hil_addr')
+In file included from ../src/modbus_reply.c:2:
+../src_gen/modbus_config.h:116:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x550001e4 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:116:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[0].holding_in_hil_addr')
+../src_gen/modbus_config.h:132:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x550002c0 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:132:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].discrete_hil_addr')
+../src_gen/modbus_config.h:134:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x550002bc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:134:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_in_hil_addr')
+../src_gen/modbus_config.h:135:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x5500019c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:135:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].coil_out_hil_addr')
+../src_gen/modbus_config.h:142:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x550002c4 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:142:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[1].holding_in_hil_addr')
+../src_gen/modbus_config.h:158:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x55000410 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:158:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].discrete_hil_addr')
+../src_gen/modbus_config.h:160:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500040c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:160:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_in_hil_addr')
+../src_gen/modbus_config.h:161:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x550001cc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:161:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].coil_out_hil_addr')
+../src_gen/modbus_config.h:168:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x55000414 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:168:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[2].holding_in_hil_addr')
+../src_gen/modbus_config.h:184:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x550003a0 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:184:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].discrete_hil_addr')
+../src_gen/modbus_config.h:186:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500039c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:186:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_in_hil_addr')
+../src_gen/modbus_config.h:187:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x550001bc },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:187:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].coil_out_hil_addr')
+../src_gen/modbus_config.h:194:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x550003a4 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:194:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[3].holding_in_hil_addr')
+../src_gen/modbus_config.h:210:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x55000250 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:210:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].discrete_hil_addr')
+../src_gen/modbus_config.h:212:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500024c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:212:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_in_hil_addr')
+../src_gen/modbus_config.h:213:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x5500018c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:213:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].coil_out_hil_addr')
+../src_gen/modbus_config.h:220:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x55000254 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:220:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[4].holding_in_hil_addr')
+../src_gen/modbus_config.h:236:44: warning: excess elements in array initializer
+             /* discrete_hil_addr */      { 0x55000330 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:236:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].discrete_hil_addr')
+../src_gen/modbus_config.h:238:44: warning: excess elements in array initializer
+             /* coil_in_hil_addr */       { 0x5500032c },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:238:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_in_hil_addr')
+../src_gen/modbus_config.h:239:44: warning: excess elements in array initializer
+             /* coil_out_hil_addr */      { 0x550001ac },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:239:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].coil_out_hil_addr')
+../src_gen/modbus_config.h:246:44: warning: excess elements in array initializer
+             /* holding_in_hil_addr */    { 0x55000334 },
+                                            ^~~~~~~~~~
+../src_gen/modbus_config.h:246:44: note: (near initialization for 'ModBus_HIL_config.MbusHIL[5].holding_in_hil_addr')
+../src_gen/modbus_config.h:394:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:394:51: note: (near initialization for 'ModBus_config.Mbus[0].coil_out_init')
+../src_gen/modbus_config.h:397:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:397:51: note: (near initialization for 'ModBus_config.Mbus[0].register_32')
+../src_gen/modbus_config.h:398:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:398:51: note: (near initialization for 'ModBus_config.Mbus[0].register_64')
+../src_gen/modbus_config.h:400:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:400:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_in_16')
+../src_gen/modbus_config.h:401:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:401:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_in_32')
+../src_gen/modbus_config.h:402:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:402:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_in_64')
+../src_gen/modbus_config.h:405:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:405:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_out_32')
+../src_gen/modbus_config.h:406:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:406:51: note: (near initialization for 'ModBus_config.Mbus[0].holding_out_64')
+../src_gen/modbus_config.h:456:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:456:51: note: (near initialization for 'ModBus_config.Mbus[1].coil_out_init')
+../src_gen/modbus_config.h:459:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:459:51: note: (near initialization for 'ModBus_config.Mbus[1].register_32')
+../src_gen/modbus_config.h:460:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:460:51: note: (near initialization for 'ModBus_config.Mbus[1].register_64')
+../src_gen/modbus_config.h:462:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:462:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_in_16')
+../src_gen/modbus_config.h:463:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:463:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_in_32')
+../src_gen/modbus_config.h:464:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:464:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_in_64')
+../src_gen/modbus_config.h:467:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:467:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_out_32')
+../src_gen/modbus_config.h:468:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:468:51: note: (near initialization for 'ModBus_config.Mbus[1].holding_out_64')
+../src_gen/modbus_config.h:518:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:518:51: note: (near initialization for 'ModBus_config.Mbus[2].coil_out_init')
+../src_gen/modbus_config.h:521:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:521:51: note: (near initialization for 'ModBus_config.Mbus[2].register_32')
+../src_gen/modbus_config.h:522:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:522:51: note: (near initialization for 'ModBus_config.Mbus[2].register_64')
+../src_gen/modbus_config.h:524:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:524:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_in_16')
+../src_gen/modbus_config.h:525:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:525:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_in_32')
+../src_gen/modbus_config.h:526:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:526:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_in_64')
+../src_gen/modbus_config.h:529:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:529:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_out_32')
+../src_gen/modbus_config.h:530:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:530:51: note: (near initialization for 'ModBus_config.Mbus[2].holding_out_64')
+../src_gen/modbus_config.h:580:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:580:51: note: (near initialization for 'ModBus_config.Mbus[3].coil_out_init')
+../src_gen/modbus_config.h:583:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:583:51: note: (near initialization for 'ModBus_config.Mbus[3].register_32')
+../src_gen/modbus_config.h:584:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:584:51: note: (near initialization for 'ModBus_config.Mbus[3].register_64')
+../src_gen/modbus_config.h:586:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:586:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_in_16')
+../src_gen/modbus_config.h:587:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:587:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_in_32')
+../src_gen/modbus_config.h:588:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:588:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_in_64')
+../src_gen/modbus_config.h:591:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:591:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_out_32')
+../src_gen/modbus_config.h:592:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:592:51: note: (near initialization for 'ModBus_config.Mbus[3].holding_out_64')
+../src_gen/modbus_config.h:642:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:642:51: note: (near initialization for 'ModBus_config.Mbus[4].coil_out_init')
+../src_gen/modbus_config.h:645:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:645:51: note: (near initialization for 'ModBus_config.Mbus[4].register_32')
+../src_gen/modbus_config.h:646:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:646:51: note: (near initialization for 'ModBus_config.Mbus[4].register_64')
+../src_gen/modbus_config.h:648:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:648:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_in_16')
+../src_gen/modbus_config.h:649:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:649:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_in_32')
+../src_gen/modbus_config.h:650:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:650:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_in_64')
+../src_gen/modbus_config.h:653:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:653:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_out_32')
+../src_gen/modbus_config.h:654:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:654:51: note: (near initialization for 'ModBus_config.Mbus[4].holding_out_64')
+../src_gen/modbus_config.h:704:51: warning: excess elements in array initializer
+             /* coil_out initialisation */       { 0 },
+                                                   ^
+../src_gen/modbus_config.h:704:51: note: (near initialization for 'ModBus_config.Mbus[5].coil_out_init')
+../src_gen/modbus_config.h:707:51: warning: excess elements in array initializer
+             /* register_32 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:707:51: note: (near initialization for 'ModBus_config.Mbus[5].register_32')
+../src_gen/modbus_config.h:708:51: warning: excess elements in array initializer
+             /* register_64 initialization */    { 0 },
+                                                   ^
+../src_gen/modbus_config.h:708:51: note: (near initialization for 'ModBus_config.Mbus[5].register_64')
+../src_gen/modbus_config.h:710:51: warning: excess elements in array initializer
+             /* holding_in_16 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:710:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_in_16')
+../src_gen/modbus_config.h:711:51: warning: excess elements in array initializer
+             /* holding_in_32 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:711:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_in_32')
+../src_gen/modbus_config.h:712:51: warning: excess elements in array initializer
+             /* holding_in_64 initialization */  { 0 },
+                                                   ^
+../src_gen/modbus_config.h:712:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_in_64')
+../src_gen/modbus_config.h:715:51: warning: excess elements in array initializer
+             /* holding_out_32 initialization */ { 0 },
+                                                   ^
+../src_gen/modbus_config.h:715:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_out_32')
+../src_gen/modbus_config.h:716:51: warning: excess elements in array initializer
+             /* holding_out_64 initialization */ { 0 }
+                                                   ^
+../src_gen/modbus_config.h:716:51: note: (near initialization for 'ModBus_config.Mbus[5].holding_out_64')
+In file included from ../src/modbus_reply.c:4:
+../src/modbus_reply.c: In function 'update_hil_value':
+../../bsp/hil-unit.h:105:75: warning: 'hil_data_float' may be used uninitialized in this function [-Wmaybe-uninitialized]
+ #define XIo_OutFloat(OutputPtr, Value)  (*(volatile float *)((OutputPtr)) = (Value))
+                                                                           ^
+../src/modbus_reply.c:1153:11: note: 'hil_data_float' was declared here
+     float hil_data_float;
+           ^~~~~~~~~~~~~~

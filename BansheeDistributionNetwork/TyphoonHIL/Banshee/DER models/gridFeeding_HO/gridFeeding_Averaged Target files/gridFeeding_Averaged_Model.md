@@ -1,4 +1,4 @@
-Model gridfeeding_averaged
+Model gridFeeding_Averaged
 
 REM *****************************************:
 REM * Common entries:
@@ -105,12 +105,21 @@ rtds_file_write 0x08082000 SPC0_MAC1.txt
 rtds_file_write 0x08084000 SPC0_MAC2.txt
 rtds_file_write 0x08086000 SPC0_MAC3.txt
 
-rtds_write 0x08100004 0x00000000
+rtds_write 0x08100004 0x00000001
 REM SPC0 Contactors initialization...
+rtds_write 0x08240000 0x00000000
+rtds_write 0x08240080 0x00000000
+rtds_write 0x08240100 0x00000000
+rtds_write 0x08240180 0x00000000
+rtds_write 0x08240200 0x00000000
+rtds_write 0x08240280 0x00000000
+rtds_write 0x08240300 0x00000000
+rtds_write 0x08240380 0x00000000
+rtds_write 0x08240400 0x00000001
 
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x00000012
+rtds_write 0x080C0001 0x0000000B
 rtds_write 0x080C0004 0x3BA3D70A
 rtds_write 0x080C0005 0x3D710000
 rtds_write 0x08100000 0x000000C8
@@ -626,6 +635,208 @@ REM SPC5 Comparators initialization...
 
 REM SPC5 DTSM initialization...
 
+REM *****************************************:
+REM * SPC6 entries:
+REM *****************************************:
+
+REM SPC6 Topology Selector (TS) initialization...
+rtds_file_write 0x09980000 SPC6_red_table.txt
+
+rtds_write 0x09900020 0x00000000
+rtds_write 0x09900021 0x00000000
+rtds_write 0x09900023 0x00000000
+rtds_write 0x09900024 0x00000000
+rtds_write 0x09900025 0x00000000
+rtds_write 0x09900026 0x00000000
+rtds_write 0x09900027 0x00000000
+rtds_write 0x09900030 0x00000000
+rtds_write 0x09900031 0x00000000
+rtds_write 0x09900032 0x00000000
+rtds_write 0x09900033 0x00000000
+rtds_write 0x09900034 0x00000000
+rtds_write 0x09900035 0x00000000
+rtds_write 0x09900036 0x00000000
+rtds_write 0x09900037 0x00000000
+rtds_write 0x09900038 0x00000000
+rtds_write 0x09900039 0x00000000
+rtds_write 0x0990003A 0x00000000
+rtds_write 0x0990003B 0x00000000
+rtds_file_write 0x09940000 trivial_imem.txt
+rtds_file_write 0x09942000 trivial_lut.txt
+rtds_write 0x09900040 0x00000000
+rtds_write 0x09900041 0x00000000
+rtds_write 0x09900043 0x00000000
+rtds_write 0x09900044 0x00000000
+rtds_write 0x09900045 0x00000000
+rtds_write 0x09900046 0x00000000
+rtds_write 0x09900047 0x00000000
+rtds_write 0x09900050 0x00000000
+rtds_write 0x09900051 0x00000000
+rtds_write 0x09900052 0x00000000
+rtds_write 0x09900053 0x00000000
+rtds_write 0x09900054 0x00000000
+rtds_write 0x09900055 0x00000000
+rtds_write 0x09900056 0x00000000
+rtds_write 0x09900057 0x00000000
+rtds_write 0x09900058 0x00000000
+rtds_write 0x09900059 0x00000000
+rtds_write 0x0990005A 0x00000000
+rtds_write 0x0990005B 0x00000000
+rtds_file_write 0x09948000 trivial_imem.txt
+rtds_file_write 0x0994A000 trivial_lut.txt
+rtds_write 0x09900060 0x00000000
+rtds_write 0x09900061 0x00000000
+rtds_write 0x09900063 0x00000000
+rtds_write 0x09900064 0x00000000
+rtds_write 0x09900065 0x00000000
+rtds_write 0x09900066 0x00000000
+rtds_write 0x09900067 0x00000000
+rtds_write 0x09900070 0x00000000
+rtds_write 0x09900071 0x00000000
+rtds_write 0x09900072 0x00000000
+rtds_write 0x09900073 0x00000000
+rtds_write 0x09900074 0x00000000
+rtds_write 0x09900075 0x00000000
+rtds_write 0x09900076 0x00000000
+rtds_write 0x09900077 0x00000000
+rtds_write 0x09900078 0x00000000
+rtds_write 0x09900079 0x00000000
+rtds_write 0x0990007A 0x00000000
+rtds_write 0x0990007B 0x00000000
+rtds_file_write 0x09950000 trivial_imem.txt
+rtds_file_write 0x09952000 trivial_lut.txt
+
+REM SPC6 Variable Delay initialization...
+rtds_write 0x09900001 0x0
+
+REM SPC6 Output voltage compare mode...
+rtds_write 0x09900005 0x00000000
+
+REM SPC6 Matrix multiplier initialization...
+rtds_file_write 0x09800000 SPC6_Com_Word.txt
+rtds_file_write 0x09820000 SPC6_Com_LUT.txt
+rtds_file_write 0x09880000 SPC6_MAC0.txt
+rtds_file_write 0x09882000 SPC6_MAC1.txt
+rtds_file_write 0x09884000 SPC6_MAC2.txt
+rtds_file_write 0x09886000 SPC6_MAC3.txt
+
+rtds_write 0x09900004 0x00000000
+REM SPC6 Contactors initialization...
+
+REM SPC6 GDS compensation settings...
+rtds_write 0x098C0000 0x00000000
+rtds_write 0x098C0001 0x00000000
+rtds_write 0x098C0004 0x00000000
+rtds_write 0x098C0005 0x00000000
+rtds_write 0x09900000 0x00000000
+
+REM SPC6 FSM digital input pin assignments...
+
+REM SPC6 Comparators initialization...
+
+REM SPC6 DTSM initialization...
+
+REM *****************************************:
+REM * SPC7 entries:
+REM *****************************************:
+
+REM SPC7 Topology Selector (TS) initialization...
+rtds_file_write 0x09D80000 SPC7_red_table.txt
+
+rtds_write 0x09D00020 0x00000000
+rtds_write 0x09D00021 0x00000000
+rtds_write 0x09D00023 0x00000000
+rtds_write 0x09D00024 0x00000000
+rtds_write 0x09D00025 0x00000000
+rtds_write 0x09D00026 0x00000000
+rtds_write 0x09D00027 0x00000000
+rtds_write 0x09D00030 0x00000000
+rtds_write 0x09D00031 0x00000000
+rtds_write 0x09D00032 0x00000000
+rtds_write 0x09D00033 0x00000000
+rtds_write 0x09D00034 0x00000000
+rtds_write 0x09D00035 0x00000000
+rtds_write 0x09D00036 0x00000000
+rtds_write 0x09D00037 0x00000000
+rtds_write 0x09D00038 0x00000000
+rtds_write 0x09D00039 0x00000000
+rtds_write 0x09D0003A 0x00000000
+rtds_write 0x09D0003B 0x00000000
+rtds_file_write 0x09D40000 trivial_imem.txt
+rtds_file_write 0x09D42000 trivial_lut.txt
+rtds_write 0x09D00040 0x00000000
+rtds_write 0x09D00041 0x00000000
+rtds_write 0x09D00043 0x00000000
+rtds_write 0x09D00044 0x00000000
+rtds_write 0x09D00045 0x00000000
+rtds_write 0x09D00046 0x00000000
+rtds_write 0x09D00047 0x00000000
+rtds_write 0x09D00050 0x00000000
+rtds_write 0x09D00051 0x00000000
+rtds_write 0x09D00052 0x00000000
+rtds_write 0x09D00053 0x00000000
+rtds_write 0x09D00054 0x00000000
+rtds_write 0x09D00055 0x00000000
+rtds_write 0x09D00056 0x00000000
+rtds_write 0x09D00057 0x00000000
+rtds_write 0x09D00058 0x00000000
+rtds_write 0x09D00059 0x00000000
+rtds_write 0x09D0005A 0x00000000
+rtds_write 0x09D0005B 0x00000000
+rtds_file_write 0x09D48000 trivial_imem.txt
+rtds_file_write 0x09D4A000 trivial_lut.txt
+rtds_write 0x09D00060 0x00000000
+rtds_write 0x09D00061 0x00000000
+rtds_write 0x09D00063 0x00000000
+rtds_write 0x09D00064 0x00000000
+rtds_write 0x09D00065 0x00000000
+rtds_write 0x09D00066 0x00000000
+rtds_write 0x09D00067 0x00000000
+rtds_write 0x09D00070 0x00000000
+rtds_write 0x09D00071 0x00000000
+rtds_write 0x09D00072 0x00000000
+rtds_write 0x09D00073 0x00000000
+rtds_write 0x09D00074 0x00000000
+rtds_write 0x09D00075 0x00000000
+rtds_write 0x09D00076 0x00000000
+rtds_write 0x09D00077 0x00000000
+rtds_write 0x09D00078 0x00000000
+rtds_write 0x09D00079 0x00000000
+rtds_write 0x09D0007A 0x00000000
+rtds_write 0x09D0007B 0x00000000
+rtds_file_write 0x09D50000 trivial_imem.txt
+rtds_file_write 0x09D52000 trivial_lut.txt
+
+REM SPC7 Variable Delay initialization...
+rtds_write 0x09D00001 0x0
+
+REM SPC7 Output voltage compare mode...
+rtds_write 0x09D00005 0x00000000
+
+REM SPC7 Matrix multiplier initialization...
+rtds_file_write 0x09C00000 SPC7_Com_Word.txt
+rtds_file_write 0x09C20000 SPC7_Com_LUT.txt
+rtds_file_write 0x09C80000 SPC7_MAC0.txt
+rtds_file_write 0x09C82000 SPC7_MAC1.txt
+rtds_file_write 0x09C84000 SPC7_MAC2.txt
+rtds_file_write 0x09C86000 SPC7_MAC3.txt
+
+rtds_write 0x09D00004 0x00000000
+REM SPC7 Contactors initialization...
+
+REM SPC7 GDS compensation settings...
+rtds_write 0x09CC0000 0x00000000
+rtds_write 0x09CC0001 0x00000000
+rtds_write 0x09CC0004 0x00000000
+rtds_write 0x09CC0005 0x00000000
+rtds_write 0x09D00000 0x00000000
+
+REM SPC7 FSM digital input pin assignments...
+
+REM SPC7 Comparators initialization...
+
+REM SPC7 DTSM initialization...
+
 *****************************************:
 
 
@@ -640,9 +851,6 @@ REM post SP Init calculation...
 rtds_write  
 rtds_write 0x00000041 0x000011C1
 rtds_write 0x00000005 0x00000002
-glbl_write 0x41200008 0x00000000
-glbl_write 0x42200008 0x00000001
-glbl_write 0x43200008 0x00000000
 rtds_write 0x00000043 0x00002710
 rtds_write 0x00000042 0x000001F3
 rtds_write 0x0000000A 0x00000001
@@ -668,8 +876,14 @@ glbl_write 0xf8000244 0x2
 glbl_write 0xf8000244 0x22
 glbl_write 0xf8000244 0x20
 glbl_write 0xf8000244 0x0
-glbl_file_write 0x20a00000 cop_2_app_imem.bin
-glbl_file_write 0xfffc0000 cop_2_app_dmem.bin
+glbl_file_write 0x15000000 user_sp_cpu_0_imem.bin
+glbl_file_write 0xfffc0000 user_sp_cpu_0_dmem.bin
+
+
+REM special case for HIL402 for eth ve and SV
+
+
+REM sys_command 0x0
 
 
 REM disable can devices
@@ -683,7 +897,7 @@ sys_command 0x1
 REM enable ETH0 Intr on Core0 CPU
 glbl_write 0xF8F01834 0x01010101
 glbl_write 0x40800000 0x7
-glbl_write 0xfffffff0 0x20a00000
+glbl_write 0xfffffff0 0x15000000
 
 
 REM Restart counter for collected Linux OS communication apps

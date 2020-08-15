@@ -26,346 +26,6 @@ SETTINGS_DIR = get_settings_dir_path()
 ]]></initialization_code>
     <components>
         <component_data>
-                <id>829cb9e4bcfb11ea90a1509a4c4e2fb4</id>
-                <name><![CDATA[Capture/Scope]]></name>
-                <type>Capture/Scope</type>
-                <description><![CDATA[]]></description>
-                <hierarchy_position>1</hierarchy_position>
-                <working_mode>windowed</working_mode>
-                <widget_settings>
-                    <x>336.0</x>
-                    <y>64.0</y>
-                    <width>120</width>
-                    <height>120</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                    <state>Scope</state>
-                    <layout>None</layout>
-                    <presets>
-                        <active_capture_preset>Default</active_capture_preset>
-                        <active_scope_preset>Default</active_scope_preset>
-                        <capture name="Default">
-                            <time_interval>0.01</time_interval>
-                            <sample_rate>250000</sample_rate>
-                            <background_color>white</background_color>
-                            <layout>Vertical</layout>
-                            <legend>True</legend>
-                            <analog_signals>
-                            </analog_signals>
-                            <digital_signals>
-                            </digital_signals>
-                            <trigger>
-                                <device>-1</device>
-                                <is_force>False</is_force>
-                                <type>Analog</type>
-                                <source>None</source>
-                                <edge>Rising edge</edge>
-                                <treshold>0.0</treshold>
-                                <offset>0.0</offset>
-                                <useFirstTrigger>False</useFirstTrigger>
-                            </trigger>
-                            <plotting_options in_use="False">
-                                <subplots>
-                                    </subplots>
-                            </plotting_options>
-                        </capture>
-                        <scope name="Default">
-                            <background_color>white</background_color>
-                            <layout>Grid</layout>
-                            <legend>True</legend>
-                            <show_viewports>1</show_viewports>
-                            <decimation>1</decimation>
-                            <time_base>0.005</time_base>
-                            <analog_signals>
-                            </analog_signals>
-                            <digital_signals>
-                            </digital_signals>
-                            <trigger>
-                                <device>-1</device>
-                                <is_force>False</is_force>
-                                <type>Analog</type>
-                                <source>None</source>
-                                <edge>Rising edge</edge>
-                                <treshold>0.0</treshold>
-                                <offset>50.0</offset>
-                                <useFirstTrigger>False</useFirstTrigger>
-                            </trigger>
-                        </scope>
-                        </presets>
-                    <capture>
-                        <time_interval>0.01</time_interval>
-                        <sample_rate>250000</sample_rate>
-                        <background_color>white</background_color>
-                        <layout>Vertical</layout>
-                        <legend>True</legend>
-                        <trigger>
-                            <type>Analog</type>
-                            <source>None</source>
-                            <edge>Rising edge</edge>
-                            <treshold>0.0</treshold>
-                            <offset>0.0</offset>
-                            <useFirstTrigger>False</useFirstTrigger>
-                        </trigger>
-
-                        <analog_signals>
-                            </analog_signals>
-
-                         <digital_signals>
-                            </digital_signals>
-
-                    </capture>
-
-                    <scope>
-                        <time_base>0.005 </time_base>
-                        <background_color>white</background_color>
-                        <layout>Grid</layout>
-                        <legend>True</legend>
-                        <trigger>
-                            <mode>Auto</mode>
-                            <type>Analog</type>
-                            <source>None</source>
-                            <edge>Rising edge</edge>
-                            <treshold>0.0</treshold>
-                            <offset>50.0</offset>
-                        </trigger>
-
-                         <analog_signals>
-                            </analog_signals>
-
-                        <digital_signals>
-                            </digital_signals>
-
-                    </scope>
-                    <plotting_options in_use="False">
-                    
-                        <subplots>
-                            </subplots>
-                    </plotting_options>
-                </widget_settings>
-
-            </component_data>
-        <component_data>
-                <id>896cde74bd0311eabcd2509a4c4e2fb4</id>
-                <name><![CDATA[Voltage Difference]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.volt_diff3']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>704.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>896cde75bd0311eab2be509a4c4e2fb4</id>
-                <name><![CDATA[Frequency Difference]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.frequency_diff3']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>832.0</x>
-                    <y>704.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>896cde76bd0311ea8f55509a4c4e2fb4</id>
-                <name><![CDATA[Angle Difference]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.angle_diff3']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>408.0</x>
-                    <y>720.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
                 <id>7d256180bd4411ea9c6a509a4c4e2fb4</id>
                 <name><![CDATA[Xi error]]></name>
                 <type>TraceDisplay</type>
@@ -389,7 +49,7 @@ displayValue = 0.0
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>208.0</y>
+                    <y>8.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -462,8 +122,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>16.0</x>
-                    <y>432.0</y>
+                    <x>0.0</x>
+                    <y>232.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -537,7 +197,7 @@ displayValue = 0.0
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
                     <x>384.0</x>
-                    <y>224.0</y>
+                    <y>24.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -610,8 +270,8 @@ displayValue = 0.0
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>432.0</x>
-                    <y>440.0</y>
+                    <x>392.0</x>
+                    <y>240.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -662,184 +322,53 @@ referenceCurves = [refCurveData1]
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>dc033a0abd6411ea8069509a4c4e2fb4</id>
-                <name><![CDATA[Real Power (W)]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.P1']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
+                <id>52d3f234dde011eaac40d89ef3221e8e</id>
+                <name><![CDATA[Three-phase Inverter]]></name>
+                <type>Group</type>
+                <description><![CDATA[None]]></description>
+                <components_ids><![CDATA[['52d3f235dde011eaa4d0d89ef3221e8e', '52d41a2fdde011eabd0ad89ef3221e8e', '52d41a30dde011ea9811d89ef3221e8e', '52d41a31dde011eab972d89ef3221e8e', '52d41a32dde011ea95bfd89ef3221e8e', '52d41a33dde011eabbd6d89ef3221e8e', '52d41a34dde011ea9265d89ef3221e8e']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
+                <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
                 <widget_settings>
-                    <x>456.0</x>
-                    <y>16.0</y>
-                    <width>400</width>
-                    <height>200</height>
+                    <x>848.0</x>
+                    <y>40.0</y>
+                    <width>768</width>
+                    <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>200</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>10ab4800bd6511ea8cb4509a4c4e2fb4</id>
-                <name><![CDATA[Reactive Power (Var)]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing value
-# that will be displayed
-displayValue = 0.0
-
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Q1']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>880.0</x>
-                    <y>24.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>200</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>62502d5ec61c11eaa8c6509a4c4e2fb4</id>
-                <name><![CDATA[Disconnect]]></name>
-                <type>Macro</type>
-                <description><![CDATA[]]></description>
-                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_click_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-]]></on_start_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
-# HIL API is imported as 'hil'
-
-]]></on_timer_code>
-                <run_each>250</run_each>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_stop_code>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>32.0</x>
-                    <y>128.0</y>
-                    <width>96</width>
-                    <height>40</height>
-                    <appearance><![CDATA[Flat]]></appearance>
+                    <collapsed>False</collapsed>
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>62502d5fc61c11eaad18509a4c4e2fb4</id>
+                <id>52d3f235dde011eaa4d0d89ef3221e8e</id>
+                <name><![CDATA[Inverter Startup Control]]></name>
+                <type>Group</type>
+                <description><![CDATA[None]]></description>
+                <components_ids><![CDATA[['52d3f236dde011eab3ddd89ef3221e8e', '52d3f237dde011eabc77d89ef3221e8e', '52d3f238dde011ea8880d89ef3221e8e', '52d3f239dde011ea872ed89ef3221e8e', '52d41a2edde011eaa453d89ef3221e8e']]]></components_ids>
+                <hierarchy_position>2</hierarchy_position>
+                <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
+                <widget_settings>
+                    <x>8.0</x>
+                    <y>8.0</y>
+                    <width>192</width>
+                    <height>152</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                    <collapsed>False</collapsed>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d3f236dde011eab3ddd89ef3221e8e</id>
                 <name><![CDATA[Connect]]></name>
                 <type>Macro</type>
                 <description><![CDATA[]]></description>
@@ -859,95 +388,17 @@ hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)
                 <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
 # HIL API is imported as 'hil'
 ]]></on_stop_code>
-                <hierarchy_position>1</hierarchy_position>
+                <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>32.0</x>
-                    <y>80.0</y>
+                    <x>80.0</x>
+                    <y>40.0</y>
                     <width>96</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>94a07f7ec61c11ea8ba1509a4c4e2fb4</id>
-                <name><![CDATA[Ready to sync]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.INV_sync ON]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Blue</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>216.0</x>
-                    <y>32.0</y>
-                    <width>96</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>94a0a668c61c11eab44c509a4c4e2fb4</id>
-                <name><![CDATA[Grid Islanded]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.Grid_Islanded ON]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Yellow</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>216.0</x>
-                    <y>0.0</y>
-                    <width>96</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>a273a1c0c61c11eaa3a0509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.GCB OFF]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>216.0</x>
-                    <y>104.0</y>
-                    <width>32</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>a273a1c1c61c11ea99a6509a4c4e2fb4</id>
+                <id>52d3f237dde011eabc77d89ef3221e8e</id>
                 <name><![CDATA[]]></name>
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
@@ -963,17 +414,72 @@ displayValue = False
 displayValue = False
 ]]></code>
                 <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
+                <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>160.0</x>
-                    <y>104.0</y>
+                    <x>0.0</x>
+                    <y>48.0</y>
                     <width>32</width>
                     <height>32</height>
+                    <appearance><![CDATA[Raised]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d3f238dde011ea8880d89ef3221e8e</id>
+                <name><![CDATA[Disconnect]]></name>
+                <type>Macro</type>
+                <description><![CDATA[]]></description>
+                <on_click_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on button click.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_click_code>
+                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+]]></on_start_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on timer event.
+# HIL API is imported as 'hil'
+
+]]></on_timer_code>
+                <run_each>250</run_each>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]></on_stop_code>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>80.0</x>
+                    <y>80.0</y>
+                    <width>96</width>
+                    <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>ae575df0c61c11eab4d4509a4c4e2fb4</id>
+                <id>52d3f239dde011ea872ed89ef3221e8e</id>
+                <name><![CDATA[]]></name>
+                <type>LedDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Digital signal</data_type>
+                <signal_name><![CDATA[Grid forming inverter (averaged).CB_control.GCB OFF]]></signal_name>
+                <hil_device>0</hil_device>
+                <led_color>Red</led_color>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing LED indicator state
+# True -> On, False -> Off
+displayValue = False
+]]></code>
+                <updateRate>500</updateRate>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>80.0</y>
+                    <width>32</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Raised]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a2edde011eaa453d89ef3221e8e</id>
                 <name><![CDATA[Microgrid mode]]></name>
                 <type>ComboBoxMacro</type>
                 <description><![CDATA[]]></description>
@@ -1017,18 +523,18 @@ widgetValue = None
                 <inputValue><![CDATA[Islanded]]></inputValue>
                 <availableValues><![CDATA[['Islanded', 'Grid-connected']]]></availableValues>
                 <unit><![CDATA[]]></unit>
-                <hierarchy_position>1</hierarchy_position>
+                <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>8.0</x>
-                    <y>0.0</y>
-                    <width>192</width>
+                    <x>0.0</x>
+                    <y>8.0</y>
+                    <width>184</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>5d1751bac61d11eaa1bd509a4c4e2fb4</id>
-                <name><![CDATA[PLL voltage]]></name>
+                <id>52d41a2fdde011eabd0ad89ef3221e8e</id>
+                <name><![CDATA[GFM Real Power]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
                 <data_type>Signals</data_type>
@@ -1053,69 +559,139 @@ data = {
     }
 displayValue = data
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.Vd_G', 'Grid forming inverter (averaged).BE1-25A Synchronizer.Vq_G']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.P1']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
                 <update_rate>500</update_rate>
                 <execution_rate>None</execution_rate>
                 <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
+                <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>872.0</x>
+                    <x>0.0</x>
+                    <y>400.0</y>
+                    <width>376</width>
+                    <height>272</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>10</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a30dde011ea9811d89ef3221e8e</id>
+                <name><![CDATA[Frequency]]></name>
+                <type>Gauge</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <signal_name><![CDATA[Grid forming inverter (averaged).Controller.f1]]></signal_name>
+                <unit><![CDATA[Hz]]></unit>
+                <automatic_unit>False</automatic_unit>
+                <updateRate>500</updateRate>
+                <decimals>2</decimals>
+                <hierarchy_position>2</hierarchy_position>
+                <widget_settings>
+                    <x>432.0</x>
+                    <y>200.0</y>
+                    <width>280</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <min>0.0</min>
+                    <max>100.0</max>
+                    <warning_range>(0, 0, 0, 0)</warning_range>
+                    <critical_range>(0, 0, 0, 0)</critical_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a31dde011eab972d89ef3221e8e</id>
+                <name><![CDATA[Line-to-Line Voltage]]></name>
+                <type>Gauge</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <signal_name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|E|]]></signal_name>
+                <unit><![CDATA[V]]></unit>
+                <automatic_unit>False</automatic_unit>
+                <updateRate>500</updateRate>
+                <decimals>2</decimals>
+                <hierarchy_position>2</hierarchy_position>
+                <widget_settings>
+                    <x>64.0</x>
                     <y>208.0</y>
-                    <width>536</width>
-                    <height>248</height>
+                    <width>280</width>
+                    <height>192</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
                 <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-0.5</y_range_min>
-                    <y_range_max>1.1</y_range_max>
-                    <time_window>10</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
+                    <color_range>False</color_range>
+                    <min>227.0</min>
+                    <max>500.0</max>
+                    <warning_range>(0, 0, 0, 0)</warning_range>
+                    <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>5d1751bbc61d11ea8c53509a4c4e2fb4</id>
-                <name><![CDATA[PLL frequency]]></name>
+                <id>52d41a32dde011ea95bfd89ef3221e8e</id>
+                <name><![CDATA[GFM Reactive Power]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
                 <data_type>Signals</data_type>
@@ -1140,26 +716,26 @@ data = {
     }
 displayValue = data
 ]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.omegaPLL']]]></analog_signals>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Q1']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
                 <update_rate>500</update_rate>
                 <execution_rate>None</execution_rate>
                 <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
+                <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>872.0</x>
-                    <y>456.0</y>
-                    <width>536</width>
-                    <height>248</height>
+                    <x>376.0</x>
+                    <y>400.0</y>
+                    <width>376</width>
+                    <height>272</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
                 <advance_widget_settings>
                     <x_title><![CDATA[x axes]]></x_title>
                     <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-0.5</y_range_min>
-                    <y_range_max>1.1</y_range_max>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
                     <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
@@ -1201,112 +777,7 @@ referenceCurves = [refCurveData1]
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>01853b66c61e11ea95ba509a4c4e2fb4</id>
-                <name><![CDATA[VF control]]></name>
-                <type>CheckBoxMacro</type>
-                <description><![CDATA[]]></description>
-                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
-# NOTE: entered value is available through variable 'inputValue'
-
-if inputValue:
-    # do something when checkbox is checked
-    hil.set_scada_input_value('Grid forming inverter (averaged).ref_ctrl', 1)
-
-    pass
-else:
-    # do something when checkbox is unchecked
-    hil.set_scada_input_value('Grid forming inverter (averaged).ref_ctrl', 0)
-    pass
-
-]]></on_use_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[True]]></inputValue>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>8.0</x>
-                    <y>24.0</y>
-                    <width>112</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>01853b67c61e11ea9a09509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[ref_ctrl ON]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>112.0</x>
-                    <y>24.0</y>
-                    <width>32</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>01853b68c61e11ea9585509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[ref_ctrl OFF]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>136.0</x>
-                    <y>24.0</y>
-                    <width>32</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>66ded930cad711eaa68bd89ef3221e8e</id>
+                <id>52d41a33dde011eabbd6d89ef3221e8e</id>
                 <name><![CDATA[Sync]]></name>
                 <type>PhasorGraphDisplay</type>
                 <description><![CDATA[]]></description>
@@ -1324,22 +795,22 @@ displayValue = []
                 <signals><![CDATA[]]></signals>
                 <updateRate>500</updateRate>
                 <background_color>#ffffff</background_color>
-                <hierarchy_position>1</hierarchy_position>
+                <hierarchy_position>2</hierarchy_position>
                 <phasors_data>
                     <phasor>
-                        <display_name><![CDATA[Voltage Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_|V|]]></magnitude_signal>
-                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                        <display_name><![CDATA[Bus Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V]]></phase_signal>
                     </phasor>
                     <phasor>
-                        <display_name><![CDATA[Frequency Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_w]]></magnitude_signal>
-                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
+                        <display_name><![CDATA[Generator Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E]]></phase_signal>
                     </phasor>
                     </phasors_data>
                 <widget_settings>
-                    <x>1312.0</x>
-                    <y>8.0</y>
+                    <x>480.0</x>
+                    <y>0.0</y>
                     <width>280</width>
                     <height>192</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1348,6 +819,481 @@ displayValue = []
                     <range_max>20.0</range_max>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a34dde011ea9265d89ef3221e8e</id>
+                <name><![CDATA[Inverter Droop Control]]></name>
+                <type>Group</type>
+                <description><![CDATA[None]]></description>
+                <components_ids><![CDATA[['52d41a35dde011eab8c1d89ef3221e8e', '52d41a36dde011eaadaad89ef3221e8e', '52d41a37dde011ea864fd89ef3221e8e', '52d41a38dde011ea95c6d89ef3221e8e']]]></components_ids>
+                <hierarchy_position>2</hierarchy_position>
+                <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
+                <widget_settings>
+                    <x>232.0</x>
+                    <y>8.0</y>
+                    <width>296</width>
+                    <height>152</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                    <collapsed>False</collapsed>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a35dde011eab8c1d89ef3221e8e</id>
+                <name><![CDATA[Q ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Qref_form', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Qref_form', 0)
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[vars]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>144.0</x>
+                    <y>48.0</y>
+                    <width>144</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a36dde011eaadaad89ef3221e8e</id>
+                <name><![CDATA[V ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Grid forming inverter (averaged).Controller.Voltage droop.Vref', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[pu]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>48.0</y>
+                    <width>136</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a37dde011ea864fd89ef3221e8e</id>
+                <name><![CDATA[w ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Grid forming inverter (averaged).Controller.Frequency droop.wref', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[pu]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>80.0</y>
+                    <width>136</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>52d41a38dde011ea95c6d89ef3221e8e</id>
+                <name><![CDATA[P ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Pref_form', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Pref_form', 0)
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[W]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>152.0</x>
+                    <y>80.0</y>
+                    <width>128</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>7e39f77edde011ea985fd89ef3221e8e</id>
+                <name><![CDATA[Frequency Difference]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.frequency_diff']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>16.0</x>
+                    <y>504.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>7e39f77fdde011eab022d89ef3221e8e</id>
+                <name><![CDATA[Voltage Difference]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.voltage_diff']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>400.0</x>
+                    <y>504.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>fbb79030dde311eaa6a3d89ef3221e8e</id>
+                <name><![CDATA[Phase Difference]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = 0.0
+
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).BE1-25A Synchronizer.theta_diff']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>264.0</x>
+                    <y>704.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>200</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
                 </advance_widget_settings>
             </component_data>
         </components>

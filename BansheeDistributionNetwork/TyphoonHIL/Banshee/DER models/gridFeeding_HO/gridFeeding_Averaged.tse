@@ -1,14 +1,14 @@
 version = 4.2
 
 //
-// Saved by sw version: 2020.1 SP2
-// Save timestamp: 15-Jul-2020 @ 05:35:37 PM
+// Saved by sw version: 2020.2
+// Save timestamp: 14-Aug-2020 @ 03:13:33 PM
 //
 
 model "gridFeeding_Averaged" {
     configuration {
         hil_device = "HIL603"
-        hil_configuration_id = 1
+        hil_configuration_id = 2
         simulation_method = exact
         simulation_time_step = 4e-6
         simulation_discret_scaling = 1.0
@@ -22,12 +22,23 @@ model "gridFeeding_Averaged" {
         enb_dep_sw_detect = False
         code_section = "external memory"
         data_section = "internal memory"
-        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_1 = 5e-05
         sys_sp_rate_2 = 0.05
         sys_real_type_precision = "default"
         user_real_type_precision = "double precision"
         sys_cpu_optimization = "high"
         user_cpu_optimization = "medium"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
     }
 
     component Subsystem Root {
@@ -57,7 +68,7 @@ model "gridFeeding_Averaged" {
 
         component "core/RL Section" RL2 {
             inductance_per_l_mile = "1.6e-3"
-            length_mile = "1.5"
+            length_mile = "0.05"
             resistance_per_l_mile = "0.57"
         }
         [
@@ -93,7 +104,7 @@ model "gridFeeding_Averaged" {
 
         component "core/RL Section" RL1 {
             inductance_per_l_mile = "1.6e-3"
-            length_mile = "1.5"
+            length_mile = "0.1"
             resistance_per_l_mile = "0.57"
         }
         [
@@ -161,7 +172,7 @@ model "gridFeeding_Averaged" {
         ]
 
         component src_scada_input Pref {
-            execution_rate = "Ts"
+            execution_rate = "Ts_inv"
             max = "70e3"
             min = "-70e3"
             unit = "W"
@@ -171,7 +182,7 @@ model "gridFeeding_Averaged" {
         ]
 
         component src_scada_input Qref {
-            execution_rate = "Ts"
+            execution_rate = "Ts_inv"
             max = "70e3"
             min = "-70e3"
             unit = "Vars"
@@ -228,14 +239,6 @@ model "gridFeeding_Averaged" {
                 rotation = down
             ]
 
-            component pas_inductor Lgridb_1 {
-                inductance = "L"
-            }
-            [
-                position = 9584, 8000
-                rotation = down
-            ]
-
             component "core/Current Measurement" Xi_a1 {
                 addr = "14"
                 execution_rate = "Ts"
@@ -259,21 +262,8 @@ model "gridFeeding_Averaged" {
                 outputs = "3"
             }
             [
-                position = 6912, 7760
+                position = 6856, 7760
                 hide_name = True
-            ]
-
-            component gen_probe Ec_1 {
-            }
-            [
-                position = 8512, 8400
-            ]
-
-            component pas_resistor Rgrida_1 {
-                resistance = "R"
-            }
-            [
-                position = 9488, 7904
             ]
 
             component pas_resistor Ra1 {
@@ -290,14 +280,6 @@ model "gridFeeding_Averaged" {
                 position = 8888, 8000
             ]
 
-            component pas_inductor Lgrida_1 {
-                inductance = "L"
-            }
-            [
-                position = 9584, 7904
-                rotation = down
-            ]
-
             component "core/Voltage Measurement" Vb2 {
                 execution_rate = "Ts"
                 sig_output = "True"
@@ -307,13 +289,6 @@ model "gridFeeding_Averaged" {
                 rotation = right
                 scale = -1, 1
                 size = 64, 32
-            ]
-
-            component pas_resistor Rgridc_1 {
-                resistance = "R"
-            }
-            [
-                position = 9488, 8096
             ]
 
             component pas_inductor L0b1 {
@@ -347,7 +322,7 @@ model "gridFeeding_Averaged" {
             component gen_product Product1 {
             }
             [
-                position = 6816, 7760
+                position = 6792, 7760
                 hide_name = True
             ]
 
@@ -447,34 +422,6 @@ model "gridFeeding_Averaged" {
                 size = 64, 32
             ]
 
-            component gen_probe Eb_1 {
-            }
-            [
-                position = 8400, 8288
-            ]
-
-            component "core/Three Phase Two Winding Transformer" Tr1 {
-                Poc1 = "344.99999999952564"
-                Psc1 = "1762.5"
-                Sn = "120000"
-                V1 = "277"
-                V2 = "480"
-                current_vals_SCOC = "[0.0024, 1.0]"
-                ioc1 = "0.6999999999992988"
-                usc1 = "3.9999999999957394"
-            }
-            [
-                position = 9936, 8000
-                size = 126, 256
-            ]
-
-            component pas_resistor Rgridb_1 {
-                resistance = "R"
-            }
-            [
-                position = 9488, 8000
-            ]
-
             component pas_resistor R0b1 {
                 resistance = "R_i"
             }
@@ -508,27 +455,14 @@ model "gridFeeding_Averaged" {
                 component gen_probe f1 {
                 }
                 [
-                    position = 7712, 8280
+                    position = 7688, 8264
                     rotation = down
                 ]
 
                 component gen_product Product10 {
                 }
                 [
-                    position = 7368, 8296
-                    scale = -1, 1
-                ]
-
-                component gen_probe E_qREF1 {
-                }
-                [
-                    position = 7528, 8048
-                ]
-
-                component gen_probe Eq {
-                }
-                [
-                    position = 7744, 8224
+                    position = 7336, 8296
                     scale = -1, 1
                 ]
 
@@ -760,7 +694,7 @@ model "gridFeeding_Averaged" {
                     gain = "1/(2*np.pi)"
                 }
                 [
-                    position = 7800, 8280
+                    position = 7744, 8264
                     scale = -1, 1
                 ]
 
@@ -771,34 +705,17 @@ model "gridFeeding_Averaged" {
                     scale = -1, 1
                 ]
 
-                component gen_gain Gain5 {
-                    gain = "1/V_DQ"
-                }
-                [
-                    position = 7864, 8120
-                    hide_name = True
-                    scale = -1, -1
-                ]
-
-                component gen_probe Xi_d1 {
-                    addr = "8968"
-                }
-                [
-                    position = 7728, 7816
-                    scale = -1, 1
-                ]
-
                 component gen_gain Gain14 {
                     gain = "S"
                 }
                 [
-                    position = 7136, 8456
+                    position = 7128, 8456
                     rotation = right
                     hide_name = True
                     scale = -1, 1
                 ]
 
-                component Subsystem "Outer Voltage Loop + Inner Current Loop" {
+                component Subsystem "Outer Power Loop + Inner Current Loop" {
                     layout = dynamic
                     component gen_gain Gain6 {
                         gain = "V_DQ"
@@ -936,10 +853,10 @@ model "gridFeeding_Averaged" {
                     component Subsystem "inner current control loop" {
                         layout = dynamic
                         component gen_gain Gain7 {
-                            gain = "L_i/Z_DQ"
+                            gain = "Li"
                         }
                         [
-                            position = 8272, 8368
+                            position = 8312, 8368
                             scale = -1, 1
                         ]
 
@@ -1022,7 +939,7 @@ model "gridFeeding_Averaged" {
                         ]
 
                         component gen_gain Gain6 {
-                            gain = "L_i/Z_DQ"
+                            gain = "Li"
                         }
                         [
                             position = 8264, 8152
@@ -1032,7 +949,7 @@ model "gridFeeding_Averaged" {
                         component gen_product Product2 {
                         }
                         [
-                            position = 8168, 8336
+                            position = 8208, 8336
                             scale = -1, 1
                         ]
 
@@ -1096,18 +1013,6 @@ model "gridFeeding_Averaged" {
                             scale = -1, 1
                         ]
 
-                        component gen_probe Xi_d_ERR {
-                        }
-                        [
-                            position = 8448, 7960
-                        ]
-
-                        component gen_probe Xi_q_ERR {
-                        }
-                        [
-                            position = 8496, 8248
-                        ]
-
                         component sys_signal_switch "Signal switch2" {
                             criterion = "ctrl > threshold"
                             threshold = "0.5"
@@ -1145,7 +1050,7 @@ model "gridFeeding_Averaged" {
                             value = "0"
                         }
                         [
-                            position = 8384, 8240
+                            position = 8400, 8240
                             hide_name = True
                             scale = -1, 1
                         ]
@@ -1192,40 +1097,36 @@ model "gridFeeding_Averaged" {
                             scale = -1, 1
                         ]
 
-                        component gen_probe Xi_d_ref {
+                        component gen_gain Gain8 {
+                            gain = "1/w_0"
                         }
                         [
-                            position = 8624, 7952
+                            position = 8304, 8312
+                            hide_name = True
+                            scale = -1, 1
                         ]
 
-                        component gen_probe Xi_d {
+                        component gen_gain Gain9 {
+                            gain = "1/w_0"
                         }
                         [
-                            position = 8656, 8088
+                            position = 8272, 8104
+                            hide_name = True
+                            scale = -1, 1
                         ]
 
-                        component gen_probe Xi_q_ref {
+                        component gen_probe Xi_d_ERR {
                         }
                         [
-                            position = 8720, 8120
+                            position = 8024, 8008
+                            rotation = down
                         ]
 
-                        component gen_probe Xi_q {
+                        component gen_probe Xi_q_ERR {
                         }
                         [
-                            position = 8648, 8256
-                        ]
-
-                        component gen_probe Xi_d_ctrl {
-                        }
-                        [
-                            position = 7992, 7992
-                        ]
-
-                        component gen_probe Xi_q_ctrl {
-                        }
-                        [
-                            position = 8024, 8184
+                            position = 8024, 8192
+                            rotation = down
                         ]
 
                         port Xi_d_ref1 {
@@ -1347,7 +1248,7 @@ model "gridFeeding_Averaged" {
                             direction = out
                         }
                         [
-                            position = 8288, 8312
+                            position = 8384, 8312
                             scale = -1, 1
                             size = 60, 20
                         ]
@@ -1371,7 +1272,7 @@ model "gridFeeding_Averaged" {
                             direction = out
                         }
                         [
-                            position = 8272, 8112
+                            position = 8352, 8104
                             scale = -1, 1
                             size = 60, 20
                         ]
@@ -1431,17 +1332,12 @@ model "gridFeeding_Averaged" {
 
                         junction Junction172 sp
                         [
-                            position = 8280, 8448
+                            position = 8256, 8448
                         ]
 
                         junction Junction180 sp
                         [
                             position = 8560, 8056
-                        ]
-
-                        junction Junction181 sp
-                        [
-                            position = 8408, 8024
                         ]
 
                         junction Junction182 sp
@@ -1451,37 +1347,12 @@ model "gridFeeding_Averaged" {
 
                         junction Junction183 sp
                         [
-                            position = 8440, 8208
+                            position = 8248, 8040
                         ]
 
                         junction Junction184 sp
                         [
-                            position = 8512, 8016
-                        ]
-
-                        junction Junction185 sp
-                        [
-                            position = 8536, 8056
-                        ]
-
-                        junction Junction186 sp
-                        [
-                            position = 8568, 8176
-                        ]
-
-                        junction Junction187 sp
-                        [
-                            position = 8544, 8216
-                        ]
-
-                        junction Junction188 sp
-                        [
-                            position = 7944, 8040
-                        ]
-
-                        junction Junction189 sp
-                        [
-                            position = 7968, 8224
+                            position = 8272, 8224
                         ]
 
                         connect Gain7.out Product2.in1 as Connection293
@@ -1491,17 +1362,21 @@ model "gridFeeding_Averaged" {
                         connect Comparator1.out "Signal switch1.in2" as Connection57
                         connect Junction172 Comparator1.in1 as Connection267
                         connect Sum6.in1 Product2.out as Connection26
+                        [
+                            breakpoints = 8072, 8336; 8128, 8336
+                        ]
                         connect "Signal switch1.in" Junction172 as Connection266
                         connect Product3.out Sum3.in1 as Connection17
                         connect Junction171 Product3.in1 as Connection253
+                        [
+                            breakpoints = 7960, 8288; 7960, 8120
+                        ]
                         connect Gain6.out Product1.in1 as Connection289
                         connect Sum5.out Product3.in as Connection25
                         connect From26 Sum6.in as Connection3
                         connect "Signal switch1.out" Gain5.in as Connection250
-                        connect From23 Product1.in as Connection1
                         connect Gain5.out Junction171 as Connection254
                         connect Product4.out Sum7.in1 as Connection19
-                        connect From25 Product2.in as Connection2
                         connect From27 Junction172 as Connection268
                         connect one.out "Signal switch1.in1" as Connection40
                         connect Sum6.out Product4.in as Connection27
@@ -1513,27 +1388,13 @@ model "gridFeeding_Averaged" {
                         [
                             breakpoints = 8584, 8328; 8560, 8136
                         ]
-                        connect "Signal switch2.out" "PID controller1.in" as Connection352
-                        connect Xi_d_ERR.in Junction181 as Connection353
-                        connect Junction181 Sum8.out as Connection354
-                        [
-                            breakpoints = 8408, 8024; 8408, 8024
-                        ]
-                        connect "Signal switch2.in" Junction181 as Connection355
                         connect Connect3 "Signal switch3.in2" as Connection356
                         connect Constant2.out "Signal switch3.in1" as Connection357
-                        connect "Signal switch3.out" "PID controller2.in" as Connection359
                         connect Sum9.in1 Junction182 as Connection369
                         connect Junction182 Xi_q_meas1 as Connection370
                         [
                             breakpoints = 8552, 8216
                         ]
-                        connect Sum9.out Junction183 as Connection372
-                        connect Junction183 Xi_q_ERR.in as Connection373
-                        [
-                            breakpoints = 8440, 8208
-                        ]
-                        connect "Signal switch3.in" Junction183 as Connection374
                         connect Connect4 "Signal switch4.in2" as Connection375
                         connect Constant3.out "Signal switch4.in1" as Connection376
                         connect Ud1 "Signal switch4.out" as Connection377
@@ -1542,33 +1403,48 @@ model "gridFeeding_Averaged" {
                         connect Constant4.out "Signal switch5.in1" as Connection380
                         connect Sum7.out "Signal switch5.in" as Connection381
                         connect Uq1 "Signal switch5.out" as Connection382
-                        connect Sum8.in Junction184 as Connection383
-                        connect Junction184 Xi_d_ref1 as Connection384
-                        connect Xi_d_ref.in Junction184 as Connection385
-                        connect Junction180 Junction185 as Connection386
-                        connect Junction185 Sum8.in1 as Connection387
-                        connect Xi_d.in Junction185 as Connection388
-                        connect Xi_q_ref1 Junction186 as Connection389
-                        connect Junction186 Sum9.in as Connection390
+                        connect From25 Gain8.in as Connection401
+                        connect Gain8.out Product2.in as Connection402
+                        connect From23 Gain9.in as Connection403
+                        connect Gain9.out Product1.in as Connection404
+                        connect Xi_d_ref1 Sum8.in as Connection405
                         [
-                            breakpoints = 8568, 8176; 8568, 8176; 8568, 8200
+                            breakpoints = 8512, 8016
                         ]
-                        connect Xi_q_ref.in Junction186 as Connection391
-                        connect Gain6.in Junction187 as Connection392
-                        connect Junction187 Junction182 as Connection393
-                        connect Xi_q.in Junction187 as Connection394
-                        connect "PID controller1.out" Junction188 as Connection395
+                        connect "Signal switch2.in" Sum8.out as Connection406
                         [
-                            breakpoints = 8160, 8040
+                            breakpoints = 8408, 8024; 8408, 8024; 8408, 8024
                         ]
-                        connect Junction188 Sum3.in as Connection396
-                        connect Xi_d_ctrl.in Junction188 as Connection397
-                        connect Sum7.in Junction189 as Connection398
-                        connect Junction189 "PID controller2.out" as Connection399
+                        connect Sum8.in1 Junction180 as Connection408
                         [
-                            breakpoints = 8160, 8224
+                            breakpoints = 8536, 8056
                         ]
-                        connect Xi_q_ctrl.in Junction189 as Connection400
+                        connect Sum9.in Xi_q_ref1 as Connection407
+                        [
+                            breakpoints = 8568, 8200; 8568, 8176; 8568, 8176; 8568, 8176
+                        ]
+                        connect Junction182 Gain6.in as Connection409
+                        [
+                            breakpoints = 8544, 8216; 8544, 8216
+                        ]
+                        connect Sum3.in "PID controller1.out" as Connection410
+                        [
+                            breakpoints = 7944, 8040; 8160, 8040
+                        ]
+                        connect "PID controller2.out" Sum7.in as Connection411
+                        [
+                            breakpoints = 8160, 8224; 7968, 8224
+                        ]
+                        connect Sum9.out "Signal switch3.in" as Connection412
+                        [
+                            breakpoints = 8440, 8208
+                        ]
+                        connect "Signal switch2.out" Junction183 as Connection413
+                        connect Junction183 "PID controller1.in" as Connection414
+                        connect Xi_d_ERR.in Junction183 as Connection415
+                        connect "Signal switch3.out" Junction184 as Connection416
+                        connect Junction184 "PID controller2.in" as Connection417
+                        connect Xi_q_ERR.in Junction184 as Connection418
                     }
                     [
                         position = 8608, 8424
@@ -1608,12 +1484,6 @@ model "gridFeeding_Averaged" {
                             scale = -1, 1
                         ]
 
-                        component gen_probe Et_sqr_res {
-                        }
-                        [
-                            position = 8224, 8256
-                        ]
-
                         component gen_product Product2 {
                             signs = "*/"
                         }
@@ -1634,12 +1504,6 @@ model "gridFeeding_Averaged" {
                         [
                             position = 8232, 8160
                             scale = -1, 1
-                        ]
-
-                        component gen_probe Et_sqr {
-                        }
-                        [
-                            position = 8496, 8288
                         ]
 
                         component gen_product Product5 {
@@ -1797,16 +1661,6 @@ model "gridFeeding_Averaged" {
                             position = 8408, 8360
                         ]
 
-                        junction Junction147 sp
-                        [
-                            position = 8184, 8328
-                        ]
-
-                        junction Junction149 sp
-                        [
-                            position = 8424, 8360
-                        ]
-
                         junction Junction138 sp
                         [
                             position = 8160, 8176
@@ -1824,10 +1678,8 @@ model "gridFeeding_Averaged" {
 
                         connect Product1.in Sum3.out as Connection23
                         connect Product6.in1 Junction143 as Connection36
-                        connect Et_sqr_res.in Junction147 as Connection5
                         connect Product2.in1 Junction138 as Connection25
                         connect Product3.out Sum3.in as Connection28
-                        connect Junction149 Junction144 as Connection45
                         connect Junction138 Product1.in1 as Connection9
                         connect Comparator1.in1 Junction144 as Connection1
                         connect Product6.out Sum4.in1 as Connection37
@@ -1841,26 +1693,27 @@ model "gridFeeding_Averaged" {
                         connect Junction142 Ed as Connection12
                         connect Eq Junction143 as Connection3
                         connect Junction143 Product3.in as Connection13
-                        connect "Signal switch1.out" Junction147 as Connection39
                         connect Product5.in Junction139 as Connection32
                         connect Product5.in1 Junction142 as Connection33
-                        connect Et_p2 Junction149 as Connection46
                         connect Product5.out Sum4.in as Connection34
                         connect one.out "Signal switch1.in1" as Connection40
-                        connect Et_sqr.in Junction149 as Connection44
                         connect Product6.in Junction141 as Connection35
                         connect Product2.in Sum4.out as Connection26
                         connect Product3.in1 Junction139 as Connection27
-                        connect Junction138 Junction147 as Connection47
-                        [
-                            breakpoints = 8160, 8176; 8160, 8264
-                        ]
                         connect Junction139 P_ref as Connection48
                         [
                             breakpoints = 8568, 8144; 8600, 8144
                         ]
                         connect Product1.out Xi_rq as Connection49
                         connect Xi_rd Product2.out as Connection50
+                        connect Junction144 Et_p2 as Connection51
+                        [
+                            breakpoints = 8408, 8360; 8424, 8360
+                        ]
+                        connect "Signal switch1.out" Junction138 as Connection52
+                        [
+                            breakpoints = 8184, 8328; 8160, 8264; 8160, 8176
+                        ]
                     }
                     [
                         position = 8864, 8400
@@ -1992,18 +1845,6 @@ model "gridFeeding_Averaged" {
                         hide_name = True
                     ]
 
-                    component gen_probe Pref_probe {
-                    }
-                    [
-                        position = 9392, 8304
-                    ]
-
-                    component gen_probe Qref_probe {
-                    }
-                    [
-                        position = 9280, 8424
-                    ]
-
                     component gen_gain Gain9 {
                         gain = "V_ABC*np.sqrt(3)"
                     }
@@ -2028,7 +1869,7 @@ model "gridFeeding_Averaged" {
                     ]
 
                     port E_q {
-                        label = "E_q_ref1"
+                        label = "E_q"
                         position = right:4
                         kind = sp
                         direction =  out
@@ -2043,7 +1884,7 @@ model "gridFeeding_Averaged" {
                     ]
 
                     port E_d {
-                        label = "E_d_ref1"
+                        label = "E_d"
                         position = right:4
                         kind = sp
                         direction =  out
@@ -2147,11 +1988,6 @@ model "gridFeeding_Averaged" {
                         size = 63, 25
                     ]
 
-                    junction Junction4 sp
-                    [
-                        position = 9360, 8352
-                    ]
-
                     junction Junction6 sp
                     [
                         position = 9056, 8400
@@ -2165,11 +2001,6 @@ model "gridFeeding_Averaged" {
                     junction Junction8 sp
                     [
                         position = 8968, 8456
-                    ]
-
-                    junction Junction9 sp
-                    [
-                        position = 9248, 8376
                     ]
 
                     connect "dq to abc.alpha" From1 as Connection229
@@ -2194,9 +2025,6 @@ model "gridFeeding_Averaged" {
                     connect "outer power loop.Xi_rd" "inner current control loop.Xi_d_ref1" as Connection347
                     connect "outer power loop.Xi_rq" "inner current control loop.Xi_q_ref1" as Connection348
                     connect Gain8.out "outer power loop.Q_ref" as Connection363
-                    connect Gain7.in Junction4 as Connection378
-                    connect Junction4 P_ref as Connection379
-                    connect Pref_probe.in Junction4 as Connection380
                     connect Gain7.out "outer power loop.P_ref" as Connection384
                     connect E_d Junction6 as Connection390
                     connect Junction6 "outer power loop.Ed" as Connection391
@@ -2207,32 +2035,26 @@ model "gridFeeding_Averaged" {
                     connect squared_Vt2.Et_p2 Junction8 as Connection396
                     connect Junction8 "outer power loop.Et_p2" as Connection397
                     connect "Mathematical function1.in" Junction8 as Connection398
-                    connect Qref_probe.in Junction9 as Connection400
-                    connect Junction9 Q_ref as Connection401
-                    [
-                        breakpoints = 9248, 8376
-                    ]
-                    connect Gain8.in Junction9 as Connection402
                     connect "Mathematical function1.out" Gain9.in as Connection403
                     connect Gain9.out "|E|.in" as Connection404
+                    connect Q_ref Gain8.in as Connection405
+                    [
+                        breakpoints = 9248, 8376; 9248, 8376
+                    ]
+                    connect P_ref Gain7.in as Connection406
+                    [
+                        breakpoints = 9360, 8352
+                    ]
                 }
                 [
-                    position = 7360, 7952
+                    position = 7336, 7952
                     size = 128, 152
                 ]
 
                 component gen_product Product111 {
                 }
                 [
-                    position = 7368, 8216
-                    scale = -1, 1
-                ]
-
-                component gen_probe Xi_q1 {
-                    addr = "8965"
-                }
-                [
-                    position = 7728, 7944
+                    position = 7336, 8216
                     scale = -1, 1
                 ]
 
@@ -2249,7 +2071,7 @@ model "gridFeeding_Averaged" {
                     gain = "S"
                 }
                 [
-                    position = 7120, 8176
+                    position = 7128, 8176
                     rotation = left
                     hide_name = True
                     scale = -1, 1
@@ -2267,28 +2089,6 @@ model "gridFeeding_Averaged" {
                 }
                 [
                     position = 7200, 7952
-                    scale = -1, 1
-                ]
-
-                component gen_gain Gain10 {
-                    gain = "1/V_DQ"
-                }
-                [
-                    position = 7848, 8520
-                    hide_name = True
-                    scale = -1, -1
-                ]
-
-                component gen_probe E_dREF1 {
-                }
-                [
-                    position = 7568, 7856
-                ]
-
-                component gen_probe Ed {
-                }
-                [
-                    position = 7744, 8064
                     scale = -1, 1
                 ]
 
@@ -2320,14 +2120,14 @@ model "gridFeeding_Averaged" {
                 component gen_product Product13 {
                 }
                 [
-                    position = 7368, 8464
+                    position = 7336, 8464
                     scale = -1, 1
                 ]
 
                 component gen_product Product12 {
                 }
                 [
-                    position = 7368, 8376
+                    position = 7336, 8376
                     scale = -1, 1
                 ]
 
@@ -2337,136 +2137,6 @@ model "gridFeeding_Averaged" {
                 [
                     position = 7192, 8368
                     scale = -1, 1
-                ]
-
-                component gen_gain Gain8 {
-                    gain = "1/V_DQ"
-                }
-                [
-                    position = 7864, 8168
-                    hide_name = True
-                    scale = -1, -1
-                ]
-
-                component gen_gain Gain9 {
-                    gain = "1/V_DQ"
-                }
-                [
-                    position = 7840, 8392
-                    hide_name = True
-                    scale = -1, -1
-                ]
-
-                component Subsystem Current_abc_to_dq3 {
-                    layout = dynamic
-                    component "core/abc to dq" "abc to dq1" {
-                    }
-                    [
-                        position = 7856, 8008
-                        size = 48, 80
-                    ]
-
-                    component gen_terminator Termination1 {
-                    }
-                    [
-                        position = 7952, 8064
-                    ]
-
-                    port "^Eq2" {
-                        label = "^Eq2"
-                        position = left:2
-                        kind = sp
-                        direction =  in
-                        sp_type {
-                            default = inherit
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 8008, 8016
-                    ]
-
-                    port wt2 {
-                        label = "wt2"
-                        position = right:4
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7704, 8088
-                    ]
-
-                    port "^Ec2" {
-                        label = "^Ec2"
-                        position = right:6
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7704, 8040
-                    ]
-
-                    port "^Ed2" {
-                        label = "^Ed2"
-                        position = left:1
-                        kind = sp
-                        direction =  in
-                        sp_type {
-                            default = inherit
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 8008, 7976
-                    ]
-
-                    port "^Ea2" {
-                        label = "^Ea2"
-                        position = right:1
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7704, 7960
-                    ]
-
-                    port "^Eb2" {
-                        label = "^Eb2"
-                        position = right:2
-                        kind = sp
-                        direction =  out
-                        sp_type {
-                            default = auto
-                            readonly = True
-                        }
-                    }
-                    [
-                        position = 7704, 8000
-                    ]
-
-                    connect "^Ec2" "abc to dq1.vc" as Connection3
-                    connect Termination1.in "abc to dq1.zero_axis" as Connection4
-                    connect "^Eb2" "abc to dq1.vb" as Connection2
-                    connect "^Ea2" "abc to dq1.va" as Connection1
-                    connect "abc to dq1.q_axis" "^Eq2" as Connection6
-                    connect "abc to dq1.d_axis" "^Ed2" as Connection5
-                    connect wt2 "abc to dq1.wt" as Connection7
-                }
-                [
-                    position = 7944, 8456
-                    size = 80, 168
                 ]
 
                 component Subsystem PLL {
@@ -2483,7 +2153,7 @@ model "gridFeeding_Averaged" {
                         gain = "-1/V_DQ"
                     }
                     [
-                        position = 8080, 8400
+                        position = 8056, 8400
                         hide_name = True
                     ]
 
@@ -2500,7 +2170,7 @@ model "gridFeeding_Averaged" {
                             upper_sat_lim = "PLL_max"
                         }
                         [
-                            position = 8192, 8152
+                            position = 8200, 8152
                             hide_name = True
                         ]
 
@@ -2531,12 +2201,12 @@ var += (Ts*in);
                             size = 80, 48
                         ]
 
-                        component sys_signal_switch "Signal switch1" {
+                        component sys_signal_switch "Signal switch2" {
                             criterion = "ctrl > threshold"
                             threshold = "0.5"
                         }
                         [
-                            position = 8120, 8152
+                            position = 8128, 8152
                             hide_name = True
                         ]
 
@@ -2546,7 +2216,7 @@ var += (Ts*in);
                             value = "0"
                         }
                         [
-                            position = 8048, 8176
+                            position = 8056, 8168
                             hide_name = True
                         ]
 
@@ -2570,7 +2240,7 @@ out = in - (6.283185307179586*floor_in);
 /*End code section*/"
                         }
                         [
-                            position = 8408, 8152
+                            position = 8416, 8152
                             size = 56, 48
                         ]
 
@@ -2613,7 +2283,9 @@ out = in - (6.283185307179586*floor_in);
                             }
                         }
                         [
-                            position = 8048, 8128
+                            position = 8056, 8136
+                            rotation = down
+                            scale = -1, 1
                         ]
 
                         tag Connect2 {
@@ -2623,7 +2295,7 @@ out = in - (6.283185307179586*floor_in);
                             direction = out
                         }
                         [
-                            position = 8048, 8096
+                            position = 8056, 8088
                             hide_name = True
                         ]
 
@@ -2634,18 +2306,32 @@ out = in - (6.283185307179586*floor_in);
 
                         connect w Junction1 as Connection19
                         connect "C function1.in" Junction1 as Connection17
-                        connect wt "confine phase.out" as Connection14
-                        connect "confine phase.in" "C function1.out" as Connection16
                         connect Junction1 "PID controller1.out" as Connection18
-                        connect "Signal switch1.out" "PID controller1.in" as Connection20
-                        connect Connect2 "Signal switch1.in2" as Connection21
-                        connect d "Signal switch1.in" as Connection22
-                        connect Constant1.out "Signal switch1.in1" as Connection23
+                        connect Connect2 "Signal switch2.in2" as Connection21
+                        connect Constant1.out "Signal switch2.in1" as Connection328
+                        connect d "Signal switch2.in" as Connection329
+                        connect "Signal switch2.out" "PID controller1.in" as Connection330
+                        connect "C function1.out" "confine phase.in" as Connection331
+                        connect "confine phase.out" wt as Connection332
                     }
                     [
-                        position = 8240, 8400
+                        position = 8432, 8472
                         scale = 1, -1
                         size = 96, 56
+                    ]
+
+                    component gen_probe E_d {
+                    }
+                    [
+                        position = 7984, 8256
+                        rotation = down
+                    ]
+
+                    component gen_probe E_q {
+                    }
+                    [
+                        position = 7984, 8360
+                        rotation = down
                     ]
 
                     component Subsystem "abc to qd" {
@@ -2976,7 +2662,7 @@ out = in - (6.283185307179586*floor_in);
                         connect "Trigonometric function7.in" Junction10 as Connection1229
                     }
                     [
-                        position = 7992, 8352
+                        position = 7872, 8352
                         size = 80, 136
                     ]
 
@@ -2991,7 +2677,7 @@ out = in - (6.283185307179586*floor_in);
                         }
                     }
                     [
-                        position = 8080, 8304
+                        position = 8056, 8304
                     ]
 
                     port wt {
@@ -3019,7 +2705,7 @@ out = in - (6.283185307179586*floor_in);
                         }
                     }
                     [
-                        position = 8080, 8440
+                        position = 8056, 8440
                         scale = -1, 1
                     ]
 
@@ -3034,7 +2720,7 @@ out = in - (6.283185307179586*floor_in);
                         }
                     }
                     [
-                        position = 7752, 8280
+                        position = 7752, 8296
                     ]
 
                     port Eb {
@@ -3048,7 +2734,7 @@ out = in - (6.283185307179586*floor_in);
                         }
                     }
                     [
-                        position = 7752, 8328
+                        position = 7752, 8336
                     ]
 
                     port Ec {
@@ -3079,87 +2765,71 @@ out = in - (6.283185307179586*floor_in);
                         position = 8336, 8408
                     ]
 
-                    junction Junction1 sp
-                    [
-                        position = 8112, 8400
-                    ]
-
                     junction Junction2 sp
                     [
                         position = 8368, 8392
                     ]
 
-                    connect Gain6.in "abc to qd.d" as Connection1362
-                    connect Eb "abc to qd.b" as Connection1386
-                    connect Ea "abc to qd.a" as Connection1387
-                    connect Ec "abc to qd.c" as Connection1388
-                    connect "abc to qd.q" Ed as Connection1390
-                    connect PLL1.d Junction1 as Connection1391
+                    junction Junction4 sp
                     [
-                        breakpoints = 8176, 8400
+                        position = 8016, 8304
                     ]
-                    connect Junction1 Gain6.out as Connection1392
-                    connect Eq Junction1 as Connection1393
+
+                    junction Junction5 sp
+                    [
+                        position = 8088, 8400
+                    ]
+
+                    junction Junction6 sp
+                    [
+                        position = 8088, 8400
+                    ]
+
                     connect PLL1.wt Junction2 as Connection1394
                     connect Junction2 "Unit Delay2.in" as Connection1395
                     connect wt Junction2 as Connection1396
                     connect w PLL1.w as Connection1397
-                    connect "Unit Delay2.out" "abc to qd.theta" as Connection1398
+                    connect "abc to qd.d" Gain6.in as Connection1408
+                    connect "abc to qd.q" Junction4 as Connection1410
+                    connect Junction4 Ed as Connection1411
+                    connect E_d.in Junction4 as Connection1412
+                    connect Ec "abc to qd.c" as Connection1413
+                    connect Eb "abc to qd.b" as Connection1414
+                    connect Ea "abc to qd.a" as Connection1415
+                    connect "Unit Delay2.out" "abc to qd.theta" as Connection1416
                     [
-                        breakpoints = 8368, 8488; 7936, 8488
+                        breakpoints = 8368, 8480; 7816, 8480
                     ]
+                    connect Gain6.out Junction5 as Connection1418
+                    connect Junction5 PLL1.d as Connection1419
+                    [
+                        breakpoints = 8176, 8400; 8176, 8400
+                    ]
+                    connect E_q.in Junction6 as Connection1421
+                    connect Junction6 Junction5 as Connection1422
+                    connect Eq Junction6 as Connection1423
                 }
                 [
-                    position = 8064, 8192
+                    position = 7944, 8192
                     size = 96, 192
                 ]
 
-                component gen_probe E_q {
+                component gen_gain Gain5 {
+                    gain = "1/V_DQ"
                 }
                 [
-                    position = 7752, 8488
-                    scale = -1, 1
-                ]
-
-                component gen_probe E_d {
-                }
-                [
-                    position = 7752, 8424
-                    scale = -1, 1
-                ]
-
-                component gen_gain Gain16 {
-                    gain = "S"
-                }
-                [
-                    position = 7288, 8176
-                    rotation = left
+                    position = 7816, 8120
                     hide_name = True
-                    scale = -1, 1
+                    scale = -1, -1
                 ]
 
-                component gen_probe P2 {
+                component gen_gain Gain8 {
+                    gain = "1/V_DQ"
                 }
                 [
-                    position = 7248, 8136
-                    rotation = down
-                ]
-
-                component gen_gain Gain17 {
-                    gain = "-1*S"
-                }
-                [
-                    position = 7288, 8456
-                    rotation = right
+                    position = 7816, 8168
                     hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_probe Q2 {
-                }
-                [
-                    position = 7224, 8488
-                    rotation = down
+                    scale = -1, -1
                 ]
 
                 port U_P {
@@ -3172,7 +2842,7 @@ out = in - (6.283185307179586*floor_in);
                     }
                 }
                 [
-                    position = 7488, 7880
+                    position = 7552, 7888
                     scale = -1, 1
                 ]
 
@@ -3186,7 +2856,7 @@ out = in - (6.283185307179586*floor_in);
                     }
                 }
                 [
-                    position = 7488, 7936
+                    position = 7520, 7928
                     scale = -1, 1
                 ]
 
@@ -3208,7 +2878,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8160, 8264
+                    position = 8072, 8264
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3267,7 +2937,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 7528, 8000
+                    position = 7536, 7976
                     scale = -1, 1
                 ]
 
@@ -3313,7 +2983,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8160, 8120
+                    position = 8072, 8120
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3337,18 +3007,6 @@ out = in - (6.283185307179586*floor_in);
                 }
                 [
                     position = 8072, 7816
-                    scale = -1, 1
-                    size = 60, 20
-                ]
-
-                tag From34 {
-                    value = "E_c1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8072, 8520
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3383,7 +3041,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 7568, 7904
+                    position = 7536, 8016
                     scale = -1, 1
                     size = 67, 20
                 ]
@@ -3395,7 +3053,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 7728, 7880
+                    position = 7728, 7816
                     scale = -1, 1
                 ]
 
@@ -3433,29 +3091,6 @@ out = in - (6.283185307179586*floor_in);
                     scale = -1, 1
                 ]
 
-                tag From32 {
-                    value = "alpha1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8072, 8480
-                    scale = -1, 1
-                ]
-
-                tag From33 {
-                    value = "E_a1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8072, 8392
-                    scale = -1, 1
-                    size = 60, 20
-                ]
-
                 tag From23 {
                     value = "Ia1"
                     scope = masked_subsystem
@@ -3474,7 +3109,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 7848, 8216
+                    position = 7744, 8216
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3486,19 +3121,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8160, 8192
-                    scale = -1, 1
-                    size = 60, 20
-                ]
-
-                tag From35 {
-                    value = "E_b1"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8072, 8432
+                    position = 8072, 8192
                     scale = -1, 1
                     size = 60, 20
                 ]
@@ -3521,7 +3144,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 7728, 8008
+                    position = 7728, 7944
                     scale = -1, 1
                 ]
 
@@ -3532,18 +3155,8 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 7944, 8264
+                    position = 7832, 8264
                     scale = -1, 1
-                ]
-
-                junction Junction151 sp
-                [
-                    position = 7776, 7816
-                ]
-
-                junction Junction258 sp
-                [
-                    position = 7480, 8000
                 ]
 
                 junction Junction229 sp
@@ -3551,24 +3164,9 @@ out = in - (6.283185307179586*floor_in);
                     position = 7520, 8256
                 ]
 
-                junction Junction231 sp
-                [
-                    position = 7520, 7904
-                ]
-
                 junction Junction230 sp
                 [
                     position = 7472, 8472
-                ]
-
-                junction Junction152 sp
-                [
-                    position = 7776, 7944
-                ]
-
-                junction Junction157 sp
-                [
-                    position = 7816, 8120
                 ]
 
                 junction Junction228 sp
@@ -3581,132 +3179,91 @@ out = in - (6.283185307179586*floor_in);
                     position = 7472, 8208
                 ]
 
-                junction Junction158 sp
+                junction Junction231 sp
                 [
-                    position = 7808, 8168
+                    position = 7792, 8216
                 ]
 
-                junction Junction271 sp
-                [
-                    position = 7896, 8216
-                ]
-
-                junction Junction272 sp
-                [
-                    position = 7288, 8216
-                ]
-
-                junction Junction273 sp
-                [
-                    position = 7288, 8376
-                ]
-
-                connect Junction158 Gain8.out as Connection868
                 connect Product111.in Junction159 as Connection703
-                connect E_qREF1.in Junction258 as Connection861
                 connect Product10.in Junction229 as Connection723
-                connect Eq.in Junction158 as Connection718
-                connect Ed.in Junction157 as Connection291
                 connect From25 "Current_abc_to_dq4.^Ec2" as Connection699
-                connect Goto23 Junction152 as Connection256
-                connect Gain6.out Junction151 as Connection865
                 connect Junction230 From38 as Connection677
                 connect "Current_abc_to_dq4.^Ea2" From23 as Connection701
                 connect Goto20 Gain12.out as Connection878
-                connect From34 "Current_abc_to_dq3.^Ec2" as Connection279
-                connect Junction152 Xi_q1.in as Connection255
-                connect From32 Current_abc_to_dq3.wt2 as Connection275
                 connect Product10.in1 Junction228 as Connection681
-                connect Gain10.in "Current_abc_to_dq3.^Eq2" as Connection875
                 connect Current_abc_to_dq.Xi_d2 Gain6.in as Connection864
-                connect "Outer Voltage Loop + Inner Current Loop.Ua1" "Bus Join1.in" as Connection839
+                connect "Outer Power Loop + Inner Current Loop.Ua1" "Bus Join1.in" as Connection839
                 connect Product12.in Junction159 as Connection720
                 connect Junction229 From37 as Connection683
                 connect Product13.in Junction228 as Connection679
-                connect Junction258 "Outer Voltage Loop + Inner Current Loop.E_q" as Connection860
                 connect Gain12.in "Current_abc_to_dq4.^Eq2" as Connection879
                 connect "Current_abc_to_dq4.^Ed2" Gain11.in as Connection876
-                connect E_dREF1.in Junction231 as Connection729
-                [
-                    breakpoints = 7520, 7856; 7520, 7904
-                ]
-                connect Junction231 "Outer Voltage Loop + Inner Current Loop.E_d" as Connection736
-                connect "Current_abc_to_dq3.^Ed2" Gain9.in as Connection872
-                connect Goto22 Junction151 as Connection251
                 connect Q1.in Gain14.out as Connection959
                 connect Product111.in1 Junction229 as Connection682
-                connect From35 "Current_abc_to_dq3.^Eb2" as Connection276
                 connect From6 Current_abc_to_dq.Xi_b2 as Connection39
                 connect Junction159 From36 as Connection698
                 connect f1.in Gain1.out as Connection318
                 connect Current_abc_to_dq4.wt2 From26 as Connection702
-                connect "Current_abc_to_dq3.^Ea2" From33 as Connection278
-                connect "Outer Voltage Loop + Inner Current Loop.Uc1" "Bus Join1.in2" as Connection840
-                connect Gain7.out Junction152 as Connection867
+                connect "Outer Power Loop + Inner Current Loop.Uc1" "Bus Join1.in2" as Connection840
                 connect Junction228 From39 as Connection680
-                connect Goto3 Junction158 as Connection292
                 connect "Current_abc_to_dq4.^Eb2" From24 as Connection700
                 connect P1.in Gain15.out as Connection961
                 connect Product13.in1 Junction230 as Connection676
-                connect Junction157 Goto4 as Connection290
                 connect Product12.in1 Junction230 as Connection678
                 connect Goto2 "Bus Join1.out" as Connection51
-                connect Junction151 Xi_d1.in as Connection250
-                connect Junction231 From20 as Connection728
                 connect Sum1.in1 Product13.out as Connection719
                 connect From5 Current_abc_to_dq.Xi_a2 as Connection38
-                connect From42 Junction258 as Connection859
                 connect Current_abc_to_dq.wt2 From28 as Connection247
                 [
                     breakpoints = 8000, 7904; 8040, 7904
                 ]
                 connect Current_abc_to_dq.Xi_q2 Gain7.in as Connection866
                 connect From7 Current_abc_to_dq.Xi_c2 as Connection40
-                connect "Bus Join1.in1" "Outer Voltage Loop + Inner Current Loop.Ub1" as Connection838
+                connect "Bus Join1.in1" "Outer Power Loop + Inner Current Loop.Ub1" as Connection838
                 connect Gain11.out Goto19 as Connection877
-                connect Gain5.out Junction157 as Connection871
-                connect From8 PLL.Ea as Connection990
-                connect From9 PLL.Eb as Connection991
-                connect From10 PLL.Ec as Connection992
-                connect PLL.Ed Gain5.in as Connection993
-                connect Gain8.in PLL.Eq as Connection994
-                connect Goto17 Junction271 as Connection996
-                connect Junction271 PLL.w as Connection997
-                connect Gain1.in Junction271 as Connection998
-                connect Goto21 PLL.wt as Connection999
-                connect U_Q "Outer Voltage Loop + Inner Current Loop.Q_ref" as Connection1000
-                connect U_P "Outer Voltage Loop + Inner Current Loop.P_ref" as Connection1001
-                connect Gain9.out E_d.in as Connection1008
-                [
-                    breakpoints = 7808, 8392
-                ]
-                connect E_q.in Gain10.out as Connection1009
-                [
-                    breakpoints = 7808, 8520
-                ]
+                connect U_Q "Outer Power Loop + Inner Current Loop.Q_ref" as Connection1000
+                connect U_P "Outer Power Loop + Inner Current Loop.P_ref" as Connection1001
                 connect Sum2.out Gain14.in as Connection1021
                 [
                     breakpoints = 7152, 8368; 7152, 8368; 7152, 8368; 7136, 8368; 7136, 8368; 7136, 8368
                 ]
-                connect Gain15.in Sum1.out as Connection1020
-                [
-                    breakpoints = 7120, 8224; 7120, 8224; 7120, 8224; 7152, 8224; 7152, 8224
-                ]
-                connect P2.in Gain16.out as Connection1022
-                connect Product111.out Junction272 as Connection1023
-                connect Junction272 Sum1.in as Connection1024
-                connect Gain16.in Junction272 as Connection1025
-                connect Q2.in Gain17.out as Connection1026
                 connect Product10.out Sum2.in as Connection1030
                 [
-                    breakpoints = 7288, 8296
+                    breakpoints = 7280, 8296; 7280, 8360
                 ]
-                connect Product12.out Junction273 as Connection1031
-                connect Junction273 Sum2.in1 as Connection1032
-                connect Gain17.in Junction273 as Connection1033
+                connect Product111.out Sum1.in as Connection1046
+                [
+                    breakpoints = 7288, 8216
+                ]
+                connect Product12.out Sum2.in1 as Connection1047
+                [
+                    breakpoints = 7288, 8376
+                ]
+                connect Gain6.out Goto22 as Connection1050
+                [
+                    breakpoints = 7776, 7816
+                ]
+                connect Gain7.out Goto23 as Connection1051
+                [
+                    breakpoints = 7776, 7944
+                ]
+                connect From42 "Outer Power Loop + Inner Current Loop.E_q" as Connection1052
+                connect From20 "Outer Power Loop + Inner Current Loop.E_d" as Connection1053
+                connect Gain15.in Sum1.out as Connection1054
+                connect From8 PLL.Ea as Connection1064
+                connect PLL.Eb From9 as Connection1065
+                connect PLL.Ec From10 as Connection1066
+                connect Gain8.out Goto3 as Connection1067
+                connect Goto4 Gain5.out as Connection1068
+                connect Gain5.in PLL.Ed as Connection1069
+                connect Gain8.in PLL.Eq as Connection1070
+                connect Goto21 PLL.wt as Connection1071
+                connect Goto17 Junction231 as Connection1073
+                connect Junction231 PLL.w as Connection1074
+                connect Gain1.in Junction231 as Connection1075
             }
             [
-                position = 6784, 7624
+                position = 6744, 7552
                 size = 272, 144
             ]
 
@@ -3715,14 +3272,6 @@ out = in - (6.283185307179586*floor_in);
             }
             [
                 position = 8984, 7904
-                rotation = down
-            ]
-
-            component pas_inductor Lgridc_1 {
-                inductance = "L"
-            }
-            [
-                position = 9584, 8096
                 rotation = down
             ]
 
@@ -3746,14 +3295,8 @@ out = in - (6.283185307179586*floor_in);
                 gain = "0.5"
             }
             [
-                position = 6744, 7792
+                position = 6720, 7792
                 hide_name = True
-            ]
-
-            component gen_probe Ea_1 {
-            }
-            [
-                position = 8352, 8176
             ]
 
             component pas_inductor L0a1 {
@@ -3840,6 +3383,14 @@ out = in - (6.283185307179586*floor_in);
                 scale = -1, 1
             ]
 
+            component "core/Triple Pole Single Throw Contactor" S1 {
+                ctrl_src = "Model"
+            }
+            [
+                position = 9984, 8000
+                size = 64, 256
+            ]
+
             port Vc {
                 label = "Vc"
                 position = top:3
@@ -3870,7 +3421,7 @@ out = in - (6.283185307179586*floor_in);
                 }
             }
             [
-                position = 6712, 7448
+                position = 6680, 7448
                 scale = -1, 1
             ]
 
@@ -3884,16 +3435,6 @@ out = in - (6.283185307179586*floor_in);
                 scale = -1, 1
             ]
 
-            port Ground {
-                label = "Ground"
-                position = bottom:4
-                kind = pe
-            }
-            [
-                position = 10152, 8688
-                scale = -1, 1
-            ]
-
             port setpoint_Q {
                 position = left:1
                 kind = sp
@@ -3904,7 +3445,7 @@ out = in - (6.283185307179586*floor_in);
                 }
             }
             [
-                position = 6832, 7448
+                position = 6800, 7448
             ]
 
             tag Goto18 {
@@ -3962,7 +3503,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = out
             }
             [
-                position = 6672, 7728
+                position = 6648, 7728
                 hide_name = True
                 size = 60, 20
             ]
@@ -4010,7 +3551,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = out
             }
             [
-                position = 6672, 7792
+                position = 6648, 7792
                 hide_name = True
             ]
 
@@ -4069,7 +3610,7 @@ out = in - (6.283185307179586*floor_in);
                 direction = in
             }
             [
-                position = 8256, 8144
+                position = 8280, 8144
                 scale = -1, 1
                 size = 60, 20
             ]
@@ -4097,6 +3638,17 @@ out = in - (6.283185307179586*floor_in);
                 hide_name = True
             ]
 
+            tag Connect2 {
+                value = "Connect"
+                scope = masked_subsystem
+                kind = sp
+                direction = out
+            }
+            [
+                position = 9880, 7784
+                hide_name = True
+            ]
+
             junction Junction160 pe
             [
                 position = 8096, 8000
@@ -4112,29 +3664,14 @@ out = in - (6.283185307179586*floor_in);
                 position = 8016, 7904
             ]
 
-            junction Junction283 sp
-            [
-                position = 8368, 8256
-            ]
-
             junction Junction216 pe
             [
                 position = 8176, 8304
             ]
 
-            junction Junction284 sp
-            [
-                position = 8480, 8352
-            ]
-
             junction Junction289 pe
             [
                 position = 7600, 8688
-            ]
-
-            junction Junction221 sp
-            [
-                position = 8320, 8144
             ]
 
             junction Junction213 pe
@@ -4207,21 +3744,6 @@ out = in - (6.283185307179586*floor_in);
                 position = 8176, 8688
             ]
 
-            junction Junction312 pe
-            [
-                position = 9904, 8688
-            ]
-
-            junction Junction313 pe
-            [
-                position = 9968, 8688
-            ]
-
-            junction Junction314 pe
-            [
-                position = 8544, 8688
-            ]
-
             junction Junction315 pe
             [
                 position = 8464, 8688
@@ -4229,30 +3751,20 @@ out = in - (6.283185307179586*floor_in);
 
             junction Junction316 pe
             [
-                position = 8360, 8688
+                position = 8400, 8688
             ]
 
             connect Vc2.p_node Junction216 as Connection627
-            connect Junction283 Eb1.out as Connection951
             connect Vc2.out Goto33 as Connection617
             [
                 breakpoints = 7840, 8480; 7824, 8480
             ]
-            connect Goto41 Junction221 as Connection656
-            [
-                breakpoints = 8288, 8144; 8336, 8144
-            ]
-            connect "Bus Split1.out" Va_inv.in as Connection1051
             connect Rt0c1.p_node Junction216 as Connection625
             [
                 breakpoints = 8176, 8288
             ]
             connect Rt0b1.p_node Junction213 as Connection612
             connect Vc_inv.n_node Junction290 as Connection1060
-            connect Ec_1.in Junction284 as Connection956
-            [
-                breakpoints = 8480, 8384; 8480, 8352
-            ]
             connect Rc1.n_node Lc1.n_node as Connection399
             connect Va_inv.n_node Junction291 as Connection1065
             [
@@ -4273,73 +3785,53 @@ out = in - (6.283185307179586*floor_in);
                 breakpoints = 7840, 8288; 8016, 8288
             ]
             connect Xi_a1.n_node Junction161 as Connection314
-            connect "Bus Split1.out2" Vc_inv.in as Connection1053
             connect Product1.in1 Gain1.out as Connection1073
-            connect Rgridb_1.n_node Lgridb_1.n_node as Connection546
             connect Rb1.n_node Lb1.n_node as Connection354
             connect Va2.n_node Junction289 as Connection1057
-            connect Ib1.n_node Rgridb_1.p_node as Connection662
             connect La1.n_node Ra1.n_node as Connection401
             connect Va2.out Goto34 as Connection624
-            connect Vc_inv.p_node R0c1.p_node as Connection1054
-            connect Junction221 Ea1.out as Connection639
-            [
-                breakpoints = 8304, 8144; 8368, 8144
-            ]
             connect Xi_b1.n_node Junction160 as Connection388
             connect Goto39 Ib1.out as Connection669
             connect From2 Product1.in as Connection1074
-            connect Va_inv.p_node R0a1.p_node as Connection1056
             connect Junction291 Junction290 as Connection1064
             [
                 breakpoints = 7088, 8688; 7168, 8688
             ]
             connect setpoint_P Controller.U_P as Connection1290
-            connect Goto30 Junction284 as Connection954
             connect Vb_inv.n_node Junction291 as Connection1063
             connect L0a1.n_node R0a1.n_node as Connection355
             connect Product1.out "Bus Split1.in" as Connection1075
-            connect "Bus Split1.out1" Vb_inv.in as Connection1071
             connect Ca1.p_node Junction211 as Connection598
             connect La1.p_node Ia1.p_node as Connection665
-            connect Ea_1.in Junction221 as Connection640
             connect Vb2.p_node Junction213 as Connection614
             [
                 breakpoints = 7920, 8304; 8096, 8304
             ]
             connect Xi_b1.out Goto44 as Connection374
             connect Ic1.out Goto31 as Connection668
-            connect Tr1.sec_1 Va as Connection1282
             connect Junction216 Cc1.p_node as Connection626
             [
                 breakpoints = 8176, 8304; 8176, 8304; 8176, 8304
             ]
             connect Goto35 Xi_a1.out as Connection342
+            [
+                breakpoints = 7840, 8160; 7840, 8024
+            ]
             connect Lc1.p_node Ic1.p_node as Connection663
-            connect Goto40 Junction283 as Connection950
             connect Vb2.out Goto42 as Connection616
             connect L0b1.p_node Xi_b1.p_node as Connection372
             connect From3 Gain1.in as Connection1072
             connect Rt0a1.n_node Junction161 as Connection366
             connect L0a1.p_node Xi_a1.p_node as Connection378
-            connect Ia1.n_node Rgrida_1.p_node as Connection660
             connect Lb1.p_node Ib1.p_node as Connection664
             connect Junction213 Cb1.p_node as Connection613
             [
                 breakpoints = 8096, 8304; 8096, 8304; 8096, 8304
             ]
-            connect Vb Tr1.sec_2 as Connection1277
-            connect Junction284 Ec1.out as Connection955
-            connect Rgridc_1.n_node Lgridc_1.n_node as Connection545
             connect Constant1.out Goto18 as Connection1096
-            connect Tr1.sec_3 Vc as Connection1280
-            connect Lgrida_1.n_node Rgrida_1.n_node as Connection547
             connect Xi_c1.out Goto38 as Connection313
-            connect Eb_1.in Junction283 as Connection952
-            connect Ic1.n_node Rgridc_1.p_node as Connection661
             connect R0b1.n_node L0b1.n_node as Connection385
             connect L0c1.p_node Xi_c1.p_node as Connection328
-            connect Vb_inv.p_node R0b1.p_node as Connection1055
             connect R0c1.n_node L0c1.n_node as Connection330
             connect setpoint_Q Controller.U_Q as Connection1308
             connect "GCB OFF.in" "Logical operator3.out" as Connection155
@@ -4387,29 +3879,51 @@ out = in - (6.283185307179586*floor_in);
             connect Cb1.n_node Junction310 as Connection1388
             connect Junction311 Junction310 as Connection1390
             connect Cc1.n_node Junction311 as Connection1391
-            connect Tr1.n1 Junction312 as Connection1394
-            connect Ground Junction313 as Connection1395
-            connect Junction313 Junction312 as Connection1396
-            connect Tr1.n2 Junction313 as Connection1397
-            connect Junction312 Junction314 as Connection1398
-            connect Ec1.n_node Junction314 as Connection1400
-            connect Junction314 Junction315 as Connection1401
             connect Eb1.n_node Junction315 as Connection1403
             connect Junction315 Junction316 as Connection1404
             connect Junction316 Junction311 as Connection1405
             connect Ea1.n_node Junction316 as Connection1406
-            connect Lgrida_1.p_node Tr1.prm_1 as Connection1407
-            connect Lgridb_1.p_node Tr1.prm_2 as Connection1408
-            connect Tr1.prm_3 Lgridc_1.p_node as Connection1409
+            connect Va_inv.p_node R0a1.p_node as Connection1417
+            connect R0b1.p_node Vb_inv.p_node as Connection1418
+            connect Vc_inv.p_node R0c1.p_node as Connection1419
+            connect Goto30 Ec1.out as Connection1439
+            connect Goto40 Eb1.out as Connection1440
+            connect Goto41 Ea1.out as Connection1441
+            connect "Bus Split1.out" Va_inv.in as Connection1443
+            connect "Bus Split1.out1" Vb_inv.in as Connection1444
+            connect "Bus Split1.out2" Vc_inv.in as Connection1445
+            connect S1.ctrl_in Connect2 as Connection1442
+            connect Va S1.a_out as Connection1446
+            connect S1.b_out Vb as Connection1447
+            connect Vc S1.c_out as Connection1448
+            connect S1.c_in Ic1.n_node as Connection1449
+            connect Ib1.n_node S1.b_in as Connection1450
+            connect S1.a_in Ia1.n_node as Connection1451
+            connect Ec1.n_node Junction315 as Connection1455
+            [
+                breakpoints = 8544, 8688; 8544, 8688; 8464, 8688
+            ]
+
+            C_s = "800e-6"
+            Ts = "Ts_inv"
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A grid-feeding three-phase inverter</p></body></html>"
 
                 S {
-                    label = "Rated Power "
+                    label = "Rated Power (system)"
                     widget = edit
                     type = generic
-                    default_value = "200e3"
+                    default_value = "15.5e6"
+                    unit = "VA"
+                    group = "1. Three-phase Inverter"
+                }
+
+                S_i {
+                    label = "Rated Power (inverter)"
+                    widget = edit
+                    type = generic
+                    default_value = "5e6"
                     unit = "VA"
                     group = "1. Three-phase Inverter"
                 }
@@ -4418,7 +3932,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Rated Phase Voltage (RMS)"
                     widget = edit
                     type = generic
-                    default_value = "277/np.sqrt(3)"
+                    default_value = "480/np.sqrt(3)"
                     unit = "V"
                     group = "1. Three-phase Inverter"
                 }
@@ -4433,10 +3947,19 @@ out = in - (6.283185307179586*floor_in);
                 }
 
                 Ts {
-                    label = "Execution rate"
+                    label = "Execution rate (inverter)"
                     widget = edit
                     type = generic
-                    default_value = "Ts_gen"
+                    default_value = "Ts_gfeed"
+                    unit = "s"
+                    group = "1. Three-phase Inverter"
+                }
+
+                Ts_sys {
+                    label = "Execution rate (system)"
+                    widget = edit
+                    type = generic
+                    default_value = "Ts"
                     unit = "s"
                     group = "1. Three-phase Inverter"
                 }
@@ -4445,7 +3968,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Input Resistance"
                     widget = edit
                     type = generic
-                    default_value = "0.1"
+                    default_value = "1e-3"
                     unit = "Ω"
                     group = "2. LCL filter"
                 }
@@ -4454,7 +3977,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Input Inductance"
                     widget = edit
                     type = generic
-                    default_value = "6e-3"
+                    default_value = "7e-6"
                     unit = "H"
                     group = "2. LCL filter"
                 }
@@ -4463,7 +3986,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Shunt Resistance"
                     widget = edit
                     type = generic
-                    default_value = "15e-3"
+                    default_value = "1e-3"
                     unit = "Ω"
                     group = "2. LCL filter"
                 }
@@ -4472,7 +3995,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Shunt Capacitance"
                     widget = edit
                     type = generic
-                    default_value = "150e-6"
+                    default_value = "300e-6"
                     unit = "F"
                     group = "2. LCL filter"
                 }
@@ -4481,7 +4004,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Output Resistance"
                     widget = edit
                     type = generic
-                    default_value = "0.03"
+                    default_value = "0.15e-3"
                     unit = "Ω"
                     group = "2. LCL filter"
                 }
@@ -4490,34 +4013,16 @@ out = in - (6.283185307179586*floor_in);
                     label = "Output Inductance"
                     widget = edit
                     type = generic
-                    default_value = "1e-4"
+                    default_value = "4e-6"
                     unit = "H"
                     group = "2. LCL filter"
-                }
-
-                R {
-                    label = "Resistance"
-                    widget = edit
-                    type = generic
-                    default_value = "0.35"
-                    unit = "Ω"
-                    group = "3. Electrical Line"
-                }
-
-                L {
-                    label = "Inductance"
-                    widget = edit
-                    type = generic
-                    default_value = "1.5e-3"
-                    unit = "H"
-                    group = "3. Electrical Line"
                 }
 
                 Kp_I {
                     label = "Inner Loop Proportional Gain"
                     widget = edit
                     type = generic
-                    default_value = "7.8206"
+                    default_value = "7e-6/1e-3"
                     group = "4. Cascaded Controller"
                 }
 
@@ -4525,7 +4030,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Inner Loop Integral Gain"
                     widget = edit
                     type = generic
-                    default_value = "130.3441"
+                    default_value = "1e-3/1e-3"
                     group = "4. Cascaded Controller"
                 }
 
@@ -4533,7 +4038,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Inner Loop Upper Limit"
                     widget = edit
                     type = generic
-                    default_value = "2"
+                    default_value = "1"
                     group = "4. Cascaded Controller"
                 }
 
@@ -4541,7 +4046,7 @@ out = in - (6.283185307179586*floor_in);
                     label = "Inner Loop Lower Limit"
                     widget = edit
                     type = generic
-                    default_value = "-2"
+                    default_value = "-1"
                     group = "4. Cascaded Controller"
                 }
 
@@ -4591,6 +4096,7 @@ out = in - (6.283185307179586*floor_in);
 
                 CODE init
                     S = mdl.get_property_value(mdl.prop(item_handle, "S"))
+                    S_i = mdl.get_property_value(mdl.prop(item_handle, "S_i"))
                     V_ABC = mdl.get_property_value(mdl.prop(item_handle, "V_ABC"))
                     w_0 = mdl.get_property_value(mdl.prop(item_handle, "w_0"))
                     Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
@@ -4600,8 +4106,6 @@ out = in - (6.283185307179586*floor_in);
                     C_s = mdl.get_property_value(mdl.prop(item_handle, "C_s"))
                     R_o = mdl.get_property_value(mdl.prop(item_handle, "R_o"))
                     L_o = mdl.get_property_value(mdl.prop(item_handle, "L_o"))
-                    R = mdl.get_property_value(mdl.prop(item_handle, "R"))
-                    L = mdl.get_property_value(mdl.prop(item_handle, "L"))
                     Kp_I = mdl.get_property_value(mdl.prop(item_handle, "Kp_I"))
                     Ki_I = mdl.get_property_value(mdl.prop(item_handle, "Ki_I"))
                     Imax = mdl.get_property_value(mdl.prop(item_handle, "Imax"))
@@ -4613,8 +4117,16 @@ out = in - (6.283185307179586*floor_in);
                     
                     Tfast = Ts
                     V_DQ = V_ABC*np.sqrt(2)
-                    I_DQ = S/V_DQ
+                    I_DQ = 2*S/(3*V_DQ)
                     Z_DQ = V_DQ/I_DQ
+                    C_DQ = 1/(Z_DQ*w_0)
+                    L_DQ = Z_DQ/w_0
+                    
+                    Kp_I = Kp_I/Z_DQ
+                    Ki_I = Ki_I*C_DQ
+                    
+                    Rs = R_s/Z_DQ
+                    Li = L_i/L_DQ
                 ENDCODE
 
                 CODE define_icon
@@ -4626,8 +4138,47 @@ out = in - (6.283185307179586*floor_in);
             }
         }
         [
-            position = 8224, 8336
+            position = 8240, 8336
             size = 168, 112
+        ]
+
+        component sys_hil_marker "Device Marker1" {
+        }
+        [
+            position = 8272, 8096
+        ]
+
+        component "core/Voltage Measurement" Vc {
+            addr = "11"
+            execution_rate = "Ts"
+        }
+        [
+            position = 9072, 8344
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Va {
+            addr = "11"
+            execution_rate = "Ts"
+        }
+        [
+            position = 9536, 8240
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Vb {
+            addr = "11"
+            execution_rate = "Ts"
+        }
+        [
+            position = 9224, 8416
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
         ]
 
         tag V_d_a {
@@ -4731,21 +4282,42 @@ out = in - (6.283185307179586*floor_in);
 
         junction Junction65 pe
         [
-            position = 8720, 8480
+            position = 8272, 8144
+        ]
+
+        junction Junction66 pe
+        [
+            position = 9160, 8272
+        ]
+
+        junction Junction67 pe
+        [
+            position = 9160, 8424
+        ]
+
+        junction Junction68 pe
+        [
+            position = 9368, 8184
+        ]
+
+        junction Junction69 pe
+        [
+            position = 9368, 8304
+        ]
+
+        junction Junction70 pe
+        [
+            position = 9264, 8456
+        ]
+
+        junction Junction71 pe
+        [
+            position = 9264, 8224
         ]
 
         connect V_q_a Va_G.in as Connection312
         connect V_d_a Vb_G.in as Connection313
         connect V_d_a2 Vc_G.in as Connection314
-        connect RL2.P3 Vb_G.p_node as Connection509
-        connect RL2.P5 Vc_G.p_node as Connection538
-        [
-            breakpoints = 9096, 8184; 9096, 8216; 9160, 8216
-        ]
-        connect RL2.P1 Va_G.p_node as Connection539
-        [
-            breakpoints = 9096, 8144; 9096, 8104; 9368, 8104
-        ]
         connect V_q_a1 Gain3.out as Connection315
         connect "Sinusoidal Source1.out" Gain3.in as Connection328
         connect Gain4.in "Sinusoidal Source3.out" as Connection789
@@ -4761,29 +4333,47 @@ out = in - (6.283185307179586*floor_in);
         connect RL2.P6 Junction60 as Connection802
         connect Junction60 RL1.P5 as Connection803
         connect "Constant Impedance Load1.C" Junction60 as Connection804
-        connect Va_G.n_node Junction61 as Connection818
         connect gnd1.node Junction61 as Connection820
-        connect Vc_G.n_node Junction63 as Connection826
         connect Junction61 Junction64 as Connection827
         [
             breakpoints = 9296, 8480
         ]
         connect Junction64 Junction63 as Connection828
-        connect Vb_G.n_node Junction64 as Connection829
-        connect "Grid feeding inverter (averaged).Vc" RL1.P6 as Connection849
-        connect "Grid feeding inverter (averaged).Vb" RL1.P4 as Connection850
-        connect "Grid feeding inverter (averaged).Va" RL1.P2 as Connection851
-        connect Pref.out "Grid feeding inverter (averaged).setpoint_P" as Connection852
-        connect Qref.out "Grid feeding inverter (averaged).setpoint_Q" as Connection853
-        connect Junction63 Junction65 as Connection854
+        connect "Grid feeding inverter (averaged).Vb" RL1.P4 as Connection861
+        connect "Grid feeding inverter (averaged).Vc" RL1.P6 as Connection862
+        connect "Grid feeding inverter (averaged).Va" Junction65 as Connection863
+        connect Junction65 RL1.P2 as Connection864
+        connect "Device Marker1.node" Junction65 as Connection865
+        connect Pref.out "Grid feeding inverter (averaged).setpoint_P" as Connection866
+        connect Qref.out "Grid feeding inverter (averaged).setpoint_Q" as Connection867
+        connect Junction63 "Constant Impedance Load1.N" as Connection871
         [
-            breakpoints = 9160, 8480; 9160, 8480
+            breakpoints = 9160, 8480; 9160, 8480; 9160, 8480; 9160, 8480; 8720, 8480; 8720, 8480; 8720, 8480; 8720, 8480; 8720, 8480; 8720, 8480
         ]
-        connect Junction65 "Constant Impedance Load1.N" as Connection855
+        connect RL2.P5 Junction66 as Connection872
         [
-            breakpoints = 8720, 8480; 8720, 8480; 8720, 8480; 8720, 8480
+            breakpoints = 9096, 8184; 9096, 8216; 9160, 8216
         ]
-        connect "Grid feeding inverter (averaged).Ground" Junction65 as Connection856
+        connect Junction66 Vc_G.p_node as Connection873
+        connect Vc.p_node Junction66 as Connection874
+        connect Vc_G.n_node Junction67 as Connection875
+        connect Junction67 Junction63 as Connection876
+        connect Vc.n_node Junction67 as Connection877
+        connect RL2.P1 Junction68 as Connection878
+        [
+            breakpoints = 9096, 8144; 9096, 8104; 9368, 8104
+        ]
+        connect Junction68 Va_G.p_node as Connection879
+        connect Va.p_node Junction68 as Connection880
+        connect Va_G.n_node Junction69 as Connection881
+        connect Junction69 Junction61 as Connection882
+        connect Va.n_node Junction69 as Connection883
+        connect Vb_G.n_node Junction70 as Connection884
+        connect Junction70 Junction64 as Connection885
+        connect Vb.n_node Junction70 as Connection886
+        connect RL2.P3 Junction71 as Connection887
+        connect Junction71 Vb_G.p_node as Connection888
+        connect Vb.p_node Junction71 as Connection889
     }
 
     default {
@@ -4891,6 +4481,7 @@ out = in - (6.283185307179586*floor_in);
 
         gen_trigonometric {
             trigonometric_fn = "sin"
+            angle = "Radians"
             execution_rate = "inherit"
         }
 
@@ -4937,6 +4528,31 @@ out = in - (6.283185307179586*floor_in);
             frequency = "50"
             phase = "0"
             execution_rate = "100e-6"
+        }
+
+        sys_hil_marker {
+            hil_device_id = "0"
+            override_hw_settings = "False"
+            hw_configuration_id = "1"
+            override_sim_settings = "False"
+            simulation_method = "exact"
+            simulation_time_step = "auto"
+            ss_calc_method = "systematic elimination"
+            enb_pole_shift = "True"
+            enb_gds_oversampling = "True"
+            show_modes = "False"
+            cpl_stb = "False"
+            cpl_dynamics_analysis = "False"
+            matrix_based_reduction = "True"
+            enb_dep_sw_detect = "False"
+            override_user_sp_settings = "False"
+            user_cpu_optimization = "high"
+            code_section = "Internal Memory"
+            data_section = "Internal Memory"
+            override_sys_sp_settings = "False"
+            sys_cpu_optimization = "high"
+            sys_sp_rate_1 = "100e-6"
+            sys_sp_rate_2 = "50e-3"
         }
 
         sys_signal_switch {
@@ -5017,53 +4633,25 @@ out = in - (6.283185307179586*floor_in);
             frequency = "50.0"
             R_value = "21.55"
             L_value = "0.00842"
+            embedded_coupling = "False"
+            ratio_type = "Automatic"
+            ratio = "0.1"
         }
 
         "core/Signal Controlled Voltage Source" {
             execution_rate = "inherit"
         }
 
-        "core/Three Phase Two Winding Transformer" {
-            input = "SC and OC tests"
-            core_sat = "False"
-            Sn = "160000.0"
-            f = "50.0"
-            V1 = "10000.0"
-            V2 = "400.0"
-            usc1 = "4.0"
-            Psc1 = "2350.0"
-            ioc1 = "0.7"
-            Poc1 = "460.0"
-            R1 = "4.58984375"
-            L1 = ".0370093710364"
-            R2 = ".00734375"
-            L2 = "5.92149936583e-05"
-            Rm = "217391.304348"
-            Lm = "311.709196788"
-            flux_vals_SI = "[1910.3, 2419.7]"
-            current_vals_SI = "[0.66653, 277.72]"
-            r1 = ".00734375"
-            l1 = ".0186029389059"
-            r2 = ".00734375"
-            l2 = ".0186029389059"
-            rm = "347.826086957"
-            lm = "156.68213163"
-            flux_vals_pu = "[1.2, 1.52]"
-            current_vals_pu = "[0.0024, 1]"
-            flux_vals_SCOC = "[1.2, 1.52]"
-            current_vals_SCOC = "[0.0024, 1]"
-            import_from_SI2SCOC = "Import from SI"
-            import_from_pu2SCOC = "Import from PU"
-            import_from_SCOC2SI = "Import from SC OC"
-            import_from_pu2SI = "Import from PU"
-            import_from_SCOC2pu = "Import from SC OC"
-            import_from_SI2pu = "Import from SI"
-            winding_1_connection = "Y"
-            winding_2_connection = "Y"
-            clock_number = "0"
-            embedded_cpl = "false"
-            coupling_type = "core"
-            Rshunt = "inf"
+        "core/Triple Pole Single Throw Contactor" {
+            ctrl_src = "Digital input"
+            Sa = "1"
+            Sa_logic = "active high"
+            enable_fb_out = "False"
+            fb_out_type = "real"
+            execution_rate = "inherit"
+            initial_state = "off"
+            on_delay = "0"
+            off_delay = "0"
         }
 
         "core/Voltage Measurement" {
@@ -5110,6 +4698,7 @@ out = in - (6.283185307179586*floor_in);
         # The Schematic API is imported as 'mdl'
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
-        Ts = 20e-6
+        Ts = 1e-3
+        Ts_inv = 1e-3
     ENDCODE
 }
