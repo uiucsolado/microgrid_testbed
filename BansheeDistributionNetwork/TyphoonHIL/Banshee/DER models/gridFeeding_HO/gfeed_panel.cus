@@ -89,6 +89,71 @@ SETTINGS_DIR = get_settings_dir_path()
                                 
                            </viewports>
                         </analog>
+                            <analog>
+                            <channel>3</channel>
+                            <name>Va</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>4</channel>
+                            <name>Vb</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>5</channel>
+                            <name>Vc</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>6</channel>
+                            <name>Grid feeding inverter (averaged).Controller.P1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>7</channel>
+                            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
                             </analog_signals>
                             <digital_signals>
                             </digital_signals>
@@ -111,9 +176,9 @@ SETTINGS_DIR = get_settings_dir_path()
                             <background_color>white</background_color>
                             <layout>Grid</layout>
                             <legend>True</legend>
-                            <show_viewports>2</show_viewports>
-                            <decimation>1</decimation>
-                            <time_base>0.005</time_base>
+                            <show_viewports>4</show_viewports>
+                            <decimation>7</decimation>
+                            <time_base>0.05</time_base>
                             <analog_signals>
                             <analog>
                             <channel>0</channel>
@@ -193,6 +258,43 @@ SETTINGS_DIR = get_settings_dir_path()
                                 
                            </viewports>
                         </analog>
+                            <analog>
+                            <channel>6</channel>
+                            <name>Grid feeding inverter (averaged).Controller.P1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>7</channel>
+                            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>8</channel>
+                            <name>Grid feeding inverter (averaged).Va1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
                             </analog_signals>
                             <digital_signals>
                             </digital_signals>
@@ -263,6 +365,71 @@ SETTINGS_DIR = get_settings_dir_path()
                                 
                            </viewports>
                         </analog>
+                            <analog>
+                            <channel>3</channel>
+                            <name>Va</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>4</channel>
+                            <name>Vb</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>5</channel>
+                            <name>Vc</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>6</channel>
+                            <name>Grid feeding inverter (averaged).Controller.P1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>7</channel>
+                            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
                             </analog_signals>
 
                          <digital_signals>
@@ -271,7 +438,7 @@ SETTINGS_DIR = get_settings_dir_path()
                     </capture>
 
                     <scope>
-                        <time_base>0.005 </time_base>
+                        <time_base>0.05 </time_base>
                         <background_color>white</background_color>
                         <layout>Grid</layout>
                         <legend>True</legend>
@@ -360,6 +527,43 @@ SETTINGS_DIR = get_settings_dir_path()
                             <viewports>
                                 
                                 <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>6</channel>
+                            <name>Grid feeding inverter (averaged).Controller.P1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>7</channel>
+                            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>8</channel>
+                            <name>Grid feeding inverter (averaged).Va1</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
                                 
                            </viewports>
                         </analog>
@@ -757,8 +961,8 @@ widgetValue = None
                 <unit><![CDATA[vars]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>16</x>
-                    <y>32</y>
+                    <x>16.0</x>
+                    <y>32.0</y>
                     <width>176</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -814,8 +1018,8 @@ widgetValue = None
                 <unit><![CDATA[W]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
-                    <x>16</x>
-                    <y>72</y>
+                    <x>16.0</x>
+                    <y>72.0</y>
                     <width>168</width>
                     <height>32</height>
                     <inputWidgetWidth>80</inputWidgetWidth>
@@ -928,8 +1132,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0</x>
-                    <y>384</y>
+                    <x>0.0</x>
+                    <y>384.0</y>
                     <width>376</width>
                     <height>288</height>
                     <appearance><![CDATA[Flat]]></appearance>

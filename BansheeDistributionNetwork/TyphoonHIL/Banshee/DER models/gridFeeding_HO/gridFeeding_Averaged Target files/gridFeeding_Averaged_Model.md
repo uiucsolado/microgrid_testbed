@@ -119,7 +119,7 @@ rtds_write 0x08240400 0x00000001
 
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x0000000B
+rtds_write 0x080C0001 0x0000000C
 rtds_write 0x080C0004 0x3BA3D70A
 rtds_write 0x080C0005 0x3D710000
 rtds_write 0x08100000 0x000000C8
@@ -877,7 +877,6 @@ glbl_write 0xf8000244 0x22
 glbl_write 0xf8000244 0x20
 glbl_write 0xf8000244 0x0
 glbl_file_write 0x15000000 user_sp_cpu_0_imem.bin
-glbl_file_write 0xfffc0000 user_sp_cpu_0_dmem.bin
 
 
 REM special case for HIL402 for eth ve and SV

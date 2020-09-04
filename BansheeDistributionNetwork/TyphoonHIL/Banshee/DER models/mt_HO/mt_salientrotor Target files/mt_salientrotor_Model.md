@@ -886,7 +886,6 @@ glbl_write 0xf8000244 0x22
 glbl_write 0xf8000244 0x20
 glbl_write 0xf8000244 0x0
 glbl_file_write 0x15000000 user_sp_cpu_0_imem.bin
-glbl_file_write 0xfffc0000 user_sp_cpu_0_dmem.bin
 
 
 REM special case for HIL402 for eth ve and SV

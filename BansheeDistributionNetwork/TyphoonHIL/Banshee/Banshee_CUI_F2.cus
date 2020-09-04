@@ -805,9 +805,9 @@ displayValue = hil.read_analog_signal('Vrms_bus201')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1288.0</x>
-                    <y>328.0</y>
-                    <width>128</width>
+                    <x>1272</x>
+                    <y>328</y>
+                    <width>144</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
@@ -1192,11 +1192,11 @@ widgetValue = None
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e54010eec55c11ea8278509a4c4e2fb4</id>
+                <id>69151fe4e3dc11ea9abed89ef3221e8e</id>
                 <name><![CDATA[Three-phase Inverter]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['e54010efc55c11eabf08509a4c4e2fb4', 'e5403894c55c11eaaeed509a4c4e2fb4', 'e5403895c55c11eaa1af509a4c4e2fb4', 'e5403896c55c11eaadc9509a4c4e2fb4', 'facddddcc62411ea9ed0509a4c4e2fb4', '917bbc3ec62e11eabd30509a4c4e2fb4', 'ba2e1b8ac62f11ea85e5509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['69151fe5e3dc11ea84bed89ef3221e8e', '691546e0e3dc11eabf4ad89ef3221e8e', '691546e1e3dc11eaa375d89ef3221e8e', '691546e2e3dc11eaadbad89ef3221e8e', '691546e3e3dc11ea9cc1d89ef3221e8e', '691546e4e3dc11eaa030d89ef3221e8e', '691546e5e3dc11ea93c5d89ef3221e8e']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1206,20 +1206,20 @@ widgetValue = None
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>2576.0</x>
-                    <y>256.0</y>
+                    <x>216.0</x>
+                    <y>272.0</y>
                     <width>768</width>
-                    <height>688</height>
+                    <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <collapsed>False</collapsed>
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e54010efc55c11eabf08509a4c4e2fb4</id>
+                <id>69151fe5e3dc11ea84bed89ef3221e8e</id>
                 <name><![CDATA[Inverter Startup Control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['e54010f0c55c11ea97bd509a4c4e2fb4', 'e54010f1c55c11ea8864509a4c4e2fb4', 'e540388ac55c11eaac35509a4c4e2fb4', 'e540388bc55c11eabe13509a4c4e2fb4', '53b80528c5a911eaa58b509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['69151fe6e3dc11eaa612d89ef3221e8e', '691546dce3dc11eaa719d89ef3221e8e', '691546dde3dc11ea9dacd89ef3221e8e', '691546dee3dc11ea8671d89ef3221e8e', '691546dfe3dc11eaa304d89ef3221e8e']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1238,7 +1238,7 @@ widgetValue = None
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e54010f0c55c11ea97bd509a4c4e2fb4</id>
+                <id>69151fe6e3dc11eaa612d89ef3221e8e</id>
                 <name><![CDATA[Connect]]></name>
                 <type>Macro</type>
                 <description><![CDATA[]]></description>
@@ -1268,7 +1268,7 @@ hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e54010f1c55c11ea8864509a4c4e2fb4</id>
+                <id>691546dce3dc11eaa719d89ef3221e8e</id>
                 <name><![CDATA[]]></name>
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
@@ -1294,7 +1294,7 @@ displayValue = False
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e540388ac55c11eaac35509a4c4e2fb4</id>
+                <id>691546dde3dc11ea9dacd89ef3221e8e</id>
                 <name><![CDATA[Disconnect]]></name>
                 <type>Macro</type>
                 <description><![CDATA[]]></description>
@@ -1323,7 +1323,7 @@ hil.set_scada_input_value('Grid forming inverter (averaged).Connect GFM', 0.0)]]
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e540388bc55c11eabe13509a4c4e2fb4</id>
+                <id>691546dee3dc11ea8671d89ef3221e8e</id>
                 <name><![CDATA[]]></name>
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
@@ -1349,7 +1349,61 @@ displayValue = False
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>e5403894c55c11eaaeed509a4c4e2fb4</id>
+                <id>691546dfe3dc11eaa304d89ef3221e8e</id>
+                <name><![CDATA[Microgrid mode]]></name>
+                <type>ComboBoxMacro</type>
+                <description><![CDATA[]]></description>
+                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
+# NOTE: entered value is available through variable 'inputValue'
+
+if inputValue == 'Islanded':
+    # do something when 'Case 1' is selected
+    hil.set_scada_input_value('Grid forming inverter (averaged).CB_control.Grid_Islanded', 1)
+    pass
+elif inputValue == 'Grid-connected':
+    # do something when 'Case 2' is selected
+    hil.set_scada_input_value('Grid forming inverter (averaged).CB_control.Grid_Islanded', 0)
+    pass
+
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
+# NOTE: Variables specified here will be available in other handlers.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = 'Islanded'
+]]></on_start_code>
+                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = 'Islanded'
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[Islanded]]></inputValue>
+                <availableValues><![CDATA[['Islanded', 'Grid-connected']]]></availableValues>
+                <unit><![CDATA[]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>8.0</y>
+                    <width>184</width>
+                    <height>32</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e0e3dc11eabf4ad89ef3221e8e</id>
                 <name><![CDATA[GFM Real Power]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
@@ -1385,9 +1439,9 @@ displayValue = data
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>400.0</y>
+                    <y>384.0</y>
                     <width>376</width>
-                    <height>248</height>
+                    <height>272</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
                 <advance_widget_settings>
@@ -1395,7 +1449,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -1436,7 +1490,7 @@ referenceCurves = [refCurveData1]
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>e5403895c55c11eaa1af509a4c4e2fb4</id>
+                <id>691546e1e3dc11eaa375d89ef3221e8e</id>
                 <name><![CDATA[Frequency]]></name>
                 <type>Gauge</type>
                 <description><![CDATA[]]></description>
@@ -1457,7 +1511,7 @@ displayValue = 0.0
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>432.0</x>
-                    <y>200.0</y>
+                    <y>208.0</y>
                     <width>280</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1471,7 +1525,7 @@ displayValue = 0.0
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>e5403896c55c11eaadc9509a4c4e2fb4</id>
+                <id>691546e2e3dc11eaadbad89ef3221e8e</id>
                 <name><![CDATA[Line-to-Line Voltage]]></name>
                 <type>Gauge</type>
                 <description><![CDATA[]]></description>
@@ -1491,7 +1545,7 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>72.0</x>
+                    <x>64.0</x>
                     <y>208.0</y>
                     <width>280</width>
                     <height>192</height>
@@ -1499,18 +1553,403 @@ displayValue = 0.0
                 </widget_settings>
                 <advance_widget_settings>
                     <color_range>False</color_range>
-                    <min>0.0</min>
-                    <max>400.0</max>
+                    <min>100.0</min>
+                    <max>1000.0</max>
                     <warning_range>(0, 0, 0, 0)</warning_range>
                     <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>4501b69ac59911eab64a509a4c4e2fb4</id>
+                <id>691546e3e3dc11ea9cc1d89ef3221e8e</id>
+                <name><![CDATA[GFM Reactive Power]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+data = {
+    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
+    "analog_names": [],
+    
+    # analog data values: [aVal1,aVal2,aVal3]
+    "analog_values": [],
+    
+    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
+    "digital_names": [],
+    
+    # digital data values: [dVal1,dVal2,aVal3]
+    "digital_values": [],
+    }
+displayValue = data
+]]></code>
+                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Q1']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>500</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>2</hierarchy_position>
+                <widget_settings>
+                    <x>376.0</x>
+                    <y>400.0</y>
+                    <width>376</width>
+                    <height>272</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>100</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e4e3dc11eaa030d89ef3221e8e</id>
+                <name><![CDATA[Sync]]></name>
+                <type>PhasorGraphDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# e.g displayValue = [ ['Phasor 1 name', Phasor 1 phase, Phasor 1 magnitude],
+#                      ['Phasor X name', Phasor X phase, Phasor X magnitude] ]
+displayValue = []
+
+]]></code>
+                <signals><![CDATA[]]></signals>
+                <updateRate>500</updateRate>
+                <background_color>#ffffff</background_color>
+                <hierarchy_position>2</hierarchy_position>
+                <phasors_data>
+                    <phasor>
+                        <display_name><![CDATA[Bus Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V]]></phase_signal>
+                    </phasor>
+                    <phasor>
+                        <display_name><![CDATA[Generator Voltage]]></display_name>
+                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu]]></magnitude_signal>
+                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E]]></phase_signal>
+                    </phasor>
+                    </phasors_data>
+                <widget_settings>
+                    <x>480.0</x>
+                    <y>0.0</y>
+                    <width>280</width>
+                    <height>192</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <range_max>20.0</range_max>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e5e3dc11ea93c5d89ef3221e8e</id>
+                <name><![CDATA[Inverter Droop Control]]></name>
+                <type>Group</type>
+                <description><![CDATA[None]]></description>
+                <components_ids><![CDATA[['691546e6e3dc11ea8a52d89ef3221e8e', '691546e7e3dc11eaa2d4d89ef3221e8e', '691546e8e3dc11ea83c2d89ef3221e8e', '691546e9e3dc11ea9441d89ef3221e8e']]]></components_ids>
+                <hierarchy_position>2</hierarchy_position>
+                <canvas_bg_color>#ffffff</canvas_bg_color>
+                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
+# available for use in all Macro and Expression scripts of the components owned by this widget.
+# This code is always executed prior simulation start.
+# HIL API is imported as 'hil'
+
+]]></initialization_code>
+                <widget_settings>
+                    <x>232.0</x>
+                    <y>8.0</y>
+                    <width>296</width>
+                    <height>152</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                    <collapsed>False</collapsed>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e6e3dc11ea8a52d89ef3221e8e</id>
+                <name><![CDATA[Q ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Qref_form', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Qref_form', 0)
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[vars]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>144.0</x>
+                    <y>48.0</y>
+                    <width>144</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e7e3dc11eaa2d4d89ef3221e8e</id>
+                <name><![CDATA[V ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Grid forming inverter (averaged).Controller.Voltage droop.Vref', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[pu]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>48.0</y>
+                    <width>136</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e8e3dc11ea83c2d89ef3221e8e</id>
+                <name><![CDATA[w ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Grid forming inverter (averaged).Controller.Frequency droop.wref', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[pu]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>0.0</x>
+                    <y>80.0</y>
+                    <width>136</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>691546e9e3dc11ea9441d89ef3221e8e</id>
+                <name><![CDATA[P ref]]></name>
+                <type>TextBoxMacro</type>
+                <description><![CDATA[None]]></description>
+                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Pref_form', inputValue)
+]]></on_use_code>
+                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
+# HIL Control Panel API
+
+
+# Function for printing text to console (e.g printf("Hello world"))
+
+#------------------------------------------------
+
+# NOTE: entered value is available through variable 'inputValue'
+hil.set_scada_input_value('Pref_form', 0)
+]]></on_start_code>
+                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
+# HIL API is imported as 'hil'
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_stop_code>
+                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
+# NOTE: Only read functions are available from the HIL Control Panel API
+# HIL Control Panel API
+
+
+
+# Change widget value by setting this variable.
+# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
+widgetValue = None
+]]></on_timer_code>
+                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
+                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValueType>float</inputValueType>
+                <unit><![CDATA[W]]></unit>
+                <hierarchy_position>3</hierarchy_position>
+                <widget_settings>
+                    <x>152.0</x>
+                    <y>80.0</y>
+                    <width>128</width>
+                    <height>32</height>
+                    <inputWidgetWidth>80</inputWidgetWidth>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+            </component_data>
+        <component_data>
+                <id>72167858e3dc11eaaf39d89ef3221e8e</id>
                 <name><![CDATA[Three-phase Inverter (GFL)]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['4501b69bc59911eab726509a4c4e2fb4', '4501deacc59911eaa846509a4c4e2fb4', '4501deb5c59911eaa55b509a4c4e2fb4', '4501deb6c59911ea87ae509a4c4e2fb4', 'd992c224c62511ea8fec509a4c4e2fb4', 'd992c225c62511eab5ed509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['72167859e3dc11eaa32ed89ef3221e8e', '7216785ee3dc11ea9acad89ef3221e8e', '7216a044e3dc11ea9bb4d89ef3221e8e', '7216a045e3dc11eaad04d89ef3221e8e', '7216a046e3dc11ea8e33d89ef3221e8e', '7216a047e3dc11ea93ced89ef3221e8e']]]></components_ids>
                 <hierarchy_position>1</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1520,20 +1959,20 @@ displayValue = 0.0
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>2576.0</x>
-                    <y>952.0</y>
+                    <x>2512.0</x>
+                    <y>272.0</y>
                     <width>768</width>
-                    <height>696</height>
+                    <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <collapsed>False</collapsed>
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501b69bc59911eab726509a4c4e2fb4</id>
+                <id>72167859e3dc11eaa32ed89ef3221e8e</id>
                 <name><![CDATA[Inverter Startup Control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['4501b69cc59911eaa8b3509a4c4e2fb4', '4501dea8c59911eaa614509a4c4e2fb4', '4501dea9c59911eab9a6509a4c4e2fb4', '4501deaac59911ea9fd6509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['7216785ae3dc11ea80a5d89ef3221e8e', '7216785be3dc11ea8fa6d89ef3221e8e', '7216785ce3dc11ea9dd6d89ef3221e8e', '7216785de3dc11ea9060d89ef3221e8e']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1552,7 +1991,7 @@ displayValue = 0.0
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501b69cc59911eaa8b3509a4c4e2fb4</id>
+                <id>7216785ae3dc11ea80a5d89ef3221e8e</id>
                 <name><![CDATA[Connect]]></name>
                 <type>Macro</type>
                 <description><![CDATA[]]></description>
@@ -1583,7 +2022,7 @@ hil.set_scada_input_value('Grid feeding inverter (averaged).Connect GFL', 0)
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501dea8c59911eaa614509a4c4e2fb4</id>
+                <id>7216785be3dc11ea8fa6d89ef3221e8e</id>
                 <name><![CDATA[]]></name>
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
@@ -1609,7 +2048,7 @@ displayValue = False
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501dea9c59911eab9a6509a4c4e2fb4</id>
+                <id>7216785ce3dc11ea9dd6d89ef3221e8e</id>
                 <name><![CDATA[Disconnect]]></name>
                 <type>Macro</type>
                 <description><![CDATA[]]></description>
@@ -1640,7 +2079,7 @@ hil.set_scada_input_value('Grid feeding inverter (averaged).Connect GFL', 0)
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501deaac59911ea9fd6509a4c4e2fb4</id>
+                <id>7216785de3dc11ea9060d89ef3221e8e</id>
                 <name><![CDATA[]]></name>
                 <type>LedDisplay</type>
                 <description><![CDATA[]]></description>
@@ -1666,11 +2105,11 @@ displayValue = False
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501deacc59911eaa846509a4c4e2fb4</id>
+                <id>7216785ee3dc11ea9acad89ef3221e8e</id>
                 <name><![CDATA[Inverter Power Control]]></name>
                 <type>Group</type>
                 <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['4501deadc59911ea8bc1509a4c4e2fb4', '4501deb3c59911eaad79509a4c4e2fb4']]]></components_ids>
+                <components_ids><![CDATA[['7216a042e3dc11eaba6fd89ef3221e8e', '7216a043e3dc11ea80f7d89ef3221e8e']]]></components_ids>
                 <hierarchy_position>2</hierarchy_position>
                 <canvas_bg_color>#ffffff</canvas_bg_color>
                 <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
@@ -1689,7 +2128,7 @@ displayValue = False
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501deadc59911ea8bc1509a4c4e2fb4</id>
+                <id>7216a042e3dc11eaba6fd89ef3221e8e</id>
                 <name><![CDATA[Q reference]]></name>
                 <type>TextBoxMacro</type>
                 <description><![CDATA[None]]></description>
@@ -1746,7 +2185,7 @@ widgetValue = None
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501deb3c59911eaad79509a4c4e2fb4</id>
+                <id>7216a043e3dc11ea80f7d89ef3221e8e</id>
                 <name><![CDATA[P reference]]></name>
                 <type>TextBoxMacro</type>
                 <description><![CDATA[None]]></description>
@@ -1789,7 +2228,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[10.0]]></inputValue>
+                <inputValue><![CDATA[0.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[W]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -1803,7 +2242,7 @@ widgetValue = None
                 </widget_settings>
             </component_data>
         <component_data>
-                <id>4501deb5c59911eaa55b509a4c4e2fb4</id>
+                <id>7216a044e3dc11ea9bb4d89ef3221e8e</id>
                 <name><![CDATA[Frequency]]></name>
                 <type>Gauge</type>
                 <description><![CDATA[]]></description>
@@ -1824,7 +2263,7 @@ displayValue = 0.0
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>440.0</x>
-                    <y>176.0</y>
+                    <y>192.0</y>
                     <width>272</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1832,13 +2271,13 @@ displayValue = 0.0
                 <advance_widget_settings>
                     <color_range>False</color_range>
                     <min>0.0</min>
-                    <max>7200.0</max>
+                    <max>100.0</max>
                     <warning_range>(0, 0, 0, 0)</warning_range>
                     <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>4501deb6c59911ea87ae509a4c4e2fb4</id>
+                <id>7216a045e3dc11eaad04d89ef3221e8e</id>
                 <name><![CDATA[Line-to-Line Voltage]]></name>
                 <type>Gauge</type>
                 <description><![CDATA[]]></description>
@@ -1851,170 +2290,29 @@ displayValue = 0.0
 displayValue = 0.0
 
 ]]></code>
-                <signal_name><![CDATA[Grid feeding inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.|E|]]></signal_name>
+                <signal_name><![CDATA[Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.|E|]]></signal_name>
                 <unit><![CDATA[V]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>72.0</x>
-                    <y>176.0</y>
+                    <x>64.0</x>
+                    <y>192.0</y>
                     <width>280</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
                 <advance_widget_settings>
                     <color_range>False</color_range>
-                    <min>0.0</min>
-                    <max>400.0</max>
+                    <min>100.0</min>
+                    <max>1000.0</max>
                     <warning_range>(0, 0, 0, 0)</warning_range>
                     <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>53b80528c5a911eaa58b509a4c4e2fb4</id>
-                <name><![CDATA[Microgrid mode]]></name>
-                <type>ComboBoxMacro</type>
-                <description><![CDATA[]]></description>
-                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
-# NOTE: entered value is available through variable 'inputValue'
-
-if inputValue == 'Islanded':
-    # do something when 'Case 1' is selected
-    hil.set_scada_input_value('Grid forming inverter (averaged).CB_control.Grid_Islanded', 1)
-    pass
-elif inputValue == 'Grid-connected':
-    # do something when 'Case 2' is selected
-    hil.set_scada_input_value('Grid forming inverter (averaged).CB_control.Grid_Islanded', 0)
-    pass
-
-]]></on_use_code>
-                <on_start_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = 'Islanded'
-]]></on_start_code>
-                <on_stop_code active="True"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = 'Islanded'
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[Islanded]]></inputValue>
-                <availableValues><![CDATA[['Islanded', 'Grid-connected']]]></availableValues>
-                <unit><![CDATA[]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>8.0</y>
-                    <width>184</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>facddddcc62411ea9ed0509a4c4e2fb4</id>
-                <name><![CDATA[GFM Reactive Power]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing values
-# that will be displayed
-# specify data (one pairs of "names" and "values" parts are mandatory)
-data = {
-    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
-    "analog_names": [],
-    
-    # analog data values: [aVal1,aVal2,aVal3]
-    "analog_values": [],
-    
-    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
-    "digital_names": [],
-    
-    # digital data values: [dVal1,dVal2,aVal3]
-    "digital_values": [],
-    }
-displayValue = data
-]]></code>
-                <analog_signals><![CDATA[['Grid forming inverter (averaged).Controller.Q1']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>500</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>2</hierarchy_position>
-                <widget_settings>
-                    <x>376.0</x>
-                    <y>400.0</y>
-                    <width>376</width>
-                    <height>248</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>d992c224c62511ea8fec509a4c4e2fb4</id>
+                <id>7216a046e3dc11ea8e33d89ef3221e8e</id>
                 <name><![CDATA[GFL Real Power]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
@@ -2050,7 +2348,7 @@ displayValue = data
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>368.0</y>
+                    <y>384.0</y>
                     <width>376</width>
                     <height>288</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2060,7 +2358,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -2101,7 +2399,7 @@ referenceCurves = [refCurveData1]
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>d992c225c62511eab5ed509a4c4e2fb4</id>
+                <id>7216a047e3dc11ea93ced89ef3221e8e</id>
                 <name><![CDATA[GFL Reactive Power]]></name>
                 <type>TraceDisplay</type>
                 <description><![CDATA[]]></description>
@@ -2136,8 +2434,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>384.0</x>
-                    <y>368.0</y>
+                    <x>368.0</x>
+                    <y>384.0</y>
                     <width>376</width>
                     <height>288</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2147,7 +2445,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -2188,405 +2486,200 @@ referenceCurves = [refCurveData1]
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>917bbc3ec62e11eabd30509a4c4e2fb4</id>
-                <name><![CDATA[Sync]]></name>
-                <type>PhasorGraphDisplay</type>
+                <id>bffb7230e3ea11ea85fed89ef3221e8e</id>
+                <name><![CDATA[Capture/Scope]]></name>
+                <type>Capture/Scope</type>
                 <description><![CDATA[]]></description>
-                <data_type>Analog signal</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing values
-# that will be displayed
-# e.g displayValue = [ ['Phasor 1 name', Phasor 1 phase, Phasor 1 magnitude],
-#                      ['Phasor X name', Phasor X phase, Phasor X magnitude] ]
-displayValue = []
-
-]]></code>
-                <signals><![CDATA[]]></signals>
-                <updateRate>500</updateRate>
-                <background_color>#ffffff</background_color>
-                <hierarchy_position>2</hierarchy_position>
-                <phasors_data>
-                    <phasor>
-                        <display_name><![CDATA[Voltage Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_|V|]]></magnitude_signal>
-                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
-                    </phasor>
-                    <phasor>
-                        <display_name><![CDATA[Frequency Ratio]]></display_name>
-                        <magnitude_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_w]]></magnitude_signal>
-                        <phase_signal><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.sync_theta]]></phase_signal>
-                    </phasor>
-                    </phasors_data>
+                <hierarchy_position>1</hierarchy_position>
+                <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>480.0</x>
-                    <y>0.0</y>
-                    <width>280</width>
-                    <height>192</height>
+                    <x>672</x>
+                    <y>1008</y>
+                    <width>120</width>
+                    <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
+                    <state>Scope</state>
+                    <layout></layout>
+                    <presets>
+                        <active_capture_preset>Default</active_capture_preset>
+                        <active_scope_preset>Default</active_scope_preset>
+                        <capture name="Default">
+                            <time_interval>0.01</time_interval>
+                            <sample_rate>500000.0</sample_rate>
+                            <background_color>white</background_color>
+                            <layout>Vertical</layout>
+                            <legend>True</legend>
+                            <analog_signals>
+                            </analog_signals>
+                            <digital_signals>
+                            </digital_signals>
+                            <trigger>
+                                <device>-1</device>
+                                <is_force>False</is_force>
+                                <type>Analog</type>
+                                <source>None</source>
+                                <edge>Rising edge</edge>
+                                <treshold>0.0</treshold>
+                                <offset>0.0</offset>
+                                <useFirstTrigger>False</useFirstTrigger>
+                            </trigger>
+                            <plotting_options in_use="False">
+                                <subplots>
+                                    </subplots>
+                            </plotting_options>
+                        </capture>
+                        <scope name="Default">
+                            <background_color>white</background_color>
+                            <layout>Grid</layout>
+                            <legend>True</legend>
+                            <show_viewports>2</show_viewports>
+                            <decimation>2</decimation>
+                            <time_base>0.005</time_base>
+                            <analog_signals>
+                            <analog>
+                            <channel>0</channel>
+                            <name>F2_PCC.Meas1.VA</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>1</channel>
+                            <name>F2_PCC.Meas2.VA</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>2</channel>
+                            <name>F2_PCC.Meas1.IA</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            </analog_signals>
+                            <digital_signals>
+                            </digital_signals>
+                            <trigger>
+                                <device>0</device>
+                                <is_force>False</is_force>
+                                <type>Analog</type>
+                                <source>F2_PCC.Meas1.VA</source>
+                                <edge>Rising edge</edge>
+                                <treshold>0.0</treshold>
+                                <offset>50.0</offset>
+                                <useFirstTrigger>False</useFirstTrigger>
+                            </trigger>
+                        </scope>
+                        </presets>
+                    <capture>
+                        <time_interval>0.01</time_interval>
+                        <sample_rate>500000.0</sample_rate>
+                        <background_color>white</background_color>
+                        <layout>Vertical</layout>
+                        <legend>True</legend>
+                        <trigger>
+                            <type>Analog</type>
+                            <source>None</source>
+                            <edge>Rising edge</edge>
+                            <treshold>0.0</treshold>
+                            <offset>0.0</offset>
+                            <useFirstTrigger>False</useFirstTrigger>
+                        </trigger>
+
+                        <analog_signals>
+                            </analog_signals>
+
+                         <digital_signals>
+                            </digital_signals>
+
+                    </capture>
+
+                    <scope>
+                        <time_base>0.005 </time_base>
+                        <background_color>white</background_color>
+                        <layout>Grid</layout>
+                        <legend>True</legend>
+                        <trigger>
+                            <mode>Auto</mode>
+                            <type>Analog</type>
+                            <source>F2_PCC.Meas1.VA</source>
+                            <edge>Rising edge</edge>
+                            <treshold>0.0</treshold>
+                            <offset>50.0</offset>
+                        </trigger>
+
+                         <analog_signals>
+                            <analog>
+                            <channel>0</channel>
+                            <name>F2_PCC.Meas1.VA</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>1</channel>
+                            <name>F2_PCC.Meas2.VA</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>2</channel>
+                            <name>F2_PCC.Meas1.IA</name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            </analog_signals>
+
+                        <digital_signals>
+                            </digital_signals>
+
+                    </scope>
+                    <plotting_options in_use="False">
+                    
+                        <subplots>
+                            </subplots>
+                    </plotting_options>
                 </widget_settings>
-                <advance_widget_settings>
-                    <range_max>20.0</range_max>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b8ac62f11ea85e5509a4c4e2fb4</id>
-                <name><![CDATA[Inverter Droop Control]]></name>
-                <type>Group</type>
-                <description><![CDATA[None]]></description>
-                <components_ids><![CDATA[['ba2e1b8bc62f11eaabfc509a4c4e2fb4', 'ba2e1b8cc62f11ea8139509a4c4e2fb4', 'ba2e1b8dc62f11ea820a509a4c4e2fb4', 'ba2e1b8ec62f11eab1a5509a4c4e2fb4', 'ba2e1b8fc62f11ea83a2509a4c4e2fb4', 'ba2e1b90c62f11eab1c4509a4c4e2fb4', 'ba2e1b91c62f11ea9b39509a4c4e2fb4']]]></components_ids>
-                <hierarchy_position>2</hierarchy_position>
-                <canvas_bg_color>#ffffff</canvas_bg_color>
-                <initialization_code><![CDATA[# NOTE: Variables and functions defined here will be
-# available for use in all Macro and Expression scripts of the components owned by this widget.
-# This code is always executed prior simulation start.
-# HIL API is imported as 'hil'
 
-]]></initialization_code>
-                <widget_settings>
-                    <x>232.0</x>
-                    <y>8.0</y>
-                    <width>296</width>
-                    <height>152</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                    <collapsed>False</collapsed>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b8bc62f11eaabfc509a4c4e2fb4</id>
-                <name><![CDATA[Q ref]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Qref_form', inputValue)
-]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
-                <inputValueType>float</inputValueType>
-                <unit><![CDATA[vars]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>152.0</x>
-                    <y>48.0</y>
-                    <width>136</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b8cc62f11ea8139509a4c4e2fb4</id>
-                <name><![CDATA[VF control]]></name>
-                <type>CheckBoxMacro</type>
-                <description><![CDATA[]]></description>
-                <on_use_code active="True"><![CDATA[# HIL API is imported as 'hil'
-# NOTE: entered value is available through variable 'inputValue'
-
-if inputValue:
-    # do something when checkbox is checked
-    hil.set_scada_input_value('Grid forming inverter (averaged).ref_ctrl', 1)
-
-    pass
-else:
-    # do something when checkbox is unchecked
-    hil.set_scada_input_value('Grid forming inverter (averaged).ref_ctrl', 0)
-    pass
-
-]]></on_use_code>
-                <on_start_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed on simulation start.
-# NOTE: Variables specified here will be available in other handlers.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[True]]></inputValue>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>16</x>
-                    <y>8</y>
-                    <width>80</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b8dc62f11ea820a509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[ref_ctrl ON]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Green</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>144.0</x>
-                    <y>8.0</y>
-                    <width>32</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Raised]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b8ec62f11eab1a5509a4c4e2fb4</id>
-                <name><![CDATA[]]></name>
-                <type>LedDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Digital signal</data_type>
-                <signal_name><![CDATA[ref_ctrl OFF]]></signal_name>
-                <hil_device>0</hil_device>
-                <led_color>Red</led_color>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing LED indicator state
-# True -> On, False -> Off
-displayValue = False
-]]></code>
-                <updateRate>500</updateRate>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>176.0</x>
-                    <y>8.0</y>
-                    <width>32</width>
-                    <height>32</height>
-                    <appearance><![CDATA[Raised]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b8fc62f11ea83a2509a4c4e2fb4</id>
-                <name><![CDATA[V ref]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Grid forming inverter (averaged).Controller.Voltage droop.Vref', inputValue)
-]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[1.0]]></inputValue>
-                <inputValueType>float</inputValueType>
-                <unit><![CDATA[p.u.]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>48.0</y>
-                    <width>136</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b90c62f11eab1c4509a4c4e2fb4</id>
-                <name><![CDATA[w ref]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Grid forming inverter (averaged).Controller.Frequency droop.wref', inputValue)
-]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[1.0]]></inputValue>
-                <inputValueType>float</inputValueType>
-                <unit><![CDATA[p.u.]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>0.0</x>
-                    <y>80.0</y>
-                    <width>136</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-            </component_data>
-        <component_data>
-                <id>ba2e1b91c62f11ea9b39509a4c4e2fb4</id>
-                <name><![CDATA[P ref]]></name>
-                <type>TextBoxMacro</type>
-                <description><![CDATA[None]]></description>
-                <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Pref_form', inputValue)
-]]></on_use_code>
-                <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
-# HIL Control Panel API
-
-
-# Function for printing text to console (e.g printf("Hello world"))
-
-#------------------------------------------------
-
-# NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Vref', 1)]]></on_start_code>
-                <on_stop_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed after simulation is stopped.
-# HIL API is imported as 'hil'
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_stop_code>
-                <on_timer_code active="False"><![CDATA[# NOTE: The code specified in this handler will be executed periodically each 1000ms.
-# NOTE: Only read functions are available from the HIL Control Panel API
-# HIL Control Panel API
-
-
-
-# Change widget value by setting this variable.
-# NOTE: If you not specify 'widgetValue' variable or assign 'None' to it, widget value won't be changed.
-widgetValue = None
-]]></on_timer_code>
-                <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[1000.0]]></inputValue>
-                <inputValueType>float</inputValueType>
-                <unit><![CDATA[W]]></unit>
-                <hierarchy_position>3</hierarchy_position>
-                <widget_settings>
-                    <x>152.0</x>
-                    <y>80.0</y>
-                    <width>128</width>
-                    <height>32</height>
-                    <inputWidgetWidth>80</inputWidgetWidth>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
             </component_data>
         </components>
 </ui_settings>

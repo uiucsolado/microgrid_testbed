@@ -59,141 +59,148 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>RL1.L2</name>
+            <name>RL1.L1</name>
             <address>6</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>RL1.L3</name>
+            <name>RL1.L2</name>
             <address>7</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>RL2.L1</name>
+            <name>RL1.L3</name>
             <address>8</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>RL2.L2</name>
+            <name>RL2.L1</name>
             <address>9</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>RL2.L3</name>
+            <name>RL2.L2</name>
             <address>10</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Ea1</name>
+            <name>RL2.L3</name>
             <address>11</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Eb1</name>
+            <name>Grid feeding inverter (averaged).Ea1</name>
             <address>12</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Ec1</name>
+            <name>Grid feeding inverter (averaged).Eb1</name>
             <address>13</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Va2</name>
+            <name>Grid feeding inverter (averaged).Ec1</name>
             <address>14</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Vb2</name>
+            <name>Grid feeding inverter (averaged).Va1</name>
             <address>15</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Vc2</name>
+            <name>Grid feeding inverter (averaged).Vb1</name>
             <address>16</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Va</name>
+            <name>Grid feeding inverter (averaged).Vc1</name>
             <address>17</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vb</name>
+            <name>Va</name>
             <address>18</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vc</name>
+            <name>Vb</name>
             <address>19</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Ia1</name>
+            <name>Vc</name>
             <address>20</address>
-            <type>current</type>
+            <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Ib1</name>
+            <name>Grid feeding inverter (averaged).Ia1</name>
             <address>21</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Ic1</name>
+            <name>Grid feeding inverter (averaged).Ib1</name>
             <address>22</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Xi_a1</name>
+            <name>Grid feeding inverter (averaged).Ic1</name>
             <address>23</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Xi_b1</name>
+            <name>Grid feeding inverter (averaged).Xi_a1</name>
             <address>24</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Xi_c1</name>
+            <name>Grid feeding inverter (averaged).Xi_b1</name>
             <address>25</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Xi_c1</name>
+            <address>26</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -434,14 +441,35 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[[0.001]]]</execution_rates>
+        <execution_rates>[[[0.0001, 0.001]]]</execution_rates>
     </model_properties>
 
     <variables>
         <cell>
-            <name>Grid feeding inverter (averaged).Controller.PLL.E_q</name>
+            <name>Grid feeding inverter (averaged).Controller.P1</name>
             <type>generic</type>
-            <address>16389</address>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.PLL.E_d</name>
+            <type>generic</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+            <type>generic</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Xi_q_ERR</name>
+            <type>generic</type>
+            <address>16385</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -467,30 +495,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Xi_q_ERR</name>
+            <name>Grid feeding inverter (averaged).Controller.PLL.E_q</name>
             <type>generic</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.Q1</name>
-            <type>generic</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.P1</name>
-            <type>generic</type>
-            <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.PLL.E_d</name>
-            <type>generic</type>
-            <address>16388</address>
+            <address>16389</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -511,22 +518,22 @@
 
     <scada_inputs>
         <scada_input>
-            <name>Pref</name>
-            <addr>1426063620</addr>
-            <min>-70000.0</min>
-            <max>70000.0</max>
-            <def_value>0.0</def_value>
-            <unit>W</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
             <name>Qref</name>
             <addr>1426063624</addr>
             <min>-70000.0</min>
             <max>70000.0</max>
             <def_value>0.0</def_value>
             <unit>Vars</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Pref</name>
+            <addr>1426063620</addr>
+            <min>-70000.0</min>
+            <max>70000.0</max>
+            <def_value>0.0</def_value>
+            <unit>W</unit>
             <widget_type>float</widget_type>
             <format>real</format>
         </scada_input>
@@ -547,9 +554,9 @@
         <monitor>
             <type>user</type>
             <cpu_idx>0</cpu_idx>
-            <execution_rates>[0.001]</execution_rates>
-            <execution_rate_labels>['ER0 (0.001)']</execution_rate_labels>
-            <timer_counters>[149999]</timer_counters>
+            <execution_rates>[0.0001, 0.001]</execution_rates>
+            <execution_rate_labels>['ER0 (0.0001)', 'ER1 (0.001)']</execution_rate_labels>
+            <timer_counters>[14999, 149999]</timer_counters>
 
             
         </monitor>

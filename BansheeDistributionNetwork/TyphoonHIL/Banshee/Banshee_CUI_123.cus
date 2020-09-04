@@ -2881,7 +2881,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[On]]></inputValue>
+                <inputValue><![CDATA[Off]]></inputValue>
                 <availableValues><![CDATA[['On', 'Off']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
@@ -3675,7 +3675,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -3762,7 +3762,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -4027,7 +4027,7 @@ displayValue = data
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>400.0</y>
+                    <y>384.0</y>
                     <width>376</width>
                     <height>272</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4037,7 +4037,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -4133,7 +4133,7 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>72.0</x>
+                    <x>64.0</x>
                     <y>208.0</y>
                     <width>280</width>
                     <height>192</height>
@@ -4141,8 +4141,8 @@ displayValue = 0.0
                 </widget_settings>
                 <advance_widget_settings>
                     <color_range>False</color_range>
-                    <min>227.0</min>
-                    <max>500.0</max>
+                    <min>100.0</min>
+                    <max>1000.0</max>
                     <warning_range>(0, 0, 0, 0)</warning_range>
                     <critical_range>(0, 0, 0, 0)</critical_range>
                 </advance_widget_settings>
@@ -4194,7 +4194,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -4779,7 +4779,7 @@ displayValue = data
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>0.0</x>
-                    <y>408.0</y>
+                    <y>416.0</y>
                     <width>416</width>
                     <height>248</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4789,7 +4789,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -5150,7 +5150,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -5482,7 +5482,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -5843,7 +5843,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
+                    <time_window>100</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>

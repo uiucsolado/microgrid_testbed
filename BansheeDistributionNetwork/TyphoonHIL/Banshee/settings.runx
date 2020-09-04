@@ -79,8 +79,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB10.Brk.S1</name>
@@ -88,8 +88,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB11.Brk.S1</name>
@@ -97,7 +97,7 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -106,7 +106,7 @@
                 <device>0</device>
                 <weight>2</weight>
                 <site>0</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -115,7 +115,7 @@
                 <device>0</device>
                 <weight>3</weight>
                 <site>0</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -124,8 +124,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB2.Brk.S1</name>
@@ -133,8 +133,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB3.Brk.S1</name>
@@ -142,8 +142,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB4.Brk.S1</name>
@@ -151,8 +151,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB5.Brk.S1</name>
@@ -160,8 +160,8 @@
                 <device>0</device>
                 <weight>2</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB6.Brk.S1</name>
@@ -169,8 +169,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB7.Brk.S1</name>
@@ -178,8 +178,8 @@
                 <device>0</device>
                 <weight>2</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB8.Brk.S1</name>
@@ -187,7 +187,7 @@
                 <device>0</device>
                 <weight>3</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -196,7 +196,7 @@
                 <device>0</device>
                 <weight>3</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -223,7 +223,7 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>0</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
@@ -232,8 +232,8 @@
                 <device>1</device>
                 <weight>0</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB11.Brk.S1</name>
@@ -241,7 +241,7 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
@@ -250,8 +250,8 @@
                 <device>1</device>
                 <weight>2</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB13.Brk.S1</name>
@@ -259,7 +259,7 @@
                 <device>1</device>
                 <weight>3</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -268,8 +268,8 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB15.Brk.S1</name>
@@ -277,8 +277,8 @@
                 <device>1</device>
                 <weight>0</weight>
                 <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB16.Brk.S1</name>
@@ -286,7 +286,7 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>5</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -295,7 +295,7 @@
                 <device>1</device>
                 <weight>2</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -304,8 +304,8 @@
                 <device>1</device>
                 <weight>2</weight>
                 <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB19.Brk.S1</name>
@@ -313,8 +313,8 @@
                 <device>1</device>
                 <weight>0</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB2.Brk.S1</name>
@@ -322,7 +322,7 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
@@ -331,8 +331,8 @@
                 <device>1</device>
                 <weight>3</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB4.Brk.S1</name>
@@ -340,8 +340,8 @@
                 <device>1</device>
                 <weight>0</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB5.Brk.S1</name>
@@ -349,8 +349,8 @@
                 <device>1</device>
                 <weight>2</weight>
                 <site>0</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB6.Brk.S1</name>
@@ -358,8 +358,8 @@
                 <device>1</device>
                 <weight>3</weight>
                 <site>0</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB7.Brk.S1</name>
@@ -367,8 +367,8 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB8.Brk.S1</name>
@@ -376,8 +376,8 @@
                 <device>1</device>
                 <weight>2</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB9.Brk.S1</name>
@@ -385,8 +385,8 @@
                 <device>1</device>
                 <weight>2</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_PCC.S1</name>
@@ -403,8 +403,8 @@
                 <device>2</device>
                 <weight>0</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB2.Brk.S1</name>
@@ -412,8 +412,8 @@
                 <device>2</device>
                 <weight>0</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB3.Brk.S1</name>
@@ -421,8 +421,8 @@
                 <device>2</device>
                 <weight>0</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB4.Brk.S1</name>
@@ -430,8 +430,8 @@
                 <device>2</device>
                 <weight>0</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB5.Brk.S1</name>
@@ -439,8 +439,8 @@
                 <device>2</device>
                 <weight>1</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB6.Brk.S1</name>
@@ -448,8 +448,8 @@
                 <device>2</device>
                 <weight>2</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB7.Brk.S1</name>
@@ -457,8 +457,8 @@
                 <device>2</device>
                 <weight>1</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB8.Brk.S1</name>
@@ -466,8 +466,8 @@
                 <device>2</device>
                 <weight>3</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB9.Brk.S1</name>
@@ -475,8 +475,8 @@
                 <device>2</device>
                 <weight>1</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_Motor.CB.S1</name>
@@ -485,7 +485,7 @@
                 <weight>2</weight>
                 <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F3_PCC.S1</name>
@@ -493,7 +493,7 @@
                 <device>3</device>
                 <weight>0</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
@@ -2531,7 +2531,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>ang_sync3</name>
+                	<name>DIESEL_MCB.DG_MCB_fb</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -4056,145 +4056,185 @@
             <scada_input>
                 <name>3ph Fault 103.ctrl</name>
                 <device>0</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>3ph Fault 106.ctrl</name>
                 <device>0</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>3ph Fault 204.ctrl</name>
                 <device>1</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>3ph Fault 208.ctrl</name>
                 <device>1</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>3ph Fault 301.ctrl</name>
                 <device>2</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB1.F1_CB1</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB10.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB10.F1_CB10</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB12.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB11.F1_CB11</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB14.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB12.F1_CB12</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB2.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB13.F1_CB13</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F1_CB14.F1_CB14</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F1_CB2.F1_CB2</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_CB3.Brk.F1_CB3</name>
                 <device>0</device>
-                <value>1</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB4.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB4.F1_CB4</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB5.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB5.F1_CB5</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB6.F1_CB6</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB7.F1_CB7</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F1_Motor.Control Panel Input1</name>
+                <name>F1_CB8.F1_CB8</name>
                 <device>0</device>
-                <value>0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F1_CB9.F1_CB9</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F2_CB1.F2_CB1</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB12.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB10.F2_CB10</name>
+                <device>1</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F2_CB11.F2_CB11</name>
+                <device>1</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F2_CB12.F2_CB12</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB14.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB13.F2_CB13</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB15.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB14.F2_CB14</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB18.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB15.F2_CB15</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB19.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB16.F2_CB16</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB2.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB17.F2_CB17</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB3.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB18.F2_CB18</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB4.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB19.F2_CB19</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB5.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB2.F2_CB2</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB3.F2_CB3</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB4.F2_CB4</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F2_CB8.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F2_CB5.F2_CB5</name>
+                <device>1</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F2_CB6.F2_CB6</name>
+                <device>1</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F2_CB7.F2_CB7</name>
+                <device>1</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>F2_CB8.F2_CB8</name>
                 <device>1</device>
                 <value>0.0</value>
             </scada_input>
@@ -4204,7 +4244,7 @@
                 <value>1.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB1.F3_CB1</name>
                 <device>2</device>
                 <value>0.0</value>
             </scada_input>
@@ -4214,7 +4254,7 @@
                 <value>1.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB3.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB3.F3_CB3</name>
                 <device>2</device>
                 <value>0.0</value>
             </scada_input>
@@ -4229,34 +4269,29 @@
                 <value>1.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB6.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB6.F3_CB6</name>
                 <device>2</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB7.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB7.F3_CB7</name>
                 <device>2</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB8.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB8.F3_CB8</name>
                 <device>2</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>F3_CB9.MID_Rly1.SEL_787.Control Panel Input1</name>
+                <name>F3_CB9.F3_CB9</name>
                 <device>2</device>
                 <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F3_Motor.Control Panel Input1</name>
-                <device>2</device>
-                <value>0</value>
             </scada_input>
             <scada_input>
                 <name>F3_PCC.PCC_CB</name>
                 <device>3</device>
-                <value>1</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>Grid feeding inverter (averaged).Connect GFL</name>
@@ -4266,7 +4301,7 @@
             <scada_input>
                 <name>Grid forming inverter (averaged).CB_control.Grid_Islanded</name>
                 <device>1</device>
-                <value>1</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Grid forming inverter (averaged).Connect GFM</name>
@@ -4286,7 +4321,7 @@
             <scada_input>
                 <name>Microturbine.CB_control.Grid_Islanded</name>
                 <device>2</device>
-                <value>1</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>Microturbine.Connect MCB</name>
@@ -4316,7 +4351,7 @@
             <scada_input>
                 <name>Microturbine1.CB_control.Grid_Islanded</name>
                 <device>0</device>
-                <value>1</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Microturbine1.Connect MCB</name>

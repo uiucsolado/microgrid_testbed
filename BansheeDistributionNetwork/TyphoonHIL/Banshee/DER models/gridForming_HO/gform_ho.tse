@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.2
-// Save timestamp: 14-Aug-2020 @ 03:23:07 PM
+// Save timestamp: 21-Aug-2020 @ 01:54:12 PM
 //
 
 model "gform_ho" {
@@ -27,7 +27,7 @@ model "gform_ho" {
         sys_real_type_precision = "default"
         user_real_type_precision = "double precision"
         sys_cpu_optimization = "high"
-        user_cpu_optimization = "medium"
+        user_cpu_optimization = "high"
         user_cpu_part_option = "default"
         matrix_based_reduction = True
         cpl_dynamics_analysis = False
@@ -166,7 +166,7 @@ model "gform_ho" {
         ]
 
         component src_scada_input Pref {
-            execution_rate = "Ts"
+            execution_rate = "Ts_inv"
             max = "70e3"
             min = "-70e3"
             unit = "W"
@@ -177,7 +177,7 @@ model "gform_ho" {
         ]
 
         component src_scada_input Qref {
-            execution_rate = "Ts"
+            execution_rate = "Ts_inv"
             max = "70e3"
             min = "-70e3"
             unit = "Vars"
@@ -730,7 +730,7 @@ model "gform_ho" {
 
                     component src_scada_input wref {
                         def_value = "1"
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         max = "1.3"
                         min = "0.7"
                         unit = "pu"
@@ -764,13 +764,13 @@ model "gform_ho" {
                         threshold = "1"
                     }
                     [
-                        position = 7736, 8184
+                        position = 7712, 8184
                         hide_name = True
                         scale = -1, -1
                     ]
 
                     component src_constant Constant3 {
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         value = "w_0"
                     }
                     [
@@ -783,7 +783,7 @@ model "gform_ho" {
                         gain = "w_0"
                     }
                     [
-                        position = 7800, 8168
+                        position = 7848, 8168
                         hide_name = True
                         scale = -1, 1
                     ]
@@ -848,7 +848,7 @@ model "gform_ho" {
                         direction = out
                     }
                     [
-                        position = 7880, 8168
+                        position = 7912, 8168
                         hide_name = True
                         scale = -1, -1
                     ]
@@ -875,10 +875,10 @@ model "gform_ho" {
                     connect "Signal switch3.in" Sum4.out as Connection421
                     connect Constant3.out "Signal switch4.in" as Connection415
                     connect w_bus3 Gain5.in as Connection422
-                    connect Gain5.out "Signal switch4.in1" as Connection423
                     connect "Signal switch4.out" "Signal switch3.in1" as Connection424
-                    connect MT_ON4 "Signal switch4.in2" as Connection429
-                    connect MT_ON3 "Signal switch3.in2" as Connection430
+                    connect "Signal switch3.in2" MT_ON3 as Connection437
+                    connect "Signal switch4.in2" MT_ON4 as Connection438
+                    connect "Signal switch4.in1" Gain5.out as Connection439
                 }
                 [
                     position = 8336, 8184
@@ -946,7 +946,7 @@ model "gform_ho" {
 
                     component src_scada_input Vref {
                         def_value = "1"
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         max = "5"
                         min = "0.8"
                         unit = "pu"
@@ -977,7 +977,7 @@ model "gform_ho" {
                     ]
 
                     component src_constant Constant2 {
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                     }
                     [
                         position = 7872, 8200
@@ -1065,16 +1065,16 @@ model "gform_ho" {
 
                     connect From18 Sum2.in1 as Connection323
                     connect Gain3.in Sum2.out as Connection325
-                    connect Q_ref1 Sum2.in as Connection360
                     connect Gain3.out Sum4.in as Connection362
                     connect Vref.out Sum4.in1 as Connection368
                     connect E_magnitude "Signal switch2.out" as Connection412
                     connect "Signal switch2.in" Sum4.out as Connection413
                     connect Constant2.out "Signal switch1.in" as Connection399
-                    connect w_bus2 "Signal switch1.in1" as Connection409
                     connect "Signal switch1.out" "Signal switch2.in1" as Connection414
-                    connect MT_ON1 "Signal switch1.in2" as Connection419
-                    connect MT_ON2 "Signal switch2.in2" as Connection420
+                    connect MT_ON1 "Signal switch1.in2" as Connection429
+                    connect "Signal switch1.in1" w_bus2 as Connection430
+                    connect MT_ON2 "Signal switch2.in2" as Connection431
+                    connect Q_ref1 Sum2.in as Connection432
                 }
                 [
                     position = 8312, 7944
@@ -2768,65 +2768,6 @@ out = in - (6.283185307179586*floor_in);
                     scale = -1, 1
                 ]
 
-                component "core/Rate Transition" "Rate Transition1" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7560, 8208
-                    rotation = down
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition2" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7560, 8256
-                    rotation = down
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition3" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7560, 8400
-                    rotation = down
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition4" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7560, 8472
-                    rotation = down
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition5" {
-                    execution_rate = "Ts"
-                }
-                [
-                    position = 7840, 8648
-                    rotation = down
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition6" {
-                    execution_rate = "Ts"
-                }
-                [
-                    position = 8600, 8224
-                    hide_name = True
-                    size = 32, 32
-                ]
-
                 port U_P {
                     position = top:1
                     kind = sp
@@ -3328,16 +3269,6 @@ out = in - (6.283185307179586*floor_in);
                     size = 60, 20
                 ]
 
-                junction Junction228 sp
-                [
-                    position = 7520, 8400
-                ]
-
-                junction Junction230 sp
-                [
-                    position = 7472, 8472
-                ]
-
                 junction Junction231 sp
                 [
                     position = 7520, 7896
@@ -3363,24 +3294,9 @@ out = in - (6.283185307179586*floor_in);
                     position = 7816, 8392
                 ]
 
-                junction Junction229 sp
-                [
-                    position = 7520, 8256
-                ]
-
                 junction Junction158 sp
                 [
                     position = 7816, 8248
-                ]
-
-                junction Junction272 sp
-                [
-                    position = 8544, 8224
-                ]
-
-                junction Junction273 sp
-                [
-                    position = 8544, 8312
                 ]
 
                 junction Junction274 sp
@@ -3410,7 +3326,32 @@ out = in - (6.283185307179586*floor_in);
 
                 junction Junction279 sp
                 [
+                    position = 7520, 8256
+                ]
+
+                junction Junction280 sp
+                [
                     position = 7472, 8208
+                ]
+
+                junction Junction281 sp
+                [
+                    position = 7520, 8400
+                ]
+
+                junction Junction282 sp
+                [
+                    position = 7472, 8472
+                ]
+
+                junction Junction283 sp
+                [
+                    position = 8512, 8224
+                ]
+
+                junction Junction284 sp
+                [
+                    position = 8512, 8312
                 ]
 
                 connect From10 Current_abc_to_dq2.Ec2 as Connection234
@@ -3447,7 +3388,6 @@ out = in - (6.283185307179586*floor_in);
                 ]
                 connect E_qREF1.in Junction258 as Connection861
                 connect Product111.out Sum1.in as Connection684
-                connect Product13.in Junction228 as Connection679
                 connect "Current_abc_to_dq4.^Eb2" From24 as Connection700
                 connect "Outer Voltage Loop + Inner Current Loop.Uc1" "Bus Join1.in2" as Connection840
                 connect P1.in Gain15.out as Connection966
@@ -3455,17 +3395,13 @@ out = in - (6.283185307179586*floor_in);
                 connect Gain15.in Junction268 as Connection967
                 connect Sum5.out Gain13.in as Connection926
                 connect Q1.in Gain14.out as Connection968
-                connect Product10.in Junction229 as Connection723
                 connect "Current_abc_to_dq4.^Ed2" Gain11.in as Connection876
-                connect Product12.in1 Junction230 as Connection678
                 connect Gain14.in Junction267 as Connection969
                 connect Current_abc_to_dq.wt2 From28 as Connection247
                 [
                     breakpoints = 8000, 7904; 8040, 7904
                 ]
-                connect Product10.in1 Junction228 as Connection681
                 connect Goto2 "Bus Join1.out" as Connection51
-                connect "Frequency droop.w1" Junction272 as Connection991
                 connect From35 "Current_abc_to_dq3.^Eb2" as Connection276
                 connect Gain8.in Current_abc_to_dq2.Eq2 as Connection869
                 connect "Bus Join1.in1" "Outer Voltage Loop + Inner Current Loop.Ub1" as Connection838
@@ -3477,7 +3413,6 @@ out = in - (6.283185307179586*floor_in);
                 connect "Current_abc_to_dq3.^Ea2" From33 as Connection278
                 connect Junction269 Goto29 as Connection964
                 connect Junction258 "Outer Voltage Loop + Inner Current Loop.E_q_ref1" as Connection860
-                connect Product13.in1 Junction230 as Connection676
                 connect Sum4.out Gain4.in as Connection330
                 connect Constant1.out Goto46 as Connection882
                 connect From5 Current_abc_to_dq.Xi_a2 as Connection38
@@ -3485,15 +3420,11 @@ out = in - (6.283185307179586*floor_in);
                 connect Gain4.out Integrator2.in as Connection335
                 connect From27 Current_abc_to_dq2.wt2 as Connection246
                 connect From32 Current_abc_to_dq3.wt2 as Connection275
-                connect Product111.in1 Junction229 as Connection682
                 connect Goto20 Gain12.out as Connection878
                 connect "Current_abc_to_dq3.^Ed2" Gain9.in as Connection872
                 connect Goto28 Gain10.out as Connection874
                 connect Goto3 Junction158 as Connection292
                 connect Current_abc_to_dq.Xi_q2 Gain7.in as Connection866
-                connect Gain1.in Junction273 as Connection998
-                connect Junction273 Junction272 as Connection999
-                connect Goto48 Junction273 as Connection1000
                 connect Integrator3.out Junction274 as Connection1003
                 connect Junction274 Sum5.in1 as Connection1004
                 [
@@ -3532,23 +3463,42 @@ out = in - (6.283185307179586*floor_in);
                 connect "Voltage droop.E_magnitude" Junction278 as Connection1037
                 connect Junction278 Goto47 as Connection1038
                 connect E_mag.in Junction278 as Connection1039
-                connect "Rate Transition1.in" From36 as Connection1041
-                connect Product111.in Junction279 as Connection1045
-                connect Junction279 Product12.in as Connection1046
+                connect Product111.in1 Junction279 as Connection1062
+                connect Junction279 Product10.in as Connection1063
                 [
-                    breakpoints = 7472, 8208
+                    breakpoints = 7520, 8256
                 ]
-                connect "Rate Transition1.out" Junction279 as Connection1047
-                connect Junction229 "Rate Transition2.out" as Connection1048
-                connect "Rate Transition2.in" From37 as Connection1049
-                connect Junction228 "Rate Transition3.out" as Connection1050
-                connect "Rate Transition3.in" From39 as Connection1051
-                connect Junction230 "Rate Transition4.out" as Connection1052
-                connect "Rate Transition4.in" From38 as Connection1053
-                connect From43 "Rate Transition5.in" as Connection1054
-                connect "Rate Transition5.out" Goto45 as Connection1055
-                connect Junction272 "Rate Transition6.in" as Connection1056
-                connect "Rate Transition6.out" Goto17 as Connection1057
+                connect From37 Junction279 as Connection1064
+                connect Product111.in Junction280 as Connection1065
+                connect Junction280 Product12.in as Connection1066
+                [
+                    breakpoints = 7472, 8208; 7472, 8208
+                ]
+                connect From36 Junction280 as Connection1067
+                connect Product13.in Junction281 as Connection1068
+                connect Junction281 Product10.in1 as Connection1069
+                [
+                    breakpoints = 7520, 8400
+                ]
+                connect From39 Junction281 as Connection1070
+                connect Product12.in1 Junction282 as Connection1071
+                connect Junction282 Product13.in1 as Connection1072
+                [
+                    breakpoints = 7472, 8472
+                ]
+                connect From38 Junction282 as Connection1073
+                connect From43 Goto45 as Connection1074
+                connect "Frequency droop.w1" Junction283 as Connection1083
+                [
+                    breakpoints = 8400, 8224
+                ]
+                connect Junction283 Goto17 as Connection1084
+                [
+                    breakpoints = 8544, 8224; 8544, 8224
+                ]
+                connect Gain1.in Junction284 as Connection1086
+                connect Junction284 Junction283 as Connection1087
+                connect Goto48 Junction284 as Connection1088
             }
             [
                 position = 6704, 7544
@@ -3855,7 +3805,7 @@ out = in - (6.283185307179586*floor_in);
 
             component src_scada_input "Connect GFM" {
                 def_value = "1"
-                execution_rate = "Ts_sys"
+                execution_rate = "Ts"
                 max = "1"
                 min = "0"
                 unit = ""
@@ -3883,7 +3833,7 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component src_constant Constant9 {
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                     value = "5e-2"
                 }
                 [
@@ -4062,7 +4012,7 @@ if (in < 0)
                 ]
 
                 component src_constant Constant7 {
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                     value = "1e-3"
                 }
                 [
@@ -4125,7 +4075,7 @@ if (in < 0)
                 ]
 
                 component src_constant Constant6 {
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                     value = "5e-3"
                 }
                 [
@@ -4567,7 +4517,7 @@ if (connect==0)
                     ]
 
                     component src_constant Constant3 {
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         value = "2*np.pi/3"
                     }
                     [
@@ -4584,7 +4534,7 @@ if (connect==0)
                     ]
 
                     component src_constant Constant2 {
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         value = "2*np.pi/3"
                     }
                     [
@@ -4899,7 +4849,7 @@ if (connect==0)
                     ]
 
                     component src_constant Constant3 {
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         value = "2*np.pi/3"
                     }
                     [
@@ -4916,7 +4866,7 @@ if (connect==0)
                     ]
 
                     component src_constant Constant2 {
-                        execution_rate = "Ts_sys"
+                        execution_rate = "Ts"
                         value = "2*np.pi/3"
                     }
                     [
@@ -5243,7 +5193,7 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component gen_gain Gain14 {
-                    gain = "V_DQ"
+                    gain = "V_ABC*np.sqrt(3)"
                 }
                 [
                     position = 7456, 8184
@@ -5307,69 +5257,6 @@ out = in - (6.283185307179586*floor_in);
                 }
                 [
                     position = 8504, 8280
-                ]
-
-                component "core/Rate Transition" "Rate Transition4" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7168, 8544
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition5" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7168, 8608
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition6" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7168, 8576
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition7" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7160, 8736
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition8" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7160, 8800
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition9" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7160, 8768
-                    hide_name = True
-                    size = 32, 32
-                ]
-
-                component "core/Rate Transition" "Rate Transition11" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7728, 8176
-                    hide_name = True
-                    size = 32, 32
                 ]
 
                 tag From43 {
@@ -6068,22 +5955,8 @@ out = in - (6.283185307179586*floor_in);
                 connect "Unit Delay2.out" Junction118 as Connection1501
                 connect Junction118 theta_bus as Connection1502
                 connect "abc to qd.theta" Junction118 as Connection1503
-                connect "abc to qd.a" "Rate Transition4.out" as Connection1504
-                connect "Rate Transition4.in" Va_G1 as Connection1505
-                connect "abc to qd.c" "Rate Transition5.out" as Connection1506
-                connect "Rate Transition5.in" Vc_G1 as Connection1507
-                connect Vb_G1 "Rate Transition6.in" as Connection1508
-                connect "Rate Transition6.out" "abc to qd.b" as Connection1509
                 connect Gain7.out Goto29 as Connection1510
                 connect Goto28 Gain12.out as Connection1511
-                connect From34 "Rate Transition8.in" as Connection1512
-                connect "Rate Transition8.out" "abc to qd1.c" as Connection1513
-                connect From33 "Rate Transition7.in" as Connection1514
-                connect "Rate Transition7.out" "abc to qd1.a" as Connection1515
-                connect "abc to qd1.b" "Rate Transition9.out" as Connection1516
-                connect "Rate Transition9.in" From35 as Connection1517
-                connect Gain4.out "Rate Transition11.in" as Connection1518
-                connect "Rate Transition11.out" Sum2.in as Connection1519
                 connect "Relational operator4.out" "Logical operator1.in2" as Connection1525
                 connect "Logical operator1.out" "stay connected1.ready" as Connection1534
                 connect "|V|1" Junction119 as Connection1536
@@ -6093,6 +5966,13 @@ out = in - (6.283185307179586*floor_in);
                 connect theta_bus1 "abc to qd1.theta" as Connection1540
                 connect Goto35 "Unit Delay7.out" as Connection1541
                 connect Goto34 "Unit Delay6.out" as Connection1542
+                connect Gain4.out Sum2.in as Connection1543
+                connect Vc_G1 "abc to qd.c" as Connection1544
+                connect Vb_G1 "abc to qd.b" as Connection1545
+                connect Va_G1 "abc to qd.a" as Connection1546
+                connect From34 "abc to qd1.c" as Connection1547
+                connect From35 "abc to qd1.b" as Connection1548
+                connect From33 "abc to qd1.a" as Connection1549
             }
             [
                 position = 9208, 7592
@@ -6156,7 +6036,7 @@ out = in - (6.283185307179586*floor_in);
 
                 component src_scada_input Grid_Islanded {
                     def_value = "1"
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                     format = "int"
                     max = "1"
                     min = "0"
@@ -6205,7 +6085,7 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component src_constant Constant10 {
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                     value = "5e-2"
                 }
                 [
@@ -6238,7 +6118,7 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component src_constant Constant1 {
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                 }
                 [
                     position = 7944, 8664
@@ -6246,7 +6126,7 @@ out = in - (6.283185307179586*floor_in);
                 ]
 
                 component src_constant Constant11 {
-                    execution_rate = "Ts_sys"
+                    execution_rate = "Ts"
                     value = "1e-3"
                 }
                 [
@@ -6375,7 +6255,7 @@ var = 1;
 out = var;
 /*End code section*/"
                     update_fnc = "/*Begin code section*/
-if ((in1<1.05)&&(in1>0.95)&&(in2<1.005)&&(in2>0.995))
+if ((in1<1.1)&&(in1>0.9)&&(in2<1.1)&&(in2>0.9))
     var = 0;
 else
     var = 1;
@@ -6392,15 +6272,6 @@ else
                 [
                     position = 8528, 8296
                     hide_name = True
-                ]
-
-                component "core/Rate Transition" "Rate Transition1" {
-                    execution_rate = "Ts_sys"
-                }
-                [
-                    position = 7944, 8616
-                    hide_name = True
-                    size = 32, 32
                 ]
 
                 port CB_status {
@@ -6695,11 +6566,10 @@ else
                 [
                     breakpoints = 8560, 8296
                 ]
-                connect Gain13.out "Rate Transition1.in" as Connection1214
-                connect "Rate Transition1.out" Sum10.in1 as Connection1215
                 connect "Hold after connect2.out" Junction125 as Connection1217
                 connect Junction125 "Logical operator10.in" as Connection1218
                 connect "Logical operator7.in1" Junction125 as Connection1219
+                connect Gain13.out Sum10.in1 as Connection1220
             }
             [
                 position = 9208, 7768
@@ -7279,13 +7149,15 @@ else
             connect Eb1.n_node Junction333 as Connection1418
 
             C_s = "800e-6"
+            Ki_V = "0.291176*132.4743"
+            Kp_V = "0.291176"
             Ts_sys = "Ts"
             maxV_pds = "1e-3"
             maxV_slip = "5e-4"
-            maxw_pds = "1e-4"
-            maxw_slip = "3e-4"
+            maxw_pds = "8e-4"
+            maxw_slip = "8e-4"
             minV_slip = "2e-4"
-            minw_slip = "1e-4"
+            minw_slip = "4e-4"
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A grid-forming three-phase inverter with a frequency and voltage droop controller</p></body></html>"
@@ -7653,7 +7525,7 @@ else
             }
         }
         [
-            position = 6648, 8152
+            position = 6624, 8152
             rotation = down
             scale = -1, -1
             size = 168, 112
@@ -7753,6 +7625,11 @@ else
             position = 7712, 8296
         ]
 
+        junction Junction65 pe
+        [
+            position = 6760, 7960
+        ]
+
         connect V_q_a Va_G.in as Connection312
         connect V_d_a Vb_G.in as Connection313
         connect V_d_a2 Vc_G.in as Connection314
@@ -7783,23 +7660,24 @@ else
         connect Vc_G.n_node Junction63 as Connection826
         connect Junction64 Junction63 as Connection828
         connect Vb_G.n_node Junction64 as Connection829
-        connect RL1.P2 "Device Marker1.node" as Connection874
-        [
-            breakpoints = 6760, 7960
-        ]
         connect "Constant Impedance Load1.N" Junction63 as Connection873
         [
             breakpoints = 7168, 8296; 7168, 8296; 7168, 8296; 7168, 8296; 7168, 8296; 7168, 8296; 7608, 8296; 7608, 8296
         ]
-        connect "Grid forming inverter (averaged).Va" RL1.P2 as Connection875
-        connect "Grid forming inverter (averaged).Vb" RL1.P4 as Connection876
-        connect "Grid forming inverter (averaged).Vc" RL1.P6 as Connection877
-        connect Pref.out "Grid forming inverter (averaged).setpoint_P" as Connection878
-        connect Qref.out "Grid forming inverter (averaged).setpoint_Q" as Connection879
         connect Va_G.n_node Junction64 as Connection880
         [
             breakpoints = 7816, 8296; 7744, 8296
         ]
+        connect "Device Marker1.node" Junction65 as Connection897
+        connect Junction65 RL1.P2 as Connection898
+        [
+            breakpoints = 6760, 7960; 6760, 7960; 6760, 7960
+        ]
+        connect "Grid forming inverter (averaged).Va" Junction65 as Connection899
+        connect "Grid forming inverter (averaged).Vb" RL1.P4 as Connection900
+        connect "Grid forming inverter (averaged).Vc" RL1.P6 as Connection901
+        connect Pref.out "Grid forming inverter (averaged).setpoint_P" as Connection902
+        connect Qref.out "Grid forming inverter (averaged).setpoint_Q" as Connection903
     }
 
     default {
@@ -8096,11 +7974,6 @@ else
             embedded_coupling = "False"
             ratio_type = "Automatic"
             ratio = "0.1"
-        }
-
-        "core/Rate Transition" {
-            init_value = "0.0"
-            execution_rate = "100e-6"
         }
 
         "core/Signal Controlled Voltage Source" {

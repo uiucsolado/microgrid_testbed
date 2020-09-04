@@ -510,7 +510,7 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev1() {
         _vrms_bus202_vinst_va1__out = (HIL_InFloat(0xc80000+0x2b));
 
              // Generated from the component: Vrms_bus203.Vinst.Va1
-        _vrms_bus203_vinst_va1__out = (HIL_InFloat(0xc80000+0x624));
+        _vrms_bus203_vinst_va1__out = (HIL_InFloat(0xc80000+0x62d));
 
              // Generated from the component: Vrms_bus204.Vinst.Va1
         _vrms_bus204_vinst_va1__out = (HIL_InFloat(0xc80000+0x2c));
@@ -522,7 +522,7 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev1() {
         _vrms_bus206_vinst_va1__out = (HIL_InFloat(0xc80000+0x827));
 
              // Generated from the component: Vrms_bus207.Vinst.Va1
-        _vrms_bus207_vinst_va1__out = (HIL_InFloat(0xc80000+0x625));
+        _vrms_bus207_vinst_va1__out = (HIL_InFloat(0xc80000+0x62e));
 
              // Generated from the component: Vrms_bus208.Vinst.Va1
         _vrms_bus208_vinst_va1__out = (HIL_InFloat(0xc80000+0x222));

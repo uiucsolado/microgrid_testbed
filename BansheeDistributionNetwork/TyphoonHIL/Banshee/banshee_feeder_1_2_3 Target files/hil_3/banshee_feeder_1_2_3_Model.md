@@ -128,7 +128,7 @@ rtds_write 0x08240401 0x00000001
 
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x0000000F
+rtds_write 0x080C0001 0x0000000D
 rtds_write 0x080C0004 0x3C23D70A
 rtds_write 0x080C0005 0x3D710000
 rtds_write 0x08100000 0x00000064
