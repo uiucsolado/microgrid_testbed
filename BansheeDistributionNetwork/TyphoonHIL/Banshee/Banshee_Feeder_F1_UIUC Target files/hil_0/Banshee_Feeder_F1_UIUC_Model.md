@@ -1,4 +1,4 @@
-Model Banshee_Feeder_F1_UIUC
+Model banshee_feeder_f1_uiuc
 
 REM *****************************************:
 REM * Common entries:
@@ -541,7 +541,7 @@ rtds_file_write 0x08C82000 SPC3_MAC1.txt
 rtds_file_write 0x08C84000 SPC3_MAC2.txt
 rtds_file_write 0x08C86000 SPC3_MAC3.txt
 
-rtds_write 0x08D00004 0x00000007
+rtds_write 0x08D00004 0x0000000F
 REM SPC3 Contactors initialization...
 rtds_write 0x08E40000 0x00000000
 rtds_write 0x08E40080 0x00000000
@@ -570,10 +570,19 @@ rtds_write 0x08E40282 0x00000000
 rtds_write 0x08E40302 0x00000000
 rtds_write 0x08E40382 0x00000000
 rtds_write 0x08E40402 0x00000001
+rtds_write 0x08E40003 0x00000000
+rtds_write 0x08E40083 0x00000000
+rtds_write 0x08E40103 0x00000000
+rtds_write 0x08E40183 0x00000000
+rtds_write 0x08E40203 0x00000000
+rtds_write 0x08E40283 0x00000000
+rtds_write 0x08E40303 0x00000000
+rtds_write 0x08E40383 0x00000000
+rtds_write 0x08E40403 0x00000001
 
 REM SPC3 GDS compensation settings...
 rtds_write 0x08CC0000 0x00000001
-rtds_write 0x08CC0001 0x00000010
+rtds_write 0x08CC0001 0x0000001A
 rtds_write 0x08CC0004 0x3BA3D70A
 rtds_write 0x08CC0005 0x3D710000
 rtds_write 0x08D00000 0x000000C8
