@@ -1106,19 +1106,49 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).ESS_start</name>
+                <name>ESS.Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV</name>
                 <device>0</device>
-                <value>1.0</value>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).CONNECT</name>
+                <device>0</device>
+                <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ki_v_d</name>
+                <device>0</device>
+                <value>22.5</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ki_v_q</name>
+                <device>0</device>
+                <value>22.5</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.kp_v_d</name>
+                <device>0</device>
+                <value>0.1</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.kp_v_q</name>
+                <device>0</device>
+                <value>0.1</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).INV_sync</name>
+                <device>0</device>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>ESS.P_ref_ess</name>
                 <device>0</device>
-                <value>50.0</value>
+                <value>500.0</value>
             </scada_input>
             <scada_input>
                 <name>ESS.Q_ref_ess</name>
                 <device>0</device>
-                <value>30.0</value>
+                <value>500.0</value>
             </scada_input>
             <scada_input>
                 <name>F2_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>

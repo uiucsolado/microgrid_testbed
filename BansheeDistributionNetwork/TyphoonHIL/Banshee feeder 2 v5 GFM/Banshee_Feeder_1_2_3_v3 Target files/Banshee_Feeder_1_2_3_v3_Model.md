@@ -1006,7 +1006,7 @@ rtds_write 0x09E40400 0x00000001
 
 REM SPC7 GDS compensation settings...
 rtds_write 0x09CC0000 0x00000001
-rtds_write 0x09CC0001 0x0000000E
+rtds_write 0x09CC0001 0x00000011
 rtds_write 0x09CC0004 0x3BA3D70A
 rtds_write 0x09CC0005 0x3D710000
 rtds_write 0x09D00000 0x000000C8

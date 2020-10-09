@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "exported_src\typhoon\tools\compiler\main.py", line 175, in execute
+  File "exported_src\typhoon\tools\compiler\pe_compiler\main.py", line 98, in compile_model
+  File "exported_src\typhoon\tools\compiler\code_generation\utils\__init__.py", line 346, in find_all_exec_rates_per_device
+TypeError: '<' not supported between instances of 'str' and 'float'

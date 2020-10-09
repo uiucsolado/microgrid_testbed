@@ -1279,18 +1279,18 @@ displayValue = hil.read_analog_signal('Vrms_bus204')/1000
 
 # mandatory variable used for storing value
 # that will be displayed
-displayValue = hil.read_analog_signal('Vrms_bus202')/1000
+displayValue = hil.read_analog_signal('Vrms_bus202')
 
 ]]></code>
                 <signal_name><![CDATA[]]></signal_name>
-                <unit><![CDATA[kV]]></unit>
+                <unit><![CDATA[V]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <decimals><![CDATA[2]]></decimals>
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1240</x>
-                    <y>384</y>
+                    <x>1240.0</x>
+                    <y>376.0</y>
                     <width>96</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2167,8 +2167,8 @@ displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (average
                 <updateRate>1000</updateRate>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>16.0</x>
-                    <y>112.0</y>
+                    <x>16</x>
+                    <y>112</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3336,8 +3336,8 @@ displayValue = hil.read_analog_signal('ESS.Grid forming inverter (averaged).Vrms
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1144.0</x>
-                    <y>1024.0</y>
+                    <x>1120.0</x>
+                    <y>1064.0</y>
                     <width>120</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3366,10 +3366,9 @@ import numpy as np
 # that will be displayed
 # e.g displayValue = [ [sigVal1,sigVal2,sigVal3], ["Signal 1 name","Signal 2 name","Signal 3 name"] ]
 
-P = hil.read_analog_signal(name = 'ESS.Grid forming inverter (averaged).Controller.Frequency droop.del_P')
-Q = hil.read_analog_signal(name = 'ESS.Grid forming inverter (averaged).Controller.Voltage droop.del_Q')
+I = hil.read_analog_signal(name = 'ESS.ESS_Ia')
 
-displayValue = [ [P*277*1.4142,Q*277*1.4142], ['del_omega [Hz]','del_V [V]'] ]
+displayValue = [ [I], ['I [A]'] ]
 
 ]]></code>
                 <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
@@ -3381,8 +3380,8 @@ displayValue = [ [P*277*1.4142,Q*277*1.4142], ['del_omega [Hz]','del_V [V]'] ]
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>384</x>
-                    <y>1528</y>
+                    <x>392.0</x>
+                    <y>1528.0</y>
                     <width>592</width>
                     <height>352</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3456,8 +3455,8 @@ displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (average
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1128.0</x>
-                    <y>952.0</y>
+                    <x>1416.0</x>
+                    <y>1072.0</y>
                     <width>136</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3778,7 +3777,116 @@ displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (average
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>0edc612ebdd711ea86060050b621b179</id>
+                <id>1d5c1b46be3411ea80420050b621b179</id>
+                <name><![CDATA[ESS V_ref]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (averaged).Controller.Voltage droop.E_1')
+]]></code>
+                <signal_name><![CDATA[]]></signal_name>
+                <unit><![CDATA[pu]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[4]]></decimals>
+                <updateRate>1000</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1256.0</x>
+                    <y>1072.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>a8c5ef08be3511eab3980050b621b179</id>
+                <name><![CDATA[Connect]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (averaged).BE1-25A Synchronizer.Connect')
+
+]]></code>
+                <signal_name><![CDATA[]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>500</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1120.0</x>
+                    <y>984.0</y>
+                    <width>136</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>dd929670be3711eabc2e0050b621b179</id>
+                <name><![CDATA[ESS dQ]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (averaged).Controller.Voltage droop.dQ')
+]]></code>
+                <signal_name><![CDATA[]]></signal_name>
+                <unit><![CDATA[pu]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[4]]></decimals>
+                <updateRate>1000</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1312.0</x>
+                    <y>960.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>51a0a9eebe3e11ea9e430050b621b179</id>
                 <name><![CDATA[ ]]></name>
                 <type>DigitalDisplay</type>
                 <description><![CDATA[None]]></description>
@@ -3791,18 +3899,18 @@ displayValue = hil.read_analog_signal(name = 'ESS.Grid forming inverter (average
 
 # mandatory variable used for storing value
 # that will be displayed
-displayValue = hil.read_analog_signal('PV.Grid feeding inverter (averaged).Vrms_pv')
+displayValue = hil.read_analog_signal('ESS.P')
 
 ]]></code>
                 <signal_name><![CDATA[]]></signal_name>
-                <unit><![CDATA[V]]></unit>
+                <unit><![CDATA[W]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <decimals><![CDATA[2]]></decimals>
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1960</x>
-                    <y>1056</y>
+                    <x>1040.0</x>
+                    <y>1784.0</y>
                     <width>120</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3812,6 +3920,125 @@ displayValue = hil.read_analog_signal('PV.Grid feeding inverter (averaged).Vrms_
                     <green_range>(0, 0, 0, 0)</green_range>
                     <orange_range>(0, 0, 0, 0)</orange_range>
                     <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>627920debe3e11ea83a70050b621b179</id>
+                <name><![CDATA[ ]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal('ESS.Q')
+
+]]></code>
+                <signal_name><![CDATA[]]></signal_name>
+                <unit><![CDATA[VAr]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>1000</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1264.0</x>
+                    <y>1816.0</y>
+                    <width>120</width>
+                    <height>56</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>7a786b30be3e11eaa0d40050b621b179</id>
+                <name><![CDATA[]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+import numpy as np
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing values
+# that will be displayed
+# e.g displayValue = [ [sigVal1,sigVal2,sigVal3], ["Signal 1 name","Signal 2 name","Signal 3 name"] ]
+
+V = hil.read_analog_signal(name = 'ESS.Va')
+
+displayValue = [ [V], ['V [V]'] ]
+
+]]></code>
+                <analog_signals><![CDATA[['P [kW]', 'Q [kvar]']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>1000</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>304.0</x>
+                    <y>616.0</y>
+                    <width>592</width>
+                    <height>352</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-1000.0</y_range_min>
+                    <y_range_max>1100.0</y_range_max>
+                    <time_window>60</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
                 </advance_widget_settings>
             </component_data>
         </components>

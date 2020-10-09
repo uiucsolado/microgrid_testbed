@@ -9,22 +9,7 @@
         <fw_release_date>132383518</fw_release_date>
     </hw_properties>
     <components>
-        <inputs>
-            <input>
-                <name>Vs1</name>
-                <device>0</device>
-                <input_address>2</input_address>
-                <child_input_address>[0, 1, 2]</child_input_address>
-                <device>0</device>
-            	<input_type>ThreePhaseInput</input_type>
-                <waveform_type>Sine</waveform_type>
-                <rms>7968.0</rms>
-                <frequency>60.0</frequency>
-                <phase>0.0</phase>
-                <use_harmonics>False</use_harmonics>
-                <harmonics>[]</harmonics>
-                <harmonics_type>per_rms_unit_harmonics</harmonics_type>
-            </input></inputs>
+        <inputs></inputs>
         <pvs>
         </pvs>
         <contactors>
@@ -200,15 +185,6 @@
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>F2_PCC.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>3</weight>
-                <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
                 <name>PV.MX2</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
@@ -376,14 +352,14 @@
             <analog_channel>
                 <number>11</number>
                 <device>0</device>
-                <scale>355.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.IA</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -391,14 +367,14 @@
             <analog_channel>
                 <number>12</number>
                 <device>0</device>
-                <scale>355.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.IB</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -406,14 +382,14 @@
             <analog_channel>
                 <number>13</number>
                 <device>0</device>
-                <scale>355.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.IC</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -481,14 +457,14 @@
             <analog_channel>
                 <number>18</number>
                 <device>0</device>
-                <scale>1000000.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
                 <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.IB</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -496,14 +472,14 @@
             <analog_channel>
                 <number>19</number>
                 <device>0</device>
-                <scale>1000000.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
                 <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.VA</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -511,14 +487,14 @@
             <analog_channel>
                 <number>20</number>
                 <device>0</device>
-                <scale>1000000.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
                 <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.VB</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -586,14 +562,14 @@
             <analog_channel>
                 <number>25</number>
                 <device>0</device>
-                <scale>3598.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.VA</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -601,14 +577,14 @@
             <analog_channel>
                 <number>26</number>
                 <device>0</device>
-                <scale>3595.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.VB</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -616,14 +592,14 @@
             <analog_channel>
                 <number>27</number>
                 <device>0</device>
-                <scale>3596.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas1.VC</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -631,14 +607,14 @@
             <analog_channel>
                 <number>28</number>
                 <device>0</device>
-                <scale>3598.0</scale>
+                <scale>100.0</scale>
                 <offset>0.0</offset>
-                <locked>True</locked>
+                <locked>False</locked>
                 <ao_limiting_enabled>False</ao_limiting_enabled>
                 <ao_lower_limit>-1.0</ao_lower_limit>
                 <ao_upper_limit>1.0</ao_upper_limit>
                 <analog_signal>
-                	<name>F2_PCC.Meas2.VA</name>
+                	<name>const_0V</name>
                 	<show>True</show>
                 	<device>0</device>
                 </analog_signal>
@@ -725,7 +701,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>F2_PCC.S1_fb</name>
+                	<name>3ph Fault 208.S1_fb</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -757,11 +733,11 @@
                 <number>5</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
-                <software_control>False</software_control>
+                <software_control>True</software_control>
                 <software_value>0</software_value>
-                <locked>True</locked>
+                <locked>False</locked>
                 <digital_signal>
-                	<name>F2_PCC.S1_fb</name>
+                	<name>ESS.Grid forming inverter (averaged).INV_sync ON</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -1106,24 +1082,29 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>ESS.Grid forming inverter (averaged).BE1-25A Synchronizer (inverter).ESS_start</name>
+                <name>ESS.Grid forming inverter (averaged).BE1-25A Synchronizer.Connect INV</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>ESS.Grid forming inverter (averaged).INV_sync</name>
                 <device>0</device>
                 <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>ESS.P_ref_ess</name>
                 <device>0</device>
-                <value>50.0</value>
+                <value>1200.0</value>
             </scada_input>
             <scada_input>
                 <name>ESS.Q_ref_ess</name>
                 <device>0</device>
-                <value>30.0</value>
+                <value>1300.0</value>
             </scada_input>
             <scada_input>
                 <name>F2_CB1.MID_Rly1.SEL_787.Control Panel Input1</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F2_CB10.MID_Rly1.SEL_787.Control Panel Input1</name>

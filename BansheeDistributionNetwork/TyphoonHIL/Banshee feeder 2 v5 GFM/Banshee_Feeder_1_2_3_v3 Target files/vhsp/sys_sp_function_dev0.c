@@ -494,7 +494,7 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: ESS.Grid forming inverter (averaged).Vrms.Vinst.Va1
-    _ess_grid_forming_inverter__averaged__vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xe17));
+    _ess_grid_forming_inverter__averaged__vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xe1a));
     // Generated from the component: PV.Grid feeding inverter (averaged).Vrms.Vinst.Va1
     _pv_grid_feeding_inverter__averaged__vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xc14));
     // Generated from the component: Vrms_bus201.Vinst.Va1

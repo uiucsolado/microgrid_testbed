@@ -1,0 +1,3491 @@
+// generated using template: cop_main.template---------------------------------------------
+/******************************************************************************************
+**
+**  Module Name: cop_main.c
+**  NOTE: Automatically generated file. DO NOT MODIFY!
+**  Description:
+**            Main file
+**
+******************************************************************************************/
+// generated using template: arm/custom_include.template-----------------------------------
+
+#include "math.h"
+
+// x86 libraries:
+#include "../include/sp_functions_dev0.h"
+
+// H files from Advanced C Function components
+//#include "example_dll.h"
+
+// Header files from additional sources (Advanced C Function)
+// ----------------------------------------------------------------------------------------
+// generated using template: VirtualHIL/custom_defines.template----------------------------
+
+typedef unsigned char X_UnInt8;
+typedef char X_Int8;
+typedef signed short X_Int16;
+typedef unsigned short X_UnInt16;
+typedef int X_Int32;
+typedef unsigned int X_UnInt32;
+typedef unsigned int uint;
+typedef double real;
+
+// ----------------------------------------------------------------------------------------
+// generated using template: custom_consts.template----------------------------------------
+
+// arithmetic constants
+#define C_SQRT_2                    1.4142135623730950488016887242097f
+#define C_SQRT_3                    1.7320508075688772935274463415059f
+#define C_PI                        3.1415926535897932384626433832795f
+#define C_E                         2.7182818284590452353602874713527f
+#define C_2PI                       6.283185307179586476925286766559f
+
+//@cmp.def.start
+//component defines
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define SQRT_2OVER3 0.8164965809277260327324280249019f
+#define SQRT3_OVER_2 0.8660254037844386467637231707529f
+#define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define SQRT_2OVER3 0.8164965809277260327324280249019f
+#define SQRT3_OVER_2 0.8660254037844386467637231707529f
+#define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//@cmp.def.end
+
+
+//-----------------------------------------------------------------------------------------
+// generated using template: common_variables.template-------------------------------------
+// true global variables
+
+
+//@cmp.var.start
+// variables
+double _microgrid1_ess_idc_ia1__out;
+double _microgrid1_ess_lead_acid_abs1__out;
+double _microgrid1_ess_lead_acid_abs2__out;
+double _microgrid1_ess_lead_acid_abs3__out;
+double _microgrid1_ess_lead_acid_constant1__out = 55.0;
+double _microgrid1_ess_lead_acid_constant2__out = 0.9;
+double _microgrid1_ess_lead_acid_constant3__out = 0.86;
+double _microgrid1_ess_lead_acid_constant4__out = 1.3;
+double _microgrid1_ess_lead_acid_constant5__out = 1.5;
+double _microgrid1_ess_lead_acid_constant6__out = 1.0;
+double _microgrid1_ess_lead_acid_constant7__out = 1.2;
+double _microgrid1_ess_lead_acid_constant8__out = 1.0;
+double _microgrid1_ess_lead_acid_constant9__out = 0.0;
+double _microgrid1_ess_lead_acid_unit_delay1__out;
+double _microgrid1_ess_lead_acid_unit_delay2__out;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_connect_inv__out;
+double _microgrid1_inverter_be1_25a_synchronizer_constant6__out = 0.01;
+double _microgrid1_inverter_be1_25a_synchronizer_constant7__out = 1.0;
+double _microgrid1_inverter_be1_25a_synchronizer_constant9__out = 0.003;
+double _microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out;
+X_Int32 _microgrid1_inverter_c_function3__k;
+double _microgrid1_inverter_c_function3__t;
+
+
+double _microgrid1_inverter_c_function3__Pref;
+double _microgrid1_inverter_c_function3__Qref;
+X_Int32 _microgrid1_inverter_connect__out;
+double _microgrid1_inverter_constant2__out = 1.0;
+double _microgrid1_inverter_controller_constant1__out = 0.0;
+double _microgrid1_inverter_controller_frequency_droop_clock1__out;
+double _microgrid1_inverter_controller_frequency_droop_clock2__out;
+double _microgrid1_inverter_controller_integrator2__out;
+double _microgrid1_inverter_controller_integrator3__out;
+X_Int32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gfm_mode__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_o_ref__out = 0.0;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_limit_zero__out = 0.1;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_one__out = 1.0;
+double _microgrid1_inverter_controller_pll_pll_pid_integrator1__out;
+double _microgrid1_inverter_controller_pll_pll_pid_integrator2__out;
+double _microgrid1_inverter_controller_pll_pll_unit_delay1__out;
+double _microgrid1_inverter_controller_pll_pll_to_hz__out;
+double _microgrid1_inverter_controller_voltage_droop_clock1__out;
+double _microgrid1_inverter_controller_voltage_droop_clock2__out;
+double _microgrid1_inverter_ea1_va1__out;
+double _microgrid1_inverter_eb1_va1__out;
+double _microgrid1_inverter_ec1_va1__out;
+double _microgrid1_inverter_gain19__out;
+double _microgrid1_inverter_gain20__out;
+X_Int32 _microgrid1_inverter_inv_sync__out;
+double _microgrid1_inverter_ia1_ia1__out;
+double _microgrid1_inverter_ib1_ia1__out;
+double _microgrid1_inverter_ic1_ia1__out;
+double _microgrid1_inverter_power_meas_gain4__out;
+double _microgrid1_inverter_power_meas_gain5__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__P;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__Q;
+
+
+double _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__S;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__pf;
+double _microgrid1_inverter_va2_va1__out;
+double _microgrid1_inverter_vag_va1__out;
+double _microgrid1_inverter_vb2_va1__out;
+double _microgrid1_inverter_vbg_va1__out;
+double _microgrid1_inverter_vc2_va1__out;
+double _microgrid1_inverter_vcg_va1__out;
+double _microgrid1_inverter_xi_a1_ia1__out;
+double _microgrid1_inverter_xi_b1_ia1__out;
+double _microgrid1_inverter_xi_c1_ia1__out;
+X_Int32 _microgrid1_inverter_charge__out;
+double _microgrid1_pv_constant14__out = 30.0;
+double _microgrid1_pv_solar_irradiance_clock1__out;
+double _microgrid1_pv_solar_irradiance_constant14__out = 0.2;
+double _microgrid1_pv_solar_irradiance_constant15__out = 1.0;
+double _microgrid1_pv_solar_irradiance_constant17__out = 1.0;
+double _microgrid1_pv_solar_irradiance_ang_t__out;
+// Generated from the component Root/PCC/Digital Input Close
+X_UnInt32 _pcc_digital_input_close__out;// Generated from the component Root/PCC/Digital Input Trip
+X_UnInt32 _pcc_digital_input_trip__out;
+X_Int32 _pcc_grid_connect__out;
+double _pcc_meas1_ia_ia1__out;
+double _pcc_meas1_ib_ia1__out;
+double _pcc_meas1_ic_ia1__out;
+double _pcc_meas1_va_va1__out;
+double _pcc_meas1_vb_va1__out;
+double _pcc_meas1_vc_va1__out;
+double _pcc_meas2_va_va1__out;
+double _pcc_meas2_vb_va1__out;
+double _pcc_meas2_vc_va1__out;
+double _pcc_pcc_measurements_constant1__out = 1.0;
+double _pcc_pcc_measurements_constant2__out = 1.0;
+double _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__out;
+double _pcc_pcc_measurements_three_phase_pll1_unit_delay1__out;
+double _pcc_pcc_measurements_three_phase_pll1_to_hz__out;
+X_UnInt32 _pcc_sr_flip_flop1__out;
+X_UnInt32 _pcc_sr_flip_flop1__out_n;
+double _microgrid1_ess_lpf_dc1__out;
+double _microgrid1_ess_lpf_dc1__b_coeff[2] = {0.003131753958361405, 0.003131753958361294};
+double _microgrid1_ess_lpf_dc1__a_coeff[2] = {1.0, -0.9937364920832772};
+double _microgrid1_ess_lpf_dc1__a_sum;
+double _microgrid1_ess_lpf_dc1__b_sum;
+double _microgrid1_ess_lpf_dc1__delay_line_in;
+X_UnInt32 _microgrid1_ess_lpf_dc1__i;
+double _microgrid1_ess_lead_acid_product1__out;
+double _microgrid1_ess_lead_acid_mathematical_function2__out;
+double _microgrid1_ess_lead_acid_mathematical_function3__out;
+double _microgrid1_ess_lead_acid_comparator1__out;
+double _microgrid1_ess_lead_acid_abs4__out;
+double _microgrid1_ess_lead_acid_c_function1__Ibat;
+double _microgrid1_ess_lead_acid_c_function1__SOC;
+
+
+double _microgrid1_ess_lead_acid_c_function1__out;
+double _microgrid1_ess_lead_acid_sum1__out;
+double _microgrid1_ess_product1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connect;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connectINV;
+double _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__ready;
+
+
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng;
+double _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__df;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w;
+double _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer1__dV;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer1__del_V;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out;
+double _microgrid1_inverter_controller_pll_gain5__out;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__gamma;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__gamma;
+float _microgrid1_inverter_inv_sync_on__tmp;
+X_Int32 _microgrid1_inverter_logical_operator1__out;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__gamma;
+double _microgrid1_inverter_power_meter__Pdc;
+double _microgrid1_inverter_power_meter__Qdc;
+double _microgrid1_inverter_power_meter__P0dc;
+double _microgrid1_inverter_power_meter__Pac;
+double _microgrid1_inverter_power_meter__Qac;
+double _microgrid1_inverter_power_meter__P0ac;
+double _microgrid1_inverter_power_meter__apparent;
+double _microgrid1_inverter_power_meter__k_factor;
+double _microgrid1_inverter_power_meter__v_alpha;
+double _microgrid1_inverter_power_meter__v_beta;
+double _microgrid1_inverter_power_meter__i_alpha;
+double _microgrid1_inverter_power_meter__i_beta;
+double _microgrid1_inverter_power_meter__v_zero;
+double _microgrid1_inverter_power_meter__i_zero;
+double _microgrid1_inverter_power_meter__filter_1_output;
+double _microgrid1_inverter_power_meter__filter_1_outputQ;
+double _microgrid1_inverter_power_meter__filter_1_outputP0;
+double _microgrid1_inverter_power_meas_gain6__out;
+X_Int32 _microgrid1_inverter_logical_operator3__out;
+X_Int32 _microgrid1_inverter_logical_operator2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_coeff[2] = {6.282790547806893e-05, 6.282790547806893e-05};
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__a_coeff[2] = {1.0, -0.999874344189044};
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__a_sum;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_sum;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__delay_line_in;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i;
+X_Int32 _microgrid1_inverter_c_function2__charge;
+double _microgrid1_inverter_c_function2__ref;
+
+
+double _microgrid1_inverter_c_function2__out;
+X_Int32 _microgrid1_inverter_c_function1__charge;
+double _microgrid1_inverter_c_function1__ref;
+
+
+double _microgrid1_inverter_c_function1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum6__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum7__out;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__gamma;
+double _microgrid1_inverter_be1_25a_synchronizer_sum8__out;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__gamma;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__gamma;
+double _microgrid1_pv_solar_irradiance_c_function4__k;
+double _microgrid1_pv_solar_irradiance_c_function4__clk;
+
+
+double _microgrid1_pv_solar_irradiance_c_function4__ETR;
+double _microgrid1_pv_solar_irradiance_c_function4__GHI;
+double _microgrid1_pv_solar_irradiance_c_function4__ang_z;
+double _microgrid1_pv_solar_irradiance_trigonometric_function2__out;
+double _microgrid1_pv_solar_irradiance_trigonometric_function7__out;
+double _microgrid1_pv_solar_irradiance_gain4__out;
+double _pcc_meas1_bus_join2__out[3];
+double _pcc_meas1_bus_join1__out[3];
+double _pcc_meas2_bus_join1__out[3];
+double _pcc_pcc_measurements_three_phase_pll1_sin__out;
+double _pcc_gain4__out;
+X_Int32 _pcc_logical_operator2__out;
+double _microgrid1_ess_lead_acid_mathematical_function1__out;
+double _microgrid1_ess_lead_acid_c_function2__Idc;
+double _microgrid1_ess_lead_acid_c_function2__Vbtt;
+X_Int32 _microgrid1_ess_lead_acid_c_function2__charge;
+
+
+double _microgrid1_ess_lead_acid_c_function2__Ibat;
+float _microgrid1_ess_lead_acid_charging__tmp;
+double _microgrid1_ess_lead_acid_mathematical_function4__out;
+double _microgrid1_ess_lead_acid_mathematical_function6__out;
+double _microgrid1_ess_lead_acid_abs5__out;
+float _microgrid1_inverter_be1_25a_synchronizer_digital_probe1__tmp;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_logical_operator2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__var;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__INV_sync;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__connect;
+double _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__var;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__INV_sync;
+X_Int32 _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__connect;
+double _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__out;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__q;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__d;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__q;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k2;
+float _microgrid1_inverter_inv_sync_off__tmp;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__d;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__q;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2;
+X_Int32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_logical_operator1__out;
+double _microgrid1_inverter_gain17__out;
+double _microgrid1_inverter_gain18__out;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__q;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__alpha;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__beta;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__gamma;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__d;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__q;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k2;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2;
+double _microgrid1_pv_solar_irradiance_c_function2__k;
+double _microgrid1_pv_solar_irradiance_c_function2__ETR;
+double _microgrid1_pv_solar_irradiance_c_function2__GHI;
+
+
+double _microgrid1_pv_solar_irradiance_c_function2__Gdh;
+double _microgrid1_pv_solar_irradiance_c_function2__f;
+double _microgrid1_pv_solar_irradiance_gain5__out;
+double _microgrid1_pv_solar_irradiance_gain1__out;
+double _microgrid1_pv_solar_irradiance_gain2__out;
+double _microgrid1_pv_solar_irradiance_sum7__out;
+double _microgrid1_pv_solar_irradiance_trigonometric_function3__out;
+double _pcc_pcc_measurements_bus_split2__out;
+double _pcc_pcc_measurements_bus_split2__out1;
+double _pcc_pcc_measurements_bus_split2__out2;
+double _pcc_pcc_measurements_bus_split1__out;
+double _pcc_pcc_measurements_bus_split1__out1;
+double _pcc_pcc_measurements_bus_split1__out2;
+double _pcc_data_type_conversion1__out;
+double _microgrid1_ess_lead_acid_lpf_dc__out;
+double _microgrid1_ess_lead_acid_lpf_dc__b_coeff[2] = {0.003131753958361405, 0.003131753958361294};
+double _microgrid1_ess_lead_acid_lpf_dc__a_coeff[2] = {1.0, -0.9937364920832772};
+double _microgrid1_ess_lead_acid_lpf_dc__a_sum;
+double _microgrid1_ess_lead_acid_lpf_dc__b_sum;
+double _microgrid1_ess_lead_acid_lpf_dc__delay_line_in;
+X_UnInt32 _microgrid1_ess_lead_acid_lpf_dc__i;
+double _microgrid1_ess_lead_acid_sum2__out;
+double _microgrid1_ess_lead_acid_mathematical_function5__out;
+float _microgrid1_inverter_be1_25a_synchronizer_digital_probe6__tmp;
+X_Int32 _microgrid1_inverter_controller_frequency_droop_c_function3__Connect;
+X_Int32 _microgrid1_inverter_controller_frequency_droop_c_function3__INV_sync;
+double _microgrid1_inverter_controller_frequency_droop_c_function3__del_w;
+
+
+double _microgrid1_inverter_controller_frequency_droop_c_function3__wref;
+X_Int32 _microgrid1_inverter_controller_voltage_droop_c_function3__Connect;
+X_Int32 _microgrid1_inverter_controller_voltage_droop_c_function3__INV_sync;
+double _microgrid1_inverter_controller_voltage_droop_c_function3__del_V;
+
+
+double _microgrid1_inverter_controller_voltage_droop_c_function3__Vref;
+double _microgrid1_inverter_be1_25a_synchronizer_gain12__out;
+double _microgrid1_inverter_be1_25a_synchronizer_gain7__out;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__out;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_coeff[2] = {0.0012566370614000002, 0.0012566370614000002};
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_coeff[2] = {2.0012566370614, -1.9987433629386};
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_sum;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_sum;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__delay_line_in;
+X_UnInt32 _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__out;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_coeff[2] = {0.0012566370614000002, 0.0012566370614000002};
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_coeff[2] = {2.0012566370614, -1.9987433629386};
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_sum;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_sum;
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__delay_line_in;
+X_UnInt32 _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i;
+double _microgrid1_inverter_controller_gain11__out;
+double _microgrid1_inverter_controller_gain12__out;
+double _microgrid1_inverter_controller_voltage_droop_sum2__out;
+double _microgrid1_inverter_controller_frequency_droop_sum1__out;
+double _microgrid1_inverter_controller_gain10__out;
+double _microgrid1_inverter_controller_gain9__out;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__d;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__q;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k1;
+double _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k2;
+double _microgrid1_inverter_be1_25a_synchronizer_gain5__out;
+double _microgrid1_inverter_be1_25a_synchronizer_gain6__out;
+double _microgrid1_inverter_controller_gain6__out;
+double _microgrid1_inverter_controller_gain7__out;
+double _microgrid1_pv_solar_irradiance_product4__out;
+double _microgrid1_pv_solar_irradiance_sum3__out;
+double _microgrid1_pv_solar_irradiance_trigonometric_function4__out;
+double _microgrid1_pv_solar_irradiance_trigonometric_function5__out;
+double _microgrid1_pv_solar_irradiance_trigonometric_function1__out;
+double _microgrid1_pv_solar_irradiance_trigonometric_function6__out;
+double _microgrid1_pv_solar_irradiance_sum4__out;
+double _pcc_pcc_measurements_power_meter1__Pdc;
+double _pcc_pcc_measurements_power_meter1__Qdc;
+double _pcc_pcc_measurements_power_meter1__P0dc;
+double _pcc_pcc_measurements_power_meter1__Pac;
+double _pcc_pcc_measurements_power_meter1__Qac;
+double _pcc_pcc_measurements_power_meter1__P0ac;
+double _pcc_pcc_measurements_power_meter1__apparent;
+double _pcc_pcc_measurements_power_meter1__k_factor;
+double _pcc_pcc_measurements_power_meter1__v_alpha;
+double _pcc_pcc_measurements_power_meter1__v_beta;
+double _pcc_pcc_measurements_power_meter1__i_alpha;
+double _pcc_pcc_measurements_power_meter1__i_beta;
+double _pcc_pcc_measurements_power_meter1__v_zero;
+double _pcc_pcc_measurements_power_meter1__i_zero;
+double _pcc_pcc_measurements_power_meter1__filter_1_output;
+double _pcc_pcc_measurements_power_meter1__filter_1_outputQ;
+double _pcc_pcc_measurements_power_meter1__filter_1_outputP0;
+double _pcc_pcc_measurements_rms_value1__out;
+double _pcc_pcc_measurements_rms_value1__previous_value;
+double _pcc_pcc_measurements_rms_value1__previous_filtered_value;
+double _pcc_pcc_measurements_rms_value1__correction;
+double _pcc_pcc_measurements_rms_value1__previous_correction;
+X_UnInt32 _pcc_pcc_measurements_rms_value1__zc;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__alpha;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__beta;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__gamma;
+double _microgrid1_ess_lead_acid_bus_join1__out[6];
+double _microgrid1_inverter_be1_25a_synchronizer_product2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_limit1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_product1__out;
+double _microgrid1_inverter_controller_pll_gain4__out;
+double _microgrid1_inverter_controller_pll_gain3__out;
+double _microgrid1_inverter_controller_pll_pll_normalize__in1;
+double _microgrid1_inverter_controller_pll_pll_normalize__in2;
+
+
+double _microgrid1_inverter_controller_pll_pll_normalize__in2_pu;
+double _microgrid1_inverter_controller_pll_pll_normalize__pk;
+double _microgrid1_inverter_controller_voltage_droop_gain3__out;
+double _microgrid1_inverter_controller_frequency_droop_gain3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain6__out;
+double _microgrid1_inverter_be1_25a_synchronizer_limit2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_product3__out;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int;
+double _microgrid1_inverter_be1_25a_synchronizer_product4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum10__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain7__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum11__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain6__out;
+double _microgrid1_pv_solar_irradiance_sum5__out;
+double _microgrid1_pv_solar_irradiance_product2__out;
+double _microgrid1_pv_solar_irradiance_bus_join1__out[4];
+double _microgrid1_pv_solar_irradiance_product3__out;
+double _pcc_pcc_measurements_comparator1__out;
+double _pcc_pcc_measurements_comparator2__out;
+double _pcc_w____kw__out;
+double _pcc_var____kvar__out;
+double _pcc_gain3__out;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__d;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__q;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k1;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k2;
+double _microgrid1_ess_lead_acid_c_function__Cbat;
+double _microgrid1_ess_lead_acid_c_function__Vbat;
+double _microgrid1_ess_lead_acid_c_function__Ceff;
+double _microgrid1_ess_lead_acid_c_function__Ibat;
+X_Int32 _microgrid1_ess_lead_acid_c_function__charge;
+double _microgrid1_ess_lead_acid_c_function__x[6];
+
+
+double _microgrid1_ess_lead_acid_c_function__SOC;
+double _microgrid1_ess_lead_acid_c_function__Vbtt;
+double _microgrid1_ess_lead_acid_c_function__Vdc;
+double _microgrid1_inverter_be1_25a_synchronizer_trigonometric_function1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_coeff[2] = {0.9090909090909092, 0.9090909090909092};
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__a_coeff[2] = {1.0, 0.8181818181818182};
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__a_sum;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_sum;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__delay_line_in;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product5__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_product1__out;
+double _microgrid1_inverter_controller_product111__out;
+double _microgrid1_inverter_controller_product12__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_product1__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_product3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_coeff[2] = {0.9090909090909092, 0.9090909090909092};
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__a_coeff[2] = {1.0, 0.8181818181818182};
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__a_sum;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_sum;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__delay_line_in;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product6__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_product2__out;
+double _microgrid1_inverter_controller_product10__out;
+double _microgrid1_inverter_controller_product13__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_product2__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_product4__out;
+double _microgrid1_inverter_controller_pll_pll_pid_kd__out;
+double _microgrid1_inverter_controller_pll_pll_pid_ki__out;
+double _microgrid1_inverter_controller_pll_pll_pid_kp__out;
+double _microgrid1_inverter_controller_voltage_droop_c_function1__clk;
+double _microgrid1_inverter_controller_voltage_droop_c_function1__in;
+
+
+double _microgrid1_inverter_controller_voltage_droop_c_function1__out;
+double _microgrid1_inverter_controller_frequency_droop_c_function1__clk;
+double _microgrid1_inverter_controller_frequency_droop_c_function1__in;
+
+
+double _microgrid1_inverter_controller_frequency_droop_c_function1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product6__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product8__out;
+double _microgrid1_inverter_be1_25a_synchronizer_trigonometric_function2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__var;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum5__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product1__out;
+double _microgrid1_pv_solar_irradiance_c_function3__Gdh;
+double _microgrid1_pv_solar_irradiance_c_function3__fk;
+double _microgrid1_pv_solar_irradiance_c_function3__x[4];
+
+
+double _microgrid1_pv_solar_irradiance_c_function3__Gd;
+double _microgrid1_pv_solar_irradiance_gain3__out;
+double _pcc_gain1__out;
+double _pcc_gain2__out;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__out;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[2] = {0.06283185307, 0.06283185307};
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_coeff[2] = {2.06283185307, -1.93716814693};
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
+X_UnInt32 _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__out;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_coeff[2] = {0.06283185307, 0.06283185307};
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_coeff[2] = {2.06283185307, -1.93716814693};
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum;
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in;
+X_UnInt32 _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
+double _microgrid1_ess_lpf_dc2__out;
+double _microgrid1_ess_lpf_dc2__b_coeff[2] = {0.003131753958361405, 0.003131753958361294};
+double _microgrid1_ess_lpf_dc2__a_coeff[2] = {1.0, -0.9937364920832772};
+double _microgrid1_ess_lpf_dc2__a_sum;
+double _microgrid1_ess_lpf_dc2__b_sum;
+double _microgrid1_ess_lpf_dc2__delay_line_in;
+X_UnInt32 _microgrid1_ess_lpf_dc2__i;
+double _microgrid1_ess_lead_acid_lpf_dc1__out;
+double _microgrid1_ess_lead_acid_lpf_dc1__b_coeff[2] = {0.003131753958361405, 0.003131753958361294};
+double _microgrid1_ess_lead_acid_lpf_dc1__a_coeff[2] = {1.0, -0.9937364920832772};
+double _microgrid1_ess_lead_acid_lpf_dc1__a_sum;
+double _microgrid1_ess_lead_acid_lpf_dc1__b_sum;
+double _microgrid1_ess_lead_acid_lpf_dc1__delay_line_in;
+X_UnInt32 _microgrid1_ess_lead_acid_lpf_dc1__i;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__x;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__floor_in;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_mathematical_function1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_sum3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_sum4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out;
+double _microgrid1_inverter_controller_sum2__out;
+double _microgrid1_inverter_controller_sum1__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_sum1__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_sum2__out;
+double _microgrid1_inverter_controller_pll_pll_pid_sum8__out;
+double _microgrid1_inverter_controller_voltage_droop_sum4__out;
+double _microgrid1_inverter_controller_frequency_droop_sum4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum10__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum13__out;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__x;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__floor_in;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__x;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__floor_in;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__out;
+double _microgrid1_inverter_be1_25a_synchronizer_mathematical_function2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum6__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum8__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum5__out;
+double _microgrid1_pv_solar_irradiance_sum6__out;
+double _pcc_pcc_measurements_three_phase_pll1_normalize__in1;
+double _pcc_pcc_measurements_three_phase_pll1_normalize__in2;
+
+
+double _pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu;
+double _pcc_pcc_measurements_three_phase_pll1_normalize__pk;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__out;
+double _microgrid1_inverter_controller_gain14__out;
+double _microgrid1_inverter_controller_sum5__out;
+double _microgrid1_inverter_controller_gain15__out;
+double _microgrid1_inverter_controller_sum4__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_coeff[2] = {6.282790547806893e-05, 6.282790547806893e-05};
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__a_coeff[2] = {1.0, -0.999874344189044};
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__a_sum;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_sum;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__delay_line_in;
+X_UnInt32 _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__out;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_coeff[2] = {6.282790547806893e-05, 6.282790547806893e-05};
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__a_coeff[2] = {1.0, -0.999874344189044};
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__a_sum;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_sum;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__delay_line_in;
+X_UnInt32 _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i;
+double _microgrid1_inverter_controller_pll_pll_pid_gain1__out;
+double _microgrid1_inverter_controller_voltage_droop_c_function2__time;
+X_Int32 _microgrid1_inverter_controller_voltage_droop_c_function2__connected;
+X_Int32 _microgrid1_inverter_controller_voltage_droop_c_function2__GFM;
+double _microgrid1_inverter_controller_voltage_droop_c_function2__clk;
+double _microgrid1_inverter_controller_voltage_droop_c_function2__in;
+
+
+double _microgrid1_inverter_controller_voltage_droop_c_function2__out;
+double _microgrid1_inverter_controller_frequency_droop_c_function2__time;
+X_Int32 _microgrid1_inverter_controller_frequency_droop_c_function2__connected;
+double _microgrid1_inverter_controller_frequency_droop_c_function2__clk;
+X_Int32 _microgrid1_inverter_controller_frequency_droop_c_function2__cnt;
+double _microgrid1_inverter_controller_frequency_droop_c_function2__in;
+
+
+double _microgrid1_inverter_controller_frequency_droop_c_function2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out;
+double _microgrid1_pv_c_function1__SI;
+double _microgrid1_pv_c_function1__Tamb;
+double _microgrid1_pv_c_function1__Vdc;
+
+
+double _microgrid1_pv_c_function1__Ipv;
+double _microgrid1_pv_c_function1__Ppv;
+double _pcc_pcc_measurements_three_phase_pll1_pid_kd__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_ki__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_kp__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out;
+double _microgrid1_inverter_controller_gain13__out;
+double _microgrid1_inverter_controller_gain4__out;
+double _microgrid1_inverter_controller_pll_pll_pid_sum5__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum7__out;
+double _microgrid1_inverter_be1_25a_synchronizer_sum2__out;
+double _microgrid1_inverter_controller_gain1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase__in;
+
+
+double _microgrid1_inverter_be1_25a_synchronizer_confine_phase__out;
+double _microgrid1_inverter_be1_25a_synchronizer_abs2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit2__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_sum8__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product2__out;
+double _microgrid1_inverter_controller_pll_pll_pid_limit1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out;
+double _microgrid1_inverter_be1_25a_synchronizer_abs5__out;
+double _microgrid1_inverter_be1_25a_synchronizer_abs4__out;
+double _microgrid1_inverter_be1_25a_synchronizer_relational_operator4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int;
+double _pcc_pcc_measurements_three_phase_pll1_pid_gain1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join2__out[2];
+double _microgrid1_inverter_controller_pll_pll_pid_sum6__out;
+double _microgrid1_inverter_controller_pll_pll_rate_limiter1__in_rate;
+double _microgrid1_inverter_controller_pll_pll_integrator__in;
+
+
+double _microgrid1_inverter_controller_pll_pll_integrator__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit1__out;
+double _microgrid1_inverter_be1_25a_synchronizer_relational_operator2__out;
+double _microgrid1_inverter_be1_25a_synchronizer_relational_operator1__out;
+float _microgrid1_inverter_be1_25a_synchronizer_digital_probe5__tmp;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum12__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_sum5__out;
+double _microgrid1_inverter_controller_pll_pll_pid_kb__out;
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__out;
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__b_coeff[2] = {4.440892098500626e-16, 9.869600294032388e-06};
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_coeff[3] = {1.0, -1.995557788912, 0.9955676585122945};
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_sum;
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__b_sum;
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__delay_line_in;
+X_UnInt32 _microgrid1_inverter_controller_pll_pll_lpf_lpf__i;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int;
+float _microgrid1_inverter_be1_25a_synchronizer_digital_probe4__tmp;
+float _microgrid1_inverter_be1_25a_synchronizer_digital_probe3__tmp;
+double _microgrid1_inverter_be1_25a_synchronizer_logical_operator1__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
+double _microgrid1_inverter_controller_pll_pll_pid_sum7__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum9__out;
+double _pcc_pcc_measurements_three_phase_pll1_pid_sum6__out;
+double _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__in_rate;
+double _pcc_pcc_measurements_three_phase_pll1_integrator__in;
+
+
+double _pcc_pcc_measurements_three_phase_pll1_integrator__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join1__out[2];
+double _pcc_pcc_measurements_three_phase_pll1_pid_kb__out;
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__out;
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_coeff[1] = {0.024674000736159996};
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_coeff[3] = {1.0, -1.7778894456, 0.8025634463361601};
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum;
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum;
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in;
+X_UnInt32 _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_signal_switch2__out[2];
+double _pcc_pcc_measurements_three_phase_pll1_pid_sum7__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out1;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum7__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product5__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product6__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit1__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit2__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain5__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain6__out;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__alpha;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__beta;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k1;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k2;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__A;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__B;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__C;
+double _microgrid1_inverter_controller_bus_join1__out[3];
+double _microgrid1_inverter_controller_limit1__out[3];
+double _microgrid1_inverter_bus_split1__out;
+double _microgrid1_inverter_bus_split1__out1;
+double _microgrid1_inverter_bus_split1__out2;
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[1] = {0};
+double _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__limited_in[1];
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__update_mask;
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__sig_dir[1];
+
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[1] = {1};
+double _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__limited_in[1];
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__update_mask;
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__sig_dir[1];
+
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[1] = {2};
+double _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__limited_in[1];
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__update_mask;
+X_UnInt32 _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__sig_dir[1];
+
+//@cmp.var.end
+
+//@cmp.svar.start
+// state variables
+double _microgrid1_ess_lead_acid_unit_delay1__state;
+double _microgrid1_ess_lead_acid_unit_delay2__state;
+double _microgrid1_ess_rate_transition7_output__out =  1000.0;
+
+double _microgrid1_inverter_be1_25a_synchronizer_rate_transition12_output__out =  0.0;
+
+double _microgrid1_inverter_be1_25a_synchronizer_rate_transition2_output__out =  0.0;
+
+double _microgrid1_inverter_be1_25a_synchronizer_rate_transition4_output__out =  0.0;
+
+double _microgrid1_inverter_be1_25a_synchronizer_rate_transition6_output__out =  0.0;
+
+double _microgrid1_inverter_be1_25a_synchronizer_unit_delay2__state;
+double _microgrid1_inverter_controller_frequency_droop_clock1__state;
+double _microgrid1_inverter_controller_frequency_droop_clock2__state;
+double _microgrid1_inverter_controller_frequency_droop_rate_transition12_output__out =  0.0;
+
+double _microgrid1_inverter_controller_integrator2__state;
+double _microgrid1_inverter_controller_integrator3__state;
+double _microgrid1_inverter_controller_pll_pll_pid_integrator1__state;
+double _microgrid1_inverter_controller_pll_pll_pid_integrator2__state;
+double _microgrid1_inverter_controller_pll_pll_unit_delay1__state;
+double _microgrid1_inverter_controller_voltage_droop_clock1__state;
+double _microgrid1_inverter_controller_voltage_droop_clock2__state;
+double _microgrid1_inverter_controller_voltage_droop_rate_transition13_output__out =  0.0;
+
+X_Int32 _microgrid1_inverter_rate_transition1_output__out = (X_Int32) 1.0;
+
+double _microgrid1_inverter_rate_transition10_output__out =  0.0;
+
+X_Int32 _microgrid1_inverter_rate_transition6_output__out = (X_Int32) 0.0;
+
+double _microgrid1_inverter_rate_transition7_output__out =  750.0;
+
+X_Int32 _microgrid1_inverter_rate_transition8_output__out = (X_Int32) 0.0;
+
+double _microgrid1_inverter_rate_transition9_output__out =  0.0;
+
+double _microgrid1_pv_rate_transition1_output__out =  0.0;
+
+double _microgrid1_pv_solar_irradiance_clock1__state;
+double _microgrid1_pv_solar_irradiance_rate_transition3_output__out =  0.0;
+
+double _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state;
+double _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state;
+double _pcc_pcc_measurements_three_phase_pll1_unit_delay1__state;
+X_UnInt32 _pcc_sr_flip_flop1__state;
+double _microgrid1_ess_lpf_dc1__states[1];
+double _microgrid1_ess_lead_acid_comparator1__state;
+double _microgrid1_inverter_power_meter__filter_1_output_k_minus_1;
+double _microgrid1_inverter_power_meter__filter_1_input_k_minus_1;
+double _microgrid1_inverter_power_meter__filter_1_output_k_minus_1Q;
+double _microgrid1_inverter_power_meter__filter_1_input_k_minus_1Q;
+double _microgrid1_inverter_power_meter__filter_1_output_k_minus_1P0;
+double _microgrid1_inverter_power_meter__filter_1_input_k_minus_1P0;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__states[1];
+double _microgrid1_ess_lead_acid_lpf_dc__states[1];
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__states[1];
+double _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__states[1];
+double _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1;
+double _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1;
+double _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1Q;
+double _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1Q;
+double _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1P0;
+double _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1P0;
+double _pcc_pcc_measurements_rms_value1__square_sum;
+double _pcc_pcc_measurements_rms_value1__sample_cnt;
+double _pcc_pcc_measurements_rms_value1__filtered_value;
+double _pcc_pcc_measurements_rms_value1__out_state;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__integrator_state;
+X_UnInt32 _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__av_active;
+double _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__filter_state;
+double _pcc_pcc_measurements_comparator1__state;
+double _pcc_pcc_measurements_comparator2__state;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__states[1];
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__states[1];
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[1];
+double _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[1];
+double _microgrid1_ess_lpf_dc2__states[1];
+double _microgrid1_ess_lead_acid_lpf_dc1__states[1];
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state;
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__states[1];
+double _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__states[1];
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__filter_state;
+double _microgrid1_inverter_controller_pll_pll_rate_limiter1__prev_out;
+double _microgrid1_inverter_controller_pll_pll_rate_limiter1__out;
+int _microgrid1_inverter_controller_pll_pll_rate_limiter1__first_step;
+double _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[2];
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__filter_state;
+double _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__prev_out;
+double _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out;
+int _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__first_step;
+double _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[2];
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__filter_state;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state;
+X_UnInt32 _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active;
+double _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state;
+//@cmp.svar.end
+
+
+
+// generated using template: virtual_hil/custom_functions.template---------------------------------
+void ReInit_user_sp_cpu_dev0() {
+#if DEBUG_MODE
+    printf("\n\rReInitTimer");
+#endif
+    //@cmp.init.block.start
+    HIL_OutAO(0x4003, 0.0f);
+    _microgrid1_ess_lead_acid_unit_delay1__state = 0.5;
+    _microgrid1_ess_lead_acid_unit_delay2__state = 0.5;
+    _microgrid1_ess_rate_transition7_output__out =  1000.0;
+    HIL_OutAO(0x4006, 0.0f);
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition12_output__out =  0.0;
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition2_output__out =  0.0;
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition4_output__out =  0.0;
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition6_output__out =  0.0;
+    _microgrid1_inverter_be1_25a_synchronizer_unit_delay2__state = 0.0;
+    _microgrid1_inverter_c_function3__k = 0;
+    _microgrid1_inverter_c_function3__t = 1;
+    _microgrid1_inverter_controller_frequency_droop_clock1__state = 0.0f;
+    _microgrid1_inverter_controller_frequency_droop_clock2__state = 0.0f;
+    _microgrid1_inverter_controller_frequency_droop_rate_transition12_output__out =  0.0;
+    _microgrid1_inverter_controller_integrator2__state = 0.0;
+    _microgrid1_inverter_controller_integrator3__state = 0.0;
+    _microgrid1_inverter_controller_pll_pll_pid_integrator1__state = 376.99111843;
+    _microgrid1_inverter_controller_pll_pll_pid_integrator2__state = 0.0;
+    _microgrid1_inverter_controller_pll_pll_unit_delay1__state = 0.0;
+    _microgrid1_inverter_controller_voltage_droop_clock1__state = 0.0f;
+    _microgrid1_inverter_controller_voltage_droop_clock2__state = 0.0f;
+    _microgrid1_inverter_controller_voltage_droop_rate_transition13_output__out =  0.0;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__P = 0;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__Q = 0;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__S = 0;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__pf = 0;
+    _microgrid1_inverter_rate_transition1_output__out = (X_Int32) 1.0;
+    _microgrid1_inverter_rate_transition10_output__out =  0.0;
+    _microgrid1_inverter_rate_transition6_output__out = (X_Int32) 0.0;
+    _microgrid1_inverter_rate_transition7_output__out =  750.0;
+    _microgrid1_inverter_rate_transition8_output__out = (X_Int32) 0.0;
+    _microgrid1_inverter_rate_transition9_output__out =  0.0;
+    _microgrid1_pv_rate_transition1_output__out =  0.0;
+    _microgrid1_pv_solar_irradiance_clock1__state = 0.0f;
+    _microgrid1_pv_solar_irradiance_rate_transition3_output__out =  0.0;
+    _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state = 376.99111843;
+    _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state = 0.0;
+    _pcc_pcc_measurements_three_phase_pll1_unit_delay1__state = 0.0;
+    _pcc_sr_flip_flop1__state = (double) 0;
+    for (_microgrid1_ess_lpf_dc1__i = 0; _microgrid1_ess_lpf_dc1__i < 1; _microgrid1_ess_lpf_dc1__i++) {
+        _microgrid1_ess_lpf_dc1__states[_microgrid1_ess_lpf_dc1__i] = 0.0;
+    }
+    _microgrid1_ess_lead_acid_comparator1__state = 0.0f;
+    HIL_OutAO(0x4004, 0.0f);
+    _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connect = 0;
+    HIL_OutAO(0x4015, 0.0f);
+    HIL_OutAO(0x401b, 0.0f);
+    HIL_OutAO(0x4026, 0.0f);
+    HIL_OutAO(0x402b, 0.0f);
+    HIL_OutAO(0x4030, 0.0f);
+    HIL_OutAO(0x4031, 0.0f);
+    HIL_OutAO(0x4032, 0.0f);
+    HIL_OutAO(0x4035, 0.0f);
+    HIL_OutAO(0x4038, 0.0f);
+    _microgrid1_inverter_power_meter__filter_1_output_k_minus_1 = 0.0;
+    _microgrid1_inverter_power_meter__filter_1_input_k_minus_1 = 0.0;
+    _microgrid1_inverter_power_meter__filter_1_output_k_minus_1Q = 0.0;
+    _microgrid1_inverter_power_meter__filter_1_input_k_minus_1Q = 0.0;
+    _microgrid1_inverter_power_meter__filter_1_output_k_minus_1P0 = 0.0;
+    _microgrid1_inverter_power_meter__filter_1_input_k_minus_1P0 = 0.0;
+    HIL_OutAO(0x4034, 0.0f);
+    HIL_OutAO(0x4037, 0.0f);
+    HIL_OutAO(0x403a, 0.0f);
+    for (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i = 0; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i < 1; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i++) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__states[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i] = 0.0;
+    }
+    HIL_OutAO(0x4005, 0.0f);
+    HIL_OutAO(0x4007, 0.0f);
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__var = 0;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__var = 0;
+    HIL_OutAO(0x4033, 0.0f);
+    HIL_OutAO(0x4036, 0.0f);
+    HIL_OutAO(0x4039, 0.0f);
+    HIL_OutAO(0x400a, 0.0f);
+    HIL_OutAO(0x400b, 0.0f);
+    HIL_OutAO(0x400c, 0.0f);
+    for (_microgrid1_ess_lead_acid_lpf_dc__i = 0; _microgrid1_ess_lead_acid_lpf_dc__i < 1; _microgrid1_ess_lead_acid_lpf_dc__i++) {
+        _microgrid1_ess_lead_acid_lpf_dc__states[_microgrid1_ess_lead_acid_lpf_dc__i] = 0.0;
+    }
+    HIL_OutAO(0x4013, 0.0f);
+    _microgrid1_inverter_controller_frequency_droop_c_function3__wref = 376.99111843077515;
+    HIL_OutAO(0x4012, 0.0f);
+    _microgrid1_inverter_controller_voltage_droop_c_function3__Vref = 1;
+    for (_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i = 0; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i < 1; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i++) {
+        _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__states[_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i] = 0.0;
+    }
+    for (_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i = 0; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i < 1; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i++) {
+        _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__states[_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i] = 0.0;
+    }
+    _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1 = 0.0;
+    _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1 = 0.0;
+    _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1Q = 0.0;
+    _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1Q = 0.0;
+    _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1P0 = 0.0;
+    _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1P0 = 0.0;
+    _pcc_pcc_measurements_rms_value1__square_sum = 0x0;
+    _pcc_pcc_measurements_rms_value1__sample_cnt = 0x0;
+    _pcc_pcc_measurements_rms_value1__filtered_value = 0x0;
+    _pcc_pcc_measurements_rms_value1__out_state = 0x0;
+    HIL_OutAO(0x4009, 0.0f);
+    HIL_OutAO(0x4008, 0.0f);
+    _microgrid1_inverter_controller_pll_pll_normalize__in1 = 0;
+    _microgrid1_inverter_controller_pll_pll_normalize__in2 = 0;
+    _microgrid1_inverter_controller_pll_pll_normalize__pk = 0;
+    HIL_OutAO(0x402e, 0.0f);
+    HIL_OutAO(0x400d, 0.0f);
+    HIL_OutAO(0x400e, 0.0f);
+    HIL_OutAO(0x400f, 0.0f);
+    _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__integrator_state =  376.99111843077515;
+    _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__filter_state =  0.0;
+    HIL_OutAO(0x4010, 0.0f);
+    HIL_OutAO(0x403d, 0.0f);
+    _pcc_pcc_measurements_comparator1__state = 0.0f;
+    _pcc_pcc_measurements_comparator2__state = 0.0f;
+    HIL_OutAO(0x403e, 0.0f);
+    _microgrid1_ess_lead_acid_c_function__SOC = 0.5;
+    for (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i = 0; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i < 1; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i++) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__states[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i] = 0.0;
+    }
+    for (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i = 0; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i < 1; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i++) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__states[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i] = 0.0;
+    }
+    _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__var = 0;
+    HIL_OutAO(0x4017, 0.0f);
+    for (_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
+        _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0.0;
+    }
+    for (_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
+        _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i] = 0.0;
+    }
+    for (_microgrid1_ess_lpf_dc2__i = 0; _microgrid1_ess_lpf_dc2__i < 1; _microgrid1_ess_lpf_dc2__i++) {
+        _microgrid1_ess_lpf_dc2__states[_microgrid1_ess_lpf_dc2__i] = 0.0;
+    }
+    for (_microgrid1_ess_lead_acid_lpf_dc1__i = 0; _microgrid1_ess_lead_acid_lpf_dc1__i < 1; _microgrid1_ess_lead_acid_lpf_dc1__i++) {
+        _microgrid1_ess_lead_acid_lpf_dc1__states[_microgrid1_ess_lead_acid_lpf_dc1__i] = 0.0;
+    }
+    HIL_OutFloat(141295616, 0.0);
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__floor_in = 0;
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__floor_in = 0;
+    _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__floor_in = 0;
+    _pcc_pcc_measurements_three_phase_pll1_normalize__in1 = 0;
+    _pcc_pcc_measurements_three_phase_pll1_normalize__in2 = 0;
+    _pcc_pcc_measurements_three_phase_pll1_normalize__pk = 0;
+    HIL_OutAO(0x4018, 0.0f);
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state = 0.0f;
+    for (_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i = 0; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i < 1; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i++) {
+        _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__states[_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i] = 0.0;
+    }
+    for (_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i = 0; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i < 1; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i++) {
+        _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__states[_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i] = 0.0;
+    }
+    HIL_OutAO(0x402d, 0.0f);
+    _microgrid1_inverter_controller_frequency_droop_c_function2__connected = 0;
+    _microgrid1_inverter_controller_frequency_droop_c_function2__time = 0;
+    HIL_OutAO(0x4019, 0.0f);
+    HIL_OutAO(0x401d, 0.0f);
+    HIL_OutAO(0x403c, 0.0f);
+    HIL_OutAO(0x402c, 0.0f);
+    HIL_OutAO(0x402a, 0.0f);
+    HIL_OutAO(0x401a, 0.0f);
+    HIL_OutAO(0x4016, 0.0f);
+    HIL_OutAO(0x4021, 0.0f);
+    HIL_OutFloat(141295617, 0.0);
+    HIL_OutAO(0x403b, 0.0f);
+    HIL_OutAO(0x4029, 0.0f);
+    HIL_OutAO(0x401c, 0.0f);
+    HIL_OutAO(0x4014, 0.0f);
+    HIL_OutAO(0x402f, 0.0f);
+    HIL_OutAO(0x4011, 0.0f);
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state =  0.0;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__filter_state =  0.0;
+    _microgrid1_inverter_controller_pll_pll_rate_limiter1__first_step = 1;
+    _microgrid1_inverter_controller_pll_pll_integrator__out = 0;
+    _microgrid1_inverter_controller_pll_pll_integrator__in = 0;
+    HIL_OutAO(0x4020, 0.0f);
+    HIL_OutAO(0x401f, 0.0f);
+    for (_microgrid1_inverter_controller_pll_pll_lpf_lpf__i = 0; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i < 2; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i++) {
+        _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i] = 38197202.23545778;
+    }
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state =  0.0;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__filter_state =  0.0;
+    HIL_OutAO(0x401e, 0.0f);
+    _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__first_step = 1;
+    _pcc_pcc_measurements_three_phase_pll1_integrator__out = 0;
+    _pcc_pcc_measurements_three_phase_pll1_integrator__in = 0;
+    for (_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 0; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i < 2; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i++) {
+        _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] = 15278.880894183112;
+    }
+    HIL_OutAO(0x4024, 0.0f);
+    HIL_OutAO(0x4025, 0.0f);
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state =  0.0;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__filter_state =  0.0;
+    HIL_OutAO(0x4027, 0.0f);
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state =  0.0;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__filter_state =  0.0;
+    HIL_OutAO(0x4028, 0.0f);
+    HIL_OutAO(0x4022, 0.0f);
+    HIL_OutAO(0x4023, 0.0f);
+    _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__update_mask = 1;
+    HIL_OutInt32(0x2000080 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 2500);// divide by 2 is already implemented in hw
+    HIL_OutInt32(0x20000c0 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 250);
+    HIL_OutInt32(0x20001c0 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000200 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000240 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000300 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 1);
+    HIL_OutInt32(0x2000140, _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__update_mask);
+    _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__update_mask = 2;
+    HIL_OutInt32(0x2000080 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 2500);// divide by 2 is already implemented in hw
+    HIL_OutInt32(0x20000c0 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 250);
+    HIL_OutInt32(0x20001c0 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000200 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000240 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000300 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 1);
+    HIL_OutInt32(0x2000140, _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__update_mask);
+    _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__update_mask = 4;
+    HIL_OutInt32(0x2000080 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 2500);// divide by 2 is already implemented in hw
+    HIL_OutInt32(0x20000c0 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 250);
+    HIL_OutInt32(0x20001c0 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000200 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000240 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 0);
+    HIL_OutInt32(0x2000300 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 1);
+    HIL_OutInt32(0x2000140, _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__update_mask);
+    //@cmp.init.block.end
+}
+
+void ReInit_sp_scope_user_sp_cpu_dev0() {
+    // initialise SP Scope buffer pointer
+}
+
+void init_fmu_objects_dev0(void) {
+    return;
+}
+
+
+void terminate_fmu_objects_dev0(void) {
+    return;
+}
+
+// generated using template: common_timer_counter_handler.template-------------------------
+
+/*****************************************************************************************/
+/**
+* This function is the handler which performs processing for the timer counter.
+* It is called from an interrupt context such that the amount of processing
+* performed should be minimized.  It is called when the timer counter expires
+* if interrupts are enabled.
+*
+*
+* @param    None
+*
+* @return   None
+*
+* @note     None
+*
+*****************************************************************************************/
+
+void TimerCounterHandler_0_user_sp_cpu_dev0() {
+#if DEBUG_MODE
+    printf("\n\rTimerCounterHandler_0");
+#endif
+    //////////////////////////////////////////////////////////////////////////
+    // Output block
+    //////////////////////////////////////////////////////////////////////////
+    //@cmp.out.block.start
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Constant6
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Constant7
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Constant9
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Unit Delay2
+    _microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out = _microgrid1_inverter_be1_25a_synchronizer_unit_delay2__state;
+    // Generated from the component: Microgrid1.Inverter.CONNECT
+    _microgrid1_inverter_connect__out = XIo_InInt32(0x55000104);
+    // Generated from the component: Microgrid1.Inverter.Constant2
+    // Generated from the component: Microgrid1.Inverter.Controller.Constant1
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Clock1
+    _microgrid1_inverter_controller_frequency_droop_clock1__out = _microgrid1_inverter_controller_frequency_droop_clock1__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Clock2
+    _microgrid1_inverter_controller_frequency_droop_clock2__out = _microgrid1_inverter_controller_frequency_droop_clock2__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Rate Transition12.Output
+    // Generated from the component: Microgrid1.Inverter.Controller.Integrator2
+    _microgrid1_inverter_controller_integrator2__out = _microgrid1_inverter_controller_integrator2__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.Integrator3
+    _microgrid1_inverter_controller_integrator3__out = _microgrid1_inverter_controller_integrator3__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.GFM_mode
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gfm_mode__out = XIo_InInt32(0x55000108);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.dq to abc.o_ref
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Limit3
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__out < 10.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit3__out = 10.0;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit3__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Limit_zero
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.one
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Integrator1
+    _microgrid1_inverter_controller_pll_pll_pid_integrator1__out = _microgrid1_inverter_controller_pll_pll_pid_integrator1__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Integrator2
+    _microgrid1_inverter_controller_pll_pll_pid_integrator2__out = _microgrid1_inverter_controller_pll_pll_pid_integrator2__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.Unit Delay1
+    _microgrid1_inverter_controller_pll_pll_unit_delay1__out = _microgrid1_inverter_controller_pll_pll_unit_delay1__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.to_Hz
+    _microgrid1_inverter_controller_pll_pll_to_hz__out = 0.15915494309189535 * _microgrid1_inverter_controller_pll_pll_lpf_lpf__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Clock1
+    _microgrid1_inverter_controller_voltage_droop_clock1__out = _microgrid1_inverter_controller_voltage_droop_clock1__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Clock2
+    _microgrid1_inverter_controller_voltage_droop_clock2__out = _microgrid1_inverter_controller_voltage_droop_clock2__state;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Rate Transition13.Output
+    // Generated from the component: Microgrid1.Inverter.Ea1.Va1
+    _microgrid1_inverter_ea1_va1__out = (HIL_InFloat(0xc80000 + 0x207));
+    // Generated from the component: Microgrid1.Inverter.Eb1.Va1
+    _microgrid1_inverter_eb1_va1__out = (HIL_InFloat(0xc80000 + 0x208));
+    // Generated from the component: Microgrid1.Inverter.Ec1.Va1
+    _microgrid1_inverter_ec1_va1__out = (HIL_InFloat(0xc80000 + 0x209));
+    // Generated from the component: Microgrid1.Inverter.Ia1.Ia1
+    _microgrid1_inverter_ia1_ia1__out = (HIL_InFloat(0xc80000 + 0x214));
+    // Generated from the component: Microgrid1.Inverter.Ib1.Ia1
+    _microgrid1_inverter_ib1_ia1__out = (HIL_InFloat(0xc80000 + 0x215));
+    // Generated from the component: Microgrid1.Inverter.Ic1.Ia1
+    _microgrid1_inverter_ic1_ia1__out = (HIL_InFloat(0xc80000 + 0x216));
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Gain4
+    _microgrid1_inverter_power_meas_gain4__out = 20000.0 * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__out;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Gain5
+    _microgrid1_inverter_power_meas_gain5__out = 20000.0 * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__out;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.S_and_pf
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__P = _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__out;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__Q = _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__out;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__S = sqrt(_microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__P * _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__P + _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__Q * _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__Q);
+    if (_microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__S > 0) {
+        _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__pf = _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__P / _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__S;
+    }
+    else {
+        _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__pf = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.Rate Transition1.Output
+    // Generated from the component: Microgrid1.Inverter.Rate Transition10.Output
+    // Generated from the component: Microgrid1.Inverter.Rate Transition6.Output
+    // Generated from the component: Microgrid1.Inverter.Rate Transition7.Output
+    // Generated from the component: Microgrid1.Inverter.Rate Transition8.Output
+    // Generated from the component: Microgrid1.Inverter.Rate Transition9.Output
+    // Generated from the component: Microgrid1.Inverter.Va2.Va1
+    _microgrid1_inverter_va2_va1__out = (HIL_InFloat(0xc80000 + 0x20a));
+    // Generated from the component: Microgrid1.Inverter.VaG.Va1
+    _microgrid1_inverter_vag_va1__out = (HIL_InFloat(0xc80000 + 0x20b));
+    // Generated from the component: Microgrid1.Inverter.Vb2.Va1
+    _microgrid1_inverter_vb2_va1__out = (HIL_InFloat(0xc80000 + 0x20c));
+    // Generated from the component: Microgrid1.Inverter.VbG.Va1
+    _microgrid1_inverter_vbg_va1__out = (HIL_InFloat(0xc80000 + 0x20d));
+    // Generated from the component: Microgrid1.Inverter.Vc2.Va1
+    _microgrid1_inverter_vc2_va1__out = (HIL_InFloat(0xc80000 + 0x20e));
+    // Generated from the component: Microgrid1.Inverter.VcG.Va1
+    _microgrid1_inverter_vcg_va1__out = (HIL_InFloat(0xc80000 + 0x20f));
+    // Generated from the component: Microgrid1.Inverter.Xi_a1.Ia1
+    _microgrid1_inverter_xi_a1_ia1__out = (HIL_InFloat(0xc80000 + 0x217));
+    // Generated from the component: Microgrid1.Inverter.Xi_b1.Ia1
+    _microgrid1_inverter_xi_b1_ia1__out = (HIL_InFloat(0xc80000 + 0x218));
+    // Generated from the component: Microgrid1.Inverter.Xi_c1.Ia1
+    _microgrid1_inverter_xi_c1_ia1__out = (HIL_InFloat(0xc80000 + 0x219));
+    // Generated from the component: Microgrid1.Inverter.charge
+    _microgrid1_inverter_charge__out = XIo_InInt32(0x55000110);
+    // Generated from the component: Microgrid1.Inverter.Controller.E_qREF1
+    HIL_OutAO(0x401b, (float)_microgrid1_inverter_controller_constant1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Gain5
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out = 0.5 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.alpha
+    HIL_OutAO(0x4026, (float)_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.Gain5
+    _microgrid1_inverter_controller_pll_gain5__out = 6.283185307179586 * _microgrid1_inverter_controller_pll_pll_to_hz__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.f_meas
+    HIL_OutAO(0x402b, (float)_microgrid1_inverter_controller_pll_pll_to_hz__out);
+    // Generated from the component: Microgrid1.Inverter.Ea_1
+    HIL_OutAO(0x4030, (float)_microgrid1_inverter_ea1_va1__out);
+    // Generated from the component: Microgrid1.Inverter.Eb_1
+    HIL_OutAO(0x4031, (float)_microgrid1_inverter_eb1_va1__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Current_abc_to_dq3.abc to dq1.abc to alpha beta
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_ea1_va1__out - _microgrid1_inverter_eb1_va1__out - _microgrid1_inverter_ec1_va1__out) * 0.3333333333333333;
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta = (_microgrid1_inverter_eb1_va1__out - _microgrid1_inverter_ec1_va1__out) * 0.5773502691896258;
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__gamma = (_microgrid1_inverter_ea1_va1__out + _microgrid1_inverter_eb1_va1__out + _microgrid1_inverter_ec1_va1__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.abc to dq.abc to alpha beta
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_ea1_va1__out - _microgrid1_inverter_eb1_va1__out - _microgrid1_inverter_ec1_va1__out) * 0.3333333333333333;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__beta = (_microgrid1_inverter_eb1_va1__out - _microgrid1_inverter_ec1_va1__out) * 0.5773502691896258;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__gamma = (_microgrid1_inverter_ea1_va1__out + _microgrid1_inverter_eb1_va1__out + _microgrid1_inverter_ec1_va1__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.Ec_1
+    HIL_OutAO(0x4032, (float)_microgrid1_inverter_ec1_va1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq4.abc to dq1.abc to alpha beta
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_ia1_ia1__out - _microgrid1_inverter_ib1_ia1__out - _microgrid1_inverter_ic1_ia1__out) * 0.3333333333333333;
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta = (_microgrid1_inverter_ib1_ia1__out - _microgrid1_inverter_ic1_ia1__out) * 0.5773502691896258;
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__gamma = (_microgrid1_inverter_ia1_ia1__out + _microgrid1_inverter_ib1_ia1__out + _microgrid1_inverter_ic1_ia1__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.Power Meter
+    _microgrid1_inverter_power_meter__v_alpha = SQRT_2OVER3 * ( _microgrid1_inverter_ea1_va1__out - 0.5f * _microgrid1_inverter_eb1_va1__out - 0.5f * _microgrid1_inverter_ec1_va1__out);
+    _microgrid1_inverter_power_meter__v_beta = SQRT_2OVER3 * (SQRT3_OVER_2 * _microgrid1_inverter_eb1_va1__out - SQRT3_OVER_2 * _microgrid1_inverter_ec1_va1__out);
+    _microgrid1_inverter_power_meter__i_alpha = SQRT_2OVER3 * ( _microgrid1_inverter_ia1_ia1__out - 0.5f * _microgrid1_inverter_ib1_ia1__out - 0.5f * _microgrid1_inverter_ic1_ia1__out);
+    _microgrid1_inverter_power_meter__i_beta = SQRT_2OVER3 * (SQRT3_OVER_2 * _microgrid1_inverter_ib1_ia1__out - SQRT3_OVER_2 * _microgrid1_inverter_ic1_ia1__out);
+    _microgrid1_inverter_power_meter__v_zero = ONE_DIV_BY_SQRT_3 * (_microgrid1_inverter_ea1_va1__out + _microgrid1_inverter_eb1_va1__out + _microgrid1_inverter_ec1_va1__out);
+    _microgrid1_inverter_power_meter__i_zero = ONE_DIV_BY_SQRT_3 * (_microgrid1_inverter_ia1_ia1__out + _microgrid1_inverter_ib1_ia1__out + _microgrid1_inverter_ic1_ia1__out);
+    _microgrid1_inverter_power_meter__Pac = _microgrid1_inverter_power_meter__v_alpha * _microgrid1_inverter_power_meter__i_alpha + _microgrid1_inverter_power_meter__v_beta * _microgrid1_inverter_power_meter__i_beta;
+    _microgrid1_inverter_power_meter__Qac = _microgrid1_inverter_power_meter__v_beta * _microgrid1_inverter_power_meter__i_alpha - _microgrid1_inverter_power_meter__v_alpha * _microgrid1_inverter_power_meter__i_beta;
+    _microgrid1_inverter_power_meter__P0ac = _microgrid1_inverter_power_meter__v_zero * _microgrid1_inverter_power_meter__i_zero;
+    _microgrid1_inverter_power_meter__filter_1_output = 6.282790547807006e-05 * (_microgrid1_inverter_power_meter__Pac + _microgrid1_inverter_power_meter__filter_1_input_k_minus_1) - (-0.9998743441890439) * _microgrid1_inverter_power_meter__filter_1_output_k_minus_1;
+    _microgrid1_inverter_power_meter__filter_1_outputQ = 6.282790547807006e-05 * (_microgrid1_inverter_power_meter__Qac + _microgrid1_inverter_power_meter__filter_1_input_k_minus_1Q) - (-0.9998743441890439) * _microgrid1_inverter_power_meter__filter_1_output_k_minus_1Q;
+    _microgrid1_inverter_power_meter__filter_1_outputP0 = 6.282790547807006e-05 * (_microgrid1_inverter_power_meter__P0ac + _microgrid1_inverter_power_meter__filter_1_input_k_minus_1P0) - (-0.9998743441890439) * _microgrid1_inverter_power_meter__filter_1_output_k_minus_1P0;
+    _microgrid1_inverter_power_meter__filter_1_input_k_minus_1 = _microgrid1_inverter_power_meter__Pac;
+    _microgrid1_inverter_power_meter__filter_1_output_k_minus_1 = _microgrid1_inverter_power_meter__filter_1_output;
+    _microgrid1_inverter_power_meter__filter_1_input_k_minus_1Q = _microgrid1_inverter_power_meter__Qac;;
+    _microgrid1_inverter_power_meter__filter_1_output_k_minus_1Q = _microgrid1_inverter_power_meter__filter_1_outputQ;
+    _microgrid1_inverter_power_meter__filter_1_input_k_minus_1P0 = _microgrid1_inverter_power_meter__P0ac;
+    _microgrid1_inverter_power_meter__filter_1_output_k_minus_1P0 = _microgrid1_inverter_power_meter__filter_1_outputP0;
+    _microgrid1_inverter_power_meter__Pdc = _microgrid1_inverter_power_meter__filter_1_output;
+    _microgrid1_inverter_power_meter__Qdc = _microgrid1_inverter_power_meter__filter_1_outputQ;
+    _microgrid1_inverter_power_meter__P0dc = _microgrid1_inverter_power_meter__filter_1_outputP0;
+    _microgrid1_inverter_power_meter__apparent = sqrt(pow(_microgrid1_inverter_power_meter__Pdc, 2) + pow(_microgrid1_inverter_power_meter__Qdc, 2));
+    if (_microgrid1_inverter_power_meter__apparent > 0)
+        _microgrid1_inverter_power_meter__k_factor = _microgrid1_inverter_power_meter__Pdc / _microgrid1_inverter_power_meter__apparent;
+    else
+        _microgrid1_inverter_power_meter__k_factor = 0;
+    // Generated from the component: Microgrid1.Inverter.P1
+    HIL_OutAO(0x4034, (float)_microgrid1_inverter_power_meas_gain4__out);
+    // Generated from the component: Microgrid1.Inverter.Q1
+    HIL_OutAO(0x4037, (float)_microgrid1_inverter_power_meas_gain5__out);
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Gain6
+    _microgrid1_inverter_power_meas_gain6__out = 20000.0 * _microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__S;
+    // Generated from the component: Microgrid1.Inverter.pf
+    HIL_OutAO(0x403a, (float)_microgrid1_inverter_power_meas_power_meas_dqpu_s_and_pf__pf);
+    // Generated from the component: Microgrid1.Inverter.Logical operator3
+    _microgrid1_inverter_logical_operator3__out = !_microgrid1_inverter_rate_transition1_output__out;
+    // Generated from the component: Microgrid1.Inverter.Logical operator2
+    _microgrid1_inverter_logical_operator2__out = _microgrid1_inverter_connect__out || _microgrid1_inverter_rate_transition6_output__out ;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.LPF_dc
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__a_sum = 0.0f;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_sum = 0.0f;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i = 0; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i < 1; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i++) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_coeff[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i + 1] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__states[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__i];
+    }
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__a_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__states[0] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__a_coeff[1];
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__delay_line_in = _microgrid1_inverter_rate_transition7_output__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__a_sum;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_coeff[0] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__delay_line_in;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__b_sum;
+    // Generated from the component: Microgrid1.Inverter.C function2
+    _microgrid1_inverter_c_function2__charge = _microgrid1_inverter_rate_transition8_output__out;
+    _microgrid1_inverter_c_function2__ref = _microgrid1_inverter_rate_transition10_output__out;
+    if (_microgrid1_inverter_c_function2__charge > 0)_microgrid1_inverter_c_function2__out = 0;
+    else _microgrid1_inverter_c_function2__out = _microgrid1_inverter_c_function2__ref;
+    // Generated from the component: Microgrid1.Inverter.C function1
+    _microgrid1_inverter_c_function1__charge = _microgrid1_inverter_rate_transition8_output__out;
+    _microgrid1_inverter_c_function1__ref = _microgrid1_inverter_rate_transition9_output__out;
+    if (_microgrid1_inverter_c_function1__charge > 0)_microgrid1_inverter_c_function1__out = -1;
+    else _microgrid1_inverter_c_function1__out = _microgrid1_inverter_c_function1__ref;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum6
+    _microgrid1_inverter_be1_25a_synchronizer_sum6__out = _microgrid1_inverter_ea1_va1__out - _microgrid1_inverter_vag_va1__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum7
+    _microgrid1_inverter_be1_25a_synchronizer_sum7__out = _microgrid1_inverter_eb1_va1__out - _microgrid1_inverter_vbg_va1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq3.abc to dq1.abc to alpha beta
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_va2_va1__out - _microgrid1_inverter_vb2_va1__out - _microgrid1_inverter_vc2_va1__out) * 0.3333333333333333;
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta = (_microgrid1_inverter_vb2_va1__out - _microgrid1_inverter_vc2_va1__out) * 0.5773502691896258;
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__gamma = (_microgrid1_inverter_va2_va1__out + _microgrid1_inverter_vb2_va1__out + _microgrid1_inverter_vc2_va1__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum8
+    _microgrid1_inverter_be1_25a_synchronizer_sum8__out = _microgrid1_inverter_ec1_va1__out - _microgrid1_inverter_vcg_va1__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.abc to dq1.abc to alpha beta
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_vag_va1__out - _microgrid1_inverter_vbg_va1__out - _microgrid1_inverter_vcg_va1__out) * 0.3333333333333333;
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__beta = (_microgrid1_inverter_vbg_va1__out - _microgrid1_inverter_vcg_va1__out) * 0.5773502691896258;
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__gamma = (_microgrid1_inverter_vag_va1__out + _microgrid1_inverter_vbg_va1__out + _microgrid1_inverter_vcg_va1__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq.abc to dq1.abc to alpha beta
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_xi_a1_ia1__out - _microgrid1_inverter_xi_b1_ia1__out - _microgrid1_inverter_xi_c1_ia1__out) * 0.3333333333333333;
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta = (_microgrid1_inverter_xi_b1_ia1__out - _microgrid1_inverter_xi_c1_ia1__out) * 0.5773502691896258;
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__gamma = (_microgrid1_inverter_xi_a1_ia1__out + _microgrid1_inverter_xi_b1_ia1__out + _microgrid1_inverter_xi_c1_ia1__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.Rate Transition8.Input
+    _microgrid1_inverter_rate_transition8_output__out = _microgrid1_inverter_charge__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Current_abc_to_dq3.Termination
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Current_abc_to_dq3.abc to dq1.alpha beta to dq
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out);
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out);
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d = _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha - _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__q = _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha + _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.abc to dq.alpha beta to dq
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__d = _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__alpha - _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__q = _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__alpha + _microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_pll_pll_abc_to_dq_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.term_zero
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq4.Termination1
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq4.abc to dq1.alpha beta to dq
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__d = _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha - _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__q = _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__alpha + _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.P
+    HIL_OutAO(0x4033, (float)_microgrid1_inverter_power_meter__Pdc);
+    // Generated from the component: Microgrid1.Inverter.Q
+    HIL_OutAO(0x4036, (float)_microgrid1_inverter_power_meter__Qdc);
+    // Generated from the component: Microgrid1.Inverter.S
+    HIL_OutAO(0x4039, (float)_microgrid1_inverter_power_meas_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Logical operator1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_logical_operator1__out = _microgrid1_inverter_logical_operator3__out || _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gfm_mode__out ;
+    // Generated from the component: Microgrid1.Inverter.S2.CTC_Wrapper
+    if (_microgrid1_inverter_logical_operator2__out == 0x0) {
+        HIL_OutInt32(0x8640480, 0x0);
+    }
+    else {
+        HIL_OutInt32(0x8640480, 0x1);
+    }
+    // Generated from the component: Microgrid1.Inverter.Gain17
+    _microgrid1_inverter_gain17__out = 0.05 * _microgrid1_inverter_c_function2__out;
+    // Generated from the component: Microgrid1.Inverter.Gain18
+    _microgrid1_inverter_gain18__out = 0.05 * _microgrid1_inverter_c_function1__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Ea-Va
+    HIL_OutAO(0x400a, (float)_microgrid1_inverter_be1_25a_synchronizer_sum6__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Eb-Vb
+    HIL_OutAO(0x400b, (float)_microgrid1_inverter_be1_25a_synchronizer_sum7__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq3.Termination1
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq3.abc to dq1.alpha beta to dq
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d = _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha - _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__q = _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__alpha + _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Ec-Vc
+    HIL_OutAO(0x400c, (float)_microgrid1_inverter_be1_25a_synchronizer_sum8__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.abc to dq2.abc to alpha beta
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__alpha = (2.0 * _microgrid1_inverter_be1_25a_synchronizer_sum6__out - _microgrid1_inverter_be1_25a_synchronizer_sum7__out - _microgrid1_inverter_be1_25a_synchronizer_sum8__out) * 0.3333333333333333;
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__beta = (_microgrid1_inverter_be1_25a_synchronizer_sum7__out - _microgrid1_inverter_be1_25a_synchronizer_sum8__out) * 0.5773502691896258;
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__gamma = (_microgrid1_inverter_be1_25a_synchronizer_sum6__out + _microgrid1_inverter_be1_25a_synchronizer_sum7__out + _microgrid1_inverter_be1_25a_synchronizer_sum8__out) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Termination1
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.abc to dq1.alpha beta to dq
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out);
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out);
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__d = _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__alpha - _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__q = _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__alpha + _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq.Termination1
+    // Generated from the component: Microgrid1.Inverter.Controller.Current_abc_to_dq.abc to dq1.alpha beta to dq
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d = _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha - _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q = _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k1 * _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__alpha + _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__k2 * _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Gain12
+    _microgrid1_inverter_be1_25a_synchronizer_gain12__out = 0.0025515518153991436 * _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__q;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Gain7
+    _microgrid1_inverter_be1_25a_synchronizer_gain7__out = 0.0025515518153991436 * _microgrid1_inverter_be1_25a_synchronizer_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.abc to dq.LPF_d
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_sum = 0.0f;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_sum = 0.0f;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i = 0; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i < 1; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i++) {
+        _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_sum += _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_coeff[_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i + 1] * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__states[_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__i];
+    }
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_sum += _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__states[0] * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_coeff[1];
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__delay_line_in = (_microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__d - _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_sum) / _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__a_coeff[0];
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_sum += _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_coeff[0] * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__delay_line_in;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__out = _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.abc to dq.LPF_q
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_sum = 0.0f;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_sum = 0.0f;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i = 0; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i < 1; _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i++) {
+        _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_sum += _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_coeff[_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i + 1] * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__states[_microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__i];
+    }
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_sum += _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__states[0] * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_coeff[1];
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__delay_line_in = (_microgrid1_inverter_controller_pll_pll_abc_to_dq_alpha_beta_to_dq__q - _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_sum) / _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__a_coeff[0];
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_sum += _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_coeff[0] * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__delay_line_in;
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__out = _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain11
+    _microgrid1_inverter_controller_gain11__out = 0.029393876913398145 * _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__d;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain12
+    _microgrid1_inverter_controller_gain12__out = 0.029393876913398145 * _microgrid1_inverter_controller_current_abc_to_dq4_abc_to_dq1_alpha_beta_to_dq__q;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Sum2
+    _microgrid1_inverter_controller_voltage_droop_sum2__out = _microgrid1_inverter_gain17__out - _microgrid1_inverter_controller_integrator3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Sum1
+    _microgrid1_inverter_controller_frequency_droop_sum1__out = _microgrid1_inverter_gain18__out - _microgrid1_inverter_controller_integrator2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain10
+    _microgrid1_inverter_controller_gain10__out = 0.0025515518153991436 * _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__q;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain9
+    _microgrid1_inverter_controller_gain9__out = 0.0025515518153991436 * _microgrid1_inverter_controller_current_abc_to_dq3_abc_to_dq1_alpha_beta_to_dq__d;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Termination2
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.abc to dq2.alpha beta to dq
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k1 = cos(_microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out);
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k2 = sin(_microgrid1_inverter_be1_25a_synchronizer_unit_delay2__out);
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__d = _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k2 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__alpha - _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k1 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__beta;
+    _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__q = _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k1 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__alpha + _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__k2 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Gain5
+    _microgrid1_inverter_be1_25a_synchronizer_gain5__out = 0.0025515518153991436 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__d;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Gain6
+    _microgrid1_inverter_be1_25a_synchronizer_gain6__out = 0.0025515518153991436 * _microgrid1_inverter_be1_25a_synchronizer_abc_to_dq1_alpha_beta_to_dq__q;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain6
+    _microgrid1_inverter_controller_gain6__out = 0.029393876913398145 * _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__d;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain7
+    _microgrid1_inverter_controller_gain7__out = 0.029393876913398145 * _microgrid1_inverter_controller_current_abc_to_dq_abc_to_dq1_alpha_beta_to_dq__q;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.E_q
+    HIL_OutAO(0x4009, (float)_microgrid1_inverter_be1_25a_synchronizer_gain12__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Product2
+    _microgrid1_inverter_be1_25a_synchronizer_product2__out = (_microgrid1_inverter_be1_25a_synchronizer_gain12__out * _microgrid1_inverter_be1_25a_synchronizer_gain12__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.E_d
+    HIL_OutAO(0x4008, (float)_microgrid1_inverter_be1_25a_synchronizer_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Limit1
+    if (_microgrid1_inverter_be1_25a_synchronizer_gain7__out < 1e-12) {
+        _microgrid1_inverter_be1_25a_synchronizer_limit1__out = 1e-12;
+    } else {
+        _microgrid1_inverter_be1_25a_synchronizer_limit1__out = _microgrid1_inverter_be1_25a_synchronizer_gain7__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Product1
+    _microgrid1_inverter_be1_25a_synchronizer_product1__out = (_microgrid1_inverter_be1_25a_synchronizer_gain7__out * _microgrid1_inverter_be1_25a_synchronizer_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.Gain4
+    _microgrid1_inverter_controller_pll_gain4__out = 0.0025515518153991436 * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.Gain3
+    _microgrid1_inverter_controller_pll_gain3__out = 0.0025515518153991436 * _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.normalize
+    _microgrid1_inverter_controller_pll_pll_normalize__in1 = _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__out;
+    _microgrid1_inverter_controller_pll_pll_normalize__in2 = _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__out;
+    _microgrid1_inverter_controller_pll_pll_normalize__pk = (powf(_microgrid1_inverter_controller_pll_pll_normalize__in1, 2.0) + powf(_microgrid1_inverter_controller_pll_pll_normalize__in2, 2.0));
+    _microgrid1_inverter_controller_pll_pll_normalize__pk = sqrt(_microgrid1_inverter_controller_pll_pll_normalize__pk);
+    if (_microgrid1_inverter_controller_pll_pll_normalize__pk < 0.1) {
+        _microgrid1_inverter_controller_pll_pll_normalize__in2_pu = _microgrid1_inverter_controller_pll_pll_normalize__in2 / 0.1;
+    }
+    else {
+        _microgrid1_inverter_controller_pll_pll_normalize__in2_pu = _microgrid1_inverter_controller_pll_pll_normalize__in2 / _microgrid1_inverter_controller_pll_pll_normalize__pk;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Gain3
+    _microgrid1_inverter_controller_voltage_droop_gain3__out = 0.01959591794226543 * _microgrid1_inverter_controller_voltage_droop_sum2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.dQ
+    HIL_OutAO(0x402e, (float)_microgrid1_inverter_controller_voltage_droop_sum2__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Gain3
+    _microgrid1_inverter_controller_frequency_droop_gain3__out = 0.011309733552923255 * _microgrid1_inverter_controller_frequency_droop_sum1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Gain4
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain4__out = 5.760000000000002e-05 * _microgrid1_inverter_controller_gain10__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Gain6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain6__out = 5.760000000000002e-05 * _microgrid1_inverter_controller_gain9__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Ed-Vd
+    HIL_OutAO(0x400d, (float)_microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__d);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Eq-Vq
+    HIL_OutAO(0x400e, (float)_microgrid1_inverter_be1_25a_synchronizer_abc_to_dq2_alpha_beta_to_dq__q);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Limit2
+    if (_microgrid1_inverter_be1_25a_synchronizer_gain5__out < 1e-12) {
+        _microgrid1_inverter_be1_25a_synchronizer_limit2__out = 1e-12;
+    } else {
+        _microgrid1_inverter_be1_25a_synchronizer_limit2__out = _microgrid1_inverter_be1_25a_synchronizer_gain5__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Product3
+    _microgrid1_inverter_be1_25a_synchronizer_product3__out = (_microgrid1_inverter_be1_25a_synchronizer_gain5__out * _microgrid1_inverter_be1_25a_synchronizer_gain5__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Vd_G
+    HIL_OutAO(0x400f, (float)_microgrid1_inverter_be1_25a_synchronizer_gain5__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.PLL.PID controller1
+    _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int = _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__integrator_state + 1.0 * _microgrid1_inverter_be1_25a_synchronizer_gain6__out;
+    if (_microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int < 373.84952577718536) {
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out = 373.84952577718536;
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__av_active = 1;
+    } else if (_microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int > 380.132711084365) {
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out = 380.132711084365;
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__av_active = 1;
+    } else {
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out = _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int;
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__av_active = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Product4
+    _microgrid1_inverter_be1_25a_synchronizer_product4__out = (_microgrid1_inverter_be1_25a_synchronizer_gain6__out * _microgrid1_inverter_be1_25a_synchronizer_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Vq_G
+    HIL_OutAO(0x4010, (float)_microgrid1_inverter_be1_25a_synchronizer_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Sum10
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum10__out = _microgrid1_inverter_controller_gain11__out - _microgrid1_inverter_controller_gain6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Gain7
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain7__out = 0.0028906249999999995 * _microgrid1_inverter_controller_gain6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Sum11
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum11__out = _microgrid1_inverter_controller_gain12__out - _microgrid1_inverter_controller_gain7__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Gain6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain6__out = 0.0028906249999999995 * _microgrid1_inverter_controller_gain7__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Trigonometric function1
+    _microgrid1_inverter_be1_25a_synchronizer_trigonometric_function1__out = atan2(_microgrid1_inverter_be1_25a_synchronizer_gain12__out, _microgrid1_inverter_be1_25a_synchronizer_limit1__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum4
+    _microgrid1_inverter_be1_25a_synchronizer_sum4__out = _microgrid1_inverter_be1_25a_synchronizer_product1__out + _microgrid1_inverter_be1_25a_synchronizer_product2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Discrete Transfer Function1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__a_sum = 0.0f;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_sum = 0.0f;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i = 0; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i < 1; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i++) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_coeff[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i + 1] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__states[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__i];
+    }
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__a_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__states[0] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__a_coeff[1];
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__delay_line_in = _microgrid1_inverter_controller_pll_gain4__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__a_sum;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_coeff[0] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__delay_line_in;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product4
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product4__out = (_microgrid1_inverter_controller_pll_gain4__out * _microgrid1_inverter_gain17__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product5
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product5__out = (_microgrid1_inverter_gain18__out * _microgrid1_inverter_controller_pll_gain4__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.squared_Vt2.Product1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_product1__out = (_microgrid1_inverter_controller_pll_gain4__out * _microgrid1_inverter_controller_pll_gain4__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Product111
+    _microgrid1_inverter_controller_product111__out = (_microgrid1_inverter_controller_pll_gain4__out * _microgrid1_inverter_controller_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Product12
+    _microgrid1_inverter_controller_product12__out = (_microgrid1_inverter_controller_pll_gain4__out * _microgrid1_inverter_controller_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.Product1
+    _microgrid1_inverter_power_meas_power_meas_dqpu_product1__out = (_microgrid1_inverter_controller_pll_gain4__out * _microgrid1_inverter_controller_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.Product3
+    _microgrid1_inverter_power_meas_power_meas_dqpu_product3__out = (_microgrid1_inverter_controller_pll_gain4__out * _microgrid1_inverter_controller_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Discrete Transfer Function2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__a_sum = 0.0f;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_sum = 0.0f;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i = 0; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i < 1; _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i++) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_coeff[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i + 1] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__states[_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__i];
+    }
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__a_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__states[0] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__a_coeff[1];
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__delay_line_in = _microgrid1_inverter_controller_pll_gain3__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__a_sum;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_sum += _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_coeff[0] * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__delay_line_in;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product3
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product3__out = (_microgrid1_inverter_controller_pll_gain3__out * _microgrid1_inverter_gain18__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product6__out = (_microgrid1_inverter_gain17__out * _microgrid1_inverter_controller_pll_gain3__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.squared_Vt2.Product2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_product2__out = (_microgrid1_inverter_controller_pll_gain3__out * _microgrid1_inverter_controller_pll_gain3__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Product10
+    _microgrid1_inverter_controller_product10__out = (_microgrid1_inverter_controller_gain6__out * _microgrid1_inverter_controller_pll_gain3__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Product13
+    _microgrid1_inverter_controller_product13__out = (_microgrid1_inverter_controller_pll_gain3__out * _microgrid1_inverter_controller_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.Product2
+    _microgrid1_inverter_power_meas_power_meas_dqpu_product2__out = (_microgrid1_inverter_controller_pll_gain3__out * _microgrid1_inverter_controller_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.Product4
+    _microgrid1_inverter_power_meas_power_meas_dqpu_product4__out = (_microgrid1_inverter_controller_pll_gain3__out * _microgrid1_inverter_controller_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Kd
+    _microgrid1_inverter_controller_pll_pll_pid_kd__out = 1.0 * _microgrid1_inverter_controller_pll_pll_normalize__in2_pu;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Ki
+    _microgrid1_inverter_controller_pll_pll_pid_ki__out = 3200.0 * _microgrid1_inverter_controller_pll_pll_normalize__in2_pu;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Kp
+    _microgrid1_inverter_controller_pll_pll_pid_kp__out = 100.0 * _microgrid1_inverter_controller_pll_pll_normalize__in2_pu;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.term_pk
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.C function1
+    _microgrid1_inverter_controller_voltage_droop_c_function1__clk = _microgrid1_inverter_controller_voltage_droop_clock1__out;
+    _microgrid1_inverter_controller_voltage_droop_c_function1__in = _microgrid1_inverter_controller_voltage_droop_gain3__out;
+    if (_microgrid1_inverter_controller_voltage_droop_c_function1__clk > 120) {
+        _microgrid1_inverter_controller_voltage_droop_c_function1__out = _microgrid1_inverter_controller_voltage_droop_c_function1__in;
+    }
+    else {
+        _microgrid1_inverter_controller_voltage_droop_c_function1__out = 0;
+    }
+    _microgrid1_inverter_controller_voltage_droop_c_function1__out = _microgrid1_inverter_controller_voltage_droop_c_function1__in;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.C function1
+    _microgrid1_inverter_controller_frequency_droop_c_function1__clk = _microgrid1_inverter_controller_frequency_droop_clock1__out;
+    _microgrid1_inverter_controller_frequency_droop_c_function1__in = _microgrid1_inverter_controller_frequency_droop_gain3__out;
+    if (_microgrid1_inverter_controller_frequency_droop_c_function1__clk > 120) {
+        _microgrid1_inverter_controller_frequency_droop_c_function1__out = _microgrid1_inverter_controller_frequency_droop_c_function1__in;
+    }
+    else {
+        _microgrid1_inverter_controller_frequency_droop_c_function1__out = 0;
+    }
+    _microgrid1_inverter_controller_frequency_droop_c_function1__out = _microgrid1_inverter_controller_frequency_droop_c_function1__in;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Product6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product6__out = (_microgrid1_inverter_controller_pll_gain5__out * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain4__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Product8
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product8__out = (_microgrid1_inverter_controller_pll_gain5__out * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Trigonometric function2
+    _microgrid1_inverter_be1_25a_synchronizer_trigonometric_function2__out = atan2(_microgrid1_inverter_be1_25a_synchronizer_gain6__out, _microgrid1_inverter_be1_25a_synchronizer_limit2__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.PLL.C function1
+    _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__in = _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out;
+    _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__out = _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__var;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.w_bus
+    HIL_OutAO(0x4017, (float)_microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum5
+    _microgrid1_inverter_be1_25a_synchronizer_sum5__out = _microgrid1_inverter_be1_25a_synchronizer_product3__out + _microgrid1_inverter_be1_25a_synchronizer_product4__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Gain3
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain3__out = 0.22458333333333327 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum10__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Product2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product2__out = (_microgrid1_inverter_controller_pll_gain5__out * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain7__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Gain4
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain4__out = 0.22458333333333327 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum11__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Product1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product1__out = (_microgrid1_inverter_controller_pll_gain5__out * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.confine phase1
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__in = _microgrid1_inverter_be1_25a_synchronizer_trigonometric_function1__out;
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__x = _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__in / 6.283185307179586;
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__floor_in = floor(_microgrid1_inverter_be1_25a_synchronizer_confine_phase1__x);
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__in - (6.283185307179586 * _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__floor_in);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Mathematical function1
+    _microgrid1_inverter_be1_25a_synchronizer_mathematical_function1__out = sqrt(_microgrid1_inverter_be1_25a_synchronizer_sum4__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Sum3
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_sum3__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product3__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product4__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Sum4
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_sum4__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product5__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.squared_Vt2.Sum3
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_product1__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_product2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Sum2
+    _microgrid1_inverter_controller_sum2__out = _microgrid1_inverter_controller_product10__out - _microgrid1_inverter_controller_product12__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Sum1
+    _microgrid1_inverter_controller_sum1__out = _microgrid1_inverter_controller_product111__out + _microgrid1_inverter_controller_product13__out;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.Sum1
+    _microgrid1_inverter_power_meas_power_meas_dqpu_sum1__out = _microgrid1_inverter_power_meas_power_meas_dqpu_product1__out + _microgrid1_inverter_power_meas_power_meas_dqpu_product2__out;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.Sum2
+    _microgrid1_inverter_power_meas_power_meas_dqpu_sum2__out = _microgrid1_inverter_power_meas_power_meas_dqpu_product4__out - _microgrid1_inverter_power_meas_power_meas_dqpu_product3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Sum8
+    _microgrid1_inverter_controller_pll_pll_pid_sum8__out = _microgrid1_inverter_controller_pll_pll_pid_kd__out - _microgrid1_inverter_controller_pll_pll_pid_integrator2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Sum4
+    _microgrid1_inverter_controller_voltage_droop_sum4__out = _microgrid1_inverter_controller_voltage_droop_c_function1__out + _microgrid1_inverter_controller_voltage_droop_rate_transition13_output__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Sum4
+    _microgrid1_inverter_controller_frequency_droop_sum4__out = _microgrid1_inverter_controller_frequency_droop_c_function1__out + _microgrid1_inverter_controller_frequency_droop_rate_transition12_output__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum10
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum10__out = _microgrid1_inverter_controller_gain11__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum13
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum13__out = _microgrid1_inverter_controller_gain12__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_product8__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.confine phase2
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__in = _microgrid1_inverter_be1_25a_synchronizer_trigonometric_function2__out;
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__x = _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__in / 6.283185307179586;
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__floor_in = floor(_microgrid1_inverter_be1_25a_synchronizer_confine_phase2__x);
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__in - (6.283185307179586 * _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__floor_in);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.PLL.confine phase
+    _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__in = _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__out;
+    _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__x = _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__in / 6.283185307179586;
+    _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__floor_in = floor(_microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__x);
+    _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__out = _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__in - (6.283185307179586 * _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__floor_in);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Mathematical function2
+    _microgrid1_inverter_be1_25a_synchronizer_mathematical_function2__out = sqrt(_microgrid1_inverter_be1_25a_synchronizer_sum5__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum6__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Sum8
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum8__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain4__out + _microgrid1_inverter_controller_constant1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum5
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum5__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product1__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.|E|
+    HIL_OutAO(0x4018, (float)_microgrid1_inverter_be1_25a_synchronizer_mathematical_function1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Comparator1
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out < _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_limit_zero__out) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__out = 0;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out > _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_limit_zero__out) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__out = 1;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain14
+    _microgrid1_inverter_controller_gain14__out = 20000.0 * _microgrid1_inverter_controller_sum2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Sum5
+    _microgrid1_inverter_controller_sum5__out = _microgrid1_inverter_controller_sum2__out - _microgrid1_inverter_controller_integrator3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain15
+    _microgrid1_inverter_controller_gain15__out = 20000.0 * _microgrid1_inverter_controller_sum1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Sum4
+    _microgrid1_inverter_controller_sum4__out = _microgrid1_inverter_controller_sum1__out - _microgrid1_inverter_controller_integrator2__out;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.LPF_P
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__a_sum = 0.0f;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_sum = 0.0f;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i = 0; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i < 1; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i++) {
+        _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_sum += _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_coeff[_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i + 1] * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__states[_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__i];
+    }
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__a_sum += _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__states[0] * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__a_coeff[1];
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__delay_line_in = _microgrid1_inverter_power_meas_power_meas_dqpu_sum1__out - _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__a_sum;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_sum += _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_coeff[0] * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__delay_line_in;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__out = _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.LPF_Q
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__a_sum = 0.0f;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_sum = 0.0f;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i = 0; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i < 1; _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i++) {
+        _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_sum += _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_coeff[_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i + 1] * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__states[_microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__i];
+    }
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__a_sum += _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__states[0] * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__a_coeff[1];
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__delay_line_in = _microgrid1_inverter_power_meas_power_meas_dqpu_sum2__out - _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__a_sum;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_sum += _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_coeff[0] * _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__delay_line_in;
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__out = _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Gain1
+    _microgrid1_inverter_controller_pll_pll_pid_gain1__out = 714.2857 * _microgrid1_inverter_controller_pll_pll_pid_sum8__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.C function2
+    _microgrid1_inverter_controller_voltage_droop_c_function2__GFM = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_logical_operator1__out;
+    _microgrid1_inverter_controller_voltage_droop_c_function2__clk = _microgrid1_inverter_controller_voltage_droop_clock2__out;
+    _microgrid1_inverter_controller_voltage_droop_c_function2__in = _microgrid1_inverter_controller_voltage_droop_sum4__out;
+    if (_microgrid1_inverter_controller_voltage_droop_c_function2__GFM > 0)_microgrid1_inverter_controller_voltage_droop_c_function2__out = _microgrid1_inverter_controller_voltage_droop_c_function2__in;
+    else _microgrid1_inverter_controller_voltage_droop_c_function2__out = 1;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.E_1
+    HIL_OutAO(0x402d, (float)_microgrid1_inverter_controller_voltage_droop_sum4__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.C function2
+    _microgrid1_inverter_controller_frequency_droop_c_function2__clk = _microgrid1_inverter_controller_frequency_droop_clock2__out;
+    _microgrid1_inverter_controller_frequency_droop_c_function2__cnt = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_logical_operator1__out;
+    _microgrid1_inverter_controller_frequency_droop_c_function2__in = _microgrid1_inverter_controller_frequency_droop_sum4__out;
+    if (_microgrid1_inverter_controller_frequency_droop_c_function2__cnt > 0)_microgrid1_inverter_controller_frequency_droop_c_function2__out = _microgrid1_inverter_controller_frequency_droop_c_function2__in;
+    else _microgrid1_inverter_controller_frequency_droop_c_function2__out = 2 * 3.14159265359 * 60;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum1
+    _microgrid1_inverter_be1_25a_synchronizer_sum1__out =  - _microgrid1_inverter_be1_25a_synchronizer_confine_phase1__out + _microgrid1_inverter_be1_25a_synchronizer_confine_phase2__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum3
+    _microgrid1_inverter_be1_25a_synchronizer_sum3__out =  - _microgrid1_inverter_be1_25a_synchronizer_mathematical_function1__out + _microgrid1_inverter_be1_25a_synchronizer_mathematical_function2__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.|V|
+    HIL_OutAO(0x4019, (float)_microgrid1_inverter_be1_25a_synchronizer_mathematical_function2__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Eq_ref
+    HIL_OutAO(0x401d, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum8__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum11
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum8__out - _microgrid1_inverter_controller_gain10__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Signal switch1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__out < 0.5f) ? _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_one__out : _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Q1
+    HIL_OutAO(0x402c, (float)_microgrid1_inverter_controller_gain14__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain13
+    _microgrid1_inverter_controller_gain13__out = 2.0 * _microgrid1_inverter_controller_sum5__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.P1
+    HIL_OutAO(0x402a, (float)_microgrid1_inverter_controller_gain15__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain4
+    _microgrid1_inverter_controller_gain4__out = 2.0 * _microgrid1_inverter_controller_sum4__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Sum5
+    _microgrid1_inverter_controller_pll_pll_pid_sum5__out = _microgrid1_inverter_controller_pll_pll_pid_kp__out + _microgrid1_inverter_controller_pll_pll_pid_gain1__out + _microgrid1_inverter_controller_pll_pll_pid_integrator1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.E_dREF1
+    HIL_OutAO(0x401a, (float)_microgrid1_inverter_controller_voltage_droop_c_function2__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Sum7
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum7__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain3__out + _microgrid1_inverter_controller_voltage_droop_c_function2__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Sum2
+    _microgrid1_inverter_be1_25a_synchronizer_sum2__out =  - _microgrid1_inverter_controller_frequency_droop_c_function2__out + _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.w_G
+    HIL_OutAO(0x4016, (float)_microgrid1_inverter_controller_frequency_droop_c_function2__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Gain1
+    _microgrid1_inverter_controller_gain1__out = 0.15915494309189535 * _microgrid1_inverter_controller_frequency_droop_c_function2__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.confine phase
+    _microgrid1_inverter_be1_25a_synchronizer_confine_phase__in = _microgrid1_inverter_be1_25a_synchronizer_sum1__out;
+    if (_microgrid1_inverter_be1_25a_synchronizer_confine_phase__in > 0) {
+        if (_microgrid1_inverter_be1_25a_synchronizer_confine_phase__in > (6.283185307179586 / 2))_microgrid1_inverter_be1_25a_synchronizer_confine_phase__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase__in - 6.283185307179586;
+        else _microgrid1_inverter_be1_25a_synchronizer_confine_phase__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase__in;
+    }
+    if (_microgrid1_inverter_be1_25a_synchronizer_confine_phase__in < 0) {
+        if (_microgrid1_inverter_be1_25a_synchronizer_confine_phase__in < (-6.283185307179586 / 2))_microgrid1_inverter_be1_25a_synchronizer_confine_phase__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase__in + 6.283185307179586;
+        else _microgrid1_inverter_be1_25a_synchronizer_confine_phase__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase__in;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Abs2
+    _microgrid1_inverter_be1_25a_synchronizer_abs2__out = fabs(_microgrid1_inverter_be1_25a_synchronizer_sum3__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition6.Input
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition6_output__out = _microgrid1_inverter_be1_25a_synchronizer_sum3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Eq_err
+    HIL_OutAO(0x4021, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Limit2
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit2__out = 1.0;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit2__out = -1.0;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit2__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum11__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Et_sqr_res
+    HIL_OutAO(0x4029, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product1__out = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_sum3__out) * 1.0 / (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Product2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product2__out = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_sum4__out) * 1.0 / (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_signal_switch1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Limit1
+    if (_microgrid1_inverter_controller_pll_pll_pid_sum5__out > 527.7875658030853) {
+        _microgrid1_inverter_controller_pll_pll_pid_limit1__out = 527.7875658030853;
+    } else if (_microgrid1_inverter_controller_pll_pll_pid_sum5__out < 0.0) {
+        _microgrid1_inverter_controller_pll_pll_pid_limit1__out = 0.0;
+    } else {
+        _microgrid1_inverter_controller_pll_pll_pid_limit1__out = _microgrid1_inverter_controller_pll_pll_pid_sum5__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Ed_ref
+    HIL_OutAO(0x401c, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum7__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum8
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_sum7__out - _microgrid1_inverter_controller_gain9__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Abs5
+    _microgrid1_inverter_be1_25a_synchronizer_abs5__out = fabs(_microgrid1_inverter_be1_25a_synchronizer_sum2__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition4.Input
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition4_output__out = _microgrid1_inverter_be1_25a_synchronizer_sum2__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.frequency_diff3
+    HIL_OutAO(0x4014, (float)_microgrid1_inverter_be1_25a_synchronizer_sum2__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.f1
+    HIL_OutAO(0x402f, (float)_microgrid1_inverter_controller_gain1__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Abs4
+    _microgrid1_inverter_be1_25a_synchronizer_abs4__out = fabs(_microgrid1_inverter_be1_25a_synchronizer_confine_phase__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition2.Input
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition2_output__out = _microgrid1_inverter_be1_25a_synchronizer_confine_phase__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.angle_diff3
+    HIL_OutAO(0x4011, (float)_microgrid1_inverter_be1_25a_synchronizer_confine_phase__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Relational operator4
+    _microgrid1_inverter_be1_25a_synchronizer_relational_operator4__out = (_microgrid1_inverter_be1_25a_synchronizer_abs2__out < _microgrid1_inverter_be1_25a_synchronizer_constant9__out) ? 1 : 0;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller4
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state + 0.0033 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit2__out;
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = -1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active = 1;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = 1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active = 1;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__pi_reg_out_int;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Bus Join2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join2__out[0] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product2__out;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join2__out[1] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_product1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Sum6
+    _microgrid1_inverter_controller_pll_pll_pid_sum6__out =  - _microgrid1_inverter_controller_pll_pll_pid_sum5__out + _microgrid1_inverter_controller_pll_pll_pid_limit1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.Rate Limiter1
+    if (_microgrid1_inverter_controller_pll_pll_rate_limiter1__first_step) {
+        _microgrid1_inverter_controller_pll_pll_rate_limiter1__out = _microgrid1_inverter_controller_pll_pll_pid_limit1__out;
+    } else {
+        _microgrid1_inverter_controller_pll_pll_rate_limiter1__out = _microgrid1_inverter_controller_pll_pll_pid_limit1__out;
+        _microgrid1_inverter_controller_pll_pll_rate_limiter1__in_rate = _microgrid1_inverter_controller_pll_pll_pid_limit1__out - _microgrid1_inverter_controller_pll_pll_rate_limiter1__prev_out;
+        if (_microgrid1_inverter_controller_pll_pll_rate_limiter1__in_rate > 0.03769911184307752) {
+            _microgrid1_inverter_controller_pll_pll_rate_limiter1__out = _microgrid1_inverter_controller_pll_pll_rate_limiter1__prev_out + (0.03769911184307752);
+        }
+        if (_microgrid1_inverter_controller_pll_pll_rate_limiter1__in_rate < -0.03769911184307752) {
+            _microgrid1_inverter_controller_pll_pll_rate_limiter1__out = _microgrid1_inverter_controller_pll_pll_rate_limiter1__prev_out + (-0.03769911184307752);
+        }
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.integrator
+    _microgrid1_inverter_controller_pll_pll_integrator__in = _microgrid1_inverter_controller_pll_pll_pid_limit1__out;
+    _microgrid1_inverter_controller_pll_pll_integrator__out += 2e-05 * _microgrid1_inverter_controller_pll_pll_integrator__in;
+    if (_microgrid1_inverter_controller_pll_pll_integrator__in >= 0.0) {
+        if (_microgrid1_inverter_controller_pll_pll_integrator__out >= 6.283185307179586) {
+            _microgrid1_inverter_controller_pll_pll_integrator__out -= 6.283185307179586;
+        }
+    }
+    else {
+        if (_microgrid1_inverter_controller_pll_pll_integrator__out <= -6.283185307179586) {
+            _microgrid1_inverter_controller_pll_pll_integrator__out += 6.283185307179586;
+        }
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Ed_err
+    HIL_OutAO(0x4020, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Limit1
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit1__out = 1.0;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit1__out = -1.0;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit1__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum8__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Relational operator2
+    _microgrid1_inverter_be1_25a_synchronizer_relational_operator2__out = (_microgrid1_inverter_be1_25a_synchronizer_constant7__out > _microgrid1_inverter_be1_25a_synchronizer_abs5__out) ? 1 : 0;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Relational operator1
+    _microgrid1_inverter_be1_25a_synchronizer_relational_operator1__out = (_microgrid1_inverter_be1_25a_synchronizer_constant6__out > _microgrid1_inverter_be1_25a_synchronizer_abs4__out) ? 1 : 0;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Digital Probe5
+    HIL_OutInt32(0xf00404, _microgrid1_inverter_be1_25a_synchronizer_relational_operator4__out != 0x0);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl
+    HIL_OutAO(0x401f, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum12
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum12__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum13__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Kb
+    _microgrid1_inverter_controller_pll_pll_pid_kb__out = 1.0 * _microgrid1_inverter_controller_pll_pll_pid_sum6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.LPF.LPF
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_sum = 0.0f;
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__b_sum = 0.0f;
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__delay_line_in = 0.0f;
+    for (_microgrid1_inverter_controller_pll_pll_lpf_lpf__i = 0; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i < 2; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i++) {
+        _microgrid1_inverter_controller_pll_pll_lpf_lpf__b_sum += _microgrid1_inverter_controller_pll_pll_lpf_lpf__b_coeff[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i] * _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i + 0];
+    }
+    for (_microgrid1_inverter_controller_pll_pll_lpf_lpf__i = 1; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i > 0; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i--) {
+        _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_sum += _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_coeff[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i + 1] * _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i];
+    }
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_sum += _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[0] * _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_coeff[1];
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__delay_line_in = _microgrid1_inverter_controller_pll_pll_rate_limiter1__out - _microgrid1_inverter_controller_pll_pll_lpf_lpf__a_sum;
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__out = _microgrid1_inverter_controller_pll_pll_lpf_lpf__b_sum;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller3
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state + 0.0033 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit1__out;
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = -1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 1;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = 1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 1;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__pi_reg_out_int;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Digital Probe4
+    HIL_OutInt32(0xf00403, _microgrid1_inverter_be1_25a_synchronizer_relational_operator2__out != 0x0);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Digital Probe3
+    HIL_OutInt32(0xf00402, _microgrid1_inverter_be1_25a_synchronizer_relational_operator1__out != 0x0);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Logical operator1
+    _microgrid1_inverter_be1_25a_synchronizer_logical_operator1__out = _microgrid1_inverter_be1_25a_synchronizer_relational_operator1__out && _microgrid1_inverter_be1_25a_synchronizer_relational_operator2__out && _microgrid1_inverter_be1_25a_synchronizer_relational_operator4__out ;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Sum7
+    _microgrid1_inverter_controller_pll_pll_pid_sum7__out = _microgrid1_inverter_controller_pll_pll_pid_ki__out + _microgrid1_inverter_controller_pll_pll_pid_kb__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl
+    HIL_OutAO(0x401e, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Sum9
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum9__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum10__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition12.Input
+    _microgrid1_inverter_be1_25a_synchronizer_rate_transition12_output__out = _microgrid1_inverter_be1_25a_synchronizer_logical_operator1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Bus Join1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join1__out[0] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum9__out;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join1__out[1] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_sum12__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Signal switch2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_signal_switch2__out[0] = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_logical_operator1__out != 1.0) ? _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join2__out[0] : _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join1__out[0];
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_signal_switch2__out[1] = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_logical_operator1__out != 1.0) ? _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join2__out[1] : _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_join1__out[1];
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Bus Split1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_signal_switch2__out[0];
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out1 = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_signal_switch2__out[1];
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Xi_d_ref
+    HIL_OutAO(0x4024, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Xi_q_ref
+    HIL_OutAO(0x4025, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out1);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum8
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out - _microgrid1_inverter_controller_gain6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum9
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_bus_split1__out1 - _microgrid1_inverter_controller_gain7__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state + 0.527690972222222 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out;
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = -1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 1;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = 1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 1;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__pi_reg_out_int;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__av_active = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.id_err
+    HIL_OutAO(0x4027, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state + 0.527690972222222 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out;
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = -1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 1;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = 1.0;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 1;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__pi_reg_out_int;
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__av_active = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.iq_err
+    HIL_OutAO(0x4028, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum3
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum5__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Sum7
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum7__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum6__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Product5
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product5__out = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum3__out) * 1.0 / (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Product6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product6__out = (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum7__out) * 1.0 / (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_gain5__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Limit1
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product5__out > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit1__out = 1.0;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product5__out < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit1__out = -1.0;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit1__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product5__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Limit2
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product6__out > 1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit2__out = 1.0;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product6__out < -1.0) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit2__out = -1.0;
+    } else {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit2__out = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_product6__out;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Gain5
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain5__out = 391.91835884530855 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit1__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Gain6
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain6__out = 391.91835884530855 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_limit2__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Ud
+    HIL_OutAO(0x4022, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain5__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Uq
+    HIL_OutAO(0x4023, (float)_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain6__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.dq to abc.dq to abc1.dq to alpha beta
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k1 = cos(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k2 = sin(_microgrid1_inverter_controller_pll_pll_unit_delay1__out);
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__alpha = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k2 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain5__out + _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k1 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain6__out;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__beta = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k2 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain6__out - _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__k1 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_gain5__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.dq to abc.dq to abc1.alpha beta to abc
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__A = 1 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_o_ref__out;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__B = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__A - 0.5 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__alpha;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__C = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__B - 0.8660254037844386 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__beta;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__B += 0.8660254037844386 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__beta;
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__A += 1 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_dq_to_alpha_beta__alpha;
+    // Generated from the component: Microgrid1.Inverter.Controller.Bus Join1
+    _microgrid1_inverter_controller_bus_join1__out[0] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__A;
+    _microgrid1_inverter_controller_bus_join1__out[1] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__B;
+    _microgrid1_inverter_controller_bus_join1__out[2] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_dq_to_abc_dq_to_abc1_alpha_beta_to_abc__C;
+    // Generated from the component: Microgrid1.Inverter.Controller.Limit1
+    if (_microgrid1_inverter_controller_bus_join1__out[0] > 1.0) {
+        _microgrid1_inverter_controller_limit1__out[0] = 1.0;
+    } else if (_microgrid1_inverter_controller_bus_join1__out[0] < -1.0) {
+        _microgrid1_inverter_controller_limit1__out[0] = -1.0;
+    } else {
+        _microgrid1_inverter_controller_limit1__out[0] = _microgrid1_inverter_controller_bus_join1__out[0];
+    }
+    if (_microgrid1_inverter_controller_bus_join1__out[1] > 1.0) {
+        _microgrid1_inverter_controller_limit1__out[1] = 1.0;
+    } else if (_microgrid1_inverter_controller_bus_join1__out[1] < -1.0) {
+        _microgrid1_inverter_controller_limit1__out[1] = -1.0;
+    } else {
+        _microgrid1_inverter_controller_limit1__out[1] = _microgrid1_inverter_controller_bus_join1__out[1];
+    }
+    if (_microgrid1_inverter_controller_bus_join1__out[2] > 1.0) {
+        _microgrid1_inverter_controller_limit1__out[2] = 1.0;
+    } else if (_microgrid1_inverter_controller_bus_join1__out[2] < -1.0) {
+        _microgrid1_inverter_controller_limit1__out[2] = -1.0;
+    } else {
+        _microgrid1_inverter_controller_limit1__out[2] = _microgrid1_inverter_controller_bus_join1__out[2];
+    }
+    // Generated from the component: Microgrid1.Inverter.Bus Split1
+    _microgrid1_inverter_bus_split1__out = _microgrid1_inverter_controller_limit1__out[0];
+    _microgrid1_inverter_bus_split1__out1 = _microgrid1_inverter_controller_limit1__out[1];
+    _microgrid1_inverter_bus_split1__out2 = _microgrid1_inverter_controller_limit1__out[2];
+    // Generated from the component: Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1.PWM_Modulator
+    if (_microgrid1_inverter_bus_split1__out < -1.0)
+        _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__limited_in[0] = -1.0;
+    else if (_microgrid1_inverter_bus_split1__out > 1.0)
+        _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__limited_in[0] = 1.0;
+    else
+        _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__limited_in[0] = _microgrid1_inverter_bus_split1__out;
+    HIL_OutInt32(0x2000040 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], ((unsigned)((_microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__limited_in[0] - (-1.0)) * 1250.0)));
+    if (_microgrid1_inverter_constant2__out == 0x0) {
+        // pwm_modulator_en
+        HIL_OutInt32(0x2000000 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 0x0);
+    }
+    else {
+        // pwm_modulator_en
+        HIL_OutInt32(0x2000000 + _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__channels[0], 0x1);
+    }
+    HIL_OutInt32(0x2000140, _microgrid1_inverter_three_phase_inverter_igbt_leg1_pwm_modulator__update_mask);
+    // Generated from the component: Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2.PWM_Modulator
+    if (_microgrid1_inverter_bus_split1__out1 < -1.0)
+        _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__limited_in[0] = -1.0;
+    else if (_microgrid1_inverter_bus_split1__out1 > 1.0)
+        _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__limited_in[0] = 1.0;
+    else
+        _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__limited_in[0] = _microgrid1_inverter_bus_split1__out1;
+    HIL_OutInt32(0x2000040 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], ((unsigned)((_microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__limited_in[0] - (-1.0)) * 1250.0)));
+    if (_microgrid1_inverter_constant2__out == 0x0) {
+        // pwm_modulator_en
+        HIL_OutInt32(0x2000000 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 0x0);
+    }
+    else {
+        // pwm_modulator_en
+        HIL_OutInt32(0x2000000 + _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__channels[0], 0x1);
+    }
+    HIL_OutInt32(0x2000140, _microgrid1_inverter_three_phase_inverter_igbt_leg2_pwm_modulator__update_mask);
+    // Generated from the component: Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3.PWM_Modulator
+    if (_microgrid1_inverter_bus_split1__out2 < -1.0)
+        _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__limited_in[0] = -1.0;
+    else if (_microgrid1_inverter_bus_split1__out2 > 1.0)
+        _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__limited_in[0] = 1.0;
+    else
+        _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__limited_in[0] = _microgrid1_inverter_bus_split1__out2;
+    HIL_OutInt32(0x2000040 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], ((unsigned)((_microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__limited_in[0] - (-1.0)) * 1250.0)));
+    if (_microgrid1_inverter_constant2__out == 0x0) {
+        // pwm_modulator_en
+        HIL_OutInt32(0x2000000 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 0x0);
+    }
+    else {
+        // pwm_modulator_en
+        HIL_OutInt32(0x2000000 + _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__channels[0], 0x1);
+    }
+    HIL_OutInt32(0x2000140, _microgrid1_inverter_three_phase_inverter_igbt_leg3_pwm_modulator__update_mask);
+    //@cmp.out.block.end
+    //////////////////////////////////////////////////////////////////////////
+    // Update block
+    //////////////////////////////////////////////////////////////////////////
+    //@cmp.update.block.start
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Unit Delay2
+    _microgrid1_inverter_be1_25a_synchronizer_unit_delay2__state = _microgrid1_inverter_be1_25a_synchronizer_pll_confine_phase__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Clock1
+    _microgrid1_inverter_controller_frequency_droop_clock1__state += 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Clock2
+    _microgrid1_inverter_controller_frequency_droop_clock2__state += 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.Integrator2
+    _microgrid1_inverter_controller_integrator2__state += _microgrid1_inverter_controller_gain4__out * 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.Integrator3
+    _microgrid1_inverter_controller_integrator3__state += _microgrid1_inverter_controller_gain13__out * 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Integrator1
+    _microgrid1_inverter_controller_pll_pll_pid_integrator1__state += _microgrid1_inverter_controller_pll_pll_pid_sum7__out * 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.PID.Integrator2
+    _microgrid1_inverter_controller_pll_pll_pid_integrator2__state += _microgrid1_inverter_controller_pll_pll_pid_gain1__out * 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.Unit Delay1
+    _microgrid1_inverter_controller_pll_pll_unit_delay1__state = _microgrid1_inverter_controller_pll_pll_integrator__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Clock1
+    _microgrid1_inverter_controller_voltage_droop_clock1__state += 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Clock2
+    _microgrid1_inverter_controller_voltage_droop_clock2__state += 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.S_and_pf
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.LPF_dc
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__states[0] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_lpf_dc__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.C function2
+    // Generated from the component: Microgrid1.Inverter.C function1
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.abc to dq.LPF_d
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__states[0] = _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_d__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.abc to dq.LPF_q
+    _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__states[0] = _microgrid1_inverter_controller_pll_pll_abc_to_dq_lpf_q__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.normalize
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.PLL.PID controller1
+    if (!_microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__av_active) {
+        _microgrid1_inverter_be1_25a_synchronizer_pll_pid_controller1__integrator_state += 2.0 * _microgrid1_inverter_be1_25a_synchronizer_gain6__out * 2e-05;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Discrete Transfer Function1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__states[0] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function1__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.Discrete Transfer Function2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__states[0] = _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_discrete_transfer_function2__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.C function1
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.C function1
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.PLL.C function1
+    _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__var += (2e-05 * _microgrid1_inverter_be1_25a_synchronizer_pll_c_function1__in);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.confine phase1
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.confine phase2
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.PLL.confine phase
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Comparator1
+    if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out < _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_limit_zero__out) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state = 0;
+    } else if (_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_squared_vt2_sum3__out > _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_limit_zero__out) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_power_loop_comparator1__state = 1;
+    }
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.LPF_P
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__states[0] = _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_p__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Power_Meas.Power_Meas_DQpu.LPF_Q
+    _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__states[0] = _microgrid1_inverter_power_meas_power_meas_dqpu_lpf_q__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.C function2
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.C function2
+    if (_microgrid1_inverter_controller_frequency_droop_c_function2__connected < 1 && _microgrid1_inverter_controller_frequency_droop_c_function2__cnt > 0) {
+        _microgrid1_inverter_controller_frequency_droop_c_function2__time = _microgrid1_inverter_controller_frequency_droop_c_function2__clk;
+    }
+    if (_microgrid1_inverter_controller_frequency_droop_c_function2__cnt > 0) {
+        _microgrid1_inverter_controller_frequency_droop_c_function2__connected = 1;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.confine phase
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller4
+    if (!_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__av_active) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller4__integrator_state += 0.7493 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit2__out * 2e-05;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.Rate Limiter1
+    _microgrid1_inverter_controller_pll_pll_rate_limiter1__prev_out = _microgrid1_inverter_controller_pll_pll_rate_limiter1__out;
+    _microgrid1_inverter_controller_pll_pll_rate_limiter1__first_step = 0;
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.integrator
+    // Generated from the component: Microgrid1.Inverter.Controller.PLL.PLL.LPF.LPF
+    for (_microgrid1_inverter_controller_pll_pll_lpf_lpf__i = 1; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i > 0; _microgrid1_inverter_controller_pll_pll_lpf_lpf__i--) {
+        _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i] = _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[_microgrid1_inverter_controller_pll_pll_lpf_lpf__i - 1];
+    }
+    _microgrid1_inverter_controller_pll_pll_lpf_lpf__states[0] = _microgrid1_inverter_controller_pll_pll_lpf_lpf__delay_line_in;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.PID controller3
+    if (!_microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__av_active) {
+        _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_pid_controller3__integrator_state += 0.7493 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_outer_voltage_control_loop_limit1__out * 2e-05;
+    }
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller1
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller1__integrator_state += 3.4722222222222214 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum8__out * 2e-05;
+    // Generated from the component: Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.PID controller2
+    _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_pid_controller2__integrator_state += 3.4722222222222214 * _microgrid1_inverter_controller_outer_voltage_loop___inner_current_loop_inner_current_control_loop_sum9__out * 2e-05;
+    //@cmp.update.block.end
+}
+void TimerCounterHandler_1_user_sp_cpu_dev0() {
+#if DEBUG_MODE
+    printf("\n\rTimerCounterHandler_1");
+#endif
+    //////////////////////////////////////////////////////////////////////////
+    // Output block
+    //////////////////////////////////////////////////////////////////////////
+    //@cmp.out.block.start
+    // Generated from the component: Microgrid1.ESS.Idc.Ia1
+    _microgrid1_ess_idc_ia1__out = (HIL_InFloat(0xc80000 + 0x213));
+    // Generated from the component: Microgrid1.ESS.Lead acid.Abs1
+    _microgrid1_ess_lead_acid_abs1__out = fabs(_microgrid1_ess_lead_acid_lpf_dc__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Abs2
+    _microgrid1_ess_lead_acid_abs2__out = fabs(_microgrid1_ess_lead_acid_lpf_dc__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Abs3
+    _microgrid1_ess_lead_acid_abs3__out = fabs(_microgrid1_ess_lead_acid_lpf_dc__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant1
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant2
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant3
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant4
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant5
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant6
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant7
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant8
+    // Generated from the component: Microgrid1.ESS.Lead acid.Constant9
+    // Generated from the component: Microgrid1.ESS.Lead acid.Ibat
+    HIL_OutAO(0x4003, (float)_microgrid1_ess_lead_acid_lpf_dc__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Unit Delay1
+    _microgrid1_ess_lead_acid_unit_delay1__out = _microgrid1_ess_lead_acid_unit_delay1__state;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Unit Delay2
+    _microgrid1_ess_lead_acid_unit_delay2__out = _microgrid1_ess_lead_acid_unit_delay2__state;
+    // Generated from the component: Microgrid1.ESS.Rate Transition7.Input
+    _microgrid1_ess_rate_transition7_output__out = _microgrid1_ess_lpf_dc2__out;
+    // Generated from the component: Microgrid1.ESS.Rate Transition7.Output
+    // Generated from the component: Microgrid1.ESS.VDC
+    HIL_OutAO(0x4006, (float)_microgrid1_ess_lpf_dc2__out);
+    // Generated from the component: PCC.Digital Input Close
+    _pcc_digital_input_close__out = HIL_InInt32(0xf80207);
+    if(_pcc_digital_input_close__out == 0) {
+        _pcc_digital_input_close__out = 1;
+    } else {
+        _pcc_digital_input_close__out = 0;
+    }
+    // Generated from the component: PCC.Digital Input Trip
+    _pcc_digital_input_trip__out = HIL_InInt32(0xf80208);
+    if(_pcc_digital_input_trip__out == 0) {
+        _pcc_digital_input_trip__out = 1;
+    } else {
+        _pcc_digital_input_trip__out = 0;
+    }
+    // Generated from the component: PCC.Grid_Connect
+    _pcc_grid_connect__out = XIo_InInt32(0x55000118);
+    // Generated from the component: PCC.Meas1.IA.Ia1
+    _pcc_meas1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x9));
+    // Generated from the component: PCC.Meas1.IB.Ia1
+    _pcc_meas1_ib_ia1__out = (HIL_InFloat(0xc80000 + 0xa));
+    // Generated from the component: PCC.Meas1.IC.Ia1
+    _pcc_meas1_ic_ia1__out = (HIL_InFloat(0xc80000 + 0xb));
+    // Generated from the component: PCC.Meas1.VA.Va1
+    _pcc_meas1_va_va1__out = (HIL_InFloat(0xc80000 + 0x2));
+    // Generated from the component: PCC.Meas1.VB.Va1
+    _pcc_meas1_vb_va1__out = (HIL_InFloat(0xc80000 + 0x3));
+    // Generated from the component: PCC.Meas1.VC.Va1
+    _pcc_meas1_vc_va1__out = (HIL_InFloat(0xc80000 + 0x4));
+    // Generated from the component: PCC.Meas2.VA.Va1
+    _pcc_meas2_va_va1__out = (HIL_InFloat(0xc80000 + 0x5));
+    // Generated from the component: PCC.Meas2.VB.Va1
+    _pcc_meas2_vb_va1__out = (HIL_InFloat(0xc80000 + 0x6));
+    // Generated from the component: PCC.Meas2.VC.Va1
+    _pcc_meas2_vc_va1__out = (HIL_InFloat(0xc80000 + 0x7));
+    // Generated from the component: PCC.PCC Measurements.Constant1
+    // Generated from the component: PCC.PCC Measurements.Constant2
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Integrator1
+    _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__out = _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Integrator2
+    _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__out = _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.Unit Delay1
+    _pcc_pcc_measurements_three_phase_pll1_unit_delay1__out = _pcc_pcc_measurements_three_phase_pll1_unit_delay1__state;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.to_Hz
+    _pcc_pcc_measurements_three_phase_pll1_to_hz__out = 0.15915494309189535 * _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__out;
+    // Generated from the component: PCC.SR Flip Flop1
+    _pcc_sr_flip_flop1__out = _pcc_sr_flip_flop1__state;
+    _pcc_sr_flip_flop1__out_n = _pcc_sr_flip_flop1__state != -1 ? !_pcc_sr_flip_flop1__state : -1;
+    // Generated from the component: Microgrid1.ESS.LPF_dc1
+    _microgrid1_ess_lpf_dc1__a_sum = 0.0f;
+    _microgrid1_ess_lpf_dc1__b_sum = 0.0f;
+    _microgrid1_ess_lpf_dc1__delay_line_in = 0.0f;
+    for (_microgrid1_ess_lpf_dc1__i = 0; _microgrid1_ess_lpf_dc1__i < 1; _microgrid1_ess_lpf_dc1__i++) {
+        _microgrid1_ess_lpf_dc1__b_sum += _microgrid1_ess_lpf_dc1__b_coeff[_microgrid1_ess_lpf_dc1__i + 1] * _microgrid1_ess_lpf_dc1__states[_microgrid1_ess_lpf_dc1__i];
+    }
+    _microgrid1_ess_lpf_dc1__a_sum += _microgrid1_ess_lpf_dc1__states[0] * _microgrid1_ess_lpf_dc1__a_coeff[1];
+    _microgrid1_ess_lpf_dc1__delay_line_in = _microgrid1_ess_idc_ia1__out - _microgrid1_ess_lpf_dc1__a_sum;
+    _microgrid1_ess_lpf_dc1__b_sum += _microgrid1_ess_lpf_dc1__b_coeff[0] * _microgrid1_ess_lpf_dc1__delay_line_in;
+    _microgrid1_ess_lpf_dc1__out = _microgrid1_ess_lpf_dc1__b_sum;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Product1
+    _microgrid1_ess_lead_acid_product1__out = (_microgrid1_ess_lead_acid_abs1__out) * 1.0 / (_microgrid1_ess_lead_acid_constant1__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Mathematical function2
+    _microgrid1_ess_lead_acid_mathematical_function2__out = pow(_microgrid1_ess_lead_acid_abs2__out, _microgrid1_ess_lead_acid_constant3__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Mathematical function3
+    _microgrid1_ess_lead_acid_mathematical_function3__out = pow(_microgrid1_ess_lead_acid_abs3__out, _microgrid1_ess_lead_acid_constant4__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Comparator1
+    if (_microgrid1_ess_lpf_dc1__out < _microgrid1_ess_lead_acid_constant9__out) {
+        _microgrid1_ess_lead_acid_comparator1__out = 0;
+    } else if (_microgrid1_ess_lpf_dc1__out > _microgrid1_ess_lead_acid_constant9__out) {
+        _microgrid1_ess_lead_acid_comparator1__out = 1;
+    } else {
+        _microgrid1_ess_lead_acid_comparator1__out = _microgrid1_ess_lead_acid_comparator1__state;
+    }
+    // Generated from the component: Microgrid1.ESS.Lead acid.Abs4
+    _microgrid1_ess_lead_acid_abs4__out = fabs(_microgrid1_ess_lead_acid_unit_delay1__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.C function1
+    _microgrid1_ess_lead_acid_c_function1__Ibat = _microgrid1_ess_lead_acid_lpf_dc__out;
+    _microgrid1_ess_lead_acid_c_function1__SOC = _microgrid1_ess_lead_acid_unit_delay1__out;
+    if (_microgrid1_ess_lead_acid_c_function1__Ibat > 0)_microgrid1_ess_lead_acid_c_function1__out = 20.73 * (_microgrid1_ess_lead_acid_c_function1__SOC - 1) / (_microgrid1_ess_lead_acid_c_function1__Ibat / 55.0 + 0.55);
+    else _microgrid1_ess_lead_acid_c_function1__out = 20.73 * (_microgrid1_ess_lead_acid_c_function1__SOC - 1) / (-_microgrid1_ess_lead_acid_c_function1__Ibat / 55.0 + 0.55);
+    // Generated from the component: Microgrid1.ESS.Lead acid.SOC
+    HIL_OutAO(0x4004, (float)_microgrid1_ess_lead_acid_unit_delay1__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Sum1
+    _microgrid1_ess_lead_acid_sum1__out = _microgrid1_ess_lead_acid_constant6__out - _microgrid1_ess_lead_acid_unit_delay1__out;
+    // Generated from the component: Microgrid1.ESS.Product1
+    _microgrid1_ess_product1__out = (_microgrid1_ess_rate_transition7_output__out * _microgrid1_ess_lpf_dc1__out);
+    // Generated from the component: Microgrid1.Inverter.Rate Transition7.Input
+    _microgrid1_inverter_rate_transition7_output__out = _microgrid1_ess_rate_transition7_output__out;
+    // Generated from the component: Microgrid1.PV.Rate Transition1.Input
+    _microgrid1_pv_rate_transition1_output__out = _microgrid1_ess_rate_transition7_output__out;
+    // Generated from the component: Microgrid1.Inverter.Rate Transition1.Input
+    _microgrid1_inverter_rate_transition1_output__out = _pcc_grid_connect__out;
+    // Generated from the component: PCC.Meas1.Bus Join2
+    _pcc_meas1_bus_join2__out[0] = _pcc_meas1_ia_ia1__out;
+    _pcc_meas1_bus_join2__out[1] = _pcc_meas1_ib_ia1__out;
+    _pcc_meas1_bus_join2__out[2] = _pcc_meas1_ic_ia1__out;
+    // Generated from the component: PCC.Meas1.Bus Join1
+    _pcc_meas1_bus_join1__out[0] = _pcc_meas1_va_va1__out;
+    _pcc_meas1_bus_join1__out[1] = _pcc_meas1_vb_va1__out;
+    _pcc_meas1_bus_join1__out[2] = _pcc_meas1_vc_va1__out;
+    // Generated from the component: PCC.Meas2.Bus Join1
+    _pcc_meas2_bus_join1__out[0] = _pcc_meas2_va_va1__out;
+    _pcc_meas2_bus_join1__out[1] = _pcc_meas2_vb_va1__out;
+    _pcc_meas2_bus_join1__out[2] = _pcc_meas2_vc_va1__out;
+    // Generated from the component: PCC.PCC Measurements.Termination4
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.sin
+    _pcc_pcc_measurements_three_phase_pll1_sin__out = sin(_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out);
+    // Generated from the component: PCC.Gain4
+    _pcc_gain4__out = 100.0 * _pcc_pcc_measurements_three_phase_pll1_to_hz__out;
+    // Generated from the component: PCC.Logical operator2
+    _pcc_logical_operator2__out = _pcc_grid_connect__out && _pcc_sr_flip_flop1__out ;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Mathematical function1
+    _microgrid1_ess_lead_acid_mathematical_function1__out = pow(_microgrid1_ess_lead_acid_product1__out, _microgrid1_ess_lead_acid_constant2__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.C function2
+    _microgrid1_ess_lead_acid_c_function2__Idc = _microgrid1_ess_lpf_dc1__out;
+    _microgrid1_ess_lead_acid_c_function2__Vbtt = _microgrid1_ess_lead_acid_unit_delay2__out;
+    _microgrid1_ess_lead_acid_c_function2__charge = _microgrid1_ess_lead_acid_comparator1__out;
+    if (_microgrid1_ess_lead_acid_c_function2__charge > 0)_microgrid1_ess_lead_acid_c_function2__Ibat = _microgrid1_ess_lead_acid_c_function2__Idc * 1000.0 / _microgrid1_ess_lead_acid_c_function2__Vbtt;
+    else _microgrid1_ess_lead_acid_c_function2__Ibat = _microgrid1_ess_lead_acid_c_function2__Idc * 1000.0 / _microgrid1_ess_lead_acid_c_function2__Vbtt;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Charging
+    HIL_OutInt32(0xf00400, _microgrid1_ess_lead_acid_comparator1__out != 0x0);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Mathematical function4
+    _microgrid1_ess_lead_acid_mathematical_function4__out = pow(_microgrid1_ess_lead_acid_abs4__out, _microgrid1_ess_lead_acid_constant5__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Mathematical function6
+    _microgrid1_ess_lead_acid_mathematical_function6__out = pow(M_E, _microgrid1_ess_lead_acid_c_function1__out);
+    // Generated from the component: Microgrid1.ESS.Lead acid.Abs5
+    _microgrid1_ess_lead_acid_abs5__out = fabs(_microgrid1_ess_lead_acid_sum1__out);
+    // Generated from the component: Microgrid1.ESS.P
+    HIL_OutAO(0x4005, (float)_microgrid1_ess_product1__out);
+    // Generated from the component: PCC.PCC Measurements.Bus Split2
+    _pcc_pcc_measurements_bus_split2__out = _pcc_meas1_bus_join2__out[0];
+    _pcc_pcc_measurements_bus_split2__out1 = _pcc_meas1_bus_join2__out[1];
+    _pcc_pcc_measurements_bus_split2__out2 = _pcc_meas1_bus_join2__out[2];
+    // Generated from the component: PCC.PCC Measurements.Bus Split1
+    _pcc_pcc_measurements_bus_split1__out = _pcc_meas1_bus_join1__out[0];
+    _pcc_pcc_measurements_bus_split1__out1 = _pcc_meas1_bus_join1__out[1];
+    _pcc_pcc_measurements_bus_split1__out2 = _pcc_meas1_bus_join1__out[2];
+    // Generated from the component: PCC.PCC Measurements.Termination5
+    // Generated from the component: PCC.Data Type Conversion1
+    _pcc_data_type_conversion1__out = (double)_pcc_logical_operator2__out;
+    // Generated from the component: PCC.S1.CTC_Wrapper
+    if (_pcc_logical_operator2__out == 0x0) {
+        HIL_OutInt32(0x8240480, 0x0);
+    }
+    else {
+        HIL_OutInt32(0x8240480, 0x1);
+    }
+    // Generated from the component: Microgrid1.ESS.Lead acid.LPF_dc
+    _microgrid1_ess_lead_acid_lpf_dc__a_sum = 0.0f;
+    _microgrid1_ess_lead_acid_lpf_dc__b_sum = 0.0f;
+    _microgrid1_ess_lead_acid_lpf_dc__delay_line_in = 0.0f;
+    for (_microgrid1_ess_lead_acid_lpf_dc__i = 0; _microgrid1_ess_lead_acid_lpf_dc__i < 1; _microgrid1_ess_lead_acid_lpf_dc__i++) {
+        _microgrid1_ess_lead_acid_lpf_dc__b_sum += _microgrid1_ess_lead_acid_lpf_dc__b_coeff[_microgrid1_ess_lead_acid_lpf_dc__i + 1] * _microgrid1_ess_lead_acid_lpf_dc__states[_microgrid1_ess_lead_acid_lpf_dc__i];
+    }
+    _microgrid1_ess_lead_acid_lpf_dc__a_sum += _microgrid1_ess_lead_acid_lpf_dc__states[0] * _microgrid1_ess_lead_acid_lpf_dc__a_coeff[1];
+    _microgrid1_ess_lead_acid_lpf_dc__delay_line_in = _microgrid1_ess_lead_acid_c_function2__Ibat - _microgrid1_ess_lead_acid_lpf_dc__a_sum;
+    _microgrid1_ess_lead_acid_lpf_dc__b_sum += _microgrid1_ess_lead_acid_lpf_dc__b_coeff[0] * _microgrid1_ess_lead_acid_lpf_dc__delay_line_in;
+    _microgrid1_ess_lead_acid_lpf_dc__out = _microgrid1_ess_lead_acid_lpf_dc__b_sum;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Sum2
+    _microgrid1_ess_lead_acid_sum2__out = _microgrid1_ess_lead_acid_constant8__out - _microgrid1_ess_lead_acid_mathematical_function6__out;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Mathematical function5
+    _microgrid1_ess_lead_acid_mathematical_function5__out = pow(_microgrid1_ess_lead_acid_abs5__out, _microgrid1_ess_lead_acid_constant7__out);
+    // Generated from the component: PCC.PCC Measurements.Power Meter1
+    _pcc_pcc_measurements_power_meter1__v_alpha = SQRT_2OVER3 * ( _pcc_pcc_measurements_bus_split1__out - 0.5f * _pcc_pcc_measurements_bus_split1__out1 - 0.5f * _pcc_pcc_measurements_bus_split1__out2);
+    _pcc_pcc_measurements_power_meter1__v_beta = SQRT_2OVER3 * (SQRT3_OVER_2 * _pcc_pcc_measurements_bus_split1__out1 - SQRT3_OVER_2 * _pcc_pcc_measurements_bus_split1__out2);
+    _pcc_pcc_measurements_power_meter1__i_alpha = SQRT_2OVER3 * ( _pcc_pcc_measurements_bus_split2__out - 0.5f * _pcc_pcc_measurements_bus_split2__out1 - 0.5f * _pcc_pcc_measurements_bus_split2__out2);
+    _pcc_pcc_measurements_power_meter1__i_beta = SQRT_2OVER3 * (SQRT3_OVER_2 * _pcc_pcc_measurements_bus_split2__out1 - SQRT3_OVER_2 * _pcc_pcc_measurements_bus_split2__out2);
+    _pcc_pcc_measurements_power_meter1__v_zero = ONE_DIV_BY_SQRT_3 * (_pcc_pcc_measurements_bus_split1__out + _pcc_pcc_measurements_bus_split1__out1 + _pcc_pcc_measurements_bus_split1__out2);
+    _pcc_pcc_measurements_power_meter1__i_zero = ONE_DIV_BY_SQRT_3 * (_pcc_pcc_measurements_bus_split2__out + _pcc_pcc_measurements_bus_split2__out1 + _pcc_pcc_measurements_bus_split2__out2);
+    _pcc_pcc_measurements_power_meter1__Pac = _pcc_pcc_measurements_power_meter1__v_alpha * _pcc_pcc_measurements_power_meter1__i_alpha + _pcc_pcc_measurements_power_meter1__v_beta * _pcc_pcc_measurements_power_meter1__i_beta;
+    _pcc_pcc_measurements_power_meter1__Qac = _pcc_pcc_measurements_power_meter1__v_beta * _pcc_pcc_measurements_power_meter1__i_alpha - _pcc_pcc_measurements_power_meter1__v_alpha * _pcc_pcc_measurements_power_meter1__i_beta;
+    _pcc_pcc_measurements_power_meter1__P0ac = _pcc_pcc_measurements_power_meter1__v_zero * _pcc_pcc_measurements_power_meter1__i_zero;
+    _pcc_pcc_measurements_power_meter1__filter_1_output = 0.08613019954354689 * (_pcc_pcc_measurements_power_meter1__Pac + _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1) - (-0.8277396009129062) * _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1;
+    _pcc_pcc_measurements_power_meter1__filter_1_outputQ = 0.08613019954354689 * (_pcc_pcc_measurements_power_meter1__Qac + _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1Q) - (-0.8277396009129062) * _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1Q;
+    _pcc_pcc_measurements_power_meter1__filter_1_outputP0 = 0.08613019954354689 * (_pcc_pcc_measurements_power_meter1__P0ac + _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1P0) - (-0.8277396009129062) * _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1P0;
+    _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1 = _pcc_pcc_measurements_power_meter1__Pac;
+    _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1 = _pcc_pcc_measurements_power_meter1__filter_1_output;
+    _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1Q = _pcc_pcc_measurements_power_meter1__Qac;;
+    _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1Q = _pcc_pcc_measurements_power_meter1__filter_1_outputQ;
+    _pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1P0 = _pcc_pcc_measurements_power_meter1__P0ac;
+    _pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1P0 = _pcc_pcc_measurements_power_meter1__filter_1_outputP0;
+    _pcc_pcc_measurements_power_meter1__Pdc = _pcc_pcc_measurements_power_meter1__filter_1_output;
+    _pcc_pcc_measurements_power_meter1__Qdc = _pcc_pcc_measurements_power_meter1__filter_1_outputQ;
+    _pcc_pcc_measurements_power_meter1__P0dc = _pcc_pcc_measurements_power_meter1__filter_1_outputP0;
+    _pcc_pcc_measurements_power_meter1__apparent = sqrt(pow(_pcc_pcc_measurements_power_meter1__Pdc, 2) + pow(_pcc_pcc_measurements_power_meter1__Qdc, 2));
+    if (_pcc_pcc_measurements_power_meter1__apparent > 0)
+        _pcc_pcc_measurements_power_meter1__k_factor = _pcc_pcc_measurements_power_meter1__Pdc / _pcc_pcc_measurements_power_meter1__apparent;
+    else
+        _pcc_pcc_measurements_power_meter1__k_factor = 0;
+    // Generated from the component: PCC.PCC Measurements.RMS value1
+    _pcc_pcc_measurements_rms_value1__previous_filtered_value = _pcc_pcc_measurements_rms_value1__filtered_value;
+    _pcc_pcc_measurements_rms_value1__filtered_value = _pcc_pcc_measurements_rms_value1__previous_filtered_value * 0.1 + _pcc_pcc_measurements_bus_split1__out * 0.9;
+    if( (_pcc_pcc_measurements_rms_value1__filtered_value >= 0.0) && (_pcc_pcc_measurements_rms_value1__previous_filtered_value < 0.0) )
+        _pcc_pcc_measurements_rms_value1__zc = 1;
+    else
+        _pcc_pcc_measurements_rms_value1__zc = 0;
+    _pcc_pcc_measurements_rms_value1__out = _pcc_pcc_measurements_rms_value1__out_state;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.abc to dq.abc to alpha beta
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__alpha = (2.0 * _pcc_pcc_measurements_bus_split1__out - _pcc_pcc_measurements_bus_split1__out1 - _pcc_pcc_measurements_bus_split1__out2) * 0.3333333333333333;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__beta = (_pcc_pcc_measurements_bus_split1__out1 - _pcc_pcc_measurements_bus_split1__out2) * 0.5773502691896258;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__gamma = (_pcc_pcc_measurements_bus_split1__out + _pcc_pcc_measurements_bus_split1__out1 + _pcc_pcc_measurements_bus_split1__out2) * 0.3333333333333333;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Bus Join1
+    _microgrid1_ess_lead_acid_bus_join1__out[0] = _microgrid1_ess_lead_acid_mathematical_function1__out;
+    _microgrid1_ess_lead_acid_bus_join1__out[1] = _microgrid1_ess_lead_acid_mathematical_function2__out;
+    _microgrid1_ess_lead_acid_bus_join1__out[2] = _microgrid1_ess_lead_acid_mathematical_function5__out;
+    _microgrid1_ess_lead_acid_bus_join1__out[3] = _microgrid1_ess_lead_acid_abs3__out;
+    _microgrid1_ess_lead_acid_bus_join1__out[4] = _microgrid1_ess_lead_acid_mathematical_function3__out;
+    _microgrid1_ess_lead_acid_bus_join1__out[5] = _microgrid1_ess_lead_acid_mathematical_function4__out;
+    // Generated from the component: PCC.P
+    HIL_OutAO(0x403d, (float)_pcc_pcc_measurements_power_meter1__Pdc);
+    // Generated from the component: PCC.PCC Measurements.Comparator1
+    if (_pcc_pcc_measurements_power_meter1__Pdc < _pcc_pcc_measurements_constant1__out) {
+        _pcc_pcc_measurements_comparator1__out = 0;
+    } else if (_pcc_pcc_measurements_power_meter1__Pdc > _pcc_pcc_measurements_constant1__out) {
+        _pcc_pcc_measurements_comparator1__out = 1;
+    } else {
+        _pcc_pcc_measurements_comparator1__out = _pcc_pcc_measurements_comparator1__state;
+    }
+    // Generated from the component: PCC.PCC Measurements.Comparator2
+    if (_pcc_pcc_measurements_power_meter1__k_factor < _pcc_pcc_measurements_constant2__out) {
+        _pcc_pcc_measurements_comparator2__out = 0;
+    } else if (_pcc_pcc_measurements_power_meter1__k_factor > _pcc_pcc_measurements_constant2__out) {
+        _pcc_pcc_measurements_comparator2__out = 1;
+    } else {
+        _pcc_pcc_measurements_comparator2__out = _pcc_pcc_measurements_comparator2__state;
+    }
+    // Generated from the component: PCC.PCC Measurements.Termination6
+    // Generated from the component: PCC.PCC Measurements.Termination7
+    // Generated from the component: PCC.PCC Measurements.Termination8
+    // Generated from the component: PCC.Q
+    HIL_OutAO(0x403e, (float)_pcc_pcc_measurements_power_meter1__Qdc);
+    // Generated from the component: PCC.W -> kW
+    _pcc_w____kw__out = 0.001 * _pcc_pcc_measurements_power_meter1__Pdc;
+    // Generated from the component: PCC.var -> kvar
+    _pcc_var____kvar__out = 0.001 * _pcc_pcc_measurements_power_meter1__Qdc;
+    // Generated from the component: PCC.Gain3
+    _pcc_gain3__out = 100.0 * _pcc_pcc_measurements_rms_value1__out;
+    // Generated from the component: PCC.PCC Measurements.Termination3
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.abc to dq.alpha beta to dq
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k1 = cos(_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out);
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k2 = sin(_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out);
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__d = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k2 * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__alpha - _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k1 * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__beta;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__q = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k1 * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__alpha + _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__k2 * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_abc_to_alpha_beta__beta;
+    // Generated from the component: Microgrid1.ESS.Lead acid.C function
+    _microgrid1_ess_lead_acid_c_function__Ceff = _microgrid1_ess_lead_acid_sum2__out;
+    _microgrid1_ess_lead_acid_c_function__Ibat = _microgrid1_ess_lead_acid_lpf_dc__out;
+    _microgrid1_ess_lead_acid_c_function__charge = _microgrid1_ess_lead_acid_comparator1__out;
+    _microgrid1_ess_lead_acid_c_function__x[0] = _microgrid1_ess_lead_acid_bus_join1__out[0];
+    _microgrid1_ess_lead_acid_c_function__x[1] = _microgrid1_ess_lead_acid_bus_join1__out[1];
+    _microgrid1_ess_lead_acid_c_function__x[2] = _microgrid1_ess_lead_acid_bus_join1__out[2];
+    _microgrid1_ess_lead_acid_c_function__x[3] = _microgrid1_ess_lead_acid_bus_join1__out[3];
+    _microgrid1_ess_lead_acid_c_function__x[4] = _microgrid1_ess_lead_acid_bus_join1__out[4];
+    _microgrid1_ess_lead_acid_c_function__x[5] = _microgrid1_ess_lead_acid_bus_join1__out[5];
+    if (_microgrid1_ess_lead_acid_c_function__Ibat > 0) {
+        _microgrid1_ess_lead_acid_c_function__Vbat = 20.0 * (2 + 0.16 * _microgrid1_ess_lead_acid_c_function__SOC) + 20.0 * _microgrid1_ess_lead_acid_c_function__Ibat / 550.0 * (6 / (1 + _microgrid1_ess_lead_acid_c_function__x[1]) + 0.48 / _microgrid1_ess_lead_acid_c_function__x[2] + 0.036) * (1 - 0.025 * (30.0 - 25));
+        _microgrid1_ess_lead_acid_c_function__SOC = _microgrid1_ess_lead_acid_c_function__SOC + (_microgrid1_ess_lead_acid_c_function__Ibat / _microgrid1_ess_lead_acid_c_function__Cbat) * 1e-3 / 3600.0;
+    }
+    else {
+        _microgrid1_ess_lead_acid_c_function__Vbat = 20.0 * (1.965 + 0.12 * _microgrid1_ess_lead_acid_c_function__SOC) - 20.0 * _microgrid1_ess_lead_acid_c_function__x[3] / 550.0 * (4 / (1 + _microgrid1_ess_lead_acid_c_function__x[4]) + 0.27 / _microgrid1_ess_lead_acid_c_function__x[5] + 0.02) * (1 - 0.007 * (30.0 - 25));
+        _microgrid1_ess_lead_acid_c_function__SOC = _microgrid1_ess_lead_acid_c_function__SOC + (_microgrid1_ess_lead_acid_c_function__Ibat / _microgrid1_ess_lead_acid_c_function__Cbat) * 1e-3 / 3600.0;
+    }
+    if (_microgrid1_ess_lead_acid_c_function__SOC < 0.001)_microgrid1_ess_lead_acid_c_function__SOC = 0.001;
+    if (_microgrid1_ess_lead_acid_c_function__SOC > 1)_microgrid1_ess_lead_acid_c_function__SOC = 1;
+    if (_microgrid1_ess_lead_acid_c_function__Vbat < 1)_microgrid1_ess_lead_acid_c_function__Vbat = 1;
+    if (_microgrid1_ess_lead_acid_c_function__Vbat > 1.5e3)_microgrid1_ess_lead_acid_c_function__Vbat = 1.5e3;
+    _microgrid1_ess_lead_acid_c_function__Vbtt = _microgrid1_ess_lead_acid_c_function__Vbat + 0.01 * _microgrid1_ess_lead_acid_c_function__Ibat;
+    if (_microgrid1_ess_lead_acid_c_function__charge > 0)_microgrid1_ess_lead_acid_c_function__Vdc = 1000.0;
+    else _microgrid1_ess_lead_acid_c_function__Vdc = 1000.0;
+    // Generated from the component: PCC.Gain1
+    _pcc_gain1__out = 10.0 * _pcc_w____kw__out;
+    // Generated from the component: PCC.Gain2
+    _pcc_gain2__out = 10.0 * _pcc_var____kvar__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_d
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum = 0.0f;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum = 0.0f;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in = 0.0f;
+    for (_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
+        _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum += _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i + 1] * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i];
+    }
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum += _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[0] * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_coeff[1];
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in = (_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__d - _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum) / _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_coeff[0];
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum += _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[0] * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__out = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_q
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum = 0.0f;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum = 0.0f;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in = 0.0f;
+    for (_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
+        _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum += _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_coeff[_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i + 1] * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i];
+    }
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum += _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[0] * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_coeff[1];
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in = (_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_alpha_beta_to_dq__q - _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum) / _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_coeff[0];
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum += _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_coeff[0] * _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in;
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__out = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum;
+    // Generated from the component: Microgrid1.ESS.LPF_dc2
+    _microgrid1_ess_lpf_dc2__a_sum = 0.0f;
+    _microgrid1_ess_lpf_dc2__b_sum = 0.0f;
+    _microgrid1_ess_lpf_dc2__delay_line_in = 0.0f;
+    for (_microgrid1_ess_lpf_dc2__i = 0; _microgrid1_ess_lpf_dc2__i < 1; _microgrid1_ess_lpf_dc2__i++) {
+        _microgrid1_ess_lpf_dc2__b_sum += _microgrid1_ess_lpf_dc2__b_coeff[_microgrid1_ess_lpf_dc2__i + 1] * _microgrid1_ess_lpf_dc2__states[_microgrid1_ess_lpf_dc2__i];
+    }
+    _microgrid1_ess_lpf_dc2__a_sum += _microgrid1_ess_lpf_dc2__states[0] * _microgrid1_ess_lpf_dc2__a_coeff[1];
+    _microgrid1_ess_lpf_dc2__delay_line_in = _microgrid1_ess_lead_acid_c_function__Vdc - _microgrid1_ess_lpf_dc2__a_sum;
+    _microgrid1_ess_lpf_dc2__b_sum += _microgrid1_ess_lpf_dc2__b_coeff[0] * _microgrid1_ess_lpf_dc2__delay_line_in;
+    _microgrid1_ess_lpf_dc2__out = _microgrid1_ess_lpf_dc2__b_sum;
+    // Generated from the component: Microgrid1.ESS.Lead acid.LPF_dc1
+    _microgrid1_ess_lead_acid_lpf_dc1__a_sum = 0.0f;
+    _microgrid1_ess_lead_acid_lpf_dc1__b_sum = 0.0f;
+    _microgrid1_ess_lead_acid_lpf_dc1__delay_line_in = 0.0f;
+    for (_microgrid1_ess_lead_acid_lpf_dc1__i = 0; _microgrid1_ess_lead_acid_lpf_dc1__i < 1; _microgrid1_ess_lead_acid_lpf_dc1__i++) {
+        _microgrid1_ess_lead_acid_lpf_dc1__b_sum += _microgrid1_ess_lead_acid_lpf_dc1__b_coeff[_microgrid1_ess_lead_acid_lpf_dc1__i + 1] * _microgrid1_ess_lead_acid_lpf_dc1__states[_microgrid1_ess_lead_acid_lpf_dc1__i];
+    }
+    _microgrid1_ess_lead_acid_lpf_dc1__a_sum += _microgrid1_ess_lead_acid_lpf_dc1__states[0] * _microgrid1_ess_lead_acid_lpf_dc1__a_coeff[1];
+    _microgrid1_ess_lead_acid_lpf_dc1__delay_line_in = _microgrid1_ess_lead_acid_c_function__Vbtt - _microgrid1_ess_lead_acid_lpf_dc1__a_sum;
+    _microgrid1_ess_lead_acid_lpf_dc1__b_sum += _microgrid1_ess_lead_acid_lpf_dc1__b_coeff[0] * _microgrid1_ess_lead_acid_lpf_dc1__delay_line_in;
+    _microgrid1_ess_lead_acid_lpf_dc1__out = _microgrid1_ess_lead_acid_lpf_dc1__b_sum;
+    // Generated from the component: Microgrid1.ESS.Vess.Vs1
+    HIL_OutFloat(141295616, (float) _microgrid1_ess_lead_acid_c_function__Vdc);
+    // Generated from the component: PCC.PCC Measurements.Termination1
+    // Generated from the component: PCC.PCC Measurements.Termination2
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.normalize
+    _pcc_pcc_measurements_three_phase_pll1_normalize__in1 = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__out;
+    _pcc_pcc_measurements_three_phase_pll1_normalize__in2 = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__out;
+    _pcc_pcc_measurements_three_phase_pll1_normalize__pk = (powf(_pcc_pcc_measurements_three_phase_pll1_normalize__in1, 2.0) + powf(_pcc_pcc_measurements_three_phase_pll1_normalize__in2, 2.0));
+    _pcc_pcc_measurements_three_phase_pll1_normalize__pk = sqrt(_pcc_pcc_measurements_three_phase_pll1_normalize__pk);
+    if (_pcc_pcc_measurements_three_phase_pll1_normalize__pk < 0.1) {
+        _pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu = _pcc_pcc_measurements_three_phase_pll1_normalize__in2 / 0.1;
+    }
+    else {
+        _pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu = _pcc_pcc_measurements_three_phase_pll1_normalize__in2 / _pcc_pcc_measurements_three_phase_pll1_normalize__pk;
+    }
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Kd
+    _pcc_pcc_measurements_three_phase_pll1_pid_kd__out = 1.0 * _pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Ki
+    _pcc_pcc_measurements_three_phase_pll1_pid_ki__out = 3200.0 * _pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Kp
+    _pcc_pcc_measurements_three_phase_pll1_pid_kp__out = 100.0 * _pcc_pcc_measurements_three_phase_pll1_normalize__in2_pu;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.term_pk
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Sum8
+    _pcc_pcc_measurements_three_phase_pll1_pid_sum8__out = _pcc_pcc_measurements_three_phase_pll1_pid_kd__out - _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Gain1
+    _pcc_pcc_measurements_three_phase_pll1_pid_gain1__out = 714.2857 * _pcc_pcc_measurements_three_phase_pll1_pid_sum8__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Sum5
+    _pcc_pcc_measurements_three_phase_pll1_pid_sum5__out = _pcc_pcc_measurements_three_phase_pll1_pid_kp__out + _pcc_pcc_measurements_three_phase_pll1_pid_gain1__out + _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Limit1
+    if (_pcc_pcc_measurements_three_phase_pll1_pid_sum5__out > 10000.0) {
+        _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out = 10000.0;
+    } else if (_pcc_pcc_measurements_three_phase_pll1_pid_sum5__out < -10000.0) {
+        _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out = -10000.0;
+    } else {
+        _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out = _pcc_pcc_measurements_three_phase_pll1_pid_sum5__out;
+    }
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Sum6
+    _pcc_pcc_measurements_three_phase_pll1_pid_sum6__out =  - _pcc_pcc_measurements_three_phase_pll1_pid_sum5__out + _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.Rate Limiter1
+    if (_pcc_pcc_measurements_three_phase_pll1_rate_limiter1__first_step) {
+        _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out = _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
+    } else {
+        _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out = _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
+        _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__in_rate = _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out - _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__prev_out;
+        if (_pcc_pcc_measurements_three_phase_pll1_rate_limiter1__in_rate > 0.07539822368615504) {
+            _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out = _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__prev_out + (0.07539822368615504);
+        }
+        if (_pcc_pcc_measurements_three_phase_pll1_rate_limiter1__in_rate < -0.07539822368615504) {
+            _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out = _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__prev_out + (-0.07539822368615504);
+        }
+    }
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.integrator
+    _pcc_pcc_measurements_three_phase_pll1_integrator__in = _pcc_pcc_measurements_three_phase_pll1_pid_limit1__out;
+    _pcc_pcc_measurements_three_phase_pll1_integrator__out += 0.001 * _pcc_pcc_measurements_three_phase_pll1_integrator__in;
+    if (_pcc_pcc_measurements_three_phase_pll1_integrator__in >= 0.0) {
+        if (_pcc_pcc_measurements_three_phase_pll1_integrator__out >= 6.283185307179586) {
+            _pcc_pcc_measurements_three_phase_pll1_integrator__out -= 6.283185307179586;
+        }
+    }
+    else {
+        if (_pcc_pcc_measurements_three_phase_pll1_integrator__out <= -6.283185307179586) {
+            _pcc_pcc_measurements_three_phase_pll1_integrator__out += 6.283185307179586;
+        }
+    }
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Kb
+    _pcc_pcc_measurements_three_phase_pll1_pid_kb__out = 1.0 * _pcc_pcc_measurements_three_phase_pll1_pid_sum6__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.LPF.LPF
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum = 0.0f;
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum = 0.0f;
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in = 0.0f;
+    for (_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 0; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i < 1; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i++) {
+        _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum += _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_coeff[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] * _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i + 1];
+    }
+    for (_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 1; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i > 0; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i--) {
+        _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum += _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_coeff[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i + 1] * _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i];
+    }
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum += _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[0] * _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_coeff[1];
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in = _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out - _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum;
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__out = _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Sum7
+    _pcc_pcc_measurements_three_phase_pll1_pid_sum7__out = _pcc_pcc_measurements_three_phase_pll1_pid_ki__out + _pcc_pcc_measurements_three_phase_pll1_pid_kb__out;
+    //@cmp.out.block.end
+    //////////////////////////////////////////////////////////////////////////
+    // Update block
+    //////////////////////////////////////////////////////////////////////////
+    //@cmp.update.block.start
+    // Generated from the component: Microgrid1.ESS.Lead acid.Unit Delay1
+    _microgrid1_ess_lead_acid_unit_delay1__state = _microgrid1_ess_lead_acid_c_function__SOC;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Unit Delay2
+    _microgrid1_ess_lead_acid_unit_delay2__state = _microgrid1_ess_lead_acid_lpf_dc1__out;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Integrator1
+    _pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state += _pcc_pcc_measurements_three_phase_pll1_pid_sum7__out * 0.001;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.PID.Integrator2
+    _pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state += _pcc_pcc_measurements_three_phase_pll1_pid_gain1__out * 0.001;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.Unit Delay1
+    _pcc_pcc_measurements_three_phase_pll1_unit_delay1__state = _pcc_pcc_measurements_three_phase_pll1_integrator__out;
+    // Generated from the component: PCC.SR Flip Flop1
+    if ((_pcc_digital_input_close__out != 0x0) && (_pcc_digital_input_trip__out == 0x0))
+        _pcc_sr_flip_flop1__state = 1;
+    else if ((_pcc_digital_input_close__out == 0x0) && (_pcc_digital_input_trip__out != 0x0))
+        _pcc_sr_flip_flop1__state = 0;
+    else if ((_pcc_digital_input_close__out != 0x0) && (_pcc_digital_input_trip__out != 0x0))
+        _pcc_sr_flip_flop1__state = -1;
+    // Generated from the component: Microgrid1.ESS.LPF_dc1
+    _microgrid1_ess_lpf_dc1__states[0] = _microgrid1_ess_lpf_dc1__delay_line_in;
+    // Generated from the component: Microgrid1.ESS.Lead acid.Comparator1
+    if (_microgrid1_ess_lpf_dc1__out < _microgrid1_ess_lead_acid_constant9__out) {
+        _microgrid1_ess_lead_acid_comparator1__state = 0;
+    } else if (_microgrid1_ess_lpf_dc1__out > _microgrid1_ess_lead_acid_constant9__out) {
+        _microgrid1_ess_lead_acid_comparator1__state = 1;
+    }
+    // Generated from the component: Microgrid1.ESS.Lead acid.C function1
+    // Generated from the component: Microgrid1.ESS.Lead acid.C function2
+    // Generated from the component: Microgrid1.ESS.Lead acid.LPF_dc
+    _microgrid1_ess_lead_acid_lpf_dc__states[0] = _microgrid1_ess_lead_acid_lpf_dc__delay_line_in;
+    // Generated from the component: PCC.PCC Measurements.RMS value1
+    if( _pcc_pcc_measurements_rms_value1__zc ) {
+        if (_pcc_pcc_measurements_bus_split1__out != _pcc_pcc_measurements_rms_value1__previous_value)
+            _pcc_pcc_measurements_rms_value1__correction = - _pcc_pcc_measurements_rms_value1__previous_value / (_pcc_pcc_measurements_bus_split1__out - _pcc_pcc_measurements_rms_value1__previous_value);
+        if (_pcc_pcc_measurements_rms_value1__correction < 0)
+            _pcc_pcc_measurements_rms_value1__correction = 0;
+        else
+            _pcc_pcc_measurements_rms_value1__correction = 0;
+        _pcc_pcc_measurements_rms_value1__sample_cnt += _pcc_pcc_measurements_rms_value1__correction - _pcc_pcc_measurements_rms_value1__previous_correction;
+        _pcc_pcc_measurements_rms_value1__out_state = sqrt(_pcc_pcc_measurements_rms_value1__square_sum / _pcc_pcc_measurements_rms_value1__sample_cnt);
+        _pcc_pcc_measurements_rms_value1__sample_cnt = 0;
+        _pcc_pcc_measurements_rms_value1__previous_correction = _pcc_pcc_measurements_rms_value1__correction;
+        _pcc_pcc_measurements_rms_value1__square_sum = 0;
+    } else if ( _pcc_pcc_measurements_rms_value1__sample_cnt >= 500 ) {
+        _pcc_pcc_measurements_rms_value1__out_state = sqrt(_pcc_pcc_measurements_rms_value1__square_sum / _pcc_pcc_measurements_rms_value1__sample_cnt);
+        _pcc_pcc_measurements_rms_value1__sample_cnt = 0;
+        _pcc_pcc_measurements_rms_value1__square_sum = 0;
+    }
+    _pcc_pcc_measurements_rms_value1__previous_value = _pcc_pcc_measurements_bus_split1__out;
+    _pcc_pcc_measurements_rms_value1__square_sum += _pcc_pcc_measurements_bus_split1__out * _pcc_pcc_measurements_bus_split1__out;
+    _pcc_pcc_measurements_rms_value1__sample_cnt ++;
+    // Generated from the component: PCC.PCC Measurements.Comparator1
+    if (_pcc_pcc_measurements_power_meter1__Pdc < _pcc_pcc_measurements_constant1__out) {
+        _pcc_pcc_measurements_comparator1__state = 0;
+    } else if (_pcc_pcc_measurements_power_meter1__Pdc > _pcc_pcc_measurements_constant1__out) {
+        _pcc_pcc_measurements_comparator1__state = 1;
+    }
+    // Generated from the component: PCC.PCC Measurements.Comparator2
+    if (_pcc_pcc_measurements_power_meter1__k_factor < _pcc_pcc_measurements_constant2__out) {
+        _pcc_pcc_measurements_comparator2__state = 0;
+    } else if (_pcc_pcc_measurements_power_meter1__k_factor > _pcc_pcc_measurements_constant2__out) {
+        _pcc_pcc_measurements_comparator2__state = 1;
+    }
+    // Generated from the component: Microgrid1.ESS.Lead acid.C function
+    _microgrid1_ess_lead_acid_c_function__Cbat = 1.67 * 550.0 * (1 + 0.005 * (30.0 - 25)) / (1 + 0.67 * _microgrid1_ess_lead_acid_c_function__x[0]);
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_d
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[0] = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_q
+    _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[0] = _pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in;
+    // Generated from the component: Microgrid1.ESS.LPF_dc2
+    _microgrid1_ess_lpf_dc2__states[0] = _microgrid1_ess_lpf_dc2__delay_line_in;
+    // Generated from the component: Microgrid1.ESS.Lead acid.LPF_dc1
+    _microgrid1_ess_lead_acid_lpf_dc1__states[0] = _microgrid1_ess_lead_acid_lpf_dc1__delay_line_in;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.normalize
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.Rate Limiter1
+    _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__prev_out = _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__out;
+    _pcc_pcc_measurements_three_phase_pll1_rate_limiter1__first_step = 0;
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.integrator
+    // Generated from the component: PCC.PCC Measurements.Three phase PLL1.LPF.LPF
+    for (_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 1; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i > 0; _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i--) {
+        _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] = _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i - 1];
+    }
+    _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[0] = _pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in;
+    //@cmp.update.block.end
+}
+void TimerCounterHandler_2_user_sp_cpu_dev0() {
+#if DEBUG_MODE
+    printf("\n\rTimerCounterHandler_2");
+#endif
+    //////////////////////////////////////////////////////////////////////////
+    // Output block
+    //////////////////////////////////////////////////////////////////////////
+    //@cmp.out.block.start
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Connect INV
+    _microgrid1_inverter_be1_25a_synchronizer_connect_inv__out = XIo_InInt32(0x55000100);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition12.Output
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition2.Output
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition4.Output
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Rate Transition6.Output
+    // Generated from the component: Microgrid1.Inverter.C function3
+    if (_microgrid1_inverter_c_function3__k > 9)_microgrid1_inverter_c_function3__k = 0;
+    if (_microgrid1_inverter_c_function3__t > 4)_microgrid1_inverter_c_function3__t = 0;
+    if (_microgrid1_inverter_c_function3__k == 0) {
+        _microgrid1_inverter_c_function3__Pref = 0;
+        _microgrid1_inverter_c_function3__Qref = 0;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 1) {
+        _microgrid1_inverter_c_function3__Pref = 2;
+        _microgrid1_inverter_c_function3__Qref = 1.5;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 2) {
+        _microgrid1_inverter_c_function3__Pref = 3;
+        _microgrid1_inverter_c_function3__Qref = 1.2;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 3) {
+        _microgrid1_inverter_c_function3__Pref = 10;
+        _microgrid1_inverter_c_function3__Qref = 1;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 4) {
+        _microgrid1_inverter_c_function3__Pref = 5;
+        _microgrid1_inverter_c_function3__Qref = 2;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 5) {
+        _microgrid1_inverter_c_function3__Pref = 4;
+        _microgrid1_inverter_c_function3__Qref = 2.6;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 6) {
+        _microgrid1_inverter_c_function3__Pref = 3.2;
+        _microgrid1_inverter_c_function3__Qref = 1.4;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 7) {
+        _microgrid1_inverter_c_function3__Pref = 1.4;
+        _microgrid1_inverter_c_function3__Qref = 3;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 8) {
+        _microgrid1_inverter_c_function3__Pref = 5.6;
+        _microgrid1_inverter_c_function3__Qref = 2.6;
+    }
+    else if (_microgrid1_inverter_c_function3__k == 9) {
+        _microgrid1_inverter_c_function3__Pref = 7;
+        _microgrid1_inverter_c_function3__Qref = 4;
+    }
+    if (_microgrid1_inverter_c_function3__t >= 4)_microgrid1_inverter_c_function3__k += 1;
+    _microgrid1_inverter_c_function3__t += 1;
+    // Generated from the component: Microgrid1.Inverter.Gain19
+    _microgrid1_inverter_gain19__out = 1000.0 * _microgrid1_inverter_c_function3__Pref;
+    // Generated from the component: Microgrid1.Inverter.Gain20
+    _microgrid1_inverter_gain20__out = 1000.0 * _microgrid1_inverter_c_function3__Qref;
+    // Generated from the component: Microgrid1.Inverter.INV_sync
+    _microgrid1_inverter_inv_sync__out = XIo_InInt32(0x5500010c);
+    // Generated from the component: Microgrid1.Inverter.Rate Transition10.Input
+    _microgrid1_inverter_rate_transition10_output__out = _microgrid1_inverter_c_function3__Qref;
+    // Generated from the component: Microgrid1.Inverter.Rate Transition9.Input
+    _microgrid1_inverter_rate_transition9_output__out = _microgrid1_inverter_c_function3__Pref;
+    // Generated from the component: Microgrid1.PV.Constant14
+    // Generated from the component: Microgrid1.PV.Rate Transition1.Output
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Clock1
+    _microgrid1_pv_solar_irradiance_clock1__out = _microgrid1_pv_solar_irradiance_clock1__state;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Constant14
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Constant15
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Constant17
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Rate Transition3.Output
+    // Generated from the component: Microgrid1.PV.Solar irradiance.ang_t
+    _microgrid1_pv_solar_irradiance_ang_t__out = XIo_InFloat(0x55000114);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.stay connected1
+    _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connectINV = _microgrid1_inverter_be1_25a_synchronizer_connect_inv__out;
+    _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__ready = _microgrid1_inverter_be1_25a_synchronizer_rate_transition12_output__out;
+    _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out = _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connect;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.BE1-25A Synchronizer
+    _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng = _microgrid1_inverter_be1_25a_synchronizer_rate_transition2_output__out;
+    _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__df = _microgrid1_inverter_be1_25a_synchronizer_rate_transition4_output__out;
+    if (_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng > 3.14159265359)_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng -= 2 * 3.14159265359;
+    if (_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng < -3.14159265359)_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng += 2 * 3.14159265359;
+    _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w = 0.01 * _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__dAng / 1.0 + _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__df;
+    if (_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w > 0.1)_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w = 0.1;
+    else if (_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w < -0.1)_microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w = -0.1;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.BE1-25A Synchronizer1
+    _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer1__dV = _microgrid1_inverter_be1_25a_synchronizer_rate_transition6_output__out;
+    _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer1__del_V = 0.01 * _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer1__dV;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.volt_diff3
+    HIL_OutAO(0x4015, (float)_microgrid1_inverter_be1_25a_synchronizer_rate_transition6_output__out);
+    // Generated from the component: Microgrid1.Inverter.Pref
+    HIL_OutAO(0x4035, (float)_microgrid1_inverter_gain19__out);
+    // Generated from the component: Microgrid1.Inverter.Qref
+    HIL_OutAO(0x4038, (float)_microgrid1_inverter_gain20__out);
+    // Generated from the component: Microgrid1.Inverter.INV_sync ON
+    HIL_OutInt32(0xf00407, _microgrid1_inverter_inv_sync__out != 0x0);
+    // Generated from the component: Microgrid1.Inverter.Logical operator1
+    _microgrid1_inverter_logical_operator1__out = !_microgrid1_inverter_inv_sync__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.C function4
+    _microgrid1_pv_solar_irradiance_c_function4__clk = _microgrid1_pv_solar_irradiance_clock1__out;
+    if (_microgrid1_pv_solar_irradiance_c_function4__clk < 1800) {
+        _microgrid1_pv_solar_irradiance_c_function4__GHI = 300;
+        _microgrid1_pv_solar_irradiance_c_function4__ETR = 330;
+        _microgrid1_pv_solar_irradiance_c_function4__ang_z = 2.5;
+    }
+    else if (_microgrid1_pv_solar_irradiance_c_function4__clk < 3600) {
+        _microgrid1_pv_solar_irradiance_c_function4__GHI = 330;
+        _microgrid1_pv_solar_irradiance_c_function4__ETR = 393;
+        _microgrid1_pv_solar_irradiance_c_function4__ang_z = 2.4;
+    }
+    else if (_microgrid1_pv_solar_irradiance_c_function4__clk < 5400) {
+        _microgrid1_pv_solar_irradiance_c_function4__GHI = 399;
+        _microgrid1_pv_solar_irradiance_c_function4__ETR = 430;
+        _microgrid1_pv_solar_irradiance_c_function4__ang_z = 2.4;
+    }
+    else {
+        _microgrid1_pv_solar_irradiance_c_function4__GHI = 510;
+        _microgrid1_pv_solar_irradiance_c_function4__ETR = 510;
+        _microgrid1_pv_solar_irradiance_c_function4__ang_z = 2.4;
+    }
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function2
+    _microgrid1_pv_solar_irradiance_trigonometric_function2__out = cos(_microgrid1_pv_solar_irradiance_rate_transition3_output__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function7
+    _microgrid1_pv_solar_irradiance_trigonometric_function7__out = sin(_microgrid1_pv_solar_irradiance_rate_transition3_output__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Gain4
+    _microgrid1_pv_solar_irradiance_gain4__out = 0.017453292519943295 * _microgrid1_pv_solar_irradiance_ang_t__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Connect
+    HIL_OutAO(0x4007, (float)_microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Digital Probe1
+    HIL_OutInt32(0xf00401, _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out != 0x0);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Logical operator2
+    _microgrid1_inverter_be1_25a_synchronizer_logical_operator2__out = !_microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+    // Generated from the component: Microgrid1.Inverter.Rate Transition6.Input
+    _microgrid1_inverter_rate_transition6_output__out = _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Hold after connect2
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__INV_sync = _microgrid1_inverter_inv_sync__out;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__connect = _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__in = _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer__del_w;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__out = _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__var;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Hold after connect3
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__INV_sync = _microgrid1_inverter_inv_sync__out;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__connect = _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__in = _microgrid1_inverter_be1_25a_synchronizer_be1_25a_synchronizer1__del_V;
+    _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__out = _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__var;
+    // Generated from the component: Microgrid1.Inverter.INV_sync OFF
+    HIL_OutInt32(0xf00406, _microgrid1_inverter_logical_operator1__out != 0x0);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.C function2
+    _microgrid1_pv_solar_irradiance_c_function2__ETR = _microgrid1_pv_solar_irradiance_c_function4__ETR;
+    _microgrid1_pv_solar_irradiance_c_function2__GHI = _microgrid1_pv_solar_irradiance_c_function4__GHI;
+    if (_microgrid1_pv_solar_irradiance_c_function2__k <= 0.21)_microgrid1_pv_solar_irradiance_c_function2__f = 0.995 - 0.081 * _microgrid1_pv_solar_irradiance_c_function2__k;
+    else if (_microgrid1_pv_solar_irradiance_c_function2__k > 0.76)_microgrid1_pv_solar_irradiance_c_function2__f = 0.18;
+    else _microgrid1_pv_solar_irradiance_c_function2__f = 0.724 + 2.738 * _microgrid1_pv_solar_irradiance_c_function2__k - 8.321 * _microgrid1_pv_solar_irradiance_c_function2__k * _microgrid1_pv_solar_irradiance_c_function2__k + 4.967 * _microgrid1_pv_solar_irradiance_c_function2__k * _microgrid1_pv_solar_irradiance_c_function2__k * _microgrid1_pv_solar_irradiance_c_function2__k;
+    _microgrid1_pv_solar_irradiance_c_function2__Gdh = _microgrid1_pv_solar_irradiance_c_function2__f * _microgrid1_pv_solar_irradiance_c_function2__GHI;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Gain5
+    _microgrid1_pv_solar_irradiance_gain5__out = 0.017453292519943295 * _microgrid1_pv_solar_irradiance_c_function4__ang_z;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Gain1
+    _microgrid1_pv_solar_irradiance_gain1__out = 0.5 * _microgrid1_pv_solar_irradiance_gain4__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Gain2
+    _microgrid1_pv_solar_irradiance_gain2__out = 0.5 * _microgrid1_pv_solar_irradiance_gain4__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Sum7
+    _microgrid1_pv_solar_irradiance_sum7__out = _microgrid1_pv_solar_irradiance_gain4__out - _microgrid1_pv_solar_irradiance_rate_transition3_output__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function3
+    _microgrid1_pv_solar_irradiance_trigonometric_function3__out = cos(_microgrid1_pv_solar_irradiance_gain4__out);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Digital Probe6
+    HIL_OutInt32(0xf00405, _microgrid1_inverter_be1_25a_synchronizer_logical_operator2__out != 0x0);
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.del_w
+    HIL_OutAO(0x4013, (float)_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.C function3
+    _microgrid1_inverter_controller_frequency_droop_c_function3__Connect = _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+    _microgrid1_inverter_controller_frequency_droop_c_function3__INV_sync = _microgrid1_inverter_inv_sync__out;
+    _microgrid1_inverter_controller_frequency_droop_c_function3__del_w = _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__out;
+    if (_microgrid1_inverter_controller_frequency_droop_c_function3__INV_sync)_microgrid1_inverter_controller_frequency_droop_c_function3__wref = _microgrid1_inverter_controller_frequency_droop_c_function3__wref + _microgrid1_inverter_controller_frequency_droop_c_function3__del_w;
+    if (_microgrid1_inverter_controller_frequency_droop_c_function3__Connect)_microgrid1_inverter_controller_frequency_droop_c_function3__wref = 376.99111843077515;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.del_V
+    HIL_OutAO(0x4012, (float)_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__out);
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.C function3
+    _microgrid1_inverter_controller_voltage_droop_c_function3__Connect = _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__out;
+    _microgrid1_inverter_controller_voltage_droop_c_function3__INV_sync = _microgrid1_inverter_inv_sync__out;
+    _microgrid1_inverter_controller_voltage_droop_c_function3__del_V = _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__out;
+    if (_microgrid1_inverter_controller_voltage_droop_c_function3__INV_sync)_microgrid1_inverter_controller_voltage_droop_c_function3__Vref = _microgrid1_inverter_controller_voltage_droop_c_function3__Vref + _microgrid1_inverter_controller_voltage_droop_c_function3__del_V;
+    if (_microgrid1_inverter_controller_voltage_droop_c_function3__Connect)_microgrid1_inverter_controller_voltage_droop_c_function3__Vref = 1;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Product4
+    _microgrid1_pv_solar_irradiance_product4__out = (_microgrid1_pv_solar_irradiance_c_function2__f * _microgrid1_pv_solar_irradiance_c_function2__f);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Sum3
+    _microgrid1_pv_solar_irradiance_sum3__out = _microgrid1_pv_solar_irradiance_c_function4__GHI - _microgrid1_pv_solar_irradiance_c_function2__Gdh;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Rate Transition3.Input
+    _microgrid1_pv_solar_irradiance_rate_transition3_output__out = _microgrid1_pv_solar_irradiance_gain5__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function4
+    _microgrid1_pv_solar_irradiance_trigonometric_function4__out = cos(_microgrid1_pv_solar_irradiance_gain1__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function5
+    _microgrid1_pv_solar_irradiance_trigonometric_function5__out = sin(_microgrid1_pv_solar_irradiance_gain2__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function1
+    _microgrid1_pv_solar_irradiance_trigonometric_function1__out = cos(_microgrid1_pv_solar_irradiance_sum7__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Trigonometric function6
+    _microgrid1_pv_solar_irradiance_trigonometric_function6__out = cos(_microgrid1_pv_solar_irradiance_sum7__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Sum4
+    _microgrid1_pv_solar_irradiance_sum4__out = _microgrid1_pv_solar_irradiance_constant15__out - _microgrid1_pv_solar_irradiance_trigonometric_function3__out;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.Rate Transition12.Input
+    _microgrid1_inverter_controller_frequency_droop_rate_transition12_output__out = _microgrid1_inverter_controller_frequency_droop_c_function3__wref;
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.Rate Transition13.Input
+    _microgrid1_inverter_controller_voltage_droop_rate_transition13_output__out = _microgrid1_inverter_controller_voltage_droop_c_function3__Vref;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Sum5
+    _microgrid1_pv_solar_irradiance_sum5__out = _microgrid1_pv_solar_irradiance_constant17__out - _microgrid1_pv_solar_irradiance_product4__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Product2
+    _microgrid1_pv_solar_irradiance_product2__out = (_microgrid1_pv_solar_irradiance_sum3__out * _microgrid1_pv_solar_irradiance_trigonometric_function1__out) * 1.0 / (_microgrid1_pv_solar_irradiance_trigonometric_function2__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Bus Join1
+    _microgrid1_pv_solar_irradiance_bus_join1__out[0] = _microgrid1_pv_solar_irradiance_trigonometric_function4__out;
+    _microgrid1_pv_solar_irradiance_bus_join1__out[1] = _microgrid1_pv_solar_irradiance_trigonometric_function5__out;
+    _microgrid1_pv_solar_irradiance_bus_join1__out[2] = _microgrid1_pv_solar_irradiance_trigonometric_function6__out;
+    _microgrid1_pv_solar_irradiance_bus_join1__out[3] = _microgrid1_pv_solar_irradiance_trigonometric_function7__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Product3
+    _microgrid1_pv_solar_irradiance_product3__out = (_microgrid1_pv_solar_irradiance_sum4__out * _microgrid1_pv_solar_irradiance_c_function4__GHI * _microgrid1_pv_solar_irradiance_constant14__out);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.C function3
+    _microgrid1_pv_solar_irradiance_c_function3__Gdh = _microgrid1_pv_solar_irradiance_c_function2__Gdh;
+    _microgrid1_pv_solar_irradiance_c_function3__fk = _microgrid1_pv_solar_irradiance_sum5__out;
+    _microgrid1_pv_solar_irradiance_c_function3__x[0] = _microgrid1_pv_solar_irradiance_bus_join1__out[0];
+    _microgrid1_pv_solar_irradiance_c_function3__x[1] = _microgrid1_pv_solar_irradiance_bus_join1__out[1];
+    _microgrid1_pv_solar_irradiance_c_function3__x[2] = _microgrid1_pv_solar_irradiance_bus_join1__out[2];
+    _microgrid1_pv_solar_irradiance_c_function3__x[3] = _microgrid1_pv_solar_irradiance_bus_join1__out[3];
+    _microgrid1_pv_solar_irradiance_c_function3__Gd = _microgrid1_pv_solar_irradiance_c_function3__Gdh * 0.5 * (1 + _microgrid1_pv_solar_irradiance_c_function3__x[0]) * (1 + _microgrid1_pv_solar_irradiance_c_function3__fk * _microgrid1_pv_solar_irradiance_c_function3__x[1] * _microgrid1_pv_solar_irradiance_c_function3__x[1] * _microgrid1_pv_solar_irradiance_c_function3__x[1]) * (1 + _microgrid1_pv_solar_irradiance_c_function3__fk * _microgrid1_pv_solar_irradiance_c_function3__x[2] * _microgrid1_pv_solar_irradiance_c_function3__x[2] * _microgrid1_pv_solar_irradiance_c_function3__x[3] * _microgrid1_pv_solar_irradiance_c_function3__x[3] * _microgrid1_pv_solar_irradiance_c_function3__x[3]);
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Gain3
+    _microgrid1_pv_solar_irradiance_gain3__out = 0.5 * _microgrid1_pv_solar_irradiance_product3__out;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Sum6
+    _microgrid1_pv_solar_irradiance_sum6__out = _microgrid1_pv_solar_irradiance_product2__out + _microgrid1_pv_solar_irradiance_gain3__out + _microgrid1_pv_solar_irradiance_c_function3__Gd;
+    // Generated from the component: Microgrid1.PV.C function1
+    _microgrid1_pv_c_function1__SI = _microgrid1_pv_solar_irradiance_sum6__out;
+    _microgrid1_pv_c_function1__Tamb = _microgrid1_pv_constant14__out;
+    _microgrid1_pv_c_function1__Vdc = _microgrid1_pv_rate_transition1_output__out;
+    _microgrid1_pv_c_function1__Ppv = _microgrid1_pv_c_function1__SI * 0.15 * 100;
+    _microgrid1_pv_c_function1__Ipv = _microgrid1_pv_c_function1__Ppv / _microgrid1_pv_c_function1__Vdc;
+    // Generated from the component: Microgrid1.PV.SI
+    HIL_OutAO(0x403c, (float)_microgrid1_pv_solar_irradiance_sum6__out);
+    // Generated from the component: Microgrid1.PV.Isp1.Is1
+    HIL_OutFloat(141295617, (float) _microgrid1_pv_c_function1__Ipv);
+    // Generated from the component: Microgrid1.PV.P
+    HIL_OutAO(0x403b, (float)_microgrid1_pv_c_function1__Ppv);
+    //@cmp.out.block.end
+    //////////////////////////////////////////////////////////////////////////
+    // Update block
+    //////////////////////////////////////////////////////////////////////////
+    //@cmp.update.block.start
+    // Generated from the component: Microgrid1.Inverter.C function3
+    // Generated from the component: Microgrid1.PV.Solar irradiance.Clock1
+    _microgrid1_pv_solar_irradiance_clock1__state += 1.0;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.stay connected1
+    if ((_microgrid1_inverter_be1_25a_synchronizer_stay_connected1__ready == 1) && (_microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connectINV == 1)) {
+        _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connect = 1;
+    }
+    else if (_microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connectINV == 0) {
+        _microgrid1_inverter_be1_25a_synchronizer_stay_connected1__connect = 0;
+    }
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.BE1-25A Synchronizer
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.BE1-25A Synchronizer1
+    // Generated from the component: Microgrid1.PV.Solar irradiance.C function4
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Hold after connect2
+    if ((_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__connect == 0) && (_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__INV_sync == 1))_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__var = _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__in;
+    else if (_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__connect == 1)_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect2__var = 0;
+    // Generated from the component: Microgrid1.Inverter.BE1-25A Synchronizer.Hold after connect3
+    if ((_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__connect == 0) && (_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__INV_sync == 1))_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__var = _microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__in;
+    else if (_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__connect == 1)_microgrid1_inverter_be1_25a_synchronizer_hold_after_connect3__var = 0;
+    // Generated from the component: Microgrid1.PV.Solar irradiance.C function2
+    _microgrid1_pv_solar_irradiance_c_function2__k = _microgrid1_pv_solar_irradiance_c_function2__GHI / _microgrid1_pv_solar_irradiance_c_function2__ETR;
+    // Generated from the component: Microgrid1.Inverter.Controller.Frequency droop.C function3
+    // Generated from the component: Microgrid1.Inverter.Controller.Voltage droop.C function3
+    // Generated from the component: Microgrid1.PV.Solar irradiance.C function3
+    // Generated from the component: Microgrid1.PV.C function1
+    //@cmp.update.block.end
+}
+// ----------------------------------------------------------------------------------------  //-----------------------------------------------------------------------------------------

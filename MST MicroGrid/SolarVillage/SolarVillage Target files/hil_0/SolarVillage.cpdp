@@ -1,0 +1,1068 @@
+
+<model_description>
+    <sw_version>2020.1 SP2</sw_version>
+    <hw_properties>
+        <revision>3</revision>
+        <product_id>HIL603</product_id>
+        <configuration_id>2</configuration_id>
+        <device_ao_limit_enable>True</device_ao_limit_enable>
+        <device_id>0</device_id>
+        <spc_out_mem_size>512</spc_out_mem_size>
+        <fw_support_limit>132383518</fw_support_limit>
+    </hw_properties>
+    <sim_setup>
+        <sim_time_step>4e-06</sim_time_step>
+    </sim_setup>
+    <pesb>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1</name>
+            <type>
+                <cell>1ph_inverter_r3</cell>
+            </type>
+            <site>1</site>
+            <switches>
+                <cell>
+                    <name>Sa_top</name>
+                    <weights>
+                        <cell>3</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sa_bot</name>
+                    <weights>
+                        <cell>2</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_top</name>
+                    <weights>
+                        <cell>1</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_bot</name>
+                    <weights>
+                        <cell>0</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+    </pesb>
+    <variables>
+        <cell>
+            <name>EV Charging Station.Core coupling.Core Coupling 1.I_msr</name>
+            <address>452</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Line 6.Device Coupling.I_msr</name>
+            <address>0</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.C</name>
+            <address>512</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Cs</name>
+            <address>513</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.C1.Cint</name>
+            <address>514</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.C1.Cint</name>
+            <address>515</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.C1.Cint</name>
+            <address>516</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Lb</name>
+            <address>517</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.R0.L</name>
+            <address>518</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.R1.L</name>
+            <address>519</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.R0.L</name>
+            <address>520</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.R1.L</name>
+            <address>521</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.R0.L</name>
+            <address>522</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.R1.L</name>
+            <address>523</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Core coupling.Core Coupling 1.V_msr</name>
+            <address>960</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.E</name>
+            <address>524</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.v1</name>
+            <address>898</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.v2</name>
+            <address>899</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.v3</name>
+            <address>900</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.v4</name>
+            <address>901</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.VDC</name>
+            <address>525</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Vrms.Vinst</name>
+            <address>526</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Core Coupling.V_msr</name>
+            <address>968</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.C1.charge</name>
+            <address>944</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.C1.charge</name>
+            <address>947</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.C1.charge</name>
+            <address>950</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Measurement.Va</name>
+            <address>527</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Measurement.Vrms.Vinst</name>
+            <address>528</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.I</name>
+            <address>529</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Io</name>
+            <address>530</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.ia</name>
+            <address>896</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.ib</name>
+            <address>897</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Idc</name>
+            <address>531</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.C1.I</name>
+            <address>532</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.Idc</name>
+            <address>533</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.R0.I</name>
+            <address>945</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.R1.I</name>
+            <address>946</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.C1.I</name>
+            <address>534</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.Idc</name>
+            <address>535</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.R0.I</name>
+            <address>948</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.R1.I</name>
+            <address>949</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.C1.I</name>
+            <address>536</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.Idc</name>
+            <address>537</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.R0.I</name>
+            <address>951</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.R1.I</name>
+            <address>952</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Measurement.Ia</name>
+            <address>538</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.C1.Cint</name>
+            <address>1024</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.C1.Cint</name>
+            <address>1025</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.C1.Cint</name>
+            <address>1026</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.R0.L</name>
+            <address>1027</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.R1.L</name>
+            <address>1028</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.R0.L</name>
+            <address>1029</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.R1.L</name>
+            <address>1030</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.R0.L</name>
+            <address>1031</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.R1.L</name>
+            <address>1032</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.C1.charge</name>
+            <address>1456</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.C1.charge</name>
+            <address>1459</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.C1.charge</name>
+            <address>1462</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Vdc</name>
+            <address>1033</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Core Coupling.I_msr</name>
+            <address>1476</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.C1.I</name>
+            <address>1034</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.Idc</name>
+            <address>1035</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.R0.I</name>
+            <address>1457</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.R1.I</name>
+            <address>1458</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.C1.I</name>
+            <address>1036</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.Idc</name>
+            <address>1037</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.R0.I</name>
+            <address>1460</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.R1.I</name>
+            <address>1461</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.C1.I</name>
+            <address>1038</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.Idc</name>
+            <address>1039</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.R0.I</name>
+            <address>1463</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.R1.I</name>
+            <address>1464</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>const_0V</name>
+            <address>34304</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 1</name>
+            <address>34816</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 2</name>
+            <address>34817</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 3</name>
+            <address>34818</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 4</name>
+            <address>34819</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 5</name>
+            <address>34820</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 6</name>
+            <address>34821</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 7</name>
+            <address>34822</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 8</name>
+            <address>34823</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </variables>
+    <do_var_list>
+        <cell>
+            <name>HIL0 AO flag</name>
+            <address>8</address>
+        </cell>
+        <cell>
+            <name>HIL0 DTV flag</name>
+            <address>9</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 1</name>
+            <address>512</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 2</name>
+            <address>513</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 3</name>
+            <address>514</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 4</name>
+            <address>515</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 5</name>
+            <address>516</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 6</name>
+            <address>517</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 7</name>
+            <address>518</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 8</name>
+            <address>519</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 9</name>
+            <address>520</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 10</name>
+            <address>521</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 11</name>
+            <address>522</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 12</name>
+            <address>523</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 13</name>
+            <address>524</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 14</name>
+            <address>525</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 15</name>
+            <address>526</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 16</name>
+            <address>527</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 17</name>
+            <address>528</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 18</name>
+            <address>529</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 19</name>
+            <address>530</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 20</name>
+            <address>531</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 21</name>
+            <address>532</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 22</name>
+            <address>533</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 23</name>
+            <address>534</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 24</name>
+            <address>535</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 25</name>
+            <address>536</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 26</name>
+            <address>537</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 27</name>
+            <address>538</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 28</name>
+            <address>539</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 29</name>
+            <address>540</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 30</name>
+            <address>541</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 31</name>
+            <address>542</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 32</name>
+            <address>543</address>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.PWM_Modulator_TOP_1</name>
+            <address>768</address>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.PWM_Modulator_BOT_1</name>
+            <address>769</address>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.PWM_Modulator_TOP_2</name>
+            <address>770</address>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1.PWM_Modulator_BOT_2</name>
+            <address>771</address>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Single Phase Inverter1_stf</name>
+            <address>1051</address>
+        </cell>
+    </do_var_list>
+    <sources>
+    </sources>
+    <machines>
+    </machines>
+    <pv_panels>
+    </pv_panels>
+    <batteries>
+    </batteries>
+    <contactors>
+    </contactors>
+    <dtv>
+        <spc_dtv>
+            <cell>
+                <address>3</address>
+                <fqn>EV Charging Station.Inverter.Single Phase Inverter1</fqn>
+            </cell>
+        </spc_dtv>
+        <par_dtv>
+        </par_dtv>
+    </dtv>
+
+<!-- ******* SP DATA ******** -->
+
+    <model_properties>
+        <execution_rates>[[2e-05, 0.0001]]</execution_rates>
+    </model_properties>
+
+    <variables>
+        <cell>
+            <name>EV Charging Station.Measurement.Vrms</name>
+            <type>voltage</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop1.Et_sqr_res</name>
+            <type>generic</type>
+            <address>16395</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.P</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.ud</name>
+            <type>generic</type>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.uq</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 1.SOC</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.iq_err</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Vrms</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.VDC</name>
+            <type>generic</type>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 5.SOC</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Ud</name>
+            <type>generic</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.V</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.w</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Uq</name>
+            <type>generic</type>
+            <address>16392</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Id_ref</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.pf</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Iq_ref</name>
+            <type>generic</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Iq</name>
+            <type>generic</type>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Edq_sq</name>
+            <type>generic</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 4.SOC</name>
+            <type>generic</type>
+            <address>16410</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 2.SOC</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 3.SOC</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Id</name>
+            <type>generic</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Measurement.Q</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.IDC</name>
+            <type>generic</type>
+            <address>16406</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.id_err</name>
+            <type>generic</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Vd</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Q</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.P</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Li Battery.Li Cells Series 6.SOC</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.S</name>
+            <type>generic</type>
+            <address>16403</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Inverter.Controller.Vq</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>EV Charging Station.Measurement.P</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </variables>
+
+
+
+
+    <dsp_monitors>
+        <monitor>
+            <type>internal</type>
+            <execution_rates>[5e-05, 0.05]</execution_rates>
+            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.05)']</execution_rate_labels>
+            <timer_counters>[7000.0, 7000000.0]</timer_counters>
+
+            
+        </monitor>
+        <monitor>
+            <type>user</type>
+            <execution_rates>[2e-05, 0.0001]</execution_rates>
+            <execution_rate_labels>['ER0 (2e-05)', 'ER1 (0.0001)']</execution_rate_labels>
+            <timer_counters>[2800.0000000000005, 14000.0]</timer_counters>
+
+            
+        </monitor>
+    </dsp_monitors>
+
+    <streaming>
+
+
+
+     </streaming>
+
+
+</model_description>

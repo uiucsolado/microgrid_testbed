@@ -1,0 +1,1362 @@
+
+<model_description>
+    <sw_version>2020.1 SP2</sw_version>
+    <hw_properties>
+        <revision>3</revision>
+        <product_id>HIL603</product_id>
+        <configuration_id>2</configuration_id>
+        <device_ao_limit_enable>True</device_ao_limit_enable>
+        <device_id>0</device_id>
+        <spc_out_mem_size>512</spc_out_mem_size>
+        <fw_support_limit>132383518</fw_support_limit>
+    </hw_properties>
+    <sim_setup>
+        <sim_time_step>4e-06</sim_time_step>
+    </sim_setup>
+    <pesb>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>1</site>
+            <switches>
+                <cell>
+                    <name>Sa_top</name>
+                    <weights>
+                        <cell>1</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sa_bot</name>
+                    <weights>
+                        <cell>0</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_top</name>
+                    <weights>
+                        <cell>7</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_bot</name>
+                    <weights>
+                        <cell>6</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_top</name>
+                    <weights>
+                        <cell>13</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_bot</name>
+                    <weights>
+                        <cell>12</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+    </pesb>
+    <variables>
+        <cell>
+            <name>RL Section1.L2</name>
+            <address>0</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section1.L3</name>
+            <address>1</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.VA</name>
+            <address>2</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.VB</name>
+            <address>3</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.VC</name>
+            <address>4</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas2.VA</name>
+            <address>5</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas2.VB</name>
+            <address>6</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas2.VC</name>
+            <address>7</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_grid.Vinst</name>
+            <address>8</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Core coupling.Core Coupling.cpl1.I_msr</name>
+            <address>452</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Core coupling.Core Coupling.cpl2.I_msr</name>
+            <address>453</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.IA</name>
+            <address>9</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.IB</name>
+            <address>10</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.IC</name>
+            <address>11</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vs1_a</name>
+            <address>33280</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vs1_b</name>
+            <address>33281</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vs1_c</name>
+            <address>33282</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ca1</name>
+            <address>512</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Cb1</name>
+            <address>513</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Cc1</name>
+            <address>514</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.L0b1</name>
+            <address>515</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.L0c1</name>
+            <address>516</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Load.Lb</name>
+            <address>517</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Load.Lc</name>
+            <address>518</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Core coupling.Core Coupling.cpl1.V_msr</name>
+            <address>960</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Core coupling.Core Coupling.cpl2.V_msr</name>
+            <address>961</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ea1</name>
+            <address>519</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Eb1</name>
+            <address>520</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ec1</name>
+            <address>521</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1.v1</name>
+            <address>897</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1.v2</name>
+            <address>898</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2.v1</name>
+            <address>905</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2.v2</name>
+            <address>906</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3.v1</name>
+            <address>913</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3.v2</name>
+            <address>914</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Va2</name>
+            <address>522</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.VaG</name>
+            <address>523</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Vb2</name>
+            <address>524</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.VbG</name>
+            <address>525</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Vc2</name>
+            <address>526</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.VcG</name>
+            <address>527</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Vrms.Vinst</name>
+            <address>528</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Measurement.Vab</name>
+            <address>529</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Measurement.Vrms.Vinst</name>
+            <address>530</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.ESS.Idc</name>
+            <address>531</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ia1</name>
+            <address>532</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ib1</name>
+            <address>533</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ic1</name>
+            <address>534</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1.il</name>
+            <address>896</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2.il</name>
+            <address>904</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3.il</name>
+            <address>912</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Xi_a1</name>
+            <address>535</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Xi_b1</name>
+            <address>536</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Xi_c1</name>
+            <address>537</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Measurement.Ia</name>
+            <address>538</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Measurement.Ib</name>
+            <address>539</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Measurement.Ic</name>
+            <address>540</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>const_0V</name>
+            <address>34304</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 1</name>
+            <address>34816</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 2</name>
+            <address>34817</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 3</name>
+            <address>34818</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 4</name>
+            <address>34819</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 5</name>
+            <address>34820</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 6</name>
+            <address>34821</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 7</name>
+            <address>34822</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 8</name>
+            <address>34823</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </variables>
+    <do_var_list>
+        <cell>
+            <name>HIL0 AO flag</name>
+            <address>8</address>
+        </cell>
+        <cell>
+            <name>HIL0 DTV flag</name>
+            <address>9</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 1</name>
+            <address>512</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 2</name>
+            <address>513</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 3</name>
+            <address>514</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 4</name>
+            <address>515</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 5</name>
+            <address>516</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 6</name>
+            <address>517</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 7</name>
+            <address>518</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 8</name>
+            <address>519</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 9</name>
+            <address>520</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 10</name>
+            <address>521</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 11</name>
+            <address>522</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 12</name>
+            <address>523</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 13</name>
+            <address>524</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 14</name>
+            <address>525</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 15</name>
+            <address>526</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 16</name>
+            <address>527</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 17</name>
+            <address>528</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 18</name>
+            <address>529</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 19</name>
+            <address>530</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 20</name>
+            <address>531</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 21</name>
+            <address>532</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 22</name>
+            <address>533</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 23</name>
+            <address>534</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 24</name>
+            <address>535</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 25</name>
+            <address>536</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 26</name>
+            <address>537</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 27</name>
+            <address>538</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 28</name>
+            <address>539</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 29</name>
+            <address>540</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 30</name>
+            <address>541</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 31</name>
+            <address>542</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 32</name>
+            <address>543</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <address>772</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <address>773</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <address>768</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <address>769</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <address>770</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <address>771</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1_vout_cmp</name>
+            <address>891</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2_vout_cmp</name>
+            <address>892</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3_vout_cmp</name>
+            <address>893</address>
+        </cell>
+        <cell>
+            <name>PCC.S1_fb</name>
+            <address>1024</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.S2_fb</name>
+            <address>1039</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1_stf</name>
+            <address>1051</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2_stf</name>
+            <address>1052</address>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3_stf</name>
+            <address>1053</address>
+        </cell>
+    </do_var_list>
+    <sources>
+        <cell>
+            <name>Vs1</name>
+            <type>3phase</type>
+            <address>[0, 1, 2]</address>
+            <unit>V</unit>
+            <init_settings>['Sine', 0.0, 60.0, 0.0]</init_settings>
+        </cell>
+    </sources>
+    <machines>
+    </machines>
+    <pv_panels>
+    </pv_panels>
+    <batteries>
+    </batteries>
+    <contactors>
+        <cell>
+            <name>PCC.S1</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>0</site>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.S2</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>1</site>
+        </cell>
+    </contactors>
+    <dtv>
+        <spc_dtv>
+            <cell>
+                <address>3</address>
+                <fqn>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg1</fqn>
+            </cell>
+            <cell>
+                <address>4</address>
+                <fqn>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg2</fqn>
+            </cell>
+            <cell>
+                <address>5</address>
+                <fqn>Microgrid1.Inverter.Three Phase Inverter.IGBT Leg3</fqn>
+            </cell>
+        </spc_dtv>
+        <par_dtv>
+        </par_dtv>
+    </dtv>
+
+<!-- ******* SP DATA ******** -->
+
+    <model_properties>
+        <execution_rates>[[2e-05, 0.001, 1.0]]</execution_rates>
+    </model_properties>
+
+    <variables>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.E_q</name>
+            <type>generic</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Eb_1</name>
+            <type>generic</type>
+            <address>16433</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Eq_err</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Measurement.Vrms</name>
+            <type>voltage</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.del_w</name>
+            <type>generic</type>
+            <address>16403</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.iq_err</name>
+            <type>generic</type>
+            <address>16424</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Q1</name>
+            <type>generic</type>
+            <address>16428</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.P</name>
+            <type>generic</type>
+            <address>16445</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.PLL.f_meas</name>
+            <type>generic</type>
+            <address>16427</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.S</name>
+            <type>generic</type>
+            <address>16441</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.P1</name>
+            <type>generic</type>
+            <address>16436</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.w_G</name>
+            <type>generic</type>
+            <address>16406</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.frequency_diff3</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ea_1</name>
+            <type>generic</type>
+            <address>16432</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Voltage droop.E_1</name>
+            <type>generic</type>
+            <address>16429</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Pref</name>
+            <type>generic</type>
+            <address>16437</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.P1</name>
+            <type>generic</type>
+            <address>16426</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.volt_diff3</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.angle_diff3</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Vd_G</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.E_dREF1</name>
+            <type>generic</type>
+            <address>16410</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.pf</name>
+            <type>generic</type>
+            <address>16442</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.f1</name>
+            <type>generic</type>
+            <address>16431</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.del_V</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.w_bus</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Eq_ref</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Vq_G</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Voltage droop.dQ</name>
+            <type>generic</type>
+            <address>16430</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.|V|</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.E_d</name>
+            <type>generic</type>
+            <address>16392</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.|E|</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Ed_ref</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.ESS.Lead acid.SOC</name>
+            <type>generic</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Ed_err</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Vrms</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.E_qREF1</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Eq-Vq</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.PV.P</name>
+            <type>generic</type>
+            <address>16443</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Xi_d_ref</name>
+            <type>generic</type>
+            <address>16420</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.alpha</name>
+            <type>generic</type>
+            <address>16422</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Eb-Vb</name>
+            <type>generic</type>
+            <address>16395</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.id_err</name>
+            <type>generic</type>
+            <address>16423</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Connect</name>
+            <type>generic</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Q</name>
+            <type>generic</type>
+            <address>16438</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Ec-Vc</name>
+            <type>generic</type>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
+            <type>generic</type>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Ud</name>
+            <type>generic</type>
+            <address>16418</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Ea-Va</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Ec_1</name>
+            <type>generic</type>
+            <address>16434</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Qref</name>
+            <type>generic</type>
+            <address>16440</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.P</name>
+            <type>generic</type>
+            <address>16435</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.PV.SI</name>
+            <type>generic</type>
+            <address>16444</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Et_sqr_res</name>
+            <type>generic</type>
+            <address>16425</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.ESS.P</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Q1</name>
+            <type>generic</type>
+            <address>16439</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.ESS.VDC</name>
+            <type>generic</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Xi_q_ref</name>
+            <type>generic</type>
+            <address>16421</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Q</name>
+            <type>generic</type>
+            <address>16446</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_grid</name>
+            <type>voltage</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.ESS.Lead acid.Ibat</name>
+            <type>generic</type>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Ed-Vd</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.Uq</name>
+            <type>generic</type>
+            <address>16419</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </variables>
+
+    <do_var_list>
+        <cell>
+            <name>freq_sync3</name>
+            <address>2051</address>
+        </cell>
+
+        <cell>
+            <name>Microgrid1.ESS.Lead acid.Charging</name>
+            <address>2048</address>
+        </cell>
+
+        <cell>
+            <name>gridconnect2</name>
+            <address>2049</address>
+        </cell>
+
+        <cell>
+            <name>volt_sync3</name>
+            <address>2052</address>
+        </cell>
+
+        <cell>
+            <name>Microgrid1.Inverter.INV_sync OFF</name>
+            <address>2054</address>
+        </cell>
+
+        <cell>
+            <name>Microgrid1.Inverter.INV_sync ON</name>
+            <address>2055</address>
+        </cell>
+
+        <cell>
+            <name>griddisconnect2</name>
+            <address>2053</address>
+        </cell>
+
+        <cell>
+            <name>ang_sync3</name>
+            <address>2050</address>
+        </cell>
+
+    </do_var_list>
+
+    <scada_inputs>
+        <scada_input>
+            <name>Microgrid1.Inverter.charge</name>
+            <addr>1426063632</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>PCC.Grid_Connect</name>
+            <addr>1426063640</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microgrid1.Inverter.INV_sync</name>
+            <addr>1426063628</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microgrid1.Inverter.Controller.Outer Voltage Loop + Inner Current Loop.GFM_mode</name>
+            <addr>1426063624</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microgrid1.Inverter.CONNECT</name>
+            <addr>1426063620</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microgrid1.Inverter.BE1-25A Synchronizer.Connect INV</name>
+            <addr>1426063616</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Microgrid1.PV.Solar irradiance.ang_t</name>
+            <addr>1426063636</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>deg</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+    </scada_inputs>
+
+
+    <dsp_monitors>
+        <monitor>
+            <type>internal</type>
+            <execution_rates>[5e-05, 0.05]</execution_rates>
+            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.05)']</execution_rate_labels>
+            <timer_counters>[7000.0, 7000000.0]</timer_counters>
+
+            
+        </monitor>
+        <monitor>
+            <type>user</type>
+            <execution_rates>[2e-05, 0.001, 1.0]</execution_rates>
+            <execution_rate_labels>['ER0 (2e-05)', 'ER1 (0.001)', 'ER2 (1.0)']</execution_rate_labels>
+            <timer_counters>[2800.0000000000005, 140000.0, 140000000.0]</timer_counters>
+
+            
+        </monitor>
+    </dsp_monitors>
+
+    <streaming>
+
+
+
+     </streaming>
+
+
+</model_description>

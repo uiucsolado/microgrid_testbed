@@ -1,0 +1,3465 @@
+
+<model_description>
+    <sw_version>2020.1 SP2</sw_version>
+    <hw_properties>
+        <revision>3</revision>
+        <product_id>HIL603</product_id>
+        <configuration_id>2</configuration_id>
+        <device_ao_limit_enable>True</device_ao_limit_enable>
+        <device_id>0</device_id>
+        <spc_out_mem_size>512</spc_out_mem_size>
+        <fw_support_limit>132383518</fw_support_limit>
+    </hw_properties>
+    <sim_setup>
+        <sim_time_step>4e-06</sim_time_step>
+    </sim_setup>
+    <pesb>
+        <cell>
+            <name>ESS1.Three Phase Inverter</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>1</site>
+            <switches>
+                <cell>
+                    <name>Sa_top</name>
+                    <weights>
+                        <cell>1</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sa_bot</name>
+                    <weights>
+                        <cell>0</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_top</name>
+                    <weights>
+                        <cell>7</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_bot</name>
+                    <weights>
+                        <cell>6</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_top</name>
+                    <weights>
+                        <cell>13</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_bot</name>
+                    <weights>
+                        <cell>12</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>2</site>
+            <switches>
+                <cell>
+                    <name>Sa_top</name>
+                    <weights>
+                        <cell>1</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sa_bot</name>
+                    <weights>
+                        <cell>0</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_top</name>
+                    <weights>
+                        <cell>7</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_bot</name>
+                    <weights>
+                        <cell>6</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_top</name>
+                    <weights>
+                        <cell>13</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_bot</name>
+                    <weights>
+                        <cell>12</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>3</site>
+            <switches>
+                <cell>
+                    <name>Sa_top</name>
+                    <weights>
+                        <cell>1</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sa_bot</name>
+                    <weights>
+                        <cell>0</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_top</name>
+                    <weights>
+                        <cell>7</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_bot</name>
+                    <weights>
+                        <cell>6</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_top</name>
+                    <weights>
+                        <cell>13</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_bot</name>
+                    <weights>
+                        <cell>12</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter</name>
+            <type>
+                <cell>igbt_leg</cell>
+            </type>
+            <site>4</site>
+            <switches>
+                <cell>
+                    <name>Sa_top</name>
+                    <weights>
+                        <cell>1</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sa_bot</name>
+                    <weights>
+                        <cell>0</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_top</name>
+                    <weights>
+                        <cell>7</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sb_bot</name>
+                    <weights>
+                        <cell>6</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_top</name>
+                    <weights>
+                        <cell>13</cell>
+                    </weights>
+                </cell>
+                <cell>
+                    <name>Sc_bot</name>
+                    <weights>
+                        <cell>12</cell>
+                    </weights>
+                </cell>
+            </switches>
+        </cell>
+    </pesb>
+    <variables>
+        <cell>
+            <name>RL Section1.L2</name>
+            <address>0</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section1.L3</name>
+            <address>1</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section2.L2</name>
+            <address>2</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section2.L3</name>
+            <address>3</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section3.L2</name>
+            <address>4</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section3.L3</name>
+            <address>5</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section4.L2</name>
+            <address>6</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>RL Section4.L3</name>
+            <address>7</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Device coupling.Device Coupling 1.cpl1.V_msr</name>
+            <address>8</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Device coupling.Device Coupling 1.cpl2.V_msr</name>
+            <address>9</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.VA</name>
+            <address>10</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.VB</name>
+            <address>11</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.VC</name>
+            <address>12</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas2.VA</name>
+            <address>13</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas2.VB</name>
+            <address>14</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas2.VC</name>
+            <address>15</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_ess1.Vinst</name>
+            <address>16</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_ess2.Vinst</name>
+            <address>17</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_grid.Vinst</name>
+            <address>18</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_pv1.Vinst</name>
+            <address>19</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_pv2.Vinst</name>
+            <address>20</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling1.Core Coupling.cpl1.I_msr</name>
+            <address>452</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling1.Core Coupling.cpl2.I_msr</name>
+            <address>453</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling2.Core Coupling.cpl1.I_msr</name>
+            <address>456</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling2.Core Coupling.cpl2.I_msr</name>
+            <address>457</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling3.Core Coupling.cpl1.I_msr</name>
+            <address>460</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling3.Core Coupling.cpl2.I_msr</name>
+            <address>461</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling4.Core Coupling.cpl1.I_msr</name>
+            <address>464</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling4.Core Coupling.cpl2.I_msr</name>
+            <address>465</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.IA</name>
+            <address>21</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.IB</name>
+            <address>22</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.Meas1.IC</name>
+            <address>23</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vs1_a</name>
+            <address>33280</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vs1_b</name>
+            <address>33281</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vs1_c</name>
+            <address>33282</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ca1</name>
+            <address>512</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Cb1</name>
+            <address>513</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Cc1</name>
+            <address>514</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.L0b1</name>
+            <address>515</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.L0c1</name>
+            <address>516</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Load1.Lb</name>
+            <address>517</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Load1.Lc</name>
+            <address>518</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling1.Core Coupling.cpl1.V_msr</name>
+            <address>960</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling1.Core Coupling.cpl2.V_msr</name>
+            <address>961</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ea1</name>
+            <address>519</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Eb1</name>
+            <address>520</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ec1</name>
+            <address>521</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1.v1</name>
+            <address>897</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1.v2</name>
+            <address>898</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2.v1</name>
+            <address>905</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2.v2</name>
+            <address>906</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3.v1</name>
+            <address>913</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3.v2</name>
+            <address>914</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Va2</name>
+            <address>522</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.VaG</name>
+            <address>523</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Vb2</name>
+            <address>524</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.VbG</name>
+            <address>525</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Vc2</name>
+            <address>526</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.VcG</name>
+            <address>527</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Vrms.Vinst</name>
+            <address>528</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ia1</name>
+            <address>529</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ib1</name>
+            <address>530</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ic1</name>
+            <address>531</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Idc</name>
+            <address>532</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1.il</name>
+            <address>896</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2.il</name>
+            <address>904</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3.il</name>
+            <address>912</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Xi_a1</name>
+            <address>533</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Xi_b1</name>
+            <address>534</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Xi_c1</name>
+            <address>535</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.C1</name>
+            <address>1024</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.C2</name>
+            <address>1025</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.C3</name>
+            <address>1026</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ca1</name>
+            <address>1027</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.L2</name>
+            <address>1028</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.L3</name>
+            <address>1029</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling2.Core Coupling.cpl1.V_msr</name>
+            <address>1472</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling2.Core Coupling.cpl2.V_msr</name>
+            <address>1473</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1.v1</name>
+            <address>1409</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1.v2</name>
+            <address>1410</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2.v1</name>
+            <address>1417</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2.v2</name>
+            <address>1418</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3.v1</name>
+            <address>1425</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3.v2</name>
+            <address>1426</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Va</name>
+            <address>1030</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Vab</name>
+            <address>1031</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Vb</name>
+            <address>1032</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Vc</name>
+            <address>1033</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Vdc</name>
+            <address>1034</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1.il</name>
+            <address>1408</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2.il</name>
+            <address>1416</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3.il</name>
+            <address>1424</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ia</name>
+            <address>1035</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ia1</name>
+            <address>1036</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ib</name>
+            <address>1037</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ib1</name>
+            <address>1038</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ic</name>
+            <address>1039</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Ic1</name>
+            <address>1040</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Iinv_in</name>
+            <address>1041</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.C1</name>
+            <address>1536</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.C2</name>
+            <address>1537</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.C3</name>
+            <address>1538</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ca1</name>
+            <address>1539</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.L2</name>
+            <address>1540</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.L3</name>
+            <address>1541</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling3.Core Coupling.cpl1.V_msr</name>
+            <address>1984</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling3.Core Coupling.cpl2.V_msr</name>
+            <address>1985</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1.v1</name>
+            <address>1921</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1.v2</name>
+            <address>1922</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2.v1</name>
+            <address>1929</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2.v2</name>
+            <address>1930</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3.v1</name>
+            <address>1937</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3.v2</name>
+            <address>1938</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Va</name>
+            <address>1542</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Vab</name>
+            <address>1543</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Vb</name>
+            <address>1544</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Vc</name>
+            <address>1545</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Vdc</name>
+            <address>1546</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1.il</name>
+            <address>1920</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2.il</name>
+            <address>1928</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3.il</name>
+            <address>1936</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ia</name>
+            <address>1547</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ia1</name>
+            <address>1548</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ib</name>
+            <address>1549</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ib1</name>
+            <address>1550</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ic</name>
+            <address>1551</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Ic1</name>
+            <address>1552</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Iinv_in</name>
+            <address>1553</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ca1</name>
+            <address>2048</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Cb1</name>
+            <address>2049</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Cc1</name>
+            <address>2050</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.L0b1</name>
+            <address>2051</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.L0c1</name>
+            <address>2052</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Load2.Lb</name>
+            <address>2053</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Load2.Lc</name>
+            <address>2054</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling4.Core Coupling.cpl1.V_msr</name>
+            <address>2496</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core coupling4.Core Coupling.cpl2.V_msr</name>
+            <address>2497</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ea1</name>
+            <address>2055</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Eb1</name>
+            <address>2056</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ec1</name>
+            <address>2057</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1.v1</name>
+            <address>2433</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1.v2</name>
+            <address>2434</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2.v1</name>
+            <address>2441</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2.v2</name>
+            <address>2442</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3.v1</name>
+            <address>2449</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3.v2</name>
+            <address>2450</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Va2</name>
+            <address>2058</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.VaG</name>
+            <address>2059</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Vb2</name>
+            <address>2060</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.VbG</name>
+            <address>2061</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Vc2</name>
+            <address>2062</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.VcG</name>
+            <address>2063</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Vrms.Vinst</name>
+            <address>2064</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ia1</name>
+            <address>2065</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ib1</name>
+            <address>2066</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ic1</name>
+            <address>2067</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Idc</name>
+            <address>2068</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1.il</name>
+            <address>2432</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2.il</name>
+            <address>2440</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3.il</name>
+            <address>2448</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Xi_a1</name>
+            <address>2069</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Xi_b1</name>
+            <address>2070</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Xi_c1</name>
+            <address>2071</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>const_0V</name>
+            <address>34304</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 1</name>
+            <address>34816</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 2</name>
+            <address>34817</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 3</name>
+            <address>34818</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 4</name>
+            <address>34819</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 5</name>
+            <address>34820</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 6</name>
+            <address>34821</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 7</name>
+            <address>34822</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>HIL0 analog input 8</name>
+            <address>34823</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </variables>
+    <do_var_list>
+        <cell>
+            <name>HIL0 AO flag</name>
+            <address>8</address>
+        </cell>
+        <cell>
+            <name>HIL0 DTV flag</name>
+            <address>9</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 1</name>
+            <address>512</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 2</name>
+            <address>513</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 3</name>
+            <address>514</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 4</name>
+            <address>515</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 5</name>
+            <address>516</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 6</name>
+            <address>517</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 7</name>
+            <address>518</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 8</name>
+            <address>519</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 9</name>
+            <address>520</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 10</name>
+            <address>521</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 11</name>
+            <address>522</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 12</name>
+            <address>523</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 13</name>
+            <address>524</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 14</name>
+            <address>525</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 15</name>
+            <address>526</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 16</name>
+            <address>527</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 17</name>
+            <address>528</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 18</name>
+            <address>529</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 19</name>
+            <address>530</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 20</name>
+            <address>531</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 21</name>
+            <address>532</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 22</name>
+            <address>533</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 23</name>
+            <address>534</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 24</name>
+            <address>535</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 25</name>
+            <address>536</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 26</name>
+            <address>537</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 27</name>
+            <address>538</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 28</name>
+            <address>539</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 29</name>
+            <address>540</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 30</name>
+            <address>541</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 31</name>
+            <address>542</address>
+        </cell>
+        <cell>
+            <name>HIL0 digital input 32</name>
+            <address>543</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <address>790</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <address>791</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <address>788</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <address>789</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <address>776</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <address>777</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <address>786</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <address>787</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <address>768</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <address>769</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <address>784</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <address>785</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <address>770</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <address>771</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <address>782</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <address>783</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <address>774</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <address>775</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <address>778</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <address>779</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <address>772</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <address>773</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <address>780</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <address>781</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1_vout_cmp</name>
+            <address>891</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2_vout_cmp</name>
+            <address>892</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3_vout_cmp</name>
+            <address>893</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1_vout_cmp</name>
+            <address>894</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2_vout_cmp</name>
+            <address>895</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3_vout_cmp</name>
+            <address>896</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1_vout_cmp</name>
+            <address>897</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2_vout_cmp</name>
+            <address>898</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3_vout_cmp</name>
+            <address>899</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1_vout_cmp</name>
+            <address>900</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2_vout_cmp</name>
+            <address>901</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3_vout_cmp</name>
+            <address>902</address>
+        </cell>
+        <cell>
+            <name>PCC.S1_fb</name>
+            <address>1024</address>
+        </cell>
+        <cell>
+            <name>ESS1.S2_fb</name>
+            <address>1039</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.S1_fb</name>
+            <address>1054</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.S1_fb</name>
+            <address>1069</address>
+        </cell>
+        <cell>
+            <name>ESS2.S2_fb</name>
+            <address>1084</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg1_stf</name>
+            <address>1051</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg2_stf</name>
+            <address>1052</address>
+        </cell>
+        <cell>
+            <name>ESS1.Three Phase Inverter.IGBT Leg3_stf</name>
+            <address>1053</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg1_stf</name>
+            <address>1066</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg2_stf</name>
+            <address>1067</address>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.3ph_inverter 1.IGBT Leg3_stf</name>
+            <address>1068</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg1_stf</name>
+            <address>1081</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg2_stf</name>
+            <address>1082</address>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.3ph_inverter 1.IGBT Leg3_stf</name>
+            <address>1083</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg1_stf</name>
+            <address>1096</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg2_stf</name>
+            <address>1097</address>
+        </cell>
+        <cell>
+            <name>ESS2.Three Phase Inverter.IGBT Leg3_stf</name>
+            <address>1098</address>
+        </cell>
+    </do_var_list>
+    <sources>
+        <cell>
+            <name>Vs1</name>
+            <type>3phase</type>
+            <address>[0, 1, 2]</address>
+            <unit>V</unit>
+            <init_settings>['Sine', 0.0, 60.0, 0.0]</init_settings>
+        </cell>
+    </sources>
+    <machines>
+    </machines>
+    <pv_panels>
+    </pv_panels>
+    <batteries>
+    </batteries>
+    <contactors>
+        <cell>
+            <name>PCC.S1</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>0</site>
+        </cell>
+        <cell>
+            <name>ESS1.S2</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>1</site>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.S1</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>2</site>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.S1</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>3</site>
+        </cell>
+        <cell>
+            <name>ESS2.S2</name>
+            <type>three_phase_breaker</type>
+            <weight>0</weight>
+            <site>4</site>
+        </cell>
+    </contactors>
+    <dtv>
+        <spc_dtv>
+            <cell>
+                <address>3</address>
+                <fqn>ESS1.Three Phase Inverter.IGBT Leg1</fqn>
+            </cell>
+            <cell>
+                <address>4</address>
+                <fqn>ESS1.Three Phase Inverter.IGBT Leg2</fqn>
+            </cell>
+            <cell>
+                <address>5</address>
+                <fqn>ESS1.Three Phase Inverter.IGBT Leg3</fqn>
+            </cell>
+            <cell>
+                <address>6</address>
+                <fqn>PV1.PV Plant.3ph_inverter 1.IGBT Leg1</fqn>
+            </cell>
+            <cell>
+                <address>7</address>
+                <fqn>PV1.PV Plant.3ph_inverter 1.IGBT Leg2</fqn>
+            </cell>
+            <cell>
+                <address>8</address>
+                <fqn>PV1.PV Plant.3ph_inverter 1.IGBT Leg3</fqn>
+            </cell>
+            <cell>
+                <address>9</address>
+                <fqn>PV2.PV Plant.3ph_inverter 1.IGBT Leg1</fqn>
+            </cell>
+            <cell>
+                <address>10</address>
+                <fqn>PV2.PV Plant.3ph_inverter 1.IGBT Leg2</fqn>
+            </cell>
+            <cell>
+                <address>11</address>
+                <fqn>PV2.PV Plant.3ph_inverter 1.IGBT Leg3</fqn>
+            </cell>
+            <cell>
+                <address>12</address>
+                <fqn>ESS2.Three Phase Inverter.IGBT Leg1</fqn>
+            </cell>
+            <cell>
+                <address>13</address>
+                <fqn>ESS2.Three Phase Inverter.IGBT Leg2</fqn>
+            </cell>
+            <cell>
+                <address>14</address>
+                <fqn>ESS2.Three Phase Inverter.IGBT Leg3</fqn>
+            </cell>
+        </spc_dtv>
+        <par_dtv>
+        </par_dtv>
+    </dtv>
+
+<!-- ******* SP DATA ******** -->
+
+    <model_properties>
+        <execution_rates>[[2e-05, 0.001, 1.0]]</execution_rates>
+    </model_properties>
+
+    <variables>
+        <cell>
+            <name>PCC.Q</name>
+            <type>generic</type>
+            <address>16498</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.w_pu</name>
+            <type>generic</type>
+            <address>16517</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.Dz_A</name>
+            <type>generic</type>
+            <address>16524</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Vt_pu</name>
+            <type>generic</type>
+            <address>16512</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.iq</name>
+            <type>generic</type>
+            <address>16514</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Eq_err</name>
+            <type>generic</type>
+            <address>16472</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Id_ref</name>
+            <type>generic</type>
+            <address>16534</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_pv1</name>
+            <type>voltage</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.P</name>
+            <type>generic</type>
+            <address>16490</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Uq_c</name>
+            <type>generic</type>
+            <address>16509</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Ed_err</name>
+            <type>generic</type>
+            <address>16471</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.alpha</name>
+            <type>generic</type>
+            <address>16477</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Ea-Va</name>
+            <type>generic</type>
+            <address>16447</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Ec-Vc</name>
+            <type>generic</type>
+            <address>16449</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <type>generic</type>
+            <address>16470</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.id_err</name>
+            <type>generic</type>
+            <address>16478</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_ess2</name>
+            <type>voltage</type>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.S</name>
+            <type>generic</type>
+            <address>16540</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.E_q</name>
+            <type>generic</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.|V|</name>
+            <type>generic</type>
+            <address>16462</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.E_d</name>
+            <type>generic</type>
+            <address>16392</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Id_ref</name>
+            <type>generic</type>
+            <address>16501</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.E_qREF1</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Q1</name>
+            <type>generic</type>
+            <address>16483</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Connect</name>
+            <type>generic</type>
+            <address>16444</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.m_d</name>
+            <type>generic</type>
+            <address>16528</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Battery.SOC</name>
+            <type>generic</type>
+            <address>16464</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Eb-Vb</name>
+            <type>generic</type>
+            <address>16395</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Vd_G</name>
+            <type>generic</type>
+            <address>16452</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.w_G</name>
+            <type>generic</type>
+            <address>16459</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Vd</name>
+            <type>generic</type>
+            <address>16510</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Vt_pu</name>
+            <type>generic</type>
+            <address>16545</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Q</name>
+            <type>generic</type>
+            <address>16538</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Eb_1</name>
+            <type>generic</type>
+            <address>16488</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.SI</name>
+            <type>generic</type>
+            <address>16564</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Xi_d_ref</name>
+            <type>generic</type>
+            <address>16475</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Pref</name>
+            <type>generic</type>
+            <address>16537</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.volt_diff3</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.id</name>
+            <type>generic</type>
+            <address>16513</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Uq</name>
+            <type>generic</type>
+            <address>16421</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.ControlSignal_Calculation.Vdc</name>
+            <type>generic</type>
+            <address>16533</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Eq_ref</name>
+            <type>generic</type>
+            <address>16468</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.PLL.f_meas</name>
+            <type>generic</type>
+            <address>16520</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.P</name>
+            <type>generic</type>
+            <address>16536</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.S</name>
+            <type>generic</type>
+            <address>16507</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.VDC</name>
+            <type>generic</type>
+            <address>16495</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Battery.SOC</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.m_q</name>
+            <type>generic</type>
+            <address>16562</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.Db</name>
+            <type>generic</type>
+            <address>16555</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ec_1</name>
+            <type>generic</type>
+            <address>16436</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.|V|</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.P</name>
+            <type>generic</type>
+            <address>16503</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.Dz_A</name>
+            <type>generic</type>
+            <address>16557</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Ec-Vc</name>
+            <type>generic</type>
+            <address>16396</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Uq</name>
+            <type>generic</type>
+            <address>16474</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.f1</name>
+            <type>generic</type>
+            <address>16486</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.frequency_diff3</name>
+            <type>generic</type>
+            <address>16404</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.Dz_B</name>
+            <type>generic</type>
+            <address>16525</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Q1</name>
+            <type>generic</type>
+            <address>16430</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.PLL.f_meas</name>
+            <type>generic</type>
+            <address>16429</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.PLL.f_meas</name>
+            <type>generic</type>
+            <address>16482</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Eq_ref</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Ed_err</name>
+            <type>generic</type>
+            <address>16418</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.Dc</name>
+            <type>generic</type>
+            <address>16523</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.P1</name>
+            <type>generic</type>
+            <address>16438</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.Eq_err</name>
+            <type>generic</type>
+            <address>16419</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.VDC</name>
+            <type>generic</type>
+            <address>16442</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.angle_diff3</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.del_w</name>
+            <type>generic</type>
+            <address>16456</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Vq</name>
+            <type>generic</type>
+            <address>16544</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.Dz_C</name>
+            <type>generic</type>
+            <address>16526</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.w_bus</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.frequency_diff3</name>
+            <type>generic</type>
+            <address>16457</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Battery.Ibat</name>
+            <type>generic</type>
+            <address>16463</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Xi_q_ref</name>
+            <type>generic</type>
+            <address>16476</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Vd</name>
+            <type>generic</type>
+            <address>16543</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.pf</name>
+            <type>generic</type>
+            <address>16443</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.S</name>
+            <type>generic</type>
+            <address>16494</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.Q</name>
+            <type>generic</type>
+            <address>16563</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_ess1</name>
+            <type>voltage</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.id_err</name>
+            <type>generic</type>
+            <address>16425</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Iq_ref</name>
+            <type>generic</type>
+            <address>16502</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.PLL.Vt_meas</name>
+            <type>generic</type>
+            <address>16519</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Vq</name>
+            <type>generic</type>
+            <address>16511</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.P</name>
+            <type>generic</type>
+            <address>16437</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.volt_diff3</name>
+            <type>generic</type>
+            <address>16458</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.m_d</name>
+            <type>generic</type>
+            <address>16561</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.S</name>
+            <type>generic</type>
+            <address>16441</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.ControlSignal_Calculation.Vdc</name>
+            <type>generic</type>
+            <address>16500</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.|E|</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Ed-Vd</name>
+            <type>generic</type>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.ZSM.Z0</name>
+            <type>generic</type>
+            <address>16560</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Vrms</name>
+            <type>voltage</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.Da</name>
+            <type>generic</type>
+            <address>16554</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.iq</name>
+            <type>generic</type>
+            <address>16547</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.P</name>
+            <type>generic</type>
+            <address>16532</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.Dz_C</name>
+            <type>generic</type>
+            <address>16559</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.Da</name>
+            <type>generic</type>
+            <address>16521</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Et_sqr_res</name>
+            <type>generic</type>
+            <address>16427</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Ud_c</name>
+            <type>generic</type>
+            <address>16541</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.m_q</name>
+            <type>generic</type>
+            <address>16529</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Ud</name>
+            <type>generic</type>
+            <address>16420</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Ea_1</name>
+            <type>generic</type>
+            <address>16434</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Vd_G</name>
+            <type>generic</type>
+            <address>16399</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Ed-Vd</name>
+            <type>generic</type>
+            <address>16450</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.f1</name>
+            <type>generic</type>
+            <address>16433</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Q1</name>
+            <type>generic</type>
+            <address>16493</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Uq_c</name>
+            <type>generic</type>
+            <address>16542</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Qref</name>
+            <type>generic</type>
+            <address>16506</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.Q</name>
+            <type>generic</type>
+            <address>16530</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Voltage droop.dQ</name>
+            <type>generic</type>
+            <address>16432</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Vq_G</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.outer power loop.Et_sqr_res</name>
+            <type>generic</type>
+            <address>16480</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Connect</name>
+            <type>generic</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.Dz_B</name>
+            <type>generic</type>
+            <address>16558</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Ed_ref</name>
+            <type>generic</type>
+            <address>16467</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.P</name>
+            <type>generic</type>
+            <address>16499</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Voltage droop.E_1</name>
+            <type>generic</type>
+            <address>16431</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.Db</name>
+            <type>generic</type>
+            <address>16522</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Ud_c</name>
+            <type>generic</type>
+            <address>16508</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.w_G</name>
+            <type>generic</type>
+            <address>16406</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.wt_pll</name>
+            <type>generic</type>
+            <address>16518</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Battery.Ibat</name>
+            <type>generic</type>
+            <address>16410</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Vrms</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Ud</name>
+            <type>generic</type>
+            <address>16473</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.irr_in</name>
+            <type>generic</type>
+            <address>16548</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Eb_1</name>
+            <type>generic</type>
+            <address>16435</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.E_d</name>
+            <type>generic</type>
+            <address>16445</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Ed_ref</name>
+            <type>generic</type>
+            <address>16414</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.iq_err</name>
+            <type>generic</type>
+            <address>16479</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.w_pu</name>
+            <type>generic</type>
+            <address>16550</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.P1</name>
+            <type>generic</type>
+            <address>16491</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Voltage droop.dQ</name>
+            <type>generic</type>
+            <address>16485</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.id</name>
+            <type>generic</type>
+            <address>16546</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.del_V</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.P1</name>
+            <type>generic</type>
+            <address>16481</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ea_1</name>
+            <type>generic</type>
+            <address>16487</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.E_dREF1</name>
+            <type>generic</type>
+            <address>16465</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Pref</name>
+            <type>generic</type>
+            <address>16504</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_pv2</name>
+            <type>voltage</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.pf</name>
+            <type>generic</type>
+            <address>16496</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PCC.P</name>
+            <type>generic</type>
+            <address>16497</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.|E|</name>
+            <type>generic</type>
+            <address>16461</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_grid</name>
+            <type>voltage</type>
+            <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Xi_q_ref</name>
+            <type>generic</type>
+            <address>16423</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.E_q</name>
+            <type>generic</type>
+            <address>16446</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.del_V</name>
+            <type>generic</type>
+            <address>16455</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Q1</name>
+            <type>generic</type>
+            <address>16440</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.pf</name>
+            <type>generic</type>
+            <address>16549</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.del_w</name>
+            <type>generic</type>
+            <address>16403</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Vq_G</name>
+            <type>generic</type>
+            <address>16453</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.angle_diff3</name>
+            <type>generic</type>
+            <address>16454</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Voltage droop.E_1</name>
+            <type>generic</type>
+            <address>16484</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.wt_pll</name>
+            <type>generic</type>
+            <address>16551</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Qref</name>
+            <type>generic</type>
+            <address>16539</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.PLL.f_meas</name>
+            <type>generic</type>
+            <address>16553</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.iq_err</name>
+            <type>generic</type>
+            <address>16426</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.duty_cycle.ZSM.Z0</name>
+            <type>generic</type>
+            <address>16527</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.Xi_d_ref</name>
+            <type>generic</type>
+            <address>16422</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
+            <type>generic</type>
+            <address>16469</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.P1</name>
+            <type>generic</type>
+            <address>16428</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Iq_ref</name>
+            <type>generic</type>
+            <address>16535</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Q</name>
+            <type>generic</type>
+            <address>16492</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Controller.E_qREF1</name>
+            <type>generic</type>
+            <address>16466</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Eq-Vq</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Eq-Vq</name>
+            <type>generic</type>
+            <address>16451</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.SI</name>
+            <type>generic</type>
+            <address>16531</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.Eb-Vb</name>
+            <type>generic</type>
+            <address>16448</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.alpha</name>
+            <type>generic</type>
+            <address>16424</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.pf</name>
+            <type>generic</type>
+            <address>16516</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Q</name>
+            <type>generic</type>
+            <address>16439</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.Controller.E_dREF1</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.duty_cycle.Dc</name>
+            <type>generic</type>
+            <address>16556</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS1.BE1-25A Synchronizer.Ea-Va</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.Ec_1</name>
+            <type>generic</type>
+            <address>16489</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.irr_in</name>
+            <type>generic</type>
+            <address>16515</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV2.PV Plant.Control.PLL.Vt_meas</name>
+            <type>generic</type>
+            <address>16552</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>ESS2.BE1-25A Synchronizer.w_bus</name>
+            <type>generic</type>
+            <address>16460</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Q</name>
+            <type>generic</type>
+            <address>16505</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+    </variables>
+
+    <do_var_list>
+        <cell>
+            <name>PV2.PV Plant.enable</name>
+            <address>2069</address>
+        </cell>
+
+        <cell>
+            <name>PV1.PV Plant.On</name>
+            <address>2065</address>
+        </cell>
+
+        <cell>
+            <name>PV1.PV Plant.enable</name>
+            <address>2066</address>
+        </cell>
+
+        <cell>
+            <name>ang_sync3</name>
+            <address>2049</address>
+        </cell>
+
+        <cell>
+            <name>PV2.PV Plant.Control.Grid_follow.Qmode</name>
+            <address>2067</address>
+        </cell>
+
+        <cell>
+            <name>PV1.PV Plant.Control.Grid_follow.Qmode</name>
+            <address>2064</address>
+        </cell>
+
+        <cell>
+            <name>volt_sync3</name>
+            <address>2051</address>
+        </cell>
+
+        <cell>
+            <name>freq_sync3</name>
+            <address>2050</address>
+        </cell>
+
+        <cell>
+            <name>ang_sync3</name>
+            <address>2057</address>
+        </cell>
+
+        <cell>
+            <name>freq_sync3</name>
+            <address>2058</address>
+        </cell>
+
+        <cell>
+            <name>griddisconnect2</name>
+            <address>2060</address>
+        </cell>
+
+        <cell>
+            <name>ESS2.INV_sync OFF</name>
+            <address>2062</address>
+        </cell>
+
+        <cell>
+            <name>gridconnect2</name>
+            <address>2056</address>
+        </cell>
+
+        <cell>
+            <name>ESS1.INV_sync ON</name>
+            <address>2055</address>
+        </cell>
+
+        <cell>
+            <name>ESS1.INV_sync OFF</name>
+            <address>2054</address>
+        </cell>
+
+        <cell>
+            <name>ESS2.INV_sync ON</name>
+            <address>2063</address>
+        </cell>
+
+        <cell>
+            <name>ESS1.Battery.Charging</name>
+            <address>2053</address>
+        </cell>
+
+        <cell>
+            <name>griddisconnect2</name>
+            <address>2052</address>
+        </cell>
+
+        <cell>
+            <name>gridconnect2</name>
+            <address>2048</address>
+        </cell>
+
+        <cell>
+            <name>volt_sync3</name>
+            <address>2059</address>
+        </cell>
+
+        <cell>
+            <name>ESS2.Battery.Charging</name>
+            <address>2061</address>
+        </cell>
+
+        <cell>
+            <name>PV2.PV Plant.On</name>
+            <address>2068</address>
+        </cell>
+
+    </do_var_list>
+
+    <scada_inputs>
+        <scada_input>
+            <name>ESS1.Controller.Outer Voltage Loop + Inner Current Loop.GFM_mode</name>
+            <addr>1426063628</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.Q_ref_ess</name>
+            <addr>1426063668</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>kVAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.Battery.charge</name>
+            <addr>1426063648</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>PV2.Solar irradiance.ang_t2</name>
+            <addr>1426063688</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>kVAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.P_ref_ess</name>
+            <addr>1426063664</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>50.0</def_value>
+            <unit>kW</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.INV_sync</name>
+            <addr>1426063660</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.Controller.Outer Voltage Loop + Inner Current Loop.GFM_mode</name>
+            <addr>1426063656</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>PCC.Grid_Connect</name>
+            <addr>1426063672</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS1.BE1-25A Synchronizer.Connect INV</name>
+            <addr>1426063616</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS1.INV_sync</name>
+            <addr>1426063632</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>PV2.Q_ref_pv2</name>
+            <addr>1426063684</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>kVAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>PV1.Solar irradiance.ang_t1</name>
+            <addr>1426063680</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>kVAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>PV1.Q_ref_pv1</name>
+            <addr>1426063676</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>kVAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.CONNECT</name>
+            <addr>1426063652</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS1.P_ref_ess</name>
+            <addr>1426063636</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>50.0</def_value>
+            <unit>kW</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS1.Battery.charge</name>
+            <addr>1426063620</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS1.Q_ref_ess</name>
+            <addr>1426063640</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>30.0</def_value>
+            <unit>kVAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS1.CONNECT</name>
+            <addr>1426063624</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>ESS2.BE1-25A Synchronizer.Connect INV</name>
+            <addr>1426063644</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+    </scada_inputs>
+
+
+    <dsp_monitors>
+        <monitor>
+            <type>internal</type>
+            <execution_rates>[5e-05, 0.05]</execution_rates>
+            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.05)']</execution_rate_labels>
+            <timer_counters>[7000.0, 7000000.0]</timer_counters>
+
+            
+        </monitor>
+        <monitor>
+            <type>user</type>
+            <execution_rates>[2e-05, 0.001, 1.0]</execution_rates>
+            <execution_rate_labels>['ER0 (2e-05)', 'ER1 (0.001)', 'ER2 (1.0)']</execution_rate_labels>
+            <timer_counters>[2800.0000000000005, 140000.0, 140000000.0]</timer_counters>
+
+            
+        </monitor>
+    </dsp_monitors>
+
+    <streaming>
+
+
+
+     </streaming>
+
+
+</model_description>
