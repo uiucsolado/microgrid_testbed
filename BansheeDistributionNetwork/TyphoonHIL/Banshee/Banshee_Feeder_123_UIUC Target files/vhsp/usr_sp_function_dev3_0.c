@@ -116,13 +116,6 @@ typedef double real;
 
 
 
-
-
-
-
-
-
-
 #define SQRT_2OVER3 0.8164965809277260327324280249019f
 #define SQRT3_OVER_2 0.8660254037844386467637231707529f
 #define ONE_DIV_BY_SQRT_3 0.57735026918962576450914878f
@@ -225,8 +218,7 @@ typedef double real;
 
 //@cmp.var.start
 // variables
-X_UnInt32 _f1_pcc_digital_input_close__out;
-X_UnInt32 _f1_pcc_digital_input_trip__out;
+X_Int32 _f1_pcc_f1_pcc__out;
 double _f1_pcc_meas1_ia_ia1__out;
 double _f1_pcc_meas1_ib_ia1__out;
 double _f1_pcc_meas1_ic_ia1__out;
@@ -242,10 +234,7 @@ double _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__out;
 double _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__out;
 double _f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out;
 double _f1_pcc_pcc_measurements_three_phase_pll1_to_hz__out;
-X_UnInt32 _f1_pcc_sr_flip_flop1__out;
-X_UnInt32 _f1_pcc_sr_flip_flop1__out_n;
-X_UnInt32 _f2_pcc_digital_input_close__out;
-X_UnInt32 _f2_pcc_digital_input_trip__out;
+X_Int32 _f2_pcc_f2_pcc__out;
 double _f2_pcc_meas1_ia_ia1__out;
 double _f2_pcc_meas1_ib_ia1__out;
 double _f2_pcc_meas1_ic_ia1__out;
@@ -261,8 +250,7 @@ double _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_to_hz__out;
-X_UnInt32 _f2_pcc_sr_flip_flop1__out;
-X_UnInt32 _f2_pcc_sr_flip_flop1__out_n;
+X_Int32 _f3_pcc_f3_pcc__out;
 double _f3_pcc_meas1_ia_ia1__out;
 double _f3_pcc_meas1_ib_ia1__out;
 double _f3_pcc_meas1_ic_ia1__out;
@@ -272,19 +260,18 @@ double _f3_pcc_meas1_vc_va1__out;
 double _f3_pcc_meas2_va_va1__out;
 double _f3_pcc_meas2_vb_va1__out;
 double _f3_pcc_meas2_vc_va1__out;
-X_Int32 _f3_pcc_pcc_cb__out;
+double _f1_pcc_data_type_conversion1__out;
 double _f1_pcc_meas1_bus_join2__out[3];
 double _f1_pcc_meas1_bus_join1__out[3];
 double _f1_pcc_meas2_bus_join1__out[3];
 double _f1_pcc_pcc_measurements_three_phase_pll1_sin__out;
 double _f1_pcc_gain4__out;
-double _f1_pcc_data_type_conversion1__out;
+double _f2_pcc_data_type_conversion1__out;
 double _f2_pcc_meas1_bus_join2__out[3];
 double _f2_pcc_meas1_bus_join1__out[3];
 double _f2_pcc_meas2_bus_join1__out[3];
 double _f2_pcc_pcc_measurements_three_phase_pll1_sin__out;
 double _f2_pcc_gain4__out;
-double _f2_pcc_data_type_conversion1__out;
 double _f3_pcc_meas1_bus_join2__out[3];
 double _f3_pcc_meas1_bus_join1__out[3];
 double _f1_pcc_pcc_measurements_bus_split2__out;
@@ -495,11 +482,9 @@ double _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum7__out;
 double _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state;
 double _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state;
 double _f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state;
-X_UnInt32 _f1_pcc_sr_flip_flop1__state;
 double _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state;
 double _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state;
 double _f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state;
-X_UnInt32 _f2_pcc_sr_flip_flop1__state;
 double _f1_pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1;
 double _f1_pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1;
 double _f1_pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1Q;
@@ -555,11 +540,9 @@ void ReInit_user_sp_cpu0_dev3() {
     _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state = 376.99111843;
     _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state = 0.0;
     _f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state = 0.0;
-    _f1_pcc_sr_flip_flop1__state = (double) 0;
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state = 376.99111843;
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state = 0.0;
     _f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state = 0.0;
-    _f2_pcc_sr_flip_flop1__state = (double) 0;
     _f1_pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1 = 0.0;
     _f1_pcc_pcc_measurements_power_meter1__filter_1_input_k_minus_1 = 0.0;
     _f1_pcc_pcc_measurements_power_meter1__filter_1_output_k_minus_1Q = 0.0;
@@ -681,22 +664,8 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     // Output block
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
-    // Generated from the component: F1_PCC.Digital Input Close
-    X_UnInt32 _f1_pcc_digital_input_close__temp = HIL_InInt32(0xf80204);
-    if(_f1_pcc_digital_input_close__temp == 0) {
-        _f1_pcc_digital_input_close__out = (X_UnInt32)1.0;
-    }
-    else {
-        _f1_pcc_digital_input_close__out = (X_UnInt32)0.0;
-    }
-    // Generated from the component: F1_PCC.Digital Input Trip
-    X_UnInt32 _f1_pcc_digital_input_trip__temp = HIL_InInt32(0xf80205);
-    if(_f1_pcc_digital_input_trip__temp == 0) {
-        _f1_pcc_digital_input_trip__out = (X_UnInt32)1.0;
-    }
-    else {
-        _f1_pcc_digital_input_trip__out = (X_UnInt32)0.0;
-    }
+    // Generated from the component: F1_PCC.F1_PCC
+    _f1_pcc_f1_pcc__out = XIo_InInt32(0x55000108);
     // Generated from the component: F1_PCC.Meas1.IA.Ia1
     _f1_pcc_meas1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x22));
     // Generated from the component: F1_PCC.Meas1.IB.Ia1
@@ -725,25 +694,8 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out = _f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state;
     // Generated from the component: F1_PCC.PCC Measurements.Three phase PLL1.to_Hz
     _f1_pcc_pcc_measurements_three_phase_pll1_to_hz__out = 0.15915494309189535 * _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__out;
-    // Generated from the component: F1_PCC.SR Flip Flop1
-    _f1_pcc_sr_flip_flop1__out = _f1_pcc_sr_flip_flop1__state;
-    _f1_pcc_sr_flip_flop1__out_n = _f1_pcc_sr_flip_flop1__state != -1 ? !_f1_pcc_sr_flip_flop1__state : -1;
-    // Generated from the component: F2_PCC.Digital Input Close
-    X_UnInt32 _f2_pcc_digital_input_close__temp = HIL_InInt32(0xf80207);
-    if(_f2_pcc_digital_input_close__temp == 0) {
-        _f2_pcc_digital_input_close__out = (X_UnInt32)1.0;
-    }
-    else {
-        _f2_pcc_digital_input_close__out = (X_UnInt32)0.0;
-    }
-    // Generated from the component: F2_PCC.Digital Input Trip
-    X_UnInt32 _f2_pcc_digital_input_trip__temp = HIL_InInt32(0xf80208);
-    if(_f2_pcc_digital_input_trip__temp == 0) {
-        _f2_pcc_digital_input_trip__out = (X_UnInt32)1.0;
-    }
-    else {
-        _f2_pcc_digital_input_trip__out = (X_UnInt32)0.0;
-    }
+    // Generated from the component: F2_PCC.F2_PCC
+    _f2_pcc_f2_pcc__out = XIo_InInt32(0x5500010c);
     // Generated from the component: F2_PCC.Meas1.IA.Ia1
     _f2_pcc_meas1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x25));
     // Generated from the component: F2_PCC.Meas1.IB.Ia1
@@ -772,9 +724,8 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out = _f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.to_Hz
     _f2_pcc_pcc_measurements_three_phase_pll1_to_hz__out = 0.15915494309189535 * _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__out;
-    // Generated from the component: F2_PCC.SR Flip Flop1
-    _f2_pcc_sr_flip_flop1__out = _f2_pcc_sr_flip_flop1__state;
-    _f2_pcc_sr_flip_flop1__out_n = _f2_pcc_sr_flip_flop1__state != -1 ? !_f2_pcc_sr_flip_flop1__state : -1;
+    // Generated from the component: F3_PCC.F3_PCC
+    _f3_pcc_f3_pcc__out = XIo_InInt32(0x55000110);
     // Generated from the component: F3_PCC.Meas1.IA.Ia1
     _f3_pcc_meas1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x20f));
     // Generated from the component: F3_PCC.Meas1.IB.Ia1
@@ -793,8 +744,15 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f3_pcc_meas2_vb_va1__out = (HIL_InFloat(0xc80000 + 0x20d));
     // Generated from the component: F3_PCC.Meas2.VC.Va1
     _f3_pcc_meas2_vc_va1__out = (HIL_InFloat(0xc80000 + 0x20e));
-    // Generated from the component: F3_PCC.PCC_CB
-    _f3_pcc_pcc_cb__out = XIo_InInt32(0x55000108);
+    // Generated from the component: F1_PCC.Data Type Conversion1
+    _f1_pcc_data_type_conversion1__out = (double)_f1_pcc_f1_pcc__out;
+    // Generated from the component: F1_PCC.S1.CTC_Wrapper
+    if (_f1_pcc_f1_pcc__out == 0x0) {
+        HIL_OutInt32(0x8240480, 0x0);
+    }
+    else {
+        HIL_OutInt32(0x8240480, 0x1);
+    }
     // Generated from the component: F1_PCC.Meas1.Bus Join2
     _f1_pcc_meas1_bus_join2__out[0] = _f1_pcc_meas1_ia_ia1__out;
     _f1_pcc_meas1_bus_join2__out[1] = _f1_pcc_meas1_ib_ia1__out;
@@ -812,17 +770,15 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f1_pcc_pcc_measurements_three_phase_pll1_sin__out = sin(_f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out);
     // Generated from the component: F1_PCC.Gain4
     _f1_pcc_gain4__out = 100.0 * _f1_pcc_pcc_measurements_three_phase_pll1_to_hz__out;
-    // Generated from the component: F1_PCC.Data Type Conversion1
-    _f1_pcc_data_type_conversion1__out = (double)_f1_pcc_sr_flip_flop1__out;
-    // Generated from the component: F1_PCC.S1.CTC_Wrapper
-    if (_f1_pcc_sr_flip_flop1__out == 0x0) {
-        HIL_OutInt32(0x8240480, 0x0);
+    // Generated from the component: F2_PCC.Data Type Conversion1
+    _f2_pcc_data_type_conversion1__out = (double)_f2_pcc_f2_pcc__out;
+    // Generated from the component: F2_PCC.S1.CTC_Wrapper
+    if (_f2_pcc_f2_pcc__out == 0x0) {
+        HIL_OutInt32(0x8240481, 0x0);
     }
     else {
-        HIL_OutInt32(0x8240480, 0x1);
+        HIL_OutInt32(0x8240481, 0x1);
     }
-    // Generated from the component: F1_PCC.Termination2
-    // Generated from the component: F1_PCC.Termination3
     // Generated from the component: F2_PCC.Meas1.Bus Join2
     _f2_pcc_meas1_bus_join2__out[0] = _f2_pcc_meas1_ia_ia1__out;
     _f2_pcc_meas1_bus_join2__out[1] = _f2_pcc_meas1_ib_ia1__out;
@@ -840,16 +796,13 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f2_pcc_pcc_measurements_three_phase_pll1_sin__out = sin(_f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__out);
     // Generated from the component: F2_PCC.Gain4
     _f2_pcc_gain4__out = 100.0 * _f2_pcc_pcc_measurements_three_phase_pll1_to_hz__out;
-    // Generated from the component: F2_PCC.Data Type Conversion1
-    _f2_pcc_data_type_conversion1__out = (double)_f2_pcc_sr_flip_flop1__out;
-    // Generated from the component: F2_PCC.S1.CTC_Wrapper
-    if (_f2_pcc_sr_flip_flop1__out == 0x0) {
-        HIL_OutInt32(0x8240481, 0x0);
+    // Generated from the component: F3_PCC.S1.CTC_Wrapper
+    if (_f3_pcc_f3_pcc__out == 0x0) {
+        HIL_OutInt32(0x8640480, 0x0);
     }
     else {
-        HIL_OutInt32(0x8240481, 0x1);
+        HIL_OutInt32(0x8640480, 0x1);
     }
-    // Generated from the component: F2_PCC.Termination4
     // Generated from the component: F3_PCC.Meas1.Bus Join2
     _f3_pcc_meas1_bus_join2__out[0] = _f3_pcc_meas1_ia_ia1__out;
     _f3_pcc_meas1_bus_join2__out[1] = _f3_pcc_meas1_ib_ia1__out;
@@ -861,13 +814,6 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     // Generated from the component: F3_PCC.Meas2.Termination4
     // Generated from the component: F3_PCC.Meas2.Termination5
     // Generated from the component: F3_PCC.Meas2.Termination6
-    // Generated from the component: F3_PCC.S1.CTC_Wrapper
-    if (_f3_pcc_pcc_cb__out == 0x0) {
-        HIL_OutInt32(0x8640480, 0x0);
-    }
-    else {
-        HIL_OutInt32(0x8640480, 0x1);
-    }
     // Generated from the component: F1_PCC.PCC Measurements.Bus Split2
     _f1_pcc_pcc_measurements_bus_split2__out = _f1_pcc_meas1_bus_join2__out[0];
     _f1_pcc_pcc_measurements_bus_split2__out1 = _f1_pcc_meas1_bus_join2__out[1];
@@ -1308,26 +1254,12 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f1_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state += _f1_pcc_pcc_measurements_three_phase_pll1_pid_gain1__out * 0.001;
     // Generated from the component: F1_PCC.PCC Measurements.Three phase PLL1.Unit Delay1
     _f1_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state = _f1_pcc_pcc_measurements_three_phase_pll1_integrator__out;
-    // Generated from the component: F1_PCC.SR Flip Flop1
-    if ((_f1_pcc_digital_input_close__out != 0x0) && (_f1_pcc_digital_input_trip__out == 0x0))
-        _f1_pcc_sr_flip_flop1__state = 1;
-    else if ((_f1_pcc_digital_input_close__out == 0x0) && (_f1_pcc_digital_input_trip__out != 0x0))
-        _f1_pcc_sr_flip_flop1__state = 0;
-    else if ((_f1_pcc_digital_input_close__out != 0x0) && (_f1_pcc_digital_input_trip__out != 0x0))
-        _f1_pcc_sr_flip_flop1__state = -1;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Integrator1
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator1__state += _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum7__out * 0.001;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Integrator2
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_integrator2__state += _f2_pcc_pcc_measurements_three_phase_pll1_pid_gain1__out * 0.001;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.Unit Delay1
     _f2_pcc_pcc_measurements_three_phase_pll1_unit_delay1__state = _f2_pcc_pcc_measurements_three_phase_pll1_integrator__out;
-    // Generated from the component: F2_PCC.SR Flip Flop1
-    if ((_f2_pcc_digital_input_close__out != 0x0) && (_f2_pcc_digital_input_trip__out == 0x0))
-        _f2_pcc_sr_flip_flop1__state = 1;
-    else if ((_f2_pcc_digital_input_close__out == 0x0) && (_f2_pcc_digital_input_trip__out != 0x0))
-        _f2_pcc_sr_flip_flop1__state = 0;
-    else if ((_f2_pcc_digital_input_close__out != 0x0) && (_f2_pcc_digital_input_trip__out != 0x0))
-        _f2_pcc_sr_flip_flop1__state = -1;
     // Generated from the component: F1_PCC.PCC Measurements.RMS value1
     if( _f1_pcc_pcc_measurements_rms_value1__zc ) {
         if (_f1_pcc_pcc_measurements_bus_split1__out != _f1_pcc_pcc_measurements_rms_value1__previous_value)

@@ -302,9 +302,9 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1216.0</x>
-                    <y>376.0</y>
-                    <width>56</width>
+                    <x>1240</x>
+                    <y>376</y>
+                    <width>32</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
@@ -805,8 +805,8 @@ displayValue = hil.read_analog_signal('Vrms_bus201')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1272</x>
-                    <y>328</y>
+                    <x>1272.0</x>
+                    <y>328.0</y>
                     <width>144</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2493,19 +2493,19 @@ referenceCurves = [refCurveData1]
                 <hierarchy_position>1</hierarchy_position>
                 <working_mode>windowed</working_mode>
                 <widget_settings>
-                    <x>672</x>
-                    <y>1008</y>
+                    <x>672.0</x>
+                    <y>1008.0</y>
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
                     <state>Scope</state>
-                    <layout></layout>
+                    <layout>None</layout>
                     <presets>
                         <active_capture_preset>Default</active_capture_preset>
                         <active_scope_preset>Default</active_scope_preset>
                         <capture name="Default">
                             <time_interval>0.01</time_interval>
-                            <sample_rate>500000.0</sample_rate>
+                            <sample_rate>250000.0</sample_rate>
                             <background_color>white</background_color>
                             <layout>Vertical</layout>
                             <legend>True</legend>
@@ -2533,7 +2533,7 @@ referenceCurves = [refCurveData1]
                             <layout>Grid</layout>
                             <legend>True</legend>
                             <show_viewports>2</show_viewports>
-                            <decimation>2</decimation>
+                            <decimation>1</decimation>
                             <time_base>0.005</time_base>
                             <analog_signals>
                             <analog>
@@ -2541,7 +2541,7 @@ referenceCurves = [refCurveData1]
                             <name>F2_PCC.Meas1.VA</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -2554,7 +2554,7 @@ referenceCurves = [refCurveData1]
                             <name>F2_PCC.Meas2.VA</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -2567,7 +2567,7 @@ referenceCurves = [refCurveData1]
                             <name>F2_PCC.Meas1.IA</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -2592,7 +2592,7 @@ referenceCurves = [refCurveData1]
                         </presets>
                     <capture>
                         <time_interval>0.01</time_interval>
-                        <sample_rate>500000.0</sample_rate>
+                        <sample_rate>250000.0</sample_rate>
                         <background_color>white</background_color>
                         <layout>Vertical</layout>
                         <legend>True</legend>
@@ -2633,7 +2633,7 @@ referenceCurves = [refCurveData1]
                             <name>F2_PCC.Meas1.VA</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -2646,7 +2646,7 @@ referenceCurves = [refCurveData1]
                             <name>F2_PCC.Meas2.VA</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
@@ -2659,7 +2659,7 @@ referenceCurves = [refCurveData1]
                             <name>F2_PCC.Meas1.IA</name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
+                            <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 

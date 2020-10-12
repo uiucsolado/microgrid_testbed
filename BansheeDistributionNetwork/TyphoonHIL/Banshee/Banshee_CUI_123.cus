@@ -61,8 +61,8 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                 <phasors_data>
                     </phasors_data>
                 <widget_settings>
-                    <x>1984.0</x>
-                    <y>176.0</y>
+                    <x>2000</x>
+                    <y>184</y>
                     <width>328</width>
                     <height>304</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -163,8 +163,8 @@ referenceCurves = [refCurveData1]
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>648.0</x>
-                    <y>736.0</y>
+                    <x>768</x>
+                    <y>736</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -182,12 +182,12 @@ referenceCurves = [refCurveData1]
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>0.0</y>
+                    <x>0</x>
+                    <y>0</y>
                     <width>3450</width>
                     <height>1150</height>
                     <background_color><![CDATA[#8f8f8f]]></background_color>
-                    <background_type><![CDATA[Filled]]></background_type>
+                    <background_type><![CDATA[Transparent]]></background_type>
                     <is_background>True</is_background>
                     <appearance><![CDATA[Flat]]></appearance>
                 </widget_settings>
@@ -201,8 +201,8 @@ referenceCurves = [refCurveData1]
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3336.0</x>
-                    <y>272.0</y>
+                    <x>3224</x>
+                    <y>272</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -244,8 +244,8 @@ widgetValue = None
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3368.0</x>
-                    <y>288.0</y>
+                    <x>3256</x>
+                    <y>288</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -260,8 +260,8 @@ widgetValue = None
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2232.0</x>
-                    <y>464.0</y>
+                    <x>2248</x>
+                    <y>464</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -279,8 +279,8 @@ widgetValue = None
                 <image_scaling><![CDATA[Keep aspect ratio]]></image_scaling>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1440.0</x>
-                    <y>552.0</y>
+                    <x>1456</x>
+                    <y>552</y>
                     <width>80</width>
                     <height>72</height>
                     <background_color><![CDATA[#f0f0f0]]></background_color>
@@ -322,8 +322,8 @@ widgetValue = None
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1464.0</x>
-                    <y>568.0</y>
+                    <x>1480</x>
+                    <y>568</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -364,8 +364,8 @@ widgetValue = None
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>680.0</x>
-                    <y>720.0</y>
+                    <x>800</x>
+                    <y>720</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -393,8 +393,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>400.0</x>
-                    <y>312.0</y>
+                    <x>520</x>
+                    <y>312</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -422,8 +422,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>504.0</x>
-                    <y>312.0</y>
+                    <x>624</x>
+                    <y>312</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -451,8 +451,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>608.0</x>
-                    <y>312.0</y>
+                    <x>728</x>
+                    <y>312</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -480,8 +480,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>72.0</x>
-                    <y>472.0</y>
+                    <x>184</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -509,8 +509,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>192.0</x>
-                    <y>472.0</y>
+                    <x>304</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -538,8 +538,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>392.0</x>
-                    <y>472.0</y>
+                    <x>504</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -567,8 +567,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>504.0</x>
-                    <y>472.0</y>
+                    <x>616</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -596,8 +596,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>616.0</x>
-                    <y>472.0</y>
+                    <x>728</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -625,8 +625,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>744.0</x>
-                    <y>480.0</y>
+                    <x>856</x>
+                    <y>496</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -654,8 +654,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>848.0</x>
-                    <y>512.0</y>
+                    <x>952</x>
+                    <y>512</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -683,8 +683,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>168.0</x>
-                    <y>704.0</y>
+                    <x>280</x>
+                    <y>704</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -712,8 +712,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>392.0</x>
-                    <y>744.0</y>
+                    <x>504</x>
+                    <y>744</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -741,8 +741,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>592.0</x>
-                    <y>744.0</y>
+                    <x>704</x>
+                    <y>744</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -770,8 +770,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>440.0</x>
-                    <y>960.0</y>
+                    <x>552</x>
+                    <y>960</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -799,8 +799,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1264.0</x>
-                    <y>136.0</y>
+                    <x>1280</x>
+                    <y>136</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -828,8 +828,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1464.0</x>
-                    <y>136.0</y>
+                    <x>1480</x>
+                    <y>136</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -857,8 +857,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1632.0</x>
-                    <y>136.0</y>
+                    <x>1648</x>
+                    <y>136</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -886,8 +886,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1272.0</x>
-                    <y>320.0</y>
+                    <x>1280</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -915,8 +915,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1584.0</x>
-                    <y>320.0</y>
+                    <x>1592</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -944,8 +944,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1840.0</x>
-                    <y>320.0</y>
+                    <x>1848</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -973,8 +973,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1376.0</x>
-                    <y>544.0</y>
+                    <x>1392</x>
+                    <y>544</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1002,8 +1002,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1688.0</x>
-                    <y>520.0</y>
+                    <x>1704</x>
+                    <y>520</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1031,8 +1031,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1952.0</x>
-                    <y>512.0</y>
+                    <x>1960</x>
+                    <y>512</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1060,8 +1060,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2176.0</x>
-                    <y>512.0</y>
+                    <x>2192</x>
+                    <y>512</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1089,8 +1089,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1136.0</x>
-                    <y>592.0</y>
+                    <x>1160</x>
+                    <y>592</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1118,8 +1118,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1376.0</x>
-                    <y>592.0</y>
+                    <x>1392</x>
+                    <y>592</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1147,8 +1147,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1616.0</x>
-                    <y>600.0</y>
+                    <x>1632</x>
+                    <y>600</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1176,8 +1176,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1792.0</x>
-                    <y>600.0</y>
+                    <x>1808</x>
+                    <y>600</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1205,8 +1205,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1352.0</x>
-                    <y>792.0</y>
+                    <x>1368</x>
+                    <y>792</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1234,8 +1234,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1472.0</x>
-                    <y>792.0</y>
+                    <x>1488</x>
+                    <y>792</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1263,8 +1263,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1592.0</x>
-                    <y>872.0</y>
+                    <x>1608</x>
+                    <y>872</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1292,8 +1292,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1744.0</x>
-                    <y>880.0</y>
+                    <x>1760</x>
+                    <y>880</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1321,8 +1321,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1872.0</x>
-                    <y>880.0</y>
+                    <x>1888</x>
+                    <y>880</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1350,8 +1350,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1984.0</x>
-                    <y>712.0</y>
+                    <x>1992</x>
+                    <y>712</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1379,8 +1379,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2128.0</x>
-                    <y>712.0</y>
+                    <x>2144</x>
+                    <y>712</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1408,8 +1408,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2256.0</x>
-                    <y>712.0</y>
+                    <x>2264</x>
+                    <y>712</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1437,8 +1437,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2720.0</x>
-                    <y>320.0</y>
+                    <x>2672</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1466,8 +1466,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2856.0</x>
-                    <y>320.0</y>
+                    <x>2808</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1495,8 +1495,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3040.0</x>
-                    <y>320.0</y>
+                    <x>2992</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1524,8 +1524,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3272.0</x>
-                    <y>320.0</y>
+                    <x>3160</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1553,8 +1553,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2480.0</x>
-                    <y>472.0</y>
+                    <x>2432</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1582,8 +1582,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2672.0</x>
-                    <y>472.0</y>
+                    <x>2624</x>
+                    <y>472</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1611,8 +1611,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3088.0</x>
-                    <y>512.0</y>
+                    <x>3040</x>
+                    <y>504</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1640,8 +1640,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2720.0</x>
-                    <y>752.0</y>
+                    <x>2672</x>
+                    <y>752</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1669,8 +1669,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2904.0</x>
-                    <y>880.0</y>
+                    <x>2856</x>
+                    <y>880</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1698,8 +1698,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3360.0</x>
-                    <y>648.0</y>
+                    <x>3248</x>
+                    <y>648</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1727,8 +1727,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>752.0</x>
-                    <y>616.0</y>
+                    <x>856</x>
+                    <y>616</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1816,8 +1816,8 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                 <phasors_data>
                     </phasors_data>
                 <widget_settings>
-                    <x>216.0</x>
-                    <y>0.0</y>
+                    <x>336</x>
+                    <y>0</y>
                     <width>304</width>
                     <height>304</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1852,8 +1852,8 @@ displayValue = hil.read_analog_signal('Vrms_bus101')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>400.0</x>
-                    <y>272.0</y>
+                    <x>520</x>
+                    <y>272</y>
                     <width>128</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1889,8 +1889,8 @@ displayValue = hil.read_analog_signal('Vrms_bus201')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1400.0</x>
-                    <y>272.0</y>
+                    <x>1416</x>
+                    <y>272</y>
                     <width>128</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1926,8 +1926,8 @@ displayValue = hil.read_analog_signal('Vrms_bus102')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>24.0</x>
-                    <y>432.0</y>
+                    <x>136</x>
+                    <y>432</y>
                     <width>128</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1963,8 +1963,8 @@ displayValue = hil.read_analog_signal('Vrms_bus105')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>392.0</x>
-                    <y>432.0</y>
+                    <x>512</x>
+                    <y>432</y>
                     <width>128</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2000,8 +2000,8 @@ displayValue = hil.read_analog_signal('Vrms_bus104')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>112.0</x>
-                    <y>640.0</y>
+                    <x>232</x>
+                    <y>640</y>
                     <width>104</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2037,8 +2037,8 @@ displayValue = hil.read_analog_signal('Vrms_bus106')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>416.0</x>
-                    <y>704.0</y>
+                    <x>536</x>
+                    <y>704</y>
                     <width>96</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2074,8 +2074,8 @@ displayValue = hil.read_analog_signal('Vrms_bus207')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1816.0</x>
-                    <y>832.0</y>
+                    <x>1832</x>
+                    <y>832</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2110,8 +2110,8 @@ displayValue = hil.read_analog_signal('Vrms_bus107')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>288.0</x>
-                    <y>920.0</y>
+                    <x>408</x>
+                    <y>920</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2147,8 +2147,8 @@ displayValue = hil.read_analog_signal('Vrms_bus206')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1640.0</x>
-                    <y>832.0</y>
+                    <x>1656</x>
+                    <y>832</y>
                     <width>104</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2184,8 +2184,8 @@ displayValue = hil.read_analog_signal('Vrms_bus204')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1048.0</x>
-                    <y>552.0</y>
+                    <x>1064</x>
+                    <y>552</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2221,8 +2221,8 @@ displayValue = hil.read_analog_signal('Vrms_bus202')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1240.0</x>
-                    <y>408.0</y>
+                    <x>1256</x>
+                    <y>408</y>
                     <width>96</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2258,8 +2258,8 @@ displayValue = hil.read_analog_signal('Vrms_bus203')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1728.0</x>
-                    <y>552.0</y>
+                    <x>1744</x>
+                    <y>552</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2295,8 +2295,8 @@ displayValue = hil.read_analog_signal('Vrms_bus208')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1872.0</x>
-                    <y>464.0</y>
+                    <x>1888</x>
+                    <y>464</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2332,8 +2332,8 @@ displayValue = hil.read_analog_signal('Vrms_bus209')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1968.0</x>
-                    <y>672.0</y>
+                    <x>1984</x>
+                    <y>672</y>
                     <width>104</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2369,8 +2369,8 @@ displayValue = hil.read_analog_signal('Vrms_bus210')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2200.0</x>
-                    <y>672.0</y>
+                    <x>2216</x>
+                    <y>672</y>
                     <width>104</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2406,8 +2406,8 @@ displayValue = hil.read_analog_signal('Vrms_bus303')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2384.0</x>
-                    <y>672.0</y>
+                    <x>2336</x>
+                    <y>672</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2443,8 +2443,8 @@ displayValue = hil.read_analog_signal('Vrms_bus305')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2760.0</x>
-                    <y>840.0</y>
+                    <x>2712</x>
+                    <y>840</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2480,8 +2480,8 @@ displayValue = hil.read_analog_signal('Vrms_bus205')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1248.0</x>
-                    <y>744.0</y>
+                    <x>1264</x>
+                    <y>744</y>
                     <width>120</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2517,8 +2517,8 @@ displayValue = hil.read_analog_signal('Vrms_bus302')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2496.0</x>
-                    <y>424.0</y>
+                    <x>2448</x>
+                    <y>424</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2554,8 +2554,8 @@ displayValue = hil.read_analog_signal('Vrms_bus306')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2944.0</x>
-                    <y>424.0</y>
+                    <x>2896</x>
+                    <y>424</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2591,8 +2591,8 @@ displayValue = hil.read_analog_signal('Vrms_bus301')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2832.0</x>
-                    <y>272.0</y>
+                    <x>2784</x>
+                    <y>272</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2628,8 +2628,8 @@ displayValue = hil.read_analog_signal('Vrms_bus307')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3184.0</x>
-                    <y>608.0</y>
+                    <x>3136</x>
+                    <y>608</y>
                     <width>112</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2729,8 +2729,8 @@ displayValue = [[P, Q], ["P [kW]", "Q [kvar]"]]
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>536.0</x>
-                    <y>0.0</y>
+                    <x>656</x>
+                    <y>0</y>
                     <width>480</width>
                     <height>168</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2808,8 +2808,8 @@ displayValue = hil.read_analog_signal('F3_Motor.IM_machine mechanical speed')*30
                 <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3192.0</x>
-                    <y>824.0</y>
+                    <x>3112</x>
+                    <y>848</y>
                     <width>248</width>
                     <height>136</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2886,8 +2886,8 @@ widgetValue = None
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>3104.0</x>
-                    <y>792.0</y>
+                    <x>3216</x>
+                    <y>744</y>
                     <width>136</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2957,8 +2957,8 @@ widgetValue = None
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>200.0</x>
-                    <y>1048.0</y>
+                    <x>320</x>
+                    <y>1048</y>
                     <width>136</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2992,8 +2992,8 @@ displayValue = hil.read_analog_signal('F1_Motor.IM_machine mechanical speed')*30
                 <decimals>2</decimals>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>496.0</x>
-                    <y>1008.0</y>
+                    <x>616</x>
+                    <y>1008</y>
                     <width>248</width>
                     <height>136</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3111,8 +3111,8 @@ displayValue = hil.read_analog_signal(name = 'F1_PCC.P')/1000.0
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>656.0</x>
-                    <y>176.0</y>
+                    <x>776</x>
+                    <y>176</y>
                     <width>216</width>
                     <height>64</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3148,8 +3148,8 @@ displayValue = hil.read_analog_signal(name = 'F2_PCC.P')/1000.0
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1536.0</x>
-                    <y>216.0</y>
+                    <x>1552</x>
+                    <y>216</y>
                     <width>208</width>
                     <height>64</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3231,8 +3231,8 @@ widgetValue = None
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>2264.0</x>
-                    <y>480.0</y>
+                    <x>2280</x>
+                    <y>480</y>
                     <width>80</width>
                     <height>40</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3253,8 +3253,8 @@ widgetValue = None
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>1800.0</x>
-                    <y>1152.0</y>
+                    <x>1784</x>
+                    <y>1152</y>
                     <width>768</width>
                     <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3276,8 +3276,8 @@ widgetValue = None
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>1000.0</x>
-                    <y>1152.0</y>
+                    <x>1016</x>
+                    <y>1152</y>
                     <width>768</width>
                     <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -3488,7 +3488,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValue><![CDATA[500.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[vars]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -3545,7 +3545,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValue><![CDATA[100.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[W]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -3675,7 +3675,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -3762,7 +3762,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -4037,7 +4037,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -4194,7 +4194,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -4347,7 +4347,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValue><![CDATA[-10000.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[vars]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -4519,7 +4519,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[0.0]]></inputValue>
+                <inputValue><![CDATA[100.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[W]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -4547,8 +4547,8 @@ widgetValue = None
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>2584.0</x>
-                    <y>1152.0</y>
+                    <x>2552</x>
+                    <y>1152</y>
                     <width>896</width>
                     <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -5240,8 +5240,8 @@ displayValue = 0.0
 
 ]]></initialization_code>
                 <widget_settings>
-                    <x>72.0</x>
-                    <y>1152.0</y>
+                    <x>120</x>
+                    <y>1152</y>
                     <width>896</width>
                     <height>704</height>
                     <appearance><![CDATA[Flat]]></appearance>

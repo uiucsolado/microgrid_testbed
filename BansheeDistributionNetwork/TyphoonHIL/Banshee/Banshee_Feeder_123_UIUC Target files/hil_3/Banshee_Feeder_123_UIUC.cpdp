@@ -760,9 +760,30 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>F1_PCC.P</name>
+            <type>generic</type>
+            <address>16385</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F1_PCC.Q</name>
+            <type>generic</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>F2_PCC.Q</name>
             <type>generic</type>
             <address>16388</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_PCC.P</name>
+            <type>generic</type>
+            <address>16387</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -780,37 +801,36 @@
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
-        <cell>
-            <name>F2_PCC.P</name>
-            <type>generic</type>
-            <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F1_PCC.Q</name>
-            <type>generic</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F1_PCC.P</name>
-            <type>generic</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
     </variables>
 
 
     <scada_inputs>
         <scada_input>
-            <name>F3_PCC.PCC_CB</name>
+            <name>F1_PCC.F1_PCC</name>
             <addr>1426063624</addr>
             <min>0.0</min>
             <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F3_PCC.F3_PCC</name>
+            <addr>1426063632</addr>
+            <min>0.0</min>
+            <max>1.0</max>
             <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_PCC.F2_PCC</name>
+            <addr>1426063628</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
             <unit></unit>
             <widget_type>int</widget_type>
             <format>integer</format>

@@ -5,7 +5,7 @@ REM * Common entries:
 REM *****************************************:
 
 REM Setting the simulation time step...
-rtds_write 0x00000000 0x00000258
+rtds_write 0x00000000 0x000002EE
 
 REM Module block enable
 rtds_write 0x00000003 0x00000001
@@ -15,22 +15,22 @@ rtds_write 0x00810000 0x00000820
 rtds_write 0x00810001 0x00000822
 rtds_write 0x00810400 0x40400000
 rtds_write 0x00810401 0x00000000
-rtds_write 0x00810402 0x3F7FF66F
-rtds_write 0x00810403 0xC4A84000
-rtds_write 0x00810404 0x39174445
-rtds_write 0x00810405 0xFEDD0000
-rtds_write 0x00810406 0x39AC218D
-rtds_write 0x00810407 0x71770000
-rtds_write 0x00810408 0x3F7FEA3C
-rtds_write 0x00810409 0x2C834000
-rtds_write 0x0081040A 0x3686353B
-rtds_write 0x0081040B 0x3BA14000
-rtds_write 0x0081040C 0xAF9E9D57
-rtds_write 0x0081040D 0xFE6A4000
-rtds_write 0x0081040E 0x30347E14
-rtds_write 0x0081040F 0xAEBF8000
-rtds_write 0x00810410 0xB6863208
-rtds_write 0x00810411 0x66C38000
+rtds_write 0x00810402 0x3F7FF40B
+rtds_write 0x00810403 0xE3E50000
+rtds_write 0x00810404 0x393D1273
+rtds_write 0x00810405 0x14684000
+rtds_write 0x00810406 0x39D726A6
+rtds_write 0x00810407 0x435C0000
+rtds_write 0x00810408 0x3F7FE4CB
+rtds_write 0x00810409 0xA16FC000
+rtds_write 0x0081040A 0x36A7C1C1
+rtds_write 0x0081040B 0x8A7E0000
+rtds_write 0x0081040C 0xAFF7D20F
+rtds_write 0x0081040D 0x03908000
+rtds_write 0x0081040E 0x308D0057
+rtds_write 0x0081040F 0xFD9D4000
+rtds_write 0x00810410 0xB6A7BCC2
+rtds_write 0x00810411 0x31758000
 rtds_write 0x00810412 0x449D48EA
 rtds_write 0x00810413 0xB7AFC000
 rtds_write 0x00810414 0xC49B7D24
@@ -41,8 +41,8 @@ rtds_write 0x00810418 0x3FC00000
 rtds_write 0x00810419 0x00000000
 rtds_write 0x0081041A 0x3F000000
 rtds_write 0x0081041B 0x00000000
-rtds_write 0x00800001 4e-06
-rtds_write 0x00800011 1.2525442304681383e-07
+rtds_write 0x00800001 5e-06
+rtds_write 0x00800011 1.5656802880851733e-07
 rtds_write 0x00800012 0.5
 rtds_write 0x00800017 1.0
 rtds_write 0x00800005 0x00000000
@@ -57,7 +57,7 @@ rtds_write 0x00800021 0x00000010
 rtds_write 0x00800023 0x00000000
 rtds_write 0x00800022 0x00000001
 rtds_write 0x0080002B 1.0
-rtds_write 0x0080002C 0.1256637061435917
+rtds_write 0x0080002C 0.15707963267948968
 rtds_write 0x0080002D 0x00000000
 rtds_write 0x0080002E 0x00000000
 rtds_write 0x00800026 0.0
@@ -173,9 +173,9 @@ rtds_write 0x08240400 0x00000001
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
 rtds_write 0x080C0001 0x00000002
-rtds_write 0x080C0004 0x3BA3D70A
-rtds_write 0x080C0005 0x3D710000
-rtds_write 0x08100000 0x000000C8
+rtds_write 0x080C0004 0x3B83126E
+rtds_write 0x080C0005 0x978D0000
+rtds_write 0x08100000 0x000000FA
 
 REM SPC0 FSM digital input pin assignments...
 
@@ -310,9 +310,9 @@ rtds_write 0x08640403 0x00000001
 REM SPC1 GDS compensation settings...
 rtds_write 0x084C0000 0x00000001
 rtds_write 0x084C0001 0x0000001F
-rtds_write 0x084C0004 0x3BA3D70A
-rtds_write 0x084C0005 0x3D710000
-rtds_write 0x08500000 0x000000C8
+rtds_write 0x084C0004 0x3B83126E
+rtds_write 0x084C0005 0x978D0000
+rtds_write 0x08500000 0x000000FA
 
 REM SPC1 FSM digital input pin assignments...
 
@@ -438,9 +438,9 @@ rtds_write 0x08A40402 0x00000001
 REM SPC2 GDS compensation settings...
 rtds_write 0x088C0000 0x00000001
 rtds_write 0x088C0001 0x00000010
-rtds_write 0x088C0004 0x3BA3D70A
-rtds_write 0x088C0005 0x3D710000
-rtds_write 0x08900000 0x000000C8
+rtds_write 0x088C0004 0x3B83126E
+rtds_write 0x088C0005 0x978D0000
+rtds_write 0x08900000 0x000000FA
 
 REM SPC2 FSM digital input pin assignments...
 
@@ -557,9 +557,9 @@ rtds_write 0x08E40401 0x00000001
 REM SPC3 GDS compensation settings...
 rtds_write 0x08CC0000 0x00000001
 rtds_write 0x08CC0001 0x0000000D
-rtds_write 0x08CC0004 0x3BA3D70A
-rtds_write 0x08CC0005 0x3D710000
-rtds_write 0x08D00000 0x000000C8
+rtds_write 0x08CC0004 0x3B83126E
+rtds_write 0x08CC0005 0x978D0000
+rtds_write 0x08D00000 0x000000FA
 
 REM SPC3 FSM digital input pin assignments...
 
@@ -685,9 +685,9 @@ rtds_write 0x09240402 0x00000000
 REM SPC4 GDS compensation settings...
 rtds_write 0x090C0000 0x00000001
 rtds_write 0x090C0001 0x00000011
-rtds_write 0x090C0004 0x3BA3D70A
-rtds_write 0x090C0005 0x3D710000
-rtds_write 0x09100000 0x000000C8
+rtds_write 0x090C0004 0x3B83126E
+rtds_write 0x090C0005 0x978D0000
+rtds_write 0x09100000 0x000000FA
 
 REM SPC4 FSM digital input pin assignments...
 
@@ -786,9 +786,9 @@ REM SPC5 Contactors initialization...
 REM SPC5 GDS compensation settings...
 rtds_write 0x094C0000 0x00000001
 rtds_write 0x094C0001 0x00000000
-rtds_write 0x094C0004 0x3BA3D70A
-rtds_write 0x094C0005 0x3D710000
-rtds_write 0x09500000 0x000000C8
+rtds_write 0x094C0004 0x3B83126E
+rtds_write 0x094C0005 0x978D0000
+rtds_write 0x09500000 0x000000FA
 
 REM SPC5 FSM digital input pin assignments...
 

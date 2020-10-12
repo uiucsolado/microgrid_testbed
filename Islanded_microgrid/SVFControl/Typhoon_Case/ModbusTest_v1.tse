@@ -1,8 +1,8 @@
 version = 4.2
 
 //
-// Saved by sw version: 2018.3 SP1
-// Save timestamp: 28-Jul-2019 @ 03:18:37 PM
+// Saved by sw version: 2020.2
+// Save timestamp: 12-Oct-2020 @ 11:26:45 AM
 //
 
 model "ModbusTest_v1" {
@@ -28,6 +28,17 @@ model "ModbusTest_v1" {
         user_real_type_precision = "default"
         sys_cpu_optimization = "high"
         user_cpu_optimization = "high"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
     }
 
     component Subsystem Root {
@@ -402,7 +413,7 @@ model "ModbusTest_v1" {
             connect C_u12.out "ModBus Device1.discrete_in" as Connection111
         }
         [
-            position = 10416, 8832
+            position = 10712, 8952
             scale = -1, 1
             size = 64, 80
         ]
@@ -882,9 +893,17 @@ model "ModbusTest_v1" {
             hil_id = "0"
             configuration = "config1"
             preview = "Configuration preview"
+            network_settings_src = "Configuration dictionary"
+            ip_addr = "192.168.0.210"
+            netmask = "255.255.255.0"
+            port = "502"
+            gateway = "192.168.0.210"
+            gateway_enable = "False"
             ip_address_port = "False"
+            request_counter_port = "None"
             defines = ""
             modbus_sunspec = "False"
+            logging = "False"
             execution_rate = "100e-6"
         }
     }
