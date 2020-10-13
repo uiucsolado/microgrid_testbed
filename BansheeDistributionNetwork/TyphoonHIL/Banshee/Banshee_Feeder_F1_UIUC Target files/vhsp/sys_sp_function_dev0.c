@@ -141,6 +141,39 @@ typedef double real;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //@cmp.def.end
 
 
@@ -153,6 +186,8 @@ typedef double real;
 // variables
 float _vbr_variable_load1_irms1_iinst_ia1__out;
 float _vbr_variable_load1_vrms1_vinst_va1__out;
+float _vbr_variable_load2_irms1_iinst_ia1__out;
+float _vbr_variable_load2_vrms1_vinst_va1__out;
 float _vrms_bus101_vinst_va1__out;
 float _vrms_bus102_vinst_va1__out;
 float _vrms_bus103_vinst_va1__out;
@@ -160,6 +195,7 @@ float _vrms_bus104_vinst_va1__out;
 float _vrms_bus105_vinst_va1__out;
 float _vrms_bus106_vinst_va1__out;
 float _vrms_bus107_vinst_va1__out;
+float _vrms_grid_vinst_va1__out;
 float _vbr_variable_load1_irms1_rms_calc_fast__var_eff_s;
 X_UnInt32 _vbr_variable_load1_irms1_rms_calc_fast__period;
 X_UnInt8 _vbr_variable_load1_irms1_rms_calc_fast__var_zc;
@@ -170,6 +206,16 @@ X_UnInt32 _vbr_variable_load1_vrms1_rms_calc_fast__period;
 X_UnInt8 _vbr_variable_load1_vrms1_rms_calc_fast__var_zc;
 float _vbr_variable_load1_vrms1_rms_calc_fast__var_filt_old;
 float _vbr_variable_load1_vrms1_rms_calc_slow__var_rms;
+float _vbr_variable_load2_irms1_rms_calc_fast__var_eff_s;
+X_UnInt32 _vbr_variable_load2_irms1_rms_calc_fast__period;
+X_UnInt8 _vbr_variable_load2_irms1_rms_calc_fast__var_zc;
+float _vbr_variable_load2_irms1_rms_calc_fast__var_filt_old;
+float _vbr_variable_load2_irms1_rms_calc_slow__var_rms;
+float _vbr_variable_load2_vrms1_rms_calc_fast__var_eff_s;
+X_UnInt32 _vbr_variable_load2_vrms1_rms_calc_fast__period;
+X_UnInt8 _vbr_variable_load2_vrms1_rms_calc_fast__var_zc;
+float _vbr_variable_load2_vrms1_rms_calc_fast__var_filt_old;
+float _vbr_variable_load2_vrms1_rms_calc_slow__var_rms;
 float _vrms_bus101_rms_calc_fast__var_eff_s;
 X_UnInt32 _vrms_bus101_rms_calc_fast__period;
 float _vrms_bus101_rms_calc_slow__var_rms;
@@ -191,6 +237,9 @@ float _vrms_bus106_rms_calc_slow__var_rms;
 float _vrms_bus107_rms_calc_fast__var_eff_s;
 X_UnInt32 _vrms_bus107_rms_calc_fast__period;
 float _vrms_bus107_rms_calc_slow__var_rms;
+float _vrms_grid_rms_calc_fast__var_eff_s;
+X_UnInt32 _vrms_grid_rms_calc_fast__period;
+float _vrms_grid_rms_calc_slow__var_rms;
 //@cmp.var.end
 
 //@cmp.svar.start
@@ -202,6 +251,14 @@ float _vbr_variable_load1_irms1_rt2_output__out =  0.0;
 float _vbr_variable_load1_vrms1_rt1_output__out =  0.0;
 
 float _vbr_variable_load1_vrms1_rt2_output__out =  0.0;
+
+float _vbr_variable_load2_irms1_rt1_output__out =  0.0;
+
+float _vbr_variable_load2_irms1_rt2_output__out =  0.0;
+
+float _vbr_variable_load2_vrms1_rt1_output__out =  0.0;
+
+float _vbr_variable_load2_vrms1_rt2_output__out =  0.0;
 
 float _vrms_bus101_rt1_output__out =  0.0;
 
@@ -231,12 +288,22 @@ float _vrms_bus107_rt1_output__out =  0.0;
 
 float _vrms_bus107_rt2_output__out =  0.0;
 
+float _vrms_grid_rt1_output__out =  0.0;
+
+float _vrms_grid_rt2_output__out =  0.0;
+
 float _vbr_variable_load1_irms1_rms_calc_fast__v_sq_sum_state;
 X_UnInt32 _vbr_variable_load1_irms1_rms_calc_fast__pc_cnt_1_state;
 float _vbr_variable_load1_irms1_rms_calc_fast__var_filt;
 float _vbr_variable_load1_vrms1_rms_calc_fast__v_sq_sum_state;
 X_UnInt32 _vbr_variable_load1_vrms1_rms_calc_fast__pc_cnt_1_state;
 float _vbr_variable_load1_vrms1_rms_calc_fast__var_filt;
+float _vbr_variable_load2_irms1_rms_calc_fast__v_sq_sum_state;
+X_UnInt32 _vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state;
+float _vbr_variable_load2_irms1_rms_calc_fast__var_filt;
+float _vbr_variable_load2_vrms1_rms_calc_fast__v_sq_sum_state;
+X_UnInt32 _vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state;
+float _vbr_variable_load2_vrms1_rms_calc_fast__var_filt;
 float _vrms_bus101_rms_calc_fast__v_sq_sum_state;
 X_UnInt32 _vrms_bus101_rms_calc_fast__pc_cnt_1_state;
 float _vrms_bus101_rms_calc_fast__var_filt;
@@ -258,6 +325,9 @@ float _vrms_bus106_rms_calc_fast__var_filt;
 float _vrms_bus107_rms_calc_fast__v_sq_sum_state;
 X_UnInt32 _vrms_bus107_rms_calc_fast__pc_cnt_1_state;
 float _vrms_bus107_rms_calc_fast__var_filt;
+float _vrms_grid_rms_calc_fast__v_sq_sum_state;
+X_UnInt32 _vrms_grid_rms_calc_fast__pc_cnt_1_state;
+float _vrms_grid_rms_calc_fast__var_filt;
 //@cmp.svar.end
 
 
@@ -271,6 +341,10 @@ void ReInit_sys_sp_cpu_dev0() {
     _vbr_variable_load1_irms1_rt2_output__out =  0.0;
     _vbr_variable_load1_vrms1_rt1_output__out =  0.0;
     _vbr_variable_load1_vrms1_rt2_output__out =  0.0;
+    _vbr_variable_load2_irms1_rt1_output__out =  0.0;
+    _vbr_variable_load2_irms1_rt2_output__out =  0.0;
+    _vbr_variable_load2_vrms1_rt1_output__out =  0.0;
+    _vbr_variable_load2_vrms1_rt2_output__out =  0.0;
     _vrms_bus101_rt1_output__out =  0.0;
     _vrms_bus101_rt2_output__out =  0.0;
     _vrms_bus102_rt1_output__out =  0.0;
@@ -285,6 +359,8 @@ void ReInit_sys_sp_cpu_dev0() {
     _vrms_bus106_rt2_output__out =  0.0;
     _vrms_bus107_rt1_output__out =  0.0;
     _vrms_bus107_rt2_output__out =  0.0;
+    _vrms_grid_rt1_output__out =  0.0;
+    _vrms_grid_rt2_output__out =  0.0;
     _vbr_variable_load1_irms1_rms_calc_fast__var_eff_s = 0;
     _vbr_variable_load1_irms1_rms_calc_fast__period = 0;
     _vbr_variable_load1_irms1_rms_calc_fast__var_filt = 0.0f;
@@ -295,6 +371,16 @@ void ReInit_sys_sp_cpu_dev0() {
     _vbr_variable_load1_vrms1_rms_calc_fast__var_filt = 0.0f;
     _vbr_variable_load1_vrms1_rms_calc_fast__v_sq_sum_state = 0.0f;
     _vbr_variable_load1_vrms1_rms_calc_fast__pc_cnt_1_state = 0;
+    _vbr_variable_load2_irms1_rms_calc_fast__var_eff_s = 0;
+    _vbr_variable_load2_irms1_rms_calc_fast__period = 0;
+    _vbr_variable_load2_irms1_rms_calc_fast__var_filt = 0.0f;
+    _vbr_variable_load2_irms1_rms_calc_fast__v_sq_sum_state = 0.0f;
+    _vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state = 0;
+    _vbr_variable_load2_vrms1_rms_calc_fast__var_eff_s = 0;
+    _vbr_variable_load2_vrms1_rms_calc_fast__period = 0;
+    _vbr_variable_load2_vrms1_rms_calc_fast__var_filt = 0.0f;
+    _vbr_variable_load2_vrms1_rms_calc_fast__v_sq_sum_state = 0.0f;
+    _vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state = 0;
     _vrms_bus101_rms_calc_fast__var_eff_s = 0;
     _vrms_bus101_rms_calc_fast__period = 0;
     _vrms_bus101_rms_calc_fast__var_filt = 0.0f;
@@ -330,6 +416,11 @@ void ReInit_sys_sp_cpu_dev0() {
     _vrms_bus107_rms_calc_fast__var_filt = 0.0f;
     _vrms_bus107_rms_calc_fast__v_sq_sum_state = 0.0f;
     _vrms_bus107_rms_calc_fast__pc_cnt_1_state = 0;
+    _vrms_grid_rms_calc_fast__var_eff_s = 0;
+    _vrms_grid_rms_calc_fast__period = 0;
+    _vrms_grid_rms_calc_fast__var_filt = 0.0f;
+    _vrms_grid_rms_calc_fast__v_sq_sum_state = 0.0f;
+    _vrms_grid_rms_calc_fast__pc_cnt_1_state = 0;
     HIL_OutAO(0x4000, 0.0f);
     HIL_OutAO(0x4001, 0.0f);
     HIL_OutAO(0x4002, 0.0f);
@@ -339,6 +430,9 @@ void ReInit_sys_sp_cpu_dev0() {
     HIL_OutAO(0x4006, 0.0f);
     HIL_OutAO(0x4007, 0.0f);
     HIL_OutAO(0x4008, 0.0f);
+    HIL_OutAO(0x4009, 0.0f);
+    HIL_OutAO(0x400a, 0.0f);
+    HIL_OutAO(0x400b, 0.0f);
     //@cmp.init.block.end
 }
 
@@ -374,11 +468,15 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: VBR Variable Load1.Irms1.Iinst.Ia1
-    _vbr_variable_load1_irms1_iinst_ia1__out = (HIL_InFloat(0xc80000 + 0x646));
+    _vbr_variable_load1_irms1_iinst_ia1__out = (HIL_InFloat(0xc80000 + 0x84c));
     // Generated from the component: VBR Variable Load1.Vrms1.Vinst.Va1
-    _vbr_variable_load1_vrms1_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x635));
+    _vbr_variable_load1_vrms1_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x837));
+    // Generated from the component: VBR Variable Load2.Irms1.Iinst.Ia1
+    _vbr_variable_load2_irms1_iinst_ia1__out = (HIL_InFloat(0xc80000 + 0x850));
+    // Generated from the component: VBR Variable Load2.Vrms1.Vinst.Va1
+    _vbr_variable_load2_vrms1_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x83b));
     // Generated from the component: Vrms_bus101.Vinst.Va1
-    _vrms_bus101_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xa0c));
+    _vrms_bus101_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xa18));
     // Generated from the component: Vrms_bus102.Vinst.Va1
     _vrms_bus102_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x425));
     // Generated from the component: Vrms_bus103.Vinst.Va1
@@ -386,11 +484,13 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus104.Vinst.Va1
     _vrms_bus104_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x426));
     // Generated from the component: Vrms_bus105.Vinst.Va1
-    _vrms_bus105_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x636));
+    _vrms_bus105_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x83c));
     // Generated from the component: Vrms_bus106.Vinst.Va1
     _vrms_bus106_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x222));
     // Generated from the component: Vrms_bus107.Vinst.Va1
-    _vrms_bus107_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x812));
+    _vrms_bus107_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x612));
+    // Generated from the component: Vrms_grid.Vinst.Va1
+    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xa19));
     // Generated from the component: VBR Variable Load1.Irms1.rms_calc_fast
     _vbr_variable_load1_irms1_rms_calc_fast__v_sq_sum_state = _vbr_variable_load1_irms1_rms_calc_fast__v_sq_sum_state + _vbr_variable_load1_irms1_iinst_ia1__out * _vbr_variable_load1_irms1_iinst_ia1__out;
     _vbr_variable_load1_irms1_rms_calc_fast__var_filt_old = _vbr_variable_load1_irms1_rms_calc_fast__var_filt;
@@ -425,6 +525,40 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
         _vbr_variable_load1_vrms1_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: VBR Variable Load1.Vrms1.sys1
+    // Generated from the component: VBR Variable Load2.Irms1.rms_calc_fast
+    _vbr_variable_load2_irms1_rms_calc_fast__v_sq_sum_state = _vbr_variable_load2_irms1_rms_calc_fast__v_sq_sum_state + _vbr_variable_load2_irms1_iinst_ia1__out * _vbr_variable_load2_irms1_iinst_ia1__out;
+    _vbr_variable_load2_irms1_rms_calc_fast__var_filt_old = _vbr_variable_load2_irms1_rms_calc_fast__var_filt;
+    _vbr_variable_load2_irms1_rms_calc_fast__var_filt = (_vbr_variable_load2_irms1_rms_calc_fast__var_filt_old * 0.909 + _vbr_variable_load2_irms1_iinst_ia1__out * 0.0909);
+    if((_vbr_variable_load2_irms1_rms_calc_fast__var_filt >= 0.0f) && (_vbr_variable_load2_irms1_rms_calc_fast__var_filt_old < 0.0f)) {
+        _vbr_variable_load2_irms1_rms_calc_fast__var_zc = 1;
+    }
+    else {
+        _vbr_variable_load2_irms1_rms_calc_fast__var_zc = 0;
+    }
+    //square sum and period update on signal zero cross
+    if ((_vbr_variable_load2_irms1_rms_calc_fast__var_zc == 1) || (10000 == _vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state)) {
+        _vbr_variable_load2_irms1_rms_calc_fast__var_eff_s = _vbr_variable_load2_irms1_rms_calc_fast__v_sq_sum_state;
+        _vbr_variable_load2_irms1_rms_calc_fast__period = (float)_vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state;
+        _vbr_variable_load2_irms1_rms_calc_fast__v_sq_sum_state = 0.0f;
+    }
+    // Generated from the component: VBR Variable Load2.Irms1.sys1
+    // Generated from the component: VBR Variable Load2.Vrms1.rms_calc_fast
+    _vbr_variable_load2_vrms1_rms_calc_fast__v_sq_sum_state = _vbr_variable_load2_vrms1_rms_calc_fast__v_sq_sum_state + _vbr_variable_load2_vrms1_vinst_va1__out * _vbr_variable_load2_vrms1_vinst_va1__out;
+    _vbr_variable_load2_vrms1_rms_calc_fast__var_filt_old = _vbr_variable_load2_vrms1_rms_calc_fast__var_filt;
+    _vbr_variable_load2_vrms1_rms_calc_fast__var_filt = (_vbr_variable_load2_vrms1_rms_calc_fast__var_filt_old * 0.909 + _vbr_variable_load2_vrms1_vinst_va1__out * 0.0909);
+    if((_vbr_variable_load2_vrms1_rms_calc_fast__var_filt >= 0.0f) && (_vbr_variable_load2_vrms1_rms_calc_fast__var_filt_old < 0.0f)) {
+        _vbr_variable_load2_vrms1_rms_calc_fast__var_zc = 1;
+    }
+    else {
+        _vbr_variable_load2_vrms1_rms_calc_fast__var_zc = 0;
+    }
+    //square sum and period update on signal zero cross
+    if ((_vbr_variable_load2_vrms1_rms_calc_fast__var_zc == 1) || (10000 == _vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state)) {
+        _vbr_variable_load2_vrms1_rms_calc_fast__var_eff_s = _vbr_variable_load2_vrms1_rms_calc_fast__v_sq_sum_state;
+        _vbr_variable_load2_vrms1_rms_calc_fast__period = (float)_vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state;
+        _vbr_variable_load2_vrms1_rms_calc_fast__v_sq_sum_state = 0.0f;
+    }
+    // Generated from the component: VBR Variable Load2.Vrms1.sys1
     // Generated from the component: Vrms_bus101.rms_calc_fast
     _vrms_bus101_rms_calc_fast__v_sq_sum_state = _vrms_bus101_rms_calc_fast__v_sq_sum_state + _vrms_bus101_vinst_va1__out * _vrms_bus101_vinst_va1__out;
     //square sum and period update on period end
@@ -488,6 +622,15 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
         _vrms_bus107_rms_calc_fast__v_sq_sum_state = 0.0f;
     }
     // Generated from the component: Vrms_bus107.sys1
+    // Generated from the component: Vrms_grid.rms_calc_fast
+    _vrms_grid_rms_calc_fast__v_sq_sum_state = _vrms_grid_rms_calc_fast__v_sq_sum_state + _vrms_grid_vinst_va1__out * _vrms_grid_vinst_va1__out;
+    //square sum and period update on period end
+    if (333 == _vrms_grid_rms_calc_fast__pc_cnt_1_state) {
+        _vrms_grid_rms_calc_fast__var_eff_s = _vrms_grid_rms_calc_fast__v_sq_sum_state;
+        _vrms_grid_rms_calc_fast__period = (float)333;
+        _vrms_grid_rms_calc_fast__v_sq_sum_state = 0.0f;
+    }
+    // Generated from the component: Vrms_grid.sys1
     // Generated from the component: VBR Variable Load1.Irms1.rt1.Input
     _vbr_variable_load1_irms1_rt1_output__out = _vbr_variable_load1_irms1_rms_calc_fast__var_eff_s;
     // Generated from the component: VBR Variable Load1.Irms1.rt2.Input
@@ -498,6 +641,16 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     // Generated from the component: VBR Variable Load1.Vrms1.rt2.Input
     _vbr_variable_load1_vrms1_rt2_output__out = _vbr_variable_load1_vrms1_rms_calc_fast__period;
     // Generated from the component: VBR Variable Load1.Vrms1.t1
+    // Generated from the component: VBR Variable Load2.Irms1.rt1.Input
+    _vbr_variable_load2_irms1_rt1_output__out = _vbr_variable_load2_irms1_rms_calc_fast__var_eff_s;
+    // Generated from the component: VBR Variable Load2.Irms1.rt2.Input
+    _vbr_variable_load2_irms1_rt2_output__out = _vbr_variable_load2_irms1_rms_calc_fast__period;
+    // Generated from the component: VBR Variable Load2.Irms1.t1
+    // Generated from the component: VBR Variable Load2.Vrms1.rt1.Input
+    _vbr_variable_load2_vrms1_rt1_output__out = _vbr_variable_load2_vrms1_rms_calc_fast__var_eff_s;
+    // Generated from the component: VBR Variable Load2.Vrms1.rt2.Input
+    _vbr_variable_load2_vrms1_rt2_output__out = _vbr_variable_load2_vrms1_rms_calc_fast__period;
+    // Generated from the component: VBR Variable Load2.Vrms1.t1
     // Generated from the component: Vrms_bus101.rt1.Input
     _vrms_bus101_rt1_output__out = _vrms_bus101_rms_calc_fast__var_eff_s;
     // Generated from the component: Vrms_bus101.rt2.Input
@@ -533,6 +686,11 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus107.rt2.Input
     _vrms_bus107_rt2_output__out = _vrms_bus107_rms_calc_fast__period;
     // Generated from the component: Vrms_bus107.t1
+    // Generated from the component: Vrms_grid.rt1.Input
+    _vrms_grid_rt1_output__out = _vrms_grid_rms_calc_fast__var_eff_s;
+    // Generated from the component: Vrms_grid.rt2.Input
+    _vrms_grid_rt2_output__out = _vrms_grid_rms_calc_fast__period;
+    // Generated from the component: Vrms_grid.t1
     //@cmp.out.block.end
     //////////////////////////////////////////////////////////////////////////
     // Update block
@@ -548,6 +706,16 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
         _vbr_variable_load1_vrms1_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vbr_variable_load1_vrms1_rms_calc_fast__pc_cnt_1_state ++;
+    // Generated from the component: VBR Variable Load2.Irms1.rms_calc_fast
+    if ((_vbr_variable_load2_irms1_rms_calc_fast__var_zc == 1) || (10000 == _vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state)) {
+        _vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state = 0;
+    }
+    _vbr_variable_load2_irms1_rms_calc_fast__pc_cnt_1_state ++;
+    // Generated from the component: VBR Variable Load2.Vrms1.rms_calc_fast
+    if ((_vbr_variable_load2_vrms1_rms_calc_fast__var_zc == 1) || (10000 == _vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state)) {
+        _vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state = 0;
+    }
+    _vbr_variable_load2_vrms1_rms_calc_fast__pc_cnt_1_state ++;
     // Generated from the component: Vrms_bus101.rms_calc_fast
     if (333 == _vrms_bus101_rms_calc_fast__pc_cnt_1_state) {
         _vrms_bus101_rms_calc_fast__pc_cnt_1_state = 0;
@@ -583,6 +751,11 @@ void TimerCounterHandler_0_sys_sp_cpu_dev0() {
         _vrms_bus107_rms_calc_fast__pc_cnt_1_state = 0;
     }
     _vrms_bus107_rms_calc_fast__pc_cnt_1_state ++;
+    // Generated from the component: Vrms_grid.rms_calc_fast
+    if (333 == _vrms_grid_rms_calc_fast__pc_cnt_1_state) {
+        _vrms_grid_rms_calc_fast__pc_cnt_1_state = 0;
+    }
+    _vrms_grid_rms_calc_fast__pc_cnt_1_state ++;
     //@cmp.update.block.end
 }
 void TimerCounterHandler_1_sys_sp_cpu_dev0() {
@@ -597,6 +770,10 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     // Generated from the component: VBR Variable Load1.Irms1.rt2.Output
     // Generated from the component: VBR Variable Load1.Vrms1.rt1.Output
     // Generated from the component: VBR Variable Load1.Vrms1.rt2.Output
+    // Generated from the component: VBR Variable Load2.Irms1.rt1.Output
+    // Generated from the component: VBR Variable Load2.Irms1.rt2.Output
+    // Generated from the component: VBR Variable Load2.Vrms1.rt1.Output
+    // Generated from the component: VBR Variable Load2.Vrms1.rt2.Output
     // Generated from the component: Vrms_bus101.rt1.Output
     // Generated from the component: Vrms_bus101.rt2.Output
     // Generated from the component: Vrms_bus102.rt1.Output
@@ -611,6 +788,8 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     // Generated from the component: Vrms_bus106.rt2.Output
     // Generated from the component: Vrms_bus107.rt1.Output
     // Generated from the component: Vrms_bus107.rt2.Output
+    // Generated from the component: Vrms_grid.rt1.Output
+    // Generated from the component: Vrms_grid.rt2.Output
     // Generated from the component: VBR Variable Load1.Irms1.rms_calc_slow
     if(_vbr_variable_load1_irms1_rt2_output__out > 0.0f) {
         _vbr_variable_load1_irms1_rms_calc_slow__var_rms = sqrtf(_vbr_variable_load1_irms1_rt1_output__out / _vbr_variable_load1_irms1_rt2_output__out);
@@ -624,6 +803,20 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     }
     else {
         _vbr_variable_load1_vrms1_rms_calc_slow__var_rms = 0.0f;
+    }
+    // Generated from the component: VBR Variable Load2.Irms1.rms_calc_slow
+    if(_vbr_variable_load2_irms1_rt2_output__out > 0.0f) {
+        _vbr_variable_load2_irms1_rms_calc_slow__var_rms = sqrtf(_vbr_variable_load2_irms1_rt1_output__out / _vbr_variable_load2_irms1_rt2_output__out);
+    }
+    else {
+        _vbr_variable_load2_irms1_rms_calc_slow__var_rms = 0.0f;
+    }
+    // Generated from the component: VBR Variable Load2.Vrms1.rms_calc_slow
+    if(_vbr_variable_load2_vrms1_rt2_output__out > 0.0f) {
+        _vbr_variable_load2_vrms1_rms_calc_slow__var_rms = sqrtf(_vbr_variable_load2_vrms1_rt1_output__out / _vbr_variable_load2_vrms1_rt2_output__out);
+    }
+    else {
+        _vbr_variable_load2_vrms1_rms_calc_slow__var_rms = 0.0f;
     }
     // Generated from the component: Vrms_bus101.rms_calc_slow
     if(_vrms_bus101_rt2_output__out > 0.0f) {
@@ -674,33 +867,49 @@ void TimerCounterHandler_1_sys_sp_cpu_dev0() {
     else {
         _vrms_bus107_rms_calc_slow__var_rms = 0.0f;
     }
+    // Generated from the component: Vrms_grid.rms_calc_slow
+    if(_vrms_grid_rt2_output__out > 0.0f) {
+        _vrms_grid_rms_calc_slow__var_rms = sqrtf(_vrms_grid_rt1_output__out / _vrms_grid_rt2_output__out);
+    }
+    else {
+        _vrms_grid_rms_calc_slow__var_rms = 0.0f;
+    }
     // Generated from the component: VBR Variable Load1.Irms1.rms
     HIL_OutAO(0x4000, _vbr_variable_load1_irms1_rms_calc_slow__var_rms);
     // Generated from the component: VBR Variable Load1.Irms1.sys2
     // Generated from the component: VBR Variable Load1.Vrms1.rms
     HIL_OutAO(0x4001, _vbr_variable_load1_vrms1_rms_calc_slow__var_rms);
     // Generated from the component: VBR Variable Load1.Vrms1.sys2
+    // Generated from the component: VBR Variable Load2.Irms1.rms
+    HIL_OutAO(0x4002, _vbr_variable_load2_irms1_rms_calc_slow__var_rms);
+    // Generated from the component: VBR Variable Load2.Irms1.sys2
+    // Generated from the component: VBR Variable Load2.Vrms1.rms
+    HIL_OutAO(0x4003, _vbr_variable_load2_vrms1_rms_calc_slow__var_rms);
+    // Generated from the component: VBR Variable Load2.Vrms1.sys2
     // Generated from the component: Vrms_bus101.rms
-    HIL_OutAO(0x4002, _vrms_bus101_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4004, _vrms_bus101_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus101.sys2
     // Generated from the component: Vrms_bus102.rms
-    HIL_OutAO(0x4003, _vrms_bus102_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4005, _vrms_bus102_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus102.sys2
     // Generated from the component: Vrms_bus103.rms
-    HIL_OutAO(0x4004, _vrms_bus103_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4006, _vrms_bus103_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus103.sys2
     // Generated from the component: Vrms_bus104.rms
-    HIL_OutAO(0x4005, _vrms_bus104_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4007, _vrms_bus104_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus104.sys2
     // Generated from the component: Vrms_bus105.rms
-    HIL_OutAO(0x4006, _vrms_bus105_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4008, _vrms_bus105_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus105.sys2
     // Generated from the component: Vrms_bus106.rms
-    HIL_OutAO(0x4007, _vrms_bus106_rms_calc_slow__var_rms);
+    HIL_OutAO(0x4009, _vrms_bus106_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus106.sys2
     // Generated from the component: Vrms_bus107.rms
-    HIL_OutAO(0x4008, _vrms_bus107_rms_calc_slow__var_rms);
+    HIL_OutAO(0x400a, _vrms_bus107_rms_calc_slow__var_rms);
     // Generated from the component: Vrms_bus107.sys2
+    // Generated from the component: Vrms_grid.rms
+    HIL_OutAO(0x400b, _vrms_grid_rms_calc_slow__var_rms);
+    // Generated from the component: Vrms_grid.sys2
     //@cmp.out.block.end
     //////////////////////////////////////////////////////////////////////////
     // Update block
