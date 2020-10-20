@@ -5,19 +5,43 @@
     <hw_properties>
         <product_id>603</product_id>
         <hardware_id>3</hardware_id>
-        <configuration_id>1</configuration_id>
+        <configuration_id>2</configuration_id>
         <fw_release_date>132383518</fw_release_date>
     </hw_properties>
     <components>
-        <inputs></inputs>
+        <inputs>
+            <input>
+                <name>Vs1</name>
+                <device>0</device>
+                <input_address>2</input_address>
+                <child_input_address>[0, 1, 2]</child_input_address>
+                <device>0</device>
+            	<input_type>ThreePhaseInput</input_type>
+                <waveform_type>Sine</waveform_type>
+                <rms>0.0</rms>
+                <frequency>60.0</frequency>
+                <phase>0.0</phase>
+                <use_harmonics>False</use_harmonics>
+                <harmonics>[]</harmonics>
+                <harmonics_type>per_rms_unit_harmonics</harmonics_type>
+            </input></inputs>
         <pvs>
         </pvs>
         <contactors>
             <contactor>
-                <name>Microturbine.S2</name>
+                <name>Microturbine1.S4</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>0</weight>
+                <site>0</site>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
+            </contactor>
+            <contactor>
+                <name>S4</name>
+                <type>three_phase_breaker</type>
+                <device>0</device>
+                <weight>1</weight>
                 <site>0</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
@@ -901,19 +925,39 @@
         </batteries>
         <scada_inputs>
             <scada_input>
-                <name>Microturbine.BE1-25A Synchronizer.Connect MT</name>
+                <name>grid_connect</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine1.CB_control.Grid_Islanded</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>Microturbine.MT_sync</name>
+                <name>Microturbine1.Connect MCB</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine1.Connect MT</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>Microturbine.qd0(PU).Governor.AGC</name>
+                <name>Microturbine1.Governor.AGC</name>
                 <device>0</device>
                 <value>0.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine1.Vref</name>
+                <device>0</device>
+                <value>1.0</value>
+            </scada_input>
+            <scada_input>
+                <name>Microturbine1.wref</name>
+                <device>0</device>
+                <value>1.0</value>
             </scada_input>
         </scada_inputs>
     </components>

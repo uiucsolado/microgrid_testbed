@@ -12,27 +12,13 @@
         <inputs>
             <input>
                 <name>Vs1</name>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                <device>1</device>
-                <input_address>2</input_address>
-                <child_input_address>[0, 1, 2]</child_input_address>
-                <device>1</device>
-=======
                 <device>0</device>
                 <input_address>2</input_address>
                 <child_input_address>[0, 1, 2]</child_input_address>
                 <device>0</device>
->>>>>>> Stashed changes
-=======
-                <device>0</device>
-                <input_address>2</input_address>
-                <child_input_address>[0, 1, 2]</child_input_address>
-                <device>0</device>
->>>>>>> Stashed changes
             	<input_type>ThreePhaseInput</input_type>
                 <waveform_type>Sine</waveform_type>
-                <rms>7968.0</rms>
+                <rms>7967.43371</rms>
                 <frequency>60.0</frequency>
                 <phase>0.0</phase>
                 <use_harmonics>False</use_harmonics>
@@ -43,33 +29,15 @@
         </pvs>
         <contactors>
             <contactor>
-<<<<<<< Updated upstream
                 <name>3ph Fault 103.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>0</weight>
                 <site>0</site>
-=======
-                <name>3ph Fault 204.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>0</site>
-                <is_enabled>True</is_enabled>
+                <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
-                <name>3ph Fault 208.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>1</site>
->>>>>>> Stashed changes
-                <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-<<<<<<< Updated upstream
                 <name>DIESEL_MCB.DG_MCB</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
@@ -84,8 +52,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB10.Brk.S1</name>
@@ -93,8 +61,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>1</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB14.Brk.S1</name>
@@ -102,8 +70,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>3</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB2.Brk.S1</name>
@@ -111,8 +79,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>4</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB3.Brk.S1</name>
@@ -120,8 +88,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>5</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB4.Brk.S1</name>
@@ -129,8 +97,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB5.Brk.S1</name>
@@ -138,8 +106,8 @@
                 <device>0</device>
                 <weight>2</weight>
                 <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB6.Brk.S1</name>
@@ -147,8 +115,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>4</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
+                <is_enabled>False</is_enabled>
+                <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_Motor.CB.S1</name>
@@ -164,57 +132,13 @@
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>1</weight>
-<<<<<<< Updated upstream
-                <site>4</site>
-=======
-                <name>F2_CB1.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>1</weight>
-                <site>0</site>
->>>>>>> Stashed changes
-=======
                 <site>5</site>
->>>>>>> Stashed changes
                 <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_VL_CB1.Brk.S1</name>
                 <type>three_phase_breaker</type>
-<<<<<<< Updated upstream
-                <device>1</device>
-                <weight>0</weight>
-<<<<<<< Updated upstream
-                <site>0</site>
-=======
-                <site>3</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB11.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>1</weight>
-                <site>3</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB12.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>2</weight>
-                <site>3</site>
->>>>>>> Stashed changes
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-<<<<<<< Updated upstream
-                <name>F1_VL_CB1.Brk.S1</name>
-=======
                 <device>0</device>
                 <weight>2</weight>
                 <site>4</site>
@@ -223,7 +147,6 @@
             </contactor>
             <contactor>
                 <name>F1_VL_CB2.Brk.S1</name>
->>>>>>> Stashed changes
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>3</weight>
@@ -233,153 +156,17 @@
             </contactor>
             <contactor>
                 <name>Microturbine1.S4</name>
-=======
-                <name>F2_CB14.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>1</weight>
-                <site>1</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB15.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>5</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB18.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>1</weight>
-                <site>5</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB19.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>4</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB2.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>1</weight>
-                <site>4</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB3.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>2</weight>
-                <site>1</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB4.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB5.Brk.S1</name>
->>>>>>> Stashed changes
                 <type>three_phase_breaker</type>
                 <device>0</device>
                 <weight>2</weight>
                 <site>0</site>
-<<<<<<< Updated upstream
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
-=======
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB6.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>3</weight>
-                <site>0</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB7.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>1</weight>
-                <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB8.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>2</weight>
-                <site>2</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_CB9.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>2</weight>
-                <site>4</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F2_PCC.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>0</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>Grid feeding inverter (averaged).S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>6</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>Grid forming inverter (averaged).S2</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>0</weight>
-                <site>7</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
->>>>>>> Stashed changes
         </contactors>
         <dtsm_contactors>
         </dtsm_contactors>
         <machines>
-<<<<<<< Updated upstream
             <machine>
                 <name>F1_Motor.IM</name>
                 <device>0</device>
@@ -401,8 +188,6 @@
                 <initial_resolver_offset>0.0</initial_resolver_offset>
                 <machine_gauge>{}</machine_gauge>
             </machine>
-=======
->>>>>>> Stashed changes
         </machines>
         <analog_channels>
             <analog_channel>
@@ -895,7 +680,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>3ph Fault 103.S1_fb</name>
+                	<name>ang_sync3</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -907,7 +692,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>DIESEL_MCB.DG_MCB_fb</name>
+                	<name>freq_sync3</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -919,7 +704,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>DIESEL_MCB.DG_MCB_fb</name>
+                	<name>gridconnect2</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -931,7 +716,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>HIL0 digital input 1</name>
+                	<name>griddisconnect2</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -943,450 +728,12 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>F1_CB10.Brk.S1_fb</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>6</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 11</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>7</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>F1_CB2.Brk.S1_fb</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>8</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 13</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>9</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 14</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>10</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 15</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>11</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 16</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>12</number>
-<<<<<<< Updated upstream
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>13</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>14</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>15</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>16</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>17</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>18</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>19</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>20</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>21</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>22</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>23</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>24</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>25</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>26</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>27</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>28</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>29</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>30</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>31</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-            <analog_channel>
-                <number>32</number>
-                <device>1</device>
-                <scale>100.0</scale>
-                <offset>0.0</offset>
-                <locked>False</locked>
-                <ao_limiting_enabled>False</ao_limiting_enabled>
-                <ao_lower_limit>-1.0</ao_lower_limit>
-                <ao_upper_limit>1.0</ao_upper_limit>
-                <analog_signal>
-                	<name>const_0V</name>
-                	<show>True</show>
-                	<device>0</device>
-                </analog_signal>
-            </analog_channel>
-        </analog_channels>
-        <digital_channels>
-            <digital_channel>
-                <number>1</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>3ph Fault 103.S1_fb</name>
-=======
-                	<name>F2_PCC.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>2</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>DIESEL_MCB.DG_MCB_fb</name>
-=======
                 	<name>HIL0 AO flag</name>
->>>>>>> Stashed changes
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>3</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>DIESEL_MCB.DG_MCB_fb</name>
-=======
-                	<name>HIL0 Capture/Scope Trigger</name>
->>>>>>> Stashed changes
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>4</number>
+                <number>6</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1398,23 +745,19 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>5</number>
+                <number>7</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-<<<<<<< Updated upstream
-                	<name>F1_CB10.Brk.S1_fb</name>
-=======
                 	<name>HIL0 digital input 10</name>
->>>>>>> Stashed changes
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>6</number>
+                <number>8</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1426,23 +769,19 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>7</number>
+                <number>9</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-<<<<<<< Updated upstream
-                	<name>F1_CB2.Brk.S1_fb</name>
-=======
                 	<name>HIL0 digital input 12</name>
->>>>>>> Stashed changes
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>8</number>
+                <number>10</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1454,7 +793,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>9</number>
+                <number>11</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1466,7 +805,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>10</number>
+                <number>12</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1478,7 +817,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>11</number>
+                <number>13</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1490,7 +829,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>12</number>
+                <number>14</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1502,7 +841,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>13</number>
+                <number>15</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1514,7 +853,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>14</number>
+                <number>16</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1526,7 +865,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>15</number>
+                <number>17</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1538,7 +877,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>16</number>
+                <number>18</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1550,7 +889,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>17</number>
+                <number>19</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1562,7 +901,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>18</number>
+                <number>20</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1574,7 +913,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>19</number>
+                <number>21</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1586,7 +925,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>20</number>
+                <number>22</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1598,7 +937,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>21</number>
+                <number>23</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1610,7 +949,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>22</number>
+                <number>24</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1622,7 +961,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>23</number>
+                <number>25</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1634,7 +973,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>24</number>
+                <number>26</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1646,7 +985,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>25</number>
+                <number>27</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -1658,460 +997,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>26</number>
-=======
->>>>>>> Stashed changes
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 17</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>13</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 18</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>14</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 19</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>15</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 2</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>16</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 20</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>17</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 21</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>18</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 22</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-<<<<<<< Updated upstream
-                <number>1</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>F1_PCC.S1_fb</name>
-=======
-                	<name>3ph Fault 204.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>2</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 AO flag</name>
-=======
-                	<name>3ph Fault 208.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>3</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 1</name>
-=======
-                	<name>F2_CB1.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>4</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 10</name>
-=======
-                	<name>F2_CB10.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>5</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 11</name>
-=======
-                	<name>F2_CB11.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>6</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 12</name>
-=======
-                	<name>F2_CB12.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>7</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 13</name>
-=======
-                	<name>F2_CB14.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>8</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 14</name>
-=======
-                	<name>F2_CB14.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>9</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 15</name>
-=======
-                	<name>F2_CB15.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>10</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 16</name>
-=======
-                	<name>F2_CB19.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>11</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 17</name>
-=======
-                	<name>F2_CB2.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>12</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 18</name>
-=======
-                	<name>F2_CB18.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>13</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 19</name>
-=======
-                	<name>F2_CB19.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>14</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 2</name>
-=======
-                	<name>F2_CB2.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>15</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 20</name>
-=======
-                	<name>F2_CB3.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>16</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-<<<<<<< Updated upstream
-                	<name>HIL1 digital input 21</name>
-=======
-                	<name>F2_CB4.Brk.S1_fb</name>
->>>>>>> Stashed changes
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>17</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL1 AO flag</name>
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>18</number>
-                <device>1</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL1 digital input 1</name>
-                	<device>1</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-=======
->>>>>>> Stashed changes
-                <number>19</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 23</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>20</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 24</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>21</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 25</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>22</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 26</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>23</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 27</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>24</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 28</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>25</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 29</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>26</number>
+                <number>28</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -2123,7 +1009,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>27</number>
+                <number>29</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -2135,7 +1021,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>28</number>
+                <number>30</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -2147,7 +1033,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>29</number>
+                <number>31</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -2159,7 +1045,7 @@
                 </digital_signal>
             </digital_channel>
             <digital_channel>
-                <number>30</number>
+                <number>32</number>
                 <device>0</device>
                 <is_inverted>False</is_inverted>
                 <software_control>True</software_control>
@@ -2170,30 +1056,6 @@
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
-            <digital_channel>
-                <number>31</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 5</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
-            <digital_channel>
-                <number>32</number>
-                <device>0</device>
-                <is_inverted>False</is_inverted>
-                <software_control>True</software_control>
-                <software_value>0</software_value>
-                <locked>False</locked>
-                <digital_signal>
-                	<name>HIL0 digital input 6</name>
-                	<device>0</device>
-                </digital_signal>
-            </digital_channel>
         </digital_channels>
         <switching_blocks>
         </switching_blocks>
@@ -2201,7 +1063,6 @@
         </batteries>
         <scada_inputs>
             <scada_input>
-<<<<<<< Updated upstream
                 <name>3ph Fault 103.ctrl</name>
                 <device>0</device>
                 <value>0.0</value>
@@ -2214,7 +1075,7 @@
             <scada_input>
                 <name>F1_CB1.F1_CB1</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_CB10.F1_CB10</name>
@@ -2229,27 +1090,27 @@
             <scada_input>
                 <name>F1_CB2.F1_CB2</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_CB3.Brk.F1_CB3</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_CB4.F1_CB4</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_CB5.F1_CB5</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_CB6.F1_CB6</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>F1_VL_CB1.F1_CB7</name>
@@ -2259,7 +1120,7 @@
             <scada_input>
                 <name>F1_VL_CB2.F1_CB7</name>
                 <device>0</device>
-                <value>1</value>
+                <value>1.0</value>
             </scada_input>
             <scada_input>
                 <name>Microturbine1.CB_control.Grid_Islanded</name>
@@ -2289,141 +1150,17 @@
             <scada_input>
                 <name>RegD_Control.P_ref_Diesel.Pref_initial</name>
                 <device>0</device>
-=======
-                <name>3ph Fault 204.ctrl</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>3ph Fault 208.ctrl</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB1.F2_CB1</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB10.F2_CB10</name>
-                <device>1</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB11.F2_CB11</name>
-                <device>1</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB12.F2_CB12</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB14.F2_CB14</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB15.F2_CB15</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB18.F2_CB18</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB19.F2_CB19</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB2.F2_CB2</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB3.F2_CB3</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB4.F2_CB4</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB5.F2_CB5</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB6.F2_CB6</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB7.F2_CB7</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB8.F2_CB8</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_CB9.Brk.F3_CB9</name>
-                <device>1</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F2_PCC.F2_PCC</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>Grid feeding inverter (averaged).Connect GFL</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Grid forming inverter (averaged).CB_control.Grid_Islanded</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Grid forming inverter (averaged).Connect GFM</name>
-                <device>1</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Grid forming inverter (averaged).Controller.Frequency droop.wref</name>
-                <device>1</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Grid forming inverter (averaged).Controller.Voltage droop.Vref</name>
-                <device>1</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Pref_feed</name>
-                <device>1</device>
->>>>>>> Stashed changes
                 <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>RegD_Control.P_ref_VL1.Pref_initial</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>200000.0</value>
             </scada_input>
             <scada_input>
                 <name>RegD_Control.P_ref_VL2.Pref_initial</name>
                 <device>0</device>
-                <value>0.0</value>
+                <value>200000.0</value>
             </scada_input>
             <scada_input>
                 <name>RegD_Control.RegD_Signal</name>
