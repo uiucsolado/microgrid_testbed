@@ -2,7 +2,7 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.1 SP2
-// Save timestamp: 20-Oct-2020 @ 11:06:28 AM
+// Save timestamp: 26-Oct-2020 @ 04:41:26 PM
 //
 
 model "banshee_feeder_f1_uiuc" {
@@ -18,7 +18,7 @@ model "banshee_feeder_f1_uiuc" {
         enb_gds_oversampling = True
         show_modes = False
         device_ao_limit_enable = True
-        cpl_stb = False
+        cpl_stb = True
         enb_dep_sw_detect = False
         code_section = "external memory"
         data_section = "external memory"
@@ -64243,8 +64243,10 @@ if(boolean==1){
         component Subsystem Coupling7 {
             layout = dynamic
             component "core/Four Phase Core Coupling" "Core Coupling 1" {
-                C1 = "10e-6"
-                R1 = "1"
+                C1 = "0.0039"
+                L1 = "0.2e-6"
+                R1 = "0.0103"
+                R2 = "0.0045"
                 fixed_snb_i = "true"
                 fixed_snb_u = "true"
             }
@@ -64256,40 +64258,40 @@ if(boolean==1){
             component pas_resistor R1 {
             }
             [
-                position = 8272, 8048
+                position = 8280, 8048
             ]
 
             component pas_resistor R2 {
             }
             [
-                position = 8272, 8144
+                position = 8280, 8144
             ]
 
             component pas_resistor R3 {
             }
             [
-                position = 8272, 8240
+                position = 8280, 8240
             ]
 
             component pas_inductor L1 {
                 inductance = "1000e-6"
             }
             [
-                position = 8368, 8048
+                position = 8376, 8048
             ]
 
             component pas_inductor L2 {
                 inductance = "1000e-6"
             }
             [
-                position = 8376, 8144
+                position = 8384, 8144
             ]
 
             component pas_inductor L3 {
                 inductance = "1000e-6"
             }
             [
-                position = 8376, 8240
+                position = 8384, 8240
             ]
 
             component Subsystem "RC Snubber" {
@@ -64438,7 +64440,7 @@ if(boolean==1){
                 }
             }
             [
-                position = 8064, 8288
+                position = 8056, 8288
                 size = 64, 48
             ]
 
@@ -64512,22 +64514,22 @@ if(boolean==1){
 
             junction Junction1 pe
             [
-                position = 8064, 8336
+                position = 8040, 8048
             ]
 
             junction Junction2 pe
             [
-                position = 8048, 8048
+                position = 8056, 8144
             ]
 
             junction Junction3 pe
             [
-                position = 8064, 8144
+                position = 8072, 8240
             ]
 
             junction Junction4 pe
             [
-                position = 8080, 8240
+                position = 8056, 8336
             ]
 
             comment Comment1 START <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><html><head><meta name="qrichtext" content="1" /><style type="text/css">p, li { white-space: pre-wrap; }</style></head><body style=" font-family:'Arial'; font-size:12pt; font-weight:400; font-style:normal;"><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1. R1-L1 to R3-L3 are series RL snubbers to remove AO problem during fault at bus 103. </p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">R = 0.1 ohm. L = 100uH</p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2. When Diesel Genset is off, it will consume 3.5W + j1.37VAr @60Hz</p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3. When Diesel Geneset is at nominal power (3.4MW), it will consume 6kW + j2.5kVAr @60Hz</p></body></html> ENDCOMMENT 
@@ -64535,40 +64537,49 @@ if(boolean==1){
                 position = 8296, 8280
             ]
 
-            connect A Junction2 as Connection28
-            connect "Core Coupling 1.d_in" Junction1 as Connection25
-            [
-                breakpoints = 8080, 8336
-            ]
-            connect "Core Coupling 1.b_in" Junction3 as Connection31
-            [
-                breakpoints = 8080, 8144
-            ]
-            connect "Core Coupling 1.c_in" Junction4 as Connection34
-            [
-                breakpoints = 8096, 8240
-            ]
-            connect "Core Coupling 1.a_out" R1.p_node as Connection37
-            connect "Core Coupling 1.b_out" R2.p_node as Connection39
-            connect "Core Coupling 1.c_out" R3.p_node as Connection41
             connect "Core Coupling 1.d_out" g as Connection6
-            connect Junction1 G as Connection26
-            connect Junction2 "Core Coupling 1.a_in" as Connection29
-            [
-                breakpoints = 8064, 8048
-            ]
-            connect Junction3 B as Connection32
-            connect Junction4 C as Connection35
-            connect L1.n_node a as Connection44
-            connect L2.n_node b as Connection46
-            connect L3.n_node c as Connection48
             connect R1.n_node L1.p_node as Connection43
             connect R2.n_node L2.p_node as Connection45
             connect R3.n_node L3.p_node as Connection47
-            connect "RC Snubber.N" Junction1 as Connection27
-            connect "RC Snubber.A" Junction2 as Connection30
-            connect "RC Snubber.B" Junction3 as Connection33
-            connect "RC Snubber.C" Junction4 as Connection36
+            connect L1.n_node a as Connection53
+            connect L2.n_node b as Connection54
+            connect L3.n_node c as Connection55
+            connect "Core Coupling 1.c_out" R3.p_node as Connection56
+            connect "Core Coupling 1.b_out" R2.p_node as Connection57
+            connect "Core Coupling 1.a_out" R1.p_node as Connection58
+            connect "Core Coupling 1.a_in" Junction1 as Connection91
+            [
+                breakpoints = 8064, 8048; 8048, 8048; 8048, 8048
+            ]
+            connect Junction1 A as Connection92
+            [
+                breakpoints = 8040, 8048
+            ]
+            connect "RC Snubber.A" Junction1 as Connection93
+            connect "Core Coupling 1.b_in" Junction2 as Connection94
+            [
+                breakpoints = 8080, 8144
+            ]
+            connect Junction2 B as Connection95
+            [
+                breakpoints = 8064, 8144; 8064, 8144; 8056, 8144
+            ]
+            connect "RC Snubber.B" Junction2 as Connection96
+            connect C Junction3 as Connection97
+            connect Junction3 "Core Coupling 1.c_in" as Connection98
+            [
+                breakpoints = 8072, 8240; 8080, 8240; 8080, 8240; 8096, 8240
+            ]
+            connect "RC Snubber.C" Junction3 as Connection99
+            connect "Core Coupling 1.d_in" Junction4 as Connection100
+            [
+                breakpoints = 8080, 8336; 8064, 8336; 8064, 8336
+            ]
+            connect Junction4 G as Connection101
+            [
+                breakpoints = 8056, 8336
+            ]
+            connect "RC Snubber.N" Junction4 as Connection102
         }
         [
             position = 6080, 8200
@@ -64797,7 +64808,7 @@ out=deltaP;
                 ]
             }
             [
-                position = 8360, 8264
+                position = 8376, 8304
                 size = 88, 48
             ]
 
@@ -65273,7 +65284,7 @@ out=deltaP;
                 connect In1 Junction13 as Connection543
             }
             [
-                position = 8360, 8176
+                position = 8368, 8120
                 size = 88, 48
             ]
 
@@ -65282,7 +65293,7 @@ out=deltaP;
                 unit = ""
             }
             [
-                position = 7856, 8152
+                position = 7448, 8112
             ]
 
             component Subsystem P_ref_VL2 {
@@ -65503,8 +65514,338 @@ out=deltaP;
                 ]
             }
             [
-                position = 8360, 8368
+                position = 8368, 8512
                 size = 88, 48
+            ]
+
+            component src_scada_input RegD {
+                unit = ""
+            }
+            [
+                position = 7824, 8128
+            ]
+
+            component gen_probe N2 {
+            }
+            [
+                position = 7688, 8512
+            ]
+
+            component gen_probe N3 {
+            }
+            [
+                position = 7520, 8512
+            ]
+
+            component Subsystem Modbus2 {
+                layout = dynamic
+                component src_constant C_u13 {
+                    value = "50"
+                }
+                [
+                    position = 7856, 8056
+                ]
+
+                component src_constant C_u11 {
+                }
+                [
+                    position = 7920, 8008
+                ]
+
+                component gen_terminator Termination1 {
+                }
+                [
+                    position = 8376, 8056
+                ]
+
+                component src_constant C_u12 {
+                }
+                [
+                    position = 7920, 7912
+                ]
+
+                component gen_probe Probe3 {
+                }
+                [
+                    position = 8512, 7968
+                ]
+
+                component gen_gain Gain1 {
+                    gain = "scale_back_const"
+                }
+                [
+                    position = 8400, 7912
+                ]
+
+                component "core/ModBus Device" "ModBus Device2" {
+                    configuration = "config2"
+                }
+                [
+                    position = 8168, 7984
+                    size = 184, 184
+                ]
+
+                component src_constant C_u14 {
+                }
+                [
+                    position = 7856, 7960
+                ]
+
+                port n2 {
+                    position = auto:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8584, 7912
+                ]
+
+                junction Junction10 sp
+                [
+                    position = 8480, 7912
+                ]
+
+                connect n2 Junction10 as Connection196
+                connect Junction10 Gain1.out as Connection197
+                connect Probe3.in Junction10 as Connection198
+                connect C_u11.out "ModBus Device2.coil_in" as Connection200
+                connect C_u12.out "ModBus Device2.discrete_in" as Connection201
+                connect C_u13.out "ModBus Device2.holding_in" as Connection202
+                connect Termination1.in "ModBus Device2.coil_out" as Connection206
+                connect Gain1.in "ModBus Device2.holding_out" as Connection207
+                connect C_u14.out "ModBus Device2.reg_in" as Connection208
+                [
+                    breakpoints = 7920, 7960; 8056, 7960
+                ]
+            }
+            [
+                position = 7600, 8512
+                size = 64, 80
+            ]
+
+            component Subsystem Modbus3 {
+                layout = dynamic
+                component src_constant C_u13 {
+                    value = "50"
+                }
+                [
+                    position = 7856, 8056
+                ]
+
+                component src_constant C_u11 {
+                }
+                [
+                    position = 7920, 8008
+                ]
+
+                component gen_terminator Termination1 {
+                }
+                [
+                    position = 8376, 8056
+                ]
+
+                component src_constant C_u12 {
+                }
+                [
+                    position = 7920, 7912
+                ]
+
+                component gen_probe Probe3 {
+                }
+                [
+                    position = 8512, 7968
+                ]
+
+                component gen_gain Gain1 {
+                    gain = "scale_back_const"
+                }
+                [
+                    position = 8400, 7912
+                ]
+
+                component "core/ModBus Device" "ModBus Device2" {
+                    configuration = "config3"
+                }
+                [
+                    position = 8168, 7984
+                    size = 184, 184
+                ]
+
+                component src_constant C_u14 {
+                }
+                [
+                    position = 7856, 7960
+                ]
+
+                port n3 {
+                    position = auto:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8584, 7912
+                ]
+
+                junction Junction10 sp
+                [
+                    position = 8480, 7912
+                ]
+
+                connect n3 Junction10 as Connection196
+                connect Junction10 Gain1.out as Connection197
+                connect Probe3.in Junction10 as Connection198
+                connect C_u11.out "ModBus Device2.coil_in" as Connection200
+                connect C_u12.out "ModBus Device2.discrete_in" as Connection201
+                connect C_u13.out "ModBus Device2.holding_in" as Connection202
+                connect Termination1.in "ModBus Device2.coil_out" as Connection206
+                connect Gain1.in "ModBus Device2.holding_out" as Connection207
+                connect C_u14.out "ModBus Device2.reg_in" as Connection208
+                [
+                    breakpoints = 7920, 7960; 8056, 7960
+                ]
+            }
+            [
+                position = 7416, 8464
+                size = 64, 80
+            ]
+
+            component Subsystem Modbus1 {
+                layout = dynamic
+                component src_constant C_u13 {
+                    value = "50"
+                }
+                [
+                    position = 7984, 8016
+                ]
+
+                component gen_product Product1 {
+                }
+                [
+                    position = 7720, 8056
+                ]
+
+                component src_constant C_u11 {
+                }
+                [
+                    position = 7912, 7872
+                ]
+
+                component gen_terminator Termination1 {
+                }
+                [
+                    position = 8376, 7904
+                ]
+
+                component src_constant Constant1 {
+                    value = "scale_const"
+                }
+                [
+                    position = 7616, 8104
+                ]
+
+                component src_constant C_u12 {
+                }
+                [
+                    position = 7984, 7960
+                ]
+
+                component gen_probe Probe1 {
+                }
+                [
+                    position = 7856, 8104
+                ]
+
+                component gen_probe Probe3 {
+                }
+                [
+                    position = 8472, 8120
+                ]
+
+                component gen_gain Gain1 {
+                    gain = "scale_back_const"
+                }
+                [
+                    position = 8360, 8056
+                ]
+
+                component "core/ModBus Device" "ModBus Device2" {
+                }
+                [
+                    position = 8168, 7984
+                    size = 184, 184
+                ]
+
+                port regD {
+                    position = right:2
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7616, 8008
+                    rotation = down
+                    scale = -1, 1
+                ]
+
+                port n1 {
+                    position = auto:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8544, 8064
+                ]
+
+                junction Junction10 sp
+                [
+                    position = 8440, 8064
+                ]
+
+                junction Junction11 sp
+                [
+                    position = 7824, 8056
+                ]
+
+                connect regD Product1.in as Connection83
+                connect Constant1.out Product1.in1 as Connection73
+                connect n1 Junction10 as Connection196
+                connect Junction10 Gain1.out as Connection197
+                connect Probe3.in Junction10 as Connection198
+                connect C_u11.out "ModBus Device2.coil_in" as Connection200
+                connect C_u12.out "ModBus Device2.discrete_in" as Connection201
+                connect C_u13.out "ModBus Device2.holding_in" as Connection202
+                connect "ModBus Device2.reg_in" Junction11 as Connection203
+                connect Junction11 Product1.out as Connection204
+                connect Probe1.in Junction11 as Connection205
+                connect Termination1.in "ModBus Device2.coil_out" as Connection206
+                connect Gain1.in "ModBus Device2.holding_out" as Connection207
+            }
+            [
+                position = 7528, 8248
+                scale = -1, 1
+                size = 64, 80
+            ]
+
+            component gen_probe N1 {
+            }
+            [
+                position = 7384, 8312
+                scale = -1, 1
             ]
 
             tag Disel_Pref {
@@ -65514,7 +65855,7 @@ out=deltaP;
                 direction = in
             }
             [
-                position = 8056, 8112
+                position = 8104, 8032
                 scale = -1, 1
             ]
 
@@ -65525,7 +65866,7 @@ out=deltaP;
                 direction = in
             }
             [
-                position = 8056, 8200
+                position = 8176, 8272
                 scale = -1, 1
             ]
 
@@ -65536,40 +65877,32 @@ out=deltaP;
                 direction = in
             }
             [
-                position = 8056, 8304
+                position = 8176, 8472
                 scale = -1, 1
             ]
 
             junction Junction1 sp
             [
-                position = 7984, 8184
+                position = 8000, 8128
             ]
 
             junction Junction2 sp
             [
-                position = 7984, 8272
+                position = 8000, 8312
             ]
 
             connect Disel_Pref P_ref_Diesel.P_ref_Diesel as Connection1
-            connect VL1_Pref P_ref_VL1.P_ref_VL1 as Connection2
-            connect RegD_Signal.out Junction1 as Connection4
+            connect VL1_Pref P_ref_VL1.P_ref_VL1 as Connection43
+            connect VL2_Pref P_ref_VL2.P_ref_VL1 as Connection44
+            connect N3.in Modbus3.n3 as Connection68
             [
-                breakpoints = 7984, 8152
+                breakpoints = 7480, 8464
             ]
-            connect Junction1 P_ref_Diesel.In1 as Connection5
-            [
-                breakpoints = 7984, 8184
-            ]
-            connect VL2_Pref P_ref_VL2.P_ref_VL1 as Connection12
-            connect P_ref_VL1.In1 Junction2 as Connection13
-            [
-                breakpoints = 8128, 8272
-            ]
-            connect Junction2 Junction1 as Connection14
-            [
-                breakpoints = 7984, 8272; 7984, 8248
-            ]
-            connect P_ref_VL2.In1 Junction2 as Connection15
+            connect RegD.out Junction1 as Connection70
+            connect Junction1 P_ref_Diesel.In1 as Connection71
+            connect P_ref_VL1.In1 Junction2 as Connection73
+            connect Junction2 Junction1 as Connection74
+            connect P_ref_VL2.In1 Junction2 as Connection75
         }
         [
             position = 7032, 8392
@@ -79291,6 +79624,14 @@ out=fabs(Vline-Vbus);
         "Microturbine1.Governor.Subsystem1"
         "Microturbine1.Governor.AGC"
         "RegD_Control.P_ref_Diesel.Subsystem1"
+        "RegD_Control.RegD_Signal"
+        "RegD_Control.N2"
+        "RegD_Control.N3"
+        "RegD_Control.Modbus2"
+        "RegD_Control.Modbus3"
+        "RegD_Control.Modbus1"
+        "RegD_Control.N1"
+        "RegD_Control.Connection68"
         "F1_VL_CB1.MID_Rly1"
         "F1_VL_CB2.MID_Rly1"
     }
@@ -80123,6 +80464,7 @@ out=fabs(Vline-Vbus);
         X1_cable11 = 0.207    # ohms/mi
         R0_cable11 = 2.1408    # ohms/mi
         X0_cable11 = 1.582    # ohms/mi
+        #X0_cable11 = 0.1582    # ohms/mi
         B_cable11 = 308.7587e-6    # S/mi
         L0_cable11 = X0_cable11/sys_w    # H/mi
         L1_cable11 = X1_cable11/sys_w    # H/mi
@@ -80450,536 +80792,51 @@ out=fabs(Vline-Vbus);
         cb_init_cond_time = 0.1+Ts
         time_flag_delay = 0.2
         
-        configF1_CB1 = {
-          'port': 502,
-          'ip_addr': '192.168.10.101',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB2 = {
-          'port': 502,
-          'ip_addr': '192.168.10.102',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB3 = {
-          'port': 502,
-          'ip_addr': '192.168.10.103',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB4 = {
-          'port': 502,
-          'ip_addr': '192.168.10.104',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB5 = {
-          'port': 502,
-          'ip_addr': '192.168.10.105',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB6 = {
-          'port': 502,
-          'ip_addr': '192.168.10.106',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB7 = {
-          'port': 502,
-          'ip_addr': '192.168.10.107',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB8 = {
-          'port': 502,
-          'ip_addr': '192.168.10.108',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB9 = {
-          'port': 502,
-          'ip_addr': '192.168.10.109',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB10 = {
-          'port': 502,
-          'ip_addr': '192.168.10.110',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB11 = {
-          'port': 502,
-          'ip_addr': '192.168.10.111',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB12 = {
-          'port': 502,
-          'ip_addr': '192.168.10.112',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB13 = {
-          'port': 502,
-          'ip_addr': '192.168.10.113',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF1_CB14 = {
-          'port': 502,
-          'ip_addr': '192.168.10.114',
-          'netmask': '255.255.255.0',
-          'slave_id': 1,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
+        
+        #RegD Control
+        scale_const=10e+3
+        scale_back_const=1e-4
+        
+        #Modbus configuration
+        config1 = {
+                                            'port': 502,
+                                            'ip_addr': '192.168.2.61',
+                                            'netmask': '255.255.255.0',
+                                            'slave_id': 17,
+                                            'coil_input_addresses': '',
+                                            'coil_output_addresses': '',
+                                            'discrete_input_addresses': '',
+                                            'holding_register_input_addresses': '',
+                                            'holding_register_output_addresses': '0',
+                                            'input_register_adresses': '0'
         }
         
-        configF2_CB1 = {
-          'port': 502,
-          'ip_addr': '192.168.10.115',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB2 = {
-          'port': 502,
-          'ip_addr': '192.168.10.116',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB3 = {
-          'port': 502,
-          'ip_addr': '192.168.10.117',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB4 = {
-          'port': 502,
-          'ip_addr': '192.168.10.118',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB5 = {
-          'port': 502,
-          'ip_addr': '192.168.10.119',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB6 = {
-          'port': 502,
-          'ip_addr': '192.168.10.120',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB7 = {
-          'port': 502,
-          'ip_addr': '192.168.10.121',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB8 = {
-          'port': 502,
-          'ip_addr': '192.168.10.122',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB9 = {
-          'port': 502,
-          'ip_addr': '192.168.10.123',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB10 = {
-          'port': 502,
-          'ip_addr': '192.168.10.124',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB11 = {
-          'port': 502,
-          'ip_addr': '192.168.10.125',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB12 = {
-          'port': 502,
-          'ip_addr': '192.168.10.126',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB13 = {
-          'port': 502,
-          'ip_addr': '192.168.10.127',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB14 = {
-          'port': 502,
-          'ip_addr': '192.168.10.128',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB15 = {
-          'port': 502,
-          'ip_addr': '192.168.10.129',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB16 = {
-          'port': 502,
-          'ip_addr': '192.168.10.130',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB17 = {
-          'port': 502,
-          'ip_addr': '192.168.10.131',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB18 = {
-          'port': 502,
-          'ip_addr': '192.168.10.132',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF2_CB19 = {
-          'port': 502,
-          'ip_addr': '192.168.10.133',
-          'netmask': '255.255.255.0',
-          'slave_id': 2,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
+        config2 = {
+                                            'port': 502,
+                                            'ip_addr': '192.168.2.62',
+                                            'netmask': '255.255.255.0',
+                                            'slave_id': 18,
+                                            'coil_input_addresses': '',
+                                            'coil_output_addresses': '',
+                                            'discrete_input_addresses': '',
+                                            'holding_register_input_addresses': '',
+                                            'holding_register_output_addresses': '0',
+                                            'input_register_adresses': ''
         }
         
-        configF3_CB1 = {
-          'port': 502,
-          'ip_addr': '192.168.10.134',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
+        config3 = {
+                                            'port': 502,
+                                            'ip_addr': '192.168.2.63',
+                                            'netmask': '255.255.255.0',
+                                            'slave_id': 19,
+                                            'coil_input_addresses': '',
+                                            'coil_output_addresses': '',
+                                            'discrete_input_addresses': '',
+                                            'holding_register_input_addresses': '',
+                                            'holding_register_output_addresses': '0',
+                                            'input_register_adresses': ''
         }
-        configF3_CB2 = {
-          'port': 502,
-          'ip_addr': '192.168.10.135',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB3 = {
-          'port': 502,
-          'ip_addr': '192.168.10.136',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB4 = {
-          'port': 502,
-          'ip_addr': '192.168.10.137',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB5 = {
-          'port': 502,
-          'ip_addr': '192.168.10.138',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB6 = {
-          'port': 502,
-          'ip_addr': '192.168.10.139',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB7 = {
-          'port': 502,
-          'ip_addr': '192.168.10.140',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB8 = {
-          'port': 502,
-          'ip_addr': '192.168.10.141',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        configF3_CB9 = {
-          'port': 502,
-          'ip_addr': '192.168.10.142',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '',
-          'holding_register_output_addresses': '2000,2001,2002',
-          'input_register_adresses': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24'
-        }
-        dms_config = {
-          'port': 502,
-          'ip_addr': '192.168.10.54',
-          'netmask': '255.255.255.0',
-          'slave_id': 3,
-          'coil_input_addresses': '',
-          'coil_output_addresses': '',
-          'discrete_input_addresses': '',
-          'holding_register_input_addresses': '0,1,2,7,3,8,4,9,5,10,6,11,12,13,14,15',
-          'holding_register_output_addresses': '',
-          'input_register_adresses': ''
-        }
-        configCHP = {
-            'port': 502,
-            'ip_addr': '192.168.10.55',
-            'netmask': '255.255.255.0',
-            'slave_id': 3,
-            'coil_input_addresses': '',
-            'coil_output_addresses': '',
-            'discrete_input_addresses': '',
-            'holding_register_input_addresses': '',
-            'holding_register_output_addresses': '2000,2001',
-            'input_register_adresses': '0,1,2,3,4'
-        }
+        
         
             #Transformers Lm and Rm
         Rm_utility_transfo1 = 1e5

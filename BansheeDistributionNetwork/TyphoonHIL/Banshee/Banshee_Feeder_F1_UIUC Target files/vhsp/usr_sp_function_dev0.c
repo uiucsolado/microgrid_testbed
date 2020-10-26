@@ -1138,7 +1138,7 @@ double _regd_control_p_ref_vl1_capacity_min__out = 100000.0;
 double _regd_control_p_ref_vl2_pref_initial__out;
 double _regd_control_p_ref_vl2_capacity_max__out = 500000.0;
 double _regd_control_p_ref_vl2_capacity_min__out = 100000.0;
-double _regd_control_regd_signal__out;
+double _regd_control_regd__out;
 double _vbr_variable_load1_control_constant3__out = 1.0;
 double _vbr_variable_load1_control_constant4__out = 0.0;
 double _vbr_variable_load1_control_constant5__out = 0.0;
@@ -2812,8 +2812,8 @@ void TimerCounterHandler_1_user_sp_cpu_dev0() {
     _regd_control_p_ref_vl2_pref_initial__out = XIo_InFloat(0x5500014c);
     // Generated from the component: RegD_Control.P_ref_VL2.capacity_max
     // Generated from the component: RegD_Control.P_ref_VL2.capacity_min
-    // Generated from the component: RegD_Control.RegD_Signal
-    _regd_control_regd_signal__out = XIo_InFloat(0x55000150);
+    // Generated from the component: RegD_Control.RegD
+    _regd_control_regd__out = XIo_InFloat(0x55000150);
     // Generated from the component: VBR Variable Load1.Control.Constant3
     // Generated from the component: VBR Variable Load1.Control.Constant4
     // Generated from the component: VBR Variable Load1.Control.Constant5
@@ -2889,11 +2889,11 @@ void TimerCounterHandler_1_user_sp_cpu_dev0() {
     // Generated from the component: RegD_Control.P_ref_VL2.Sum8
     _regd_control_p_ref_vl2_sum8__out =  - _regd_control_p_ref_vl2_capacity_min__out + _regd_control_p_ref_vl2_pref_initial__out;
     // Generated from the component: RegD_Control.P_ref_Diesel.RegD_act1
-    HIL_OutAO(0x4039, (float)_regd_control_regd_signal__out);
+    HIL_OutAO(0x4039, (float)_regd_control_regd__out);
     // Generated from the component: RegD_Control.P_ref_VL1.RegD_act1
-    HIL_OutAO(0x403a, (float)_regd_control_regd_signal__out);
+    HIL_OutAO(0x403a, (float)_regd_control_regd__out);
     // Generated from the component: RegD_Control.P_ref_VL2.RegD_act1
-    HIL_OutAO(0x403b, (float)_regd_control_regd_signal__out);
+    HIL_OutAO(0x403b, (float)_regd_control_regd__out);
     // Generated from the component: VBR Variable Load1.Control.Gain3
     _vbr_variable_load1_control_gain3__out = 0.016666666666666666 * _vbr_variable_load1_control_three_phase_pll2_to_hz__out;
     // Generated from the component: VBR Variable Load1.Control.abc to dq1.abc to alpha beta
@@ -2971,17 +2971,17 @@ void TimerCounterHandler_1_user_sp_cpu_dev0() {
     // Generated from the component: RegD_Control.P_ref_Diesel.C function1
     _regd_control_p_ref_diesel_c_function1__Reg_Max = _regd_control_p_ref_diesel_sum9__out;
     _regd_control_p_ref_diesel_c_function1__Reg_Min = _regd_control_p_ref_diesel_sum8__out;
-    _regd_control_p_ref_diesel_c_function1__in = _regd_control_regd_signal__out;
+    _regd_control_p_ref_diesel_c_function1__in = _regd_control_regd__out;
     _regd_control_p_ref_diesel_c_function1__out = _regd_control_p_ref_diesel_c_function1__deltaP;
     // Generated from the component: RegD_Control.P_ref_VL1.C function1
     _regd_control_p_ref_vl1_c_function1__Reg_Max = _regd_control_p_ref_vl1_sum9__out;
     _regd_control_p_ref_vl1_c_function1__Reg_Min = _regd_control_p_ref_vl1_sum8__out;
-    _regd_control_p_ref_vl1_c_function1__in = _regd_control_regd_signal__out;
+    _regd_control_p_ref_vl1_c_function1__in = _regd_control_regd__out;
     _regd_control_p_ref_vl1_c_function1__out = _regd_control_p_ref_vl1_c_function1__deltaP;
     // Generated from the component: RegD_Control.P_ref_VL2.C function1
     _regd_control_p_ref_vl2_c_function1__Reg_Max = _regd_control_p_ref_vl2_sum9__out;
     _regd_control_p_ref_vl2_c_function1__Reg_Min = _regd_control_p_ref_vl2_sum8__out;
-    _regd_control_p_ref_vl2_c_function1__in = _regd_control_regd_signal__out;
+    _regd_control_p_ref_vl2_c_function1__in = _regd_control_regd__out;
     _regd_control_p_ref_vl2_c_function1__out = _regd_control_p_ref_vl2_c_function1__deltaP;
     // Generated from the component: VBR Variable Load1.Control.Termination1
     // Generated from the component: VBR Variable Load1.Control.abc to dq1.alpha beta to dq
