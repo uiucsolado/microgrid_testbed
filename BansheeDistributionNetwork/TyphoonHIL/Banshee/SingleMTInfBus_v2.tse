@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.2
-// Save timestamp: 29-Oct-2020 @ 12:41:33 PM
+// Save timestamp: 29-Oct-2020 @ 06:08:57 PM
 //
 
-model "singlemtinfbus_v2" {
+model "SingleMTInfBus_v2" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 2
@@ -143,6 +143,2633 @@ model "singlemtinfbus_v2" {
         }
         [
             position = 6112, 8392
+        ]
+
+        component src_ground gnd2 {
+        }
+        [
+            position = 8072, 7920
+            rotation = down
+            hide_name = True
+        ]
+
+        component "core/Three Phase Voltage Source" Vs1 {
+            init_frequency = "60.0"
+        }
+        [
+            position = 7912, 7976
+            scale = -1, 1
+            size = 62, 256
+        ]
+
+        component "core/Voltage RMS" Vrms_grid {
+            frequency = "sys_f"
+            op_mode = "Fixed frequency"
+        }
+        [
+            position = 7768, 7928
+            rotation = right
+            size = 64, 32
+        ]
+
+        component Subsystem F1_PCC {
+            layout = dynamic
+            component gen_bus_join "Bus Join1" {
+                inputs = "8"
+            }
+            [
+                position = 7232, 8040
+                scale = -1, 1
+            ]
+
+            component gen_probe P {
+            }
+            [
+                position = 7680, 7928
+                scale = -1, 1
+            ]
+
+            component gen_probe Q {
+            }
+            [
+                position = 7680, 7872
+                scale = -1, 1
+            ]
+
+            component gen_gain Gain1 {
+                gain = "10"
+            }
+            [
+                position = 7616, 7976
+                hide_name = True
+                scale = -1, -1
+            ]
+
+            component gen_gain Gain4 {
+                gain = "100"
+            }
+            [
+                position = 7624, 8048
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_gain Gain2 {
+                gain = "10"
+            }
+            [
+                position = 7616, 8000
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_gain Gain3 {
+                gain = "100"
+            }
+            [
+                position = 7600, 8024
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_gain "W -> kW" {
+                gain = ".001"
+            }
+            [
+                position = 7744, 7976
+                scale = -1, 1
+            ]
+
+            component gen_gain "var -> kvar" {
+                gain = ".001"
+            }
+            [
+                position = 7688, 8000
+                scale = -1, 1
+            ]
+
+            component Subsystem Meas1 {
+                layout = dynamic
+                component "core/Voltage Measurement" VB {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7648, 8288
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component "core/Current Measurement" IC {
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7496, 8120
+                    size = 64, 32
+                ]
+
+                component gen_bus_join "Bus Join1" {
+                    inputs = "3"
+                }
+                [
+                    position = 7936, 8168
+                    rotation = left
+                ]
+
+                component "core/Current Measurement" IB {
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7432, 8024
+                    size = 64, 32
+                ]
+
+                component "core/Voltage Measurement" VC {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7568, 8352
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component "core/Voltage Measurement" VA {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7728, 8224
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component gen_bus_join "Bus Join2" {
+                    inputs = "3"
+                }
+                [
+                    position = 7576, 7784
+                ]
+
+                component "core/Current Measurement" IA {
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7368, 7928
+                    size = 64, 32
+                ]
+
+                port Ground {
+                    position = bottom:auto
+                    kind = pe
+                }
+                [
+                    position = 7648, 8504
+                    rotation = left
+                ]
+
+                port A {
+                    position = left:1
+                    kind = pe
+                }
+                [
+                    position = 7288, 7928
+                ]
+
+                port B {
+                    position = left:2
+                    kind = pe
+                }
+                [
+                    position = 7288, 8024
+                ]
+
+                port C {
+                    position = left:3
+                    kind = pe
+                }
+                [
+                    position = 7288, 8120
+                ]
+
+                port a {
+                    label = "a"
+                    position = right:1
+                    kind = pe
+                }
+                [
+                    position = 7800, 7928
+                    rotation = down
+                ]
+
+                port b {
+                    label = "b"
+                    position = right:2
+                    kind = pe
+                }
+                [
+                    position = 7800, 8024
+                    rotation = down
+                ]
+
+                port c {
+                    label = "c"
+                    position = right:3
+                    kind = pe
+                }
+                [
+                    position = 7800, 8120
+                    rotation = down
+                ]
+
+                port V {
+                    label = "V"
+                    position = top:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7936, 8112
+                    rotation = left
+                ]
+
+                port I {
+                    position = top:1
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7648, 7784
+                ]
+
+                junction Junction1421 pe
+                [
+                    position = 7648, 8432
+                ]
+
+                junction Junction1466 pe
+                [
+                    position = 7728, 7928
+                ]
+
+                junction Junction1467 pe
+                [
+                    position = 7648, 8024
+                ]
+
+                junction Junction1468 pe
+                [
+                    position = 7568, 8120
+                ]
+
+                junction Junction1469 pe
+                [
+                    position = 7648, 8432
+                ]
+
+                connect A IA.p_node as Connection379
+                connect B IB.p_node as Connection380
+                connect "Bus Join1.in1" VB.out as Connection387
+                connect "Bus Join1.in2" VC.out as Connection388
+                connect "Bus Join2.out" I as Connection393
+                connect "Bus Join2.in1" IB.out as Connection391
+                connect "Bus Join2.in2" IC.out as Connection392
+                connect C IC.p_node as Connection381
+                connect Ground Junction1469 as Connection384
+                connect IA.out "Bus Join2.in" as Connection390
+                connect IA.n_node Junction1466 as Connection377
+                connect Junction1421 Junction1469 as Connection382
+                connect Junction1466 a as Connection299
+                connect Junction1467 IB.n_node as Connection375
+                connect Junction1467 b as Connection301
+                connect Junction1468 IC.n_node as Connection376
+                connect Junction1468 c as Connection302
+                connect Junction1469 VC.n_node as Connection383
+                connect V "Bus Join1.out" as Connection389
+                connect V "Bus Join1.out" as Connection385
+                connect VA.out "Bus Join1.in" as Connection386
+                connect VA.n_node Junction1421 as Connection237
+                connect VA.p_node Junction1466 as Connection240
+                connect VB.n_node Junction1421 as Connection203
+                connect VB.p_node Junction1467 as Connection243
+                connect VC.p_node Junction1468 as Connection246
+            }
+            [
+                position = 8136, 8048
+                rotation = right
+                scale = -1, 1
+                size = 112, 232
+            ]
+
+            component Subsystem "PCC Measurements" {
+                layout = dynamic
+                component src_constant Constant2 {
+                    execution_rate = "Ts"
+                }
+                [
+                    position = 8040, 8472
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_bus_split "Bus Split1" {
+                    outputs = "3"
+                }
+                [
+                    position = 8416, 8256
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination5 {
+                }
+                [
+                    position = 8008, 8136
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_bus_split "Bus Split2" {
+                    outputs = "3"
+                }
+                [
+                    position = 8416, 8184
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination8 {
+                }
+                [
+                    position = 8016, 8384
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination1 {
+                }
+                [
+                    position = 8008, 8056
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination3 {
+                }
+                [
+                    position = 8008, 8088
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination2 {
+                }
+                [
+                    position = 7968, 8072
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_PQ_transform "Power Meter1" {
+                }
+                [
+                    position = 8088, 8360
+                    scale = -1, 1
+                ]
+
+                component gen_comparator Comparator1 {
+                }
+                [
+                    position = 7912, 8272
+                    hide_name = True
+                    scale = -1, -1
+                ]
+
+                component gen_comparator Comparator2 {
+                }
+                [
+                    position = 7912, 8464
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component src_constant Constant1 {
+                    execution_rate = "Ts"
+                }
+                [
+                    position = 8040, 8264
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination4 {
+                }
+                [
+                    position = 7968, 8120
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component "core/Three phase PLL" "Three phase PLL1" {
+                }
+                [
+                    position = 8088, 8096
+                    scale = -1, 1
+                    size = 64, 128
+                ]
+
+                component gen_terminator Termination7 {
+                }
+                [
+                    position = 7976, 8368
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination6 {
+                }
+                [
+                    position = 8016, 8352
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_rms_value "RMS value1" {
+                }
+                [
+                    position = 8088, 8192
+                    scale = -1, 1
+                ]
+
+                port f {
+                    label = "Frequency"
+                    position = left:4
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7920, 8104
+                    scale = -1, 1
+                ]
+
+                port P {
+                    label = "Real Power"
+                    position = left:2
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7976, 8320
+                    scale = -1, 1
+                ]
+
+                port Q {
+                    label = "Reactive Power"
+                    position = left:3
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7936, 8336
+                    scale = -1, 1
+                ]
+
+                port pf {
+                    label = "Power Factor"
+                    position = left:6
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7936, 8400
+                    scale = -1, 1
+                ]
+
+                port I {
+                    label = "I"
+                    position = right:1
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8488, 8184
+                    rotation = down
+                ]
+
+                port Vrms {
+                    label = "Voltage"
+                    position = left:3
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7984, 8192
+                    scale = -1, 1
+                ]
+
+                port V {
+                    label = "V"
+                    position = right:2
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8488, 8256
+                    rotation = down
+                ]
+
+                port "P direction" {
+                    label = "P Import/Exprot"
+                    position = left:9
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7848, 8272
+                    scale = -1, 1
+                ]
+
+                port "pf lead lag" {
+                    label = "pf lead/lag"
+                    position = left:10
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7848, 8464
+                    scale = -1, 1
+                ]
+
+                tag Goto4 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8232
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From9 {
+                    value = "Ic"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 8400
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From6 {
+                    value = "Vb"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 8336
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto2 {
+                    value = "Ib"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8184
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From10 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8192
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto3 {
+                    value = "Ic"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8208
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From4 {
+                    value = "Vc"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8240, 8352
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From2 {
+                    value = "Vb"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8096
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From5 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8240, 8320
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From3 {
+                    value = "Vc"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8128
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From7 {
+                    value = "Ia"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 8368
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto6 {
+                    value = "Vc"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8280
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From8 {
+                    value = "Ib"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8240, 8384
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From1 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8064
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto5 {
+                    value = "Vb"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8256
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto1 {
+                    value = "Ia"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8160
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                junction Junction1 sp
+                [
+                    position = 8016, 8320
+                ]
+
+                junction Junction2 sp
+                [
+                    position = 7976, 8400
+                ]
+
+                connect "Bus Split1.out" Goto4 as Connection27
+                connect "Bus Split1.out1" Goto5 as Connection26
+                connect "Bus Split1.out2" Goto6 as Connection28
+                connect "Bus Split1.in" V as Connection47
+                connect "Bus Split2.out" Goto1 as Connection25
+                connect "Bus Split2.out2" Goto3 as Connection24
+                connect "Bus Split2.in" I as Connection48
+                connect Comparator1.in1 Junction1 as Connection57
+                connect Comparator2.in1 Junction2 as Connection60
+                connect Constant1.out Comparator1.in2 as Connection54
+                connect Constant2.out Comparator2.in2 as Connection61
+                connect From1 "Three phase PLL1.va" as Connection29
+                connect From10 "RMS value1.in" as Connection46
+                connect From2 "Three phase PLL1.vb" as Connection30
+                connect From3 "Three phase PLL1.vc" as Connection31
+                connect From4 "Power Meter1.vc" as Connection37
+                connect From5 "Power Meter1.va" as Connection39
+                connect From6 "Power Meter1.vb" as Connection38
+                connect From7 "Power Meter1.ia" as Connection41
+                connect From9 "Power Meter1.ic" as Connection40
+                connect Goto2 "Bus Split2.out1" as Connection23
+                connect Junction1 P as Connection56
+                connect Junction2 pf as Connection59
+                connect "P direction" Comparator1.out as Connection62
+                connect "Power Meter1.ib" From8 as Connection42
+                connect "Power Meter1.Pdc" Junction1 as Connection55
+                connect "Power Meter1.k_factor" Junction2 as Connection58
+                connect "Power Meter1.Qdc" Q as Connection53
+                connect "RMS value1.out" Vrms as Connection50
+                connect Termination1.in "Three phase PLL1.d_axis" as Connection32
+                connect Termination2.in "Three phase PLL1.q_axis" as Connection33
+                connect Termination3.in "Three phase PLL1.zero_axis" as Connection34
+                connect Termination4.in "Three phase PLL1.theta" as Connection35
+                connect Termination5.in "Three phase PLL1.sin_theta" as Connection36
+                connect Termination6.in "Power Meter1.Pac" as Connection43
+                connect Termination7.in "Power Meter1.Qac" as Connection44
+                connect Termination8.in "Power Meter1.apparent" as Connection45
+                connect "Three phase PLL1.freq" f as Connection52
+                connect "pf lead lag" Comparator2.out as Connection63
+            }
+            [
+                position = 7920, 8048
+                size = 96, 184
+            ]
+
+            component gen_terminator Termination1 {
+            }
+            [
+                position = 7160, 8072
+            ]
+
+            port A {
+                label = "A"
+                position = top:1
+                kind = pe
+            }
+            [
+                position = 8040, 7944
+                rotation = right
+            ]
+
+            port B {
+                label = "B"
+                position = top:2
+                kind = pe
+            }
+            [
+                position = 8136, 7944
+                rotation = right
+            ]
+
+            port C {
+                label = "C"
+                position = top:3
+                kind = pe
+            }
+            [
+                position = 8232, 7944
+                rotation = right
+            ]
+
+            port a {
+                label = "a"
+                position = bottom:1
+                kind = pe
+            }
+            [
+                position = 8040, 8424
+                rotation = left
+            ]
+
+            port b {
+                label = "b"
+                position = bottom:2
+                kind = pe
+            }
+            [
+                position = 8136, 8424
+                rotation = left
+            ]
+
+            port c {
+                label = "c"
+                position = bottom:3
+                kind = pe
+            }
+            [
+                position = 8232, 8424
+                rotation = left
+            ]
+
+            port G {
+                label = "G"
+                position = right:1
+                kind = pe
+            }
+            [
+                position = 8424, 8192
+                rotation = down
+            ]
+
+            tag From3 {
+                value = "V"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 8016
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From4 {
+                value = "f"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8032
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto1 {
+                value = "P"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 7976
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From7 {
+                value = "P sign"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 8080
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto5 {
+                value = "pf"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8072
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From6 {
+                value = "pf"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8064
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto6 {
+                value = "P sign"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8096
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto7 {
+                value = "pf lead/lag"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8120
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From5 {
+                value = "CB Status"
+                scope = global
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 8048
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From2 {
+                value = "Q"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8000
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto4 {
+                value = "f"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8048
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From8 {
+                value = "pf lead/lag"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8096
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From1 {
+                value = "P"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 7984
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto3 {
+                value = "V"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8024
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto2 {
+                value = "Q"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8000
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            junction Junction4 sp
+            [
+                position = 7848, 8000
+            ]
+
+            junction Junction5 sp
+            [
+                position = 7800, 7976
+            ]
+
+            connect A Meas1.A as Connection45
+            connect "Bus Join1.in4" From5 as Connection35
+            connect From1 "Bus Join1.in" as Connection31
+            connect From2 "Bus Join1.in1" as Connection32
+            connect From3 "Bus Join1.in2" as Connection33
+            connect From4 "Bus Join1.in3" as Connection34
+            connect From6 "Bus Join1.in5" as Connection36
+            connect From7 "Bus Join1.in6" as Connection37
+            connect From8 "Bus Join1.in7" as Connection38
+            connect Gain1.in "W -> kW.out" as Connection1098
+            connect Gain2.in "var -> kvar.out" as Connection1100
+            connect Gain3.in "PCC Measurements.Vrms" as Connection1095
+            connect Gain4.out Goto4 as Connection1097
+            connect Goto1 Gain1.out as Connection1102
+            [
+                breakpoints = 7528, 7976; 7584, 7976
+            ]
+            connect Goto2 Gain2.out as Connection1103
+            [
+                breakpoints = 7528, 8000; 7592, 8000
+            ]
+            connect Goto3 Gain3.out as Connection1094
+            connect Goto5 "PCC Measurements.pf" as Connection27
+            connect Goto6 "PCC Measurements.P direction" as Connection28
+            connect Goto7 "PCC Measurements.pf lead lag" as Connection29
+            connect Junction4 "PCC Measurements.Q" as Connection1109
+            connect Junction5 "W -> kW.in" as Connection1112
+            connect Meas1.B B as Connection44
+            connect Meas1.C C as Connection43
+            connect Meas1.I "PCC Measurements.I" as Connection52
+            [
+                breakpoints = 8000, 7976; 7976, 7976
+            ]
+            connect P.in Junction5 as Connection1113
+            connect "PCC Measurements.f" Gain4.in as Connection1096
+            connect "PCC Measurements.P" Junction5 as Connection1111
+            [
+                breakpoints = 7864, 7976
+            ]
+            connect "PCC Measurements.V" Meas1.V as Connection53
+            connect Q.in Junction4 as Connection1110
+            connect "var -> kvar.in" Junction4 as Connection1108
+            connect Termination1.in "Bus Join1.out" as Connection1114
+            connect Meas1.Ground G as Connection1139
+            [
+                breakpoints = 8392, 8192
+            ]
+            connect Meas1.a a as Connection1140
+            connect Meas1.b b as Connection1141
+            connect Meas1.c c as Connection1142
+        }
+        [
+            position = 6384, 8144
+            size = 80, 48
+        ]
+
+        component "core/Transmission Line" F1_line {
+            C_imperial = "[[0.00233, 0.00140, 0.00140], [0.00140, 0.00233, 0.00140], [0.00140, 0.00140, 0.00233]]"
+            C_sequence_metric = "[[5.089e-7, 0.0, 0.0], [0.0, 5.089e-7, 0.0], [0.0, 0.0, 5.089e-7]]"
+            Frequency = "sys_f"
+            L_sequence_imperial = "L_cable13"
+            L_sequence_metric = "[[0.0020, 0.0, 0.0], [0.0, 3.0953e-4, 0.0], [0.0, 0.0, 3.0953e-4]]"
+            Length_metric = "1.6764"
+            Length_miles = "l_U_L2"
+            R_sequence_imperial = "R_cable13"
+            R_sequence_metric = "[[1.1405, 0.0, 0.0], [0.0, 0.0749, 0.0], [0.0, 0.0, 0.0749]]"
+            model_def = "Sequence"
+        }
+        [
+            position = 6568, 7976
+            size = 256, 72
+        ]
+
+        component Subsystem F1_PCC1 {
+            layout = dynamic
+            component gen_bus_join "Bus Join1" {
+                inputs = "8"
+            }
+            [
+                position = 7232, 8040
+                scale = -1, 1
+            ]
+
+            component "core/Triple Pole Single Throw Contactor" S1 {
+                ctrl_src = "Model"
+            }
+            [
+                position = 8136, 8184
+                rotation = left
+                size = 64, 256
+            ]
+
+            component gen_data_type_conversion "Data Type Conversion1" {
+            }
+            [
+                position = 7928, 8184
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_probe P {
+            }
+            [
+                position = 7680, 7928
+                scale = -1, 1
+            ]
+
+            component gen_probe Q {
+            }
+            [
+                position = 7680, 7872
+                scale = -1, 1
+            ]
+
+            component gen_gain Gain1 {
+                gain = "10"
+            }
+            [
+                position = 7616, 7976
+                hide_name = True
+                scale = -1, -1
+            ]
+
+            component gen_gain Gain4 {
+                gain = "100"
+            }
+            [
+                position = 7624, 8048
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_gain Gain2 {
+                gain = "10"
+            }
+            [
+                position = 7616, 8000
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_gain Gain3 {
+                gain = "100"
+            }
+            [
+                position = 7600, 8024
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            component gen_gain "W -> kW" {
+                gain = ".001"
+            }
+            [
+                position = 7744, 7976
+                scale = -1, 1
+            ]
+
+            component gen_gain "var -> kvar" {
+                gain = ".001"
+            }
+            [
+                position = 7688, 8000
+                scale = -1, 1
+            ]
+
+            component Subsystem Meas2 {
+                layout = dynamic
+                component "core/Voltage Measurement" VB {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7648, 8256
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component "core/Voltage Measurement" VA {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7728, 8192
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component gen_bus_join "Bus Join1" {
+                    inputs = "3"
+                }
+                [
+                    position = 7960, 8120
+                    rotation = left
+                ]
+
+                component "core/Voltage Measurement" VC {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7568, 8320
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                port Ground {
+                    position = bottom:auto
+                    kind = pe
+                }
+                [
+                    position = 7648, 8504
+                    rotation = left
+                ]
+
+                port A {
+                    position = left:1
+                    kind = pe
+                }
+                [
+                    position = 7400, 7928
+                ]
+
+                port B {
+                    position = left:2
+                    kind = pe
+                }
+                [
+                    position = 7400, 8024
+                ]
+
+                port C {
+                    position = left:3
+                    kind = pe
+                }
+                [
+                    position = 7400, 8120
+                ]
+
+                port a {
+                    label = "a"
+                    position = right:1
+                    kind = pe
+                }
+                [
+                    position = 7800, 7928
+                    rotation = down
+                ]
+
+                port b {
+                    label = "b"
+                    position = right:2
+                    kind = pe
+                }
+                [
+                    position = 7800, 8024
+                    rotation = down
+                ]
+
+                port c {
+                    label = "c"
+                    position = right:3
+                    kind = pe
+                }
+                [
+                    position = 7800, 8120
+                    rotation = down
+                ]
+
+                port V {
+                    label = "V"
+                    position = top:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7960, 8064
+                    rotation = left
+                ]
+
+                junction Junction1421 pe
+                [
+                    position = 7648, 8432
+                ]
+
+                junction Junction1469 pe
+                [
+                    position = 7648, 8432
+                ]
+
+                junction Junction1470 pe
+                [
+                    position = 7728, 7928
+                ]
+
+                junction Junction1471 pe
+                [
+                    position = 7648, 8024
+                ]
+
+                junction Junction1472 pe
+                [
+                    position = 7568, 8120
+                ]
+
+                connect A Junction1470 as Connection390
+                connect B Junction1471 as Connection393
+                connect C Junction1472 as Connection396
+                connect Ground Junction1469 as Connection384
+                connect Junction1421 Junction1469 as Connection382
+                connect Junction1469 VC.n_node as Connection383
+                connect Junction1470 VA.p_node as Connection389
+                connect Junction1471 b as Connection392
+                connect Junction1472 VC.p_node as Connection395
+                connect V "Bus Join1.out" as Connection385
+                connect VA.out "Bus Join1.in" as Connection397
+                connect VA.n_node Junction1421 as Connection237
+                connect VB.out "Bus Join1.in1" as Connection398
+                connect VB.n_node Junction1421 as Connection203
+                connect VB.p_node Junction1471 as Connection391
+                connect VC.out "Bus Join1.in2" as Connection399
+                connect a Junction1470 as Connection388
+                connect c Junction1472 as Connection394
+            }
+            [
+                position = 8136, 8312
+                rotation = right
+                scale = -1, 1
+                size = 112, 232
+            ]
+
+            component Subsystem Meas1 {
+                layout = dynamic
+                component "core/Voltage Measurement" VB {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7648, 8288
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component "core/Current Measurement" IC {
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7496, 8120
+                    size = 64, 32
+                ]
+
+                component gen_bus_join "Bus Join1" {
+                    inputs = "3"
+                }
+                [
+                    position = 7936, 8168
+                    rotation = left
+                ]
+
+                component "core/Current Measurement" IB {
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7432, 8024
+                    size = 64, 32
+                ]
+
+                component "core/Voltage Measurement" VC {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7568, 8352
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component "core/Voltage Measurement" VA {
+                    addr = "267"
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7728, 8224
+                    rotation = right
+                    size = 64, 32
+                ]
+
+                component gen_bus_join "Bus Join2" {
+                    inputs = "3"
+                }
+                [
+                    position = 7576, 7784
+                ]
+
+                component "core/Current Measurement" IA {
+                    execution_rate = "Ts"
+                    sig_output = "True"
+                }
+                [
+                    position = 7368, 7928
+                    size = 64, 32
+                ]
+
+                port Ground {
+                    position = bottom:auto
+                    kind = pe
+                }
+                [
+                    position = 7648, 8504
+                    rotation = left
+                ]
+
+                port A {
+                    position = left:1
+                    kind = pe
+                }
+                [
+                    position = 7288, 7928
+                ]
+
+                port B {
+                    position = left:2
+                    kind = pe
+                }
+                [
+                    position = 7288, 8024
+                ]
+
+                port C {
+                    position = left:3
+                    kind = pe
+                }
+                [
+                    position = 7288, 8120
+                ]
+
+                port a {
+                    label = "a"
+                    position = right:1
+                    kind = pe
+                }
+                [
+                    position = 7800, 7928
+                    rotation = down
+                ]
+
+                port b {
+                    label = "b"
+                    position = right:2
+                    kind = pe
+                }
+                [
+                    position = 7800, 8024
+                    rotation = down
+                ]
+
+                port c {
+                    label = "c"
+                    position = right:3
+                    kind = pe
+                }
+                [
+                    position = 7800, 8120
+                    rotation = down
+                ]
+
+                port V {
+                    label = "V"
+                    position = top:auto
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7936, 8112
+                    rotation = left
+                ]
+
+                port I {
+                    position = top:1
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7648, 7784
+                ]
+
+                junction Junction1421 pe
+                [
+                    position = 7648, 8432
+                ]
+
+                junction Junction1466 pe
+                [
+                    position = 7728, 7928
+                ]
+
+                junction Junction1467 pe
+                [
+                    position = 7648, 8024
+                ]
+
+                junction Junction1468 pe
+                [
+                    position = 7568, 8120
+                ]
+
+                junction Junction1469 pe
+                [
+                    position = 7648, 8432
+                ]
+
+                connect A IA.p_node as Connection379
+                connect B IB.p_node as Connection380
+                connect "Bus Join1.in1" VB.out as Connection387
+                connect "Bus Join1.in2" VC.out as Connection388
+                connect "Bus Join2.out" I as Connection393
+                connect "Bus Join2.in1" IB.out as Connection391
+                connect "Bus Join2.in2" IC.out as Connection392
+                connect C IC.p_node as Connection381
+                connect Ground Junction1469 as Connection384
+                connect IA.out "Bus Join2.in" as Connection390
+                connect IA.n_node Junction1466 as Connection377
+                connect Junction1421 Junction1469 as Connection382
+                connect Junction1466 a as Connection299
+                connect Junction1467 IB.n_node as Connection375
+                connect Junction1467 b as Connection301
+                connect Junction1468 IC.n_node as Connection376
+                connect Junction1468 c as Connection302
+                connect Junction1469 VC.n_node as Connection383
+                connect V "Bus Join1.out" as Connection389
+                connect V "Bus Join1.out" as Connection385
+                connect VA.out "Bus Join1.in" as Connection386
+                connect VA.n_node Junction1421 as Connection237
+                connect VA.p_node Junction1466 as Connection240
+                connect VB.n_node Junction1421 as Connection203
+                connect VB.p_node Junction1467 as Connection243
+                connect VC.p_node Junction1468 as Connection246
+            }
+            [
+                position = 8136, 8048
+                rotation = right
+                scale = -1, 1
+                size = 112, 232
+            ]
+
+            component Subsystem "PCC Measurements" {
+                layout = dynamic
+                component src_constant Constant2 {
+                    execution_rate = "Ts"
+                }
+                [
+                    position = 8040, 8472
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_bus_split "Bus Split1" {
+                    outputs = "3"
+                }
+                [
+                    position = 8416, 8256
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination5 {
+                }
+                [
+                    position = 8008, 8136
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_bus_split "Bus Split2" {
+                    outputs = "3"
+                }
+                [
+                    position = 8416, 8184
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination8 {
+                }
+                [
+                    position = 8016, 8384
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination1 {
+                }
+                [
+                    position = 8008, 8056
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination3 {
+                }
+                [
+                    position = 8008, 8088
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination2 {
+                }
+                [
+                    position = 7968, 8072
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_PQ_transform "Power Meter1" {
+                }
+                [
+                    position = 8088, 8360
+                    scale = -1, 1
+                ]
+
+                component gen_comparator Comparator1 {
+                }
+                [
+                    position = 7912, 8272
+                    hide_name = True
+                    scale = -1, -1
+                ]
+
+                component gen_comparator Comparator2 {
+                }
+                [
+                    position = 7912, 8464
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component src_constant Constant1 {
+                    execution_rate = "Ts"
+                }
+                [
+                    position = 8040, 8264
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination4 {
+                }
+                [
+                    position = 7968, 8120
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component "core/Three phase PLL" "Three phase PLL1" {
+                }
+                [
+                    position = 8088, 8096
+                    scale = -1, 1
+                    size = 64, 128
+                ]
+
+                component gen_terminator Termination7 {
+                }
+                [
+                    position = 7976, 8368
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_terminator Termination6 {
+                }
+                [
+                    position = 8016, 8352
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                component gen_rms_value "RMS value1" {
+                }
+                [
+                    position = 8088, 8192
+                    scale = -1, 1
+                ]
+
+                port f {
+                    label = "Frequency"
+                    position = left:4
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7920, 8104
+                    scale = -1, 1
+                ]
+
+                port P {
+                    label = "Real Power"
+                    position = left:2
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7976, 8320
+                    scale = -1, 1
+                ]
+
+                port Q {
+                    label = "Reactive Power"
+                    position = left:3
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7936, 8336
+                    scale = -1, 1
+                ]
+
+                port pf {
+                    label = "Power Factor"
+                    position = left:6
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7936, 8400
+                    scale = -1, 1
+                ]
+
+                port I {
+                    label = "I"
+                    position = right:1
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8488, 8184
+                    rotation = down
+                ]
+
+                port Vrms {
+                    label = "Voltage"
+                    position = left:3
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7984, 8192
+                    scale = -1, 1
+                ]
+
+                port V {
+                    label = "V"
+                    position = right:2
+                    kind = sp
+                    direction =  out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8488, 8256
+                    rotation = down
+                ]
+
+                port "P direction" {
+                    label = "P Import/Exprot"
+                    position = left:9
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7848, 8272
+                    scale = -1, 1
+                ]
+
+                port "pf lead lag" {
+                    label = "pf lead/lag"
+                    position = left:10
+                    kind = sp
+                    direction =  in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7848, 8464
+                    scale = -1, 1
+                ]
+
+                tag Goto4 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8232
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From9 {
+                    value = "Ic"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 8400
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From6 {
+                    value = "Vb"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 8336
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto2 {
+                    value = "Ib"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8184
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From10 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8192
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto3 {
+                    value = "Ic"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8208
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From4 {
+                    value = "Vc"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8240, 8352
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From2 {
+                    value = "Vb"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8096
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From5 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8240, 8320
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From3 {
+                    value = "Vc"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8128
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From7 {
+                    value = "Ia"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8176, 8368
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto6 {
+                    value = "Vc"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8280
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From8 {
+                    value = "Ib"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8240, 8384
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag From1 {
+                    value = "Va"
+                    scope = local
+                    kind = sp
+                    direction = out
+                }
+                [
+                    position = 8192, 8064
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto5 {
+                    value = "Vb"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8256
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                tag Goto1 {
+                    value = "Ia"
+                    scope = local
+                    kind = sp
+                    direction = in
+                }
+                [
+                    position = 8328, 8160
+                    hide_name = True
+                    scale = -1, 1
+                ]
+
+                junction Junction1 sp
+                [
+                    position = 8016, 8320
+                ]
+
+                junction Junction2 sp
+                [
+                    position = 7976, 8400
+                ]
+
+                connect "Bus Split1.out" Goto4 as Connection27
+                connect "Bus Split1.out1" Goto5 as Connection26
+                connect "Bus Split1.out2" Goto6 as Connection28
+                connect "Bus Split1.in" V as Connection47
+                connect "Bus Split2.out" Goto1 as Connection25
+                connect "Bus Split2.out2" Goto3 as Connection24
+                connect "Bus Split2.in" I as Connection48
+                connect Comparator1.in1 Junction1 as Connection57
+                connect Comparator2.in1 Junction2 as Connection60
+                connect Constant1.out Comparator1.in2 as Connection54
+                connect Constant2.out Comparator2.in2 as Connection61
+                connect From1 "Three phase PLL1.va" as Connection29
+                connect From10 "RMS value1.in" as Connection46
+                connect From2 "Three phase PLL1.vb" as Connection30
+                connect From3 "Three phase PLL1.vc" as Connection31
+                connect From4 "Power Meter1.vc" as Connection37
+                connect From5 "Power Meter1.va" as Connection39
+                connect From6 "Power Meter1.vb" as Connection38
+                connect From7 "Power Meter1.ia" as Connection41
+                connect From9 "Power Meter1.ic" as Connection40
+                connect Goto2 "Bus Split2.out1" as Connection23
+                connect Junction1 P as Connection56
+                connect Junction2 pf as Connection59
+                connect "P direction" Comparator1.out as Connection62
+                connect "Power Meter1.ib" From8 as Connection42
+                connect "Power Meter1.Pdc" Junction1 as Connection55
+                connect "Power Meter1.k_factor" Junction2 as Connection58
+                connect "Power Meter1.Qdc" Q as Connection53
+                connect "RMS value1.out" Vrms as Connection50
+                connect Termination1.in "Three phase PLL1.d_axis" as Connection32
+                connect Termination2.in "Three phase PLL1.q_axis" as Connection33
+                connect Termination3.in "Three phase PLL1.zero_axis" as Connection34
+                connect Termination4.in "Three phase PLL1.theta" as Connection35
+                connect Termination5.in "Three phase PLL1.sin_theta" as Connection36
+                connect Termination6.in "Power Meter1.Pac" as Connection43
+                connect Termination7.in "Power Meter1.Qac" as Connection44
+                connect Termination8.in "Power Meter1.apparent" as Connection45
+                connect "Three phase PLL1.freq" f as Connection52
+                connect "pf lead lag" Comparator2.out as Connection63
+            }
+            [
+                position = 7920, 8048
+                size = 96, 184
+            ]
+
+            component gen_terminator Termination1 {
+            }
+            [
+                position = 7160, 8072
+            ]
+
+            component gen_terminator Termination4 {
+            }
+            [
+                position = 7960, 8448
+            ]
+
+            component gen_logic_op "Logical operator1" {
+                operator = "NOT"
+            }
+            [
+                position = 7744, 8312
+                rotation = right
+                hide_name = True
+            ]
+
+            component gen_digital_probe "grid_connect OFF" {
+            }
+            [
+                position = 7776, 8360
+            ]
+
+            component gen_digital_probe "grid_connect ON" {
+            }
+            [
+                position = 7768, 8184
+                rotation = down
+                scale = -1, 1
+            ]
+
+            port A {
+                label = "A"
+                position = top:1
+                kind = pe
+            }
+            [
+                position = 8040, 7944
+                rotation = right
+            ]
+
+            port B {
+                label = "B"
+                position = top:2
+                kind = pe
+            }
+            [
+                position = 8136, 7944
+                rotation = right
+            ]
+
+            port C {
+                label = "C"
+                position = top:3
+                kind = pe
+            }
+            [
+                position = 8232, 7944
+                rotation = right
+            ]
+
+            port a {
+                label = "a"
+                position = bottom:1
+                kind = pe
+            }
+            [
+                position = 8040, 8424
+                rotation = left
+            ]
+
+            port b {
+                label = "b"
+                position = bottom:2
+                kind = pe
+            }
+            [
+                position = 8136, 8424
+                rotation = left
+            ]
+
+            port c {
+                label = "c"
+                position = bottom:3
+                kind = pe
+            }
+            [
+                position = 8232, 8424
+                rotation = left
+            ]
+
+            port G {
+                label = "G"
+                position = right:1
+                kind = pe
+            }
+            [
+                position = 8424, 8192
+                rotation = down
+            ]
+
+            tag From3 {
+                value = "V"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 8016
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto8 {
+                value = "CB Status"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7848, 8184
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From4 {
+                value = "f"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8032
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto1 {
+                value = "P"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 7976
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From7 {
+                value = "P sign"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 8080
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto5 {
+                value = "pf"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8072
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From6 {
+                value = "pf"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8064
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto6 {
+                value = "P sign"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8096
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto7 {
+                value = "pf lead/lag"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8120
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From5 {
+                value = "CB Status"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 8048
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From2 {
+                value = "Q"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8000
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto4 {
+                value = "f"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8048
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From8 {
+                value = "pf lead/lag"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7320, 8096
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From1 {
+                value = "P"
+                scope = local
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7384, 7984
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto3 {
+                value = "V"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8024
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag Goto2 {
+                value = "Q"
+                scope = local
+                kind = sp
+                direction = in
+            }
+            [
+                position = 7480, 8000
+                hide_name = True
+                scale = -1, 1
+            ]
+
+            tag From9 {
+                value = "Grid_CB"
+                scope = global
+                kind = sp
+                direction = out
+            }
+            [
+                position = 7576, 8256
+            ]
+
+            junction Junction1 pe
+            [
+                position = 8392, 8192
+            ]
+
+            junction Junction4 sp
+            [
+                position = 7848, 8000
+            ]
+
+            junction Junction5 sp
+            [
+                position = 7800, 7976
+            ]
+
+            junction Junction6 sp
+            [
+                position = 7736, 8240
+            ]
+
+            junction Junction7 sp
+            [
+                position = 7728, 8240
+            ]
+
+            junction Junction8 sp
+            [
+                position = 7960, 8184
+            ]
+
+            connect A Meas1.A as Connection45
+            connect "Bus Join1.in4" From5 as Connection35
+            connect From1 "Bus Join1.in" as Connection31
+            connect From2 "Bus Join1.in1" as Connection32
+            connect From3 "Bus Join1.in2" as Connection33
+            connect From4 "Bus Join1.in3" as Connection34
+            connect From6 "Bus Join1.in5" as Connection36
+            connect From7 "Bus Join1.in6" as Connection37
+            connect From8 "Bus Join1.in7" as Connection38
+            connect Gain1.in "W -> kW.out" as Connection1098
+            connect Gain2.in "var -> kvar.out" as Connection1100
+            connect Gain3.in "PCC Measurements.Vrms" as Connection1095
+            connect Gain4.out Goto4 as Connection1097
+            connect Goto1 Gain1.out as Connection1102
+            [
+                breakpoints = 7528, 7976; 7584, 7976
+            ]
+            connect Goto2 Gain2.out as Connection1103
+            [
+                breakpoints = 7528, 8000; 7592, 8000
+            ]
+            connect Goto3 Gain3.out as Connection1094
+            connect Goto5 "PCC Measurements.pf" as Connection27
+            connect Goto6 "PCC Measurements.P direction" as Connection28
+            connect Goto7 "PCC Measurements.pf lead lag" as Connection29
+            connect Goto8 "Data Type Conversion1.out" as Connection1071
+            connect Junction1 G as Connection19
+            connect Junction4 "PCC Measurements.Q" as Connection1109
+            connect Junction5 "W -> kW.in" as Connection1112
+            connect Meas1.B B as Connection44
+            connect Meas1.C C as Connection43
+            connect Meas1.Ground Junction1 as Connection20
+            connect Meas1.I "PCC Measurements.I" as Connection52
+            [
+                breakpoints = 8000, 7976; 7976, 7976
+            ]
+            connect Meas1.a S1.a_out as Connection40
+            connect Meas1.b S1.b_out as Connection41
+            connect Meas2.Ground Junction1 as Connection18
+            connect Meas2.C S1.c_in as Connection48
+            connect Meas2.b b as Connection50
+            connect Meas2.c c as Connection49
+            connect P.in Junction5 as Connection1113
+            connect "PCC Measurements.f" Gain4.in as Connection1096
+            connect "PCC Measurements.P" Junction5 as Connection1111
+            [
+                breakpoints = 7864, 7976
+            ]
+            connect "PCC Measurements.V" Meas1.V as Connection53
+            connect Q.in Junction4 as Connection1110
+            connect S1.c_out Meas1.c as Connection42
+            connect S1.b_in Meas2.B as Connection47
+            connect S1.a_in Meas2.A as Connection46
+            connect a Meas2.a as Connection51
+            connect "var -> kvar.in" Junction4 as Connection1108
+            connect Termination1.in "Bus Join1.out" as Connection1114
+            connect Termination4.in Meas2.V as Connection1120
+            connect "Logical operator1.out" "grid_connect OFF.in" as Connection1123
+            [
+                breakpoints = 7744, 8360
+            ]
+            connect "grid_connect ON.in" Junction6 as Connection1130
+            connect Junction6 "Logical operator1.in" as Connection1131
+            [
+                breakpoints = 7744, 8248; 7744, 8272
+            ]
+            connect Junction7 Junction6 as Connection1134
+            connect From9 Junction7 as Connection1135
+            connect S1.ctrl_in Junction8 as Connection1136
+            connect Junction8 Junction7 as Connection1137
+            connect "Data Type Conversion1.in" Junction8 as Connection1138
+        }
+        [
+            position = 7096, 8352
+            size = 80, 48
+        ]
+
+        component gen_data_type_conversion "Data Type Conversion1" {
+        }
+        [
+            position = 7080, 7712
+            hide_name = True
+            scale = -1, 1
         ]
 
         component Subsystem Microturbine1 {
@@ -7986,8 +10613,12 @@ if(boolean==1){
                     size = 32, 32
                 ]
 
-                component src_constant E_ref {
+                component src_scada_input E_ref {
+                    def_value = "1"
                     execution_rate = "Ts_exc"
+                    max = "1.7"
+                    min = "0.3"
+                    unit = "pu"
                 }
                 [
                     position = 7728, 8408
@@ -8382,8 +11013,8 @@ if(boolean==1){
                 connect "|E|" "Rate Transition3.in" as Connection1262
                 connect "Rate Transition3.out" Sum5.in1 as Connection1263
                 connect V_t2 Sum4.in2 as Connection1264
-                connect E_ref.out Sum4.in1 as Connection1265
                 connect "Rate Transition2.out" Sum4.in as Connection1266
+                connect E_ref.out Sum4.in1 as Connection1267
 
                 mask {
                     description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">IEEE DC1A exciter</p></body></html>"
@@ -9733,7 +12364,6 @@ if(boolean==1){
                     Jm = mdl.get_property_value(mdl.prop(item_handle, "Jm"))
                     Fc = mdl.get_property_value(mdl.prop(item_handle, "Fc"))
                     Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
-                    Ts_sys = mdl.get_property_value(mdl.prop(item_handle, "Ts_sys"))
                     R_g = mdl.get_property_value(mdl.prop(item_handle, "R_g"))
                     L_g = mdl.get_property_value(mdl.prop(item_handle, "L_g"))
                     line_len = mdl.get_property_value(mdl.prop(item_handle, "line_len"))
@@ -9781,7 +12411,7 @@ if(boolean==1){
                     maxw_slip = mdl.get_property_value(mdl.prop(item_handle, "maxw_slip"))
                     minw_slip = mdl.get_property_value(mdl.prop(item_handle, "minw_slip"))
                     maxV_pds = mdl.get_property_value(mdl.prop(item_handle, "maxV_pds"))
-                    maxP_pds = mdl.get_property_value(mdl.prop(item_handle, "maxP_pds"))
+                    maxw_pds = mdl.get_property_value(mdl.prop(item_handle, "maxw_pds"))
                     Kp_PLL = mdl.get_property_value(mdl.prop(item_handle, "Kp_PLL"))
                     Ki_PLL = mdl.get_property_value(mdl.prop(item_handle, "Ki_PLL"))
                     PLL_max = mdl.get_property_value(mdl.prop(item_handle, "PLL_max"))
@@ -9840,2635 +12470,8 @@ if(boolean==1){
             }
         }
         [
-            position = 6312, 8568
+            position = 6296, 8608
             size = 200, 96
-        ]
-
-        component src_ground gnd2 {
-        }
-        [
-            position = 8072, 7920
-            rotation = down
-            hide_name = True
-        ]
-
-        component "core/Three Phase Voltage Source" Vs1 {
-            init_frequency = "60.0"
-        }
-        [
-            position = 7912, 7976
-            scale = -1, 1
-            size = 62, 256
-        ]
-
-        component "core/Voltage RMS" Vrms_grid {
-            frequency = "sys_f"
-            op_mode = "Fixed frequency"
-        }
-        [
-            position = 7768, 7928
-            rotation = right
-            size = 64, 32
-        ]
-
-        component Subsystem F1_PCC {
-            layout = dynamic
-            component gen_bus_join "Bus Join1" {
-                inputs = "8"
-            }
-            [
-                position = 7232, 8040
-                scale = -1, 1
-            ]
-
-            component gen_probe P {
-            }
-            [
-                position = 7680, 7928
-                scale = -1, 1
-            ]
-
-            component gen_probe Q {
-            }
-            [
-                position = 7680, 7872
-                scale = -1, 1
-            ]
-
-            component gen_gain Gain1 {
-                gain = "10"
-            }
-            [
-                position = 7616, 7976
-                hide_name = True
-                scale = -1, -1
-            ]
-
-            component gen_gain Gain4 {
-                gain = "100"
-            }
-            [
-                position = 7624, 8048
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_gain Gain2 {
-                gain = "10"
-            }
-            [
-                position = 7616, 8000
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_gain Gain3 {
-                gain = "100"
-            }
-            [
-                position = 7600, 8024
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_gain "W -> kW" {
-                gain = ".001"
-            }
-            [
-                position = 7744, 7976
-                scale = -1, 1
-            ]
-
-            component gen_gain "var -> kvar" {
-                gain = ".001"
-            }
-            [
-                position = 7688, 8000
-                scale = -1, 1
-            ]
-
-            component Subsystem Meas1 {
-                layout = dynamic
-                component "core/Voltage Measurement" VB {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7648, 8288
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component "core/Current Measurement" IC {
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7496, 8120
-                    size = 64, 32
-                ]
-
-                component gen_bus_join "Bus Join1" {
-                    inputs = "3"
-                }
-                [
-                    position = 7936, 8168
-                    rotation = left
-                ]
-
-                component "core/Current Measurement" IB {
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7432, 8024
-                    size = 64, 32
-                ]
-
-                component "core/Voltage Measurement" VC {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7568, 8352
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component "core/Voltage Measurement" VA {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7728, 8224
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component gen_bus_join "Bus Join2" {
-                    inputs = "3"
-                }
-                [
-                    position = 7576, 7784
-                ]
-
-                component "core/Current Measurement" IA {
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7368, 7928
-                    size = 64, 32
-                ]
-
-                port Ground {
-                    position = bottom:auto
-                    kind = pe
-                }
-                [
-                    position = 7648, 8504
-                    rotation = left
-                ]
-
-                port A {
-                    position = left:1
-                    kind = pe
-                }
-                [
-                    position = 7288, 7928
-                ]
-
-                port B {
-                    position = left:2
-                    kind = pe
-                }
-                [
-                    position = 7288, 8024
-                ]
-
-                port C {
-                    position = left:3
-                    kind = pe
-                }
-                [
-                    position = 7288, 8120
-                ]
-
-                port a {
-                    label = "a"
-                    position = right:1
-                    kind = pe
-                }
-                [
-                    position = 7800, 7928
-                    rotation = down
-                ]
-
-                port b {
-                    label = "b"
-                    position = right:2
-                    kind = pe
-                }
-                [
-                    position = 7800, 8024
-                    rotation = down
-                ]
-
-                port c {
-                    label = "c"
-                    position = right:3
-                    kind = pe
-                }
-                [
-                    position = 7800, 8120
-                    rotation = down
-                ]
-
-                port V {
-                    label = "V"
-                    position = top:auto
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7936, 8112
-                    rotation = left
-                ]
-
-                port I {
-                    position = top:1
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7648, 7784
-                ]
-
-                junction Junction1421 pe
-                [
-                    position = 7648, 8432
-                ]
-
-                junction Junction1466 pe
-                [
-                    position = 7728, 7928
-                ]
-
-                junction Junction1467 pe
-                [
-                    position = 7648, 8024
-                ]
-
-                junction Junction1468 pe
-                [
-                    position = 7568, 8120
-                ]
-
-                junction Junction1469 pe
-                [
-                    position = 7648, 8432
-                ]
-
-                connect A IA.p_node as Connection379
-                connect B IB.p_node as Connection380
-                connect "Bus Join1.in1" VB.out as Connection387
-                connect "Bus Join1.in2" VC.out as Connection388
-                connect "Bus Join2.out" I as Connection393
-                connect "Bus Join2.in1" IB.out as Connection391
-                connect "Bus Join2.in2" IC.out as Connection392
-                connect C IC.p_node as Connection381
-                connect Ground Junction1469 as Connection384
-                connect IA.out "Bus Join2.in" as Connection390
-                connect IA.n_node Junction1466 as Connection377
-                connect Junction1421 Junction1469 as Connection382
-                connect Junction1466 a as Connection299
-                connect Junction1467 IB.n_node as Connection375
-                connect Junction1467 b as Connection301
-                connect Junction1468 IC.n_node as Connection376
-                connect Junction1468 c as Connection302
-                connect Junction1469 VC.n_node as Connection383
-                connect V "Bus Join1.out" as Connection389
-                connect V "Bus Join1.out" as Connection385
-                connect VA.out "Bus Join1.in" as Connection386
-                connect VA.n_node Junction1421 as Connection237
-                connect VA.p_node Junction1466 as Connection240
-                connect VB.n_node Junction1421 as Connection203
-                connect VB.p_node Junction1467 as Connection243
-                connect VC.p_node Junction1468 as Connection246
-            }
-            [
-                position = 8136, 8048
-                rotation = right
-                scale = -1, 1
-                size = 112, 232
-            ]
-
-            component Subsystem "PCC Measurements" {
-                layout = dynamic
-                component src_constant Constant2 {
-                    execution_rate = "Ts"
-                }
-                [
-                    position = 8040, 8472
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_bus_split "Bus Split1" {
-                    outputs = "3"
-                }
-                [
-                    position = 8416, 8256
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination5 {
-                }
-                [
-                    position = 8008, 8136
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_bus_split "Bus Split2" {
-                    outputs = "3"
-                }
-                [
-                    position = 8416, 8184
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination8 {
-                }
-                [
-                    position = 8016, 8384
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination1 {
-                }
-                [
-                    position = 8008, 8056
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination3 {
-                }
-                [
-                    position = 8008, 8088
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination2 {
-                }
-                [
-                    position = 7968, 8072
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_PQ_transform "Power Meter1" {
-                }
-                [
-                    position = 8088, 8360
-                    scale = -1, 1
-                ]
-
-                component gen_comparator Comparator1 {
-                }
-                [
-                    position = 7912, 8272
-                    hide_name = True
-                    scale = -1, -1
-                ]
-
-                component gen_comparator Comparator2 {
-                }
-                [
-                    position = 7912, 8464
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component src_constant Constant1 {
-                    execution_rate = "Ts"
-                }
-                [
-                    position = 8040, 8264
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination4 {
-                }
-                [
-                    position = 7968, 8120
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component "core/Three phase PLL" "Three phase PLL1" {
-                }
-                [
-                    position = 8088, 8096
-                    scale = -1, 1
-                    size = 64, 128
-                ]
-
-                component gen_terminator Termination7 {
-                }
-                [
-                    position = 7976, 8368
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination6 {
-                }
-                [
-                    position = 8016, 8352
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_rms_value "RMS value1" {
-                }
-                [
-                    position = 8088, 8192
-                    scale = -1, 1
-                ]
-
-                port f {
-                    label = "Frequency"
-                    position = left:4
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7920, 8104
-                    scale = -1, 1
-                ]
-
-                port P {
-                    label = "Real Power"
-                    position = left:2
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7976, 8320
-                    scale = -1, 1
-                ]
-
-                port Q {
-                    label = "Reactive Power"
-                    position = left:3
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7936, 8336
-                    scale = -1, 1
-                ]
-
-                port pf {
-                    label = "Power Factor"
-                    position = left:6
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7936, 8400
-                    scale = -1, 1
-                ]
-
-                port I {
-                    label = "I"
-                    position = right:1
-                    kind = sp
-                    direction =  out
-                    sp_type {
-                        default = auto
-                        readonly = True
-                    }
-                }
-                [
-                    position = 8488, 8184
-                    rotation = down
-                ]
-
-                port Vrms {
-                    label = "Voltage"
-                    position = left:3
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7984, 8192
-                    scale = -1, 1
-                ]
-
-                port V {
-                    label = "V"
-                    position = right:2
-                    kind = sp
-                    direction =  out
-                    sp_type {
-                        default = auto
-                        readonly = True
-                    }
-                }
-                [
-                    position = 8488, 8256
-                    rotation = down
-                ]
-
-                port "P direction" {
-                    label = "P Import/Exprot"
-                    position = left:9
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7848, 8272
-                    scale = -1, 1
-                ]
-
-                port "pf lead lag" {
-                    label = "pf lead/lag"
-                    position = left:10
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7848, 8464
-                    scale = -1, 1
-                ]
-
-                tag Goto4 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8232
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From9 {
-                    value = "Ic"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 8400
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From6 {
-                    value = "Vb"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 8336
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto2 {
-                    value = "Ib"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8184
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From10 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8192
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto3 {
-                    value = "Ic"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8208
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From4 {
-                    value = "Vc"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8240, 8352
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From2 {
-                    value = "Vb"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8096
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From5 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8240, 8320
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From3 {
-                    value = "Vc"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8128
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From7 {
-                    value = "Ia"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 8368
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto6 {
-                    value = "Vc"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8280
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From8 {
-                    value = "Ib"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8240, 8384
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From1 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8064
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto5 {
-                    value = "Vb"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8256
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto1 {
-                    value = "Ia"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8160
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                junction Junction1 sp
-                [
-                    position = 8016, 8320
-                ]
-
-                junction Junction2 sp
-                [
-                    position = 7976, 8400
-                ]
-
-                connect "Bus Split1.out" Goto4 as Connection27
-                connect "Bus Split1.out1" Goto5 as Connection26
-                connect "Bus Split1.out2" Goto6 as Connection28
-                connect "Bus Split1.in" V as Connection47
-                connect "Bus Split2.out" Goto1 as Connection25
-                connect "Bus Split2.out2" Goto3 as Connection24
-                connect "Bus Split2.in" I as Connection48
-                connect Comparator1.in1 Junction1 as Connection57
-                connect Comparator2.in1 Junction2 as Connection60
-                connect Constant1.out Comparator1.in2 as Connection54
-                connect Constant2.out Comparator2.in2 as Connection61
-                connect From1 "Three phase PLL1.va" as Connection29
-                connect From10 "RMS value1.in" as Connection46
-                connect From2 "Three phase PLL1.vb" as Connection30
-                connect From3 "Three phase PLL1.vc" as Connection31
-                connect From4 "Power Meter1.vc" as Connection37
-                connect From5 "Power Meter1.va" as Connection39
-                connect From6 "Power Meter1.vb" as Connection38
-                connect From7 "Power Meter1.ia" as Connection41
-                connect From9 "Power Meter1.ic" as Connection40
-                connect Goto2 "Bus Split2.out1" as Connection23
-                connect Junction1 P as Connection56
-                connect Junction2 pf as Connection59
-                connect "P direction" Comparator1.out as Connection62
-                connect "Power Meter1.ib" From8 as Connection42
-                connect "Power Meter1.Pdc" Junction1 as Connection55
-                connect "Power Meter1.k_factor" Junction2 as Connection58
-                connect "Power Meter1.Qdc" Q as Connection53
-                connect "RMS value1.out" Vrms as Connection50
-                connect Termination1.in "Three phase PLL1.d_axis" as Connection32
-                connect Termination2.in "Three phase PLL1.q_axis" as Connection33
-                connect Termination3.in "Three phase PLL1.zero_axis" as Connection34
-                connect Termination4.in "Three phase PLL1.theta" as Connection35
-                connect Termination5.in "Three phase PLL1.sin_theta" as Connection36
-                connect Termination6.in "Power Meter1.Pac" as Connection43
-                connect Termination7.in "Power Meter1.Qac" as Connection44
-                connect Termination8.in "Power Meter1.apparent" as Connection45
-                connect "Three phase PLL1.freq" f as Connection52
-                connect "pf lead lag" Comparator2.out as Connection63
-            }
-            [
-                position = 7920, 8048
-                size = 96, 184
-            ]
-
-            component gen_terminator Termination1 {
-            }
-            [
-                position = 7160, 8072
-            ]
-
-            port A {
-                label = "A"
-                position = top:1
-                kind = pe
-            }
-            [
-                position = 8040, 7944
-                rotation = right
-            ]
-
-            port B {
-                label = "B"
-                position = top:2
-                kind = pe
-            }
-            [
-                position = 8136, 7944
-                rotation = right
-            ]
-
-            port C {
-                label = "C"
-                position = top:3
-                kind = pe
-            }
-            [
-                position = 8232, 7944
-                rotation = right
-            ]
-
-            port a {
-                label = "a"
-                position = bottom:1
-                kind = pe
-            }
-            [
-                position = 8040, 8424
-                rotation = left
-            ]
-
-            port b {
-                label = "b"
-                position = bottom:2
-                kind = pe
-            }
-            [
-                position = 8136, 8424
-                rotation = left
-            ]
-
-            port c {
-                label = "c"
-                position = bottom:3
-                kind = pe
-            }
-            [
-                position = 8232, 8424
-                rotation = left
-            ]
-
-            port G {
-                label = "G"
-                position = right:1
-                kind = pe
-            }
-            [
-                position = 8424, 8192
-                rotation = down
-            ]
-
-            tag From3 {
-                value = "V"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 8016
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From4 {
-                value = "f"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8032
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto1 {
-                value = "P"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 7976
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From7 {
-                value = "P sign"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 8080
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto5 {
-                value = "pf"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8072
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From6 {
-                value = "pf"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8064
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto6 {
-                value = "P sign"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8096
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto7 {
-                value = "pf lead/lag"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8120
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From5 {
-                value = "CB Status"
-                scope = global
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 8048
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From2 {
-                value = "Q"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8000
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto4 {
-                value = "f"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8048
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From8 {
-                value = "pf lead/lag"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8096
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From1 {
-                value = "P"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 7984
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto3 {
-                value = "V"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8024
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto2 {
-                value = "Q"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8000
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            junction Junction4 sp
-            [
-                position = 7848, 8000
-            ]
-
-            junction Junction5 sp
-            [
-                position = 7800, 7976
-            ]
-
-            connect A Meas1.A as Connection45
-            connect "Bus Join1.in4" From5 as Connection35
-            connect From1 "Bus Join1.in" as Connection31
-            connect From2 "Bus Join1.in1" as Connection32
-            connect From3 "Bus Join1.in2" as Connection33
-            connect From4 "Bus Join1.in3" as Connection34
-            connect From6 "Bus Join1.in5" as Connection36
-            connect From7 "Bus Join1.in6" as Connection37
-            connect From8 "Bus Join1.in7" as Connection38
-            connect Gain1.in "W -> kW.out" as Connection1098
-            connect Gain2.in "var -> kvar.out" as Connection1100
-            connect Gain3.in "PCC Measurements.Vrms" as Connection1095
-            connect Gain4.out Goto4 as Connection1097
-            connect Goto1 Gain1.out as Connection1102
-            [
-                breakpoints = 7528, 7976; 7584, 7976
-            ]
-            connect Goto2 Gain2.out as Connection1103
-            [
-                breakpoints = 7528, 8000; 7592, 8000
-            ]
-            connect Goto3 Gain3.out as Connection1094
-            connect Goto5 "PCC Measurements.pf" as Connection27
-            connect Goto6 "PCC Measurements.P direction" as Connection28
-            connect Goto7 "PCC Measurements.pf lead lag" as Connection29
-            connect Junction4 "PCC Measurements.Q" as Connection1109
-            connect Junction5 "W -> kW.in" as Connection1112
-            connect Meas1.B B as Connection44
-            connect Meas1.C C as Connection43
-            connect Meas1.I "PCC Measurements.I" as Connection52
-            [
-                breakpoints = 8000, 7976; 7976, 7976
-            ]
-            connect P.in Junction5 as Connection1113
-            connect "PCC Measurements.f" Gain4.in as Connection1096
-            connect "PCC Measurements.P" Junction5 as Connection1111
-            [
-                breakpoints = 7864, 7976
-            ]
-            connect "PCC Measurements.V" Meas1.V as Connection53
-            connect Q.in Junction4 as Connection1110
-            connect "var -> kvar.in" Junction4 as Connection1108
-            connect Termination1.in "Bus Join1.out" as Connection1114
-            connect Meas1.Ground G as Connection1139
-            [
-                breakpoints = 8392, 8192
-            ]
-            connect Meas1.a a as Connection1140
-            connect Meas1.b b as Connection1141
-            connect Meas1.c c as Connection1142
-        }
-        [
-            position = 6384, 8144
-            size = 80, 48
-        ]
-
-        component "core/Transmission Line" F1_line {
-            C_imperial = "[[0.00233, 0.00140, 0.00140], [0.00140, 0.00233, 0.00140], [0.00140, 0.00140, 0.00233]]"
-            C_sequence_metric = "[[5.089e-7, 0.0, 0.0], [0.0, 5.089e-7, 0.0], [0.0, 0.0, 5.089e-7]]"
-            Frequency = "sys_f"
-            L_sequence_imperial = "L_cable13"
-            L_sequence_metric = "[[0.0020, 0.0, 0.0], [0.0, 3.0953e-4, 0.0], [0.0, 0.0, 3.0953e-4]]"
-            Length_metric = "1.6764"
-            Length_miles = "l_U_L2"
-            R_sequence_imperial = "R_cable13"
-            R_sequence_metric = "[[1.1405, 0.0, 0.0], [0.0, 0.0749, 0.0], [0.0, 0.0, 0.0749]]"
-            model_def = "Sequence"
-        }
-        [
-            position = 6568, 7976
-            size = 256, 72
-        ]
-
-        component Subsystem F1_PCC1 {
-            layout = dynamic
-            component gen_bus_join "Bus Join1" {
-                inputs = "8"
-            }
-            [
-                position = 7232, 8040
-                scale = -1, 1
-            ]
-
-            component "core/Triple Pole Single Throw Contactor" S1 {
-                ctrl_src = "Model"
-            }
-            [
-                position = 8136, 8184
-                rotation = left
-                size = 64, 256
-            ]
-
-            component gen_data_type_conversion "Data Type Conversion1" {
-            }
-            [
-                position = 7928, 8184
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_probe P {
-            }
-            [
-                position = 7680, 7928
-                scale = -1, 1
-            ]
-
-            component gen_probe Q {
-            }
-            [
-                position = 7680, 7872
-                scale = -1, 1
-            ]
-
-            component gen_gain Gain1 {
-                gain = "10"
-            }
-            [
-                position = 7616, 7976
-                hide_name = True
-                scale = -1, -1
-            ]
-
-            component gen_gain Gain4 {
-                gain = "100"
-            }
-            [
-                position = 7624, 8048
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_gain Gain2 {
-                gain = "10"
-            }
-            [
-                position = 7616, 8000
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_gain Gain3 {
-                gain = "100"
-            }
-            [
-                position = 7600, 8024
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            component gen_gain "W -> kW" {
-                gain = ".001"
-            }
-            [
-                position = 7744, 7976
-                scale = -1, 1
-            ]
-
-            component gen_gain "var -> kvar" {
-                gain = ".001"
-            }
-            [
-                position = 7688, 8000
-                scale = -1, 1
-            ]
-
-            component Subsystem Meas2 {
-                layout = dynamic
-                component "core/Voltage Measurement" VB {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7648, 8256
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component "core/Voltage Measurement" VA {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7728, 8192
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component gen_bus_join "Bus Join1" {
-                    inputs = "3"
-                }
-                [
-                    position = 7960, 8120
-                    rotation = left
-                ]
-
-                component "core/Voltage Measurement" VC {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7568, 8320
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                port Ground {
-                    position = bottom:auto
-                    kind = pe
-                }
-                [
-                    position = 7648, 8504
-                    rotation = left
-                ]
-
-                port A {
-                    position = left:1
-                    kind = pe
-                }
-                [
-                    position = 7400, 7928
-                ]
-
-                port B {
-                    position = left:2
-                    kind = pe
-                }
-                [
-                    position = 7400, 8024
-                ]
-
-                port C {
-                    position = left:3
-                    kind = pe
-                }
-                [
-                    position = 7400, 8120
-                ]
-
-                port a {
-                    label = "a"
-                    position = right:1
-                    kind = pe
-                }
-                [
-                    position = 7800, 7928
-                    rotation = down
-                ]
-
-                port b {
-                    label = "b"
-                    position = right:2
-                    kind = pe
-                }
-                [
-                    position = 7800, 8024
-                    rotation = down
-                ]
-
-                port c {
-                    label = "c"
-                    position = right:3
-                    kind = pe
-                }
-                [
-                    position = 7800, 8120
-                    rotation = down
-                ]
-
-                port V {
-                    label = "V"
-                    position = top:auto
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7960, 8064
-                    rotation = left
-                ]
-
-                junction Junction1421 pe
-                [
-                    position = 7648, 8432
-                ]
-
-                junction Junction1469 pe
-                [
-                    position = 7648, 8432
-                ]
-
-                junction Junction1470 pe
-                [
-                    position = 7728, 7928
-                ]
-
-                junction Junction1471 pe
-                [
-                    position = 7648, 8024
-                ]
-
-                junction Junction1472 pe
-                [
-                    position = 7568, 8120
-                ]
-
-                connect A Junction1470 as Connection390
-                connect B Junction1471 as Connection393
-                connect C Junction1472 as Connection396
-                connect Ground Junction1469 as Connection384
-                connect Junction1421 Junction1469 as Connection382
-                connect Junction1469 VC.n_node as Connection383
-                connect Junction1470 VA.p_node as Connection389
-                connect Junction1471 b as Connection392
-                connect Junction1472 VC.p_node as Connection395
-                connect V "Bus Join1.out" as Connection385
-                connect VA.out "Bus Join1.in" as Connection397
-                connect VA.n_node Junction1421 as Connection237
-                connect VB.out "Bus Join1.in1" as Connection398
-                connect VB.n_node Junction1421 as Connection203
-                connect VB.p_node Junction1471 as Connection391
-                connect VC.out "Bus Join1.in2" as Connection399
-                connect a Junction1470 as Connection388
-                connect c Junction1472 as Connection394
-            }
-            [
-                position = 8136, 8312
-                rotation = right
-                scale = -1, 1
-                size = 112, 232
-            ]
-
-            component Subsystem Meas1 {
-                layout = dynamic
-                component "core/Voltage Measurement" VB {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7648, 8288
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component "core/Current Measurement" IC {
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7496, 8120
-                    size = 64, 32
-                ]
-
-                component gen_bus_join "Bus Join1" {
-                    inputs = "3"
-                }
-                [
-                    position = 7936, 8168
-                    rotation = left
-                ]
-
-                component "core/Current Measurement" IB {
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7432, 8024
-                    size = 64, 32
-                ]
-
-                component "core/Voltage Measurement" VC {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7568, 8352
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component "core/Voltage Measurement" VA {
-                    addr = "267"
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7728, 8224
-                    rotation = right
-                    size = 64, 32
-                ]
-
-                component gen_bus_join "Bus Join2" {
-                    inputs = "3"
-                }
-                [
-                    position = 7576, 7784
-                ]
-
-                component "core/Current Measurement" IA {
-                    execution_rate = "Ts"
-                    sig_output = "True"
-                }
-                [
-                    position = 7368, 7928
-                    size = 64, 32
-                ]
-
-                port Ground {
-                    position = bottom:auto
-                    kind = pe
-                }
-                [
-                    position = 7648, 8504
-                    rotation = left
-                ]
-
-                port A {
-                    position = left:1
-                    kind = pe
-                }
-                [
-                    position = 7288, 7928
-                ]
-
-                port B {
-                    position = left:2
-                    kind = pe
-                }
-                [
-                    position = 7288, 8024
-                ]
-
-                port C {
-                    position = left:3
-                    kind = pe
-                }
-                [
-                    position = 7288, 8120
-                ]
-
-                port a {
-                    label = "a"
-                    position = right:1
-                    kind = pe
-                }
-                [
-                    position = 7800, 7928
-                    rotation = down
-                ]
-
-                port b {
-                    label = "b"
-                    position = right:2
-                    kind = pe
-                }
-                [
-                    position = 7800, 8024
-                    rotation = down
-                ]
-
-                port c {
-                    label = "c"
-                    position = right:3
-                    kind = pe
-                }
-                [
-                    position = 7800, 8120
-                    rotation = down
-                ]
-
-                port V {
-                    label = "V"
-                    position = top:auto
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7936, 8112
-                    rotation = left
-                ]
-
-                port I {
-                    position = top:1
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7648, 7784
-                ]
-
-                junction Junction1421 pe
-                [
-                    position = 7648, 8432
-                ]
-
-                junction Junction1466 pe
-                [
-                    position = 7728, 7928
-                ]
-
-                junction Junction1467 pe
-                [
-                    position = 7648, 8024
-                ]
-
-                junction Junction1468 pe
-                [
-                    position = 7568, 8120
-                ]
-
-                junction Junction1469 pe
-                [
-                    position = 7648, 8432
-                ]
-
-                connect A IA.p_node as Connection379
-                connect B IB.p_node as Connection380
-                connect "Bus Join1.in1" VB.out as Connection387
-                connect "Bus Join1.in2" VC.out as Connection388
-                connect "Bus Join2.out" I as Connection393
-                connect "Bus Join2.in1" IB.out as Connection391
-                connect "Bus Join2.in2" IC.out as Connection392
-                connect C IC.p_node as Connection381
-                connect Ground Junction1469 as Connection384
-                connect IA.out "Bus Join2.in" as Connection390
-                connect IA.n_node Junction1466 as Connection377
-                connect Junction1421 Junction1469 as Connection382
-                connect Junction1466 a as Connection299
-                connect Junction1467 IB.n_node as Connection375
-                connect Junction1467 b as Connection301
-                connect Junction1468 IC.n_node as Connection376
-                connect Junction1468 c as Connection302
-                connect Junction1469 VC.n_node as Connection383
-                connect V "Bus Join1.out" as Connection389
-                connect V "Bus Join1.out" as Connection385
-                connect VA.out "Bus Join1.in" as Connection386
-                connect VA.n_node Junction1421 as Connection237
-                connect VA.p_node Junction1466 as Connection240
-                connect VB.n_node Junction1421 as Connection203
-                connect VB.p_node Junction1467 as Connection243
-                connect VC.p_node Junction1468 as Connection246
-            }
-            [
-                position = 8136, 8048
-                rotation = right
-                scale = -1, 1
-                size = 112, 232
-            ]
-
-            component Subsystem "PCC Measurements" {
-                layout = dynamic
-                component src_constant Constant2 {
-                    execution_rate = "Ts"
-                }
-                [
-                    position = 8040, 8472
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_bus_split "Bus Split1" {
-                    outputs = "3"
-                }
-                [
-                    position = 8416, 8256
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination5 {
-                }
-                [
-                    position = 8008, 8136
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_bus_split "Bus Split2" {
-                    outputs = "3"
-                }
-                [
-                    position = 8416, 8184
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination8 {
-                }
-                [
-                    position = 8016, 8384
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination1 {
-                }
-                [
-                    position = 8008, 8056
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination3 {
-                }
-                [
-                    position = 8008, 8088
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination2 {
-                }
-                [
-                    position = 7968, 8072
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_PQ_transform "Power Meter1" {
-                }
-                [
-                    position = 8088, 8360
-                    scale = -1, 1
-                ]
-
-                component gen_comparator Comparator1 {
-                }
-                [
-                    position = 7912, 8272
-                    hide_name = True
-                    scale = -1, -1
-                ]
-
-                component gen_comparator Comparator2 {
-                }
-                [
-                    position = 7912, 8464
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component src_constant Constant1 {
-                    execution_rate = "Ts"
-                }
-                [
-                    position = 8040, 8264
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination4 {
-                }
-                [
-                    position = 7968, 8120
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component "core/Three phase PLL" "Three phase PLL1" {
-                }
-                [
-                    position = 8088, 8096
-                    scale = -1, 1
-                    size = 64, 128
-                ]
-
-                component gen_terminator Termination7 {
-                }
-                [
-                    position = 7976, 8368
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_terminator Termination6 {
-                }
-                [
-                    position = 8016, 8352
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                component gen_rms_value "RMS value1" {
-                }
-                [
-                    position = 8088, 8192
-                    scale = -1, 1
-                ]
-
-                port f {
-                    label = "Frequency"
-                    position = left:4
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7920, 8104
-                    scale = -1, 1
-                ]
-
-                port P {
-                    label = "Real Power"
-                    position = left:2
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7976, 8320
-                    scale = -1, 1
-                ]
-
-                port Q {
-                    label = "Reactive Power"
-                    position = left:3
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7936, 8336
-                    scale = -1, 1
-                ]
-
-                port pf {
-                    label = "Power Factor"
-                    position = left:6
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7936, 8400
-                    scale = -1, 1
-                ]
-
-                port I {
-                    label = "I"
-                    position = right:1
-                    kind = sp
-                    direction =  out
-                    sp_type {
-                        default = auto
-                        readonly = True
-                    }
-                }
-                [
-                    position = 8488, 8184
-                    rotation = down
-                ]
-
-                port Vrms {
-                    label = "Voltage"
-                    position = left:3
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7984, 8192
-                    scale = -1, 1
-                ]
-
-                port V {
-                    label = "V"
-                    position = right:2
-                    kind = sp
-                    direction =  out
-                    sp_type {
-                        default = auto
-                        readonly = True
-                    }
-                }
-                [
-                    position = 8488, 8256
-                    rotation = down
-                ]
-
-                port "P direction" {
-                    label = "P Import/Exprot"
-                    position = left:9
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7848, 8272
-                    scale = -1, 1
-                ]
-
-                port "pf lead lag" {
-                    label = "pf lead/lag"
-                    position = left:10
-                    kind = sp
-                    direction =  in
-                    sp_type {
-                        default = inherit
-                        readonly = True
-                    }
-                }
-                [
-                    position = 7848, 8464
-                    scale = -1, 1
-                ]
-
-                tag Goto4 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8232
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From9 {
-                    value = "Ic"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 8400
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From6 {
-                    value = "Vb"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 8336
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto2 {
-                    value = "Ib"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8184
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From10 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8192
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto3 {
-                    value = "Ic"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8208
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From4 {
-                    value = "Vc"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8240, 8352
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From2 {
-                    value = "Vb"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8096
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From5 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8240, 8320
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From3 {
-                    value = "Vc"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8128
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From7 {
-                    value = "Ia"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8176, 8368
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto6 {
-                    value = "Vc"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8280
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From8 {
-                    value = "Ib"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8240, 8384
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag From1 {
-                    value = "Va"
-                    scope = local
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8192, 8064
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto5 {
-                    value = "Vb"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8256
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                tag Goto1 {
-                    value = "Ia"
-                    scope = local
-                    kind = sp
-                    direction = in
-                }
-                [
-                    position = 8328, 8160
-                    hide_name = True
-                    scale = -1, 1
-                ]
-
-                junction Junction1 sp
-                [
-                    position = 8016, 8320
-                ]
-
-                junction Junction2 sp
-                [
-                    position = 7976, 8400
-                ]
-
-                connect "Bus Split1.out" Goto4 as Connection27
-                connect "Bus Split1.out1" Goto5 as Connection26
-                connect "Bus Split1.out2" Goto6 as Connection28
-                connect "Bus Split1.in" V as Connection47
-                connect "Bus Split2.out" Goto1 as Connection25
-                connect "Bus Split2.out2" Goto3 as Connection24
-                connect "Bus Split2.in" I as Connection48
-                connect Comparator1.in1 Junction1 as Connection57
-                connect Comparator2.in1 Junction2 as Connection60
-                connect Constant1.out Comparator1.in2 as Connection54
-                connect Constant2.out Comparator2.in2 as Connection61
-                connect From1 "Three phase PLL1.va" as Connection29
-                connect From10 "RMS value1.in" as Connection46
-                connect From2 "Three phase PLL1.vb" as Connection30
-                connect From3 "Three phase PLL1.vc" as Connection31
-                connect From4 "Power Meter1.vc" as Connection37
-                connect From5 "Power Meter1.va" as Connection39
-                connect From6 "Power Meter1.vb" as Connection38
-                connect From7 "Power Meter1.ia" as Connection41
-                connect From9 "Power Meter1.ic" as Connection40
-                connect Goto2 "Bus Split2.out1" as Connection23
-                connect Junction1 P as Connection56
-                connect Junction2 pf as Connection59
-                connect "P direction" Comparator1.out as Connection62
-                connect "Power Meter1.ib" From8 as Connection42
-                connect "Power Meter1.Pdc" Junction1 as Connection55
-                connect "Power Meter1.k_factor" Junction2 as Connection58
-                connect "Power Meter1.Qdc" Q as Connection53
-                connect "RMS value1.out" Vrms as Connection50
-                connect Termination1.in "Three phase PLL1.d_axis" as Connection32
-                connect Termination2.in "Three phase PLL1.q_axis" as Connection33
-                connect Termination3.in "Three phase PLL1.zero_axis" as Connection34
-                connect Termination4.in "Three phase PLL1.theta" as Connection35
-                connect Termination5.in "Three phase PLL1.sin_theta" as Connection36
-                connect Termination6.in "Power Meter1.Pac" as Connection43
-                connect Termination7.in "Power Meter1.Qac" as Connection44
-                connect Termination8.in "Power Meter1.apparent" as Connection45
-                connect "Three phase PLL1.freq" f as Connection52
-                connect "pf lead lag" Comparator2.out as Connection63
-            }
-            [
-                position = 7920, 8048
-                size = 96, 184
-            ]
-
-            component gen_terminator Termination1 {
-            }
-            [
-                position = 7160, 8072
-            ]
-
-            component gen_terminator Termination4 {
-            }
-            [
-                position = 7960, 8448
-            ]
-
-            component gen_logic_op "Logical operator1" {
-                operator = "NOT"
-            }
-            [
-                position = 7744, 8312
-                rotation = right
-                hide_name = True
-            ]
-
-            component gen_digital_probe "grid_connect OFF" {
-            }
-            [
-                position = 7776, 8360
-            ]
-
-            component gen_digital_probe "grid_connect ON" {
-            }
-            [
-                position = 7768, 8184
-                rotation = down
-                scale = -1, 1
-            ]
-
-            port A {
-                label = "A"
-                position = top:1
-                kind = pe
-            }
-            [
-                position = 8040, 7944
-                rotation = right
-            ]
-
-            port B {
-                label = "B"
-                position = top:2
-                kind = pe
-            }
-            [
-                position = 8136, 7944
-                rotation = right
-            ]
-
-            port C {
-                label = "C"
-                position = top:3
-                kind = pe
-            }
-            [
-                position = 8232, 7944
-                rotation = right
-            ]
-
-            port a {
-                label = "a"
-                position = bottom:1
-                kind = pe
-            }
-            [
-                position = 8040, 8424
-                rotation = left
-            ]
-
-            port b {
-                label = "b"
-                position = bottom:2
-                kind = pe
-            }
-            [
-                position = 8136, 8424
-                rotation = left
-            ]
-
-            port c {
-                label = "c"
-                position = bottom:3
-                kind = pe
-            }
-            [
-                position = 8232, 8424
-                rotation = left
-            ]
-
-            port G {
-                label = "G"
-                position = right:1
-                kind = pe
-            }
-            [
-                position = 8424, 8192
-                rotation = down
-            ]
-
-            tag From3 {
-                value = "V"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 8016
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto8 {
-                value = "CB Status"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7848, 8184
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From4 {
-                value = "f"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8032
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto1 {
-                value = "P"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 7976
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From7 {
-                value = "P sign"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 8080
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto5 {
-                value = "pf"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8072
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From6 {
-                value = "pf"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8064
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto6 {
-                value = "P sign"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8096
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto7 {
-                value = "pf lead/lag"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8120
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From5 {
-                value = "CB Status"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 8048
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From2 {
-                value = "Q"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8000
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto4 {
-                value = "f"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8048
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From8 {
-                value = "pf lead/lag"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7320, 8096
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From1 {
-                value = "P"
-                scope = local
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7384, 7984
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto3 {
-                value = "V"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8024
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag Goto2 {
-                value = "Q"
-                scope = local
-                kind = sp
-                direction = in
-            }
-            [
-                position = 7480, 8000
-                hide_name = True
-                scale = -1, 1
-            ]
-
-            tag From9 {
-                value = "Grid_CB"
-                scope = global
-                kind = sp
-                direction = out
-            }
-            [
-                position = 7576, 8256
-            ]
-
-            junction Junction1 pe
-            [
-                position = 8392, 8192
-            ]
-
-            junction Junction4 sp
-            [
-                position = 7848, 8000
-            ]
-
-            junction Junction5 sp
-            [
-                position = 7800, 7976
-            ]
-
-            junction Junction6 sp
-            [
-                position = 7736, 8240
-            ]
-
-            junction Junction7 sp
-            [
-                position = 7728, 8240
-            ]
-
-            junction Junction8 sp
-            [
-                position = 7960, 8184
-            ]
-
-            connect A Meas1.A as Connection45
-            connect "Bus Join1.in4" From5 as Connection35
-            connect From1 "Bus Join1.in" as Connection31
-            connect From2 "Bus Join1.in1" as Connection32
-            connect From3 "Bus Join1.in2" as Connection33
-            connect From4 "Bus Join1.in3" as Connection34
-            connect From6 "Bus Join1.in5" as Connection36
-            connect From7 "Bus Join1.in6" as Connection37
-            connect From8 "Bus Join1.in7" as Connection38
-            connect Gain1.in "W -> kW.out" as Connection1098
-            connect Gain2.in "var -> kvar.out" as Connection1100
-            connect Gain3.in "PCC Measurements.Vrms" as Connection1095
-            connect Gain4.out Goto4 as Connection1097
-            connect Goto1 Gain1.out as Connection1102
-            [
-                breakpoints = 7528, 7976; 7584, 7976
-            ]
-            connect Goto2 Gain2.out as Connection1103
-            [
-                breakpoints = 7528, 8000; 7592, 8000
-            ]
-            connect Goto3 Gain3.out as Connection1094
-            connect Goto5 "PCC Measurements.pf" as Connection27
-            connect Goto6 "PCC Measurements.P direction" as Connection28
-            connect Goto7 "PCC Measurements.pf lead lag" as Connection29
-            connect Goto8 "Data Type Conversion1.out" as Connection1071
-            connect Junction1 G as Connection19
-            connect Junction4 "PCC Measurements.Q" as Connection1109
-            connect Junction5 "W -> kW.in" as Connection1112
-            connect Meas1.B B as Connection44
-            connect Meas1.C C as Connection43
-            connect Meas1.Ground Junction1 as Connection20
-            connect Meas1.I "PCC Measurements.I" as Connection52
-            [
-                breakpoints = 8000, 7976; 7976, 7976
-            ]
-            connect Meas1.a S1.a_out as Connection40
-            connect Meas1.b S1.b_out as Connection41
-            connect Meas2.Ground Junction1 as Connection18
-            connect Meas2.C S1.c_in as Connection48
-            connect Meas2.b b as Connection50
-            connect Meas2.c c as Connection49
-            connect P.in Junction5 as Connection1113
-            connect "PCC Measurements.f" Gain4.in as Connection1096
-            connect "PCC Measurements.P" Junction5 as Connection1111
-            [
-                breakpoints = 7864, 7976
-            ]
-            connect "PCC Measurements.V" Meas1.V as Connection53
-            connect Q.in Junction4 as Connection1110
-            connect S1.c_out Meas1.c as Connection42
-            connect S1.b_in Meas2.B as Connection47
-            connect S1.a_in Meas2.A as Connection46
-            connect a Meas2.a as Connection51
-            connect "var -> kvar.in" Junction4 as Connection1108
-            connect Termination1.in "Bus Join1.out" as Connection1114
-            connect Termination4.in Meas2.V as Connection1120
-            connect "Logical operator1.out" "grid_connect OFF.in" as Connection1123
-            [
-                breakpoints = 7744, 8360
-            ]
-            connect "grid_connect ON.in" Junction6 as Connection1130
-            connect Junction6 "Logical operator1.in" as Connection1131
-            [
-                breakpoints = 7744, 8248; 7744, 8272
-            ]
-            connect Junction7 Junction6 as Connection1134
-            connect From9 Junction7 as Connection1135
-            connect S1.ctrl_in Junction8 as Connection1136
-            connect Junction8 Junction7 as Connection1137
-            connect "Data Type Conversion1.in" Junction8 as Connection1138
-        }
-        [
-            position = 7096, 8352
-            size = 80, 48
-        ]
-
-        component gen_data_type_conversion "Data Type Conversion1" {
-        }
-        [
-            position = 7080, 7712
-            hide_name = True
-            scale = -1, 1
         ]
 
         tag Tag36 {
@@ -12551,24 +12554,9 @@ if(boolean==1){
             position = 7768, 7880
         ]
 
-        junction Junction142 pe
-        [
-            position = 6232, 8440
-        ]
-
         junction Junction143 pe
         [
-            position = 6232, 8440
-        ]
-
-        junction Junction144 pe
-        [
-            position = 6384, 8456
-        ]
-
-        junction Junction145 pe
-        [
-            position = 6392, 8480
+            position = 6216, 8440
         ]
 
         junction Junction146 sp
@@ -12581,6 +12569,21 @@ if(boolean==1){
             position = 7168, 7792
         ]
 
+        junction Junction148 pe
+        [
+            position = 6400, 8480
+        ]
+
+        junction Junction149 pe
+        [
+            position = 6384, 8456
+        ]
+
+        junction Junction150 pe
+        [
+            position = 6216, 8440
+        ]
+
         connect "Constant Impedance Load1.A" Ia1.n_node as Connection834
         connect "grid_connect ON.in" Junction112 as Connection989
         connect "Logical operator1.in" Junction112 as Connection991
@@ -12591,11 +12594,6 @@ if(boolean==1){
         connect "Logical operator1.out" "grid_connect OFF.in" as Connection1109
         [
             breakpoints = 6976, 7880
-        ]
-        connect Termination1.in "Microturbine1.MCB Control" as Connection1195
-        connect "Constant Impedance Load1.N" Microturbine1.ground as Connection5103
-        [
-            breakpoints = 6632, 8768; 6632, 8768; 6632, 8768; 6632, 8768; 6632, 8768; 6632, 8768; 6632, 8768
         ]
         connect Vs1.c_node RL.P5 as Connection5129
         connect gnd2.node Junction137 as Connection5130
@@ -12632,35 +12630,11 @@ if(boolean==1){
         connect Vrms_grid.p_node Junction139 as Connection5147
         connect F1_PCC.B F1_line.b_in as Connection5148
         connect F1_PCC.C F1_line.c_in as Connection5149
-        connect F1_PCC.a Junction142 as Connection5158
-        [
-            breakpoints = 6368, 8176; 6232, 8176; 6232, 8176
-        ]
-        connect Junction142 Microturbine1.V_aG as Connection5159
-        [
-            breakpoints = 6232, 8440; 6232, 8440
-        ]
         connect "Device Marker1.node" Junction143 as Connection5161
         [
             breakpoints = 6112, 8440
         ]
-        connect Junction143 Junction142 as Connection5162
-        [
-            breakpoints = 6232, 8440
-        ]
         connect Ia1.p_node Junction143 as Connection5163
-        connect F1_PCC.b Junction144 as Connection5165
-        [
-            breakpoints = 6384, 8176
-        ]
-        connect Junction144 Microturbine1.V_bG as Connection5166
-        [
-            breakpoints = 6384, 8456; 6312, 8456
-        ]
-        connect "Constant Impedance Load1.B" Junction144 as Connection5167
-        connect "Constant Impedance Load1.C" Junction145 as Connection5168
-        connect Junction145 Microturbine1.V_cG as Connection5169
-        connect F1_PCC.c Junction145 as Connection5170
         connect Junction130 Junction146 as Connection5171
         [
             breakpoints = 6976, 7792; 6976, 7792; 6976, 7792
@@ -12675,20 +12649,42 @@ if(boolean==1){
             breakpoints = 7136, 7792
         ]
         connect "Data Type Conversion1.in" Junction147 as Connection5182
+        connect Microturbine1.ground "Constant Impedance Load1.N" as Connection5186
+        connect "Constant Impedance Load1.C" Junction148 as Connection5187
+        connect Junction148 F1_PCC.c as Connection5188
+        [
+            breakpoints = 6392, 8480
+        ]
+        connect Microturbine1.V_cG Junction148 as Connection5189
+        connect F1_PCC.b Junction149 as Connection5190
+        [
+            breakpoints = 6384, 8176
+        ]
+        connect Junction149 "Constant Impedance Load1.B" as Connection5191
+        [
+            breakpoints = 6384, 8456
+        ]
+        connect Microturbine1.V_bG Junction149 as Connection5192
+        connect Junction143 Junction150 as Connection5193
+        connect Junction150 F1_PCC.a as Connection5194
+        [
+            breakpoints = 6232, 8440; 6232, 8440; 6216, 8440; 6216, 8176; 6232, 8176; 6368, 8176
+        ]
+        connect Microturbine1.V_aG Junction150 as Connection5195
+        connect Termination1.in "Microturbine1.MCB Control" as Connection5196
     }
 
     logically_deleted {
-        "Microturbine1.Synchonous Machine.V_qG2.Differentiator1"
-        "Microturbine1.Synchonous Machine.V_dG2.Differentiator1"
-        "Microturbine1.BE1-25A Synchronizer.BE1-25A Synchronizer (modified)"
-        "Microturbine1.GovernorX"
-        "Microturbine1.Governor.Subsystem1"
-        "Microturbine1.Governor.Rate Transition4"
-        "Microturbine1.Governor.From2"
-        "Microturbine1.Governor.Connection893"
         "F1_PCC1"
         "Tag39"
         "Connection5174"
+        "Microturbine1.Synchonous Machine.V_qG2.Differentiator1"
+        "Microturbine1.Synchonous Machine.V_dG2.Differentiator1"
+        "Microturbine1.GovernorX"
+        "Microturbine1.Governor.From2"
+        "Microturbine1.Governor.Rate Transition4"
+        "Microturbine1.Governor.Subsystem1"
+        "Microturbine1.BE1-25A Synchronizer.BE1-25A Synchronizer (modified)"
     }
 
     default {

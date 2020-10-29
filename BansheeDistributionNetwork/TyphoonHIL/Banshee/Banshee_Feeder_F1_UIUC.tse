@@ -2,10 +2,10 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.2
-// Save timestamp: 29-Oct-2020 @ 12:48:12 PM
+// Save timestamp: 29-Oct-2020 @ 06:04:40 PM
 //
 
-model "Banshee_Feeder_F1_UIUC" {
+model "banshee_feeder_f1_uiuc" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 2
@@ -76797,8 +76797,12 @@ if(boolean==1){
                     size = 32, 32
                 ]
 
-                component src_constant E_ref {
+                component src_scada_input E_ref {
+                    def_value = "1"
                     execution_rate = "Ts_exc"
+                    max = "1.7"
+                    min = "0.3"
+                    unit = "pu"
                 }
                 [
                     position = 7728, 8408
@@ -77193,8 +77197,8 @@ if(boolean==1){
                 connect "|E|" "Rate Transition3.in" as Connection1262
                 connect "Rate Transition3.out" Sum5.in1 as Connection1263
                 connect V_t2 Sum4.in2 as Connection1264
-                connect E_ref.out Sum4.in1 as Connection1265
                 connect "Rate Transition2.out" Sum4.in as Connection1266
+                connect E_ref.out Sum4.in1 as Connection1267
 
                 mask {
                     description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">IEEE DC1A exciter</p></body></html>"
