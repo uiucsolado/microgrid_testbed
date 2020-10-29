@@ -774,8 +774,8 @@ displayValue = 0.0
                 <updateRate>500</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1408</x>
-                    <y>224</y>
+                    <x>1400.0</x>
+                    <y>224.0</y>
                     <width>144</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>

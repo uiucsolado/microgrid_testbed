@@ -6,7 +6,7 @@
         <product_id>603</product_id>
         <hardware_id>3</hardware_id>
         <configuration_id>2</configuration_id>
-        <fw_release_date>132383518</fw_release_date>
+        <fw_release_date>132384520</fw_release_date>
     </hw_properties>
     <components>
         <inputs>
@@ -29,165 +29,27 @@
         </pvs>
         <contactors>
             <contactor>
-                <name>3ph Fault 103.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>0</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>DIESEL_MCB.DG_MCB</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>1</weight>
-                <site>0</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB1.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB10.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB14.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB2.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB3.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB4.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>1</weight>
-                <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB5.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>2</weight>
-                <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_CB6.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>1</weight>
-                <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_Motor.CB.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>1</weight>
-                <site>3</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_PCC.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>1</weight>
-                <site>5</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_VL_CB1.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>2</weight>
-                <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
-                <name>F1_VL_CB2.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>3</weight>
-                <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
-            </contactor>
-            <contactor>
                 <name>Microturbine1.S4</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
-                <weight>2</weight>
+                <weight>0</weight>
                 <site>0</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
+            </contactor>
+            <contactor>
+                <name>S4</name>
+                <type>three_phase_breaker</type>
+                <device>0</device>
+                <weight>1</weight>
+                <site>0</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
         </contactors>
         <dtsm_contactors>
         </dtsm_contactors>
         <machines>
-            <machine>
-                <name>F1_Motor.IM</name>
-                <device>0</device>
-                <control_enabled>False</control_enabled>
-                <ext_model_load_type>0</ext_model_load_type>
-                <site>0</site>
-                <init_values>[]</init_values>
-                <constant_torque>0.0</constant_torque>
-                <linear_torque>0.0</linear_torque>
-                <square_torque>0.0</square_torque>
-                <constant_torque_type>1</constant_torque_type>
-                <external_torque_type>0</external_torque_type>
-                <load_source>0</load_source>
-                <load_type>0</load_type>
-                <machine_speed>0.0</machine_speed>
-                <initial_speed>0.0</initial_speed>
-                <initial_angle>0.0</initial_angle>
-                <initial_encoder_offset>0.0</initial_encoder_offset>
-                <initial_resolver_offset>0.0</initial_resolver_offset>
-                <machine_gauge>{}</machine_gauge>
-            </machine>
         </machines>
         <analog_channels>
             <analog_channel>
@@ -1063,62 +925,7 @@
         </batteries>
         <scada_inputs>
             <scada_input>
-                <name>3ph Fault 103.ctrl</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>3ph Fault 106.ctrl</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB1.F1_CB1</name>
-                <device>0</device>
-                <value>1</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB10.F1_CB10</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB14.F1_CB14</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB2.F1_CB2</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB3.Brk.F1_CB3</name>
-                <device>0</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB4.F1_CB4</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB5.F1_CB5</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_CB6.F1_CB6</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_VL_CB1.F1_CB7</name>
-                <device>0</device>
-                <value>0</value>
-            </scada_input>
-            <scada_input>
-                <name>F1_VL_CB2.F1_CB7</name>
+                <name>grid_connect</name>
                 <device>0</device>
                 <value>0</value>
             </scada_input>
@@ -1138,52 +945,7 @@
                 <value>0.0</value>
             </scada_input>
             <scada_input>
-                <name>Microturbine1.Vref</name>
-                <device>0</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>Microturbine1.wref</name>
-                <device>0</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>RegD_Control.P_ref_Diesel.Pref_initial</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>RegD_Control.P_ref_VL1.Pref_initial</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>RegD_Control.P_ref_VL2.Pref_initial</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>RegD_Control.RegD_Signal</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>VBR Variable Load1_in.Enable</name>
-                <device>0</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>VBR Variable Load1_in.Qref</name>
-                <device>0</device>
-                <value>0.0</value>
-            </scada_input>
-            <scada_input>
-                <name>VBR Variable Load2_in.Enable</name>
-                <device>0</device>
-                <value>1.0</value>
-            </scada_input>
-            <scada_input>
-                <name>VBR Variable Load2_in.Qref</name>
+                <name>Microturbine1.Governor.AGC</name>
                 <device>0</device>
                 <value>0.0</value>
             </scada_input>

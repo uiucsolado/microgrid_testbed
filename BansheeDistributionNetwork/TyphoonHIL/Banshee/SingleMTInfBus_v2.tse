@@ -1,11 +1,11 @@
 version = 4.2
 
 //
-// Saved by sw version: 2020.1 SP2
-// Save timestamp: 16-Oct-2020 @ 02:15:03 PM
+// Saved by sw version: 2020.2
+// Save timestamp: 29-Oct-2020 @ 12:41:33 PM
 //
 
-model "SingleMTInfBus_v2" {
+model "singlemtinfbus_v2" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 2
@@ -28,6 +28,17 @@ model "SingleMTInfBus_v2" {
         user_real_type_precision = "double precision"
         sys_cpu_optimization = "high"
         user_cpu_optimization = "medium"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
     }
 
     component Subsystem Root {
@@ -138,9 +149,10 @@ model "SingleMTInfBus_v2" {
             layout = dynamic
             component src_constant Constant1 {
                 execution_rate = "Ts_sys"
+                value = "0"
             }
             [
-                position = 6440, 8264
+                position = 6544, 8248
                 hide_name = True
             ]
 
@@ -149,16 +161,17 @@ model "SingleMTInfBus_v2" {
                 threshold = "1"
             }
             [
-                position = 6496, 8016
+                position = 6624, 8000
                 hide_name = True
                 scale = 1, -1
             ]
 
             component src_constant Constant2 {
                 execution_rate = "Ts_sys"
+                value = "0"
             }
             [
-                position = 6416, 8032
+                position = 6544, 8016
                 hide_name = True
             ]
 
@@ -167,7 +180,7 @@ model "SingleMTInfBus_v2" {
                 threshold = "1"
             }
             [
-                position = 6520, 8248
+                position = 6624, 8232
                 hide_name = True
                 scale = 1, -1
             ]
@@ -935,7 +948,7 @@ else
                 gain = "1/pms"
             }
             [
-                position = 6624, 8096
+                position = 6608, 8096
                 hide_name = True
             ]
 
@@ -1040,28 +1053,6 @@ else
                 size = 80, 56
             ]
 
-            component sys_signal_switch w {
-                criterion = "ctrl > threshold"
-                threshold = "0.5"
-            }
-            [
-                position = 6624, 8000
-                hide_name = True
-            ]
-
-            component src_scada_input wref {
-                def_value = "1"
-                execution_rate = "Ts_sys"
-                max = "1.3"
-                min = "0.7"
-                unit = "pu"
-            }
-            [
-                position = 6560, 7984
-                rotation = down
-                scale = -1, 1
-            ]
-
             component "core/Signal Controlled Voltage Source" V_F {
             }
             [
@@ -1069,28 +1060,6 @@ else
                 rotation = right
                 scale = -1, 1
                 size = 64, 32
-            ]
-
-            component sys_signal_switch "|V|3" {
-                criterion = "ctrl > threshold"
-                threshold = "0.5"
-            }
-            [
-                position = 6624, 8232
-                hide_name = True
-            ]
-
-            component src_scada_input Vref {
-                def_value = "1"
-                execution_rate = "Ts_sys"
-                max = "2"
-                min = "0.8"
-                unit = "pu"
-            }
-            [
-                position = 6560, 8216
-                rotation = down
-                scale = -1, 1
             ]
 
             component gen_gain Gain17 {
@@ -4446,7 +4415,7 @@ out = in - (6.283185307179586*floor_in);
                     scale = -1, 1
                 ]
 
-                component gen_probe del_w {
+                component gen_probe del_P {
                 }
                 [
                     position = 8496, 8352
@@ -4557,35 +4526,35 @@ else if((connectMT==0)||(MTsync==0)){
                     no_feed_inputs = "[\'\']"
                     no_feed_outputs = "[\'\']"
                     out_terminal_dimensions = "inherit"
-                    out_terminal_dimensions_str = "del_w inherit"
-                    out_terminal_labels = "[(\'del_w\', True)]"
-                    out_terminal_properties = "real del_w;"
+                    out_terminal_dimensions_str = "del_P inherit"
+                    out_terminal_labels = "[(\'del_P\', True)]"
+                    out_terminal_properties = "real del_P;"
                     output_fnc = "/*Begin code section*/
 if (df>maxw_slip)
 {
-    del_w = 1.125*maxw_pds;
+    del_P = 1.125*maxP_pds;
 }
 else if ((df<=maxw_slip) && (df>0))
 {
-    del_w = maxw_pds*df/maxw_slip + (0.125*maxw_pds);
-    //del_w = maxw_pds*(df+1e-4)/max_slip + (angle_slip);
+    del_P = maxP_pds*df/maxw_slip + (0.125*maxP_pds);
+    //del_P = maxP_pds*(df+1e-4)/max_slip + (angle_slip);
 }
 else if ((df<=0) && (df > (-minw_slip)))
 {
-    del_w = (0.125*maxw_pds)*(df)/minw_slip + (0.125*maxw_pds);
-    //del_w = maxw_pds*((-1*df)+1e-4)/min_slip  + (angle_slip);
+    del_P = (0.125*maxP_pds)*(df)/minw_slip + (0.125*maxP_pds);
+    //del_P = maxP_pds*((-1*df)+1e-4)/min_slip  + (angle_slip);
 }
 else if ((df <= (-1*minw_slip))&&(df > (-1*maxw_slip)))
 {
-    del_w = 0;
-    //del_w = maxw_pds*((min_slip)+1e-4)/min_slip  + (angle_slip);
+    del_P = 0;
+    //del_P = maxP_pds*((min_slip)+1e-4)/min_slip  + (angle_slip);
 }
 else if (df <= (-1*maxw_slip))
 {
-    del_w = (maxw_slip+df)*maxw_pds/maxw_slip;
+    del_P = (maxw_slip+df)*maxP_pds/maxw_slip;
 }
 /*End code section*/"
-                    parameters = "real maxw_pds;real maxw_slip;real minw_slip;"
+                    parameters = "real maxP_pds;real maxw_slip;real minw_slip;"
                 }
                 [
                     position = 8112, 8392
@@ -4682,16 +4651,9 @@ if (connect==0)
 /*End code section*/"
                 }
                 [
-                    position = 8688, 8432
+                    position = 8576, 8440
                     hide_name = True
                     size = 80, 88
-                ]
-
-                component gen_sum Sum9 {
-                }
-                [
-                    position = 8584, 8408
-                    hide_name = True
                 ]
 
                 component gen_c_function "Hold after connect3" {
@@ -4717,16 +4679,9 @@ if (connect==0)
 /*End code section*/"
                 }
                 [
-                    position = 8936, 8680
+                    position = 8824, 8688
                     hide_name = True
                     size = 80, 88
-                ]
-
-                component gen_sum Sum10 {
-                }
-                [
-                    position = 8832, 8656
-                    hide_name = True
                 ]
 
                 component gen_gain Gain13 {
@@ -5936,18 +5891,6 @@ out = in - (6.283185307179586*floor_in);
                     size = 58, 20
                 ]
 
-                tag w_bus2 {
-                    value = "w_bus"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8496, 8400
-                    hide_name = True
-                    scale = 1, -1
-                ]
-
                 tag Connect3 {
                     value = "Connected"
                     scope = masked_subsystem
@@ -5955,30 +5898,19 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8584, 8456
+                    position = 8472, 8464
                     hide_name = True
                     size = 58, 20
                 ]
 
                 tag Goto34 {
-                    value = "w_sync"
+                    value = "P_sync"
                     scope = masked_subsystem
                     kind = sp
                     direction = in
                 }
                 [
-                    position = 8872, 8432
-                    hide_name = True
-                ]
-
-                tag From47 {
-                    value = "|V| bus"
-                    scope = masked_subsystem
-                    kind = sp
-                    direction = out
-                }
-                [
-                    position = 8744, 8648
+                    position = 8744, 8440
                     hide_name = True
                 ]
 
@@ -5989,7 +5921,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = out
                 }
                 [
-                    position = 8832, 8704
+                    position = 8720, 8712
                     hide_name = True
                     size = 58, 20
                 ]
@@ -6001,7 +5933,7 @@ out = in - (6.283185307179586*floor_in);
                     direction = in
                 }
                 [
-                    position = 9112, 8680
+                    position = 9000, 8688
                     hide_name = True
                 ]
 
@@ -6144,16 +6076,6 @@ out = in - (6.283185307179586*floor_in);
                     position = 7520, 8000
                 ]
 
-                junction Junction88 sp
-                [
-                    position = 8432, 8416
-                ]
-
-                junction Junction89 sp
-                [
-                    position = 8672, 8664
-                ]
-
                 junction Junction90 sp
                 [
                     position = 7880, 8416
@@ -6192,6 +6114,16 @@ out = in - (6.283185307179586*floor_in);
                 junction Junction104 sp
                 [
                     position = 8072, 8648
+                ]
+
+                junction Junction105 sp
+                [
+                    position = 8416, 8416
+                ]
+
+                junction Junction106 sp
+                [
+                    position = 8672, 8664
                 ]
 
                 connect "Digital Probe4.in" Junction38 as Connection366
@@ -6286,7 +6218,7 @@ out = in - (6.283185307179586*floor_in);
                 [
                     breakpoints = 8024, 8048; 8128, 8048
                 ]
-                connect "BE1-25A Synchronizer2.del_w" "Hold after connect.in" as Connection633
+                connect "BE1-25A Synchronizer2.del_P" "Hold after connect.in" as Connection633
                 connect Sum2.out Junction81 as Connection634
                 [
                     breakpoints = 7968, 8392
@@ -6302,23 +6234,7 @@ out = in - (6.283185307179586*floor_in);
                 connect Junction86 Sum1.in1 as Connection655
                 connect "Trigonometric function1.out" Junction87 as Connection657
                 connect Connect3 "Hold after connect2.connect" as Connection1234
-                connect w_bus2 Sum9.in as Connection1235
-                connect Sum9.out "Hold after connect2.in" as Connection1237
-                connect del_w.in Junction88 as Connection1239
-                connect Junction88 "Hold after connect.out" as Connection1240
-                [
-                    breakpoints = 8432, 8416
-                ]
-                connect Sum9.in1 Junction88 as Connection1241
                 connect Connect7 "Hold after connect3.connect" as Connection1243
-                connect Sum10.out "Hold after connect3.in" as Connection1244
-                connect From47 Sum10.in as Connection1246
-                connect del_V.in Junction89 as Connection1247
-                connect Junction89 "Hold after connect1.out" as Connection1248
-                [
-                    breakpoints = 8672, 8664
-                ]
-                connect Sum10.in1 Junction89 as Connection1249
                 connect Gain13.out w_bus1 as Connection1252
                 connect w_bus3 Junction90 as Connection1254
                 connect Junction90 Sum2.in1 as Connection1255
@@ -6384,6 +6300,18 @@ out = in - (6.283185307179586*floor_in);
                 connect Gain18.in Junction104 as Connection1481
                 connect Junction104 Junction46 as Connection1482
                 connect "|E| pu.in" Junction104 as Connection1483
+                connect "Hold after connect.out" Junction105 as Connection1489
+                connect Junction105 del_P.in as Connection1490
+                [
+                    breakpoints = 8416, 8408
+                ]
+                connect "Hold after connect2.in" Junction105 as Connection1491
+                connect "Hold after connect1.out" Junction106 as Connection1493
+                connect Junction106 del_V.in as Connection1494
+                [
+                    breakpoints = 8672, 8664; 8672, 8664
+                ]
+                connect "Hold after connect3.in" Junction106 as Connection1495
             }
             [
                 position = 7640, 7912
@@ -7139,7 +7067,7 @@ if(boolean==1){
             component Subsystem Governor {
                 layout = dynamic
                 component gen_sum Sum10 {
-                    signs = "++"
+                    signs = "+++"
                 }
                 [
                     position = 8160, 8248
@@ -7286,7 +7214,7 @@ if(boolean==1){
                     signs = "+-"
                 }
                 [
-                    position = 7896, 8224
+                    position = 7896, 8248
                     hide_name = True
                 ]
 
@@ -7294,7 +7222,7 @@ if(boolean==1){
                     gain = "R_D"
                 }
                 [
-                    position = 7992, 8224
+                    position = 7992, 8248
                     hide_name = True
                 ]
 
@@ -7304,26 +7232,17 @@ if(boolean==1){
                     position = 8648, 8312
                 ]
 
-                component gen_probe frequency_diff {
+                component gen_probe fP_diff {
                 }
                 [
                     position = 8376, 8320
                 ]
 
-                component src_constant "AGC offset" {
+                component src_constant w_ref {
                     execution_rate = "Ts_gov"
-                    value = "17780.6"
                 }
                 [
-                    position = 7544, 8120
-                ]
-
-                component gen_sum Sum11 {
-                    signs = "++"
-                }
-                [
-                    position = 7760, 8200
-                    hide_name = True
+                    position = 7680, 8312
                 ]
 
                 component gen_rate_limiter "Rate Limiter2" {
@@ -7339,7 +7258,7 @@ if(boolean==1){
                     gain = "1/S"
                 }
                 [
-                    position = 7816, 8200
+                    position = 7800, 8240
                     hide_name = True
                 ]
 
@@ -7392,7 +7311,7 @@ if(boolean==1){
                     execution_rate = "Ts_gov"
                 }
                 [
-                    position = 7752, 8312
+                    position = 7872, 8176
                     hide_name = True
                     size = 32, 32
                 ]
@@ -7463,7 +7382,7 @@ if(boolean==1){
                     unit = "W"
                 }
                 [
-                    position = 7544, 8208
+                    position = 7736, 8240
                 ]
 
                 component "core/Rate Transition" "Rate Transition4" {
@@ -7474,7 +7393,7 @@ if(boolean==1){
                     size = 32, 32
                 ]
 
-                port w_ref {
+                port "AGC offset" {
                     position = left:1
                     kind = sp
                     direction =  out
@@ -7484,7 +7403,7 @@ if(boolean==1){
                     }
                 }
                 [
-                    position = 7680, 8312
+                    position = 7792, 8176
                 ]
 
                 port w_m3 {
@@ -7535,7 +7454,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 7800, 8248
+                    position = 7808, 8280
                     hide_name = True
                     size = 54, 20
                 ]
@@ -7566,11 +7485,6 @@ if(boolean==1){
                     position = 7832, 8376
                 ]
 
-                junction Junction10 sp
-                [
-                    position = 8120, 8320
-                ]
-
                 junction Junction11 sp
                 [
                     position = 8616, 8248
@@ -7581,9 +7495,14 @@ if(boolean==1){
                     position = 8616, 8248
                 ]
 
+                junction Junction13 sp
+                [
+                    position = 8208, 8248
+                ]
+
                 connect Sum2.out Gain29.in as Connection207
                 [
-                    breakpoints = 7944, 8224
+                    breakpoints = 7944, 8248
                 ]
                 connect Gain28.out Junction3 as Connection799
                 connect Junction3 Sum7.in1 as Connection800
@@ -7591,36 +7510,35 @@ if(boolean==1){
                     breakpoints = 7832, 8376; 7832, 8344
                 ]
                 connect "Exciter Activation.w_PU" Junction3 as Connection801
-                connect "AGC offset.out" Sum11.in as Connection846
-                connect From1 Sum2.in1 as Connection849
-                connect Gain29.out Sum10.in as Connection857
-                connect Sum11.out Gain37.in as Connection859
-                connect Gain37.out Sum2.in as Connection860
-                connect Sum10.in1 Junction10 as Connection867
-                connect Junction10 frequency_diff.in as Connection868
-                [
-                    breakpoints = 8120, 8320
-                ]
-                connect "Rate Limiter2.out" Junction10 as Connection869
                 connect Gain39.in Gain38.out as Connection872
                 connect "Discrete Transfer Function1.out" Gain38.in as Connection873
                 connect "Discrete Transfer Function2.in" Gain39.out as Connection874
                 connect Integrator1.in "Discrete Transfer Function2.out" as Connection875
-                connect Sum10.out "Discrete Transfer Function1.in" as Connection876
                 connect Integrator1.out Junction11 as Connection878
                 connect Junction11 P_SV as Connection879
                 connect P_sv.in Junction12 as Connection881
                 connect Junction12 Junction11 as Connection882
                 connect Goto1 Junction12 as Connection883
                 connect "Rate Limiter2.in" Sum7.out as Connection884
-                connect w_ref "Rate Transition1.in" as Connection885
-                connect "Rate Transition1.out" Sum7.in as Connection886
+                connect "AGC offset" "Rate Transition1.in" as Connection885
                 connect Gain28.in "Rate Transition2.out" as Connection887
                 connect "Rate Transition2.in" w_m3 as Connection888
                 connect "Exciter Activation.exciter state" "Rate Transition3.in" as Connection889
                 connect "Rate Transition3.out" "exciter state" as Connection890
                 connect "Rate Transition4.in" From2 as Connection893
-                connect AGC.out Sum11.in1 as Connection894
+                connect w_ref.out Sum7.in as Connection896
+                connect Gain37.in AGC.out as Connection899
+                connect Gain37.out Sum2.in as Connection900
+                connect From1 Sum2.in1 as Connection901
+                connect Gain29.out Sum10.in1 as Connection906
+                connect Sum10.in2 "Rate Limiter2.out" as Connection908
+                [
+                    breakpoints = 8120, 8320; 8120, 8320; 8120, 8320
+                ]
+                connect Sum10.out Junction13 as Connection909
+                connect Junction13 "Discrete Transfer Function1.in" as Connection910
+                connect fP_diff.in Junction13 as Connection911
+                connect "Rate Transition1.out" Sum10.in as Connection912
 
                 Ts_gov = "Ts_sys"
 
@@ -8014,10 +7932,10 @@ if(boolean==1){
                 ]
 
                 component gen_sum Sum4 {
-                    signs = "+-"
+                    signs = "++-"
                 }
                 [
-                    position = 7872, 8392
+                    position = 7872, 8408
                     hide_name = True
                 ]
 
@@ -8054,7 +7972,7 @@ if(boolean==1){
                     execution_rate = "Ts_exc"
                 }
                 [
-                    position = 7776, 8368
+                    position = 7792, 8360
                     hide_name = True
                     size = 32, 32
                 ]
@@ -8066,6 +7984,13 @@ if(boolean==1){
                     position = 8136, 8520
                     hide_name = True
                     size = 32, 32
+                ]
+
+                component src_constant E_ref {
+                    execution_rate = "Ts_exc"
+                }
+                [
+                    position = 7728, 8408
                 ]
 
                 port V_F {
@@ -8098,7 +8023,7 @@ if(boolean==1){
                     scale = -1, 1
                 ]
 
-                port E_ref {
+                port "E_ref offset" {
                     label = "E_ref"
                     position = left:1
                     kind = sp
@@ -8109,7 +8034,7 @@ if(boolean==1){
                     }
                 }
                 [
-                    position = 7704, 8368
+                    position = 7728, 8360
                 ]
 
                 port exc_state {
@@ -8265,7 +8190,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 7776, 8416
+                    position = 7744, 8456
                     hide_name = True
                 ]
 
@@ -8331,7 +8256,7 @@ if(boolean==1){
                     direction = out
                 }
                 [
-                    position = 7872, 8312
+                    position = 7872, 8304
                     hide_name = True
                 ]
 
@@ -8428,7 +8353,6 @@ if(boolean==1){
                 connect V_t1 Sum5.in as Connection25
                 connect E_t_M.in Junction10 as Connection124
                 connect "exciter OFF.in" "Logical operator1.out" as Connection155
-                connect V_t2 Sum4.in1 as Connection75
                 connect V_t5 Integrator3.reset as Connection200
                 connect V_t6 Integrator4.reset as Connection201
                 connect V_t7 Integrator2.reset as Connection202
@@ -8454,13 +8378,12 @@ if(boolean==1){
                 connect w_e1 Junction29 as Connection1257
                 connect Junction28 "Rate Transition1.out" as Connection1258
                 connect "Rate Transition1.in" exc_state as Connection1259
-                connect Sum4.in "Rate Transition2.out" as Connection1260
-                [
-                    breakpoints = 7832, 8368; 7808, 8368
-                ]
-                connect "Rate Transition2.in" E_ref as Connection1261
+                connect "Rate Transition2.in" "E_ref offset" as Connection1261
                 connect "|E|" "Rate Transition3.in" as Connection1262
                 connect "Rate Transition3.out" Sum5.in1 as Connection1263
+                connect V_t2 Sum4.in2 as Connection1264
+                connect E_ref.out Sum4.in1 as Connection1265
+                connect "Rate Transition2.out" Sum4.in as Connection1266
 
                 mask {
                     description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">IEEE DC1A exciter</p></body></html>"
@@ -9025,7 +8948,7 @@ if(boolean==1){
                 direction = out
             }
             [
-                position = 6416, 8072
+                position = 6544, 8056
                 hide_name = True
             ]
 
@@ -9036,31 +8959,18 @@ if(boolean==1){
                 direction = out
             }
             [
-                position = 6440, 8296
+                position = 6544, 8280
                 hide_name = True
-            ]
-
-            tag Connect2 {
-                value = "Connected"
-                scope = masked_subsystem
-                kind = sp
-                direction = out
-            }
-            [
-                position = 6336, 8216
-                rotation = left
-                hide_name = True
-                size = 58, 20
             ]
 
             tag theta_bus5 {
-                value = "w_sync"
+                value = "P_sync"
                 scope = masked_subsystem
                 kind = sp
                 direction = out
             }
             [
-                position = 6416, 8000
+                position = 6544, 7984
                 hide_name = True
             ]
 
@@ -9071,7 +8981,7 @@ if(boolean==1){
                 direction = out
             }
             [
-                position = 6440, 8232
+                position = 6544, 8216
                 hide_name = True
             ]
 
@@ -9125,7 +9035,7 @@ if(boolean==1){
                 direction = out
             }
             [
-                position = 6560, 8096
+                position = 6544, 8096
                 hide_name = True
             ]
 
@@ -9136,7 +9046,7 @@ if(boolean==1){
                 direction = out
             }
             [
-                position = 6608, 8328
+                position = 6544, 8328
                 hide_name = True
             ]
 
@@ -9161,11 +9071,6 @@ if(boolean==1){
             junction Junction206 pe
             [
                 position = 7448, 8512
-            ]
-
-            junction Junction220 sp
-            [
-                position = 6336, 8144
             ]
 
             junction Junction221 sp
@@ -9220,24 +9125,11 @@ if(boolean==1){
             connect Gain1.out w_e1 as Connection1418
             connect V_F.n_node "Synchonous Machine.- E_F" as Connection1419
             connect Gain18.in w_m2 as Connection1426
-            connect wref.out w.in as Connection1327
-            connect Vref.out "|V|3.in" as Connection1329
             connect V_F.p_node "Synchonous Machine.+ E_F" as Connection1410
-            connect "Signal switch2.out" "|V|3.in1" as Connection1774
-            connect "Signal switch1.out" w.in1 as Connection1775
             connect "Synchonous Machine.ground" Junction205 as Connection1790
             connect Ea1.n_node Junction205 as Connection1792
             connect Junction205 Junction206 as Connection1793
             connect Eb1.n_node Junction206 as Connection1795
-            connect "|V|3.in2" Junction220 as Connection1870
-            connect Junction220 Connect2 as Connection1871
-            [
-                breakpoints = 6336, 8144
-            ]
-            connect w.in2 Junction220 as Connection1872
-            [
-                breakpoints = 6624, 7936; 6336, 7936
-            ]
             connect Engine.T_M2 "Synchonous Machine.Torque" as Connection1873
             connect w_M.in Junction221 as Connection1875
             connect Junction221 "Synchonous Machine.Speed (rpm)" as Connection1876
@@ -9248,12 +9140,10 @@ if(boolean==1){
                 breakpoints = 6744, 8168
             ]
             connect w_e2 Junction225 as Connection1906
-            connect "|V|3.out" Exciter.E_ref as Connection1907
             connect "Exciter.|E|" Junction226 as Connection1909
             connect Junction226 "|V|2" as Connection1910
             connect Gain17.in Junction226 as Connection1911
             connect Governor.w_m3 Gain18.out as Connection1912
-            connect Governor.w_ref w.out as Connection1913
             connect Governor.P_SV Engine.P_SV as Connection1914
             connect Exciter.V_F V_F.in as Connection1915
             connect "Synchonous Machine.Ec" Junction230 as Connection1938
@@ -9296,8 +9186,8 @@ if(boolean==1){
             connect "Three-phase Meter1.A-" V_aG as Connection2012
             connect "Three-phase Meter1.A+" S4.a_out as Connection2013
             connect S4.b_out "Three-phase Meter1.B+" as Connection2014
-
-            Ts_sys = "Ts"
+            connect "Signal switch1.out" "Governor.AGC offset" as Connection2015
+            connect "Signal switch2.out" "Exciter.E_ref offset" as Connection2016
 
             mask {
                 description = "<html><head><meta name=\"qrichtext\" content=\"1\"></meta><style type=\"text/css\">p, li { white-space: pre-wrap; }</style></head><body style=\"\"><p style=\"margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">A salient-pole synchronous machine with DEGOV1 governor and IEEE type DC1A exciter, powered by a diesel genset</p></body></html>"
@@ -9368,7 +9258,7 @@ if(boolean==1){
                     label = "Execution rate (system)"
                     widget = edit
                     type = generic
-                    default_value = "0"
+                    default_value = "Ts"
                     unit = "s"
                     group = "1. Synchronous Machine"
                 }
@@ -9782,8 +9672,8 @@ if(boolean==1){
                     group = "6. Automatic Synchronizer"
                 }
 
-                maxw_pds {
-                    label = "Maximum difference signal (frequency)"
+                maxP_pds {
+                    label = "Maximum difference signal (active power)"
                     widget = edit
                     type = generic
                     default_value = "8e-2"
@@ -9843,6 +9733,7 @@ if(boolean==1){
                     Jm = mdl.get_property_value(mdl.prop(item_handle, "Jm"))
                     Fc = mdl.get_property_value(mdl.prop(item_handle, "Fc"))
                     Ts = mdl.get_property_value(mdl.prop(item_handle, "Ts"))
+                    Ts_sys = mdl.get_property_value(mdl.prop(item_handle, "Ts_sys"))
                     R_g = mdl.get_property_value(mdl.prop(item_handle, "R_g"))
                     L_g = mdl.get_property_value(mdl.prop(item_handle, "L_g"))
                     line_len = mdl.get_property_value(mdl.prop(item_handle, "line_len"))
@@ -9890,7 +9781,7 @@ if(boolean==1){
                     maxw_slip = mdl.get_property_value(mdl.prop(item_handle, "maxw_slip"))
                     minw_slip = mdl.get_property_value(mdl.prop(item_handle, "minw_slip"))
                     maxV_pds = mdl.get_property_value(mdl.prop(item_handle, "maxV_pds"))
-                    maxw_pds = mdl.get_property_value(mdl.prop(item_handle, "maxw_pds"))
+                    maxP_pds = mdl.get_property_value(mdl.prop(item_handle, "maxP_pds"))
                     Kp_PLL = mdl.get_property_value(mdl.prop(item_handle, "Kp_PLL"))
                     Ki_PLL = mdl.get_property_value(mdl.prop(item_handle, "Ki_PLL"))
                     PLL_max = mdl.get_property_value(mdl.prop(item_handle, "PLL_max"))
@@ -12965,15 +12856,15 @@ if(boolean==1){
 
         gen_trigonometric {
             trigonometric_fn = "sin"
+            angle = "Radians"
             execution_rate = "inherit"
         }
 
         gen_z_domain_transfer {
             domain = "Z-domain"
             method = "Zero-order hold"
-            b_coeff = "[1]"
-            a_coeff = "[1,-1]"
-            init_states = "0"
+            b_coeff = "[1,1]"
+            a_coeff = "[1,1]"
             signal_out_type = "inherit"
             execution_rate = "inherit"
         }
@@ -13014,6 +12905,7 @@ if(boolean==1){
             show_modes = "False"
             cpl_stb = "False"
             cpl_dynamics_analysis = "False"
+            matrix_based_reduction = "True"
             enb_dep_sw_detect = "False"
             override_user_sp_settings = "False"
             user_cpu_optimization = "high"
@@ -13103,6 +12995,9 @@ if(boolean==1){
             frequency = "50.0"
             R_value = "21.55"
             L_value = "0.00842"
+            embedded_coupling = "False"
+            ratio_type = "Automatic"
+            ratio = "0.1"
         }
 
         "core/Rate Transition" {
