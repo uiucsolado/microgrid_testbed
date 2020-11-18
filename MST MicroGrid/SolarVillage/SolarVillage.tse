@@ -1,8 +1,8 @@
 version = 4.2
 
 //
-// Saved by sw version: 2020.1 SP2
-// Save timestamp: 11-Sep-2020 @ 09:47:15 PM
+// Saved by sw version: 2020.3
+// Save timestamp: 17-Nov-2020 @ 09:11:23 AM
 //
 
 model "SolarVillage" {
@@ -28,6 +28,19 @@ model "SolarVillage" {
         user_real_type_precision = "default"
         sys_cpu_optimization = "high"
         user_cpu_optimization = "high"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        export_ss_to_pickle = False
+        cce_platform = "generic"
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
     }
 
     component Subsystem Root {
@@ -285,22 +298,20 @@ model "SolarVillage" {
                     layout = dynamic
                     component gen_c_function "C function2" {
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit;inherit"
-                        in_terminal_dimensions_str = "GHI inherit;ETR inherit"
-                        in_terminal_labels = "[(\'GHI\', True), (\'ETR\', True)]"
-                        in_terminal_properties = "real GHI;real ETR;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit"
-                        out_terminal_dimensions_str = "f inherit;Gdh inherit"
-                        out_terminal_labels = "[(\'f\', True), (\'Gdh\', True)]"
-                        out_terminal_properties = "real f;real Gdh;"
+                        input_terminals = "real GHI;real ETR;"
+                        input_terminals_dimensions = "inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True)]"
                         output_fnc = "/*Begin code section*/
 if (k<=0.21) f = 0.995-0.081*k;
 else if (k>0.76) f = 0.18;
 else f = 0.724 + 2.738*k - 8.321*k*k + 4.967*k*k*k;
 Gdh = f*GHI;
 /*End code section*/"
+                        output_terminals = "real f;real Gdh;"
+                        output_terminals_dimensions = "inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'f\', True), (\'Gdh\', True)]"
                         update_fnc = "/*Begin code section*/
 k = GHI/ETR;
 /*End code section*/"
@@ -454,19 +465,17 @@ k = GHI/ETR;
                     ]
 
                     component gen_c_function "C function3" {
-                        in_terminal_dimensions = "1;1;4"
-                        in_terminal_dimensions_str = "Gdh 1;fk 1;x 4"
-                        in_terminal_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
-                        in_terminal_properties = "real Gdh;real fk;real x;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1"
-                        out_terminal_dimensions_str = "Gd 1"
-                        out_terminal_labels = "[(\'Gd\', True)]"
-                        out_terminal_properties = "real Gd;"
+                        input_terminals = "real Gdh;real fk;real x;"
+                        input_terminals_dimensions = "1;1;4"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
                         output_fnc = "/*Begin code section*/
 Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
 /*End code section*/"
+                        output_terminals = "real Gd;"
+                        output_terminals_dimensions = "1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Gd\', True)]"
                     }
                     [
                         position = 7736, 8432
@@ -542,16 +551,10 @@ Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
                     component gen_c_function "C function4" {
                         execution_rate = "Ts_pv"
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit"
-                        in_terminal_dimensions_str = "clk inherit"
-                        in_terminal_labels = "[(\'clk\', True)]"
-                        in_terminal_properties = "real clk;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit;inherit"
-                        out_terminal_dimensions_str = "GHI inherit;ETR inherit;ang_z inherit"
-                        out_terminal_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
-                        out_terminal_properties = "real GHI;real ETR;real ang_z;"
+                        input_terminals = "real clk;"
+                        input_terminals_dimensions = "inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'clk\', True)]"
                         output_fnc = "/*Begin code section*/
 if (clk<1800){
     GHI = 300;
@@ -574,6 +577,10 @@ else {
     ang_z = 2.4;
 }
 /*End code section*/"
+                        output_terminals = "real GHI;real ETR;real ang_z;"
+                        output_terminals_dimensions = "inherit;inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
                     }
                     [
                         position = 6896, 8368
@@ -1052,16 +1059,10 @@ else {
                 ]
 
                 component gen_c_function "C function1" {
-                    in_terminal_dimensions = "inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "Vdc inherit;Y inherit;Vmax inherit"
-                    in_terminal_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
-                    in_terminal_properties = "real Vdc;real Y;real Vmax;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "inherit;inherit"
-                    out_terminal_dimensions_str = "Ipv inherit;Ppv inherit"
-                    out_terminal_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
-                    out_terminal_properties = "real Ipv;real Ppv;"
+                    input_terminals = "real Vdc;real Y;real Vmax;"
+                    input_terminals_dimensions = "inherit;inherit;inherit"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
                     output_fnc = "/*Begin code section*/
 /*if (Vdc>Vmax) Ipv = 0;
 else Ipv = Y*(Vmax-Vdc);
@@ -1070,6 +1071,10 @@ if (Ipv>15) Ipv = 15;
 Ipv = Y*(Vmax-Vdc);
 Ppv = Ipv*Vdc;
 /*End code section*/"
+                    output_terminals = "real Ipv;real Ppv;"
+                    output_terminals_dimensions = "inherit;inherit"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
                 }
                 [
                     position = 7672, 8048
@@ -1094,16 +1099,10 @@ Ppv = Ipv*Vdc;
 
                 component gen_c_function "C function2" {
                     global_variables = "real Pmax;"
-                    in_terminal_dimensions = "1;1"
-                    in_terminal_dimensions_str = "Pref 1;SI 1"
-                    in_terminal_labels = "[(\'Pref\', True), (\'SI\', True)]"
-                    in_terminal_properties = "real Pref;real SI;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1;1;1;1"
-                    out_terminal_dimensions_str = "out1 1;out2 1;Y 1;Vmax 1"
-                    out_terminal_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
-                    out_terminal_properties = "real out1;real out2;real Y;real Vmax;"
+                    input_terminals = "real Pref;real SI;"
+                    input_terminals_dimensions = "1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Pref\', True), (\'SI\', True)]"
                     output_fnc = "/*Begin code section*/
 Pmax = SI*0.15*100; Vmax = 600;
 Y = 4*Pmax/Vmax/Vmax;
@@ -1111,6 +1110,10 @@ out1 = Y*Vmax;
 if (Pref<=Pmax) out2 =  Y*Y*Vmax*Vmax - 4*Pref*Y;
 else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
 /*End code section*/"
+                    output_terminals = "real out1;real out2;real Y;real Vmax;"
+                    output_terminals_dimensions = "1;1;1;1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
                 }
                 [
                     position = 7304, 7800
@@ -1127,19 +1130,17 @@ else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
                 ]
 
                 component gen_c_function "C function3" {
-                    in_terminal_dimensions = "1;1;1"
-                    in_terminal_dimensions_str = "in 1;in2 1;Y 1"
-                    in_terminal_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
-                    in_terminal_properties = "real in;real in2;real Y;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1"
-                    out_terminal_dimensions_str = "Vref 1"
-                    out_terminal_labels = "[(\'Vref\', True)]"
-                    out_terminal_properties = "real Vref;"
+                    input_terminals = "real in;real in2;real Y;"
+                    input_terminals_dimensions = "1;1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
                     output_fnc = "/*Begin code section*/
 Vref = (in+in2)/2/Y;
 /*End code section*/"
+                    output_terminals = "real Vref;"
+                    output_terminals_dimensions = "1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Vref\', True)]"
                 }
                 [
                     position = 7552, 7792
@@ -1151,7 +1152,6 @@ Vref = (in+in2)/2/Y;
                     a_coeff = "[1.0/(2*np.pi*1),1]"
                     b_coeff = "1"
                     domain = "S-domain"
-                    init_states = "500"
                     method = "Bilinear"
                 }
                 [
@@ -1476,6 +1476,7 @@ Vref = (in+in2)/2/Y;
 
                             component gen_pid_controller "PID controller1" {
                                 controller_type = "PI"
+                                enb_anti_windup_out = "True"
                                 enb_output_limit_out = "True"
                                 ki = "Ki_I/Z_DQ"
                                 kp = "Kp_I/Z_DQ"
@@ -1524,6 +1525,7 @@ Vref = (in+in2)/2/Y;
 
                             component gen_pid_controller "PID controller2" {
                                 controller_type = "PI"
+                                enb_anti_windup_out = "True"
                                 enb_output_limit_out = "True"
                                 ki = "Ki_I/Z_DQ"
                                 kp = "Kp_I/Z_DQ"
@@ -2086,6 +2088,7 @@ Vref = (in+in2)/2/Y;
 
                             component gen_pid_controller "PID controller1" {
                                 controller_type = "PI"
+                                enb_anti_windup_out = "True"
                                 enb_output_limit_out = "True"
                                 ki = "Ki_VDCreg"
                                 kp = "Kp_VDCreg"
@@ -2796,19 +2799,17 @@ Vref = (in+in2)/2/Y;
                     ]
 
                     component gen_c_function "C function1" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = -1;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7784, 8368
@@ -2817,19 +2818,17 @@ else out = ref;
                     ]
 
                     component gen_c_function "C function2" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = 0;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7792, 8464
@@ -2882,17 +2881,13 @@ else out = ref;
                     component gen_c_function "C function3" {
                         execution_rate = "1"
                         global_variables = "int k;real t;"
-                        in_terminal_labels = "[]"
-                        in_terminal_properties = ""
                         init_fnc = "/*Begin code section*/
 k = 0; t = 1;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\', \'Pref\', \'Qref\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pref 1;Qref 1"
-                        out_terminal_labels = "[(\'Pref\', True), (\'Qref\', True)]"
-                        out_terminal_properties = "real Pref;real Qref;"
+                        input_terminals = ""
+                        input_terminals_dimensions = ""
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[]"
                         output_fnc = "/*Begin code section*/
 //float p[10]={0.0,2.0,3.0,10,5,4,3.2,1.4,5.6,7};
 //float q[10] = {0,1.5,1.2,1,2,2.6,1.4,3,2.6,4};
@@ -2917,6 +2912,10 @@ else if(k==12) {Pref =1.5;Qref = 1;}
 if (t>=3) k+=1;
 t+=1;
 /*End code section*/"
+                        output_terminals = "real Pref;real Qref;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\', \'Pref\', \'Qref\']"
+                        output_terminals_show_labels = "[(\'Pref\', True), (\'Qref\', True)]"
                     }
                     [
                         position = 7504, 8360
@@ -2972,21 +2971,19 @@ t+=1;
 
                     component gen_c_function "C function4" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "inherit;inherit;inherit"
-                        in_terminal_dimensions_str = "in inherit;pi inherit;Ts inherit"
-                        in_terminal_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
-                        in_terminal_properties = "real in;inherit pi;inherit Ts;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real in;inherit pi;inherit Ts;"
+                        input_terminals_dimensions = "inherit;inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
                         output_fnc = "/*Begin code section*/
 out = out + in*Ts;
 if (out>=2*pi){
     out = out - 2*pi;
 }
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7384, 8688
@@ -3134,24 +3131,22 @@ if (out>=2*pi){
                     component gen_c_function "C function5" {
                         execution_rate = "Ts"
                         global_variables = "real P;real Q;"
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "Pin 1;Qin 1"
-                        in_terminal_labels = "[(\'Pin\', False), (\'Qin\', False)]"
-                        in_terminal_properties = "real Pin;real Qin;"
                         init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pout 1;Qout 1"
-                        out_terminal_labels = "[(\'Pout\', False), (\'Qout\', False)]"
-                        out_terminal_properties = "real Pout;real Qout;"
+                        input_terminals = "real Pin;real Qin;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Pin\', False), (\'Qin\', False)]"
                         output_fnc = "/*Begin code section*/
 Pout = P;
 Qout = Q;
 /*End code section*/"
+                        output_terminals = "real Pout;real Qout;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Pout\', False), (\'Qout\', False)]"
                         update_fnc = "/*Begin code section*/
 P = P - (P-Pin)*1e-3;
 Q = Q - (Q-Qin)*1e-3;
@@ -3730,22 +3725,16 @@ Q = Q - (Q-Qin)*1e-3;
                     component Subsystem Power_Meas_DQpu {
                         layout = dynamic
                         component gen_c_function S_and_pf {
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "P inherit;Q inherit"
-                            in_terminal_labels = "False;False;"
-                            in_terminal_properties = "real P;inherit Q;"
                             init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 S = 0;
 pf = 0;
 /*End code section*/"
-                            no_feed_inputs = "[u\'\']"
-                            no_feed_outputs = "[u\'\']"
-                            out_terminal_dimensions = "inherit;inherit"
-                            out_terminal_dimensions_str = "S inherit;pf inherit"
-                            out_terminal_labels = "False;False;"
-                            out_terminal_properties = "inherit S;inherit pf;"
+                            input_terminals = "real P;inherit Q;"
+                            input_terminals_dimensions = "inherit;inherit"
+                            input_terminals_feedthrough = "[u\'\']"
+                            input_terminals_show_labels = "False;False;"
                             output_fnc = "/*Begin code section*/
 S = sqrt(P*P+Q*Q);
 if(S>0){
@@ -3755,6 +3744,10 @@ else{
     pf = 0;
 }
 /*End code section*/"
+                            output_terminals = "inherit S;inherit pf;"
+                            output_terminals_dimensions = "inherit;inherit"
+                            output_terminals_feedthrough = "[u\'\']"
+                            output_terminals_show_labels = "False;False;"
                         }
                         [
                             position = 8392, 8192
@@ -4170,6 +4163,7 @@ else{
 
                 component "core/Single Phase Inverter" "Single Phase Inverter" {
                     ctrl_src = "Internal modulator"
+                    fvd_def_method = "LUT"
                     ref_sig_min_max = "[-1, 1]"
                 }
                 [
@@ -5397,22 +5391,20 @@ else{
                     layout = dynamic
                     component gen_c_function "C function2" {
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit;inherit"
-                        in_terminal_dimensions_str = "GHI inherit;ETR inherit"
-                        in_terminal_labels = "[(\'GHI\', True), (\'ETR\', True)]"
-                        in_terminal_properties = "real GHI;real ETR;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit"
-                        out_terminal_dimensions_str = "f inherit;Gdh inherit"
-                        out_terminal_labels = "[(\'f\', True), (\'Gdh\', True)]"
-                        out_terminal_properties = "real f;real Gdh;"
+                        input_terminals = "real GHI;real ETR;"
+                        input_terminals_dimensions = "inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True)]"
                         output_fnc = "/*Begin code section*/
 if (k<=0.21) f = 0.995-0.081*k;
 else if (k>0.76) f = 0.18;
 else f = 0.724 + 2.738*k - 8.321*k*k + 4.967*k*k*k;
 Gdh = f*GHI;
 /*End code section*/"
+                        output_terminals = "real f;real Gdh;"
+                        output_terminals_dimensions = "inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'f\', True), (\'Gdh\', True)]"
                         update_fnc = "/*Begin code section*/
 k = GHI/ETR;
 /*End code section*/"
@@ -5566,19 +5558,17 @@ k = GHI/ETR;
                     ]
 
                     component gen_c_function "C function3" {
-                        in_terminal_dimensions = "1;1;4"
-                        in_terminal_dimensions_str = "Gdh 1;fk 1;x 4"
-                        in_terminal_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
-                        in_terminal_properties = "real Gdh;real fk;real x;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1"
-                        out_terminal_dimensions_str = "Gd 1"
-                        out_terminal_labels = "[(\'Gd\', True)]"
-                        out_terminal_properties = "real Gd;"
+                        input_terminals = "real Gdh;real fk;real x;"
+                        input_terminals_dimensions = "1;1;4"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
                         output_fnc = "/*Begin code section*/
 Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
 /*End code section*/"
+                        output_terminals = "real Gd;"
+                        output_terminals_dimensions = "1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Gd\', True)]"
                     }
                     [
                         position = 7736, 8432
@@ -5654,16 +5644,10 @@ Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
                     component gen_c_function "C function4" {
                         execution_rate = "Ts_pv"
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit"
-                        in_terminal_dimensions_str = "clk inherit"
-                        in_terminal_labels = "[(\'clk\', True)]"
-                        in_terminal_properties = "real clk;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit;inherit"
-                        out_terminal_dimensions_str = "GHI inherit;ETR inherit;ang_z inherit"
-                        out_terminal_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
-                        out_terminal_properties = "real GHI;real ETR;real ang_z;"
+                        input_terminals = "real clk;"
+                        input_terminals_dimensions = "inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'clk\', True)]"
                         output_fnc = "/*Begin code section*/
 if (clk<1800){
     GHI = 300;
@@ -5686,6 +5670,10 @@ else {
     ang_z = 2.4;
 }
 /*End code section*/"
+                        output_terminals = "real GHI;real ETR;real ang_z;"
+                        output_terminals_dimensions = "inherit;inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
                     }
                     [
                         position = 6896, 8368
@@ -6164,16 +6152,10 @@ else {
                 ]
 
                 component gen_c_function "C function1" {
-                    in_terminal_dimensions = "inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "Vdc inherit;Y inherit;Vmax inherit"
-                    in_terminal_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
-                    in_terminal_properties = "real Vdc;real Y;real Vmax;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "inherit;inherit"
-                    out_terminal_dimensions_str = "Ipv inherit;Ppv inherit"
-                    out_terminal_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
-                    out_terminal_properties = "real Ipv;real Ppv;"
+                    input_terminals = "real Vdc;real Y;real Vmax;"
+                    input_terminals_dimensions = "inherit;inherit;inherit"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
                     output_fnc = "/*Begin code section*/
 /*if (Vdc>Vmax) Ipv = 0;
 else Ipv = Y*(Vmax-Vdc);
@@ -6182,6 +6164,10 @@ if (Ipv>15) Ipv = 15;
 Ipv = Y*(Vmax-Vdc);
 Ppv = Ipv*Vdc;
 /*End code section*/"
+                    output_terminals = "real Ipv;real Ppv;"
+                    output_terminals_dimensions = "inherit;inherit"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
                 }
                 [
                     position = 7672, 8048
@@ -6206,16 +6192,10 @@ Ppv = Ipv*Vdc;
 
                 component gen_c_function "C function2" {
                     global_variables = "real Pmax;"
-                    in_terminal_dimensions = "1;1"
-                    in_terminal_dimensions_str = "Pref 1;SI 1"
-                    in_terminal_labels = "[(\'Pref\', True), (\'SI\', True)]"
-                    in_terminal_properties = "real Pref;real SI;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1;1;1;1"
-                    out_terminal_dimensions_str = "out1 1;out2 1;Y 1;Vmax 1"
-                    out_terminal_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
-                    out_terminal_properties = "real out1;real out2;real Y;real Vmax;"
+                    input_terminals = "real Pref;real SI;"
+                    input_terminals_dimensions = "1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Pref\', True), (\'SI\', True)]"
                     output_fnc = "/*Begin code section*/
 Pmax = SI*0.15*100; Vmax = 600;
 Y = 4*Pmax/Vmax/Vmax;
@@ -6223,6 +6203,10 @@ out1 = Y*Vmax;
 if (Pref<=Pmax) out2 =  Y*Y*Vmax*Vmax - 4*Pref*Y;
 else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
 /*End code section*/"
+                    output_terminals = "real out1;real out2;real Y;real Vmax;"
+                    output_terminals_dimensions = "1;1;1;1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
                 }
                 [
                     position = 7304, 7800
@@ -6239,19 +6223,17 @@ else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
                 ]
 
                 component gen_c_function "C function3" {
-                    in_terminal_dimensions = "1;1;1"
-                    in_terminal_dimensions_str = "in 1;in2 1;Y 1"
-                    in_terminal_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
-                    in_terminal_properties = "real in;real in2;real Y;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1"
-                    out_terminal_dimensions_str = "Vref 1"
-                    out_terminal_labels = "[(\'Vref\', True)]"
-                    out_terminal_properties = "real Vref;"
+                    input_terminals = "real in;real in2;real Y;"
+                    input_terminals_dimensions = "1;1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
                     output_fnc = "/*Begin code section*/
 Vref = (in+in2)/2/Y;
 /*End code section*/"
+                    output_terminals = "real Vref;"
+                    output_terminals_dimensions = "1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Vref\', True)]"
                 }
                 [
                     position = 7552, 7792
@@ -6263,7 +6245,6 @@ Vref = (in+in2)/2/Y;
                     a_coeff = "[1.0/(2*np.pi*1),1]"
                     b_coeff = "1"
                     domain = "S-domain"
-                    init_states = "500"
                     method = "Bilinear"
                 }
                 [
@@ -7908,19 +7889,17 @@ Vref = (in+in2)/2/Y;
                     ]
 
                     component gen_c_function "C function1" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = -1;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7784, 8368
@@ -7929,19 +7908,17 @@ else out = ref;
                     ]
 
                     component gen_c_function "C function2" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = 0;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7792, 8464
@@ -7994,17 +7971,13 @@ else out = ref;
                     component gen_c_function "C function3" {
                         execution_rate = "1"
                         global_variables = "int k;real t;"
-                        in_terminal_labels = "[]"
-                        in_terminal_properties = ""
                         init_fnc = "/*Begin code section*/
 k = 0; t = 1;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\', \'Pref\', \'Qref\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pref 1;Qref 1"
-                        out_terminal_labels = "[(\'Pref\', True), (\'Qref\', True)]"
-                        out_terminal_properties = "real Pref;real Qref;"
+                        input_terminals = ""
+                        input_terminals_dimensions = ""
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[]"
                         output_fnc = "/*Begin code section*/
 //float p[10]={0.0,2.0,3.0,10,5,4,3.2,1.4,5.6,7};
 //float q[10] = {0,1.5,1.2,1,2,2.6,1.4,3,2.6,4};
@@ -8029,6 +8002,10 @@ else if(k==12) {Pref =1.5;Qref = 1;}
 if (t>=4) k+=1;
 t+=1;
 /*End code section*/"
+                        output_terminals = "real Pref;real Qref;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\', \'Pref\', \'Qref\']"
+                        output_terminals_show_labels = "[(\'Pref\', True), (\'Qref\', True)]"
                     }
                     [
                         position = 7504, 8360
@@ -8084,21 +8061,19 @@ t+=1;
 
                     component gen_c_function "C function4" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "inherit;inherit;inherit"
-                        in_terminal_dimensions_str = "in inherit;pi inherit;Ts inherit"
-                        in_terminal_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
-                        in_terminal_properties = "real in;inherit pi;inherit Ts;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real in;inherit pi;inherit Ts;"
+                        input_terminals_dimensions = "inherit;inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
                         output_fnc = "/*Begin code section*/
 out = out + in*Ts;
 if (out>=2*pi){
     out = out - 2*pi;
 }
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7384, 8688
@@ -8246,24 +8221,22 @@ if (out>=2*pi){
                     component gen_c_function "C function5" {
                         execution_rate = "Ts"
                         global_variables = "real P;real Q;"
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "Pin 1;Qin 1"
-                        in_terminal_labels = "[(\'Pin\', False), (\'Qin\', False)]"
-                        in_terminal_properties = "real Pin;real Qin;"
                         init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pout 1;Qout 1"
-                        out_terminal_labels = "[(\'Pout\', False), (\'Qout\', False)]"
-                        out_terminal_properties = "real Pout;real Qout;"
+                        input_terminals = "real Pin;real Qin;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Pin\', False), (\'Qin\', False)]"
                         output_fnc = "/*Begin code section*/
 Pout = P;
 Qout = Q;
 /*End code section*/"
+                        output_terminals = "real Pout;real Qout;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Pout\', False), (\'Qout\', False)]"
                         update_fnc = "/*Begin code section*/
 P = P - (P-Pin)*1e-3;
 Q = Q - (Q-Qin)*1e-3;
@@ -8842,22 +8815,16 @@ Q = Q - (Q-Qin)*1e-3;
                     component Subsystem Power_Meas_DQpu {
                         layout = dynamic
                         component gen_c_function S_and_pf {
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "P inherit;Q inherit"
-                            in_terminal_labels = "False;False;"
-                            in_terminal_properties = "real P;inherit Q;"
                             init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 S = 0;
 pf = 0;
 /*End code section*/"
-                            no_feed_inputs = "[u\'\']"
-                            no_feed_outputs = "[u\'\']"
-                            out_terminal_dimensions = "inherit;inherit"
-                            out_terminal_dimensions_str = "S inherit;pf inherit"
-                            out_terminal_labels = "False;False;"
-                            out_terminal_properties = "inherit S;inherit pf;"
+                            input_terminals = "real P;inherit Q;"
+                            input_terminals_dimensions = "inherit;inherit"
+                            input_terminals_feedthrough = "[u\'\']"
+                            input_terminals_show_labels = "False;False;"
                             output_fnc = "/*Begin code section*/
 S = sqrt(P*P+Q*Q);
 if(S>0){
@@ -8867,6 +8834,10 @@ else{
     pf = 0;
 }
 /*End code section*/"
+                            output_terminals = "inherit S;inherit pf;"
+                            output_terminals_dimensions = "inherit;inherit"
+                            output_terminals_feedthrough = "[u\'\']"
+                            output_terminals_show_labels = "False;False;"
                         }
                         [
                             position = 8392, 8192
@@ -9282,6 +9253,7 @@ else{
 
                 component "core/Single Phase Inverter" "Single Phase Inverter1" {
                     ctrl_src = "Internal modulator"
+                    fvd_def_method = "LUT"
                     ref_sig_min_max = "[-1, 1]"
                 }
                 [
@@ -10508,22 +10480,20 @@ else{
                     layout = dynamic
                     component gen_c_function "C function2" {
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit;inherit"
-                        in_terminal_dimensions_str = "GHI inherit;ETR inherit"
-                        in_terminal_labels = "[(\'GHI\', True), (\'ETR\', True)]"
-                        in_terminal_properties = "real GHI;real ETR;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit"
-                        out_terminal_dimensions_str = "f inherit;Gdh inherit"
-                        out_terminal_labels = "[(\'f\', True), (\'Gdh\', True)]"
-                        out_terminal_properties = "real f;real Gdh;"
+                        input_terminals = "real GHI;real ETR;"
+                        input_terminals_dimensions = "inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True)]"
                         output_fnc = "/*Begin code section*/
 if (k<=0.21) f = 0.995-0.081*k;
 else if (k>0.76) f = 0.18;
 else f = 0.724 + 2.738*k - 8.321*k*k + 4.967*k*k*k;
 Gdh = f*GHI;
 /*End code section*/"
+                        output_terminals = "real f;real Gdh;"
+                        output_terminals_dimensions = "inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'f\', True), (\'Gdh\', True)]"
                         update_fnc = "/*Begin code section*/
 k = GHI/ETR;
 /*End code section*/"
@@ -10677,19 +10647,17 @@ k = GHI/ETR;
                     ]
 
                     component gen_c_function "C function3" {
-                        in_terminal_dimensions = "1;1;4"
-                        in_terminal_dimensions_str = "Gdh 1;fk 1;x 4"
-                        in_terminal_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
-                        in_terminal_properties = "real Gdh;real fk;real x;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1"
-                        out_terminal_dimensions_str = "Gd 1"
-                        out_terminal_labels = "[(\'Gd\', True)]"
-                        out_terminal_properties = "real Gd;"
+                        input_terminals = "real Gdh;real fk;real x;"
+                        input_terminals_dimensions = "1;1;4"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
                         output_fnc = "/*Begin code section*/
 Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
 /*End code section*/"
+                        output_terminals = "real Gd;"
+                        output_terminals_dimensions = "1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Gd\', True)]"
                     }
                     [
                         position = 7736, 8432
@@ -10765,16 +10733,10 @@ Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
                     component gen_c_function "C function4" {
                         execution_rate = "Ts_pv"
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit"
-                        in_terminal_dimensions_str = "clk inherit"
-                        in_terminal_labels = "[(\'clk\', True)]"
-                        in_terminal_properties = "real clk;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit;inherit"
-                        out_terminal_dimensions_str = "GHI inherit;ETR inherit;ang_z inherit"
-                        out_terminal_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
-                        out_terminal_properties = "real GHI;real ETR;real ang_z;"
+                        input_terminals = "real clk;"
+                        input_terminals_dimensions = "inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'clk\', True)]"
                         output_fnc = "/*Begin code section*/
 if (clk<1800){
     GHI = 300;
@@ -10797,6 +10759,10 @@ else {
     ang_z = 2.4;
 }
 /*End code section*/"
+                        output_terminals = "real GHI;real ETR;real ang_z;"
+                        output_terminals_dimensions = "inherit;inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
                     }
                     [
                         position = 6896, 8368
@@ -11275,16 +11241,10 @@ else {
                 ]
 
                 component gen_c_function "C function1" {
-                    in_terminal_dimensions = "inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "Vdc inherit;Y inherit;Vmax inherit"
-                    in_terminal_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
-                    in_terminal_properties = "real Vdc;real Y;real Vmax;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "inherit;inherit"
-                    out_terminal_dimensions_str = "Ipv inherit;Ppv inherit"
-                    out_terminal_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
-                    out_terminal_properties = "real Ipv;real Ppv;"
+                    input_terminals = "real Vdc;real Y;real Vmax;"
+                    input_terminals_dimensions = "inherit;inherit;inherit"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
                     output_fnc = "/*Begin code section*/
 /*if (Vdc>Vmax) Ipv = 0;
 else Ipv = Y*(Vmax-Vdc);
@@ -11293,6 +11253,10 @@ if (Ipv>15) Ipv = 15;
 Ipv = Y*(Vmax-Vdc);
 Ppv = Ipv*Vdc;
 /*End code section*/"
+                    output_terminals = "real Ipv;real Ppv;"
+                    output_terminals_dimensions = "inherit;inherit"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
                 }
                 [
                     position = 7672, 8048
@@ -11317,16 +11281,10 @@ Ppv = Ipv*Vdc;
 
                 component gen_c_function "C function2" {
                     global_variables = "real Pmax;"
-                    in_terminal_dimensions = "1;1"
-                    in_terminal_dimensions_str = "Pref 1;SI 1"
-                    in_terminal_labels = "[(\'Pref\', True), (\'SI\', True)]"
-                    in_terminal_properties = "real Pref;real SI;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1;1;1;1"
-                    out_terminal_dimensions_str = "out1 1;out2 1;Y 1;Vmax 1"
-                    out_terminal_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
-                    out_terminal_properties = "real out1;real out2;real Y;real Vmax;"
+                    input_terminals = "real Pref;real SI;"
+                    input_terminals_dimensions = "1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Pref\', True), (\'SI\', True)]"
                     output_fnc = "/*Begin code section*/
 Pmax = SI*0.15*100; Vmax = 600;
 Y = 4*Pmax/Vmax/Vmax;
@@ -11334,6 +11292,10 @@ out1 = Y*Vmax;
 if (Pref<=Pmax) out2 =  Y*Y*Vmax*Vmax - 4*Pref*Y;
 else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
 /*End code section*/"
+                    output_terminals = "real out1;real out2;real Y;real Vmax;"
+                    output_terminals_dimensions = "1;1;1;1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
                 }
                 [
                     position = 7304, 7800
@@ -11350,19 +11312,17 @@ else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
                 ]
 
                 component gen_c_function "C function3" {
-                    in_terminal_dimensions = "1;1;1"
-                    in_terminal_dimensions_str = "in 1;in2 1;Y 1"
-                    in_terminal_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
-                    in_terminal_properties = "real in;real in2;real Y;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1"
-                    out_terminal_dimensions_str = "Vref 1"
-                    out_terminal_labels = "[(\'Vref\', True)]"
-                    out_terminal_properties = "real Vref;"
+                    input_terminals = "real in;real in2;real Y;"
+                    input_terminals_dimensions = "1;1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
                     output_fnc = "/*Begin code section*/
 Vref = (in+in2)/2/Y;
 /*End code section*/"
+                    output_terminals = "real Vref;"
+                    output_terminals_dimensions = "1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Vref\', True)]"
                 }
                 [
                     position = 7552, 7792
@@ -11374,7 +11334,6 @@ Vref = (in+in2)/2/Y;
                     a_coeff = "[1.0/(2*np.pi*1),1]"
                     b_coeff = "1"
                     domain = "S-domain"
-                    init_states = "500"
                     method = "Bilinear"
                 }
                 [
@@ -13019,19 +12978,17 @@ Vref = (in+in2)/2/Y;
                     ]
 
                     component gen_c_function "C function1" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = -1;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7784, 8368
@@ -13040,19 +12997,17 @@ else out = ref;
                     ]
 
                     component gen_c_function "C function2" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = 0;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7792, 8464
@@ -13105,17 +13060,13 @@ else out = ref;
                     component gen_c_function "C function3" {
                         execution_rate = "1"
                         global_variables = "int k;real t;"
-                        in_terminal_labels = "[]"
-                        in_terminal_properties = ""
                         init_fnc = "/*Begin code section*/
 k = 0; t = 1;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\', \'Pref\', \'Qref\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pref 1;Qref 1"
-                        out_terminal_labels = "[(\'Pref\', True), (\'Qref\', True)]"
-                        out_terminal_properties = "real Pref;real Qref;"
+                        input_terminals = ""
+                        input_terminals_dimensions = ""
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[]"
                         output_fnc = "/*Begin code section*/
 //float p[10]={0.0,2.0,3.0,10,5,4,3.2,1.4,5.6,7};
 //float q[10] = {0,1.5,1.2,1,2,2.6,1.4,3,2.6,4};
@@ -13140,6 +13091,10 @@ else if(k==12) {Pref =1.5;Qref = 1;}
 if (t>=4) k+=1;
 t+=1;
 /*End code section*/"
+                        output_terminals = "real Pref;real Qref;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\', \'Pref\', \'Qref\']"
+                        output_terminals_show_labels = "[(\'Pref\', True), (\'Qref\', True)]"
                     }
                     [
                         position = 7504, 8360
@@ -13195,21 +13150,19 @@ t+=1;
 
                     component gen_c_function "C function4" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "inherit;inherit;inherit"
-                        in_terminal_dimensions_str = "in inherit;pi inherit;Ts inherit"
-                        in_terminal_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
-                        in_terminal_properties = "real in;inherit pi;inherit Ts;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real in;inherit pi;inherit Ts;"
+                        input_terminals_dimensions = "inherit;inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
                         output_fnc = "/*Begin code section*/
 out = out + in*Ts;
 if (out>=2*pi){
     out = out - 2*pi;
 }
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7384, 8688
@@ -13357,24 +13310,22 @@ if (out>=2*pi){
                     component gen_c_function "C function5" {
                         execution_rate = "Ts"
                         global_variables = "real P;real Q;"
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "Pin 1;Qin 1"
-                        in_terminal_labels = "[(\'Pin\', False), (\'Qin\', False)]"
-                        in_terminal_properties = "real Pin;real Qin;"
                         init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pout 1;Qout 1"
-                        out_terminal_labels = "[(\'Pout\', False), (\'Qout\', False)]"
-                        out_terminal_properties = "real Pout;real Qout;"
+                        input_terminals = "real Pin;real Qin;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Pin\', False), (\'Qin\', False)]"
                         output_fnc = "/*Begin code section*/
 Pout = P;
 Qout = Q;
 /*End code section*/"
+                        output_terminals = "real Pout;real Qout;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Pout\', False), (\'Qout\', False)]"
                         update_fnc = "/*Begin code section*/
 P = P - (P-Pin)*1e-3;
 Q = Q - (Q-Qin)*1e-3;
@@ -13953,22 +13904,16 @@ Q = Q - (Q-Qin)*1e-3;
                     component Subsystem Power_Meas_DQpu {
                         layout = dynamic
                         component gen_c_function S_and_pf {
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "P inherit;Q inherit"
-                            in_terminal_labels = "False;False;"
-                            in_terminal_properties = "real P;inherit Q;"
                             init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 S = 0;
 pf = 0;
 /*End code section*/"
-                            no_feed_inputs = "[u\'\']"
-                            no_feed_outputs = "[u\'\']"
-                            out_terminal_dimensions = "inherit;inherit"
-                            out_terminal_dimensions_str = "S inherit;pf inherit"
-                            out_terminal_labels = "False;False;"
-                            out_terminal_properties = "inherit S;inherit pf;"
+                            input_terminals = "real P;inherit Q;"
+                            input_terminals_dimensions = "inherit;inherit"
+                            input_terminals_feedthrough = "[u\'\']"
+                            input_terminals_show_labels = "False;False;"
                             output_fnc = "/*Begin code section*/
 S = sqrt(P*P+Q*Q);
 if(S>0){
@@ -13978,6 +13923,10 @@ else{
     pf = 0;
 }
 /*End code section*/"
+                            output_terminals = "inherit S;inherit pf;"
+                            output_terminals_dimensions = "inherit;inherit"
+                            output_terminals_feedthrough = "[u\'\']"
+                            output_terminals_show_labels = "False;False;"
                         }
                         [
                             position = 8392, 8192
@@ -14393,6 +14342,7 @@ else{
 
                 component "core/Single Phase Inverter" "Single Phase Inverter1" {
                     ctrl_src = "Internal modulator"
+                    fvd_def_method = "LUT"
                     ref_sig_min_max = "[-1, 1]"
                 }
                 [
@@ -15946,19 +15896,13 @@ else{
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -15966,6 +15910,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -16460,19 +16408,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -16480,6 +16422,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -16974,19 +16920,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -16994,6 +16934,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -17488,19 +17432,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -17508,6 +17446,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -18002,19 +17944,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -18022,6 +17958,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -18516,19 +18456,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -18536,6 +18470,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -19313,6 +19251,7 @@ C1 = C1_cell/Ncells;
 
                             component gen_pid_controller "PID controller1" {
                                 controller_type = "PI"
+                                enb_anti_windup_out = "True"
                                 enb_output_limit_out = "True"
                                 ki = "Ki_I/Z_DQ"
                                 kp = "Kp_I/Z_DQ"
@@ -19361,6 +19300,7 @@ C1 = C1_cell/Ncells;
 
                             component gen_pid_controller "PID controller2" {
                                 controller_type = "PI"
+                                enb_anti_windup_out = "True"
                                 enb_output_limit_out = "True"
                                 ki = "Ki_I/Z_DQ"
                                 kp = "Kp_I/Z_DQ"
@@ -20363,21 +20303,19 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function4" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "inherit;inherit;inherit"
-                        in_terminal_dimensions_str = "in inherit;pi inherit;Ts inherit"
-                        in_terminal_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
-                        in_terminal_properties = "real in;inherit pi;inherit Ts;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real in;inherit pi;inherit Ts;"
+                        input_terminals_dimensions = "inherit;inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
                         output_fnc = "/*Begin code section*/
 out = out + in*Ts;
 if (out>=2*pi){
     out = out - 2*pi;
 }
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7384, 8688
@@ -20540,19 +20478,17 @@ if (out>=2*pi){
                     ]
 
                     component gen_c_function "C function1" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = -1;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7880, 8432
@@ -20561,19 +20497,17 @@ else out = ref;
                     ]
 
                     component gen_c_function "C function2" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = 0;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7888, 8528
@@ -20626,17 +20560,13 @@ else out = ref;
                     component gen_c_function "C function3" {
                         execution_rate = "1"
                         global_variables = "int k;real t;"
-                        in_terminal_labels = "[]"
-                        in_terminal_properties = ""
                         init_fnc = "/*Begin code section*/
 k = 0; t = 1;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\', \'Pref\', \'Qref\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pref 1;Qref 1"
-                        out_terminal_labels = "[(\'Pref\', True), (\'Qref\', True)]"
-                        out_terminal_properties = "real Pref;real Qref;"
+                        input_terminals = ""
+                        input_terminals_dimensions = ""
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[]"
                         output_fnc = "/*Begin code section*/
 //float p[10]={0.0,2.0,3.0,10,5,4,3.2,1.4,5.6,7};
 //float q[10] = {0,1.5,1.2,1,2,2.6,1.4,3,2.6,4};
@@ -20690,6 +20620,10 @@ else if(k==12) {Pref =1.5;Qref = 1;}
 if (t>=3) k+=1;
 t+=1;
 /*End code section*/"
+                        output_terminals = "real Pref;real Qref;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\', \'Pref\', \'Qref\']"
+                        output_terminals_show_labels = "[(\'Pref\', True), (\'Qref\', True)]"
                     }
                     [
                         position = 7600, 8424
@@ -21297,22 +21231,16 @@ t+=1;
                     component Subsystem Power_Meas_DQpu {
                         layout = dynamic
                         component gen_c_function S_and_pf {
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "P inherit;Q inherit"
-                            in_terminal_labels = "False;False;"
-                            in_terminal_properties = "real P;inherit Q;"
                             init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 S = 0;
 pf = 0;
 /*End code section*/"
-                            no_feed_inputs = "[u\'\']"
-                            no_feed_outputs = "[u\'\']"
-                            out_terminal_dimensions = "inherit;inherit"
-                            out_terminal_dimensions_str = "S inherit;pf inherit"
-                            out_terminal_labels = "False;False;"
-                            out_terminal_properties = "inherit S;inherit pf;"
+                            input_terminals = "real P;inherit Q;"
+                            input_terminals_dimensions = "inherit;inherit"
+                            input_terminals_feedthrough = "[u\'\']"
+                            input_terminals_show_labels = "False;False;"
                             output_fnc = "/*Begin code section*/
 S = sqrt(P*P+Q*Q);
 if(S>0){
@@ -21322,6 +21250,10 @@ else{
     pf = 0;
 }
 /*End code section*/"
+                            output_terminals = "inherit S;inherit pf;"
+                            output_terminals_dimensions = "inherit;inherit"
+                            output_terminals_feedthrough = "[u\'\']"
+                            output_terminals_show_labels = "False;False;"
                         }
                         [
                             position = 8392, 8192
@@ -21728,6 +21660,7 @@ else{
 
                 component "core/Single Phase Inverter" "Single Phase Inverter1" {
                     ctrl_src = "Internal modulator"
+                    fvd_def_method = "LUT"
                     ref_sig_min_max = "[-1, 1]"
                 }
                 [
@@ -23720,21 +23653,19 @@ else{
 
                     component gen_c_function "C function4" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "inherit;inherit;inherit"
-                        in_terminal_dimensions_str = "in inherit;pi inherit;Ts inherit"
-                        in_terminal_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
-                        in_terminal_properties = "real in;inherit pi;inherit Ts;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real in;inherit pi;inherit Ts;"
+                        input_terminals_dimensions = "inherit;inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
                         output_fnc = "/*Begin code section*/
 out = out + in*Ts;
 if (out>=2*pi){
     out = out - 2*pi;
 }
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7384, 8688
@@ -23882,23 +23813,21 @@ if (out>=2*pi){
                     component gen_c_function "C function1" {
                         execution_rate = "1"
                         global_variables = "int k;"
-                        in_terminal_dimensions = "1"
-                        in_terminal_dimensions_str = "Pref 1"
-                        in_terminal_labels = "[(\'Pref\', True)]"
-                        in_terminal_properties = "real Pref;"
                         init_fnc = "/*Begin code section*/
 out = 0; k = 0;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1"
-                        out_terminal_dimensions_str = "out 1"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real Pref;"
+                        input_terminals_dimensions = "1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Pref\', True)]"
                         output_fnc = "/*Begin code section*/
 if (k>3) k = 0;
 if (k==1) out = out + 0.1*(Pref-out);
 k+=1;
 /*End code section*/"
+                        output_terminals_dimensions = "1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7912, 8400
@@ -24496,22 +24425,16 @@ k+=1;
                     component Subsystem Power_Meas_DQpu {
                         layout = dynamic
                         component gen_c_function S_and_pf {
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "P inherit;Q inherit"
-                            in_terminal_labels = "False;False;"
-                            in_terminal_properties = "real P;inherit Q;"
                             init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 S = 0;
 pf = 0;
 /*End code section*/"
-                            no_feed_inputs = "[u\'\']"
-                            no_feed_outputs = "[u\'\']"
-                            out_terminal_dimensions = "inherit;inherit"
-                            out_terminal_dimensions_str = "S inherit;pf inherit"
-                            out_terminal_labels = "False;False;"
-                            out_terminal_properties = "inherit S;inherit pf;"
+                            input_terminals = "real P;inherit Q;"
+                            input_terminals_dimensions = "inherit;inherit"
+                            input_terminals_feedthrough = "[u\'\']"
+                            input_terminals_show_labels = "False;False;"
                             output_fnc = "/*Begin code section*/
 S = sqrt(P*P+Q*Q);
 if(S>0){
@@ -24521,6 +24444,10 @@ else{
     pf = 0;
 }
 /*End code section*/"
+                            output_terminals = "inherit S;inherit pf;"
+                            output_terminals_dimensions = "inherit;inherit"
+                            output_terminals_feedthrough = "[u\'\']"
+                            output_terminals_show_labels = "False;False;"
                         }
                         [
                             position = 8392, 8192
@@ -24927,6 +24854,7 @@ else{
 
                 component "core/Single Phase Inverter" "Single Phase Inverter1" {
                     ctrl_src = "Internal modulator"
+                    fvd_def_method = "LUT"
                     ref_sig_min_max = "[-1, 1]"
                 }
                 [
@@ -25910,19 +25838,13 @@ else{
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -25930,6 +25852,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -26424,19 +26350,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -26444,6 +26364,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -26938,19 +26862,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -26958,6 +26876,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -27452,19 +27374,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -27472,6 +27388,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -27966,19 +27886,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -27986,6 +27900,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -28480,19 +28398,13 @@ C1 = C1_cell/Ncells;
 
                     component gen_c_function "C function" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "1;1;1;1;1;1"
-                        in_terminal_dimensions_str = "Idc 1;Em_cell 1;R0_cell 1;R1_cell 1;C1_cell 1;Cq 1"
-                        in_terminal_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
-                        in_terminal_properties = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
                         init_fnc = "/*Begin code section*/
 SOC = 0.5;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1;1;1;1"
-                        out_terminal_dimensions_str = "Vdc 1;SOC 1;R0 1;R1 1;C1 1"
-                        out_terminal_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
-                        out_terminal_properties = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        input_terminals = "real Idc;real Em_cell;real R0_cell;real R1_cell;real C1_cell;real Cq;"
+                        input_terminals_dimensions = "1;1;1;1;1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Idc\', True), (\'Em_cell\', True), (\'R0_cell\', True), (\'R1_cell\', True), (\'C1_cell\', True), (\'Cq\', True)]"
                         output_fnc = "/*Begin code section*/
 Vdc = Em_cell*Ncells;
 SOC = SOC + (Idc/Cq)*Ts/3600.0;
@@ -28500,6 +28412,10 @@ R0 = R0_cell*Ncells;
 R1 = R1_cell*Ncells;
 C1 = C1_cell/Ncells;
 /*End code section*/"
+                        output_terminals = "real Vdc;real SOC;real R0;real R1;real C1;"
+                        output_terminals_dimensions = "1;1;1;1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Vdc\', True), (\'SOC\', True), (\'R0\', True), (\'R1\', True), (\'C1\', True)]"
                         parameters = "real Ncells;real Tamb;real Ts;"
                     }
                     [
@@ -29210,22 +29126,20 @@ C1 = C1_cell/Ncells;
                     layout = dynamic
                     component gen_c_function "C function2" {
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit;inherit"
-                        in_terminal_dimensions_str = "GHI inherit;ETR inherit"
-                        in_terminal_labels = "[(\'GHI\', True), (\'ETR\', True)]"
-                        in_terminal_properties = "real GHI;real ETR;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit"
-                        out_terminal_dimensions_str = "f inherit;Gdh inherit"
-                        out_terminal_labels = "[(\'f\', True), (\'Gdh\', True)]"
-                        out_terminal_properties = "real f;real Gdh;"
+                        input_terminals = "real GHI;real ETR;"
+                        input_terminals_dimensions = "inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True)]"
                         output_fnc = "/*Begin code section*/
 if (k<=0.21) f = 0.995-0.081*k;
 else if (k>0.76) f = 0.18;
 else f = 0.724 + 2.738*k - 8.321*k*k + 4.967*k*k*k;
 Gdh = f*GHI;
 /*End code section*/"
+                        output_terminals = "real f;real Gdh;"
+                        output_terminals_dimensions = "inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'f\', True), (\'Gdh\', True)]"
                         update_fnc = "/*Begin code section*/
 k = GHI/ETR;
 /*End code section*/"
@@ -29379,19 +29293,17 @@ k = GHI/ETR;
                     ]
 
                     component gen_c_function "C function3" {
-                        in_terminal_dimensions = "1;1;4"
-                        in_terminal_dimensions_str = "Gdh 1;fk 1;x 4"
-                        in_terminal_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
-                        in_terminal_properties = "real Gdh;real fk;real x;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1"
-                        out_terminal_dimensions_str = "Gd 1"
-                        out_terminal_labels = "[(\'Gd\', True)]"
-                        out_terminal_properties = "real Gd;"
+                        input_terminals = "real Gdh;real fk;real x;"
+                        input_terminals_dimensions = "1;1;4"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Gdh\', True), (\'fk\', True), (\'x\', True)]"
                         output_fnc = "/*Begin code section*/
 Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
 /*End code section*/"
+                        output_terminals = "real Gd;"
+                        output_terminals_dimensions = "1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Gd\', True)]"
                     }
                     [
                         position = 7736, 8432
@@ -29467,16 +29379,10 @@ Gd = Gdh*0.5*(1+x[0])*(1+fk*x[1]*x[1]*x[1])*(1+fk*x[2]*x[2]*x[3]*x[3]*x[3]);
                     component gen_c_function "C function4" {
                         execution_rate = "Ts_pv"
                         global_variables = "real k;"
-                        in_terminal_dimensions = "inherit"
-                        in_terminal_dimensions_str = "clk inherit"
-                        in_terminal_labels = "[(\'clk\', True)]"
-                        in_terminal_properties = "real clk;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit;inherit;inherit"
-                        out_terminal_dimensions_str = "GHI inherit;ETR inherit;ang_z inherit"
-                        out_terminal_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
-                        out_terminal_properties = "real GHI;real ETR;real ang_z;"
+                        input_terminals = "real clk;"
+                        input_terminals_dimensions = "inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'clk\', True)]"
                         output_fnc = "/*Begin code section*/
 if (clk<1800){
     GHI = 300;
@@ -29499,6 +29405,10 @@ else {
     ang_z = 2.4;
 }
 /*End code section*/"
+                        output_terminals = "real GHI;real ETR;real ang_z;"
+                        output_terminals_dimensions = "inherit;inherit;inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'GHI\', True), (\'ETR\', True), (\'ang_z\', True)]"
                     }
                     [
                         position = 6896, 8368
@@ -29977,16 +29887,10 @@ else {
                 ]
 
                 component gen_c_function "C function1" {
-                    in_terminal_dimensions = "inherit;inherit;inherit"
-                    in_terminal_dimensions_str = "Vdc inherit;Y inherit;Vmax inherit"
-                    in_terminal_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
-                    in_terminal_properties = "real Vdc;real Y;real Vmax;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "inherit;inherit"
-                    out_terminal_dimensions_str = "Ipv inherit;Ppv inherit"
-                    out_terminal_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
-                    out_terminal_properties = "real Ipv;real Ppv;"
+                    input_terminals = "real Vdc;real Y;real Vmax;"
+                    input_terminals_dimensions = "inherit;inherit;inherit"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Vdc\', True), (\'Y\', True), (\'Vmax\', True)]"
                     output_fnc = "/*Begin code section*/
 /*if (Vdc>Vmax) Ipv = 0;
 else Ipv = Y*(Vmax-Vdc);
@@ -29995,6 +29899,10 @@ if (Ipv>15) Ipv = 15;
 Ipv = Y*(Vmax-Vdc);
 Ppv = Ipv*Vdc;
 /*End code section*/"
+                    output_terminals = "real Ipv;real Ppv;"
+                    output_terminals_dimensions = "inherit;inherit"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Ipv\', True), (\'Ppv\', True)]"
                 }
                 [
                     position = 7672, 8048
@@ -30019,16 +29927,10 @@ Ppv = Ipv*Vdc;
 
                 component gen_c_function "C function2" {
                     global_variables = "real Pmax;"
-                    in_terminal_dimensions = "1;1"
-                    in_terminal_dimensions_str = "Pref 1;SI 1"
-                    in_terminal_labels = "[(\'Pref\', True), (\'SI\', True)]"
-                    in_terminal_properties = "real Pref;real SI;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1;1;1;1"
-                    out_terminal_dimensions_str = "out1 1;out2 1;Y 1;Vmax 1"
-                    out_terminal_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
-                    out_terminal_properties = "real out1;real out2;real Y;real Vmax;"
+                    input_terminals = "real Pref;real SI;"
+                    input_terminals_dimensions = "1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'Pref\', True), (\'SI\', True)]"
                     output_fnc = "/*Begin code section*/
 Pmax = SI*0.15*100; Vmax = 600;
 Y = 4*Pmax/Vmax/Vmax;
@@ -30036,6 +29938,10 @@ out1 = Y*Vmax;
 if (Pref<=Pmax) out2 =  Y*Y*Vmax*Vmax - 4*Pref*Y;
 else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
 /*End code section*/"
+                    output_terminals = "real out1;real out2;real Y;real Vmax;"
+                    output_terminals_dimensions = "1;1;1;1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'out1\', False), (\'out2\', False), (\'Y\', True), (\'Vmax\', True)]"
                 }
                 [
                     position = 7304, 7800
@@ -30052,19 +29958,17 @@ else  out2 =  Y*Y*Vmax*Vmax - 4*Pmax*Y;
                 ]
 
                 component gen_c_function "C function3" {
-                    in_terminal_dimensions = "1;1;1"
-                    in_terminal_dimensions_str = "in 1;in2 1;Y 1"
-                    in_terminal_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
-                    in_terminal_properties = "real in;real in2;real Y;"
-                    no_feed_inputs = "[\'\']"
-                    no_feed_outputs = "[\'\']"
-                    out_terminal_dimensions = "1"
-                    out_terminal_dimensions_str = "Vref 1"
-                    out_terminal_labels = "[(\'Vref\', True)]"
-                    out_terminal_properties = "real Vref;"
+                    input_terminals = "real in;real in2;real Y;"
+                    input_terminals_dimensions = "1;1;1"
+                    input_terminals_feedthrough = "[\'\']"
+                    input_terminals_show_labels = "[(\'in\', False), (\'in2\', False), (\'Y\', True)]"
                     output_fnc = "/*Begin code section*/
 Vref = (in+in2)/2/Y;
 /*End code section*/"
+                    output_terminals = "real Vref;"
+                    output_terminals_dimensions = "1"
+                    output_terminals_feedthrough = "[\'\']"
+                    output_terminals_show_labels = "[(\'Vref\', True)]"
                 }
                 [
                     position = 7552, 7792
@@ -30076,7 +29980,6 @@ Vref = (in+in2)/2/Y;
                     a_coeff = "[1.0/(2*np.pi*1),1]"
                     b_coeff = "1"
                     domain = "S-domain"
-                    init_states = "500"
                     method = "Bilinear"
                 }
                 [
@@ -31721,19 +31624,17 @@ Vref = (in+in2)/2/Y;
                     ]
 
                     component gen_c_function "C function1" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = -1;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7784, 8368
@@ -31742,19 +31643,17 @@ else out = ref;
                     ]
 
                     component gen_c_function "C function2" {
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "ref 1;charge 1"
-                        in_terminal_labels = "[(\'ref\', True), (\'charge\', True)]"
-                        in_terminal_properties = "real ref;int charge;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real ref;int charge;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'ref\', True), (\'charge\', True)]"
                         output_fnc = "/*Begin code section*/
 if (charge>0) out = 0;
 else out = ref;
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7792, 8464
@@ -31807,17 +31706,13 @@ else out = ref;
                     component gen_c_function "C function3" {
                         execution_rate = "1"
                         global_variables = "int k;real t;"
-                        in_terminal_labels = "[]"
-                        in_terminal_properties = ""
                         init_fnc = "/*Begin code section*/
 k = 0; t = 1;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\', \'Pref\', \'Qref\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pref 1;Qref 1"
-                        out_terminal_labels = "[(\'Pref\', True), (\'Qref\', True)]"
-                        out_terminal_properties = "real Pref;real Qref;"
+                        input_terminals = ""
+                        input_terminals_dimensions = ""
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[]"
                         output_fnc = "/*Begin code section*/
 //float p[10]={0.0,2.0,3.0,10,5,4,3.2,1.4,5.6,7};
 //float q[10] = {0,1.5,1.2,1,2,2.6,1.4,3,2.6,4};
@@ -31842,6 +31737,10 @@ else if(k==12) {Pref =1.5;Qref = 1;}
 if (t>=4) k+=1;
 t+=1;
 /*End code section*/"
+                        output_terminals = "real Pref;real Qref;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\', \'Pref\', \'Qref\']"
+                        output_terminals_show_labels = "[(\'Pref\', True), (\'Qref\', True)]"
                     }
                     [
                         position = 7504, 8360
@@ -31897,21 +31796,19 @@ t+=1;
 
                     component gen_c_function "C function4" {
                         execution_rate = "Ts"
-                        in_terminal_dimensions = "inherit;inherit;inherit"
-                        in_terminal_dimensions_str = "in inherit;pi inherit;Ts inherit"
-                        in_terminal_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
-                        in_terminal_properties = "real in;inherit pi;inherit Ts;"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "inherit"
-                        out_terminal_dimensions_str = "out inherit"
-                        out_terminal_labels = "[(\'out\', False)]"
+                        input_terminals = "real in;inherit pi;inherit Ts;"
+                        input_terminals_dimensions = "inherit;inherit;inherit"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'in\', False), (\'pi\', False), (\'Ts\', False)]"
                         output_fnc = "/*Begin code section*/
 out = out + in*Ts;
 if (out>=2*pi){
     out = out - 2*pi;
 }
 /*End code section*/"
+                        output_terminals_dimensions = "inherit"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'out\', False)]"
                     }
                     [
                         position = 7384, 8688
@@ -32059,24 +31956,22 @@ if (out>=2*pi){
                     component gen_c_function "C function5" {
                         execution_rate = "Ts"
                         global_variables = "real P;real Q;"
-                        in_terminal_dimensions = "1;1"
-                        in_terminal_dimensions_str = "Pin 1;Qin 1"
-                        in_terminal_labels = "[(\'Pin\', False), (\'Qin\', False)]"
-                        in_terminal_properties = "real Pin;real Qin;"
                         init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 /*End code section*/"
-                        no_feed_inputs = "[\'\']"
-                        no_feed_outputs = "[\'\']"
-                        out_terminal_dimensions = "1;1"
-                        out_terminal_dimensions_str = "Pout 1;Qout 1"
-                        out_terminal_labels = "[(\'Pout\', False), (\'Qout\', False)]"
-                        out_terminal_properties = "real Pout;real Qout;"
+                        input_terminals = "real Pin;real Qin;"
+                        input_terminals_dimensions = "1;1"
+                        input_terminals_feedthrough = "[\'\']"
+                        input_terminals_show_labels = "[(\'Pin\', False), (\'Qin\', False)]"
                         output_fnc = "/*Begin code section*/
 Pout = P;
 Qout = Q;
 /*End code section*/"
+                        output_terminals = "real Pout;real Qout;"
+                        output_terminals_dimensions = "1;1"
+                        output_terminals_feedthrough = "[\'\']"
+                        output_terminals_show_labels = "[(\'Pout\', False), (\'Qout\', False)]"
                         update_fnc = "/*Begin code section*/
 P = P - (P-Pin)*1e-3;
 Q = Q - (Q-Qin)*1e-3;
@@ -32655,22 +32550,16 @@ Q = Q - (Q-Qin)*1e-3;
                     component Subsystem Power_Meas_DQpu {
                         layout = dynamic
                         component gen_c_function S_and_pf {
-                            in_terminal_dimensions = "inherit;inherit"
-                            in_terminal_dimensions_str = "P inherit;Q inherit"
-                            in_terminal_labels = "False;False;"
-                            in_terminal_properties = "real P;inherit Q;"
                             init_fnc = "/*Begin code section*/
 P = 0;
 Q = 0;
 S = 0;
 pf = 0;
 /*End code section*/"
-                            no_feed_inputs = "[u\'\']"
-                            no_feed_outputs = "[u\'\']"
-                            out_terminal_dimensions = "inherit;inherit"
-                            out_terminal_dimensions_str = "S inherit;pf inherit"
-                            out_terminal_labels = "False;False;"
-                            out_terminal_properties = "inherit S;inherit pf;"
+                            input_terminals = "real P;inherit Q;"
+                            input_terminals_dimensions = "inherit;inherit"
+                            input_terminals_feedthrough = "[u\'\']"
+                            input_terminals_show_labels = "False;False;"
                             output_fnc = "/*Begin code section*/
 S = sqrt(P*P+Q*Q);
 if(S>0){
@@ -32680,6 +32569,10 @@ else{
     pf = 0;
 }
 /*End code section*/"
+                            output_terminals = "inherit S;inherit pf;"
+                            output_terminals_dimensions = "inherit;inherit"
+                            output_terminals_feedthrough = "[u\'\']"
+                            output_terminals_show_labels = "False;False;"
                         }
                         [
                             position = 8392, 8192
@@ -33095,6 +32988,7 @@ else{
 
                 component "core/Single Phase Inverter" "Single Phase Inverter1" {
                     ctrl_src = "Internal modulator"
+                    fvd_def_method = "LUT"
                     ref_sig_min_max = "[-1, 1]"
                 }
                 [
@@ -34433,16 +34327,14 @@ else{
         }
 
         gen_c_function {
-            in_terminal_properties = "real in;"
-            in_terminal_labels = ""
-            out_terminal_properties = "real out;"
-            out_terminal_labels = ""
-            no_feed_inputs = ""
-            no_feed_outputs = ""
-            in_terminal_dimensions = ""
-            in_terminal_dimensions_str = ""
-            out_terminal_dimensions = ""
-            out_terminal_dimensions_str = ""
+            input_terminals = "real in;"
+            input_terminals_show_labels = "False;"
+            input_terminals_feedthrough = "True;"
+            input_terminals_dimensions = "inherit;"
+            output_terminals = "real out;"
+            output_terminals_show_labels = "False;"
+            output_terminals_feedthrough = "True;"
+            output_terminals_dimensions = "inherit;"
             output_fnc = ""
             update_fnc = ""
             init_fnc = ""
@@ -34489,8 +34381,11 @@ else{
             int_init_value = "0"
             filt_init_value = "0"
             enb_output_limit_out = "False"
+            show_reset = "none"
             upper_sat_lim = "1"
+            upper_sat_lim_source = "internal"
             lower_sat_lim = "-1"
+            lower_sat_lim_source = "internal"
             enb_anti_windup_out = "False"
             signal_out_type = "inherit"
             execution_rate = "inherit"
@@ -34518,15 +34413,15 @@ else{
 
         gen_trigonometric {
             trigonometric_fn = "sin"
+            angle = "Radians"
             execution_rate = "inherit"
         }
 
         gen_z_domain_transfer {
             domain = "Z-domain"
             method = "Zero-order hold"
-            b_coeff = "[1]"
-            a_coeff = "[1,-1]"
-            init_states = "0"
+            b_coeff = "[1,1]"
+            a_coeff = "[1,1]"
             signal_out_type = "inherit"
             execution_rate = "inherit"
         }
@@ -34558,6 +34453,8 @@ else{
         }
 
         src_clock {
+            enb_reset = "False"
+            reset_at = "1.0"
             execution_rate = "100e-6"
         }
 
@@ -34601,6 +34498,7 @@ else{
             cmp_abs_value = "False"
             feed_forward = "false"
             sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
             execution_rate = "100e-6"
             addr = "0"
             nd_msr_estimation = "false"
@@ -34663,8 +34561,10 @@ else{
             Sb_bot = "4"
             Sb_bot_logic = "active high"
             losses_estimation = "False"
+            fvd_def_method = "Voltage and Resistance"
             Import_igbt_xml = "not selected"
             Import_diode_xml = "not selected"
+            Switch_type = "IGBT"
             Vce = "1.3"
             Rce = "0"
             Vd = "1.2"
@@ -34672,6 +34572,8 @@ else{
             i_sw = "[0.0, 6.0, 12.0, 18.0, 24.0]"
             v_sw = "[0.0, 600.0]"
             temp_sw = "[25.0, 50.0, 75.0, 100.0, 125.0]"
+            vce_table_out = "[1.3, 1.3, 1.3, 1.3, 1.3]"
+            vd_table_out = "[1.2, 1.2, 1.2, 1.2, 1.2]"
             et_on_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*3.8e-3, 0.4*3.8e-3, 0.8*3.8e-3, 0.68*3.8e-3, 0.9*3.8e-3], [0.65*3.8e-3, 0.9*3.8e-3, 1.2*3.8e-3, 1.5*3.8e-3, 1.7*3.8e-3], [0.9*3.8e-3, 1.3*3.8e-3, 1.7*3.8e-3, 1.9*3.8e-3, 2.25*3.8e-3], [1.1*3.8e-3, 1.7*3.8e-3, 2.1*3.8e-3, 2.3*3.8e-3, 2.5*3.8e-3]]"
             et_off_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*2.1e-3, 0.4*2.1e-3, 0.8*2.1e-3, 0.68*2.1e-3, 0.9*2.1e-3], [0.65*2.1e-3, 0.9*2.1e-3, 1.2*2.1e-3, 1.5*2.1e-3, 1.7*2.1e-3], [0.9*2.1e-3, 1.3*2.1e-3, 1.7*2.1e-3, 1.9*2.1e-3, 2.25*2.1e-3], [1.1*2.1e-3, 1.7*2.1e-3, 2.1*2.1e-3, 2.3*2.1e-3, 2.5*2.1e-3]]"
             ed_off_table_out = "[[0.0, 0.0275e-3, 0.15e-3, 0.275e-3, 0.3e-3], [0.35*2.2e-3, 0.4*2.2e-3, 0.8*2.2e-3, 0.68*2.2e-3, 0.9*2.2e-3], [0.65*2.2e-3, 0.9*2.2e-3, 1.2*2.2e-3, 1.5*2.2e-3, 1.7*2.2e-3], [0.9*2.2e-3, 1.3*2.2e-3, 1.7*2.2e-3, 1.9*2.2e-3, 2.25*2.2e-3], [1.1*2.2e-3, 1.7*2.2e-3, 2.1*2.2e-3, 2.3*2.2e-3, 2.5*2.2e-3]]"
@@ -34691,6 +34593,7 @@ else{
             pwm_enable_di = "13"
             pwm_enable_inv = "active high"
             dtv_flag_en = "True"
+            PESB_Optimization = "True"
         }
 
         "core/Single Phase Power Meter" {
@@ -34703,7 +34606,6 @@ else{
 
         "core/Single Phase Three Winding Transformer" {
             input = "SI"
-            core_sat = "False"
             Sn = "10e3"
             f = "50"
             n1 = "100"
@@ -34718,10 +34620,6 @@ else{
             R3 = "0.1"
             L3 = "0.001"
             I3 = "0"
-            Rm = "1e5"
-            Lm = "5"
-            flux_vals_SI = "[0.001, 0.005]"
-            current_vals_SI = "[1.0, 2.0]"
             r1 = ".1"
             l1 = ".314159265359"
             i1 = "0"
@@ -34731,16 +34629,25 @@ else{
             r3 = ".1"
             l3 = ".314159265359"
             i3 = "0"
+            core_model = "Linear"
+            Rm = "1e5"
+            Lm = "5"
+            flux_vals_SI = "[0.001, 0.005]"
+            current_vals_SI = "[1.0, 2.0]"
             rm = "100000.0"
             lm = "1570.79632679"
             flux_vals_pu = "[0.001, 0.005]"
             current_vals_pu = "[1.0, 2.0]"
             import_from_pu = "Import from PU"
             import_from_si = "Import from SI"
-            embedded_cpl_12 = "false"
+            embedded_cpl_12 = "None"
             coupling_type_12 = "core"
-            embedded_cpl_13 = "false"
+            ratio_type_12 = "Automatic"
+            ratio_12 = "0.1"
+            embedded_cpl_13 = "None"
             coupling_type_13 = "core"
+            ratio_type_13 = "Automatic"
+            ratio_13 = "0.1"
         }
 
         "core/Single phase PLL" {
@@ -34783,6 +34690,7 @@ else{
             cmp_abs_value = "False"
             feed_forward = "false"
             sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
             execution_rate = "100e-6"
             addr = "0"
             nd_msr_estimation = "false"
