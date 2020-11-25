@@ -1,6 +1,6 @@
 
 <model_description>
-    <sw_version>2020.2</sw_version>
+    <sw_version>2020.3</sw_version>
     <hw_properties>
         <revision>3</revision>
         <product_id>HIL603</product_id>
@@ -8,144 +8,39 @@
         <device_ao_limit_enable>True</device_ao_limit_enable>
         <device_id>0</device_id>
         <spc_out_mem_size>512</spc_out_mem_size>
-        <fw_support_limit>132384520</fw_support_limit>
+        <fw_support_limit>132385281</fw_support_limit>
     </hw_properties>
     <sim_setup>
-        <sim_time_step>4e-06</sim_time_step>
+        <sim_time_step>3e-06</sim_time_step>
     </sim_setup>
     <pesb>
     </pesb>
     <variables>
         <cell>
-            <name>Coupling19.RC Snubber.C1</name>
-            <address>0</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling19.RC Snubber.C2</name>
-            <address>1</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling19.RC Snubber.C3</name>
-            <address>2</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_line.L1</name>
-            <address>3</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_line.L2</name>
-            <address>4</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_line.L3</name>
-            <address>5</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>Coupling19.Device Coupling 1.cpl1.V_msr</name>
-            <address>6</address>
+            <address>0</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Coupling19.Device Coupling 1.cpl2.V_msr</name>
-            <address>7</address>
+            <address>1</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Coupling19.Device Coupling 1.cpl3.V_msr</name>
-            <address>8</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas1.VA</name>
-            <address>9</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas1.VB</name>
-            <address>10</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas1.VC</name>
-            <address>11</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas2.VA</name>
-            <address>12</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas2.VB</name>
-            <address>13</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas2.VC</name>
-            <address>14</address>
+            <address>2</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_grid.Vinst</name>
-            <address>15</address>
+            <address>3</address>
             <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas1.IA</name>
-            <address>16</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas1.IB</name>
-            <address>17</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Meas1.IC</name>
-            <address>18</address>
-            <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -375,10 +270,6 @@
             <name>HIL0 digital input 32</name>
             <address>543</address>
         </cell>
-        <cell>
-            <name>F2_PCC.S1_fb</name>
-            <address>1024</address>
-        </cell>
     </do_var_list>
     <sources>
         <cell>
@@ -396,12 +287,6 @@
     <batteries>
     </batteries>
     <contactors>
-        <cell>
-            <name>F2_PCC.S1</name>
-            <type>three_phase_breaker</type>
-            <weight>0</weight>
-            <site>0</site>
-        </cell>
     </contactors>
     <dtv>
         <spc_dtv>
@@ -413,24 +298,10 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[[0.001]]]</execution_rates>
+        <execution_rates>[None]</execution_rates>
     </model_properties>
 
     <variables>
-        <cell>
-            <name>F2_PCC.P</name>
-            <type>generic</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_PCC.Q</name>
-            <type>generic</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
         <cell>
             <name>Vrms_grid</name>
             <type>voltage</type>
@@ -441,36 +312,15 @@
     </variables>
 
 
-    <scada_inputs>
-        <scada_input>
-            <name>F2_PCC.F2_PCC</name>
-            <addr>1426063624</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-    </scada_inputs>
 
 
     <dsp_monitors>
         <monitor>
             <type>internal</type>
             <cpu_idx>0</cpu_idx>
-            <execution_rates>[5e-05, 0.001]</execution_rates>
-            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.001)']</execution_rate_labels>
-            <timer_counters>[7499, 149999]</timer_counters>
-
-            
-        </monitor>
-        <monitor>
-            <type>user</type>
-            <cpu_idx>0</cpu_idx>
-            <execution_rates>[0.001]</execution_rates>
-            <execution_rate_labels>['ER0 (0.001)']</execution_rate_labels>
-            <timer_counters>[149999]</timer_counters>
+            <execution_rates>[5e-05, 0.0001]</execution_rates>
+            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.0001)']</execution_rate_labels>
+            <timer_counters>[7499, 14999]</timer_counters>
 
             
         </monitor>

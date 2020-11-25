@@ -199,6 +199,8 @@ float _vrms_bus107_rms_calc_fast__var_filt;
 //@cmp.svar.end
 
 
+
+
 // generated using template: virtual_hil/custom_functions.template---------------------------------
 void ReInit_sys_sp_cpu0_dev0() {
 #if DEBUG_MODE
@@ -268,16 +270,20 @@ void ReInit_sp_scope_sys_sp_cpu0_dev0() {
     // initialise SP Scope buffer pointer
 }
 
+
+void sys_terminate_fmu_objects_cpu0_dev0(void) {
+    return;
+}
 // generated using template:generic_macros.template-----------------------------------------
 /*********************** Macros (Inline Functions) Definitions ***************************/
 
 // ----------------------------------------------------------------------------------------
 
 #ifndef MAX
-#define MAX(value, limit) ((value > limit) ? value : limit)
+#define MAX(value, limit) (((value) > (limit)) ? (value) : (limit))
 #endif
 #ifndef MIN
-#define MIN(value, limit) ((value < limit) ? value : limit)
+#define MIN(value, limit) (((value) < (limit)) ? (value) : (limit))
 #endif
 
 // generated using template: common_timer_counter_handler.template-------------------------
@@ -311,13 +317,13 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev0() {
     // Generated from the component: Vrms_bus102.Vinst.Va1
     _vrms_bus102_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x42f));
     // Generated from the component: Vrms_bus103.Vinst.Va1
-    _vrms_bus103_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x27));
+    _vrms_bus103_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x18));
     // Generated from the component: Vrms_bus104.Vinst.Va1
     _vrms_bus104_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x430));
     // Generated from the component: Vrms_bus105.Vinst.Va1
-    _vrms_bus105_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x62a));
+    _vrms_bus105_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x627));
     // Generated from the component: Vrms_bus106.Vinst.Va1
-    _vrms_bus106_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x22a));
+    _vrms_bus106_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x227));
     // Generated from the component: Vrms_bus107.Vinst.Va1
     _vrms_bus107_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x812));
     // Generated from the component: Vrms_bus101.rms_calc_fast

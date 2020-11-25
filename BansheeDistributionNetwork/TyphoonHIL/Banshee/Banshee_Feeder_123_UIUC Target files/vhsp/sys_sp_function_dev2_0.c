@@ -199,6 +199,8 @@ float _vrms_bus307_rms_calc_fast__var_filt;
 //@cmp.svar.end
 
 
+
+
 // generated using template: virtual_hil/custom_functions.template---------------------------------
 void ReInit_sys_sp_cpu0_dev2() {
 #if DEBUG_MODE
@@ -268,16 +270,20 @@ void ReInit_sp_scope_sys_sp_cpu0_dev2() {
     // initialise SP Scope buffer pointer
 }
 
+
+void sys_terminate_fmu_objects_cpu0_dev2(void) {
+    return;
+}
 // generated using template:generic_macros.template-----------------------------------------
 /*********************** Macros (Inline Functions) Definitions ***************************/
 
 // ----------------------------------------------------------------------------------------
 
 #ifndef MAX
-#define MAX(value, limit) ((value > limit) ? value : limit)
+#define MAX(value, limit) (((value) > (limit)) ? (value) : (limit))
 #endif
 #ifndef MIN
-#define MIN(value, limit) ((value < limit) ? value : limit)
+#define MIN(value, limit) (((value) < (limit)) ? (value) : (limit))
 #endif
 
 // generated using template: common_timer_counter_handler.template-------------------------
@@ -307,19 +313,19 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev2() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: Vrms_bus301.Vinst.Va1
-    _vrms_bus301_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x2));
+    _vrms_bus301_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x3));
     // Generated from the component: Vrms_bus302.Vinst.Va1
-    _vrms_bus302_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x23b));
+    _vrms_bus302_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x221));
     // Generated from the component: Vrms_bus303.Vinst.Va1
-    _vrms_bus303_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x23c));
+    _vrms_bus303_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x222));
     // Generated from the component: Vrms_bus304.Vinst.Va1
-    _vrms_bus304_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x23d));
+    _vrms_bus304_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x61b));
     // Generated from the component: Vrms_bus305.Vinst.Va1
-    _vrms_bus305_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x61b));
+    _vrms_bus305_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x81b));
     // Generated from the component: Vrms_bus306.Vinst.Va1
     _vrms_bus306_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x420));
     // Generated from the component: Vrms_bus307.Vinst.Va1
-    _vrms_bus307_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x826));
+    _vrms_bus307_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xa26));
     // Generated from the component: Vrms_bus301.rms_calc_fast
     _vrms_bus301_rms_calc_fast__v_sq_sum_state = _vrms_bus301_rms_calc_fast__v_sq_sum_state + _vrms_bus301_vinst_va1__out * _vrms_bus301_vinst_va1__out;
     //square sum and period update on period end

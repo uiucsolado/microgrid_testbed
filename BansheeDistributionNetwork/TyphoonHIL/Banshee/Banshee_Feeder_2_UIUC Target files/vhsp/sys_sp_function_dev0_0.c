@@ -79,6 +79,8 @@ float _vrms_grid_rms_calc_fast__var_filt;
 //@cmp.svar.end
 
 
+
+
 // generated using template: virtual_hil/custom_functions.template---------------------------------
 void ReInit_sys_sp_cpu0_dev0() {
 #if DEBUG_MODE
@@ -100,16 +102,20 @@ void ReInit_sp_scope_sys_sp_cpu0_dev0() {
     // initialise SP Scope buffer pointer
 }
 
+
+void sys_terminate_fmu_objects_cpu0_dev0(void) {
+    return;
+}
 // generated using template:generic_macros.template-----------------------------------------
 /*********************** Macros (Inline Functions) Definitions ***************************/
 
 // ----------------------------------------------------------------------------------------
 
 #ifndef MAX
-#define MAX(value, limit) ((value > limit) ? value : limit)
+#define MAX(value, limit) (((value) > (limit)) ? (value) : (limit))
 #endif
 #ifndef MIN
-#define MIN(value, limit) ((value < limit) ? value : limit)
+#define MIN(value, limit) (((value) < (limit)) ? (value) : (limit))
 #endif
 
 // generated using template: common_timer_counter_handler.template-------------------------
@@ -139,7 +145,7 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev0() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: Vrms_grid.Vinst.Va1
-    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xf));
+    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x3));
     // Generated from the component: Vrms_grid.rms_calc_fast
     _vrms_grid_rms_calc_fast__v_sq_sum_state = _vrms_grid_rms_calc_fast__v_sq_sum_state + _vrms_grid_vinst_va1__out * _vrms_grid_vinst_va1__out;
     //square sum and period update on period end

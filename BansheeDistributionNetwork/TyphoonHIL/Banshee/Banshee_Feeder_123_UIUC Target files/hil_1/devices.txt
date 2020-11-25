@@ -1,7 +1,7 @@
-iPc8uA5276YUdWDG4rze3/2TqKIc/TNcfqjYbKYZNeHiq3mOy3xbQ8bdfQhD/YXyXNK2S7gRaCqOOI1WkNgkgw==
+FA3OUBcG6YDN8wG3voWE/nLvyxjkME7zeHz1M0203+IeFLToyJrFH0Pk4KtG9qpDFwogwmoJVcA00WrXxJMU8w==
 {
-  "compilation_timestamp": "2020-09-11 16:05:33",
-  "sw_version": "2020.2",
+  "compilation_timestamp": "2020-11-19 11:51:42",
+  "sw_version": "2020.3",
   "devices": [
     {
       "device_type": "HIL402",
@@ -61,5 +61,5 @@ iPc8uA5276YUdWDG4rze3/2TqKIc/TNcfqjYbKYZNeHiq3mOy3xbQ8bdfQhD/YXyXNK2S7gRaCqOOI1W
   ]
 }
 -----BEGIN SIGNATURE-----
-C1rCPebQ1fuvLgxeLF5CuLh8gn7269SeCP9ssei/cIzxYycF3bgDNudkPOIpG7uUE0K4RESGsQvCWwTyD8iByp4KoFD46h8saX/LVyPSoGPv6mRSdVY5oUybgiIRTEz4E5lhrY9g5WfoGS3UikN+/tjQvtK4tEWAqiArkdbXYC5rlS2tlbVmVcjh6hj56STHCE/lvC3I9oKPMXAXi9rQ26G6I2at5CQtWMSdE3OFvfd7SkDAGWSZfKIy1tXGtHiJ7ClcSzax+rNLnwR1G2aNfVDOY7GJer6Ueg/FXXwVui/t1vVKqUf15fOLqNNE8E1a7E8O+yzCcC1HOdRP27xouQ==
+WjDOaQhd6oxpmDaV0aWqPHx2H5FrMrcmQIkDWdXKMLi+0f6cwsOXPWM0EP1nXO9xsH8PVM98qlPkJoCtq8dHL/s7KTiuznnm/vGobuwhckl4TUcG+ih+ONift2ZMzFKK+qnO3JXAoEPZ7DmeC6VDpmRWh0CWcKwiA+kY65cFfLRiQdB05VQx2TihcY3SH/v2JBjhLG1ntOXDKdLzGZpy72kidbcoYMXqkctmphf30EjTHdykvU8l4YsDn4AmyEXD3kBJ5MAHdIkQoslgkIm/H5g2coY/0OVy2yZLf9JkBMajYJiWdvVFv4Eu97+b7ZeU0dcog6E9ah7H/GNAdF1YFw==
 -----END SIGNATURE-----

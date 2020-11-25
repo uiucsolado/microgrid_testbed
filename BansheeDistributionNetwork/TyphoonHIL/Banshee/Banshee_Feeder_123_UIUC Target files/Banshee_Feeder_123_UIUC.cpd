@@ -1,12 +1,12 @@
 <model_description>
-    <sw_version>2020.2</sw_version>
+    <sw_version>2020.3</sw_version>
     <system_description>
         <nb_devices>4</nb_devices>
         <hw_properties>
             <revision>3</revision>
             <product_id>HIL603</product_id>
             <configuration_id>2</configuration_id>
-            <fw_support_limit>132384520</fw_support_limit>
+            <fw_support_limit>132385281</fw_support_limit>
         </hw_properties>
     </system_description>
     <target_files_directories>

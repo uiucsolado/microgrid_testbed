@@ -1,6 +1,6 @@
 
 <model_description>
-    <sw_version>2020.2</sw_version>
+    <sw_version>2020.3</sw_version>
     <hw_properties>
         <revision>3</revision>
         <product_id>HIL603</product_id>
@@ -8,7 +8,7 @@
         <device_ao_limit_enable>True</device_ao_limit_enable>
         <device_id>3</device_id>
         <spc_out_mem_size>512</spc_out_mem_size>
-        <fw_support_limit>132384520</fw_support_limit>
+        <fw_support_limit>132385281</fw_support_limit>
     </hw_properties>
     <sim_setup>
         <sim_time_step>4e-06</sim_time_step>
@@ -17,302 +17,239 @@
     </pesb>
     <variables>
         <cell>
-            <name>Coupling19.RC Snubber.C1</name>
-            <address>0</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling19.RC Snubber.C2</name>
-            <address>1</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling19.RC Snubber.C3</name>
-            <address>2</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling26.RC Snubber.C1</name>
-            <address>3</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling26.RC Snubber.C2</name>
-            <address>4</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling26.RC Snubber.C3</name>
-            <address>5</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling6.RC Snubber.C1</name>
-            <address>6</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling6.RC Snubber.C2</name>
-            <address>7</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling6.RC Snubber.C3</name>
-            <address>8</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F1_line.L1</name>
-            <address>9</address>
+            <address>0</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_line.L2</name>
-            <address>10</address>
+            <address>1</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_line.L3</name>
-            <address>11</address>
+            <address>2</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_line.L1</name>
-            <address>12</address>
+            <address>3</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_line.L2</name>
-            <address>13</address>
+            <address>4</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_line.L3</name>
-            <address>14</address>
+            <address>5</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling19.Device Coupling 1.cpl1.V_msr</name>
-            <address>15</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling19.Device Coupling 1.cpl2.V_msr</name>
-            <address>16</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling19.Device Coupling 1.cpl3.V_msr</name>
-            <address>17</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling26.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling26_2.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>452</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling26.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling26_2.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>453</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling26.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling26_2.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>454</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling6.Device Coupling 1.cpl1.V_msr</name>
-            <address>18</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling6.Device Coupling 1.cpl2.V_msr</name>
-            <address>19</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling6.Device Coupling 1.cpl3.V_msr</name>
-            <address>20</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F1_PCC.Meas1.VA</name>
-            <address>21</address>
+            <address>6</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas1.VB</name>
-            <address>22</address>
+            <address>7</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas1.VC</name>
-            <address>23</address>
+            <address>8</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas2.VA</name>
-            <address>24</address>
+            <address>9</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas2.VB</name>
-            <address>25</address>
+            <address>10</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas2.VC</name>
-            <address>26</address>
+            <address>11</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas1.VA</name>
-            <address>27</address>
+            <address>12</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas1.VB</name>
-            <address>28</address>
+            <address>13</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas1.VC</name>
-            <address>29</address>
+            <address>14</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas2.VA</name>
-            <address>30</address>
+            <address>15</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas2.VB</name>
-            <address>31</address>
+            <address>16</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas2.VC</name>
-            <address>32</address>
+            <address>17</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_grid.Vinst</name>
-            <address>33</address>
+            <address>18</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling19_2.Device Coupling 1.cpl1.I_msr</name>
+            <address>19</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling19_2.Device Coupling 1.cpl2.I_msr</name>
+            <address>20</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling19_2.Device Coupling 1.cpl3.I_msr</name>
+            <address>21</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling6_2.Device Coupling 1.cpl1.I_msr</name>
+            <address>22</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling6_2.Device Coupling 1.cpl2.I_msr</name>
+            <address>23</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling6_2.Device Coupling 1.cpl3.I_msr</name>
+            <address>24</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>F1_PCC.Meas1.IA</name>
-            <address>34</address>
+            <address>25</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas1.IB</name>
-            <address>35</address>
+            <address>26</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F1_PCC.Meas1.IC</name>
-            <address>36</address>
+            <address>27</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas1.IA</name>
-            <address>37</address>
+            <address>28</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas1.IB</name>
-            <address>38</address>
+            <address>29</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_PCC.Meas1.IC</name>
-            <address>39</address>
+            <address>30</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -339,148 +276,127 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling5.RC Snubber.C1</name>
-            <address>512</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling5.RC Snubber.C2</name>
-            <address>513</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling5.RC Snubber.C3</name>
-            <address>514</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F3_line.L1</name>
-            <address>515</address>
+            <address>512</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_line.L2</name>
-            <address>516</address>
+            <address>513</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_line.L3</name>
-            <address>517</address>
+            <address>514</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling5.Device Coupling 1.cpl1.V_msr</name>
-            <address>518</address>
+            <name>Coupling26_2.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>960</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling5.Device Coupling 1.cpl2.V_msr</name>
-            <address>519</address>
+            <name>Coupling26_2.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>961</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling5.Device Coupling 1.cpl3.V_msr</name>
-            <address>520</address>
+            <name>Coupling26_2.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>962</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas1.VA</name>
-            <address>521</address>
+            <address>515</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas1.VB</name>
-            <address>522</address>
+            <address>516</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas1.VC</name>
-            <address>523</address>
+            <address>517</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas2.VA</name>
-            <address>524</address>
+            <address>518</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas2.VB</name>
-            <address>525</address>
+            <address>519</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas2.VC</name>
-            <address>526</address>
+            <address>520</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling26.Core Coupling 3.cpl1.I_msr</name>
-            <address>960</address>
+            <name>Coupling5_2.Device Coupling 1.cpl1.I_msr</name>
+            <address>521</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling26.Core Coupling 3.cpl2.I_msr</name>
-            <address>961</address>
+            <name>Coupling5_2.Device Coupling 1.cpl2.I_msr</name>
+            <address>522</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling26.Core Coupling 3.cpl3.I_msr</name>
-            <address>962</address>
+            <name>Coupling5_2.Device Coupling 1.cpl3.I_msr</name>
+            <address>523</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas1.IA</name>
-            <address>527</address>
+            <address>524</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas1.IB</name>
-            <address>528</address>
+            <address>525</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F3_PCC.Meas1.IC</name>
-            <address>529</address>
+            <address>526</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -753,9 +669,16 @@
 
     <variables>
         <cell>
-            <name>F3_PCC.P</name>
+            <name>Vrms_grid</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_PCC.Q</name>
             <type>generic</type>
-            <address>16389</address>
+            <address>16390</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -781,23 +704,16 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>F3_PCC.P</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>F2_PCC.P</name>
             <type>generic</type>
             <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_PCC.Q</name>
-            <type>generic</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_grid</name>
-            <type>voltage</type>
-            <address>16384</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -805,6 +721,16 @@
 
 
     <scada_inputs>
+        <scada_input>
+            <name>F2_PCC.F2_PCC</name>
+            <addr>1426063628</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
         <scada_input>
             <name>F1_PCC.F1_PCC</name>
             <addr>1426063624</addr>
@@ -821,16 +747,6 @@
             <min>0.0</min>
             <max>1.0</max>
             <def_value>1.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_PCC.F2_PCC</name>
-            <addr>1426063628</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
             <unit></unit>
             <widget_type>int</widget_type>
             <format>integer</format>

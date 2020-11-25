@@ -1,6 +1,6 @@
 
 <model_description>
-    <sw_version>2020.2</sw_version>
+    <sw_version>2020.3</sw_version>
     <hw_properties>
         <revision>3</revision>
         <product_id>HIL603</product_id>
@@ -8,7 +8,7 @@
         <device_ao_limit_enable>True</device_ao_limit_enable>
         <device_id>1</device_id>
         <spc_out_mem_size>512</spc_out_mem_size>
-        <fw_support_limit>132384520</fw_support_limit>
+        <fw_support_limit>132385281</fw_support_limit>
     </hw_properties>
     <sim_setup>
         <sim_time_step>5e-06</sim_time_step>
@@ -17,624 +17,589 @@
     </pesb>
     <variables>
         <cell>
-            <name>Coupling16.RC Snubber.C1</name>
-            <address>0</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling16.RC Snubber.C2</name>
-            <address>1</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling16.RC Snubber.C3</name>
-            <address>2</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling29.RC Snubber.C1</name>
-            <address>3</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling29.RC Snubber.C2</name>
-            <address>4</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling29.RC Snubber.C3</name>
-            <address>5</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>CIL_F2_Critical3.Lb</name>
-            <address>6</address>
+            <address>0</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>CIL_F2_Critical3.Lc</name>
-            <address>7</address>
+            <address>1</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line1.L1</name>
-            <address>8</address>
+            <address>2</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line1.L2</name>
-            <address>9</address>
+            <address>3</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line1.L3</name>
-            <address>10</address>
+            <address>4</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr1.L1</name>
-            <address>11</address>
+            <address>5</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr1.Lm</name>
-            <address>12</address>
+            <address>6</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr2.L1</name>
-            <address>13</address>
+            <address>7</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr2.L2</name>
-            <address>14</address>
+            <address>8</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr2.Lm</name>
-            <address>15</address>
+            <address>9</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr3.L1</name>
-            <address>16</address>
+            <address>10</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr3.L2</name>
-            <address>17</address>
+            <address>11</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo1.Tr1.tr3.Lm</name>
-            <address>18</address>
+            <address>12</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr1.Lm</name>
-            <address>19</address>
+            <address>13</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr2.L1</name>
-            <address>20</address>
+            <address>14</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr2.L2</name>
-            <address>21</address>
+            <address>15</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr2.Lm</name>
-            <address>22</address>
+            <address>16</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr3.L1</name>
-            <address>23</address>
+            <address>17</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr3.L2</name>
-            <address>24</address>
+            <address>18</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Transfo 201.Tr2.tr3.Lm</name>
-            <address>25</address>
+            <address>19</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling16.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling16_2.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>456</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling16.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling16_2.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>457</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling16.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling16_2.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>458</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling17.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>452</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling17.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>453</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling17.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>454</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Coupling20.Device Coupling 1.cpl1.V_msr</name>
-            <address>26</address>
+            <address>20</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Coupling20.Device Coupling 1.cpl2.V_msr</name>
-            <address>27</address>
+            <address>21</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling29.Core Coupling 1.cpl1.V_msr</name>
+            <name>Coupling29_2.Core Coupling.cpl1.V_cpl_msr_2</name>
             <address>476</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling29.Core Coupling 1.cpl2.V_msr</name>
+            <name>Coupling29_2.Core Coupling.cpl2.V_cpl_msr_2</name>
             <address>477</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling29_2.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>478</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>F2_CB1.Meas1.VA</name>
-            <address>28</address>
+            <address>22</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas1.VB</name>
-            <address>29</address>
+            <address>23</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas1.VC</name>
-            <address>30</address>
+            <address>24</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas2.VA</name>
-            <address>31</address>
+            <address>25</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas2.VB</name>
-            <address>32</address>
+            <address>26</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas2.VC</name>
-            <address>33</address>
+            <address>27</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB5.Meas2.VA</name>
-            <address>34</address>
+            <address>28</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB5.Meas2.VB</name>
-            <address>35</address>
+            <address>29</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB5.Meas2.VC</name>
-            <address>36</address>
+            <address>30</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas1.VA</name>
-            <address>37</address>
+            <address>31</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas1.VB</name>
-            <address>38</address>
+            <address>32</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas1.VC</name>
-            <address>39</address>
+            <address>33</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas2.VA</name>
-            <address>40</address>
+            <address>34</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas2.VB</name>
-            <address>41</address>
+            <address>35</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas2.VC</name>
-            <address>42</address>
+            <address>36</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_bus202.Vinst</name>
-            <address>43</address>
+            <address>37</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_bus204.Vinst</name>
-            <address>44</address>
+            <address>38</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling17.Core Coupling 3.cpl1.I_msr</name>
-            <address>452</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling17.Core Coupling 3.cpl2.I_msr</name>
-            <address>453</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling17.Core Coupling 3.cpl3.I_msr</name>
-            <address>454</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F2_CB1.Meas1.IA</name>
-            <address>45</address>
+            <address>39</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas1.IB</name>
-            <address>46</address>
+            <address>40</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB1.Meas1.IC</name>
-            <address>47</address>
+            <address>41</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB5.Meas1.IA</name>
-            <address>48</address>
+            <address>42</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB5.Meas1.IB</name>
-            <address>49</address>
+            <address>43</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB5.Meas1.IC</name>
-            <address>50</address>
+            <address>44</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas1.IA</name>
-            <address>51</address>
+            <address>45</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas1.IB</name>
-            <address>52</address>
+            <address>46</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB6.Meas1.IC</name>
-            <address>53</address>
+            <address>47</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling14.RC Snubber.C1</name>
-            <address>512</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling14.RC Snubber.C2</name>
-            <address>513</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling14.RC Snubber.C3</name>
-            <address>514</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>CIL_F2_Critical4.Lb</name>
-            <address>515</address>
+            <address>512</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>CIL_F2_Critical4.Lc</name>
-            <address>516</address>
+            <address>513</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line3.L1</name>
-            <address>517</address>
+            <address>514</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line3.L2</name>
-            <address>518</address>
+            <address>515</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line3.L3</name>
-            <address>519</address>
+            <address>516</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line5.L2</name>
-            <address>520</address>
+            <address>517</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line5.L3</name>
-            <address>521</address>
+            <address>518</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr1.L1</name>
-            <address>522</address>
+            <address>519</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr1.Lm</name>
-            <address>523</address>
+            <address>520</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr2.L1</name>
-            <address>524</address>
+            <address>521</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr2.L2</name>
-            <address>525</address>
+            <address>522</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr2.Lm</name>
-            <address>526</address>
+            <address>523</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr3.L1</name>
-            <address>527</address>
+            <address>524</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr3.L2</name>
-            <address>528</address>
+            <address>525</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo9.Tr1.tr3.Lm</name>
-            <address>529</address>
+            <address>526</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling14.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling14_2.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>980</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling14.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling14_2.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>981</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling14.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling14_2.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>982</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling17.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling17.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>960</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling17.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling17.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>961</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling17.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling17.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>962</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling18.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling18.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>976</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling18.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling18.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>977</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling18.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling18.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>978</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling19_2.Device Coupling 1.cpl1.V_msr</name>
+            <address>527</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling19_2.Device Coupling 1.cpl2.V_msr</name>
+            <address>528</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling19_2.Device Coupling 1.cpl3.V_msr</name>
+            <address>529</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -766,99 +731,78 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling19.Device Coupling 1.cpl1.I_msr</name>
+            <name>Coupling24.Device Coupling 1.cpl1.I_msr</name>
             <address>548</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling19.Device Coupling 1.cpl2.I_msr</name>
+            <name>Coupling24.Device Coupling 1.cpl2.I_msr</name>
             <address>549</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling19.Device Coupling 1.cpl3.I_msr</name>
+            <name>F2_CB14.Meas1.IA</name>
             <address>550</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling24.Device Coupling 1.cpl1.I_msr</name>
+            <name>F2_CB14.Meas1.IB</name>
             <address>551</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling24.Device Coupling 1.cpl2.I_msr</name>
+            <name>F2_CB14.Meas1.IC</name>
             <address>552</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB14.Meas1.IA</name>
+            <name>F2_CB17.Meas1.IA</name>
             <address>553</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB14.Meas1.IB</name>
+            <name>F2_CB17.Meas1.IB</name>
             <address>554</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB14.Meas1.IC</name>
+            <name>F2_CB17.Meas1.IC</name>
             <address>555</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB17.Meas1.IA</name>
+            <name>F2_CB3.Meas1.IA</name>
             <address>556</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB17.Meas1.IB</name>
+            <name>F2_CB3.Meas1.IB</name>
             <address>557</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_CB17.Meas1.IC</name>
-            <address>558</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB3.Meas1.IA</name>
-            <address>559</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F2_CB3.Meas1.IB</name>
-            <address>560</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F2_CB3.Meas1.IC</name>
-            <address>561</address>
+            <address>558</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -1053,6 +997,27 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling16_2.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>1472</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling16_2.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>1473</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling16_2.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>1474</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Coupling21.Device Coupling 1.cpl1.V_msr</name>
             <address>1051</address>
             <type>voltage</type>
@@ -1200,27 +1165,6 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling16.Core Coupling 3.cpl1.I_msr</name>
-            <address>1472</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling16.Core Coupling 3.cpl2.I_msr</name>
-            <address>1473</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling16.Core Coupling 3.cpl3.I_msr</name>
-            <address>1474</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F2_CB4.Meas1.IA</name>
             <address>1072</address>
             <type>current</type>
@@ -1284,750 +1228,708 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling13.RC Snubber.C1</name>
-            <address>1536</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling13.RC Snubber.C2</name>
-            <address>1537</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling13.RC Snubber.C3</name>
-            <address>1538</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>CIL_F2_Interruptible5.Lb</name>
-            <address>1539</address>
+            <address>1536</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>CIL_F2_Interruptible5.Lc</name>
-            <address>1540</address>
+            <address>1537</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line6.L2</name>
-            <address>1541</address>
+            <address>1538</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line6.L3</name>
-            <address>1542</address>
+            <address>1539</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr1.L1</name>
-            <address>1543</address>
+            <address>1540</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr1.Lm</name>
-            <address>1544</address>
+            <address>1541</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr2.L1</name>
-            <address>1545</address>
+            <address>1542</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr2.L2</name>
-            <address>1546</address>
+            <address>1543</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr2.Lm</name>
-            <address>1547</address>
+            <address>1544</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr3.L1</name>
-            <address>1548</address>
+            <address>1545</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr3.L2</name>
-            <address>1549</address>
+            <address>1546</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo7.Tr1.tr3.Lm</name>
-            <address>1550</address>
+            <address>1547</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr1.L1</name>
-            <address>1551</address>
+            <address>1548</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr1.L2</name>
-            <address>1552</address>
+            <address>1549</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr1.Lm</name>
-            <address>1553</address>
+            <address>1550</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr2.L1</name>
-            <address>1554</address>
+            <address>1551</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr2.L2</name>
-            <address>1555</address>
+            <address>1552</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr2.Lm</name>
-            <address>1556</address>
+            <address>1553</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr3.L1</name>
-            <address>1557</address>
+            <address>1554</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr3.L2</name>
-            <address>1558</address>
+            <address>1555</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo8.Tr1.tr3.Lm</name>
-            <address>1559</address>
+            <address>1556</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling13.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling13_2.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>2008</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling13.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling13_2.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>2009</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling13.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling13_2.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>2010</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling15_2.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>2000</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling15_2.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>2001</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling15_2.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>2002</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>F2_CB12.Meas1.VA</name>
-            <address>1560</address>
+            <address>1557</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas1.VB</name>
-            <address>1561</address>
+            <address>1558</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas1.VC</name>
-            <address>1562</address>
+            <address>1559</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas2.VA</name>
-            <address>1563</address>
+            <address>1560</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas2.VB</name>
-            <address>1564</address>
+            <address>1561</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas2.VC</name>
-            <address>1565</address>
+            <address>1562</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas1.VA</name>
-            <address>1566</address>
+            <address>1563</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas1.VB</name>
-            <address>1567</address>
+            <address>1564</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas1.VC</name>
-            <address>1568</address>
+            <address>1565</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas2.VA</name>
-            <address>1569</address>
+            <address>1566</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas2.VB</name>
-            <address>1570</address>
+            <address>1567</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas2.VC</name>
-            <address>1571</address>
+            <address>1568</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_bus203.Vinst</name>
-            <address>1572</address>
+            <address>1569</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_bus207.Vinst</name>
-            <address>1573</address>
+            <address>1570</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.Core Coupling 3.cpl1.I_msr</name>
-            <address>2000</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling15.Core Coupling 3.cpl2.I_msr</name>
-            <address>2001</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling15.Core Coupling 3.cpl3.I_msr</name>
-            <address>2002</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>Coupling23.Device Coupling 1.cpl1.I_msr</name>
-            <address>1574</address>
+            <address>1571</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Coupling23.Device Coupling 1.cpl2.I_msr</name>
-            <address>1575</address>
+            <address>1572</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas1.IA</name>
-            <address>1576</address>
+            <address>1573</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas1.IB</name>
-            <address>1577</address>
+            <address>1574</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB12.Meas1.IC</name>
-            <address>1578</address>
+            <address>1575</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas1.IA</name>
-            <address>1579</address>
+            <address>1576</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas1.IB</name>
-            <address>1580</address>
+            <address>1577</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB13.Meas1.IC</name>
-            <address>1581</address>
+            <address>1578</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.RC Snubber.C1</name>
+            <name>Coupling22.RC Snubber.C1</name>
             <address>2048</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.RC Snubber.C2</name>
+            <name>Coupling22.RC Snubber.C2</name>
             <address>2049</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.RC Snubber.C3</name>
+            <name>Coupling22.RC Snubber.C3</name>
             <address>2050</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling22.RC Snubber.C1</name>
-            <address>2051</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling22.RC Snubber.C2</name>
-            <address>2052</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling22.RC Snubber.C3</name>
-            <address>2053</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>CIL_F2_Priority2.Lb</name>
-            <address>2054</address>
+            <address>2051</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>CIL_F2_Priority2.Lc</name>
-            <address>2055</address>
+            <address>2052</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line2.L1</name>
-            <address>2056</address>
+            <address>2053</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line2.L2</name>
-            <address>2057</address>
+            <address>2054</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_line2.L3</name>
-            <address>2058</address>
+            <address>2055</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr1.L1</name>
-            <address>2059</address>
+            <address>2056</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr1.Lm</name>
-            <address>2060</address>
+            <address>2057</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr2.L1</name>
-            <address>2061</address>
+            <address>2058</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr2.L2</name>
-            <address>2062</address>
+            <address>2059</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr2.Lm</name>
-            <address>2063</address>
+            <address>2060</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr3.L1</name>
-            <address>2064</address>
+            <address>2061</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr3.L2</name>
-            <address>2065</address>
+            <address>2062</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Feeder2_trafo6.Tr1.tr3.Lm</name>
-            <address>2066</address>
+            <address>2063</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.Core Coupling 3.cpl1.V_msr</name>
+            <name>Coupling15_2.Core Coupling.cpl1.V_cpl_msr_1</name>
             <address>2508</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.Core Coupling 3.cpl2.V_msr</name>
+            <name>Coupling15_2.Core Coupling.cpl2.V_cpl_msr_1</name>
             <address>2509</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling15.Core Coupling 3.cpl3.V_msr</name>
+            <name>Coupling15_2.Core Coupling.cpl3.V_cpl_msr_1</name>
             <address>2510</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling18.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>2500</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling18.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>2501</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling18.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>2502</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Coupling22.Device Coupling 1.cpl1.V_msr</name>
-            <address>2067</address>
+            <address>2064</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Coupling22.Device Coupling 1.cpl2.V_msr</name>
-            <address>2068</address>
+            <address>2065</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas1.VA</name>
-            <address>2069</address>
+            <address>2066</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas1.VB</name>
-            <address>2070</address>
+            <address>2067</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas1.VC</name>
-            <address>2071</address>
+            <address>2068</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas2.VA</name>
-            <address>2072</address>
+            <address>2069</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas2.VB</name>
-            <address>2073</address>
+            <address>2070</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas2.VC</name>
-            <address>2074</address>
+            <address>2071</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas1.VA</name>
-            <address>2075</address>
+            <address>2072</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas1.VB</name>
-            <address>2076</address>
+            <address>2073</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas1.VC</name>
-            <address>2077</address>
+            <address>2074</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas2.VA</name>
-            <address>2078</address>
+            <address>2075</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas2.VB</name>
-            <address>2079</address>
+            <address>2076</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas2.VC</name>
-            <address>2080</address>
+            <address>2077</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas1.VA</name>
-            <address>2081</address>
+            <address>2078</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas1.VB</name>
-            <address>2082</address>
+            <address>2079</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas1.VC</name>
-            <address>2083</address>
+            <address>2080</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas2.VA</name>
-            <address>2084</address>
+            <address>2081</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas2.VB</name>
-            <address>2085</address>
+            <address>2082</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas2.VC</name>
-            <address>2086</address>
+            <address>2083</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vrms_bus206.Vinst</name>
-            <address>2087</address>
+            <address>2084</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Coupling18.Core Coupling 3.cpl1.I_msr</name>
-            <address>2500</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling18.Core Coupling 3.cpl2.I_msr</name>
-            <address>2501</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling18.Core Coupling 3.cpl3.I_msr</name>
-            <address>2502</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F2_CB19.Meas1.IA</name>
-            <address>2088</address>
+            <address>2085</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas1.IB</name>
-            <address>2089</address>
+            <address>2086</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB19.Meas1.IC</name>
-            <address>2090</address>
+            <address>2087</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas1.IA</name>
-            <address>2091</address>
+            <address>2088</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas1.IB</name>
-            <address>2092</address>
+            <address>2089</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB2.Meas1.IC</name>
-            <address>2093</address>
+            <address>2090</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas1.IA</name>
-            <address>2094</address>
+            <address>2091</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas1.IB</name>
-            <address>2095</address>
+            <address>2092</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>F2_CB9.Meas1.IC</name>
-            <address>2096</address>
+            <address>2093</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -2114,6 +2016,27 @@
             <address>2571</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling14_2.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>3012</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling14_2.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>3013</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling14_2.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>3014</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
@@ -2246,27 +2169,6 @@
             <name>Vrms_bus210.Vinst</name>
             <address>2590</address>
             <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling14.Core Coupling 3.cpl1.I_msr</name>
-            <address>3012</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling14.Core Coupling 3.cpl2.I_msr</name>
-            <address>3013</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling14.Core Coupling 3.cpl3.I_msr</name>
-            <address>3014</address>
-            <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2411,6 +2313,27 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling13_2.Core Coupling.cpl1.V_cpl_msr_2</name>
+            <address>3532</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling13_2.Core Coupling.cpl2.V_cpl_msr_2</name>
+            <address>3533</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling13_2.Core Coupling.cpl3.V_cpl_msr_2</name>
+            <address>3534</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Grid feeding inverter (averaged).Ea1</name>
             <address>3081</address>
             <type>voltage</type>
@@ -2449,27 +2372,6 @@
             <name>Grid feeding inverter (averaged).Vc1</name>
             <address>3086</address>
             <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling13.Core Coupling 3.cpl1.I_msr</name>
-            <address>3532</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling13.Core Coupling 3.cpl2.I_msr</name>
-            <address>3533</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling13.Core Coupling 3.cpl3.I_msr</name>
-            <address>3534</address>
-            <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2572,6 +2474,27 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Coupling29_2.Core Coupling.cpl1.V_cpl_msr_1</name>
+            <address>4032</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling29_2.Core Coupling.cpl2.V_cpl_msr_1</name>
+            <address>4033</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Coupling29_2.Core Coupling.cpl3.V_cpl_msr_1</name>
+            <address>4034</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Grid forming inverter (averaged).Ea1</name>
             <address>3592</address>
             <type>voltage</type>
@@ -2631,20 +2554,6 @@
             <name>Grid forming inverter (averaged).VcG</name>
             <address>3600</address>
             <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling29.Core Coupling 1.cpl1.I_msr</name>
-            <address>4032</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Coupling29.Core Coupling 1.cpl2.I_msr</name>
-            <address>4033</address>
-            <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3151,44 +3060,9 @@
 
     <variables>
         <cell>
-            <name>Vrms_bus201</name>
+            <name>Vrms_bus202</name>
             <type>voltage</type>
-            <address>16384</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V</name>
-            <type>generic</type>
-            <address>16404</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Ppu</name>
-            <type>generic</type>
-            <address>16424</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Qpu</name>
-            <type>generic</type>
-            <address>16426</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.PLL.E_d</name>
-            <type>generic</type>
-            <address>16398</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
-            <type>generic</type>
-            <address>16415</address>
+            <address>16385</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3200,16 +3074,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Controller.P1</name>
-            <type>generic</type>
-            <address>16397</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Xi_d_ERR</name>
-            <type>generic</type>
-            <address>16394</address>
+            <name>Vrms_bus209</name>
+            <type>voltage</type>
+            <address>16392</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3221,142 +3088,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vrms_bus207</name>
-            <type>voltage</type>
-            <address>16390</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus203</name>
-            <type>voltage</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.E_qREF1</name>
+            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.|E|</name>
             <type>generic</type>
-            <address>16414</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
-            <type>generic</type>
-            <address>16416</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.E_d1</name>
-            <type>generic</type>
-            <address>16410</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
-            <type>generic</type>
-            <address>16422</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu</name>
-            <type>generic</type>
-            <address>16408</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus210</name>
-            <type>voltage</type>
-            <address>16393</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.frequency_diff</name>
-            <type>generic</type>
-            <address>16402</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Xi_q_ERR</name>
-            <type>generic</type>
-            <address>16395</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|</name>
-            <type>generic</type>
-            <address>16407</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E</name>
-            <type>generic</type>
-            <address>16403</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
-            <type>generic</type>
-            <address>16419</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu</name>
-            <type>generic</type>
-            <address>16409</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
-            <type>generic</type>
-            <address>16417</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus204</name>
-            <type>voltage</type>
-            <address>16387</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.E_q1</name>
-            <type>generic</type>
-            <address>16413</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus205</name>
-            <type>voltage</type>
-            <address>16388</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid feeding inverter (averaged).Controller.f1</name>
-            <type>generic</type>
-            <address>16401</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus202</name>
-            <type>voltage</type>
-            <address>16385</address>
+            <address>16396</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3368,23 +3102,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vrms_bus209</name>
+            <name>Vrms_bus205</name>
             <type>voltage</type>
-            <address>16392</address>
+            <address>16388</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.E_mag</name>
+            <name>Grid forming inverter (averaged).Controller.E_qREF1</name>
             <type>generic</type>
-            <address>16412</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus206</name>
-            <type>voltage</type>
-            <address>16389</address>
+            <address>16414</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3396,37 +3123,44 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.voltage_diff</name>
+            <name>Grid forming inverter (averaged).Controller.Qpu</name>
             <type>generic</type>
-            <address>16406</address>
+            <address>16426</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).Controller.E_dREF1</name>
-            <type>generic</type>
-            <address>16411</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Grid forming inverter (averaged).Controller.f1</name>
-            <type>generic</type>
-            <address>16427</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vrms_bus208</name>
+            <name>Vrms_bus206</name>
             <type>voltage</type>
-            <address>16391</address>
+            <address>16389</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiD_ctrl</name>
             <type>generic</type>
-            <address>16400</address>
+            <address>16419</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_diff</name>
+            <type>generic</type>
+            <address>16405</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.PLL.E_d</name>
+            <type>generic</type>
+            <address>16398</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Ppu</name>
+            <type>generic</type>
+            <address>16424</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3438,6 +3172,69 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Grid forming inverter (averaged).Controller.f1</name>
+            <type>generic</type>
+            <address>16427</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus203</name>
+            <type>voltage</type>
+            <address>16386</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus204</name>
+            <type>voltage</type>
+            <address>16387</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_ctrl</name>
+            <type>generic</type>
+            <address>16417</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.frequency_diff</name>
+            <type>generic</type>
+            <address>16402</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E</name>
+            <type>generic</type>
+            <address>16403</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.voltage_diff</name>
+            <type>generic</type>
+            <address>16406</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_mag</name>
+            <type>generic</type>
+            <address>16412</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu</name>
+            <type>generic</type>
+            <address>16409</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.EQ_error</name>
             <type>generic</type>
             <address>16418</address>
@@ -3445,16 +3242,128 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.|E|</name>
+            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Xi_q_ERR</name>
             <type>generic</type>
-            <address>16396</address>
+            <address>16395</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_diff</name>
+            <name>Vrms_bus201</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.P1</name>
             <type>generic</type>
-            <address>16405</address>
+            <address>16397</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.Q1</name>
+            <type>generic</type>
+            <address>16400</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_d1</name>
+            <type>generic</type>
+            <address>16410</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_error</name>
+            <type>generic</type>
+            <address>16416</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus208</name>
+            <type>voltage</type>
+            <address>16391</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.inner current control loop.XiQ_error</name>
+            <type>generic</type>
+            <address>16422</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.f1</name>
+            <type>generic</type>
+            <address>16401</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus210</name>
+            <type>voltage</type>
+            <address>16393</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_dREF1</name>
+            <type>generic</type>
+            <address>16411</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.E_q1</name>
+            <type>generic</type>
+            <address>16413</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu</name>
+            <type>generic</type>
+            <address>16408</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.|E|</name>
+            <type>generic</type>
+            <address>16407</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).Controller.Outer Voltage Loop + Inner Current Loop.Outer voltage control loop.ED_ctrl</name>
+            <type>generic</type>
+            <address>16415</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid feeding inverter (averaged).Controller.Outer Power Loop + Inner Current Loop.inner current control loop.Xi_d_ERR</name>
+            <type>generic</type>
+            <address>16394</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vrms_bus207</name>
+            <type>voltage</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V</name>
+            <type>generic</type>
+            <address>16404</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3467,18 +3376,13 @@
         </cell>
 
         <cell>
-            <name>Grid forming inverter (averaged).CB_control.Grid_Islanded ON</name>
-            <address>2053</address>
+            <name>Grid forming inverter (averaged).CB_control.INV_sync ON</name>
+            <address>2055</address>
         </cell>
 
         <cell>
-            <name>Grid feeding inverter (averaged).GCB ON</name>
-            <address>2049</address>
-        </cell>
-
-        <cell>
-            <name>Grid forming inverter (averaged).CB_control.GCB OFF</name>
-            <address>2050</address>
+            <name>Grid forming inverter (averaged).CB_control.GCB ON</name>
+            <address>2051</address>
         </cell>
 
         <cell>
@@ -3487,8 +3391,8 @@
         </cell>
 
         <cell>
-            <name>Grid forming inverter (averaged).CB_control.INV_sync ON</name>
-            <address>2055</address>
+            <name>Grid feeding inverter (averaged).GCB ON</name>
+            <address>2049</address>
         </cell>
 
         <cell>
@@ -3497,102 +3401,27 @@
         </cell>
 
         <cell>
-            <name>Grid forming inverter (averaged).CB_control.GCB ON</name>
-            <address>2051</address>
+            <name>Grid forming inverter (averaged).CB_control.GCB OFF</name>
+            <address>2050</address>
+        </cell>
+
+        <cell>
+            <name>Grid forming inverter (averaged).CB_control.Grid_Islanded ON</name>
+            <address>2053</address>
         </cell>
 
     </do_var_list>
 
     <scada_inputs>
         <scada_input>
-            <name>F2_CB1.F2_CB1</name>
-            <addr>1426063704</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB10.F2_CB10</name>
-            <addr>1426063708</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>1.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB7.F2_CB7</name>
-            <addr>1426063768</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>3ph Fault 208.ctrl</name>
-            <addr>1426063700</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB9.Brk.F3_CB9</name>
-            <addr>1426063776</addr>
+            <name>Grid forming inverter (averaged).Connect GFM</name>
+            <addr>1426063788</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>1.0</def_value>
             <unit></unit>
             <widget_type>float</widget_type>
             <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB3.F2_CB3</name>
-            <addr>1426063752</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB13.F2_CB13</name>
-            <addr>1426063720</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB12.F2_CB12</name>
-            <addr>1426063716</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB4.F2_CB4</name>
-            <addr>1426063756</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
         </scada_input>
         <scada_input>
             <name>Pref_feed</name>
@@ -3605,58 +3434,8 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Qref_feed</name>
-            <addr>1426063808</addr>
-            <min>-3500000.0</min>
-            <max>3500000.0</max>
-            <def_value>0.0</def_value>
-            <unit>vars</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB16.F2_CB16</name>
-            <addr>1426063732</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB17.F2_CB17</name>
-            <addr>1426063736</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
-        <scada_input>
-            <name>Grid feeding inverter (averaged).Connect GFL</name>
-            <addr>1426063780</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>unsigned_int</format>
-        </scada_input>
-        <scada_input>
-            <name>Pref_form</name>
-            <addr>1426063804</addr>
-            <min>-2100000.0</min>
-            <max>2100000.0</max>
-            <def_value>0.0</def_value>
-            <unit>W</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>F2_CB18.F2_CB18</name>
-            <addr>1426063740</addr>
+            <name>F2_CB3.F2_CB3</name>
+            <addr>1426063752</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3675,6 +3454,26 @@
             <format>real</format>
         </scada_input>
         <scada_input>
+            <name>Qref_feed</name>
+            <addr>1426063808</addr>
+            <min>-3500000.0</min>
+            <max>3500000.0</max>
+            <def_value>0.0</def_value>
+            <unit>vars</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Grid feeding inverter (averaged).Connect GFL</name>
+            <addr>1426063780</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>unsigned_int</format>
+        </scada_input>
+        <scada_input>
             <name>F2_CB8.F2_CB8</name>
             <addr>1426063772</addr>
             <min>0.0</min>
@@ -3685,8 +3484,8 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB2.F2_CB2</name>
-            <addr>1426063748</addr>
+            <name>F2_CB17.F2_CB17</name>
+            <addr>1426063736</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3695,8 +3494,18 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB6.F2_CB6</name>
-            <addr>1426063764</addr>
+            <name>F2_CB10.F2_CB10</name>
+            <addr>1426063708</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB4.F2_CB4</name>
+            <addr>1426063756</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3715,22 +3524,42 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB11.F2_CB11</name>
-            <addr>1426063712</addr>
+            <name>F2_CB5.F2_CB5</name>
+            <addr>1426063760</addr>
             <min>0.0</min>
             <max>1.0</max>
-            <def_value>1.0</def_value>
+            <def_value>0.0</def_value>
             <unit></unit>
             <widget_type>int</widget_type>
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>Qref_form</name>
-            <addr>1426063812</addr>
+            <name>F2_CB18.F2_CB18</name>
+            <addr>1426063740</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB1.F2_CB1</name>
+            <addr>1426063704</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>Pref_form</name>
+            <addr>1426063804</addr>
             <min>-2100000.0</min>
             <max>2100000.0</max>
             <def_value>0.0</def_value>
-            <unit>Vars</unit>
+            <unit>W</unit>
             <widget_type>float</widget_type>
             <format>real</format>
         </scada_input>
@@ -3745,18 +3574,18 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>Grid forming inverter (averaged).Connect GFM</name>
-            <addr>1426063788</addr>
+            <name>F2_CB11.F2_CB11</name>
+            <addr>1426063712</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>1.0</def_value>
             <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
+            <widget_type>int</widget_type>
+            <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB14.F2_CB14</name>
-            <addr>1426063724</addr>
+            <name>F2_CB6.F2_CB6</name>
+            <addr>1426063764</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3775,8 +3604,78 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB5.F2_CB5</name>
-            <addr>1426063760</addr>
+            <name>Qref_form</name>
+            <addr>1426063812</addr>
+            <min>-2100000.0</min>
+            <max>2100000.0</max>
+            <def_value>0.0</def_value>
+            <unit>Vars</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>3ph Fault 208.ctrl</name>
+            <addr>1426063700</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB7.F2_CB7</name>
+            <addr>1426063768</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB16.F2_CB16</name>
+            <addr>1426063732</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB12.F2_CB12</name>
+            <addr>1426063716</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB19.F2_CB19</name>
+            <addr>1426063744</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB9.Brk.F3_CB9</name>
+            <addr>1426063776</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB13.F2_CB13</name>
+            <addr>1426063720</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
@@ -3795,8 +3694,18 @@
             <format>integer</format>
         </scada_input>
         <scada_input>
-            <name>F2_CB19.F2_CB19</name>
-            <addr>1426063744</addr>
+            <name>F2_CB2.F2_CB2</name>
+            <addr>1426063748</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
+        <scada_input>
+            <name>F2_CB14.F2_CB14</name>
+            <addr>1426063724</addr>
             <min>0.0</min>
             <max>1.0</max>
             <def_value>0.0</def_value>
