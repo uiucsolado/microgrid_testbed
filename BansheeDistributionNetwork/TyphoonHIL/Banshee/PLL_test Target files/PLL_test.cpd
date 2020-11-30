@@ -11,7 +11,7 @@
         <fw_support_limit>132385281</fw_support_limit>
     </hw_properties>
     <sim_setup>
-        <sim_time_step>4e-06</sim_time_step>
+        <sim_time_step>3e-06</sim_time_step>
     </sim_setup>
     <pesb>
     </pesb>
@@ -38,15 +38,29 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Va1</name>
+            <name>Va</name>
             <address>3</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ia1</name>
+            <name>Vb</name>
             <address>4</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vc</name>
+            <address>5</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ia1</name>
+            <address>6</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -287,14 +301,14 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[[0.001]]]</execution_rates>
+        <execution_rates>[[[3e-05]]]</execution_rates>
     </model_properties>
 
     <variables>
         <cell>
-            <name>thetaPLL</name>
+            <name>omegaPLL</name>
             <type>generic</type>
-            <address>16387</address>
+            <address>16386</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -306,16 +320,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vd_G</name>
+            <name>thetaPLL</name>
             <type>generic</type>
-            <address>16384</address>
+            <address>16387</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>omegaPLL</name>
+            <name>Vd_G</name>
             <type>generic</type>
-            <address>16386</address>
+            <address>16384</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -323,13 +337,13 @@
 
     <do_var_list>
         <cell>
-            <name>grid_connect ON</name>
-            <address>2049</address>
+            <name>grid_connect OFF</name>
+            <address>2048</address>
         </cell>
 
         <cell>
-            <name>grid_connect OFF</name>
-            <address>2048</address>
+            <name>grid_connect ON</name>
+            <address>2049</address>
         </cell>
 
     </do_var_list>
@@ -352,9 +366,9 @@
         <monitor>
             <type>user</type>
             <cpu_idx>0</cpu_idx>
-            <execution_rates>[0.001]</execution_rates>
-            <execution_rate_labels>['ER0 (0.001)']</execution_rate_labels>
-            <timer_counters>[149999]</timer_counters>
+            <execution_rates>[3e-05]</execution_rates>
+            <execution_rate_labels>['ER0 (3e-05)']</execution_rate_labels>
+            <timer_counters>[4499]</timer_counters>
 
             
         </monitor>

@@ -2,15 +2,15 @@ version = 4.2
 
 //
 // Saved by sw version: 2020.3
-// Save timestamp: 23-Nov-2020 @ 10:03:06 PM
+// Save timestamp: 25-Nov-2020 @ 01:41:22 PM
 //
 
-model "PLL_test" {
+model "pll_test" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 2
-        simulation_method = exact
-        simulation_time_step = 4e-6
+        simulation_method = bilinear
+        simulation_time_step = 3e-6
         simulation_discret_scaling = 1.0
         dsp_timer_periods = 100e-6, 50e-3
         ss_calc_method = "systematic elimination"
@@ -47,7 +47,7 @@ model "PLL_test" {
         component "core/Signal Controlled Voltage Source" Va_G {
         }
         [
-            position = 7816, 8064
+            position = 8048, 8064
             rotation = right
             size = 64, 32
         ]
@@ -55,7 +55,7 @@ model "PLL_test" {
         component "core/Signal Controlled Voltage Source" Vb_G {
         }
         [
-            position = 7712, 8112
+            position = 7944, 8112
             rotation = right
             size = 64, 32
         ]
@@ -63,7 +63,7 @@ model "PLL_test" {
         component "core/Signal Controlled Voltage Source" Vc_G {
         }
         [
-            position = 7608, 8160
+            position = 7840, 8160
             rotation = right
             size = 64, 32
         ]
@@ -106,7 +106,7 @@ model "PLL_test" {
         ]
 
         component src_sine "Sinusoidal Source1" {
-            execution_rate = "Ts"
+            execution_rate = "Ts_sys"
             frequency = "60"
         }
         [
@@ -115,7 +115,7 @@ model "PLL_test" {
         ]
 
         component src_sine "Sinusoidal Source2" {
-            execution_rate = "Ts"
+            execution_rate = "Ts_sys"
             frequency = "60"
             phase = "-120"
         }
@@ -125,7 +125,7 @@ model "PLL_test" {
         ]
 
         component src_sine "Sinusoidal Source3" {
-            execution_rate = "Ts"
+            execution_rate = "Ts_sys"
             frequency = "60"
             phase = "120"
         }
@@ -161,7 +161,7 @@ model "PLL_test" {
         component src_ground gnd1 {
         }
         [
-            position = 7816, 8352
+            position = 8048, 8352
         ]
 
         component "core/Current Measurement" Ia1 {
@@ -172,10 +172,12 @@ model "PLL_test" {
             size = 64, 32
         ]
 
-        component "core/Voltage Measurement" Va1 {
+        component "core/Voltage Measurement" Va {
+            execution_rate = "Ts"
+            sig_output = "True"
         }
         [
-            position = 7920, 8136
+            position = 8152, 8136
             rotation = right
             size = 64, 32
         ]
@@ -271,17 +273,17 @@ model "PLL_test" {
 var = 0;
 /*End code section*/"
                 input_terminals_dimensions = "inherit"
-                input_terminals_feedthrough = "[\'\']"
-                input_terminals_show_labels = "[(\'in\', True)]"
+                input_terminals_feedthrough = "True"
+                input_terminals_show_labels = "True"
                 output_fnc = "/*Begin code section*/
 out = var;
 /*End code section*/"
                 output_terminals_dimensions = "inherit"
-                output_terminals_feedthrough = "[\'\']"
-                output_terminals_show_labels = "[(\'out\', True)]"
-                parameters = "real Ts_sys;"
+                output_terminals_feedthrough = "True"
+                output_terminals_show_labels = "True"
+                parameters = "real Ts;"
                 update_fnc = "/*Begin code section*/
-var += (Ts_sys*in);
+var += (Ts*in);
 /*End code section*/"
             }
             [
@@ -370,7 +372,7 @@ out = in - (6.283185307179586*floor_in);
             connect "PID controller1.out" Junction1 as Connection26
         }
         [
-            position = 7048, 8648
+            position = 6616, 8480
             scale = 1, -1
             size = 96, 56
         ]
@@ -741,6 +743,28 @@ out = in - (6.283185307179586*floor_in);
             size = 80, 136
         ]
 
+        component "core/Voltage Measurement" Vb {
+            execution_rate = "Ts"
+            sig_output = "True"
+        }
+        [
+            position = 7768, 8160
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Vc {
+            execution_rate = "Ts"
+            sig_output = "True"
+        }
+        [
+            position = 7664, 8160
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
         tag V_d_a {
             value = "VbG"
             scope = masked_subsystem
@@ -748,7 +772,7 @@ out = in - (6.283185307179586*floor_in);
             direction = out
         }
         [
-            position = 7776, 8112
+            position = 8008, 8112
             hide_name = True
             scale = -1, 1
         ]
@@ -760,7 +784,7 @@ out = in - (6.283185307179586*floor_in);
             direction = out
         }
         [
-            position = 7880, 8064
+            position = 8112, 8064
             hide_name = True
             scale = -1, 1
         ]
@@ -772,7 +796,7 @@ out = in - (6.283185307179586*floor_in);
             direction = out
         }
         [
-            position = 7672, 8160
+            position = 7904, 8160
             hide_name = True
             scale = -1, 1
         ]
@@ -811,7 +835,7 @@ out = in - (6.283185307179586*floor_in);
         ]
 
         tag Vb_G1 {
-            value = "VbG"
+            value = "Vb"
             scope = masked_subsystem
             kind = sp
             direction = out
@@ -821,44 +845,8 @@ out = in - (6.283185307179586*floor_in);
             hide_name = True
         ]
 
-        tag theta_bus {
-            value = "theta_bus"
-            scope = masked_subsystem
-            kind = sp
-            direction = in
-        }
-        [
-            position = 6200, 8528
-            hide_name = True
-            scale = -1, 1
-        ]
-
-        tag Goto32 {
-            value = "Vq_G"
-            scope = masked_subsystem
-            kind = sp
-            direction = in
-        }
-        [
-            position = 6608, 8368
-            hide_name = True
-            size = 60, 20
-        ]
-
-        tag Goto33 {
-            value = "Vd_G"
-            scope = masked_subsystem
-            kind = sp
-            direction = in
-        }
-        [
-            position = 6504, 8432
-            hide_name = True
-            size = 60, 20
-        ]
-
         tag Vc_G1 {
-            value = "VcG"
+            value = "Vc"
             scope = masked_subsystem
             kind = sp
             direction = out
@@ -869,7 +857,7 @@ out = in - (6.283185307179586*floor_in);
         ]
 
         tag Va_G1 {
-            value = "VaG"
+            value = "Va"
             scope = masked_subsystem
             kind = sp
             direction = out
@@ -879,19 +867,53 @@ out = in - (6.283185307179586*floor_in);
             hide_name = True
         ]
 
+        tag V_q_a3 {
+            value = "Va"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8192, 8168
+            hide_name = True
+            scale = -1, 1
+        ]
+
+        tag V_q_a4 {
+            value = "Vb"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7736, 8224
+            hide_name = True
+        ]
+
+        tag V_q_a5 {
+            value = "Vc"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7632, 8208
+            hide_name = True
+        ]
+
         junction Junction61 pe
         [
-            position = 7816, 8296
+            position = 8048, 8296
         ]
 
         junction Junction63 pe
         [
-            position = 7608, 8296
+            position = 7840, 8296
         ]
 
         junction Junction64 pe
         [
-            position = 7712, 8296
+            position = 7944, 8296
         ]
 
         junction Junction112 sp
@@ -901,27 +923,17 @@ out = in - (6.283185307179586*floor_in);
 
         junction Junction121 pe
         [
-            position = 7816, 7920
+            position = 8048, 7920
         ]
 
         junction Junction122 pe
         [
-            position = 7816, 8296
+            position = 8048, 8296
         ]
 
         junction Junction130 sp
         [
             position = 6976, 7792
-        ]
-
-        junction Junction58 sp
-        [
-            position = 6432, 8432
-        ]
-
-        junction Junction99 sp
-        [
-            position = 6264, 8528
         ]
 
         junction Junction100 sp
@@ -934,19 +946,29 @@ out = in - (6.283185307179586*floor_in);
             position = 6536, 8480
         ]
 
-        junction Junction103 sp
+        junction Junction131 pe
         [
-            position = 6536, 8368
+            position = 7768, 7976
+        ]
+
+        junction Junction132 pe
+        [
+            position = 7664, 8296
+        ]
+
+        junction Junction133 pe
+        [
+            position = 7768, 8296
+        ]
+
+        junction Junction134 pe
+        [
+            position = 7664, 8032
         ]
 
         connect V_q_a Va_G.in as Connection312
         connect V_d_a Vb_G.in as Connection313
         connect V_d_a2 Vc_G.in as Connection314
-        connect RL.P3 Vb_G.p_node as Connection509
-        connect RL.P5 Vc_G.p_node as Connection538
-        [
-            breakpoints = 7544, 8000; 7544, 8032; 7608, 8032
-        ]
         connect V_q_a1 Gain3.out as Connection315
         connect "Sinusoidal Source1.out" Gain3.in as Connection328
         connect Gain4.in "Sinusoidal Source3.out" as Connection789
@@ -963,19 +985,19 @@ out = in - (6.283185307179586*floor_in);
         connect "Logical operator1.in" Junction112 as Connection991
         connect RL.P1 Junction121 as Connection1027
         [
-            breakpoints = 7544, 7960; 7544, 7920
+            breakpoints = 7544, 7960; 7544, 7920; 8048, 7920
         ]
         connect Junction121 Va_G.p_node as Connection1028
         [
-            breakpoints = 7816, 7920
+            breakpoints = 8048, 7920
         ]
-        connect Va1.p_node Junction121 as Connection1029
+        connect Va.p_node Junction121 as Connection1029
         connect Junction61 Junction122 as Connection1030
         connect Junction122 Junction64 as Connection1031
         [
-            breakpoints = 7744, 8296
+            breakpoints = 7976, 8296
         ]
-        connect Va1.n_node Junction122 as Connection1032
+        connect Va.n_node Junction122 as Connection1032
         connect S4.b_out RL.P4 as Connection1090
         connect RL.P2 S4.a_out as Connection1091
         connect RL.P6 S4.c_out as Connection1092
@@ -989,25 +1011,12 @@ out = in - (6.283185307179586*floor_in);
         [
             breakpoints = 6976, 7880
         ]
-        connect Junction63 "Constant Impedance Load1.N" as Connection1143
-        [
-            breakpoints = 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296
-        ]
-        connect Goto33 Junction58 as Connection471
-        connect Junction58 Gain7.out as Connection472
-        connect Vd_G.in Junction58 as Connection473
         connect PLL.wt "Unit Delay2.in" as Connection474
         connect Gain6.in "abc to qd.d" as Connection1362
         connect Gain7.in "abc to qd.q" as Connection1363
         connect "abc to qd.c" Vc_G1 as Connection1364
         connect Vb_G1 "abc to qd.b" as Connection1365
         connect "abc to qd.a" Va_G1 as Connection1366
-        connect "abc to qd.theta" Junction99 as Connection1375
-        connect theta_bus Junction99 as Connection1377
-        connect Junction99 Junction100 as Connection1382
-        [
-            breakpoints = 6264, 8528
-        ]
         connect Junction100 "Unit Delay2.out" as Connection1383
         [
             breakpoints = 6680, 8576; 6680, 8576
@@ -1018,9 +1027,6 @@ out = in - (6.283185307179586*floor_in);
         [
             breakpoints = 6544, 8480
         ]
-        connect Goto32 Junction103 as Connection1469
-        connect Junction103 Junction102 as Connection1470
-        connect Vq_G.in Junction103 as Connection1471
         connect S4.b_in "Constant Impedance Load1.B" as Connection1473
         [
             breakpoints = 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976
@@ -1035,6 +1041,41 @@ out = in - (6.283185307179586*floor_in);
         ]
         connect omegaPLL.in Gain13.out as Connection1476
         connect Gain13.in PLL.w as Connection1477
+        connect Junction102 Vq_G.in as Connection1478
+        [
+            breakpoints = 6536, 8480; 6536, 8368
+        ]
+        connect Gain7.out Vd_G.in as Connection1479
+        [
+            breakpoints = 6432, 8432
+        ]
+        connect RL.P3 Junction131 as Connection1480
+        connect Junction131 Vb_G.p_node as Connection1481
+        connect Vb.p_node Junction131 as Connection1482
+        connect Junction132 "Constant Impedance Load1.N" as Connection1484
+        [
+            breakpoints = 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8312; 6832, 8312
+        ]
+        connect Vc.n_node Junction132 as Connection1485
+        connect Junction63 Junction133 as Connection1486
+        connect Junction133 Junction132 as Connection1487
+        connect Vb.n_node Junction133 as Connection1488
+        connect RL.P5 Junction134 as Connection1489
+        [
+            breakpoints = 7544, 8000; 7544, 8032; 7608, 8032
+        ]
+        connect Junction134 Vc_G.p_node as Connection1490
+        connect Vc.p_node Junction134 as Connection1491
+        connect Va.out V_q_a3 as Connection1492
+        connect V_q_a4 Vb.out as Connection1493
+        [
+            breakpoints = 7688, 8224; 7688, 8160
+        ]
+        connect V_q_a5 Vc.out as Connection1494
+        connect Junction100 "abc to qd.theta" as Connection1495
+        [
+            breakpoints = 6680, 8576; 6264, 8528; 6264, 8528
+        ]
     }
 
     default {
@@ -1277,9 +1318,9 @@ out = in - (6.283185307179586*floor_in);
         # To print information to the console, use info()
         
         V_G = 480
-        Ts = 1e-3
-        Ts_sys = 1e-3
-        Ts_gen = 20e-6
+        Ts = 30e-6
+        Ts_sys = 30e-6 # 0.9e-3 # 
+        Ts_gen = 30e-6
         w_0 = 2*np.pi*60
         PLL_max = 2*np.pi*63
         PLL_min = 2*np.pi*57

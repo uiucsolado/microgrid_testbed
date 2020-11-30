@@ -54,6 +54,9 @@ typedef double real;
     
     
     
+    
+    
+    
 
     
     
@@ -101,7 +104,10 @@ typedef double real;
         double _sinusoidal_source2__out;
         double _sinusoidal_source3__out;
             double _unit_delay2__out;
-                     double _abc_to_qd_constant2__out = 2.0943951023931953;
+            double _va_va1__out;
+    double _vb_va1__out;
+    double _vc_va1__out;
+             double _abc_to_qd_constant2__out = 2.0943951023931953;
                  double _abc_to_qd_constant3__out = 2.0943951023931953;
         X_Int32 _grid_connect__out;
 double _gain3__out;double _gain5__out;double _gain4__out;      double _abc_to_qd_trigonometric_function3__out;
@@ -170,6 +176,9 @@ void ReInit_user_sp_cpu0_dev0(){
   
 
                 _unit_delay2__state = 0.0;
+    
+    
+    
     
     
     
@@ -286,6 +295,15 @@ void TimerCounterHandler_0_user_sp_cpu0_dev0() {
              // Generated from the component: Unit Delay2
               _unit_delay2__out = _unit_delay2__state;
     
+             // Generated from the component: Va.Va1
+        _va_va1__out = (HIL_InFloat(0xc80000+0x3));
+
+             // Generated from the component: Vb.Va1
+        _vb_va1__out = (HIL_InFloat(0xc80000+0x4));
+
+             // Generated from the component: Vc.Va1
+        _vc_va1__out = (HIL_InFloat(0xc80000+0x5));
+
              // Generated from the component: abc to qd.Constant2
         
              // Generated from the component: abc to qd.Constant3
@@ -351,10 +369,10 @@ void TimerCounterHandler_0_user_sp_cpu0_dev0() {
                 HIL_OutFloat(137101314, (float) _gain4__out);
     
              // Generated from the component: abc to qd.Product1
-    _abc_to_qd_product1__out = (_gain3__out * _abc_to_qd_trigonometric_function3__out);
+    _abc_to_qd_product1__out = (_va_va1__out * _abc_to_qd_trigonometric_function3__out);
 
              // Generated from the component: abc to qd.Product4
-    _abc_to_qd_product4__out = (_gain3__out * _abc_to_qd_trigonometric_function5__out);
+    _abc_to_qd_product4__out = (_va_va1__out * _abc_to_qd_trigonometric_function5__out);
 
              // Generated from the component: abc to qd.Trigonometric function2
     
@@ -380,16 +398,16 @@ void TimerCounterHandler_0_user_sp_cpu0_dev0() {
                                 HIL_OutInt32(0xf00400, _logical_operator1__out != 0x0);
         
              // Generated from the component: abc to qd.Product2
-    _abc_to_qd_product2__out = (_gain5__out * _abc_to_qd_trigonometric_function2__out);
+    _abc_to_qd_product2__out = (_vb_va1__out * _abc_to_qd_trigonometric_function2__out);
 
              // Generated from the component: abc to qd.Product5
-    _abc_to_qd_product5__out = (_gain5__out * _abc_to_qd_trigonometric_function6__out);
+    _abc_to_qd_product5__out = (_vb_va1__out * _abc_to_qd_trigonometric_function6__out);
 
              // Generated from the component: abc to qd.Product3
-    _abc_to_qd_product3__out = (_gain4__out * _abc_to_qd_trigonometric_function4__out);
+    _abc_to_qd_product3__out = (_vc_va1__out * _abc_to_qd_trigonometric_function4__out);
 
              // Generated from the component: abc to qd.Product6
-    _abc_to_qd_product6__out = (_gain4__out * _abc_to_qd_trigonometric_function7__out);
+    _abc_to_qd_product6__out = (_vc_va1__out * _abc_to_qd_trigonometric_function7__out);
 
              // Generated from the component: abc to qd.Sum3
                                                         _abc_to_qd_sum3__out = _abc_to_qd_product1__out+_abc_to_qd_product2__out+_abc_to_qd_product3__out;    
@@ -452,19 +470,19 @@ void TimerCounterHandler_0_user_sp_cpu0_dev0() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.update.block.start
          // Generated from the component: Sinusoidal Source1
-          _sinusoidal_source1__current_phase += 60.0*0.001;
+          _sinusoidal_source1__current_phase += 60.0*3e-05;
     if (_sinusoidal_source1__current_phase >= 1.0f) {
         _sinusoidal_source1__current_phase -= 1.0f;
     }
   
              // Generated from the component: Sinusoidal Source2
-          _sinusoidal_source2__current_phase += 60.0*0.001;
+          _sinusoidal_source2__current_phase += 60.0*3e-05;
     if (_sinusoidal_source2__current_phase >= 1.0f) {
         _sinusoidal_source2__current_phase -= 1.0f;
     }
   
              // Generated from the component: Sinusoidal Source3
-          _sinusoidal_source3__current_phase += 60.0*0.001;
+          _sinusoidal_source3__current_phase += 60.0*3e-05;
     if (_sinusoidal_source3__current_phase >= 1.0f) {
         _sinusoidal_source3__current_phase -= 1.0f;
     }
@@ -472,15 +490,15 @@ void TimerCounterHandler_0_user_sp_cpu0_dev0() {
              // Generated from the component: Unit Delay2
               _unit_delay2__state = _pll_confine_phase__out;
     
-                                                                                                                                                         // Generated from the component: PLL.PID controller1
+                                                                                                                                                                     // Generated from the component: PLL.PID controller1
                                         if (!_pll_pid_controller1__av_active) {
-                    _pll_pid_controller1__integrator_state += 2.0 * _gain6__out * 0.001;
+                    _pll_pid_controller1__integrator_state += 2.0 * _gain6__out * 3e-05;
                 }
                                             
     
         
                      // Generated from the component: PLL.C function1
-    _pll_c_function1__var+=(0.001*_pll_c_function1__in);
+    _pll_c_function1__var+=(3e-05*_pll_c_function1__in);
 
                  // Generated from the component: PLL.confine phase
     

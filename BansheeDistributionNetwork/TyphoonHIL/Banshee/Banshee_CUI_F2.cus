@@ -1449,7 +1449,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -1507,7 +1507,7 @@ displayValue = 0.0
                 <unit><![CDATA[Hz]]></unit>
                 <automatic_unit>False</automatic_unit>
                 <updateRate>500</updateRate>
-                <decimals>2</decimals>
+                <decimals>3</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
                     <x>432.0</x>
@@ -1606,7 +1606,7 @@ displayValue = data
                     <y_title><![CDATA[y axes]]></y_title>
                     <y_range_min>-100.0</y_range_min>
                     <y_range_max>100.0</y_range_max>
-                    <time_window>100</time_window>
+                    <time_window>10</time_window>
                     <auto_scale_enabled>True</auto_scale_enabled>
                     <legend_enabled>True</legend_enabled>
                     <x_axis_title_enabled>False</x_axis_title_enabled>
@@ -1816,7 +1816,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[0.98581]]></inputValue>
+                <inputValue><![CDATA[1.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[pu]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -2171,7 +2171,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[100000.0]]></inputValue>
+                <inputValue><![CDATA[0.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[vars]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -2262,8 +2262,8 @@ displayValue = 0.0
                 <decimals>2</decimals>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>440.0</x>
-                    <y>192.0</y>
+                    <x>440</x>
+                    <y>192</y>
                     <width>272</width>
                     <height>184</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -2498,29 +2498,195 @@ referenceCurves = [refCurveData1]
                     <width>120</width>
                     <height>120</height>
                     <appearance><![CDATA[Flat]]></appearance>
-                    <state>Scope</state>
+                    <state>Capture</state>
                     <layout>None</layout>
                     <presets>
                         <active_capture_preset><![CDATA[Default]]></active_capture_preset>
                         <active_scope_preset><![CDATA[Default]]></active_scope_preset>
                         <capture name="Default">
-                            <time_interval>0.01</time_interval>
+                            <time_interval>0.1</time_interval>
                             <sample_rate>333333.3333333333</sample_rate>
                             <background_color>white</background_color>
-                            <layout>Vertical</layout>
+                            <layout>Grid</layout>
                             <legend>True</legend>
                             <analog_signals>
+                            <analog>
+                            <channel>0</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>1</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>2</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.w_bus]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>3</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vd_G]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>4</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vq_G]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>5</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).VaG]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>6</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).VbG]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>7</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).VcG]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>8</channel>
+                            <name><![CDATA[Vrms_bus201.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>9</channel>
+                            <name><![CDATA[Vrms_bus201_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>10</channel>
+                            <name><![CDATA[Vrms_bus204.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>11</channel>
+                            <name><![CDATA[Vrms_bus204_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>12</channel>
+                            <name><![CDATA[Vrms_bus204_2.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>13</channel>
+                            <name><![CDATA[Grid feeding inverter (averaged).Controller.f1]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
                             </analog_signals>
                             <digital_signals>
                             </digital_signals>
                             <trigger>
-                                <device>-1</device>
-                                <is_force>False</is_force>
+                                <device>1</device>
+                                <is_force>True</is_force>
                                 <type>Analog</type>
-                                <source>None</source>
+                                <source>Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu</source>
                                 <edge>Rising edge</edge>
                                 <treshold>0.0</treshold>
-                                <offset>0.0</offset>
+                                <offset>50.0</offset>
                                 <useFirstTrigger>False</useFirstTrigger>
                             </trigger>
                             <plotting_options in_use="False">
@@ -2545,6 +2711,8 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
+                                <num_viewport>1</num_viewport>
+                                
                            </viewports>
                         </analog>
                             <analog>
@@ -2556,11 +2724,13 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
+                                <num_viewport>1</num_viewport>
+                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>2</channel>
-                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.w_bus]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
@@ -2573,20 +2743,20 @@ referenceCurves = [refCurveData1]
                         </analog>
                             <analog>
                             <channel>3</channel>
-                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vd_G]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>2</num_viewport>
+                                <num_viewport>3</num_viewport>
                                 
                            </viewports>
                         </analog>
                             <analog>
                             <channel>4</channel>
-                            <name><![CDATA[Grid forming inverter (averaged).Ea1]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vq_G]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
@@ -2606,59 +2776,95 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>3</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>6</channel>
-                            <name><![CDATA[Vrms_bus202_2.Vinst]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).VbG]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
-                                
-                                <num_viewport>4</num_viewport>
                                 
                            </viewports>
                         </analog>
                             <analog>
                             <channel>7</channel>
-                            <name><![CDATA[Vrms_bus202.Vinst]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).VcG]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>8</channel>
+                            <name><![CDATA[Vrms_bus201.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>9</channel>
+                            <name><![CDATA[Vrms_bus201_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>10</channel>
+                            <name><![CDATA[Vrms_bus204.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>11</channel>
+                            <name><![CDATA[Vrms_bus204_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>12</channel>
+                            <name><![CDATA[Vrms_bus204_2.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>13</channel>
+                            <name><![CDATA[Grid feeding inverter (averaged).Controller.f1]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
                                 <num_viewport>4</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>0</channel>
-                            <name><![CDATA[Vs1_a]]></name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name><![CDATA[Vrms_grid.Vinst]]></name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
                                 
                            </viewports>
                         </analog>
@@ -2678,21 +2884,187 @@ referenceCurves = [refCurveData1]
                         </scope>
                         </presets>
                     <capture>
-                        <time_interval>0.01</time_interval>
+                        <time_interval>0.1</time_interval>
                         <sample_rate>333333.3333333333</sample_rate>
                         <background_color>white</background_color>
-                        <layout>Vertical</layout>
+                        <layout>Grid</layout>
                         <legend>True</legend>
                         <trigger>
                             <type>Analog</type>
-                            <source>None</source>
+                            <source>Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu</source>
                             <edge>Rising edge</edge>
                             <treshold>0.0</treshold>
-                            <offset>0.0</offset>
+                            <offset>50.0</offset>
                             <useFirstTrigger>False</useFirstTrigger>
                         </trigger>
 
                         <analog_signals>
+                            <analog>
+                            <channel>0</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|V|pu]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>1</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.|E|pu]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>1</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>2</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.w_bus]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>2</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>3</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vd_G]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>4</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vq_G]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>3</num_viewport>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>5</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).VaG]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>6</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).VbG]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>7</channel>
+                            <name><![CDATA[Grid forming inverter (averaged).VcG]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>8</channel>
+                            <name><![CDATA[Vrms_bus201.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>9</channel>
+                            <name><![CDATA[Vrms_bus201_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>10</channel>
+                            <name><![CDATA[Vrms_bus204.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>11</channel>
+                            <name><![CDATA[Vrms_bus204_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>12</channel>
+                            <name><![CDATA[Vrms_bus204_2.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>13</channel>
+                            <name><![CDATA[Grid feeding inverter (averaged).Controller.f1]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                                <num_viewport>4</num_viewport>
+                                
+                           </viewports>
+                        </analog>
                             </analog_signals>
 
                          <digital_signals>
@@ -2724,6 +3096,8 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
+                                <num_viewport>1</num_viewport>
+                                
                            </viewports>
                         </analog>
                             <analog>
@@ -2735,11 +3109,13 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
+                                <num_viewport>1</num_viewport>
+                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>2</channel>
-                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_E]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.w_bus]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
@@ -2752,20 +3128,20 @@ referenceCurves = [refCurveData1]
                         </analog>
                             <analog>
                             <channel>3</channel>
-                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.theta_V]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vd_G]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>2</num_viewport>
+                                <num_viewport>3</num_viewport>
                                 
                            </viewports>
                         </analog>
                             <analog>
                             <channel>4</channel>
-                            <name><![CDATA[Grid forming inverter (averaged).Ea1]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).BE1-25A Synchronizer.Vq_G]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
@@ -2785,59 +3161,95 @@ referenceCurves = [refCurveData1]
                             <coupling>False</coupling>
                             <viewports>
                                 
-                                <num_viewport>3</num_viewport>
-                                
                            </viewports>
                         </analog>
                             <analog>
                             <channel>6</channel>
-                            <name><![CDATA[Vrms_bus202_2.Vinst]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).VbG]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
-                                
-                                <num_viewport>4</num_viewport>
                                 
                            </viewports>
                         </analog>
                             <analog>
                             <channel>7</channel>
-                            <name><![CDATA[Vrms_bus202.Vinst]]></name>
+                            <name><![CDATA[Grid forming inverter (averaged).VcG]]></name>
                             <is_locked>False</is_locked>
                             <vertical_scale>Auto</vertical_scale>
                             <vertical_offset>0.0</vertical_offset>
                             <coupling>False</coupling>
                             <viewports>
                                 
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>8</channel>
+                            <name><![CDATA[Vrms_bus201.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>9</channel>
+                            <name><![CDATA[Vrms_bus201_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>10</channel>
+                            <name><![CDATA[Vrms_bus204.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>11</channel>
+                            <name><![CDATA[Vrms_bus204_1.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>12</channel>
+                            <name><![CDATA[Vrms_bus204_2.Vinst]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0.0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
+                           </viewports>
+                        </analog>
+                            <analog>
+                            <channel>13</channel>
+                            <name><![CDATA[Grid feeding inverter (averaged).Controller.f1]]></name>
+                            <is_locked>False</is_locked>
+                            <vertical_scale>Auto</vertical_scale>
+                            <vertical_offset>0</vertical_offset>
+                            <coupling>False</coupling>
+                            <viewports>
+                                
                                 <num_viewport>4</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>0</channel>
-                            <name><![CDATA[Vs1_a]]></name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
-                                
-                           </viewports>
-                        </analog>
-                            <analog>
-                            <channel>1</channel>
-                            <name><![CDATA[Vrms_grid.Vinst]]></name>
-                            <is_locked>False</is_locked>
-                            <vertical_scale>Auto</vertical_scale>
-                            <vertical_offset>0</vertical_offset>
-                            <coupling>False</coupling>
-                            <viewports>
-                                
-                                <num_viewport>1</num_viewport>
                                 
                            </viewports>
                         </analog>

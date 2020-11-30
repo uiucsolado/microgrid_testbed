@@ -50,37 +50,37 @@
                 <name>F2_CB1.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
-                <weight>1</weight>
-                <site>0</site>
+                <weight>0</weight>
+                <site>7</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB10.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>0</weight>
-                <site>3</site>
+                <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB11.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>1</weight>
-                <site>3</site>
+                <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB12.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>2</weight>
-                <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <site>4</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB14.Brk.S1</name>
@@ -88,56 +88,65 @@
                 <device>1</device>
                 <weight>1</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB15.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
-                <weight>0</weight>
-                <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <weight>2</weight>
+                <site>1</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB18.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
-                <weight>1</weight>
-                <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <weight>3</weight>
+                <site>1</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB19.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>0</weight>
-                <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <site>5</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB2.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>1</weight>
-                <site>4</site>
+                <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB3.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
-                <weight>2</weight>
-                <site>1</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <weight>1</weight>
+                <site>7</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB4.Brk.S1</name>
+                <type>three_phase_breaker</type>
+                <device>1</device>
+                <weight>0</weight>
+                <site>3</site>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
+            </contactor>
+            <contactor>
+                <name>F2_CB5.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>0</weight>
@@ -146,19 +155,10 @@
                 <is_closed>True</is_closed>
             </contactor>
             <contactor>
-                <name>F2_CB5.Brk.S1</name>
-                <type>three_phase_breaker</type>
-                <device>1</device>
-                <weight>2</weight>
-                <site>0</site>
-                <is_enabled>True</is_enabled>
-                <is_closed>True</is_closed>
-            </contactor>
-            <contactor>
                 <name>F2_CB6.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
-                <weight>3</weight>
+                <weight>1</weight>
                 <site>0</site>
                 <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
@@ -168,7 +168,7 @@
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>1</weight>
-                <site>2</site>
+                <site>3</site>
                 <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
@@ -177,7 +177,7 @@
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>2</weight>
-                <site>2</site>
+                <site>3</site>
                 <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
@@ -186,16 +186,16 @@
                 <type>three_phase_breaker</type>
                 <device>1</device>
                 <weight>2</weight>
-                <site>4</site>
+                <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_PCC.S1</name>
                 <type>three_phase_breaker</type>
-                <device>0</device>
-                <weight>0</weight>
-                <site>0</site>
+                <device>1</device>
+                <weight>2</weight>
+                <site>7</site>
                 <is_enabled>True</is_enabled>
                 <is_closed>True</is_closed>
             </contactor>
@@ -212,8 +212,8 @@
                 <name>Grid forming inverter (averaged).S2</name>
                 <type>three_phase_breaker</type>
                 <device>1</device>
-                <weight>0</weight>
-                <site>7</site>
+                <weight>1</weight>
+                <site>2</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
@@ -1193,7 +1193,7 @@
                 <software_value>0</software_value>
                 <locked>False</locked>
                 <digital_signal>
-                	<name>F2_PCC.S1_fb</name>
+                	<name>HIL0 AO flag</name>
                 	<device>0</device>
                 </digital_signal>
             </digital_channel>
@@ -2051,7 +2051,7 @@
             </scada_input>
             <scada_input>
                 <name>F2_PCC.F2_PCC</name>
-                <device>0</device>
+                <device>1</device>
                 <value>0.0</value>
             </scada_input>
             <scada_input>
