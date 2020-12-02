@@ -944,8 +944,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1848.0</x>
-                    <y>320.0</y>
+                    <x>1848</x>
+                    <y>320</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1816,8 +1816,8 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                 <phasors_data>
                     </phasors_data>
                 <widget_settings>
-                    <x>336.0</x>
-                    <y>0.0</y>
+                    <x>200</x>
+                    <y>0</y>
                     <width>304</width>
                     <height>304</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1852,8 +1852,8 @@ displayValue = hil.read_analog_signal('Vrms_bus101')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>520.0</x>
-                    <y>272.0</y>
+                    <x>560</x>
+                    <y>272</y>
                     <width>128</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4347,7 +4347,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[-10000.0]]></inputValue>
+                <inputValue><![CDATA[0.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[vars]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -4519,7 +4519,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[100.0]]></inputValue>
+                <inputValue><![CDATA[0.0]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[W]]></unit>
                 <hierarchy_position>3</hierarchy_position>
