@@ -68,8 +68,8 @@
                 <name>DIESEL_MCB.DG_MCB</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
-                <weight>0</weight>
-                <site>6</site>
+                <weight>1</weight>
+                <site>0</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
@@ -79,8 +79,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>5</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB10.Brk.S1</name>
@@ -88,8 +88,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB11.Brk.S1</name>
@@ -97,25 +97,25 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>1</site>
-                <is_enabled>False</is_enabled>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB12.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
-                <weight>1</weight>
-                <site>0</site>
-                <is_enabled>False</is_enabled>
+                <weight>0</weight>
+                <site>6</site>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB13.Brk.S1</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
-                <weight>2</weight>
-                <site>0</site>
-                <is_enabled>False</is_enabled>
+                <weight>1</weight>
+                <site>6</site>
+                <is_enabled>True</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
             <contactor>
@@ -124,8 +124,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>4</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB2.Brk.S1</name>
@@ -134,7 +134,7 @@
                 <weight>0</weight>
                 <site>3</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB3.Brk.S1</name>
@@ -143,7 +143,7 @@
                 <weight>1</weight>
                 <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB4.Brk.S1</name>
@@ -151,8 +151,8 @@
                 <device>0</device>
                 <weight>0</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB5.Brk.S1</name>
@@ -160,8 +160,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>2</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB6.Brk.S1</name>
@@ -169,8 +169,8 @@
                 <device>0</device>
                 <weight>1</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB7.Brk.S1</name>
@@ -178,8 +178,8 @@
                 <device>0</device>
                 <weight>2</weight>
                 <site>3</site>
-                <is_enabled>False</is_enabled>
-                <is_closed>False</is_closed>
+                <is_enabled>True</is_enabled>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F1_CB8.Brk.S1</name>
@@ -215,7 +215,7 @@
                 <weight>0</weight>
                 <site>0</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB1.Brk.S1</name>
@@ -233,7 +233,7 @@
                 <weight>0</weight>
                 <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB11.Brk.S1</name>
@@ -242,7 +242,7 @@
                 <weight>1</weight>
                 <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB12.Brk.S1</name>
@@ -269,7 +269,7 @@
                 <weight>2</weight>
                 <site>1</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB15.Brk.S1</name>
@@ -305,7 +305,7 @@
                 <weight>2</weight>
                 <site>6</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB19.Brk.S1</name>
@@ -314,7 +314,7 @@
                 <weight>0</weight>
                 <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB2.Brk.S1</name>
@@ -332,7 +332,7 @@
                 <weight>3</weight>
                 <site>1</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_CB4.Brk.S1</name>
@@ -386,7 +386,7 @@
                 <weight>2</weight>
                 <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F2_PCC.S1</name>
@@ -404,7 +404,7 @@
                 <weight>0</weight>
                 <site>1</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB2.Brk.S1</name>
@@ -413,7 +413,7 @@
                 <weight>0</weight>
                 <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB3.Brk.S1</name>
@@ -422,7 +422,7 @@
                 <weight>0</weight>
                 <site>2</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB4.Brk.S1</name>
@@ -431,7 +431,7 @@
                 <weight>0</weight>
                 <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB5.Brk.S1</name>
@@ -440,7 +440,7 @@
                 <weight>1</weight>
                 <site>1</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB6.Brk.S1</name>
@@ -449,7 +449,7 @@
                 <weight>1</weight>
                 <site>3</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB7.Brk.S1</name>
@@ -458,7 +458,7 @@
                 <weight>1</weight>
                 <site>4</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB8.Brk.S1</name>
@@ -467,7 +467,7 @@
                 <weight>2</weight>
                 <site>3</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_CB9.Brk.S1</name>
@@ -476,7 +476,7 @@
                 <weight>1</weight>
                 <site>5</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>F3_Motor.CB.S1</name>
@@ -494,7 +494,7 @@
                 <weight>0</weight>
                 <site>1</site>
                 <is_enabled>True</is_enabled>
-                <is_closed>False</is_closed>
+                <is_closed>True</is_closed>
             </contactor>
             <contactor>
                 <name>Grid feeding inverter (averaged).S1</name>
@@ -527,8 +527,8 @@
                 <name>Microturbine1.S4</name>
                 <type>three_phase_breaker</type>
                 <device>0</device>
-                <weight>1</weight>
-                <site>6</site>
+                <weight>2</weight>
+                <site>0</site>
                 <is_enabled>False</is_enabled>
                 <is_closed>False</is_closed>
             </contactor>
@@ -4356,7 +4356,7 @@
             <scada_input>
                 <name>Microturbine1.CB_control.Grid_Islanded</name>
                 <device>0</device>
-                <value>1.0</value>
+                <value>0.0</value>
             </scada_input>
             <scada_input>
                 <name>Microturbine1.Connect MCB</name>

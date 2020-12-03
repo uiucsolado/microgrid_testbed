@@ -1,4 +1,4 @@
-Model Banshee_F123_UIUC
+Model banshee_f123_uiuc
 
 REM *****************************************:
 REM * Common entries:
@@ -833,7 +833,7 @@ rtds_write 0x09640401 0x00000001
 
 REM SPC5 GDS compensation settings...
 rtds_write 0x094C0000 0x00000001
-rtds_write 0x094C0001 0x00000006
+rtds_write 0x094C0001 0x0000000A
 rtds_write 0x094C0004 0x3BDA740D
 rtds_write 0x094C0005 0xA7410000
 rtds_write 0x09500000 0x00000096

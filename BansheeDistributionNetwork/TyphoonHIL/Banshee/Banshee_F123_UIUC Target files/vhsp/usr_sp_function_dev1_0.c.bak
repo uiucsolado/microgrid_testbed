@@ -1262,7 +1262,7 @@ double _grid_forming_inverter__averaged__controller_product13__out;
 
                         double _grid_forming_inverter__averaged__be1_25a_synchronizer_hold_after_connect1__out;
                   double _grid_forming_inverter__averaged__cb_control_relational_operator5__out;
-  X_UnInt32 _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_product2__out;
+  double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_product2__out;
       double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch2__out;
   double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_product1__out;
       double _grid_feeding_inverter__averaged__controller_outer_power_loop___inner_current_loop_inner_current_control_loop_signal_switch3__out;

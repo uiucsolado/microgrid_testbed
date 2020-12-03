@@ -940,8 +940,12 @@ double _microturbine_synchonous_machine_abc_to_qd_product3__out;
 double _microturbine_synchonous_machine_abc_to_qd_product6__out;
 double _microturbine_be1_25a_synchronizer_gain7__out;
 double _microturbine_be1_25a_synchronizer_gain12__out;
-double _microturbine_be1_25a_synchronizer_limit2__out;
 double _microturbine_be1_25a_synchronizer_product3__out;
+
+double _microturbine_be1_25a_synchronizer_limit_magnitude1__in;
+
+
+double _microturbine_be1_25a_synchronizer_limit_magnitude1__out;
 double _microturbine_be1_25a_synchronizer_pll_pid_controller1__out;
 double _microturbine_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int;
 double _microturbine_be1_25a_synchronizer_product4__out;
@@ -950,7 +954,11 @@ double _microturbine_exciter_gain6__out;
 double _microturbine_governor_gain39__out;
 double _microturbine_synchonous_machine_abc_to_qd_sum3__out;
 double _microturbine_synchonous_machine_abc_to_qd_sum5__out;
-double _microturbine_be1_25a_synchronizer_limit1__out;
+
+double _microturbine_be1_25a_synchronizer_limit_magnitude2__in;
+
+
+double _microturbine_be1_25a_synchronizer_limit_magnitude2__out;
 double _microturbine_be1_25a_synchronizer_magnitude_product6__out;
 double _microturbine_be1_25a_synchronizer_magnitude_product5__out;
 double _microturbine_be1_25a_synchronizer_trigonometric_function2__out;
@@ -1193,9 +1201,11 @@ double _microturbine_exciter_rate_limit__state;
 X_Int32 _microturbine_exciter_rate_limit__first_step;
 double _microturbine_governor_exciter_activation_comparator1__state;
 double _microturbine_governor_discrete_transfer_function1__states[1];
+double _microturbine_be1_25a_synchronizer_limit_magnitude1__var;
 double _microturbine_be1_25a_synchronizer_pll_pid_controller1__integrator_state;
 X_UnInt32 _microturbine_be1_25a_synchronizer_pll_pid_controller1__av_active;
 double _microturbine_be1_25a_synchronizer_pll_pid_controller1__filter_state;
+double _microturbine_be1_25a_synchronizer_limit_magnitude2__var;
 double _microturbine_be1_25a_synchronizer_pll_c_function1__var;
 double _microturbine_governor_discrete_transfer_function2__states[2];
 double _microturbine_be1_25a_synchronizer_pll_confine_phase__x;
@@ -1301,7 +1311,7 @@ void ReInit_user_sp_cpu0_dev2() {
         _microturbine_governor_discrete_transfer_function1__states[_microturbine_governor_discrete_transfer_function1__i] = 0;
     }
     HIL_OutAO(0x4020, 0.0f);
-    HIL_OutFloat(162267136, 0.0);
+    HIL_OutFloat(166461440, 0.0);
     HIL_OutAO(0x4009, 0.0f);
     _microturbine_be1_25a_synchronizer_pll_pid_controller1__integrator_state =  376.99111843077515;
     _microturbine_be1_25a_synchronizer_pll_pid_controller1__filter_state =  0.0;
@@ -1341,9 +1351,9 @@ void ReInit_user_sp_cpu0_dev2() {
     _microturbine_cb_control_stay_connected1__var = 0;
     _microturbine_be1_25a_synchronizer_hold_after_connect__var = 0;
     _microturbine_be1_25a_synchronizer_hold_after_connect1__var = 0;
-    HIL_OutFloat(145489920, 0.0);
-    HIL_OutFloat(145489921, 0.0);
-    HIL_OutFloat(145489922, 0.0);
+    HIL_OutFloat(162267136, 0.0);
+    HIL_OutFloat(162267137, 0.0);
+    HIL_OutFloat(162267138, 0.0);
     _microturbine_be1_25a_synchronizer_hold_after_connect2__var = 0;
     HIL_OutAO(0x400c, 0.0f);
     _microturbine_be1_25a_synchronizer_hold_after_connect3__var = 0;
@@ -1398,18 +1408,18 @@ void TimerCounterHandler_0_user_sp_cpu0_dev2() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: Microturbine.Synchonous Machine.E_F.Va1
-    _microturbine_synchonous_machine_e_f_va1__out = (HIL_InFloat(0xc80000 + 0xc00));
+    _microturbine_synchonous_machine_e_f_va1__out = (HIL_InFloat(0xc80000 + 0xe00));
     // Generated from the component: Microturbine.Synchonous Machine.E_qp.Constant1
     // Generated from the component: Microturbine.Synchonous Machine.E_qp.Constant2
     // Generated from the component: Microturbine.Synchonous Machine.E_qp.Constant3
     // Generated from the component: Microturbine.Synchonous Machine.E_qp.Integrator1
     _microturbine_synchonous_machine_e_qp_integrator1__out = _microturbine_synchonous_machine_e_qp_integrator1__state;
     // Generated from the component: Microturbine.Synchonous Machine.Ia1.Ia1
-    _microturbine_synchonous_machine_ia1_ia1__out = (HIL_InFloat(0xc80000 + 0x424));
+    _microturbine_synchonous_machine_ia1_ia1__out = (HIL_InFloat(0xc80000 + 0xc10));
     // Generated from the component: Microturbine.Synchonous Machine.Ib1.Ia1
-    _microturbine_synchonous_machine_ib1_ia1__out = (HIL_InFloat(0xc80000 + 0x425));
+    _microturbine_synchonous_machine_ib1_ia1__out = (HIL_InFloat(0xc80000 + 0xc11));
     // Generated from the component: Microturbine.Synchonous Machine.Ic1.Ia1
-    _microturbine_synchonous_machine_ic1_ia1__out = (HIL_InFloat(0xc80000 + 0x426));
+    _microturbine_synchonous_machine_ic1_ia1__out = (HIL_InFloat(0xc80000 + 0xc12));
     // Generated from the component: Microturbine.Synchonous Machine.Phi_1d_a.Constant1
     // Generated from the component: Microturbine.Synchonous Machine.Phi_1d_a.Integrator1
     _microturbine_synchonous_machine_phi_1d_a_integrator1__out = _microturbine_synchonous_machine_phi_1d_a_integrator1__state;
@@ -1644,11 +1654,11 @@ void TimerCounterHandler_0_user_sp_cpu0_dev2() {
     // Generated from the component: Microturbine.Synchonous Machine.qd to abc.Sum6
     _microturbine_synchonous_machine_qd_to_abc_sum6__out = _microturbine_synchonous_machine_qd_to_abc_product5__out + _microturbine_synchonous_machine_qd_to_abc_product6__out;
     // Generated from the component: Microturbine.Synchonous Machine.Ea1.Vs1
-    HIL_OutFloat(145489920, (float) _microturbine_synchonous_machine_qd_to_abc_sum3__out);
+    HIL_OutFloat(162267136, (float) _microturbine_synchonous_machine_qd_to_abc_sum3__out);
     // Generated from the component: Microturbine.Synchonous Machine.Eb1.Vs1
-    HIL_OutFloat(145489921, (float) _microturbine_synchonous_machine_qd_to_abc_sum5__out);
+    HIL_OutFloat(162267137, (float) _microturbine_synchonous_machine_qd_to_abc_sum5__out);
     // Generated from the component: Microturbine.Synchonous Machine.Ec1.Vs1
-    HIL_OutFloat(145489922, (float) _microturbine_synchonous_machine_qd_to_abc_sum6__out);
+    HIL_OutFloat(162267138, (float) _microturbine_synchonous_machine_qd_to_abc_sum6__out);
     //@cmp.out.block.end
     //////////////////////////////////////////////////////////////////////////
     // Update block
@@ -1727,23 +1737,23 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     // Generated from the component: F3_CB3.F3_CB3
     _f3_cb3_f3_cb3__out = XIo_InInt32(0x55000148);
     // Generated from the component: F3_CB3.Meas1.IA.Ia1
-    _f3_cb3_meas1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x421));
+    _f3_cb3_meas1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x412));
     // Generated from the component: F3_CB3.Meas1.IB.Ia1
-    _f3_cb3_meas1_ib_ia1__out = (HIL_InFloat(0xc80000 + 0x422));
+    _f3_cb3_meas1_ib_ia1__out = (HIL_InFloat(0xc80000 + 0x413));
     // Generated from the component: F3_CB3.Meas1.IC.Ia1
-    _f3_cb3_meas1_ic_ia1__out = (HIL_InFloat(0xc80000 + 0x423));
+    _f3_cb3_meas1_ic_ia1__out = (HIL_InFloat(0xc80000 + 0x414));
     // Generated from the component: F3_CB3.Meas1.VA.Va1
-    _f3_cb3_meas1_va_va1__out = (HIL_InFloat(0xc80000 + 0x410));
+    _f3_cb3_meas1_va_va1__out = (HIL_InFloat(0xc80000 + 0x40b));
     // Generated from the component: F3_CB3.Meas1.VB.Va1
-    _f3_cb3_meas1_vb_va1__out = (HIL_InFloat(0xc80000 + 0x411));
+    _f3_cb3_meas1_vb_va1__out = (HIL_InFloat(0xc80000 + 0x40c));
     // Generated from the component: F3_CB3.Meas1.VC.Va1
-    _f3_cb3_meas1_vc_va1__out = (HIL_InFloat(0xc80000 + 0x412));
+    _f3_cb3_meas1_vc_va1__out = (HIL_InFloat(0xc80000 + 0x40d));
     // Generated from the component: F3_CB3.Meas2.VA.Va1
-    _f3_cb3_meas2_va_va1__out = (HIL_InFloat(0xc80000 + 0x413));
+    _f3_cb3_meas2_va_va1__out = (HIL_InFloat(0xc80000 + 0x40e));
     // Generated from the component: F3_CB3.Meas2.VB.Va1
-    _f3_cb3_meas2_vb_va1__out = (HIL_InFloat(0xc80000 + 0x414));
+    _f3_cb3_meas2_vb_va1__out = (HIL_InFloat(0xc80000 + 0x40f));
     // Generated from the component: F3_CB3.Meas2.VC.Va1
-    _f3_cb3_meas2_vc_va1__out = (HIL_InFloat(0xc80000 + 0x415));
+    _f3_cb3_meas2_vc_va1__out = (HIL_InFloat(0xc80000 + 0x410));
     // Generated from the component: F3_CB4.Brk.F3_CB4
     _f3_cb4_brk_f3_cb4__out = XIo_InFloat(0x5500014c);
     // Generated from the component: F3_CB5.Brk.F3_CB5
@@ -1858,11 +1868,11 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     // Generated from the component: Microturbine.Constant1
     // Generated from the component: Microturbine.Constant2
     // Generated from the component: Microturbine.Ea1.Va1
-    _microturbine_ea1_va1__out = (HIL_InFloat(0xc80000 + 0x416));
+    _microturbine_ea1_va1__out = (HIL_InFloat(0xc80000 + 0xc06));
     // Generated from the component: Microturbine.Eb1.Va1
-    _microturbine_eb1_va1__out = (HIL_InFloat(0xc80000 + 0x417));
+    _microturbine_eb1_va1__out = (HIL_InFloat(0xc80000 + 0xc07));
     // Generated from the component: Microturbine.Ec1.Va1
-    _microturbine_ec1_va1__out = (HIL_InFloat(0xc80000 + 0x418));
+    _microturbine_ec1_va1__out = (HIL_InFloat(0xc80000 + 0xc08));
     // Generated from the component: Microturbine.Engine.Integrator1
     _microturbine_engine_integrator1__out = _microturbine_engine_integrator1__state;
     // Generated from the component: Microturbine.Exciter.Constant1
@@ -1876,23 +1886,23 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     _microturbine_governor_integrator1__out = _microturbine_governor_integrator1__state;
     // Generated from the component: Microturbine.Governor.w_ref
     // Generated from the component: Microturbine.Three-phase Meter1.Ia.Ia1
-    _microturbine_three_phase_meter1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0x427));
+    _microturbine_three_phase_meter1_ia_ia1__out = (HIL_InFloat(0xc80000 + 0xc13));
     // Generated from the component: Microturbine.Three-phase Meter1.Ib.Ia1
-    _microturbine_three_phase_meter1_ib_ia1__out = (HIL_InFloat(0xc80000 + 0x428));
+    _microturbine_three_phase_meter1_ib_ia1__out = (HIL_InFloat(0xc80000 + 0xc14));
     // Generated from the component: Microturbine.Three-phase Meter1.Ic.Ia1
-    _microturbine_three_phase_meter1_ic_ia1__out = (HIL_InFloat(0xc80000 + 0x429));
+    _microturbine_three_phase_meter1_ic_ia1__out = (HIL_InFloat(0xc80000 + 0xc15));
     // Generated from the component: Microturbine.Three-phase Meter1.Va_G1.Va1
-    _microturbine_three_phase_meter1_va_g1_va1__out = (HIL_InFloat(0xc80000 + 0x419));
+    _microturbine_three_phase_meter1_va_g1_va1__out = (HIL_InFloat(0xc80000 + 0xc09));
     // Generated from the component: Microturbine.Three-phase Meter1.Vb_G1.Va1
-    _microturbine_three_phase_meter1_vb_g1_va1__out = (HIL_InFloat(0xc80000 + 0x41a));
+    _microturbine_three_phase_meter1_vb_g1_va1__out = (HIL_InFloat(0xc80000 + 0xc0a));
     // Generated from the component: Microturbine.Three-phase Meter1.Vc_G1.Va1
-    _microturbine_three_phase_meter1_vc_g1_va1__out = (HIL_InFloat(0xc80000 + 0x41b));
+    _microturbine_three_phase_meter1_vc_g1_va1__out = (HIL_InFloat(0xc80000 + 0xc0b));
     // Generated from the component: NG_MCB.VA_grid_2.Va1
-    _ng_mcb_va_grid_2_va1__out = (HIL_InFloat(0xc80000 + 0x41d));
+    _ng_mcb_va_grid_2_va1__out = (HIL_InFloat(0xc80000 + 0xc0d));
     // Generated from the component: NG_MCB.VB_grid_2.Va1
-    _ng_mcb_vb_grid_2_va1__out = (HIL_InFloat(0xc80000 + 0x41e));
+    _ng_mcb_vb_grid_2_va1__out = (HIL_InFloat(0xc80000 + 0xc0e));
     // Generated from the component: NG_MCB.VC_grid_2.Va1
-    _ng_mcb_vc_grid_2_va1__out = (HIL_InFloat(0xc80000 + 0x41f));
+    _ng_mcb_vc_grid_2_va1__out = (HIL_InFloat(0xc80000 + 0xc0f));
     // Generated from the component: 3ph Fault 301.S1.CTC_Wrapper
     if (_3ph_fault_301_ctrl__out == 0x0) {
         HIL_OutInt32(0x8240480, 0x0);
@@ -2084,10 +2094,10 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     HIL_OutInt32(0xf0040a, _microturbine_connect_mcb__out != 0x0);
     // Generated from the component: NG_MCB.NG_MCB.CTC_Wrapper
     if (_microturbine_connect_mcb__out == 0x0) {
-        HIL_OutInt32(0x8a40482, 0x0);
+        HIL_OutInt32(0x9a40481, 0x0);
     }
     else {
-        HIL_OutInt32(0x8a40482, 0x1);
+        HIL_OutInt32(0x9a40481, 0x1);
     }
     // Generated from the component: Microturbine.CB_control.Logical operator2
     _microturbine_cb_control_logical_operator2__out = _microturbine_connect_mt__out && _microturbine_connect_mcb__out ;
@@ -2431,7 +2441,7 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Gain6
     _microturbine_be1_25a_synchronizer_gain6__out = -8.874962836170933e-05 * _microturbine_be1_25a_synchronizer_abc_to_qd_gain2__out;
     // Generated from the component: Microturbine.V_F.Vs1
-    HIL_OutFloat(162267136, (float) _microturbine_exciter_gain18__out);
+    HIL_OutFloat(166461440, (float) _microturbine_exciter_gain18__out);
     // Generated from the component: Microturbine.Exciter.PI.Kb
     _microturbine_exciter_pi_kb__out = 1.0 * _microturbine_exciter_pi_sum6__out;
     // Generated from the component: Microturbine.Exciter.Sum3
@@ -2444,12 +2454,13 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     _microturbine_be1_25a_synchronizer_gain7__out = 8.874962836170933e-05 * _microturbine_be1_25a_synchronizer_abc_to_qd1_gain1__out;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Gain12
     _microturbine_be1_25a_synchronizer_gain12__out = -8.874962836170933e-05 * _microturbine_be1_25a_synchronizer_abc_to_qd1_gain2__out;
-    // Generated from the component: Microturbine.BE1-25A Synchronizer.Limit2
-    _microturbine_be1_25a_synchronizer_limit2__out = MAX(_microturbine_be1_25a_synchronizer_gain5__out, 1e-12);
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Product3
     _microturbine_be1_25a_synchronizer_product3__out = (_microturbine_be1_25a_synchronizer_gain5__out * _microturbine_be1_25a_synchronizer_gain5__out);
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Vd_G
     HIL_OutAO(0x4009, (float)_microturbine_be1_25a_synchronizer_gain5__out);
+    // Generated from the component: Microturbine.BE1-25A Synchronizer.limit magnitude1
+    _microturbine_be1_25a_synchronizer_limit_magnitude1__in = _microturbine_be1_25a_synchronizer_gain5__out;
+    _microturbine_be1_25a_synchronizer_limit_magnitude1__out = _microturbine_be1_25a_synchronizer_limit_magnitude1__var;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.PLL.PID controller1
     _microturbine_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int = _microturbine_be1_25a_synchronizer_pll_pid_controller1__integrator_state + 5.0 * _microturbine_be1_25a_synchronizer_gain6__out;
     if (_microturbine_be1_25a_synchronizer_pll_pid_controller1__pi_reg_out_int < 358.1415625092364)
@@ -2471,8 +2482,9 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     _microturbine_governor_gain39__out = 10.0 * _microturbine_governor_gain38__out;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.E_d
     HIL_OutAO(0x4007, (float)_microturbine_be1_25a_synchronizer_gain7__out);
-    // Generated from the component: Microturbine.BE1-25A Synchronizer.Limit1
-    _microturbine_be1_25a_synchronizer_limit1__out = MAX(_microturbine_be1_25a_synchronizer_gain7__out, 1e-12);
+    // Generated from the component: Microturbine.BE1-25A Synchronizer.limit magnitude2
+    _microturbine_be1_25a_synchronizer_limit_magnitude2__in = _microturbine_be1_25a_synchronizer_gain7__out;
+    _microturbine_be1_25a_synchronizer_limit_magnitude2__out = _microturbine_be1_25a_synchronizer_limit_magnitude2__var;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.magnitude.Product6
     _microturbine_be1_25a_synchronizer_magnitude_product6__out = (_microturbine_be1_25a_synchronizer_gain7__out * _microturbine_be1_25a_synchronizer_gain7__out);
     // Generated from the component: Microturbine.BE1-25A Synchronizer.E_q
@@ -2480,7 +2492,7 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     // Generated from the component: Microturbine.BE1-25A Synchronizer.magnitude.Product5
     _microturbine_be1_25a_synchronizer_magnitude_product5__out = (_microturbine_be1_25a_synchronizer_gain12__out * _microturbine_be1_25a_synchronizer_gain12__out);
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Trigonometric function2
-    _microturbine_be1_25a_synchronizer_trigonometric_function2__out = atan2(_microturbine_be1_25a_synchronizer_gain6__out, _microturbine_be1_25a_synchronizer_limit2__out);
+    _microturbine_be1_25a_synchronizer_trigonometric_function2__out = atan2(_microturbine_be1_25a_synchronizer_gain6__out, _microturbine_be1_25a_synchronizer_limit_magnitude1__out);
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Gain13
     _microturbine_be1_25a_synchronizer_gain13__out = 0.0026525823848649226 * _microturbine_be1_25a_synchronizer_pll_pid_controller1__out;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.PLL.C function1
@@ -2505,7 +2517,7 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     _microturbine_governor_discrete_transfer_function2__b_sum += _microturbine_governor_discrete_transfer_function2__b_coeff[0] * _microturbine_governor_discrete_transfer_function2__delay_line_in;
     _microturbine_governor_discrete_transfer_function2__out = _microturbine_governor_discrete_transfer_function2__b_sum;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Trigonometric function1
-    _microturbine_be1_25a_synchronizer_trigonometric_function1__out = atan2(_microturbine_be1_25a_synchronizer_gain12__out, _microturbine_be1_25a_synchronizer_limit1__out);
+    _microturbine_be1_25a_synchronizer_trigonometric_function1__out = atan2(_microturbine_be1_25a_synchronizer_gain12__out, _microturbine_be1_25a_synchronizer_limit_magnitude2__out);
     // Generated from the component: Microturbine.BE1-25A Synchronizer.magnitude.Sum3
     _microturbine_be1_25a_synchronizer_magnitude_sum3__out = _microturbine_be1_25a_synchronizer_magnitude_product5__out + _microturbine_be1_25a_synchronizer_magnitude_product6__out;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Gain16
@@ -2677,10 +2689,10 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     _microturbine_cb_control_logical_operator3__out = !_microturbine_cb_control_stay_connected1__action;
     // Generated from the component: Microturbine.S4.CTC_Wrapper
     if (_microturbine_cb_control_stay_connected1__action == 0x0) {
-        HIL_OutInt32(0x8a40481, 0x0);
+        HIL_OutInt32(0x9a40480, 0x0);
     }
     else {
-        HIL_OutInt32(0x8a40481, 0x1);
+        HIL_OutInt32(0x9a40480, 0x1);
     }
     // Generated from the component: Microturbine.BE1-25A Synchronizer.Hold after connect2
     _microturbine_be1_25a_synchronizer_hold_after_connect2__connect = _microturbine_cb_control_stay_connected1__action;
@@ -2853,10 +2865,18 @@ void TimerCounterHandler_1_user_sp_cpu0_dev2() {
     // Generated from the component: Microturbine.Governor.Exciter Activation.Activate Exciter
     // Generated from the component: Microturbine.Governor.Discrete Transfer Function1
     _microturbine_governor_discrete_transfer_function1__states[0] = _microturbine_governor_discrete_transfer_function1__delay_line_in;
+    // Generated from the component: Microturbine.BE1-25A Synchronizer.limit magnitude1
+    _microturbine_be1_25a_synchronizer_limit_magnitude1__var = _microturbine_be1_25a_synchronizer_limit_magnitude1__in;
+    if ((_microturbine_be1_25a_synchronizer_limit_magnitude1__var < 1e-12) && (_microturbine_be1_25a_synchronizer_limit_magnitude1__var >= 0))_microturbine_be1_25a_synchronizer_limit_magnitude1__var = 1e-12;
+    else if ((_microturbine_be1_25a_synchronizer_limit_magnitude1__var > -1e-12) && (_microturbine_be1_25a_synchronizer_limit_magnitude1__var < 0))_microturbine_be1_25a_synchronizer_limit_magnitude1__var = 1e-12;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.PLL.PID controller1
     if (!_microturbine_be1_25a_synchronizer_pll_pid_controller1__av_active) {
         _microturbine_be1_25a_synchronizer_pll_pid_controller1__integrator_state += 2.0 * _microturbine_be1_25a_synchronizer_gain6__out * 0.0009;
     }
+    // Generated from the component: Microturbine.BE1-25A Synchronizer.limit magnitude2
+    _microturbine_be1_25a_synchronizer_limit_magnitude2__var = _microturbine_be1_25a_synchronizer_limit_magnitude2__in;
+    if ((_microturbine_be1_25a_synchronizer_limit_magnitude2__var < 1e-12) && (_microturbine_be1_25a_synchronizer_limit_magnitude2__var >= 0))_microturbine_be1_25a_synchronizer_limit_magnitude2__var = 1e-12;
+    else if ((_microturbine_be1_25a_synchronizer_limit_magnitude2__var > -1e-12) && (_microturbine_be1_25a_synchronizer_limit_magnitude2__var < 0))_microturbine_be1_25a_synchronizer_limit_magnitude2__var = 1e-12;
     // Generated from the component: Microturbine.BE1-25A Synchronizer.PLL.C function1
     _microturbine_be1_25a_synchronizer_pll_c_function1__var += (0.0009 * _microturbine_be1_25a_synchronizer_pll_c_function1__in);
     // Generated from the component: Microturbine.Governor.Discrete Transfer Function2

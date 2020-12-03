@@ -145,7 +145,7 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev3() {
     //////////////////////////////////////////////////////////////////////////
     //@cmp.out.block.start
     // Generated from the component: Vrms_grid.Vinst.Va1
-    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x18));
+    _vrms_grid_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x1e));
     // Generated from the component: Vrms_grid.rms_calc_fast
     _vrms_grid_rms_calc_fast__v_sq_sum_state = _vrms_grid_rms_calc_fast__v_sq_sum_state + _vrms_grid_vinst_va1__out * _vrms_grid_vinst_va1__out;
     //square sum and period update on period end

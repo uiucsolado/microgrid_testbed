@@ -1,4 +1,4 @@
-Model Banshee_F123_UIUC
+Model banshee_f123_uiuc
 
 REM *****************************************:
 REM * Common entries:
@@ -390,7 +390,7 @@ rtds_file_write 0x08882000 SPC2_MAC1.txt
 rtds_file_write 0x08884000 SPC2_MAC2.txt
 rtds_file_write 0x08886000 SPC2_MAC3.txt
 
-rtds_write 0x08900004 0x00000007
+rtds_write 0x08900004 0x00000001
 REM SPC2 Contactors initialization...
 rtds_write 0x08A40000 0x00000000
 rtds_write 0x08A40080 0x00000000
@@ -401,28 +401,10 @@ rtds_write 0x08A40280 0x00000000
 rtds_write 0x08A40300 0x00000000
 rtds_write 0x08A40380 0x00000000
 rtds_write 0x08A40400 0x00000001
-rtds_write 0x08A40001 0x00000000
-rtds_write 0x08A40081 0x00000000
-rtds_write 0x08A40101 0x00000000
-rtds_write 0x08A40181 0x00000000
-rtds_write 0x08A40201 0x00000000
-rtds_write 0x08A40281 0x00000000
-rtds_write 0x08A40301 0x00000000
-rtds_write 0x08A40381 0x00000000
-rtds_write 0x08A40401 0x00000001
-rtds_write 0x08A40002 0x00000000
-rtds_write 0x08A40082 0x00000007
-rtds_write 0x08A40102 0x00000000
-rtds_write 0x08A40182 0x00000000
-rtds_write 0x08A40202 0x00000000
-rtds_write 0x08A40282 0x00000000
-rtds_write 0x08A40302 0x00000000
-rtds_write 0x08A40382 0x00000000
-rtds_write 0x08A40402 0x00000001
 
 REM SPC2 GDS compensation settings...
 rtds_write 0x088C0000 0x00000001
-rtds_write 0x088C0001 0x00000010
+rtds_write 0x088C0001 0x0000000B
 rtds_write 0x088C0004 0x3BDA740D
 rtds_write 0x088C0005 0xA7410000
 rtds_write 0x08900000 0x00000096
@@ -893,12 +875,30 @@ rtds_file_write 0x09882000 SPC6_MAC1.txt
 rtds_file_write 0x09884000 SPC6_MAC2.txt
 rtds_file_write 0x09886000 SPC6_MAC3.txt
 
-rtds_write 0x09900004 0x00000000
+rtds_write 0x09900004 0x00000003
 REM SPC6 Contactors initialization...
+rtds_write 0x09A40000 0x00000000
+rtds_write 0x09A40080 0x00000000
+rtds_write 0x09A40100 0x00000000
+rtds_write 0x09A40180 0x00000000
+rtds_write 0x09A40200 0x00000000
+rtds_write 0x09A40280 0x00000000
+rtds_write 0x09A40300 0x00000000
+rtds_write 0x09A40380 0x00000000
+rtds_write 0x09A40400 0x00000001
+rtds_write 0x09A40001 0x00000000
+rtds_write 0x09A40081 0x00000007
+rtds_write 0x09A40101 0x00000000
+rtds_write 0x09A40181 0x00000000
+rtds_write 0x09A40201 0x00000000
+rtds_write 0x09A40281 0x00000000
+rtds_write 0x09A40301 0x00000000
+rtds_write 0x09A40381 0x00000000
+rtds_write 0x09A40401 0x00000001
 
 REM SPC6 GDS compensation settings...
 rtds_write 0x098C0000 0x00000001
-rtds_write 0x098C0001 0x00000000
+rtds_write 0x098C0001 0x00000006
 rtds_write 0x098C0004 0x3BDA740D
 rtds_write 0x098C0005 0xA7410000
 rtds_write 0x09900000 0x00000096
@@ -916,7 +916,7 @@ REM *****************************************:
 REM SPC7 Topology Selector (TS) initialization...
 rtds_file_write 0x09D80000 SPC7_red_table.txt
 
-rtds_write 0x09D00020 0x00000000
+rtds_write 0x09D00020 0x00000001
 rtds_write 0x09D00021 0x00000000
 rtds_write 0x09D00023 0x00000000
 rtds_write 0x09D00024 0x00000000
@@ -937,7 +937,7 @@ rtds_write 0x09D00038 0x00000000
 rtds_write 0x09D00039 0x00000000
 rtds_file_write 0x09D40000 trivial_imem.txt
 rtds_file_write 0x09D42000 trivial_lut.txt
-rtds_write 0x09D00040 0x00000000
+rtds_write 0x09D00040 0x00000001
 rtds_write 0x09D00041 0x00000000
 rtds_write 0x09D00043 0x00000000
 rtds_write 0x09D00044 0x00000000
@@ -958,7 +958,7 @@ rtds_write 0x09D00058 0x00000000
 rtds_write 0x09D00059 0x00000000
 rtds_file_write 0x09D48000 trivial_imem.txt
 rtds_file_write 0x09D4A000 trivial_lut.txt
-rtds_write 0x09D00060 0x00000000
+rtds_write 0x09D00060 0x00000001
 rtds_write 0x09D00061 0x00000000
 rtds_write 0x09D00063 0x00000000
 rtds_write 0x09D00064 0x00000000
@@ -998,11 +998,11 @@ rtds_write 0x09D00004 0x00000000
 REM SPC7 Contactors initialization...
 
 REM SPC7 GDS compensation settings...
-rtds_write 0x09CC0000 0x00000000
+rtds_write 0x09CC0000 0x00000001
 rtds_write 0x09CC0001 0x00000000
-rtds_write 0x09CC0004 0x00000000
-rtds_write 0x09CC0005 0x00000000
-rtds_write 0x09D00000 0x00000000
+rtds_write 0x09CC0004 0x3BDA740D
+rtds_write 0x09CC0005 0xA7410000
+rtds_write 0x09D00000 0x00000096
 
 REM SPC7 FSM digital input pin assignments...
 

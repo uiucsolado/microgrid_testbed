@@ -944,8 +944,8 @@ displayValue = False
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1848</x>
-                    <y>320</y>
+                    <x>1848.0</x>
+                    <y>320.0</y>
                     <width>56</width>
                     <height>32</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1816,8 +1816,8 @@ displayValue = [['Complex power [kVA]', 180*phase_P/3.14,   magnitude_P ]]
                 <phasors_data>
                     </phasors_data>
                 <widget_settings>
-                    <x>200</x>
-                    <y>0</y>
+                    <x>200.0</x>
+                    <y>0.0</y>
                     <width>304</width>
                     <height>304</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -1852,8 +1852,8 @@ displayValue = hil.read_analog_signal('Vrms_bus101')/1000
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>560</x>
-                    <y>272</y>
+                    <x>560.0</x>
+                    <y>272.0</y>
                     <width>128</width>
                     <height>56</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -5832,8 +5832,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>408.0</x>
-                    <y>408.0</y>
+                    <x>408</x>
+                    <y>408</y>
                     <width>480</width>
                     <height>256</height>
                     <appearance><![CDATA[Flat]]></appearance>
