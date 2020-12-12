@@ -1,4 +1,4 @@
-Model pll_test
+Model PLL_test
 
 REM *****************************************:
 REM * Common entries:

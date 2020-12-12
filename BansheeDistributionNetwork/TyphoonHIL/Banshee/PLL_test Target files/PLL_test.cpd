@@ -306,9 +306,9 @@
 
     <variables>
         <cell>
-            <name>omegaPLL</name>
+            <name>Vd_G</name>
             <type>generic</type>
-            <address>16386</address>
+            <address>16384</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -320,16 +320,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>thetaPLL</name>
+            <name>omegaPLL</name>
             <type>generic</type>
-            <address>16387</address>
+            <address>16386</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vd_G</name>
+            <name>thetaPLL</name>
             <type>generic</type>
-            <address>16384</address>
+            <address>16387</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -337,13 +337,13 @@
 
     <do_var_list>
         <cell>
-            <name>grid_connect OFF</name>
-            <address>2048</address>
+            <name>grid_connect ON</name>
+            <address>2049</address>
         </cell>
 
         <cell>
-            <name>grid_connect ON</name>
-            <address>2049</address>
+            <name>grid_connect OFF</name>
+            <address>2048</address>
         </cell>
 
     </do_var_list>
