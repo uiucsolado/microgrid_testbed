@@ -1,0 +1,20 @@
+<model_description>
+    <sw_version>2020.3</sw_version>
+    <system_description>
+        <nb_devices>2</nb_devices>
+        <hw_properties>
+            <revision>3</revision>
+            <product_id>HIL603</product_id>
+            <configuration_id>2</configuration_id>
+            <fw_support_limit>132385281</fw_support_limit>
+        </hw_properties>
+    </system_description>
+    <target_files_directories>
+        <cell>0</cell>
+        <cell>1</cell>
+    </target_files_directories>
+
+    <model_properties>
+        <execution_rates>[[[0.001]], [[4e-05, 8e-05, 0.001]]]</execution_rates>
+    </model_properties>
+</model_description>

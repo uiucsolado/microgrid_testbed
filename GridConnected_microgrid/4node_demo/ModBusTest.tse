@@ -1,11 +1,11 @@
 version = 4.2
 
 //
-// Saved by sw version: 2019.1
-// Save timestamp: 23-Oct-2019 @ 01:24:51 PM
+// Saved by sw version: 2020.2
+// Save timestamp: 10-Sep-2020 @ 03:17:27 PM
 //
 
-model "modbustest" {
+model "ModBusTest" {
     configuration {
         hil_device = "HIL603"
         hil_configuration_id = 2
@@ -28,6 +28,17 @@ model "modbustest" {
         user_real_type_precision = "default"
         sys_cpu_optimization = "high"
         user_cpu_optimization = "high"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
     }
 
     component Subsystem Root {
@@ -1105,16 +1116,6 @@ else if(temp < -1e7)
             execution_rate = "inherit"
         }
 
-        gen_probe {
-            addr = "0"
-            override_signal_name = "False"
-            signal_name = ""
-            signal_type = "generic"
-            streaming_en = "False"
-            streaming_er_idx = "0"
-            execution_rate = "inherit"
-        }
-
         gen_product {
             signs = "2"
             execution_rate = "inherit"
@@ -1147,6 +1148,12 @@ else if(temp < -1e7)
             hil_id = "0"
             configuration = "config1"
             preview = "Configuration preview"
+            network_settings_src = "Configuration dictionary"
+            ip_addr = "192.168.0.210"
+            netmask = "255.255.255.0"
+            port = "502"
+            gateway = "192.168.0.210"
+            gateway_enable = "False"
             ip_address_port = "False"
             request_counter_port = "None"
             defines = ""

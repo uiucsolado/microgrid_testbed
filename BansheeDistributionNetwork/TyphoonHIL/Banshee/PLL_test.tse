@@ -1,0 +1,1329 @@
+version = 4.2
+
+//
+// Saved by sw version: 2020.3
+// Save timestamp: 25-Nov-2020 @ 01:41:22 PM
+//
+
+model "pll_test" {
+    configuration {
+        hil_device = "HIL603"
+        hil_configuration_id = 2
+        simulation_method = bilinear
+        simulation_time_step = 3e-6
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        device_ao_limit_enable = True
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "external memory"
+        data_section = "external memory"
+        sys_sp_rate_1 = 0.0005
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "double precision"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "medium"
+        user_cpu_part_option = "default"
+        matrix_based_reduction = True
+        cpl_dynamics_analysis = False
+        export_ss_to_pickle = False
+        cce_platform = "generic"
+        cce_use_relative_names = False
+        cce_type_mapping_real = "double"
+        cce_type_mapping_uint = "unsigned int"
+        cce_type_mapping_int = "int"
+        cce_directory = ""
+        cce_custom_type_int = ""
+        cce_custom_type_uint = ""
+        cce_custom_type_real = ""
+    }
+
+    component Subsystem Root {
+        component "core/Signal Controlled Voltage Source" Va_G {
+        }
+        [
+            position = 8048, 8064
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Signal Controlled Voltage Source" Vb_G {
+        }
+        [
+            position = 7944, 8112
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Signal Controlled Voltage Source" Vc_G {
+        }
+        [
+            position = 7840, 8160
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/RL Section" RL {
+            inductance_per_l_mile = "1.6e-3"
+            length_mile = "2"
+            resistance_per_l_mile = "0.57"
+        }
+        [
+            position = 7400, 7976
+            size = 256, 56
+        ]
+
+        component "core/Constant Impedance Load" "Constant Impedance Load1" {
+            SAB = "1000.0/3"
+            SAn = "1000.0/3"
+            SBC = "1000.0/3"
+            SBn = "1000.0/3"
+            SCA = "1000.0/3"
+            SCn = "1000.0/3"
+            Sn_3ph = "1.0e3"
+            VAB = "V_G"
+            VAn = "V_G/(3**0.5)"
+            VBC = "V_G"
+            VBn = "V_G/(3**0.5)"
+            VCA = "V_G"
+            VCn = "V_G/(3**0.5)"
+            Vn_3ph = "V_G"
+            enable_neutral = "True"
+            pfA = "0.85"
+            pfB = "0.85"
+            pfC = "0.85"
+            pf_3ph = "0.85"
+        }
+        [
+            position = 6832, 8176
+            hide_name = True
+            size = 104, 152
+        ]
+
+        component src_sine "Sinusoidal Source1" {
+            execution_rate = "Ts_sys"
+            frequency = "60"
+        }
+        [
+            position = 7344, 8064
+            hide_name = True
+        ]
+
+        component src_sine "Sinusoidal Source2" {
+            execution_rate = "Ts_sys"
+            frequency = "60"
+            phase = "-120"
+        }
+        [
+            position = 7344, 8112
+            hide_name = True
+        ]
+
+        component src_sine "Sinusoidal Source3" {
+            execution_rate = "Ts_sys"
+            frequency = "60"
+            phase = "120"
+        }
+        [
+            position = 7344, 8160
+            hide_name = True
+        ]
+
+        component gen_gain Gain3 {
+            gain = "V_G*np.sqrt(2)/np.sqrt(3)"
+        }
+        [
+            position = 7432, 8064
+            hide_name = True
+        ]
+
+        component gen_gain Gain4 {
+            gain = "V_G*np.sqrt(2)/np.sqrt(3)"
+        }
+        [
+            position = 7432, 8160
+            hide_name = True
+        ]
+
+        component gen_gain Gain5 {
+            gain = "V_G*np.sqrt(2)/np.sqrt(3)"
+        }
+        [
+            position = 7432, 8112
+            hide_name = True
+        ]
+
+        component src_ground gnd1 {
+        }
+        [
+            position = 8048, 8352
+        ]
+
+        component "core/Current Measurement" Ia1 {
+        }
+        [
+            position = 6800, 8048
+            rotation = right
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Va {
+            execution_rate = "Ts"
+            sig_output = "True"
+        }
+        [
+            position = 8152, 8136
+            rotation = right
+            size = 64, 32
+        ]
+
+        component gen_logic_op "Logical operator1" {
+            operator = "NOT"
+        }
+        [
+            position = 6976, 7832
+            rotation = right
+            hide_name = True
+        ]
+
+        component gen_digital_probe "grid_connect OFF" {
+        }
+        [
+            position = 7008, 7880
+        ]
+
+        component gen_digital_probe "grid_connect ON" {
+        }
+        [
+            position = 7008, 7768
+            rotation = down
+            scale = -1, 1
+        ]
+
+        component src_scada_input grid_connect {
+            execution_rate = "Ts"
+            format = "int"
+            max = "1"
+            min = "0"
+            signal_type = "int"
+            unit = ""
+        }
+        [
+            position = 6912, 7792
+        ]
+
+        component "core/Triple Pole Single Throw Contactor" S4 {
+            ctrl_src = "Model"
+        }
+        [
+            position = 7168, 7976
+            hide_name = True
+            size = 64, 256
+        ]
+
+        component tm_delay "Unit Delay2" {
+        }
+        [
+            position = 6680, 8544
+            rotation = right
+            hide_name = True
+        ]
+
+        component gen_gain Gain6 {
+            gain = "-1/V_DQ"
+        }
+        [
+            position = 6440, 8480
+            hide_name = True
+        ]
+
+        component gen_gain Gain7 {
+            gain = "1/V_DQ"
+        }
+        [
+            position = 6400, 8432
+            hide_name = True
+        ]
+
+        component Subsystem PLL {
+            layout = dynamic
+            component gen_pid_controller "PID controller1" {
+                controller_type = "PI"
+                enb_anti_windup_out = "True"
+                enb_output_limit_out = "True"
+                int_init_value = "w_0"
+                ki = "2"
+                kp = "5"
+                lower_sat_lim = "PLL_min"
+                upper_sat_lim = "PLL_max"
+            }
+            [
+                position = 8128, 8152
+                hide_name = True
+            ]
+
+            component gen_c_function "C function1" {
+                global_variables = "real var;"
+                init_fnc = "/*Begin code section*/
+var = 0;
+/*End code section*/"
+                input_terminals_dimensions = "inherit"
+                input_terminals_feedthrough = "True"
+                input_terminals_show_labels = "True"
+                output_fnc = "/*Begin code section*/
+out = var;
+/*End code section*/"
+                output_terminals_dimensions = "inherit"
+                output_terminals_feedthrough = "True"
+                output_terminals_show_labels = "True"
+                parameters = "real Ts;"
+                update_fnc = "/*Begin code section*/
+var += (Ts*in);
+/*End code section*/"
+            }
+            [
+                position = 8304, 8152
+                hide_name = True
+                size = 80, 48
+            ]
+
+            component gen_c_function "confine phase" {
+                global_variables = "real x;real floor_in;"
+                init_fnc = "/*Begin code section*/
+floor_in = 0;
+/*End code section*/"
+                input_terminals_dimensions = "inherit"
+                input_terminals_feedthrough = "[\'\']"
+                input_terminals_show_labels = "[(\'in\', True)]"
+                output_fnc = "/*Begin code section*/
+x = in/6.283185307179586;
+floor_in = floor(x);
+out = in - (6.283185307179586*floor_in);
+/*End code section*/"
+                output_terminals_dimensions = "inherit"
+                output_terminals_feedthrough = "[\'\']"
+                output_terminals_show_labels = "[(\'out\', True)]"
+            }
+            [
+                position = 8408, 8152
+                size = 56, 48
+            ]
+
+            port wt {
+                label = "wt"
+                position = right:1
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8496, 8152
+            ]
+
+            port w {
+                label = "w"
+                position = right:1
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8304, 8208
+            ]
+
+            port d {
+                label = "-d"
+                position = left:1
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 8064, 8152
+            ]
+
+            junction Junction1 sp
+            [
+                position = 8240, 8152
+            ]
+
+            connect wt "confine phase.out" as Connection14
+            connect "confine phase.in" "C function1.out" as Connection16
+            connect d "PID controller1.in" as Connection20
+            connect w Junction1 as Connection24
+            connect Junction1 "C function1.in" as Connection25
+            [
+                breakpoints = 8240, 8152
+            ]
+            connect "PID controller1.out" Junction1 as Connection26
+        }
+        [
+            position = 6616, 8480
+            scale = 1, -1
+            size = 96, 56
+        ]
+
+        component gen_probe Vd_G {
+        }
+        [
+            position = 6392, 8368
+            scale = -1, 1
+        ]
+
+        component gen_probe Vq_G {
+        }
+        [
+            position = 6496, 8368
+            scale = -1, 1
+        ]
+
+        component gen_probe thetaPLL {
+        }
+        [
+            position = 6736, 8592
+        ]
+
+        component gen_probe omegaPLL {
+        }
+        [
+            position = 6800, 8472
+        ]
+
+        component gen_gain Gain13 {
+            gain = "1/w_0"
+        }
+        [
+            position = 6736, 8472
+            hide_name = True
+        ]
+
+        component Subsystem "abc to qd" {
+            layout = dynamic
+            component gen_trigonometric "Trigonometric function3" {
+                trigonometric_fn = "cos"
+            }
+            [
+                position = 8128, 7936
+                hide_name = True
+            ]
+
+            component gen_product Product1 {
+            }
+            [
+                position = 8224, 7912
+                hide_name = True
+            ]
+
+            component gen_sum Sum3 {
+                signs = "3"
+            }
+            [
+                position = 8304, 8024
+                hide_name = True
+            ]
+
+            component gen_product Product2 {
+            }
+            [
+                position = 8216, 8024
+                hide_name = True
+            ]
+
+            component gen_product Product3 {
+            }
+            [
+                position = 8216, 8136
+                hide_name = True
+            ]
+
+            component gen_trigonometric "Trigonometric function2" {
+                trigonometric_fn = "cos"
+            }
+            [
+                position = 8128, 8048
+                hide_name = True
+            ]
+
+            component gen_trigonometric "Trigonometric function4" {
+                trigonometric_fn = "cos"
+            }
+            [
+                position = 8128, 8160
+                hide_name = True
+            ]
+
+            component gen_sum Sum4 {
+            }
+            [
+                position = 7736, 8160
+                hide_name = True
+            ]
+
+            component src_constant Constant3 {
+                execution_rate = "Ts"
+                value = "2*np.pi/3"
+            }
+            [
+                position = 7648, 8168
+                hide_name = True
+            ]
+
+            component gen_sum Sum2 {
+                signs = "+-"
+            }
+            [
+                position = 7736, 8048
+                hide_name = True
+            ]
+
+            component src_constant Constant2 {
+                execution_rate = "Ts"
+                value = "2*np.pi/3"
+            }
+            [
+                position = 7648, 8056
+                hide_name = True
+            ]
+
+            component gen_trigonometric "Trigonometric function5" {
+            }
+            [
+                position = 8120, 8256
+                hide_name = True
+            ]
+
+            component gen_product Product4 {
+            }
+            [
+                position = 8216, 8224
+                hide_name = True
+            ]
+
+            component gen_sum Sum5 {
+                signs = "3"
+            }
+            [
+                position = 8304, 8336
+                hide_name = True
+            ]
+
+            component gen_product Product5 {
+            }
+            [
+                position = 8200, 8336
+                hide_name = True
+            ]
+
+            component gen_product Product6 {
+            }
+            [
+                position = 8200, 8448
+                hide_name = True
+            ]
+
+            component gen_trigonometric "Trigonometric function6" {
+            }
+            [
+                position = 8120, 8368
+                hide_name = True
+            ]
+
+            component gen_trigonometric "Trigonometric function7" {
+            }
+            [
+                position = 8120, 8480
+                hide_name = True
+            ]
+
+            component gen_gain Gain1 {
+                gain = "2/3"
+            }
+            [
+                position = 8376, 8024
+                hide_name = True
+            ]
+
+            component gen_gain Gain2 {
+                gain = "2/3"
+            }
+            [
+                position = 8376, 8336
+                hide_name = True
+            ]
+
+            port q {
+                position = right:1
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8448, 8024
+            ]
+
+            port d {
+                position = right:2
+                kind = sp
+                direction =  in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8448, 8336
+            ]
+
+            port theta {
+                position = left:4
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7512, 7936
+            ]
+
+            port a {
+                position = left:1
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7648, 7904
+                rotation = down
+                scale = -1, 1
+            ]
+
+            port b {
+                position = left:2
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7648, 8016
+                rotation = down
+                scale = -1, 1
+            ]
+
+            port c {
+                position = left:3
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7648, 8128
+                rotation = down
+                scale = -1, 1
+            ]
+
+            junction Junction11 sp
+            [
+                position = 7688, 7936
+            ]
+
+            junction Junction12 sp
+            [
+                position = 7688, 8040
+            ]
+
+            junction Junction3 sp
+            [
+                position = 8056, 7904
+            ]
+
+            junction Junction13 sp
+            [
+                position = 8032, 7936
+            ]
+
+            junction Junction7 sp
+            [
+                position = 7960, 8016
+            ]
+
+            junction Junction8 sp
+            [
+                position = 7936, 8048
+            ]
+
+            junction Junction9 sp
+            [
+                position = 7864, 8128
+            ]
+
+            junction Junction10 sp
+            [
+                position = 7840, 8160
+            ]
+
+            comment Comment1 START <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><html><head><meta name="qrichtext" content="1" /><style type="text/css">p, li { white-space: pre-wrap; }</style></head><body style=" font-family:'Arial'; font-size:12pt; font-weight:400; font-style:normal;"><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">q = (2/3)*( a*cos(wt) + b*cos(wt-(2*pi/3)) + c*cos(wt+(2*pi/3)) );</p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">d = (2/3)*( a*sin(wt) + b*sin(wt-(2*pi/3)) + c*sin(wt+(2*pi/3)) );</p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">zero = (1/3)*( a + b + c );</p></body></html> ENDCOMMENT 
+            [
+                position = 8512, 7952
+            ]
+
+            connect "Trigonometric function3.out" Product1.in1 as Connection1151
+            connect Product1.out Sum3.in as Connection1153
+            connect Product2.out Sum3.in1 as Connection1154
+            connect "Trigonometric function2.out" Product2.in1 as Connection1155
+            connect "Trigonometric function4.out" Product3.in1 as Connection1164
+            connect Constant2.out Sum2.in1 as Connection1148
+            connect Product3.out Sum3.in2 as Connection1171
+            connect "Trigonometric function5.out" Product4.in1 as Connection1173
+            connect Product4.out Sum5.in as Connection1174
+            connect Product5.out Sum5.in1 as Connection1175
+            connect "Trigonometric function6.out" Product5.in1 as Connection1176
+            connect "Trigonometric function7.out" Product6.in1 as Connection1179
+            connect Product6.out Sum5.in2 as Connection1183
+            connect Sum3.out Gain1.in as Connection1186
+            connect Junction11 theta as Connection1232
+            connect Gain1.out q as Connection1187
+            connect Sum5.out Gain2.in as Connection1188
+            connect Sum2.in Junction12 as Connection1234
+            connect Gain2.out d as Connection1189
+            connect Junction12 Junction11 as Connection1235
+            connect Sum4.in Junction12 as Connection1236
+            connect a Junction3 as Connection1190
+            connect Junction3 Product1.in as Connection1191
+            connect "Trigonometric function3.in" Junction13 as Connection1237
+            connect Product4.in Junction3 as Connection1192
+            connect Junction13 Junction11 as Connection1238
+            connect "Trigonometric function5.in" Junction13 as Connection1239
+            connect b Junction7 as Connection1213
+            connect Junction7 Product2.in as Connection1214
+            connect Product5.in Junction7 as Connection1215
+            connect Sum2.out Junction8 as Connection1216
+            connect Junction8 "Trigonometric function2.in" as Connection1217
+            connect "Trigonometric function6.in" Junction8 as Connection1218
+            connect Constant3.out Sum4.in1 as Connection1219
+            connect c Junction9 as Connection1220
+            connect Junction9 Product3.in as Connection1221
+            connect Product6.in Junction9 as Connection1222
+            connect Sum4.out Junction10 as Connection1227
+            connect Junction10 "Trigonometric function4.in" as Connection1228
+            [
+                breakpoints = 7840, 8160
+            ]
+            connect "Trigonometric function7.in" Junction10 as Connection1229
+        }
+        [
+            position = 6320, 8480
+            size = 80, 136
+        ]
+
+        component "core/Voltage Measurement" Vb {
+            execution_rate = "Ts"
+            sig_output = "True"
+        }
+        [
+            position = 7768, 8160
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
+        component "core/Voltage Measurement" Vc {
+            execution_rate = "Ts"
+            sig_output = "True"
+        }
+        [
+            position = 7664, 8160
+            rotation = right
+            scale = -1, 1
+            size = 64, 32
+        ]
+
+        tag V_d_a {
+            value = "VbG"
+            scope = masked_subsystem
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8008, 8112
+            hide_name = True
+            scale = -1, 1
+        ]
+
+        tag V_q_a {
+            value = "VaG"
+            scope = masked_subsystem
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8112, 8064
+            hide_name = True
+            scale = -1, 1
+        ]
+
+        tag V_d_a2 {
+            value = "VcG"
+            scope = masked_subsystem
+            kind = sp
+            direction = out
+        }
+        [
+            position = 7904, 8160
+            hide_name = True
+            scale = -1, 1
+        ]
+
+        tag V_d_a1 {
+            value = "VbG"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7512, 8112
+            hide_name = True
+        ]
+
+        tag V_q_a1 {
+            value = "VaG"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7512, 8064
+            hide_name = True
+        ]
+
+        tag V_q_a2 {
+            value = "VcG"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7512, 8160
+            hide_name = True
+        ]
+
+        tag Vb_G1 {
+            value = "Vb"
+            scope = masked_subsystem
+            kind = sp
+            direction = out
+        }
+        [
+            position = 6200, 8464
+            hide_name = True
+        ]
+
+        tag Vc_G1 {
+            value = "Vc"
+            scope = masked_subsystem
+            kind = sp
+            direction = out
+        }
+        [
+            position = 6200, 8496
+            hide_name = True
+        ]
+
+        tag Va_G1 {
+            value = "Va"
+            scope = masked_subsystem
+            kind = sp
+            direction = out
+        }
+        [
+            position = 6200, 8432
+            hide_name = True
+        ]
+
+        tag V_q_a3 {
+            value = "Va"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8192, 8168
+            hide_name = True
+            scale = -1, 1
+        ]
+
+        tag V_q_a4 {
+            value = "Vb"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7736, 8224
+            hide_name = True
+        ]
+
+        tag V_q_a5 {
+            value = "Vc"
+            scope = masked_subsystem
+            kind = sp
+            direction = in
+        }
+        [
+            position = 7632, 8208
+            hide_name = True
+        ]
+
+        junction Junction61 pe
+        [
+            position = 8048, 8296
+        ]
+
+        junction Junction63 pe
+        [
+            position = 7840, 8296
+        ]
+
+        junction Junction64 pe
+        [
+            position = 7944, 8296
+        ]
+
+        junction Junction112 sp
+        [
+            position = 6976, 7792
+        ]
+
+        junction Junction121 pe
+        [
+            position = 8048, 7920
+        ]
+
+        junction Junction122 pe
+        [
+            position = 8048, 8296
+        ]
+
+        junction Junction130 sp
+        [
+            position = 6976, 7792
+        ]
+
+        junction Junction100 sp
+        [
+            position = 6680, 8576
+        ]
+
+        junction Junction102 sp
+        [
+            position = 6536, 8480
+        ]
+
+        junction Junction131 pe
+        [
+            position = 7768, 7976
+        ]
+
+        junction Junction132 pe
+        [
+            position = 7664, 8296
+        ]
+
+        junction Junction133 pe
+        [
+            position = 7768, 8296
+        ]
+
+        junction Junction134 pe
+        [
+            position = 7664, 8032
+        ]
+
+        connect V_q_a Va_G.in as Connection312
+        connect V_d_a Vb_G.in as Connection313
+        connect V_d_a2 Vc_G.in as Connection314
+        connect V_q_a1 Gain3.out as Connection315
+        connect "Sinusoidal Source1.out" Gain3.in as Connection328
+        connect Gain4.in "Sinusoidal Source3.out" as Connection789
+        connect "Sinusoidal Source2.out" Gain5.in as Connection790
+        connect Gain5.out V_d_a1 as Connection791
+        connect Gain4.out V_q_a2 as Connection792
+        connect Va_G.n_node Junction61 as Connection818
+        connect gnd1.node Junction61 as Connection820
+        connect Vc_G.n_node Junction63 as Connection826
+        connect Junction64 Junction63 as Connection828
+        connect Vb_G.n_node Junction64 as Connection829
+        connect "Constant Impedance Load1.A" Ia1.n_node as Connection834
+        connect "grid_connect ON.in" Junction112 as Connection989
+        connect "Logical operator1.in" Junction112 as Connection991
+        connect RL.P1 Junction121 as Connection1027
+        [
+            breakpoints = 7544, 7960; 7544, 7920; 8048, 7920
+        ]
+        connect Junction121 Va_G.p_node as Connection1028
+        [
+            breakpoints = 8048, 7920
+        ]
+        connect Va.p_node Junction121 as Connection1029
+        connect Junction61 Junction122 as Connection1030
+        connect Junction122 Junction64 as Connection1031
+        [
+            breakpoints = 7976, 8296
+        ]
+        connect Va.n_node Junction122 as Connection1032
+        connect S4.b_out RL.P4 as Connection1090
+        connect RL.P2 S4.a_out as Connection1091
+        connect RL.P6 S4.c_out as Connection1092
+        connect Junction112 Junction130 as Connection1102
+        connect Junction130 grid_connect.out as Connection1103
+        [
+            breakpoints = 6976, 7792; 6976, 7792; 6976, 7792
+        ]
+        connect S4.ctrl_in Junction130 as Connection1104
+        connect "Logical operator1.out" "grid_connect OFF.in" as Connection1109
+        [
+            breakpoints = 6976, 7880
+        ]
+        connect PLL.wt "Unit Delay2.in" as Connection474
+        connect Gain6.in "abc to qd.d" as Connection1362
+        connect Gain7.in "abc to qd.q" as Connection1363
+        connect "abc to qd.c" Vc_G1 as Connection1364
+        connect Vb_G1 "abc to qd.b" as Connection1365
+        connect "abc to qd.a" Va_G1 as Connection1366
+        connect Junction100 "Unit Delay2.out" as Connection1383
+        [
+            breakpoints = 6680, 8576; 6680, 8576
+        ]
+        connect thetaPLL.in Junction100 as Connection1384
+        connect Gain6.out Junction102 as Connection1466
+        connect Junction102 PLL.d as Connection1467
+        [
+            breakpoints = 6544, 8480
+        ]
+        connect S4.b_in "Constant Impedance Load1.B" as Connection1473
+        [
+            breakpoints = 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976; 6832, 7976
+        ]
+        connect "Constant Impedance Load1.C" S4.c_in as Connection1472
+        [
+            breakpoints = 6864, 7992; 6864, 7992; 6864, 7992; 6864, 7992; 6864, 7992; 6864, 7992; 6864, 7992; 7120, 7992
+        ]
+        connect S4.a_in Ia1.p_node as Connection1474
+        [
+            breakpoints = 7120, 7960; 7040, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960; 6800, 7960
+        ]
+        connect omegaPLL.in Gain13.out as Connection1476
+        connect Gain13.in PLL.w as Connection1477
+        connect Junction102 Vq_G.in as Connection1478
+        [
+            breakpoints = 6536, 8480; 6536, 8368
+        ]
+        connect Gain7.out Vd_G.in as Connection1479
+        [
+            breakpoints = 6432, 8432
+        ]
+        connect RL.P3 Junction131 as Connection1480
+        connect Junction131 Vb_G.p_node as Connection1481
+        connect Vb.p_node Junction131 as Connection1482
+        connect Junction132 "Constant Impedance Load1.N" as Connection1484
+        [
+            breakpoints = 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 7608, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8296; 6832, 8312; 6832, 8312
+        ]
+        connect Vc.n_node Junction132 as Connection1485
+        connect Junction63 Junction133 as Connection1486
+        connect Junction133 Junction132 as Connection1487
+        connect Vb.n_node Junction133 as Connection1488
+        connect RL.P5 Junction134 as Connection1489
+        [
+            breakpoints = 7544, 8000; 7544, 8032; 7608, 8032
+        ]
+        connect Junction134 Vc_G.p_node as Connection1490
+        connect Vc.p_node Junction134 as Connection1491
+        connect Va.out V_q_a3 as Connection1492
+        connect V_q_a4 Vb.out as Connection1493
+        [
+            breakpoints = 7688, 8224; 7688, 8160
+        ]
+        connect V_q_a5 Vc.out as Connection1494
+        connect Junction100 "abc to qd.theta" as Connection1495
+        [
+            breakpoints = 6680, 8576; 6264, 8528; 6264, 8528
+        ]
+    }
+
+    default {
+        gen_c_function {
+            input_terminals = "real in;"
+            input_terminals_show_labels = "False;"
+            input_terminals_feedthrough = "True;"
+            input_terminals_dimensions = "inherit;"
+            output_terminals = "real out;"
+            output_terminals_show_labels = "False;"
+            output_terminals_feedthrough = "True;"
+            output_terminals_dimensions = "inherit;"
+            output_fnc = ""
+            update_fnc = ""
+            init_fnc = ""
+            global_variables = ""
+            parameters = ""
+            execution_rate = "inherit"
+        }
+
+        gen_digital_probe {
+            override_signal_name = "False"
+            signal_name = ""
+            streaming_en = "False"
+            addr = "0"
+            streaming_er_idx = "0"
+            execution_rate = "inherit"
+        }
+
+        gen_gain {
+            gain = "1"
+            multiplication = "Element-wise(K.*u)"
+            execution_rate = "inherit"
+        }
+
+        gen_logic_op {
+            operator = "AND"
+            inputs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_pid_controller {
+            controller_type = "PID"
+            kp = "1"
+            kp_source = "internal"
+            ki = "1"
+            ki_source = "internal"
+            kd = "0"
+            kd_source = "internal"
+            filt_coef = "100"
+            int_init_value = "0"
+            filt_init_value = "0"
+            enb_output_limit_out = "False"
+            show_reset = "none"
+            upper_sat_lim = "1"
+            upper_sat_lim_source = "internal"
+            lower_sat_lim = "-1"
+            lower_sat_lim_source = "internal"
+            enb_anti_windup_out = "False"
+            signal_out_type = "inherit"
+            execution_rate = "inherit"
+        }
+
+        gen_probe {
+            addr = "0"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "generic"
+            streaming_en = "False"
+            streaming_er_idx = "0"
+            execution_rate = "inherit"
+        }
+
+        gen_product {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_sum {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_trigonometric {
+            trigonometric_fn = "sin"
+            angle = "Radians"
+            execution_rate = "inherit"
+        }
+
+        src_constant {
+            value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+        }
+
+        src_scada_input {
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
+            execution_rate = "100e-6"
+        }
+
+        src_sine {
+            amplitude = "1"
+            dc_offset = "0"
+            frequency = "50"
+            phase = "0"
+            execution_rate = "100e-6"
+        }
+
+        tm_delay {
+            init_value = "0"
+            signal_out_type = "inherit"
+            execution_rate = "inherit"
+        }
+
+        "core/Constant Impedance Load" {
+            fn = "60"
+            conn_type = "Y"
+            enable_neutral = "False"
+            set_balanced = "True"
+            Vn_3ph = "480"
+            Sn_3ph = "1.0e6"
+            pf_mode_3ph = "Unit"
+            pf_3ph = "0.9"
+            VAn = "480/(3**0.5)"
+            VAB = "480"
+            SAn = "1.0e6/3"
+            SAB = "1.0e6/3"
+            pf_modeA = "Unit"
+            pfA = "0.9"
+            VBn = "480/(3**0.5)"
+            VBC = "480"
+            SBn = "1.0e6/3"
+            SBC = "1.0e6/3"
+            pf_modeB = "Unit"
+            pfB = "0.9"
+            VCn = "480/(3**0.5)"
+            VCA = "480"
+            SCn = "1.0e6/3"
+            SCA = "1.0e6/3"
+            pf_modeC = "Unit"
+            pfC = "0.9"
+        }
+
+        "core/Current Measurement" {
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+
+        "core/RL Section" {
+            model_def = "R-L"
+            unit_sys = "imperial"
+            num_of_phases = "3"
+            resistance_per_l = "1"
+            resistance_per_l_mile = "1"
+            inductance_per_l = "1e-3"
+            inductance_per_l_mile = "1e-3"
+            length = "1.0"
+            length_mile = "1.0"
+            power = "500.0"
+            voltage = "11.0"
+            frequency = "50.0"
+            R_value = "21.55"
+            L_value = "0.00842"
+            embedded_coupling = "False"
+            ratio_type = "Automatic"
+            ratio = "0.1"
+        }
+
+        "core/Signal Controlled Voltage Source" {
+            execution_rate = "inherit"
+        }
+
+        "core/Triple Pole Single Throw Contactor" {
+            ctrl_src = "Digital input"
+            Sa = "1"
+            Sa_logic = "active high"
+            enable_fb_out = "False"
+            fb_out_type = "real"
+            execution_rate = "inherit"
+            initial_state = "off"
+            on_delay = "0"
+            off_delay = "0"
+        }
+
+        "core/Voltage Measurement" {
+            bw_limit = "False"
+            frequency = "10e3"
+            comparator_enable = "False"
+            operator = "greater"
+            threshold = "0"
+            cmp_abs_value = "False"
+            feed_forward = "false"
+            sig_output = "False"
+            sig_output_filt_and_full_bw = "False"
+            execution_rate = "100e-6"
+            addr = "0"
+            nd_msr_estimation = "false"
+            dev_cpl_msr = "false"
+            host_device = "0"
+            output_to_device = "0"
+            dev_cpl_index = "0"
+            dev_cpl_var_nb = "0"
+            visible = "True"
+            override_signal_name = "False"
+            signal_name = ""
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        # The Schematic API is imported as 'mdl'
+        # To get the model file path, use 'mdl.get_model_file_path()'
+        # To print information to the console, use info()
+        
+        V_G = 480
+        Ts = 30e-6
+        Ts_sys = 30e-6 # 0.9e-3 # 
+        Ts_gen = 30e-6
+        w_0 = 2*np.pi*60
+        PLL_max = 2*np.pi*63
+        PLL_min = 2*np.pi*57
+        V_DQ = V_G*np.sqrt(2)/np.sqrt(3)
+    ENDCODE
+}

@@ -1,6 +1,6 @@
 
 <model_description>
-    <sw_version>2019.3</sw_version>
+    <sw_version>2018.3 SP1</sw_version>
     <hw_properties>
         <revision>3</revision>
         <product_id>HIL402</product_id>
@@ -8,7 +8,7 @@
         <device_ao_limit_enable>False</device_ao_limit_enable>
         <device_id>0</device_id>
         <spc_out_mem_size>256</spc_out_mem_size>
-        <fw_support_limit>132319518</fw_support_limit>
+        <fw_support_limit>132254238</fw_support_limit>
     </hw_properties>
     <sim_setup>
         <sim_time_step>2e-06</sim_time_step>
@@ -60,7 +60,7 @@
             </switches>
         </cell>
         <cell>
-            <name>Three Phase Inverter3</name>
+            <name>Three Phase Inverter2</name>
             <type>
                 <cell>igbt_leg</cell>
             </type>
@@ -105,7 +105,7 @@
             </switches>
         </cell>
         <cell>
-            <name>Three Phase Inverter2</name>
+            <name>Three Phase Inverter1</name>
             <type>
                 <cell>igbt_leg</cell>
             </type>
@@ -150,7 +150,7 @@
             </switches>
         </cell>
         <cell>
-            <name>Three Phase Inverter1</name>
+            <name>Three Phase Inverter3</name>
             <type>
                 <cell>igbt_leg</cell>
             </type>
@@ -296,21 +296,21 @@
         </cell>
         <cell>
             <name>Core Coupling 4.cpl1.V_msr</name>
-            <address>204</address>
+            <address>200</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 4.cpl2.V_msr</name>
-            <address>205</address>
+            <address>201</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 4.cpl3.V_msr</name>
-            <address>206</address>
+            <address>202</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -485,21 +485,21 @@
         </cell>
         <cell>
             <name>Core Coupling 3.cpl1.I_msr</name>
-            <address>200</address>
+            <address>196</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 3.cpl2.I_msr</name>
-            <address>201</address>
+            <address>197</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 3.cpl3.I_msr</name>
-            <address>202</address>
+            <address>198</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -666,1331 +666,1324 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ca2</name>
+            <name>Ca1</name>
             <address>256</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Cb2</name>
+            <name>Cb1</name>
             <address>257</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Cc2</name>
+            <name>Cc1</name>
             <address>258</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ea2.Cf_Va</name>
+            <name>Ea1.Cf_Va</name>
             <address>259</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Eb2.Cf_Va</name>
+            <name>Eb1.Cf_Va</name>
             <address>260</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ec2.Cf_Va</name>
+            <name>Ec1.Cf_Va</name>
             <address>261</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>L0b2</name>
-            <address>262</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>L0c2</name>
-            <address>263</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>La2</name>
-            <address>264</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Lb2</name>
-            <address>265</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Lc2</name>
-            <address>266</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_a2.Lf_Ia</name>
-            <address>267</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_b2.Lf_Ia</name>
-            <address>268</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_c2.Lf_Ia</name>
-            <address>269</address>
-            <type>current</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DC Meter3.Vdc</name>
-            <address>270</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ea2.Va1</name>
-            <address>271</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Ea2</name>
-            <address>272</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Eb2.Va1</name>
-            <address>273</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Eb2</name>
-            <address>274</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ec2.Va1</name>
-            <address>275</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Ec2</name>
-            <address>276</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg1.v1</name>
-            <address>385</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg1.v2</name>
-            <address>386</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg2.v1</name>
-            <address>393</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg2.v2</name>
-            <address>394</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg3.v1</name>
-            <address>401</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg3.v2</name>
-            <address>402</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>VDC_3</name>
-            <address>277</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vab2</name>
-            <address>278</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vab_rms2.Vinst</name>
-            <address>279</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vbc2</name>
-            <address>280</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vbc_rms2.Vinst</name>
-            <address>281</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Core Coupling 2.cpl1.I_msr</name>
-            <address>460</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Core Coupling 2.cpl2.I_msr</name>
-            <address>461</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Core Coupling 2.cpl3.I_msr</name>
-            <address>462</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>DC Meter3.Idc</name>
-            <address>282</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Idc_link2</name>
-            <address>283</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Iga_rms2.Iinst</name>
-            <address>284</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igb_rms2.Iinst</name>
-            <address>285</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igc_rms2.Iinst</name>
-            <address>286</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg1.il</name>
-            <address>384</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg2.il</name>
-            <address>392</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg3.il</name>
-            <address>400</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Xi_a2.Ia1</name>
-            <address>287</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Xi_a2</name>
-            <address>288</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_b2.Ia1</name>
-            <address>289</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Xi_b2</name>
-            <address>290</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_c2.Ia1</name>
-            <address>291</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>False</visible>
-        </cell>
-        <cell>
-            <name>Xi_c2</name>
-            <address>292</address>
-            <type>current</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>VDC3</name>
-            <address>16644</address>
-            <type>voltage</type>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ca1</name>
-            <address>512</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Cb1</name>
-            <address>513</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Cc1</name>
-            <address>514</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ea1.Cf_Va</name>
-            <address>515</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Eb1.Cf_Va</name>
-            <address>516</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ec1.Cf_Va</name>
-            <address>517</address>
-            <type>voltage</type>
-            <initial_condition>0.0</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>Va12.Cf_Va</name>
-            <address>518</address>
+            <address>262</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vb12.Cf_Va</name>
-            <address>519</address>
+            <address>263</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vc12.Cf_Va</name>
-            <address>520</address>
+            <address>264</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ia12.Lf_Ia</name>
-            <address>521</address>
+            <address>265</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ib12.Lf_Ia</name>
-            <address>522</address>
+            <address>266</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ic12.Lf_Ia</name>
-            <address>523</address>
+            <address>267</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>L0b1</name>
-            <address>524</address>
+            <address>268</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>L0c1</name>
-            <address>525</address>
+            <address>269</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_a1.Lf_Ia</name>
-            <address>526</address>
+            <address>270</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_b1.Lf_Ia</name>
-            <address>527</address>
+            <address>271</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_c1.Lf_Ia</name>
-            <address>528</address>
+            <address>272</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 3.cpl1.V_msr</name>
-            <address>704</address>
+            <address>448</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 3.cpl2.V_msr</name>
-            <address>705</address>
+            <address>449</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 3.cpl3.V_msr</name>
-            <address>706</address>
+            <address>450</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>DC Meter2.Vdc</name>
-            <address>529</address>
+            <address>273</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ea1.Va1</name>
-            <address>530</address>
+            <address>274</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ea1</name>
-            <address>531</address>
+            <address>275</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Eb1.Va1</name>
-            <address>532</address>
+            <address>276</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Eb1</name>
-            <address>533</address>
+            <address>277</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ec1.Va1</name>
-            <address>534</address>
+            <address>278</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ec1</name>
-            <address>535</address>
+            <address>279</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg1.v1</name>
-            <address>641</address>
+            <address>385</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg1.v2</name>
-            <address>642</address>
+            <address>386</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg2.v1</name>
-            <address>649</address>
+            <address>393</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg2.v2</name>
-            <address>650</address>
+            <address>394</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg3.v1</name>
-            <address>657</address>
+            <address>401</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg3.v2</name>
-            <address>658</address>
+            <address>402</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>VDC_2</name>
-            <address>536</address>
+            <address>280</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Va12.Va1</name>
-            <address>537</address>
+            <address>281</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Va12</name>
-            <address>538</address>
+            <address>282</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Va_rms1.Vinst</name>
-            <address>539</address>
+            <address>283</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vab1</name>
-            <address>540</address>
+            <address>284</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vb12.Va1</name>
-            <address>541</address>
+            <address>285</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Vb12</name>
-            <address>542</address>
+            <address>286</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vbc1</name>
-            <address>543</address>
+            <address>287</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vbc_rms1.Vinst</name>
-            <address>544</address>
+            <address>288</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vc12.Va1</name>
-            <address>545</address>
+            <address>289</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Vc12</name>
-            <address>546</address>
+            <address>290</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 1.cpl1.I_msr</name>
-            <address>716</address>
+            <address>456</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 1.cpl2.I_msr</name>
-            <address>717</address>
+            <address>457</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 1.cpl3.I_msr</name>
-            <address>718</address>
+            <address>458</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>DC Meter2.Idc</name>
-            <address>547</address>
+            <address>291</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ia12.Ia1</name>
-            <address>548</address>
+            <address>292</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ia12</name>
-            <address>549</address>
+            <address>293</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ib12.Ia1</name>
-            <address>550</address>
+            <address>294</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ib12</name>
-            <address>551</address>
+            <address>295</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ic12.Ia1</name>
-            <address>552</address>
+            <address>296</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ic12</name>
-            <address>553</address>
+            <address>297</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Idc_link1</name>
-            <address>554</address>
+            <address>298</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Iga_rms1.Iinst</name>
-            <address>555</address>
+            <address>299</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Igb_rms1.Iinst</name>
-            <address>556</address>
+            <address>300</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Igc_rms1.Iinst</name>
-            <address>557</address>
+            <address>301</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg1.il</name>
-            <address>640</address>
+            <address>384</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg2.il</name>
-            <address>648</address>
+            <address>392</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg3.il</name>
-            <address>656</address>
+            <address>400</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_a1.Ia1</name>
-            <address>558</address>
+            <address>302</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_a1</name>
-            <address>559</address>
+            <address>303</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_b1.Ia1</name>
-            <address>560</address>
+            <address>304</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_b1</name>
-            <address>561</address>
+            <address>305</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_c1.Ia1</name>
-            <address>562</address>
+            <address>306</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_c1</name>
-            <address>563</address>
+            <address>307</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>VDC2</name>
-            <address>16645</address>
+            <address>16644</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ca</name>
-            <address>768</address>
+            <address>512</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Cb</name>
-            <address>769</address>
+            <address>513</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Cc</name>
-            <address>770</address>
+            <address>514</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ea.Cf_Va</name>
-            <address>771</address>
+            <address>515</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Eb.Cf_Va</name>
-            <address>772</address>
+            <address>516</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ec.Cf_Va</name>
-            <address>773</address>
+            <address>517</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Va.Cf_Va</name>
-            <address>774</address>
+            <address>518</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vb.Cf_Va</name>
-            <address>775</address>
+            <address>519</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vc.Cf_Va</name>
-            <address>776</address>
+            <address>520</address>
             <type>voltage</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ia.Lf_Ia</name>
-            <address>777</address>
+            <address>521</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ib.Lf_Ia</name>
-            <address>778</address>
+            <address>522</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ic.Lf_Ia</name>
-            <address>779</address>
+            <address>523</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>L0b</name>
-            <address>780</address>
+            <address>524</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>L0c</name>
-            <address>781</address>
+            <address>525</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_a.Lf_Ia</name>
-            <address>782</address>
+            <address>526</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_b.Lf_Ia</name>
-            <address>783</address>
+            <address>527</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_c.Lf_Ia</name>
-            <address>784</address>
+            <address>528</address>
             <type>current</type>
             <initial_condition>0.0</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 1.cpl1.V_msr</name>
-            <address>968</address>
+            <address>708</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 1.cpl2.V_msr</name>
-            <address>969</address>
+            <address>709</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 1.cpl3.V_msr</name>
-            <address>970</address>
+            <address>710</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 2.cpl1.V_msr</name>
-            <address>964</address>
+            <address>716</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 2.cpl2.V_msr</name>
-            <address>965</address>
+            <address>717</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 2.cpl3.V_msr</name>
-            <address>966</address>
+            <address>718</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>DC Meter1.Vdc</name>
-            <address>785</address>
+            <address>529</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ea.Va1</name>
-            <address>786</address>
+            <address>530</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ea</name>
-            <address>787</address>
+            <address>531</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Eb.Va1</name>
-            <address>788</address>
+            <address>532</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Eb</name>
-            <address>789</address>
+            <address>533</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ec.Va1</name>
-            <address>790</address>
+            <address>534</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ec</name>
-            <address>791</address>
+            <address>535</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg1.v1</name>
-            <address>897</address>
+            <address>641</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg1.v2</name>
-            <address>898</address>
+            <address>642</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg2.v1</name>
-            <address>905</address>
+            <address>649</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg2.v2</name>
-            <address>906</address>
+            <address>650</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg3.v1</name>
-            <address>913</address>
+            <address>657</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg3.v2</name>
-            <address>914</address>
+            <address>658</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>VDC</name>
-            <address>792</address>
+            <address>536</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Va.Va1</name>
-            <address>793</address>
+            <address>537</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Va</name>
-            <address>794</address>
+            <address>538</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Va_rms.Vinst</name>
-            <address>795</address>
+            <address>539</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vab</name>
-            <address>796</address>
+            <address>540</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vb.Va1</name>
-            <address>797</address>
+            <address>541</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Vb</name>
-            <address>798</address>
+            <address>542</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vbc</name>
-            <address>799</address>
+            <address>543</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vbc_rms.Vinst</name>
-            <address>800</address>
+            <address>544</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Vc.Va1</name>
-            <address>801</address>
+            <address>545</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Vc</name>
-            <address>802</address>
+            <address>546</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 4.cpl1.I_msr</name>
-            <address>960</address>
+            <address>704</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 4.cpl2.I_msr</name>
-            <address>961</address>
+            <address>705</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Core Coupling 4.cpl3.I_msr</name>
-            <address>962</address>
+            <address>706</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>DC Meter1.Idc</name>
-            <address>803</address>
+            <address>547</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ia.Ia1</name>
-            <address>804</address>
+            <address>548</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ia</name>
-            <address>805</address>
+            <address>549</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ib.Ia1</name>
-            <address>806</address>
+            <address>550</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ib</name>
-            <address>807</address>
+            <address>551</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Ic.Ia1</name>
-            <address>808</address>
+            <address>552</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Ic</name>
-            <address>809</address>
+            <address>553</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Idc_link</name>
-            <address>810</address>
+            <address>554</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Iga_rms.Iinst</name>
-            <address>811</address>
+            <address>555</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Igb_rms.Iinst</name>
-            <address>812</address>
+            <address>556</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Igc_rms.Iinst</name>
-            <address>813</address>
+            <address>557</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg1.il</name>
-            <address>896</address>
+            <address>640</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg2.il</name>
-            <address>904</address>
+            <address>648</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg3.il</name>
-            <address>912</address>
+            <address>656</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_a.Ia1</name>
-            <address>814</address>
+            <address>558</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_a</name>
-            <address>815</address>
+            <address>559</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_b.Ia1</name>
-            <address>816</address>
+            <address>560</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_b</name>
-            <address>817</address>
+            <address>561</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>Xi_c.Ia1</name>
-            <address>818</address>
+            <address>562</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>False</visible>
         </cell>
         <cell>
             <name>Xi_c</name>
-            <address>819</address>
+            <address>563</address>
             <type>current</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
             <name>VDC1</name>
-            <address>16646</address>
+            <address>16645</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>const_0V</name>
-            <address>17152</address>
+            <name>Ca2</name>
+            <address>768</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Cb2</name>
+            <address>769</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Cc2</name>
+            <address>770</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ea2.Cf_Va</name>
+            <address>771</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Eb2.Cf_Va</name>
+            <address>772</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ec2.Cf_Va</name>
+            <address>773</address>
+            <type>voltage</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L0b2</name>
+            <address>774</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>L0c2</name>
+            <address>775</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>La2</name>
+            <address>776</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Lb2</name>
+            <address>777</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Lc2</name>
+            <address>778</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_a2.Lf_Ia</name>
+            <address>779</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_b2.Lf_Ia</name>
+            <address>780</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_c2.Lf_Ia</name>
+            <address>781</address>
+            <type>current</type>
+            <initial_condition>0.0</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>DC Meter3.Vdc</name>
+            <address>782</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ea2.Va1</name>
+            <address>783</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Ea2</name>
+            <address>784</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Eb2.Va1</name>
+            <address>785</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Eb2</name>
+            <address>786</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ec2.Va1</name>
+            <address>787</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Ec2</name>
+            <address>788</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg1.v1</name>
+            <address>897</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg1.v2</name>
+            <address>898</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg2.v1</name>
+            <address>905</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg2.v2</name>
+            <address>906</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg3.v1</name>
+            <address>913</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg3.v2</name>
+            <address>914</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>VDC_3</name>
+            <address>789</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vab2</name>
+            <address>790</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vab_rms2.Vinst</name>
+            <address>791</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vbc2</name>
+            <address>792</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vbc_rms2.Vinst</name>
+            <address>793</address>
+            <type>voltage</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core Coupling 2.cpl1.I_msr</name>
+            <address>968</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core Coupling 2.cpl2.I_msr</name>
+            <address>969</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Core Coupling 2.cpl3.I_msr</name>
+            <address>970</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>DC Meter3.Idc</name>
+            <address>794</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Idc_link2</name>
+            <address>795</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Iga_rms2.Iinst</name>
+            <address>796</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igb_rms2.Iinst</name>
+            <address>797</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igc_rms2.Iinst</name>
+            <address>798</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg1.il</name>
+            <address>896</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg2.il</name>
+            <address>904</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg3.il</name>
+            <address>912</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Xi_a2.Ia1</name>
+            <address>799</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Xi_a2</name>
+            <address>800</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_b2.Ia1</name>
+            <address>801</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Xi_b2</name>
+            <address>802</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_c2.Ia1</name>
+            <address>803</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>False</visible>
+        </cell>
+        <cell>
+            <name>Xi_c2</name>
+            <address>804</address>
+            <type>current</type>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>VDC3</name>
+            <address>16646</address>
             <type>voltage</type>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
@@ -2110,11 +2103,11 @@
     </variables>
     <do_var_list>
         <cell>
-            <name>HIL0 AO flag</name>
+            <name>AO flag</name>
             <address>8</address>
         </cell>
         <cell>
-            <name>HIL0 DTV flag</name>
+            <name>DTV flag</name>
             <address>9</address>
         </cell>
         <cell>
@@ -2246,148 +2239,148 @@
             <address>543</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter1.IGBT Leg2.PWM_Modulator_TOP_1</name>
             <address>768</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter1.IGBT Leg2.PWM_Modulator_BOT_1</name>
             <address>769</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter2.IGBT Leg1.PWM_Modulator_TOP_1</name>
             <address>770</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter2.IGBT Leg1.PWM_Modulator_BOT_1</name>
             <address>771</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter4.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter3.IGBT Leg2.PWM_Modulator_TOP_1</name>
             <address>772</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter4.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter3.IGBT Leg2.PWM_Modulator_BOT_1</name>
             <address>773</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter2.IGBT Leg2.PWM_Modulator_TOP_1</name>
             <address>774</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter2.IGBT Leg2.PWM_Modulator_BOT_1</name>
             <address>775</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter4.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter4.IGBT Leg1.PWM_Modulator_TOP_1</name>
             <address>776</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter4.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter4.IGBT Leg1.PWM_Modulator_BOT_1</name>
             <address>777</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter3.IGBT Leg3.PWM_Modulator_TOP_1</name>
             <address>778</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter3.IGBT Leg3.PWM_Modulator_BOT_1</name>
             <address>779</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter4.IGBT Leg3.PWM_Modulator_TOP_1</name>
             <address>780</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter4.IGBT Leg3.PWM_Modulator_BOT_1</name>
             <address>781</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter2.IGBT Leg3.PWM_Modulator_TOP_1</name>
             <address>782</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter2.IGBT Leg3.PWM_Modulator_BOT_1</name>
             <address>783</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter4.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter1.IGBT Leg1.PWM_Modulator_TOP_1</name>
             <address>784</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter4.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter1.IGBT Leg1.PWM_Modulator_BOT_1</name>
             <address>785</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg3.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter4.IGBT Leg2.PWM_Modulator_TOP_1</name>
             <address>786</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg3.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter4.IGBT Leg2.PWM_Modulator_BOT_1</name>
             <address>787</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg1.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter1.IGBT Leg3.PWM_Modulator_TOP_1</name>
             <address>788</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg1.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter1.IGBT Leg3.PWM_Modulator_BOT_1</name>
             <address>789</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg2.PWM_Modulator_TOP_1</name>
+            <name>Three Phase Inverter3.IGBT Leg1.PWM_Modulator_TOP_1</name>
             <address>790</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg2.PWM_Modulator_BOT_1</name>
+            <name>Three Phase Inverter3.IGBT Leg1.PWM_Modulator_BOT_1</name>
             <address>791</address>
         </cell>
         <cell>
             <name>Three Phase Inverter4.IGBT Leg1_vout_cmp</name>
-            <address>840</address>
+            <address>816</address>
         </cell>
         <cell>
             <name>Three Phase Inverter4.IGBT Leg2_vout_cmp</name>
-            <address>841</address>
+            <address>817</address>
         </cell>
         <cell>
             <name>Three Phase Inverter4.IGBT Leg3_vout_cmp</name>
-            <address>842</address>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg1_vout_cmp</name>
-            <address>843</address>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg2_vout_cmp</name>
-            <address>844</address>
-        </cell>
-        <cell>
-            <name>Three Phase Inverter3.IGBT Leg3_vout_cmp</name>
-            <address>845</address>
+            <address>818</address>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg1_vout_cmp</name>
-            <address>846</address>
+            <address>819</address>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg2_vout_cmp</name>
-            <address>847</address>
+            <address>820</address>
         </cell>
         <cell>
             <name>Three Phase Inverter2.IGBT Leg3_vout_cmp</name>
-            <address>848</address>
+            <address>821</address>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg1_vout_cmp</name>
-            <address>849</address>
+            <address>822</address>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg2_vout_cmp</name>
-            <address>850</address>
+            <address>823</address>
         </cell>
         <cell>
             <name>Three Phase Inverter1.IGBT Leg3_vout_cmp</name>
-            <address>851</address>
+            <address>824</address>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg1_vout_cmp</name>
+            <address>825</address>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg2_vout_cmp</name>
+            <address>826</address>
+        </cell>
+        <cell>
+            <name>Three Phase Inverter3.IGBT Leg3_vout_cmp</name>
+            <address>827</address>
         </cell>
         <cell>
             <name>Three Phase Inverter4.IGBT Leg1_stf</name>
@@ -2402,39 +2395,39 @@
             <address>1038</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg1_stf</name>
+            <name>Three Phase Inverter2.IGBT Leg1_stf</name>
             <address>1051</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg2_stf</name>
+            <name>Three Phase Inverter2.IGBT Leg2_stf</name>
             <address>1052</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter3.IGBT Leg3_stf</name>
+            <name>Three Phase Inverter2.IGBT Leg3_stf</name>
             <address>1053</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg1_stf</name>
+            <name>Three Phase Inverter1.IGBT Leg1_stf</name>
             <address>1066</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg2_stf</name>
+            <name>Three Phase Inverter1.IGBT Leg2_stf</name>
             <address>1067</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter2.IGBT Leg3_stf</name>
+            <name>Three Phase Inverter1.IGBT Leg3_stf</name>
             <address>1068</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg1_stf</name>
+            <name>Three Phase Inverter3.IGBT Leg1_stf</name>
             <address>1081</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg2_stf</name>
+            <name>Three Phase Inverter3.IGBT Leg2_stf</name>
             <address>1082</address>
         </cell>
         <cell>
-            <name>Three Phase Inverter1.IGBT Leg3_stf</name>
+            <name>Three Phase Inverter3.IGBT Leg3_stf</name>
             <address>1083</address>
         </cell>
     </do_var_list>
@@ -2444,49 +2437,42 @@
             <type>1phase</type>
             <address>[0]</address>
             <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
         </cell>
         <cell>
             <name>Grid Simulator1.V_source_phase_B</name>
             <type>1phase</type>
             <address>[1]</address>
             <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
         </cell>
         <cell>
             <name>Grid Simulator1.V_source_phase_C</name>
             <type>1phase</type>
             <address>[2]</address>
             <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
         </cell>
         <cell>
             <name>VDC4</name>
             <type>1phase</type>
             <address>[3]</address>
             <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
-        </cell>
-        <cell>
-            <name>VDC3</name>
-            <type>1phase</type>
-            <address>[4]</address>
-            <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
         </cell>
         <cell>
             <name>VDC2</name>
             <type>1phase</type>
-            <address>[5]</address>
+            <address>[4]</address>
             <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
         </cell>
         <cell>
             <name>VDC1</name>
             <type>1phase</type>
+            <address>[5]</address>
+            <unit>V</unit>
+        </cell>
+        <cell>
+            <name>VDC3</name>
+            <type>1phase</type>
             <address>[6]</address>
             <unit>V</unit>
-            <init_settings>['Constant', 0.0]</init_settings>
         </cell>
     </sources>
     <machines>
@@ -2513,39 +2499,39 @@
             </cell>
             <cell>
                 <address>3</address>
-                <fqn>Three Phase Inverter3.IGBT Leg1</fqn>
-            </cell>
-            <cell>
-                <address>4</address>
-                <fqn>Three Phase Inverter3.IGBT Leg2</fqn>
-            </cell>
-            <cell>
-                <address>5</address>
-                <fqn>Three Phase Inverter3.IGBT Leg3</fqn>
-            </cell>
-            <cell>
-                <address>6</address>
                 <fqn>Three Phase Inverter2.IGBT Leg1</fqn>
             </cell>
             <cell>
-                <address>7</address>
+                <address>4</address>
                 <fqn>Three Phase Inverter2.IGBT Leg2</fqn>
             </cell>
             <cell>
-                <address>8</address>
+                <address>5</address>
                 <fqn>Three Phase Inverter2.IGBT Leg3</fqn>
             </cell>
             <cell>
-                <address>9</address>
+                <address>6</address>
                 <fqn>Three Phase Inverter1.IGBT Leg1</fqn>
             </cell>
             <cell>
-                <address>10</address>
+                <address>7</address>
                 <fqn>Three Phase Inverter1.IGBT Leg2</fqn>
             </cell>
             <cell>
-                <address>11</address>
+                <address>8</address>
                 <fqn>Three Phase Inverter1.IGBT Leg3</fqn>
+            </cell>
+            <cell>
+                <address>9</address>
+                <fqn>Three Phase Inverter3.IGBT Leg1</fqn>
+            </cell>
+            <cell>
+                <address>10</address>
+                <fqn>Three Phase Inverter3.IGBT Leg2</fqn>
+            </cell>
+            <cell>
+                <address>11</address>
+                <fqn>Three Phase Inverter3.IGBT Leg3</fqn>
             </cell>
         </spc_dtv>
         <par_dtv>
@@ -2555,143 +2541,10 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[0.0001, 0.0002]]</execution_rates>
+        <execution_rates>[0.0001, 0.0002]</execution_rates>
     </model_properties>
 
     <variables>
-        <cell>
-            <name>Q4</name>
-            <type>generic</type>
-            <address>8272</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>wt_pll4</name>
-            <type>generic</type>
-            <address>8316</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ground2</name>
-            <type>current</type>
-            <address>8193</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_d_ref_res4</name>
-            <type>generic</type>
-            <address>8294</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref4.RegD_sys.Probe3[0]</name>
-            <type>generic</type>
-            <address>8256</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref4.RegD_sys.Probe3[1]</name>
-            <type>generic</type>
-            <address>8257</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Iga_rms1</name>
-            <type>current</type>
-            <address>8195</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref2.Pref_probe</name>
-            <type>generic</type>
-            <address>8222</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Uq4</name>
-            <type>generic</type>
-            <address>8287</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref2.RegD_act2</name>
-            <type>generic</type>
-            <address>8245</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Q_bus</name>
-            <type>generic</type>
-            <address>8273</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>pf2</name>
-            <type>generic</type>
-            <address>8309</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Q2</name>
-            <type>generic</type>
-            <address>8270</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vab_rms3</name>
-            <type>voltage</type>
-            <address>8209</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>wt_pll1</name>
-            <type>generic</type>
-            <address>8314</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igc_rms1</name>
-            <type>current</type>
-            <address>8203</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ud</name>
-            <type>generic</type>
-            <address>8280</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_bus</name>
-            <type>generic</type>
-            <address>8239</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_q_ref_res1</name>
-            <type>generic</type>
-            <address>8296</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
         <cell>
             <name>P_ref3.RegD_sys.Probe3[0]</name>
             <type>generic</type>
@@ -2707,16 +2560,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>S2</name>
-            <type>generic</type>
-            <address>8275</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Uq</name>
-            <type>generic</type>
-            <address>8284</address>
+            <name>Igb_rms3</name>
+            <type>current</type>
+            <address>8201</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2728,30 +2574,107 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ed</name>
-            <type>generic</type>
-            <address>8226</address>
+            <name>Vbc_rms1</name>
+            <type>voltage</type>
+            <address>8211</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ud4</name>
+            <name>P3</name>
             <type>generic</type>
-            <address>8283</address>
+            <address>8237</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Ground1</name>
+            <name>V1</name>
+            <type>generic</type>
+            <address>8288</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igb_rms2</name>
             <type>current</type>
-            <address>8192</address>
+            <address>8200</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>id4</name>
+            <name>pf3</name>
             <type>generic</type>
-            <address>8303</address>
+            <address>8310</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>pf_bus</name>
+            <type>generic</type>
+            <address>8312</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igb_rms1</name>
+            <type>current</type>
+            <address>8199</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P12</name>
+            <type>generic</type>
+            <address>8235</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>V2</name>
+            <type>generic</type>
+            <address>8289</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref4.RegD_act4</name>
+            <type>generic</type>
+            <address>8255</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref.Et_sqr_res</name>
+            <type>generic</type>
+            <address>8215</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ed4</name>
+            <type>generic</type>
+            <address>8229</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>id</name>
+            <type>generic</type>
+            <address>8300</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Uq1</name>
+            <type>generic</type>
+            <address>8285</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>wt_pll2</name>
+            <type>generic</type>
+            <address>8315</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2763,6 +2686,55 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>pf1</name>
+            <type>generic</type>
+            <address>8308</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>iq4</name>
+            <type>generic</type>
+            <address>8307</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Iga_rms3</name>
+            <type>current</type>
+            <address>8197</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>iq2</name>
+            <type>generic</type>
+            <address>8306</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Q3</name>
+            <type>generic</type>
+            <address>8271</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Pref_out</name>
+            <type>generic</type>
+            <address>8266</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Iga_rms2</name>
+            <type>current</type>
+            <address>8196</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Eq2</name>
             <type>generic</type>
             <address>8232</address>
@@ -2770,9 +2742,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>P_ref3.RegD_act3</name>
-            <type>generic</type>
-            <address>8250</address>
+            <name>Iga_rms</name>
+            <type>current</type>
+            <address>8194</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -2791,240 +2763,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>P2</name>
-            <type>generic</type>
-            <address>8236</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref1.Pref_probe</name>
-            <type>generic</type>
-            <address>8219</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Stotal</name>
-            <type>generic</type>
-            <address>8279</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Phase1</name>
-            <type>generic</type>
-            <address>8260</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Va_rms1</name>
-            <type>voltage</type>
-            <address>8207</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Pref_out</name>
-            <type>generic</type>
-            <address>8266</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Iga_rms3</name>
+            <name>Ground1</name>
             <type>current</type>
-            <address>8197</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>V2</name>
-            <type>generic</type>
-            <address>8289</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ed4</name>
-            <type>generic</type>
-            <address>8229</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref2.Et_sqr</name>
-            <type>generic</type>
-            <address>8220</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Q1</name>
-            <type>generic</type>
-            <address>8268</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Uq2</name>
-            <type>generic</type>
-            <address>8286</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>iq1</name>
-            <type>generic</type>
-            <address>8305</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Pref2</name>
-            <type>generic</type>
-            <address>8263</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igb_rms</name>
-            <type>current</type>
-            <address>8198</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>S3</name>
-            <type>generic</type>
-            <address>8276</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>V1</name>
-            <type>generic</type>
-            <address>8288</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref.Et_sqr</name>
-            <type>generic</type>
-            <address>8214</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_q_ref_res</name>
-            <type>generic</type>
-            <address>8295</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>V3</name>
-            <type>generic</type>
-            <address>8290</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Iga_rms2</name>
-            <type>current</type>
-            <address>8196</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>wt_pll2</name>
-            <type>generic</type>
-            <address>8315</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igc_rms2</name>
-            <type>current</type>
-            <address>8204</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref4.RegD_sys.regD</name>
-            <type>generic</type>
-            <address>8259</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vbc_rms3</name>
-            <type>voltage</type>
-            <address>8213</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref4.RegD_act4</name>
-            <type>generic</type>
-            <address>8255</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref2.RegD_sys.Regulation Data</name>
-            <type>generic</type>
-            <address>8248</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igc_rms</name>
-            <type>current</type>
-            <address>8202</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Phase2</name>
-            <type>generic</type>
-            <address>8261</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Eq4</name>
-            <type>generic</type>
-            <address>8233</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Eq</name>
-            <type>generic</type>
-            <address>8230</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>wt_pll</name>
-            <type>generic</type>
-            <address>8313</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>holding_out1</name>
-            <type>generic</type>
-            <address>8299</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>pf3</name>
-            <type>generic</type>
-            <address>8310</address>
+            <address>8192</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3036,380 +2777,23 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>P_ref3.RegD_sys.Regulation Data</name>
+            <name>Xi_d_ref_res4</name>
             <type>generic</type>
-            <address>8253</address>
+            <address>8294</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Q3</name>
+            <name>Xi_q_ref_res</name>
             <type>generic</type>
-            <address>8271</address>
+            <address>8295</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
         <cell>
-            <name>P1</name>
+            <name>pf2</name>
             <type>generic</type>
-            <address>8234</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>pf4</name>
-            <type>generic</type>
-            <address>8311</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_d_ref_res1</name>
-            <type>generic</type>
-            <address>8292</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>S1</name>
-            <type>generic</type>
-            <address>8274</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ud2</name>
-            <type>generic</type>
-            <address>8282</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>pf1</name>
-            <type>generic</type>
-            <address>8308</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_q_ref_res4</name>
-            <type>generic</type>
-            <address>8298</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref1.Et_sqr_res</name>
-            <type>generic</type>
-            <address>8218</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref3.Et_sqr_res</name>
-            <type>generic</type>
-            <address>8224</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igb_rms1</name>
-            <type>current</type>
-            <address>8199</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igb_rms2</name>
-            <type>current</type>
-            <address>8200</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref2.RegD_sys.regD</name>
-            <type>generic</type>
-            <address>8249</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref3.Pref_probe</name>
-            <type>generic</type>
-            <address>8225</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>iq2</name>
-            <type>generic</type>
-            <address>8306</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ptotal</name>
-            <type>generic</type>
-            <address>8267</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vbc_rms2</name>
-            <type>voltage</type>
-            <address>8212</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref.Et_sqr_res</name>
-            <type>generic</type>
-            <address>8215</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_q_ref_res2</name>
-            <type>generic</type>
-            <address>8297</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vbc_rms</name>
-            <type>voltage</type>
-            <address>8210</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ud1</name>
-            <type>generic</type>
-            <address>8281</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>iq4</name>
-            <type>generic</type>
-            <address>8307</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Iga_rms</name>
-            <type>current</type>
-            <address>8194</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_d_ref_res</name>
-            <type>generic</type>
-            <address>8291</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Eq1</name>
-            <type>generic</type>
-            <address>8231</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ed1</name>
-            <type>generic</type>
-            <address>8227</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vbc_rms1</name>
-            <type>voltage</type>
-            <address>8211</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Igb_rms3</name>
-            <type>current</type>
-            <address>8201</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Pref1</name>
-            <type>generic</type>
-            <address>8262</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>S_bus</name>
-            <type>generic</type>
-            <address>8278</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Pref3</name>
-            <type>generic</type>
-            <address>8264</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P12</name>
-            <type>generic</type>
-            <address>8235</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref2.Et_sqr_res</name>
-            <type>generic</type>
-            <address>8221</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>pf_bus</name>
-            <type>generic</type>
-            <address>8312</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Uq1</name>
-            <type>generic</type>
-            <address>8285</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Pref4</name>
-            <type>generic</type>
-            <address>8265</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>id2</name>
-            <type>generic</type>
-            <address>8302</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P4</name>
-            <type>generic</type>
-            <address>8238</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Vab_rms2</name>
-            <type>voltage</type>
-            <address>8208</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref1.Et_sqr</name>
-            <type>generic</type>
-            <address>8217</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref3.RegD_sys.regD</name>
-            <type>generic</type>
-            <address>8254</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P3</name>
-            <type>generic</type>
-            <address>8237</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>id1</name>
-            <type>generic</type>
-            <address>8301</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Ed2</name>
-            <type>generic</type>
-            <address>8228</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Xi_d_ref_res2</name>
-            <type>generic</type>
-            <address>8293</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Va_rms</name>
-            <type>voltage</type>
-            <address>8206</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref3.Et_sqr</name>
-            <type>generic</type>
-            <address>8223</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>Current_ref.Pref_probe</name>
-            <type>generic</type>
-            <address>8216</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>id</name>
-            <type>generic</type>
-            <address>8300</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref1.RegD_sys.Regulation Data</name>
-            <type>generic</type>
-            <address>8243</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref4.RegD_sys.Regulation Data</name>
-            <type>generic</type>
-            <address>8258</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>P_ref1.RegD_sys.regD</name>
-            <type>generic</type>
-            <address>8244</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>iq</name>
-            <type>generic</type>
-            <address>8304</address>
+            <address>8309</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3428,9 +2812,611 @@
             <visible>True</visible>
         </cell>
         <cell>
+            <name>Ud4</name>
+            <type>generic</type>
+            <address>8283</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Q4</name>
+            <type>generic</type>
+            <address>8272</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ed</name>
+            <type>generic</type>
+            <address>8226</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref2.Et_sqr_res</name>
+            <type>generic</type>
+            <address>8221</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref2.Et_sqr</name>
+            <type>generic</type>
+            <address>8220</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ud2</name>
+            <type>generic</type>
+            <address>8282</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P1</name>
+            <type>generic</type>
+            <address>8234</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vbc_rms2</name>
+            <type>voltage</type>
+            <address>8212</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
             <name>Q12</name>
             <type>generic</type>
             <address>8269</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ground2</name>
+            <type>current</type>
+            <address>8193</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_d_ref_res2</name>
+            <type>generic</type>
+            <address>8293</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ud</name>
+            <type>generic</type>
+            <address>8280</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igc_rms1</name>
+            <type>current</type>
+            <address>8203</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>id4</name>
+            <type>generic</type>
+            <address>8303</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_q_ref_res4</name>
+            <type>generic</type>
+            <address>8298</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ptotal</name>
+            <type>generic</type>
+            <address>8267</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_d_ref_res1</name>
+            <type>generic</type>
+            <address>8292</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>S_bus</name>
+            <type>generic</type>
+            <address>8278</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vab_rms3</name>
+            <type>voltage</type>
+            <address>8209</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref.Et_sqr</name>
+            <type>generic</type>
+            <address>8214</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igc_rms</name>
+            <type>current</type>
+            <address>8202</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igb_rms</name>
+            <type>current</type>
+            <address>8198</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Eq</name>
+            <type>generic</type>
+            <address>8230</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref3.RegD_sys.regD</name>
+            <type>generic</type>
+            <address>8254</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>wt_pll1</name>
+            <type>generic</type>
+            <address>8314</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref3.RegD_sys.Regulation Data</name>
+            <type>generic</type>
+            <address>8253</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>S3</name>
+            <type>generic</type>
+            <address>8276</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref4.RegD_sys.Regulation Data</name>
+            <type>generic</type>
+            <address>8258</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref4.RegD_sys.regD</name>
+            <type>generic</type>
+            <address>8259</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Q2</name>
+            <type>generic</type>
+            <address>8270</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>pf4</name>
+            <type>generic</type>
+            <address>8311</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>id2</name>
+            <type>generic</type>
+            <address>8302</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Q1</name>
+            <type>generic</type>
+            <address>8268</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>wt_pll4</name>
+            <type>generic</type>
+            <address>8316</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref2.Pref_probe</name>
+            <type>generic</type>
+            <address>8222</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vbc_rms</name>
+            <type>voltage</type>
+            <address>8210</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>wt_pll</name>
+            <type>generic</type>
+            <address>8313</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref4.RegD_sys.Probe3[0]</name>
+            <type>generic</type>
+            <address>8256</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref4.RegD_sys.Probe3[1]</name>
+            <type>generic</type>
+            <address>8257</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref3.Et_sqr_res</name>
+            <type>generic</type>
+            <address>8224</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref1.RegD_sys.Regulation Data</name>
+            <type>generic</type>
+            <address>8243</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vab_rms2</name>
+            <type>voltage</type>
+            <address>8208</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref1.RegD_sys.regD</name>
+            <type>generic</type>
+            <address>8244</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_bus</name>
+            <type>generic</type>
+            <address>8239</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Uq</name>
+            <type>generic</type>
+            <address>8284</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Va_rms1</name>
+            <type>voltage</type>
+            <address>8207</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>iq</name>
+            <type>generic</type>
+            <address>8304</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>S2</name>
+            <type>generic</type>
+            <address>8275</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_q_ref_res1</name>
+            <type>generic</type>
+            <address>8296</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_d_ref_res</name>
+            <type>generic</type>
+            <address>8291</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P4</name>
+            <type>generic</type>
+            <address>8238</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref3.Et_sqr</name>
+            <type>generic</type>
+            <address>8223</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref.Pref_probe</name>
+            <type>generic</type>
+            <address>8216</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ed2</name>
+            <type>generic</type>
+            <address>8228</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>holding_out1</name>
+            <type>generic</type>
+            <address>8299</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>S1</name>
+            <type>generic</type>
+            <address>8274</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Vbc_rms3</name>
+            <type>voltage</type>
+            <address>8213</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Phase2</name>
+            <type>generic</type>
+            <address>8261</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Uq2</name>
+            <type>generic</type>
+            <address>8286</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Pref1</name>
+            <type>generic</type>
+            <address>8262</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref2.RegD_act2</name>
+            <type>generic</type>
+            <address>8245</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Stotal</name>
+            <type>generic</type>
+            <address>8279</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Eq1</name>
+            <type>generic</type>
+            <address>8231</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Va_rms</name>
+            <type>voltage</type>
+            <address>8206</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Phase1</name>
+            <type>generic</type>
+            <address>8260</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Xi_q_ref_res2</name>
+            <type>generic</type>
+            <address>8297</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Uq4</name>
+            <type>generic</type>
+            <address>8287</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ud1</name>
+            <type>generic</type>
+            <address>8281</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref2.RegD_sys.regD</name>
+            <type>generic</type>
+            <address>8249</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref3.RegD_act3</name>
+            <type>generic</type>
+            <address>8250</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P2</name>
+            <type>generic</type>
+            <address>8236</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref3.Pref_probe</name>
+            <type>generic</type>
+            <address>8225</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Iga_rms1</name>
+            <type>current</type>
+            <address>8195</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref1.Et_sqr_res</name>
+            <type>generic</type>
+            <address>8218</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Pref3</name>
+            <type>generic</type>
+            <address>8264</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref1.Et_sqr</name>
+            <type>generic</type>
+            <address>8217</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Pref2</name>
+            <type>generic</type>
+            <address>8263</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Eq4</name>
+            <type>generic</type>
+            <address>8233</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Ed1</name>
+            <type>generic</type>
+            <address>8227</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Pref4</name>
+            <type>generic</type>
+            <address>8265</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Current_ref1.Pref_probe</name>
+            <type>generic</type>
+            <address>8219</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>P_ref2.RegD_sys.Regulation Data</name>
+            <type>generic</type>
+            <address>8248</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>iq1</name>
+            <type>generic</type>
+            <address>8305</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Igc_rms2</name>
+            <type>current</type>
+            <address>8204</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>id1</name>
+            <type>generic</type>
+            <address>8301</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>Q_bus</name>
+            <type>generic</type>
+            <address>8273</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>V3</name>
+            <type>generic</type>
+            <address>8290</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -3438,13 +3424,63 @@
 
     <do_var_list>
         <cell>
-            <name>LED 8</name>
-            <address>2066</address>
+            <name>LED 4</name>
+            <address>2062</address>
+        </cell>
+
+        <cell>
+            <name>LED 13</name>
+            <address>2052</address>
         </cell>
 
         <cell>
             <name>LED 18</name>
             <address>2057</address>
+        </cell>
+
+        <cell>
+            <name>LED 9</name>
+            <address>2067</address>
+        </cell>
+
+        <cell>
+            <name>LED 7</name>
+            <address>2065</address>
+        </cell>
+
+        <cell>
+            <name>LED 10</name>
+            <address>2049</address>
+        </cell>
+
+        <cell>
+            <name>LED 19</name>
+            <address>2058</address>
+        </cell>
+
+        <cell>
+            <name>LED 6</name>
+            <address>2064</address>
+        </cell>
+
+        <cell>
+            <name>LED 1</name>
+            <address>2048</address>
+        </cell>
+
+        <cell>
+            <name>LED 17</name>
+            <address>2056</address>
+        </cell>
+
+        <cell>
+            <name>LED 8</name>
+            <address>2066</address>
+        </cell>
+
+        <cell>
+            <name>LED 12</name>
+            <address>2051</address>
         </cell>
 
         <cell>
@@ -3458,18 +3494,8 @@
         </cell>
 
         <cell>
-            <name>LED 4</name>
-            <address>2062</address>
-        </cell>
-
-        <cell>
-            <name>LED 14</name>
-            <address>2053</address>
-        </cell>
-
-        <cell>
-            <name>LED 15</name>
-            <address>2054</address>
+            <name>LED 20</name>
+            <address>2060</address>
         </cell>
 
         <cell>
@@ -3478,18 +3504,8 @@
         </cell>
 
         <cell>
-            <name>LED 12</name>
-            <address>2051</address>
-        </cell>
-
-        <cell>
-            <name>LED 16</name>
-            <address>2055</address>
-        </cell>
-
-        <cell>
-            <name>LED 17</name>
-            <address>2056</address>
+            <name>LED 14</name>
+            <address>2053</address>
         </cell>
 
         <cell>
@@ -3498,43 +3514,13 @@
         </cell>
 
         <cell>
-            <name>LED 10</name>
-            <address>2049</address>
+            <name>LED 15</name>
+            <address>2054</address>
         </cell>
 
         <cell>
-            <name>LED 20</name>
-            <address>2060</address>
-        </cell>
-
-        <cell>
-            <name>LED 7</name>
-            <address>2065</address>
-        </cell>
-
-        <cell>
-            <name>LED 19</name>
-            <address>2058</address>
-        </cell>
-
-        <cell>
-            <name>LED 9</name>
-            <address>2067</address>
-        </cell>
-
-        <cell>
-            <name>LED 6</name>
-            <address>2064</address>
-        </cell>
-
-        <cell>
-            <name>LED 13</name>
-            <address>2052</address>
-        </cell>
-
-        <cell>
-            <name>LED 1</name>
-            <address>2048</address>
+            <name>LED 16</name>
+            <address>2055</address>
         </cell>
 
     </do_var_list>
@@ -3551,18 +3537,8 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Xi_q_ref</name>
-            <addr>1426063680</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Pref_in</name>
-            <addr>1426063628</addr>
+            <name>S_control_mode4</name>
+            <addr>1426063660</addr>
             <min>-1000000.0</min>
             <max>1000000.0</max>
             <def_value>0.0</def_value>
@@ -3581,41 +3557,11 @@
             <format>real</format>
         </scada_input>
         <scada_input>
-            <name>Input Register IP</name>
-            <addr>1426063624</addr>
+            <name>Xi_q_ref4</name>
+            <addr>1426063692</addr>
             <min>-1000000.0</min>
             <max>1000000.0</max>
-            <def_value>5.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Xi_d_ref1</name>
-            <addr>1426063668</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>10.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Q_ref3</name>
-            <addr>1426063640</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>800.0</def_value>
-            <unit>VAr</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Xi_d_ref4</name>
-            <addr>1426063676</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>10.0</def_value>
+            <def_value>0.0</def_value>
             <unit></unit>
             <widget_type>float</widget_type>
             <format>real</format>
@@ -3623,66 +3569,6 @@
         <scada_input>
             <name>S_control_mode1</name>
             <addr>1426063652</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Xi_q_ref2</name>
-            <addr>1426063688</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>S_control_mode</name>
-            <addr>1426063648</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>S_control_mode4</name>
-            <addr>1426063660</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Q_ref4</name>
-            <addr>1426063644</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>1000.0</def_value>
-            <unit>VAr</unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>S_control_mode2</name>
-            <addr>1426063656</addr>
-            <min>-1000000.0</min>
-            <max>1000000.0</max>
-            <def_value>0.0</def_value>
-            <unit></unit>
-            <widget_type>float</widget_type>
-            <format>real</format>
-        </scada_input>
-        <scada_input>
-            <name>Xi_q_ref4</name>
-            <addr>1426063692</addr>
             <min>-1000000.0</min>
             <max>1000000.0</max>
             <def_value>0.0</def_value>
@@ -3701,6 +3587,16 @@
             <format>real</format>
         </scada_input>
         <scada_input>
+            <name>Q_ref3</name>
+            <addr>1426063640</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>800.0</def_value>
+            <unit>VAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
             <name>Xi_d_ref2</name>
             <addr>1426063672</addr>
             <min>-1000000.0</min>
@@ -3711,11 +3607,101 @@
             <format>real</format>
         </scada_input>
         <scada_input>
+            <name>Xi_d_ref1</name>
+            <addr>1426063668</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>10.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Xi_q_ref2</name>
+            <addr>1426063688</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
             <name>Xi_d_ref</name>
             <addr>1426063664</addr>
             <min>-1000000.0</min>
             <max>1000000.0</max>
             <def_value>10.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Input Register IP</name>
+            <addr>1426063624</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>5.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Q_ref4</name>
+            <addr>1426063644</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>1000.0</def_value>
+            <unit>VAr</unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>S_control_mode</name>
+            <addr>1426063648</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Pref_in</name>
+            <addr>1426063628</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>S_control_mode2</name>
+            <addr>1426063656</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Xi_d_ref4</name>
+            <addr>1426063676</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>10.0</def_value>
+            <unit></unit>
+            <widget_type>float</widget_type>
+            <format>real</format>
+        </scada_input>
+        <scada_input>
+            <name>Xi_q_ref</name>
+            <addr>1426063680</addr>
+            <min>-1000000.0</min>
+            <max>1000000.0</max>
+            <def_value>0.0</def_value>
             <unit></unit>
             <widget_type>float</widget_type>
             <format>real</format>
