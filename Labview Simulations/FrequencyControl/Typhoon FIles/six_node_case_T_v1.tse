@@ -1,0 +1,3303 @@
+version = 4.2
+
+
+//
+// Saved by sw version: 2017.3
+// Save timestamp: 08-Feb-2018 @ 06:18:09 PM
+//
+
+model "six_node_case_t_v1" {
+    configuration {
+        hil_device = "HIL402"
+        hil_configuration_id = 2
+        simulation_method = exact
+        simulation_time_step = auto
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "internal memory"
+        data_section = "internal memory"
+        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "default"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "high"
+    }
+
+    
+    component Subsystem Root {
+
+        
+        component src_step L4 {
+            
+            final_value = "1.2075"
+            initial_value = "1.15"
+            step_time = "30"
+	    
+        }
+        [
+            position = 10728, 9632
+        ]
+        
+        component src_step L5 {
+            
+            final_value = "1.28"
+            initial_value = "1.25"
+            step_time = "40"
+	    
+        }
+        [
+            position = 10728, 9720
+        ]
+        
+        component src_step L6 {
+            
+            final_value = "0.945"
+            initial_value = "0.9"
+            step_time = "50"
+	    
+        }
+        [
+            position = 10728, 9800
+        ]
+        
+        component src_constant Constant1 {
+            
+	    
+        }
+        [
+            position = 11504, 9544
+        ]
+        
+        component src_constant Constant2 {
+            
+	    
+        }
+        [
+            position = 11560, 9624
+        ]
+        
+        component src_constant Constant3 {
+            
+            value = "50"
+	    
+        }
+        [
+            position = 11568, 9720
+        ]
+        
+        component gen_terminator Termination1 {
+            
+	    
+        }
+        [
+            position = 11992, 9624
+        ]
+        
+        component gen_probe "IP Reg Out" {
+            
+	    
+        }
+        [
+            position = 11624, 9872
+        ]
+        
+        component gen_c_function "C function1" {
+            
+            global_variables = "real var1;real var2;real var3;"
+            in_terminal_dimensions = "inherit;inherit;inherit"
+            in_terminal_dimensions_str = "U1 inherit;U2 inherit;U3 inherit"
+            in_terminal_labels = "False;False;False;"
+            in_terminal_properties = "real U1;real U2;real U3;"
+            no_feed_inputs = "[u'']"
+            no_feed_outputs = "[u'']"
+            out_terminal_dimensions = "inherit;inherit;inherit"
+            out_terminal_dimensions_str = "OU1 inherit;OU2 inherit;OU3 inherit"
+            out_terminal_labels = "False;False;False;"
+            out_terminal_properties = "real OU1;real OU2;real OU3;"
+            output_fnc = "/*Begin code section*/
+        if (U1==0)
+            OU1=0.85;
+        else
+            OU1=U1;
+        
+        if (U2==0)
+            OU2=1.5;
+        else
+            OU2=U2;
+        
+        if (U3==0)
+            OU3=0.95;
+        else
+            OU3=U3;
+        /*End code section*/"
+	    
+        }
+        [
+            position = 11576, 10080
+            scale = -1, 1
+        ]
+        
+        component gen_probe u1 {
+            
+	    
+        }
+        [
+            position = 11224, 9968
+        ]
+        
+        component gen_probe u2 {
+            
+	    
+        }
+        [
+            position = 11296, 10016
+        ]
+        
+        component gen_probe u3 {
+            
+	    
+        }
+        [
+            position = 11384, 10008
+        ]
+        
+        component Subsystem "Physical Model" {
+            layout = dynamic
+    
+            
+            component gen_probe "Bus4 Load" {
+                
+    	    
+            }
+            [
+                position = 7288, 8208
+            ]
+            
+            component gen_probe "Bus5 Load" {
+                
+    	    
+            }
+            [
+                position = 7392, 8688
+            ]
+            
+            component gen_probe "Bus6 Load" {
+                
+    	    
+            }
+            [
+                position = 8416, 8504
+            ]
+            
+            component gen_probe theta1 {
+                
+    	    
+            }
+            [
+                position = 7664, 8664
+            ]
+            
+            component gen_probe theta2 {
+                
+    	    
+            }
+            [
+                position = 8440, 8224
+            ]
+            
+            component gen_probe theta3 {
+                
+    	    
+            }
+            [
+                position = 8352, 8584
+            ]
+            
+            component gen_probe theta4 {
+                
+    	    
+            }
+            [
+                position = 7960, 8192
+            ]
+            
+            component gen_probe theta5 {
+                
+    	    
+            }
+            [
+                position = 7960, 8480
+            ]
+            
+            component gen_probe theta6 {
+                
+    	    
+            }
+            [
+                position = 8568, 8320
+            ]
+            
+            component Subsystem "Load - Bus 5" {
+                layout = dynamic
+        
+                
+                component gen_product Prod1 {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8352
+                ]
+                
+                component gen_product Prod2 {
+                    
+        	    
+                }
+                [
+                    position = 8448, 8072
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8104
+                ]
+                
+                component gen_trigonometric Sin {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8104
+                ]
+                
+                component gen_trigonometric Sin1 {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8304
+                ]
+                
+                component gen_product Prod {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8152
+                ]
+                
+                component gen_sum Sum4 {
+                    
+                    signs = "--"
+        	    
+                }
+                [
+                    position = 8344, 8064
+                ]
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8304
+                ]
+                
+                component gen_integrator Integrator1 {
+                    
+                    init_value = "t5"
+        	    
+                }
+                [
+                    position = 8568, 8072
+                ]
+                
+                component gen_sum Sum1 {
+                    
+        	    
+                }
+                [
+                    position = 8240, 8160
+                ]
+                
+                component src_constant D5Inv {
+                    
+                    value = "D5_bar"
+        	    
+                }
+                [
+                    position = 8352, 8184
+                ]
+                
+                component src_constant B53 {
+                    
+                    value = "B53"
+        	    
+                }
+                [
+                    position = 7960, 8200
+                ]
+                
+                component src_constant B51 {
+                    
+                    value = "B51"
+        	    
+                }
+                [
+                    position = 7960, 8392
+                ]
+                
+                component gen_probe theta5 {
+                    
+        	    
+                }
+                [
+                    position = 8832, 7920
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port L5 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7400, 8008
+                ]
+                
+                port "Theta 5" {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8840, 8072
+                ]
+                
+                port Theta3 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8160
+                ]
+                
+                port Theta1 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8360
+                ]
+                
+                junction Junction1 sp
+                [
+                    position = 8768, 8072
+                ]
+                
+                junction Junction2 sp
+                [
+                    position = 7528, 8296
+                ]
+                
+                junction Junction3 sp
+                [
+                    position = 8768, 8072
+                ]
+                connect B51.out Prod1.in1 as Connection6
+                
+                connect B53.out Prod.in1 as Connection1
+                
+                connect D5Inv.out Prod2.in1 as Connection14
+                
+                connect Integrator1.out Junction1 as Connection17
+                
+                connect Junction1 "Theta 5" as Connection18
+                
+                connect Junction2 Junction3 as Connection23
+                [
+                    breakpoints =8768, 8520;8768, 8520
+                ]
+                connect Junction3 Junction1 as Connection24
+                
+                connect L5 Sum4.in as Connection11
+                
+                connect Prod.in Sin.out as Connection2
+                
+                connect Prod1.in Sin1.out as Connection8
+                
+                connect Prod1.out Sum1.in1 as Connection9
+                
+                connect Prod2.out Integrator1.in as Connection15
+                
+                connect Sum1.in Prod.out as Connection3
+                
+                connect Sum1.out Sum4.in1 as Connection10
+                
+                connect Sum2.in Junction2 as Connection20
+                
+                connect Sum2.out Sin.in as Connection5
+                
+                connect Sum3.in Junction2 as Connection22
+                
+                connect Sum3.out Sin1.in as Connection7
+                
+                connect Sum4.out Prod2.in as Connection13
+                
+                connect Theta1 Sum3.in1 as Connection12
+                
+                connect Theta3 Sum2.in1 as Connection4
+                
+                connect theta5.in Junction3 as Connection25
+                
+                
+        
+                
+            }
+            [
+                position = 7832, 8552
+                size = 104, 120
+            ]
+            
+            component Subsystem "Gen - Bus 1" {
+                layout = dynamic
+        
+                
+                component gen_sum Sum1 {
+                    
+        	    
+                }
+                [
+                    position = 8240, 8160
+                ]
+                
+                component src_constant B15 {
+                    
+                    value = "B15"
+        	    
+                }
+                [
+                    position = 7960, 8192
+                ]
+                
+                component gen_trigonometric Sin {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8104
+                ]
+                
+                component gen_product Prod {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8152
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8104
+                ]
+                
+                component gen_trigonometric Sin1 {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8304
+                ]
+                
+                component gen_product Prod1 {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8352
+                ]
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8304
+                ]
+                
+                component src_constant B14 {
+                    
+                    value = "B14"
+        	    
+                }
+                [
+                    position = 7960, 8392
+                ]
+                
+                component gen_sum Sum4 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 8344, 8064
+                ]
+                
+                component gen_product Prod2 {
+                    
+        	    
+                }
+                [
+                    position = 8448, 8072
+                ]
+                
+                component src_constant D1Inv {
+                    
+                    value = "D1_bar"
+        	    
+                }
+                [
+                    position = 8352, 8184
+                ]
+                
+                component gen_integrator Integrator1 {
+                    
+                    init_value = "t1"
+        	    
+                }
+                [
+                    position = 8568, 8072
+                ]
+                
+                component gen_probe theta1 {
+                    
+        	    
+                }
+                [
+                    position = 8832, 7936
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port "Theta 5" {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8160
+                ]
+                
+                port U1 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7400, 8008
+                ]
+                
+                port "Theta 4" {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8360
+                ]
+                
+                port Theta1 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8840, 8072
+                ]
+                
+                junction Junction1 sp
+                [
+                    position = 8768, 8072
+                ]
+                
+                junction Junction2 sp
+                [
+                    position = 7528, 8296
+                ]
+                
+                junction Junction3 sp
+                [
+                    position = 8792, 8072
+                ]
+                connect B14.out Prod1.in1 as Connection6
+                
+                connect B15.out Prod.in1 as Connection1
+                
+                connect D1Inv.out Prod2.in1 as Connection14
+                [
+                    breakpoints =8400, 8184;8400, 8080
+                ]
+                connect Integrator1.out Junction1 as Connection17
+                
+                connect Junction1 Junction3 as Connection23
+                
+                connect Junction2 Junction1 as Connection21
+                [
+                    breakpoints =7528, 8520;8304, 8520;8768, 8520;8768, 8392;8768, 8392;8768, 8296;8768, 8296;8768, 8216;8768, 8216;8768, 8176;8768, 8176
+                ]
+                connect Junction3 Theta1 as Connection24
+                
+                connect Prod.in Sin.out as Connection2
+                
+                connect Prod1.in Sin1.out as Connection8
+                
+                connect Prod1.out Sum1.in1 as Connection9
+                [
+                    breakpoints =8160, 8352;8160, 8168
+                ]
+                connect Prod2.out Integrator1.in as Connection15
+                
+                connect Sum1.in Prod.out as Connection3
+                
+                connect Sum1.out Sum4.in1 as Connection10
+                
+                connect Sum2.in Junction2 as Connection20
+                [
+                    breakpoints =7528, 8096
+                ]
+                connect Sum2.out Sin.in as Connection5
+                
+                connect Sum3.in Junction2 as Connection22
+                [
+                    breakpoints =7528, 8296;7528, 8304
+                ]
+                connect Sum3.out Sin1.in as Connection7
+                
+                connect Sum4.out Prod2.in as Connection13
+                
+                connect "Theta 4" Sum3.in1 as Connection12
+                
+                connect "Theta 5" Sum2.in1 as Connection4
+                
+                connect U1 Sum4.in as Connection11
+                
+                connect theta1.in Junction3 as Connection25
+                [
+                    breakpoints =8768, 7936;8768, 8072
+                ]
+                
+        
+                
+            }
+            [
+                position = 7520, 8392
+                size = 104, 120
+            ]
+            
+            component Subsystem "Load - Bus 6" {
+                layout = dynamic
+        
+                
+                component gen_product Prod2 {
+                    
+        	    
+                }
+                [
+                    position = 8448, 8072
+                ]
+                
+                component gen_trigonometric Sin1 {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8304
+                ]
+                
+                component gen_sum Sum4 {
+                    
+                    signs = "--"
+        	    
+                }
+                [
+                    position = 8344, 8064
+                ]
+                
+                component gen_product Prod1 {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8352
+                ]
+                
+                component gen_product Prod {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8152
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8104
+                ]
+                
+                component gen_integrator Integrator1 {
+                    
+                    init_value = "t6"
+        	    
+                }
+                [
+                    position = 8568, 8072
+                ]
+                
+                component gen_trigonometric Sin {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8104
+                ]
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8304
+                ]
+                
+                component gen_sum Sum1 {
+                    
+        	    
+                }
+                [
+                    position = 8240, 8160
+                ]
+                
+                component src_constant D6Inv {
+                    
+                    value = "D6_bar"
+        	    
+                }
+                [
+                    position = 8352, 8184
+                ]
+                
+                component src_constant B63 {
+                    
+                    value = "B63"
+        	    
+                }
+                [
+                    position = 7960, 8200
+                ]
+                
+                component src_constant B62 {
+                    
+                    value = "B62"
+        	    
+                }
+                [
+                    position = 7960, 8392
+                ]
+                
+                component gen_probe theta6 {
+                    
+        	    
+                }
+                [
+                    position = 8840, 7928
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port Theta2 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8360
+                ]
+                
+                port L6 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7400, 8008
+                ]
+                
+                port Theta3 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8160
+                ]
+                
+                port "Theta 6" {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8840, 8072
+                ]
+                
+                junction Junction1 sp
+                [
+                    position = 8768, 8072
+                ]
+                
+                junction Junction2 sp
+                [
+                    position = 7528, 8296
+                ]
+                
+                junction Junction3 sp
+                [
+                    position = 8768, 8072
+                ]
+                connect B62.out Prod1.in1 as Connection6
+                
+                connect B63.out Prod.in1 as Connection1
+                
+                connect D6Inv.out Prod2.in1 as Connection14
+                
+                connect Integrator1.out Junction1 as Connection17
+                
+                connect Junction1 "Theta 6" as Connection18
+                
+                connect Junction2 Junction3 as Connection23
+                [
+                    breakpoints =8304, 8528;8768, 8528
+                ]
+                connect Junction3 Junction1 as Connection24
+                
+                connect L6 Sum4.in as Connection11
+                
+                connect Prod.in Sin.out as Connection2
+                
+                connect Prod1.in Sin1.out as Connection8
+                
+                connect Prod1.out Sum1.in1 as Connection9
+                
+                connect Prod2.out Integrator1.in as Connection15
+                
+                connect Sum1.in Prod.out as Connection3
+                
+                connect Sum1.out Sum4.in1 as Connection10
+                
+                connect Sum2.in Junction2 as Connection20
+                
+                connect Sum2.out Sin.in as Connection5
+                
+                connect Sum3.in Junction2 as Connection22
+                
+                connect Sum3.out Sin1.in as Connection7
+                
+                connect Sum4.out Prod2.in as Connection13
+                
+                connect Theta2 Sum3.in1 as Connection12
+                
+                connect Theta3 Sum2.in1 as Connection4
+                
+                connect theta6.in Junction3 as Connection25
+                
+                
+        
+                
+            }
+            [
+                position = 8432, 8360
+                size = 104, 120
+            ]
+            
+            component Subsystem "Gen - Bus 2" {
+                layout = dynamic
+        
+                
+                component gen_product Prod2 {
+                    
+        	    
+                }
+                [
+                    position = 8448, 8072
+                ]
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8304
+                ]
+                
+                component gen_sum Sum4 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 8344, 8064
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8104
+                ]
+                
+                component gen_product Prod1 {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8352
+                ]
+                
+                component gen_integrator Integrator1 {
+                    
+                    init_value = "t2"
+        	    
+                }
+                [
+                    position = 8568, 8072
+                ]
+                
+                component gen_product Prod {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8152
+                ]
+                
+                component gen_trigonometric Sin1 {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8304
+                ]
+                
+                component gen_trigonometric Sin {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8104
+                ]
+                
+                component gen_sum Sum1 {
+                    
+        	    
+                }
+                [
+                    position = 8240, 8160
+                ]
+                
+                component src_constant B24 {
+                    
+                    value = "B24"
+        	    
+                }
+                [
+                    position = 7960, 8192
+                ]
+                
+                component src_constant B26 {
+                    
+                    value = "B26"
+        	    
+                }
+                [
+                    position = 7960, 8392
+                ]
+                
+                component src_constant D2Inv {
+                    
+                    value = "D2_bar"
+        	    
+                }
+                [
+                    position = 8352, 8184
+                ]
+                
+                component gen_probe "theta 2" {
+                    
+        	    
+                }
+                [
+                    position = 8824, 7952
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port U2 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7400, 8008
+                ]
+                
+                port Theta4 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8160
+                ]
+                
+                port Theta6 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8360
+                ]
+                
+                port "Theta 2" {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8840, 8072
+                ]
+                
+                junction Junction1 sp
+                [
+                    position = 8768, 8072
+                ]
+                
+                junction Junction2 sp
+                [
+                    position = 7528, 8296
+                ]
+                
+                junction Junction3 sp
+                [
+                    position = 8768, 8072
+                ]
+                connect B24.out Prod.in1 as Connection1
+                
+                connect B26.out Prod1.in1 as Connection6
+                
+                connect D2Inv.out Prod2.in1 as Connection14
+                
+                connect Integrator1.out Junction1 as Connection17
+                
+                connect Junction1 "Theta 2" as Connection18
+                
+                connect Junction2 Junction3 as Connection23
+                [
+                    breakpoints =8304, 8504;8768, 8504
+                ]
+                connect Junction3 Junction1 as Connection24
+                
+                connect Prod.in Sin.out as Connection2
+                
+                connect Prod1.in Sin1.out as Connection8
+                
+                connect Prod1.out Sum1.in1 as Connection9
+                
+                connect Prod2.out Integrator1.in as Connection15
+                
+                connect Sum1.in Prod.out as Connection3
+                
+                connect Sum1.out Sum4.in1 as Connection10
+                
+                connect Sum2.in Junction2 as Connection20
+                
+                connect Sum2.out Sin.in as Connection5
+                
+                connect Sum3.in Junction2 as Connection22
+                
+                connect Sum3.out Sin1.in as Connection7
+                
+                connect Sum4.out Prod2.in as Connection13
+                
+                connect Theta4 Sum2.in1 as Connection4
+                
+                connect Theta6 Sum3.in1 as Connection12
+                
+                connect U2 Sum4.in as Connection11
+                
+                connect "theta 2.in" Junction3 as Connection25
+                
+                
+        
+                
+            }
+            [
+                position = 8224, 8248
+                size = 104, 120
+            ]
+            
+            component Subsystem "Gen - Bus 3" {
+                layout = dynamic
+        
+                
+                component gen_sum Sum1 {
+                    
+        	    
+                }
+                [
+                    position = 8240, 8160
+                ]
+                
+                component gen_product Prod {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8152
+                ]
+                
+                component gen_trigonometric Sin1 {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8304
+                ]
+                
+                component gen_sum Sum4 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 8344, 8064
+                ]
+                
+                component gen_integrator Integrator1 {
+                    
+                    init_value = "t3"
+        	    
+                }
+                [
+                    position = 8568, 8072
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8104
+                ]
+                
+                component gen_product Prod2 {
+                    
+        	    
+                }
+                [
+                    position = 8448, 8072
+                ]
+                
+                component gen_product Prod1 {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8352
+                ]
+                
+                component gen_trigonometric Sin {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8104
+                ]
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8304
+                ]
+                
+                component src_constant D3Inv {
+                    
+                    value = "D3_bar"
+        	    
+                }
+                [
+                    position = 8352, 8184
+                ]
+                
+                component src_constant B36 {
+                    
+                    value = "B36"
+        	    
+                }
+                [
+                    position = 7960, 8192
+                ]
+                
+                component src_constant B35 {
+                    
+                    value = "B35"
+        	    
+                }
+                [
+                    position = 7960, 8392
+                ]
+                
+                component gen_probe theta3 {
+                    
+        	    
+                }
+                [
+                    position = 8840, 7936
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port "Theta 3" {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8840, 8072
+                ]
+                
+                port "Theta 6" {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8160
+                ]
+                
+                port "Theta 5" {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8360
+                ]
+                
+                port U3 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7400, 8008
+                ]
+                
+                junction Junction1 sp
+                [
+                    position = 8768, 8072
+                ]
+                
+                junction Junction2 sp
+                [
+                    position = 7528, 8296
+                ]
+                
+                junction Junction3 sp
+                [
+                    position = 8768, 8072
+                ]
+                connect B35.out Prod1.in1 as Connection6
+                
+                connect B36.out Prod.in1 as Connection1
+                
+                connect D3Inv.out Prod2.in1 as Connection14
+                
+                connect Integrator1.out Junction1 as Connection17
+                
+                connect Junction1 "Theta 3" as Connection18
+                
+                connect Junction2 Junction3 as Connection23
+                [
+                    breakpoints =8768, 8520;8768, 8520
+                ]
+                connect Junction3 Junction1 as Connection24
+                
+                connect Prod.in Sin.out as Connection2
+                
+                connect Prod1.in Sin1.out as Connection8
+                
+                connect Prod1.out Sum1.in1 as Connection9
+                
+                connect Prod2.out Integrator1.in as Connection15
+                
+                connect Sum1.in Prod.out as Connection3
+                
+                connect Sum1.out Sum4.in1 as Connection10
+                
+                connect Sum2.in Junction2 as Connection20
+                
+                connect Sum2.out Sin.in as Connection5
+                
+                connect Sum3.in Junction2 as Connection22
+                
+                connect Sum3.out Sin1.in as Connection7
+                
+                connect Sum4.out Prod2.in as Connection13
+                
+                connect "Theta 5" Sum3.in1 as Connection12
+                
+                connect "Theta 6" Sum2.in1 as Connection4
+                
+                connect U3 Sum4.in as Connection11
+                
+                connect theta3.in Junction3 as Connection25
+                
+                
+        
+                
+            }
+            [
+                position = 8224, 8624
+                size = 104, 120
+            ]
+            
+            component Subsystem "Load - Bus 4" {
+                layout = dynamic
+        
+                
+                component gen_product Prod {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8152
+                ]
+                
+                component gen_sum Sum1 {
+                    
+        	    
+                }
+                [
+                    position = 8240, 8160
+                ]
+                
+                component gen_trigonometric Sin1 {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8304
+                ]
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8304
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 7776, 8104
+                ]
+                
+                component gen_integrator Integrator1 {
+                    
+                    init_value = "t4"
+        	    
+                }
+                [
+                    position = 8568, 8072
+                ]
+                
+                component gen_product Prod2 {
+                    
+        	    
+                }
+                [
+                    position = 8448, 8072
+                ]
+                
+                component gen_product Prod1 {
+                    
+        	    
+                }
+                [
+                    position = 8104, 8352
+                ]
+                
+                component gen_trigonometric Sin {
+                    
+        	    
+                }
+                [
+                    position = 7960, 8104
+                ]
+                
+                component gen_sum Sum4 {
+                    
+                    signs = "--"
+        	    
+                }
+                [
+                    position = 8344, 8064
+                ]
+                
+                component src_constant B41 {
+                    
+                    value = "B41"
+        	    
+                }
+                [
+                    position = 7960, 8200
+                ]
+                
+                component src_constant B42 {
+                    
+                    value = "B42"
+        	    
+                }
+                [
+                    position = 7960, 8392
+                ]
+                
+                component src_constant D4Inv {
+                    
+                    value = "D4_bar"
+        	    
+                }
+                [
+                    position = 8352, 8184
+                ]
+                
+                component gen_probe theta4 {
+                    
+        	    
+                }
+                [
+                    position = 8832, 7920
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port L4 {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7400, 8008
+                ]
+                
+                port "Theta 4" {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8840, 8072
+                ]
+                
+                port Theta1 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8160
+                ]
+                
+                port Theta2 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7664, 8360
+                ]
+                
+                junction Junction1 sp
+                [
+                    position = 8768, 8072
+                ]
+                
+                junction Junction2 sp
+                [
+                    position = 7528, 8296
+                ]
+                
+                junction Junction3 sp
+                [
+                    position = 8768, 8072
+                ]
+                connect B41.out Prod.in1 as Connection1
+                
+                connect B42.out Prod1.in1 as Connection6
+                
+                connect D4Inv.out Prod2.in1 as Connection14
+                
+                connect Integrator1.out Junction1 as Connection17
+                
+                connect Junction1 "Theta 4" as Connection18
+                
+                connect Junction2 Junction3 as Connection23
+                [
+                    breakpoints =7528, 8296;7528, 8488;8768, 8488;8768, 8488;8768, 8424;8768, 8424
+                ]
+                connect Junction3 Junction1 as Connection24
+                
+                connect L4 Sum4.in as Connection11
+                
+                connect Prod.in Sin.out as Connection2
+                
+                connect Prod1.in Sin1.out as Connection8
+                
+                connect Prod1.out Sum1.in1 as Connection9
+                
+                connect Prod2.out Integrator1.in as Connection15
+                
+                connect Sum1.in Prod.out as Connection3
+                
+                connect Sum1.out Sum4.in1 as Connection10
+                
+                connect Sum2.in Junction2 as Connection20
+                
+                connect Sum2.out Sin.in as Connection5
+                
+                connect Sum3.in Junction2 as Connection22
+                
+                connect Sum3.out Sin1.in as Connection7
+                
+                connect Sum4.out Prod2.in as Connection13
+                
+                connect Theta1 Sum2.in1 as Connection4
+                
+                connect Theta2 Sum3.in1 as Connection12
+                
+                connect theta4.in Junction3 as Connection25
+                
+                
+        
+                
+            }
+            [
+                position = 7848, 8272
+                size = 104, 120
+            ]
+            
+            component Subsystem "Average Frequency Error Calculation" {
+                layout = dynamic
+        
+                
+                component gen_sum Sum3 {
+                    
+                    signs = "+-"
+        	    
+                }
+                [
+                    position = 8048, 8168
+                ]
+                
+                component gen_sum Sum2 {
+                    
+                    signs = "3"
+        	    
+                }
+                [
+                    position = 7792, 8288
+                ]
+                
+                component gen_probe "Average Frequency Error" {
+                    
+        	    
+                }
+                [
+                    position = 8552, 8040
+                ]
+                
+                component gen_product Product1 {
+                    
+        	    
+                }
+                [
+                    position = 8216, 8168
+                ]
+                
+                component src_constant scale_const {
+                    
+                    value = "scale_const"
+        	    
+                }
+                [
+                    position = 8264, 8352
+                ]
+                
+                component gen_product Product2 {
+                    
+        	    
+                }
+                [
+                    position = 8488, 8240
+                ]
+                
+                component gen_sum Sum1 {
+                    
+                    signs = "3"
+        	    
+                }
+                [
+                    position = 7904, 8112
+                ]
+                
+                component src_constant Dinv_Sum {
+                    
+                    value = "Dsum_inv"
+        	    
+                }
+                [
+                    position = 8080, 8288
+                ]
+                
+                component gen_probe "U 1" {
+                    
+        	    
+                }
+                [
+                    position = 7872, 7952
+                ]
+                
+                component gen_probe "U 2" {
+                    
+        	    
+                }
+                [
+                    position = 7936, 7952
+                ]
+                
+                component gen_probe "U 3" {
+                    
+        	    
+                }
+                [
+                    position = 8064, 7952
+                ]
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                port Del_W {
+                    
+                    position = auto:auto
+                    kind = sp
+                    direction = in
+                    sp_type {
+                        default = inherit
+                        readonly = True
+                    }
+                }
+                [
+                    position = 8600, 8240
+                ]
+                
+                port U1 {
+                    
+                    position = left:1
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7720, 8000
+                ]
+                
+                port U2 {
+                    
+                    position = left:2
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7720, 8072
+                ]
+                
+                port U3 {
+                    
+                    position = left:3
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7720, 8152
+                ]
+                
+                port L4 {
+                    
+                    position = left:4
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7720, 8240
+                ]
+                
+                port L5 {
+                    
+                    position = left:5
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7720, 8312
+                ]
+                
+                port L6 {
+                    
+                    position = left:6
+                    kind = sp
+                    direction = out
+                    sp_type {
+                        default = auto
+                        readonly = True
+                    }
+                }
+                [
+                    position = 7720, 8376
+                ]
+                
+                junction Junction13 sp
+                [
+                    position = 8296, 8160
+                ]
+                
+                junction Junction14 sp
+                [
+                    position = 7752, 8000
+                ]
+                
+                junction Junction16 sp
+                [
+                    position = 7784, 8128
+                ]
+                
+                junction Junction17 sp
+                [
+                    position = 7816, 8112
+                ]
+                connect "Average Frequency Error.in" Junction13 as Connection78
+                [
+                    breakpoints =8296, 8072;8296, 8160
+                ]
+                connect Dinv_Sum.out Product1.in1 as Connection67
+                
+                connect Junction13 Product1.out as Connection79
+                [
+                    breakpoints =8272, 8160;8264, 8160
+                ]
+                connect Junction14 U1 as Connection89
+                
+                connect Junction16 U3 as Connection95
+                
+                connect Junction17 Sum1.in1 as Connection99
+                [
+                    breakpoints =7864, 8112
+                ]
+                connect Product2.out Del_W as Connection73
+                
+                connect Product2.in Junction13 as Connection80
+                [
+                    breakpoints =8296, 8232;8296, 8160
+                ]
+                connect Sum1.in Junction14 as Connection88
+                
+                connect Sum1.in2 Junction16 as Connection94
+                
+                connect Sum1.out Sum3.in as Connection59
+                
+                connect Sum2.in L4 as Connection82
+                
+                connect Sum2.in1 L5 as Connection84
+                
+                connect Sum2.in2 L6 as Connection86
+                
+                connect Sum2.out Sum3.in1 as Connection60
+                
+                connect Sum3.out Product1.in as Connection62
+                
+                connect "U 1.in" Junction14 as Connection90
+                
+                connect "U 2.in" Junction17 as Connection100
+                [
+                    breakpoints =7904, 8016;7816, 8016
+                ]
+                connect "U 3.in" Junction16 as Connection96
+                [
+                    breakpoints =7984, 7952;7968, 7952;7968, 8064;7784, 8064;7784, 8064;7784, 8064;7784, 8128
+                ]
+                connect U2 Junction17 as Connection98
+                [
+                    breakpoints =7744, 8072;7744, 8112
+                ]
+                connect scale_const.out Product2.in1 as Connection81
+                [
+                    breakpoints =8296, 8248;8440, 8248
+                ]
+                
+        
+                
+            }
+            [
+                position = 8576, 7976
+                size = 48, 112
+            ]
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            port U1 {
+                
+                position = left:1
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7136, 8464
+            ]
+            
+            port L4 {
+                
+                position = left:4
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7152, 8312
+            ]
+            
+            port U2 {
+                
+                position = left:2
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7992, 8288
+            ]
+            
+            port L6 {
+                
+                position = left:6
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 8168, 8392
+            ]
+            
+            port L5 {
+                
+                position = left:5
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7320, 8592
+            ]
+            
+            port U3 {
+                
+                position = left:3
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7992, 8592
+            ]
+            
+            port Del_W {
+                
+                position = auto:auto
+                kind = sp
+                direction = in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8872, 7976
+            ]
+            
+            junction Junction1 sp
+            [
+                position = 8520, 8360
+            ]
+            
+            junction Junction2 sp
+            [
+                position = 8296, 8168
+            ]
+            
+            junction Junction3 sp
+            [
+                position = 8288, 8440
+            ]
+            
+            junction Junction4 sp
+            [
+                position = 7624, 8424
+            ]
+            
+            junction Junction5 sp
+            [
+                position = 7992, 8176
+            ]
+            
+            junction Junction6 sp
+            [
+                position = 7960, 8552
+            ]
+            
+            junction Junction7 sp
+            [
+                position = 7200, 8464
+            ]
+            
+            junction Junction8 sp
+            [
+                position = 8032, 8288
+            ]
+            
+            junction Junction9 sp
+            [
+                position = 8064, 8592
+            ]
+            
+            junction Junction10 sp
+            [
+                position = 7384, 8312
+            ]
+            
+            junction Junction11 sp
+            [
+                position = 7408, 8592
+            ]
+            
+            junction Junction12 sp
+            [
+                position = 8352, 8400
+            ]
+            
+            junction Junction13 sp
+            [
+                position = 7184, 8312
+            ]
+            
+            junction Junction14 sp
+            [
+                position = 7368, 8592
+            ]
+            
+            junction Junction15 sp
+            [
+                position = 8328, 8400
+            ]
+            
+            junction Junction16 sp
+            [
+                position = 7608, 8424
+            ]
+            
+            junction Junction17 sp
+            [
+                position = 8296, 8224
+            ]
+            
+            junction Junction18 sp
+            [
+                position = 8288, 8552
+            ]
+            
+            junction Junction19 sp
+            [
+                position = 7920, 8272
+            ]
+            
+            junction Junction20 sp
+            [
+                position = 7904, 8552
+            ]
+            
+            junction Junction21 sp
+            [
+                position = 8496, 8360
+            ]
+            connect "Average Frequency Error Calculation.Del_W" Del_W as Connection72
+            
+            connect "Bus4 Load.in" Junction13 as Connection75
+            
+            connect "Bus5 Load.in" Junction14 as Connection82
+            
+            connect "Bus6 Load.in" Junction15 as Connection85
+            
+            connect "Gen - Bus 1.Theta1" Junction16 as Connection86
+            
+            connect "Gen - Bus 1.Theta 4" Junction5 as Connection21
+            [
+                breakpoints =7456, 8104;7992, 8104
+            ]
+            connect "Gen - Bus 1.Theta 5" Junction6 as Connection34
+            [
+                breakpoints =7472, 8768;7960, 8768
+            ]
+            connect "Gen - Bus 2.Theta 2" Junction17 as Connection89
+            
+            connect "Gen - Bus 3.Theta 6" Junction1 as Connection8
+            [
+                breakpoints =8120, 8592;8120, 8768;8520, 8768;8520, 8360
+            ]
+            connect Junction1 "Gen - Bus 2.Theta6" as Connection7
+            [
+                breakpoints =8520, 8360;8520, 8096;8088, 8096;8088, 8168
+            ]
+            connect Junction10 "Average Frequency Error Calculation.L4" as Connection66
+            
+            connect Junction10 "Load - Bus 4.L4" as Connection51
+            
+            connect Junction11 "Average Frequency Error Calculation.L5" as Connection68
+            
+            connect Junction11 "Load - Bus 5.L5" as Connection54
+            
+            connect Junction12 "Average Frequency Error Calculation.L6" as Connection70
+            
+            connect Junction12 Junction15 as Connection83
+            
+            connect Junction13 Junction10 as Connection74
+            
+            connect Junction14 Junction11 as Connection81
+            
+            connect Junction15 L6 as Connection84
+            [
+                breakpoints =8240, 8392
+            ]
+            connect Junction16 Junction4 as Connection87
+            
+            connect Junction17 Junction2 as Connection90
+            
+            connect Junction18 "Gen - Bus 3.Theta 3" as Connection93
+            
+            connect Junction19 Junction5 as Connection96
+            
+            connect Junction2 "Load - Bus 6.Theta2" as Connection10
+            [
+                breakpoints =8328, 8168;8328, 8360
+            ]
+            connect Junction20 Junction6 as Connection99
+            
+            connect Junction21 Junction1 as Connection102
+            
+            connect Junction3 Junction18 as Connection92
+            [
+                breakpoints =8288, 8440;8288, 8488
+            ]
+            connect Junction4 "Load - Bus 4.Theta1" as Connection17
+            [
+                breakpoints =7624, 8424;7624, 8328;7624, 8328;7624, 8248
+            ]
+            connect Junction5 "Gen - Bus 2.Theta4" as Connection20
+            
+            connect Junction6 "Gen - Bus 3.Theta 5" as Connection33
+            
+            connect Junction7 "Average Frequency Error Calculation.U1" as Connection67
+            
+            connect Junction7 "Gen - Bus 1.U1" as Connection42
+            
+            connect Junction8 "Average Frequency Error Calculation.U2" as Connection69
+            
+            connect Junction8 "Gen - Bus 2.U2" as Connection45
+            
+            connect Junction9 "Average Frequency Error Calculation.U3" as Connection71
+            
+            connect Junction9 "Gen - Bus 3.U3" as Connection48
+            
+            connect L4 Junction13 as Connection73
+            
+            connect L5 Junction14 as Connection80
+            
+            connect "Load - Bus 4.Theta 4" Junction19 as Connection95
+            
+            connect "Load - Bus 4.Theta2" Junction2 as Connection11
+            [
+                breakpoints =7728, 8176;7728, 8088;7784, 8088;8296, 8088
+            ]
+            connect "Load - Bus 5.Theta 5" Junction20 as Connection98
+            
+            connect "Load - Bus 5.Theta3" Junction3 as Connection15
+            [
+                breakpoints =7776, 8440;8280, 8440
+            ]
+            connect "Load - Bus 5.Theta1" Junction4 as Connection18
+            
+            connect "Load - Bus 6.L6" Junction12 as Connection64
+            
+            connect "Load - Bus 6.Theta 6" Junction21 as Connection101
+            
+            connect "Load - Bus 6.Theta3" Junction3 as Connection13
+            [
+                breakpoints =8360, 8336;8288, 8336;8288, 8320;8288, 8440
+            ]
+            connect U1 Junction7 as Connection79
+            [
+                breakpoints =7168, 8464
+            ]
+            connect U2 Junction8 as Connection44
+            
+            connect U3 Junction9 as Connection47
+            
+            connect theta1.in Junction16 as Connection88
+            
+            connect theta2.in Junction17 as Connection91
+            
+            connect theta3.in Junction18 as Connection94
+            
+            connect theta4.in Junction19 as Connection97
+            
+            connect theta5.in Junction20 as Connection100
+            
+            connect theta6.in Junction21 as Connection103
+            
+            
+    
+            
+        }
+        [
+            position = 11208, 9560
+            size = 296, 168
+        ]
+        component "core/ModBus Device" "ModBus Device1" {
+            
+            defines = "{u'ip_addr': u'169.254.0.211', u'hold_out32_init': u'', u'discrete_num': 0, u'holding_out_32_addr_cnt': 0, u'coil_write_any_value': 0, u'holding_out_addresses': [2000, 2001, 2002], u'register_64_num': 0, u'hold_out64_init': u'', u'holding_in_64_num': 0, u'register_model_ctrl': [1], u'holding_in_32_addr_cnt': 0, u'holding_out_num': 3, u'hold_out16_init': u'', u'register_16_num': 1, u'holding_out_size': [1, 1, 1], u'holding_out_64_num': 0, u'register_addresses': [0], u'holding_in_64_addr_cnt': 0, u'coil_in_num': 0, u'holding_out_type': [u'i', u'i', u'i'], u'netmask': u'255.255.0.0', u'reg16_init': u'', u'slave_id': 17, u'holding_in_addresses': [0], u'slave_id_type': u'MODBUS', u'holding_out_64_addr_cnt': 0, u'register_16_addr_cnt': 1, u'holding_out_model_ctrl': [1, 1, 1], u'coil_in_addresses': [], u'hold_in32_init': u'', u'holding_in_32_num': 0, u'coil_out_addresses': [], u'discrete_addresses': [], u'register_32_addr_cnt': 0, u'register_num': 1, u'holding_out_16_num': 3, u'holding_in_num': 1, u'holding_in_model_ctrl': [1], u'port': 502, u'hold_in64_init': u'', u'slave_id_echo': 1, u'holding_in_16_num': 1, u'reg64_init': u'', u'register_size': [1], u'holding_in_size': [1], u'holding_out_32_num': 0, u'reg32_init': u'', u'holding_out_16_addr_cnt': 3, u'holding_in_16_addr_cnt': 1, u'holding_in_type': [u'i'], u'register_type': [u'i'], u'hold_in16_init': u'', u'coil_out_num': 0, u'register_32_num': 0, u'register_64_addr_cnt': 0}"
+            execution_rate = "Ts"
+        }
+        [
+            position = 11768, 9712
+            size = 184, 184
+        ]
+        
+        
+        component Subsystem "Feedback U" {
+            layout = dynamic
+    
+            
+            component gen_product Product3 {
+                
+    	    
+            }
+            [
+                position = 8072, 8368
+            ]
+            
+            component src_constant Constant1 {
+                
+                value = "scale_back_const"
+    	    
+            }
+            [
+                position = 7824, 8072
+            ]
+            
+            component gen_product Product1 {
+                
+    	    
+            }
+            [
+                position = 8064, 8048
+            ]
+            
+            component src_constant Constant3 {
+                
+                value = "scale_back_const"
+    	    
+            }
+            [
+                position = 7944, 8400
+            ]
+            
+            component src_constant Constant2 {
+                
+                value = "scale_back_const"
+    	    
+            }
+            [
+                position = 7936, 8184
+            ]
+            
+            component gen_product Product2 {
+                
+    	    
+            }
+            [
+                position = 8064, 8168
+            ]
+            
+            component gen_bus_split "Bus Split2" {
+                
+                outputs = "3"
+    	    
+            }
+            [
+                position = 7608, 8160
+            ]
+            
+            component gen_probe "U 1" {
+                
+    	    
+            }
+            [
+                position = 8568, 7920
+            ]
+            
+            component gen_probe "U 2" {
+                
+    	    
+            }
+            [
+                position = 8568, 8112
+            ]
+            
+            component gen_probe "U 3" {
+                
+    	    
+            }
+            [
+                position = 8568, 8272
+            ]
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            port In4 {
+                
+                position = left:1
+                kind = sp
+                direction = out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 7368, 8160
+            ]
+            
+            port U1 {
+                
+                position = right:1
+                kind = sp
+                direction = in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8456, 8048
+            ]
+            
+            port U2 {
+                
+                position = right:2
+                kind = sp
+                direction = in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8456, 8176
+            ]
+            
+            port U3 {
+                
+                position = right:3
+                kind = sp
+                direction = in
+                sp_type {
+                    default = inherit
+                    readonly = True
+                }
+            }
+            [
+                position = 8464, 8368
+            ]
+            
+            junction Junction1 sp
+            [
+                position = 8368, 8048
+            ]
+            
+            junction Junction2 sp
+            [
+                position = 8368, 8176
+            ]
+            
+            junction Junction3 sp
+            [
+                position = 8376, 8368
+            ]
+            connect "Bus Split2.in" In4 as Connection26
+            
+            connect "Bus Split2.out" Product1.in as Connection30
+            [
+                breakpoints =7648, 8040;7768, 8040
+            ]
+            connect "Bus Split2.out1" Product2.in as Connection24
+            
+            connect "Bus Split2.out2" Product3.in as Connection25
+            
+            connect Constant1.out Product1.in1 as Connection21
+            
+            connect Constant2.out Product2.in1 as Connection22
+            
+            connect Constant3.out Product3.in1 as Connection23
+            
+            connect Junction1 U1 as Connection32
+            
+            connect Junction2 U2 as Connection35
+            
+            connect Junction3 U3 as Connection38
+            
+            connect Product1.out Junction1 as Connection31
+            
+            connect Product2.out Junction2 as Connection34
+            [
+                breakpoints =8104, 8176;8368, 8176
+            ]
+            connect Product3.out Junction3 as Connection37
+            
+            connect "U 1.in" Junction1 as Connection33
+            
+            connect "U 2.in" Junction2 as Connection36
+            
+            connect "U 3.in" Junction3 as Connection39
+            
+            
+    
+            
+        }
+        [
+            position = 11984, 9784
+            size = 48, 64
+        ]
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        junction Junction1 sp
+        [
+            position = 11536, 9784
+        ]
+        
+        junction Junction3 sp
+        [
+            position = 11176, 10064
+        ]
+        
+        junction Junction4 sp
+        [
+            position = 11256, 10080
+        ]
+        
+        junction Junction5 sp
+        [
+            position = 11344, 10096
+        ]
+        connect "C function1.U2" "Feedback U.U2" as Connection47
+        [
+            breakpoints =12048, 10080;12048, 9904;12048, 9784
+        ]
+        connect "C function1.U1" "Feedback U.U1" as Connection52
+        [
+            breakpoints =12024, 10064;12024, 9768;12016, 9768
+        ]
+        connect "C function1.OU1" Junction3 as Connection49
+        
+        connect Constant1.out "ModBus Device1.coil_in" as Connection25
+        
+        connect Constant2.out "ModBus Device1.discrete_in" as Connection26
+        [
+            breakpoints =11592, 9648;11656, 9648
+        ]
+        connect Constant3.out "ModBus Device1.holding_in" as Connection27
+        
+        connect "Feedback U.U3" "C function1.U3" as Connection41
+        [
+            breakpoints =12072, 9800;12072, 10096
+        ]
+        connect "IP Reg Out.in" Junction1 as Connection31
+        
+        connect Junction1 "ModBus Device1.reg_in" as Connection30
+        
+        connect Junction3 "Physical Model.U1" as Connection50
+        [
+            breakpoints =10904, 10064;10904, 9712;10904, 9712;10904, 9560
+        ]
+        connect Junction4 "C function1.OU2" as Connection54
+        
+        connect Junction5 "C function1.OU3" as Connection57
+        
+        connect L4.out "Physical Model.L4" as Connection1
+        [
+            breakpoints =10760, 9632;11032, 9632
+        ]
+        connect L5.out "Physical Model.L5" as Connection2
+        [
+            breakpoints =10816, 9720;10816, 9672
+        ]
+        connect L6.out "Physical Model.L6" as Connection3
+        [
+            breakpoints =10840, 9800;10840, 9696
+        ]
+        connect "ModBus Device1.holding_out" "Feedback U.In4" as Connection20
+        
+        connect "ModBus Device1.coil_out" Termination1.in as Connection28
+        
+        connect "Physical Model.Del_W" Junction1 as Connection29
+        [
+            breakpoints =11472, 9640;11472, 9784
+        ]
+        connect "Physical Model.U2" Junction4 as Connection53
+        
+        connect "Physical Model.U3" Junction5 as Connection56
+        [
+            breakpoints =10960, 9608;10960, 10096;11536, 10096;11552, 10096;11552, 10096
+        ]
+        connect u1.in Junction3 as Connection51
+        
+        connect u2.in Junction4 as Connection55
+        
+        connect u3.in Junction5 as Connection58
+        [
+            breakpoints =11344, 10088
+        ]
+        
+
+        
+    }
+
+    
+    
+    default {
+        
+        gen_bus_split {
+            outputs = "2"
+            execution_rate = "inherit"
+        }
+        
+        gen_c_function {
+            in_terminal_properties = "real in;"
+            in_terminal_labels = ""
+            out_terminal_properties = "real out;"
+            out_terminal_labels = ""
+            no_feed_inputs = ""
+            no_feed_outputs = ""
+            in_terminal_dimensions = ""
+            in_terminal_dimensions_str = ""
+            out_terminal_dimensions = ""
+            out_terminal_dimensions_str = ""
+            output_fnc = ""
+            update_fnc = ""
+            init_fnc = ""
+            global_variables = ""
+            parameters = ""
+            execution_rate = "inherit"
+        }
+        
+        gen_integrator {
+            show_reset = "none"
+            show_init_condition = "internal"
+            init_value = "0"
+            limit_output = "False"
+            limit_upper = "inf"
+            limit_lower = "-inf"
+            show_state = "False"
+            state_port_type = "inherit"
+            execution_rate = "inherit"
+        }
+        
+        gen_probe {
+            addr = "0"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "generic"
+            execution_rate = "inherit"
+        }
+        
+        gen_product {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+        
+        gen_sum {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+        
+        gen_terminator {
+            execution_rate = "inherit"
+        }
+        
+        gen_trigonometric {
+            trigonometric_fn = "sin"
+            execution_rate = "inherit"
+        }
+        
+        src_constant {
+            value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+        }
+        
+        src_step {
+            step_time = "1"
+            initial_value = "0"
+            final_value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+        }
+        
+        "core/ModBus Device" {
+            configuration = "config1"
+            preview = "Configuration preview"
+            defines = ""
+            modbus_sunspec = "False"
+            execution_rate = "100e-6"
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        
+        #scaling constants to handle floating point values
+        scale_const=10e+3
+        scale_back_const=10e-5
+        
+        #Modbus configuration
+        config1 = {
+                                            'port': 502,
+                                            'ip_addr': '169.254.0.211',
+                                            'netmask': '255.255.0.0',
+                                            'slave_id': 17,
+                                            'coil_input_addresses': '',
+                                            'coil_output_addresses': '',
+                                            'discrete_input_addresses': '',
+                                            'holding_register_input_addresses': '0i',
+                                            'holding_register_output_addresses': '2000i,2001i,2002i',
+                                            'input_register_adresses': '0i'
+                                            }
+        
+        #Execution Rate                                    
+        Ts=100e-6
+        
+        #initial susceptances
+        B14=2.9190
+        B15=6.6850
+        B24=4.474
+        B26=4.375
+        B35=7.435
+        B36=6.274
+        B41=B14
+        B51=B15
+        B42=B24
+        B62=B26
+        B53=B35
+        B63=B36
+        
+        #initial D values
+        D1=0.225
+        D2=0.679
+        D3=0.95
+        D4=0.0125
+        D5=0.0679
+        D6=0.0479
+        D1_bar=1/D1
+        D2_bar=1/D2
+        D3_bar=1/D3
+        D4_bar=1/D4
+        D5_bar=1/D5
+        D6_bar=1/D6
+        Dsum_inv = 1/(D1+D2+D3+D4+D5+D6)
+        
+        #initial theta values
+        t1=-0.052
+        t2=0.05
+        t3=-0.05
+        t4=-0.151
+        t5=-0.14
+        t6=-0.09481
+    ENDCODE
+}

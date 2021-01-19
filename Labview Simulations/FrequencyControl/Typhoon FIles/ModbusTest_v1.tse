@@ -1,0 +1,346 @@
+version = 4.2
+
+//
+// Saved by sw version: 2018.3 SP1
+// Save timestamp: 08-Jan-2019 @ 04:52:33 PM
+//
+
+model "modbustest_v1" {
+    configuration {
+        hil_device = "HIL603"
+        hil_configuration_id = 2
+        simulation_method = exact
+        simulation_time_step = auto
+        simulation_discret_scaling = 1.0
+        dsp_timer_periods = 100e-6, 50e-3
+        ss_calc_method = "systematic elimination"
+        enb_pole_shift = True
+        enb_gds_oversampling = True
+        show_modes = False
+        device_ao_limit_enable = True
+        cpl_stb = False
+        enb_dep_sw_detect = False
+        code_section = "internal memory"
+        data_section = "internal memory"
+        sys_sp_rate_1 = 0.0001
+        sys_sp_rate_2 = 0.05
+        sys_real_type_precision = "default"
+        user_real_type_precision = "default"
+        sys_cpu_optimization = "high"
+        user_cpu_optimization = "high"
+    }
+
+    component Subsystem Root {
+        component gen_terminator Termination1 {
+        }
+        [
+            position = 10688, 9344
+        ]
+
+        component gen_probe coil_out {
+            addr = "17922"
+        }
+        [
+            position = 10584, 9208
+        ]
+
+        component src_constant Constant3 {
+            value = "0"
+        }
+        [
+            position = 9888, 9152
+        ]
+
+        component src_constant Constant4 {
+            value = "0"
+        }
+        [
+            position = 9992, 9056
+        ]
+
+        component src_scada_input "Holding Register IP" {
+            def_value = "5"
+            format = "int"
+            signal_type = "int"
+            unit = ""
+        }
+        [
+            position = 9712, 9328
+        ]
+
+        component src_scada_input "Input Register IP" {
+            def_value = "5"
+            unit = ""
+        }
+        [
+            position = 9832, 9448
+        ]
+
+        component gen_probe coil_out2 {
+            addr = "17922"
+        }
+        [
+            position = 9992, 9256
+        ]
+
+        component gen_probe coil_out3 {
+            addr = "17922"
+        }
+        [
+            position = 9968, 9480
+        ]
+
+        component "core/ModBus Device" "ModBus Device2" {
+            execution_rate = "Ts"
+        }
+        [
+            position = 10208, 9328
+            size = 184, 184
+        ]
+
+        component gen_bus_split "Bus Split2" {
+            execution_rate = "Ts"
+        }
+        [
+            position = 10384, 9456
+        ]
+
+        component gen_probe "output_register 2" {
+        }
+        [
+            position = 10496, 9504
+        ]
+
+        component src_constant Constant5 {
+            execution_rate = "Ts"
+            value = "1/1e7"
+        }
+        [
+            position = 10608, 9520
+        ]
+
+        component gen_product Product1 {
+            execution_rate = "Ts"
+        }
+        [
+            position = 10688, 9456
+        ]
+
+        component gen_c_function "C function1" {
+            global_variables = "int temp;"
+            in_terminal_dimensions = "inherit;inherit"
+            in_terminal_dimensions_str = "high inherit;low inherit"
+            in_terminal_labels = "[(\'high\', True), (\'low\', True)]"
+            in_terminal_properties = "real high;real low;"
+            no_feed_inputs = "[\'\']"
+            no_feed_outputs = "[\'\']"
+            out_terminal_dimensions = "inherit"
+            out_terminal_dimensions_str = "regD inherit"
+            out_terminal_labels = "[(\'regD\', True)]"
+            out_terminal_properties = "int regD;"
+            output_fnc = "/*Begin code section*/
+temp = (((int)high << 16) & -65536) | ((int)low & 65535);
+
+if(temp < 1e7 && temp > -1e7)
+    regD = temp;
+else if(temp == 1e7)
+    regD = 1e7;
+else if(temp == -1e7)
+    regD = -1e7;
+else if(temp > 1e7)
+    regD = 2e7;
+else if(temp < -1e7)
+    regD = -2e7;
+/*End code section*/"
+        }
+        [
+            position = 10592, 9456
+            size = 48, 48
+        ]
+
+        component gen_probe "output_register 1" {
+        }
+        [
+            position = 10496, 9408
+        ]
+
+        component gen_probe regD {
+        }
+        [
+            position = 10816, 9376
+        ]
+
+        port RegDsignal {
+            position = auto:auto
+            kind = sp
+            direction =  in
+            sp_type {
+                default = inherit
+                readonly = True
+            }
+        }
+        [
+            position = 10880, 9456
+        ]
+
+        junction Junction3 sp
+        [
+            position = 9936, 9328
+        ]
+
+        junction Junction4 sp
+        [
+            position = 9928, 9448
+        ]
+
+        junction Junction5 sp
+        [
+            position = 10520, 9256
+        ]
+
+        junction Junction8 sp
+        [
+            position = 10448, 9440
+        ]
+
+        junction Junction9 sp
+        [
+            position = 10448, 9456
+        ]
+
+        junction Junction7 sp
+        [
+            position = 10784, 9456
+        ]
+
+        connect "Holding Register IP.out" Junction3 as Connection44
+        [
+            breakpoints = 9888, 9328
+        ]
+        connect Junction4 "Input Register IP.out" as Connection64
+        [
+            breakpoints = 9928, 9448; 9928, 9448
+        ]
+        connect coil_out2.in Junction3 as Connection46
+        connect coil_out3.in Junction4 as Connection63
+        connect Junction4 "ModBus Device2.reg_in" as Connection78
+        [
+            breakpoints = 9928, 9448; 9952, 9448
+        ]
+        connect Junction3 "ModBus Device2.holding_in" as Connection79
+        [
+            breakpoints = 9936, 9328; 10056, 9328
+        ]
+        connect Constant4.out "ModBus Device2.coil_in" as Connection87
+        connect Constant3.out "ModBus Device2.discrete_in" as Connection88
+        connect "ModBus Device2.coil_out" Junction5 as Connection90
+        connect Junction5 coil_out.in as Connection91
+        connect Termination1.in Junction5 as Connection92
+        connect "C function1.high" Junction8 as Connection75
+        connect "output_register 1.in" Junction8 as Connection73
+        connect Product1.out Junction7 as Connection62
+        connect Constant5.out Product1.in1 as Connection47
+        connect "output_register 2.in" Junction9 as Connection76
+        connect Junction9 "Bus Split2.out1" as Connection77
+        connect "C function1.low" Junction9 as Connection96
+        connect regD.in Junction7 as Connection97
+        connect Junction8 "Bus Split2.out" as Connection74
+        connect "C function1.regD" Product1.in as Connection98
+        connect Junction7 RegDsignal as Connection99
+        connect "ModBus Device2.holding_out" "Bus Split2.in" as Connection100
+    }
+
+    default {
+        gen_bus_split {
+            outputs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_c_function {
+            in_terminal_properties = "real in;"
+            in_terminal_labels = ""
+            out_terminal_properties = "real out;"
+            out_terminal_labels = ""
+            no_feed_inputs = ""
+            no_feed_outputs = ""
+            in_terminal_dimensions = ""
+            in_terminal_dimensions_str = ""
+            out_terminal_dimensions = ""
+            out_terminal_dimensions_str = ""
+            output_fnc = ""
+            update_fnc = ""
+            init_fnc = ""
+            global_variables = ""
+            parameters = ""
+            execution_rate = "inherit"
+        }
+
+        gen_probe {
+            addr = "0"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "generic"
+            streaming_en = "False"
+            streaming_er_idx = "0"
+            execution_rate = "inherit"
+        }
+
+        gen_product {
+            signs = "2"
+            execution_rate = "inherit"
+        }
+
+        gen_terminator {
+            execution_rate = "inherit"
+        }
+
+        src_constant {
+            value = "1"
+            signal_type = "real"
+            execution_rate = "100e-6"
+        }
+
+        src_scada_input {
+            addr = "0"
+            format = "real"
+            override_signal_name = "False"
+            signal_name = ""
+            signal_type = "real"
+            min = "-1e6"
+            max = "1e6"
+            def_value = "0"
+            unit = " "
+            execution_rate = "100e-6"
+        }
+
+        "core/ModBus Device" {
+            hil_id = "0"
+            configuration = "config1"
+            preview = "Configuration preview"
+            ip_address_port = "False"
+            defines = ""
+            modbus_sunspec = "False"
+            execution_rate = "100e-6"
+        }
+    }
+
+    CODE model_init
+        # Numpy module is imported as 'np'
+        # Scipy module is imported as 'sp'
+        
+        config1 = {
+                                            'port': 502,
+                                            'ip_addr': '192.168.1.50',
+                                            'netmask': '255.255.0.0',
+                                            'slave_id': 17,
+                                            'coil_input_addresses': '',
+                                            'coil_output_addresses': '',
+                                            'discrete_input_addresses': '',
+                                            'holding_register_input_addresses': '2000i',
+                                            'holding_register_output_addresses': '0,1', 
+                                            'input_register_adresses': '0i'
+                                            }
+                                            
+        Ts=100e-6
+    ENDCODE
+}
