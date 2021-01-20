@@ -5,7 +5,7 @@ REM * Common entries:
 REM *****************************************:
 
 REM Setting the simulation time step...
-rtds_write 0x00000000 0x000001C2
+rtds_write 0x00000000 0x00000258
 
 REM Module block enable
 rtds_write 0x00000003 0x00010000
@@ -129,9 +129,9 @@ rtds_write 0x08240401 0x00000001
 REM SPC0 GDS compensation settings...
 rtds_write 0x080C0000 0x00000001
 rtds_write 0x080C0001 0x0000000C
-rtds_write 0x080C0004 0x3BDA740D
-rtds_write 0x080C0005 0xA7410000
-rtds_write 0x08100000 0x00000096
+rtds_write 0x080C0004 0x3BA3D70A
+rtds_write 0x080C0005 0x3D710000
+rtds_write 0x08100000 0x000000C8
 
 REM SPC0 FSM digital input pin assignments...
 
@@ -239,9 +239,9 @@ rtds_write 0x08640400 0x00000001
 REM SPC1 GDS compensation settings...
 rtds_write 0x084C0000 0x00000001
 rtds_write 0x084C0001 0x00000006
-rtds_write 0x084C0004 0x3BDA740D
-rtds_write 0x084C0005 0xA7410000
-rtds_write 0x08500000 0x00000096
+rtds_write 0x084C0004 0x3BA3D70A
+rtds_write 0x084C0005 0x3D710000
+rtds_write 0x08500000 0x000000C8
 
 REM SPC1 FSM digital input pin assignments...
 
@@ -921,5 +921,5 @@ glbl_write 0xfffffff0 0x15000000
 
 REM Restart counter for collected Linux OS communication apps
 app_file_write 0x0 app_init
-rtds_write 0x00000027 0x000001C2
+rtds_write 0x00000027 0x00000258
 rtds_write 0x00000040 0x00FFFFFF

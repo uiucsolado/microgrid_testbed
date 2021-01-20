@@ -11,7 +11,7 @@
         <fw_support_limit>132385281</fw_support_limit>
     </hw_properties>
     <sim_setup>
-        <sim_time_step>3e-06</sim_time_step>
+        <sim_time_step>4e-06</sim_time_step>
     </sim_setup>
     <pesb>
     </pesb>
@@ -727,14 +727,14 @@
 <!-- ******* SP DATA ******** -->
 
     <model_properties>
-        <execution_rates>[[[0.0009]]]</execution_rates>
+        <execution_rates>[[[0.001]]]</execution_rates>
     </model_properties>
 
     <variables>
         <cell>
-            <name>F2_PCC.P</name>
-            <type>generic</type>
-            <address>16387</address>
+            <name>Vrms_grid</name>
+            <type>voltage</type>
+            <address>16384</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -746,9 +746,16 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>Vrms_grid</name>
-            <type>voltage</type>
-            <address>16384</address>
+            <name>F3_PCC.P</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F2_PCC.Q</name>
+            <type>generic</type>
+            <address>16388</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -760,13 +767,6 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F3_PCC.P</name>
-            <type>generic</type>
-            <address>16389</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F3_PCC.Q</name>
             <type>generic</type>
             <address>16390</address>
@@ -774,9 +774,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F2_PCC.Q</name>
+            <name>F2_PCC.P</name>
             <type>generic</type>
-            <address>16388</address>
+            <address>16387</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -830,9 +830,9 @@
         <monitor>
             <type>user</type>
             <cpu_idx>0</cpu_idx>
-            <execution_rates>[0.0009]</execution_rates>
-            <execution_rate_labels>['ER0 (0.0009)']</execution_rate_labels>
-            <timer_counters>[134999]</timer_counters>
+            <execution_rates>[0.001]</execution_rates>
+            <execution_rate_labels>['ER0 (0.001)']</execution_rate_labels>
+            <timer_counters>[149999]</timer_counters>
 
             
         </monitor>
