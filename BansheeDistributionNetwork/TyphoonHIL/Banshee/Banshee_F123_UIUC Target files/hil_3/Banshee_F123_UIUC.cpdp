@@ -1,6 +1,6 @@
 
 <model_description>
-    <sw_version>2020.3</sw_version>
+    <sw_version>2021.1</sw_version>
     <hw_properties>
         <revision>3</revision>
         <product_id>HIL603</product_id>
@@ -8,7 +8,7 @@
         <device_ao_limit_enable>True</device_ao_limit_enable>
         <device_id>3</device_id>
         <spc_out_mem_size>512</spc_out_mem_size>
-        <fw_support_limit>132385281</fw_support_limit>
+        <fw_support_limit>132385817</fw_support_limit>
     </hw_properties>
     <sim_setup>
         <sim_time_step>4e-06</sim_time_step>
@@ -732,23 +732,9 @@
 
     <variables>
         <cell>
-            <name>Vrms_grid</name>
-            <type>voltage</type>
-            <address>16384</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F1_PCC.P</name>
+            <name>F1_PCC.Q</name>
             <type>generic</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_PCC.P</name>
-            <type>generic</type>
-            <address>16389</address>
+            <address>16386</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -760,16 +746,9 @@
             <visible>True</visible>
         </cell>
         <cell>
-            <name>F1_PCC.Q</name>
+            <name>F1_PCC.P</name>
             <type>generic</type>
-            <address>16386</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
-            <name>F3_PCC.Q</name>
-            <type>generic</type>
-            <address>16390</address>
+            <address>16385</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
@@ -780,10 +759,41 @@
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>
+        <cell>
+            <name>Vrms_grid</name>
+            <type>voltage</type>
+            <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_PCC.P</name>
+            <type>generic</type>
+            <address>16389</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F3_PCC.Q</name>
+            <type>generic</type>
+            <address>16390</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
     </variables>
 
 
     <scada_inputs>
+        <scada_input>
+            <name>F3_PCC.F3_PCC</name>
+            <addr>1426063632</addr>
+            <min>0.0</min>
+            <max>1.0</max>
+            <def_value>1.0</def_value>
+            <unit></unit>
+            <widget_type>int</widget_type>
+            <format>integer</format>
+        </scada_input>
         <scada_input>
             <name>F2_PCC.F2_PCC</name>
             <addr>1426063628</addr>
@@ -804,16 +814,6 @@
             <widget_type>int</widget_type>
             <format>integer</format>
         </scada_input>
-        <scada_input>
-            <name>F3_PCC.F3_PCC</name>
-            <addr>1426063632</addr>
-            <min>0.0</min>
-            <max>1.0</max>
-            <def_value>1.0</def_value>
-            <unit></unit>
-            <widget_type>int</widget_type>
-            <format>integer</format>
-        </scada_input>
     </scada_inputs>
 
 
@@ -821,9 +821,9 @@
         <monitor>
             <type>internal</type>
             <cpu_idx>0</cpu_idx>
-            <execution_rates>[5e-05, 0.0001]</execution_rates>
-            <execution_rate_labels>['ER0 (5e-05)', 'ER1 (0.0001)']</execution_rate_labels>
-            <timer_counters>[7499, 14999]</timer_counters>
+            <execution_rates>[0.0005, 0.001]</execution_rates>
+            <execution_rate_labels>['ER0 (0.0005)', 'ER1 (0.001)']</execution_rate_labels>
+            <timer_counters>[74999, 149999]</timer_counters>
 
             
         </monitor>

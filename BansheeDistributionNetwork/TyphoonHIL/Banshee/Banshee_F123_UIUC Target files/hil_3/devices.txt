@@ -1,7 +1,7 @@
 VoqU0EtxxEo3t+YWDVhOW33izeEpZ+KL8MsSMARWPfA5FH0WXTpbuBx0Br9mm7u7JdfM/KWuQZMTVYwkKvMg8Q==
 {
-  "compilation_timestamp": "2020-12-15 15:33:38",
-  "sw_version": "2020.3",
+  "compilation_timestamp": "2021-01-22 12:07:43",
+  "sw_version": "2021.1",
   "devices": [
     {
       "device_type": "HIL402",
@@ -20,17 +20,6 @@ VoqU0EtxxEo3t+YWDVhOW33izeEpZ+KL8MsSMARWPfA5FH0WXTpbuBx0Br9mm7u7JdfM/KWuQZMTVYwk
       "activation_key": "C3LYX-FIEUS-PZ9W1-MHG8A-4C01E",
       "serial_no": "00603-00-00016",
       "license_expiry": "2117-04-03",
-      "maintenance_expiry": null,
-      "supported": true,
-      "not_supported_reason": null,
-      "toolboxes": []
-    },
-    {
-      "device_type": "HIL603",
-      "hw_id": "d946767de0d0a3bb0efb90b4edd2d48c537a98421dfe9c0056f39a78dabced6c",
-      "activation_key": "IP9CY-JZ23X-W4LRH-QVA6G-40AEC",
-      "serial_no": "00603-00-00031",
-      "license_expiry": "2117-11-14",
       "maintenance_expiry": null,
       "supported": true,
       "not_supported_reason": null,
@@ -57,9 +46,20 @@ VoqU0EtxxEo3t+YWDVhOW33izeEpZ+KL8MsSMARWPfA5FH0WXTpbuBx0Br9mm7u7JdfM/KWuQZMTVYwk
       "supported": true,
       "not_supported_reason": null,
       "toolboxes": []
+    },
+    {
+      "device_type": "HIL603",
+      "hw_id": "1af9fb25b4fbd940abb5af0183218b64b4817f68e4cece210f4484881d160af2",
+      "activation_key": "T5FM7-089DR-4UBQN-WXLEJ-1DD96",
+      "serial_no": "00603-00-00018",
+      "license_expiry": "2120-01-15",
+      "maintenance_expiry": null,
+      "supported": true,
+      "not_supported_reason": null,
+      "toolboxes": []
     }
   ]
 }
 -----BEGIN SIGNATURE-----
-NX7i7KN1hGGFfqlpDn32vfTeNs6qipxIlJNv6RdvibynoVf6didpPBMJ4ZE+Mync/ARtLPKRpAv7wmV8yxrj0GCtPlC56Z20gvgn0/D16ZhIsYy7JMeXNs+yEUAiQ0QW8RpwSU0Oi1j+EbM2qBPX7y04YPMnQKIoZxBfaxUwZgxI0rxPLFbZnEWP5HcYnhWZFM/eqQ3E2N+Fcvu69mxre1b2ph+tWyD/q1zexFXBfwxJxT8VF8VAJFhd1teyroaVtXVXT9xPCRWR0h04cEnlH0MlmEwuVWZCeLYwL/AmhCNYRpDSOx2NycjL76Pz2Mwh7gMvVFxXH0Df6BlSH5PRIg==
+COWYElDbfa4sVZcYyz7vDWw4oTpti8avx3T3pFWu1yyf2AWaOTzUwXzSSHm0ScmdyNjiB760Y4yJk2bWr0Jb7TJKyuZQzt/fja8n+5wIfb/tL3gtZ0rwPNkBizDp80OERVUEVj8bT0wKZwUmFG4poXUwTqfaOb1pwjZlYGj3xlJIWg/iYsdvt2hlaf4xERv5dhnhHS93Wbr5alNv03Qeg42YVUyh2wVH7htQTBMJwOM8qqCSMZ5PbE5nOVHDWzKVFGOuAKgmb5MnR2u7BVs1w/d3M0xNZH+4SRgYdgxiJwuDSmIdwyeO5kkFGmLgdbaIQ/LzO43zJaYZtmBxHd5ibw==
 -----END SIGNATURE-----

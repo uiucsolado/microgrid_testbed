@@ -1,11 +1,23 @@
 Model banshee_f123_uiuc
 
+
 REM *****************************************:
+
+
 REM * Common entries:
+
+
 REM *****************************************:
+
 
 REM Setting the simulation time step...
 rtds_write 0x00000000 0x00000258
+
+
+REM Reset analog and digital outputs on simulation stop
+rtds_write 0x00C00700 0x00000001
+rtds_write 0x00F00000 0x00000001
+
 
 REM Module block enable
 rtds_write 0x00000003 0x00000001
@@ -66,23 +78,30 @@ rtds_write 0x00800041 0.0
 rtds_write 0x00800044 6.283185307179586
 rtds_write 0x00800045 0.0
 
+
 REM LUT solver inputs...
 rtds_write 0x01000000 0x00000000
+
 
 REM HSSL configuration files...
 rtds_file_write 0x01C80000 hssl_tx_config.txt
 rtds_file_write 0x01D00000 hssl_rx_config.txt
 
+
 REM Parallel DTV configuration...
 
 
 REM *****************************************:
+
+
 REM * SPC0 entries:
+
+
 REM *****************************************:
+
 
 REM SPC0 Topology Selector (TS) initialization...
 rtds_file_write 0x08180000 SPC0_red_table.txt
-
 rtds_write 0x08100020 0x00000001
 rtds_write 0x08100021 0x00000000
 rtds_write 0x08100023 0x00000000
@@ -147,11 +166,14 @@ rtds_write 0x08100079 0x00000000
 rtds_file_write 0x08150000 trivial_imem.txt
 rtds_file_write 0x08152000 trivial_lut.txt
 
+
 REM SPC0 Variable Delay initialization...
 rtds_write 0x08100001 0x0
 
+
 REM SPC0 Output voltage compare mode...
 rtds_write 0x08100005 0x00000000
+
 
 REM SPC0 Matrix multiplier initialization...
 rtds_file_write 0x08000000 SPC0_Com_Word.txt
@@ -160,8 +182,9 @@ rtds_file_write 0x08080000 SPC0_MAC0.txt
 rtds_file_write 0x08082000 SPC0_MAC1.txt
 rtds_file_write 0x08084000 SPC0_MAC2.txt
 rtds_file_write 0x08086000 SPC0_MAC3.txt
-
 rtds_write 0x08100004 0x00000007
+
+
 REM SPC0 Contactors initialization...
 rtds_write 0x08240000 0x00000000
 rtds_write 0x08240080 0x00000000
@@ -173,7 +196,7 @@ rtds_write 0x08240300 0x00000000
 rtds_write 0x08240380 0x00000000
 rtds_write 0x08240400 0x00000001
 rtds_write 0x08240001 0x00000000
-rtds_write 0x08240081 0x00000000
+rtds_write 0x08240081 0x00000007
 rtds_write 0x08240101 0x00000000
 rtds_write 0x08240181 0x00000000
 rtds_write 0x08240201 0x00000000
@@ -191,26 +214,39 @@ rtds_write 0x08240302 0x00000000
 rtds_write 0x08240382 0x00000000
 rtds_write 0x08240402 0x00000001
 
+
 REM SPC0 GDS compensation settings...
-rtds_write 0x080C0000 0x00000001
-rtds_write 0x080C0001 0x0000000C
-rtds_write 0x080C0004 0x3BA3D70A
-rtds_write 0x080C0005 0x3D710000
-rtds_write 0x08100000 0x000000C8
+rtds_write 0x080C0000 0x00000000
+rtds_write 0x080C0001 0x00000000
+rtds_write 0x080C0004 0x00000000
+rtds_write 0x080C0005 0x00000000
+rtds_write 0x08100000 0x00000000
+rtds_write 0x08100006 0x00000000
+
 
 REM SPC0 FSM digital input pin assignments...
 
+
 REM SPC0 Comparators initialization...
+
 
 REM SPC0 DTSM initialization...
 
+
+REM SPC0 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC1 entries:
+
+
 REM *****************************************:
+
 
 REM SPC1 Topology Selector (TS) initialization...
 rtds_file_write 0x08580000 SPC1_red_table.txt
-
 rtds_write 0x08500020 0x00000001
 rtds_write 0x08500021 0x00000000
 rtds_write 0x08500023 0x00000000
@@ -275,11 +311,14 @@ rtds_write 0x08500079 0x00000000
 rtds_file_write 0x08550000 trivial_imem.txt
 rtds_file_write 0x08552000 trivial_lut.txt
 
+
 REM SPC1 Variable Delay initialization...
 rtds_write 0x08500001 0x0
 
+
 REM SPC1 Output voltage compare mode...
 rtds_write 0x08500005 0x00000000
+
 
 REM SPC1 Matrix multiplier initialization...
 rtds_file_write 0x08400000 SPC1_Com_Word.txt
@@ -288,8 +327,9 @@ rtds_file_write 0x08480000 SPC1_MAC0.txt
 rtds_file_write 0x08482000 SPC1_MAC1.txt
 rtds_file_write 0x08484000 SPC1_MAC2.txt
 rtds_file_write 0x08486000 SPC1_MAC3.txt
-
 rtds_write 0x08500004 0x00000001
+
+
 REM SPC1 Contactors initialization...
 rtds_write 0x08640000 0x00000000
 rtds_write 0x08640080 0x00000000
@@ -301,16 +341,21 @@ rtds_write 0x08640300 0x00000000
 rtds_write 0x08640380 0x00000000
 rtds_write 0x08640400 0x00000001
 
+
 REM SPC1 GDS compensation settings...
-rtds_write 0x084C0000 0x00000001
-rtds_write 0x084C0001 0x00000013
-rtds_write 0x084C0004 0x3BA3D70A
-rtds_write 0x084C0005 0x3D710000
-rtds_write 0x08500000 0x000000C8
+rtds_write 0x084C0000 0x00000000
+rtds_write 0x084C0001 0x00000000
+rtds_write 0x084C0004 0x00000000
+rtds_write 0x084C0005 0x00000000
+rtds_write 0x08500000 0x00000000
+rtds_write 0x08500006 0x00000000
+
 
 REM SPC1 FSM digital input pin assignments...
 
+
 REM SPC1 Comparators initialization...
+
 
 REM SPC1 DTSM initialization...
 rtds_write 0x08680000 0x00000000
@@ -332,13 +377,21 @@ rtds_write 0x08680202 0x00000000
 rtds_write 0x08680282 0x00000000
 rtds_write 0x08680302 0x00000000
 
+
+REM SPC1 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC2 entries:
+
+
 REM *****************************************:
+
 
 REM SPC2 Topology Selector (TS) initialization...
 rtds_file_write 0x08980000 SPC2_red_table.txt
-
 rtds_write 0x08900020 0x00000001
 rtds_write 0x08900021 0x00000000
 rtds_write 0x08900023 0x00000000
@@ -403,11 +456,14 @@ rtds_write 0x08900079 0x00000000
 rtds_file_write 0x08950000 trivial_imem.txt
 rtds_file_write 0x08952000 trivial_lut.txt
 
+
 REM SPC2 Variable Delay initialization...
 rtds_write 0x08900001 0x0
 
+
 REM SPC2 Output voltage compare mode...
 rtds_write 0x08900005 0x00000000
+
 
 REM SPC2 Matrix multiplier initialization...
 rtds_file_write 0x08800000 SPC2_Com_Word.txt
@@ -416,8 +472,9 @@ rtds_file_write 0x08880000 SPC2_MAC0.txt
 rtds_file_write 0x08882000 SPC2_MAC1.txt
 rtds_file_write 0x08884000 SPC2_MAC2.txt
 rtds_file_write 0x08886000 SPC2_MAC3.txt
-
 rtds_write 0x08900004 0x00000007
+
+
 REM SPC2 Contactors initialization...
 rtds_write 0x08A40000 0x00000000
 rtds_write 0x08A40080 0x00000000
@@ -447,26 +504,39 @@ rtds_write 0x08A40302 0x00000000
 rtds_write 0x08A40382 0x00000000
 rtds_write 0x08A40402 0x00000001
 
+
 REM SPC2 GDS compensation settings...
-rtds_write 0x088C0000 0x00000001
-rtds_write 0x088C0001 0x00000014
-rtds_write 0x088C0004 0x3BA3D70A
-rtds_write 0x088C0005 0x3D710000
-rtds_write 0x08900000 0x000000C8
+rtds_write 0x088C0000 0x00000000
+rtds_write 0x088C0001 0x00000000
+rtds_write 0x088C0004 0x00000000
+rtds_write 0x088C0005 0x00000000
+rtds_write 0x08900000 0x00000000
+rtds_write 0x08900006 0x00000000
+
 
 REM SPC2 FSM digital input pin assignments...
 
+
 REM SPC2 Comparators initialization...
+
 
 REM SPC2 DTSM initialization...
 
+
+REM SPC2 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC3 entries:
+
+
 REM *****************************************:
+
 
 REM SPC3 Topology Selector (TS) initialization...
 rtds_file_write 0x08D80000 SPC3_red_table.txt
-
 rtds_write 0x08D00020 0x00000001
 rtds_write 0x08D00021 0x00000000
 rtds_write 0x08D00023 0x00000000
@@ -531,11 +601,14 @@ rtds_write 0x08D00079 0x00000000
 rtds_file_write 0x08D50000 trivial_imem.txt
 rtds_file_write 0x08D52000 trivial_lut.txt
 
+
 REM SPC3 Variable Delay initialization...
 rtds_write 0x08D00001 0x0
 
+
 REM SPC3 Output voltage compare mode...
 rtds_write 0x08D00005 0x00000000
+
 
 REM SPC3 Matrix multiplier initialization...
 rtds_file_write 0x08C00000 SPC3_Com_Word.txt
@@ -544,8 +617,9 @@ rtds_file_write 0x08C80000 SPC3_MAC0.txt
 rtds_file_write 0x08C82000 SPC3_MAC1.txt
 rtds_file_write 0x08C84000 SPC3_MAC2.txt
 rtds_file_write 0x08C86000 SPC3_MAC3.txt
-
 rtds_write 0x08D00004 0x0000000F
+
+
 REM SPC3 Contactors initialization...
 rtds_write 0x08E40000 0x00000000
 rtds_write 0x08E40080 0x00000000
@@ -584,26 +658,39 @@ rtds_write 0x08E40303 0x00000000
 rtds_write 0x08E40383 0x00000000
 rtds_write 0x08E40403 0x00000001
 
+
 REM SPC3 GDS compensation settings...
-rtds_write 0x08CC0000 0x00000001
-rtds_write 0x08CC0001 0x0000000F
-rtds_write 0x08CC0004 0x3BA3D70A
-rtds_write 0x08CC0005 0x3D710000
-rtds_write 0x08D00000 0x000000C8
+rtds_write 0x08CC0000 0x00000000
+rtds_write 0x08CC0001 0x00000000
+rtds_write 0x08CC0004 0x00000000
+rtds_write 0x08CC0005 0x00000000
+rtds_write 0x08D00000 0x00000000
+rtds_write 0x08D00006 0x00000000
+
 
 REM SPC3 FSM digital input pin assignments...
 
+
 REM SPC3 Comparators initialization...
+
 
 REM SPC3 DTSM initialization...
 
+
+REM SPC3 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC4 entries:
+
+
 REM *****************************************:
+
 
 REM SPC4 Topology Selector (TS) initialization...
 rtds_file_write 0x09180000 SPC4_red_table.txt
-
 rtds_write 0x09100020 0x00000001
 rtds_write 0x09100021 0x00000000
 rtds_write 0x09100023 0x00000000
@@ -668,11 +755,14 @@ rtds_write 0x09100079 0x00000000
 rtds_file_write 0x09150000 trivial_imem.txt
 rtds_file_write 0x09152000 trivial_lut.txt
 
+
 REM SPC4 Variable Delay initialization...
 rtds_write 0x09100001 0x0
 
+
 REM SPC4 Output voltage compare mode...
 rtds_write 0x09100005 0x00000000
+
 
 REM SPC4 Matrix multiplier initialization...
 rtds_file_write 0x09000000 SPC4_Com_Word.txt
@@ -681,8 +771,9 @@ rtds_file_write 0x09080000 SPC4_MAC0.txt
 rtds_file_write 0x09082000 SPC4_MAC1.txt
 rtds_file_write 0x09084000 SPC4_MAC2.txt
 rtds_file_write 0x09086000 SPC4_MAC3.txt
-
 rtds_write 0x09100004 0x00000007
+
+
 REM SPC4 Contactors initialization...
 rtds_write 0x09240000 0x00000000
 rtds_write 0x09240080 0x00000000
@@ -712,26 +803,39 @@ rtds_write 0x09240302 0x00000000
 rtds_write 0x09240382 0x00000000
 rtds_write 0x09240402 0x00000000
 
+
 REM SPC4 GDS compensation settings...
-rtds_write 0x090C0000 0x00000001
-rtds_write 0x090C0001 0x0000000E
-rtds_write 0x090C0004 0x3BA3D70A
-rtds_write 0x090C0005 0x3D710000
-rtds_write 0x09100000 0x000000C8
+rtds_write 0x090C0000 0x00000000
+rtds_write 0x090C0001 0x00000000
+rtds_write 0x090C0004 0x00000000
+rtds_write 0x090C0005 0x00000000
+rtds_write 0x09100000 0x00000000
+rtds_write 0x09100006 0x00000000
+
 
 REM SPC4 FSM digital input pin assignments...
 
+
 REM SPC4 Comparators initialization...
+
 
 REM SPC4 DTSM initialization...
 
+
+REM SPC4 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC5 entries:
+
+
 REM *****************************************:
+
 
 REM SPC5 Topology Selector (TS) initialization...
 rtds_file_write 0x09580000 SPC5_red_table.txt
-
 rtds_write 0x09500020 0x00000001
 rtds_write 0x09500021 0x00000000
 rtds_write 0x09500023 0x00000000
@@ -796,11 +900,14 @@ rtds_write 0x09500079 0x00000000
 rtds_file_write 0x09550000 trivial_imem.txt
 rtds_file_write 0x09552000 trivial_lut.txt
 
+
 REM SPC5 Variable Delay initialization...
 rtds_write 0x09500001 0x0
 
+
 REM SPC5 Output voltage compare mode...
 rtds_write 0x09500005 0x00000000
+
 
 REM SPC5 Matrix multiplier initialization...
 rtds_file_write 0x09400000 SPC5_Com_Word.txt
@@ -809,8 +916,9 @@ rtds_file_write 0x09480000 SPC5_MAC0.txt
 rtds_file_write 0x09482000 SPC5_MAC1.txt
 rtds_file_write 0x09484000 SPC5_MAC2.txt
 rtds_file_write 0x09486000 SPC5_MAC3.txt
-
 rtds_write 0x09500004 0x00000003
+
+
 REM SPC5 Contactors initialization...
 rtds_write 0x09640000 0x00000000
 rtds_write 0x09640080 0x00000000
@@ -831,26 +939,39 @@ rtds_write 0x09640301 0x00000000
 rtds_write 0x09640381 0x00000000
 rtds_write 0x09640401 0x00000001
 
+
 REM SPC5 GDS compensation settings...
-rtds_write 0x094C0000 0x00000001
-rtds_write 0x094C0001 0x0000000A
-rtds_write 0x094C0004 0x3BA3D70A
-rtds_write 0x094C0005 0x3D710000
-rtds_write 0x09500000 0x000000C8
+rtds_write 0x094C0000 0x00000000
+rtds_write 0x094C0001 0x00000000
+rtds_write 0x094C0004 0x00000000
+rtds_write 0x094C0005 0x00000000
+rtds_write 0x09500000 0x00000000
+rtds_write 0x09500006 0x00000000
+
 
 REM SPC5 FSM digital input pin assignments...
 
+
 REM SPC5 Comparators initialization...
+
 
 REM SPC5 DTSM initialization...
 
+
+REM SPC5 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC6 entries:
+
+
 REM *****************************************:
+
 
 REM SPC6 Topology Selector (TS) initialization...
 rtds_file_write 0x09980000 SPC6_red_table.txt
-
 rtds_write 0x09900020 0x00000001
 rtds_write 0x09900021 0x00000000
 rtds_write 0x09900023 0x00000000
@@ -915,11 +1036,14 @@ rtds_write 0x09900079 0x00000000
 rtds_file_write 0x09950000 trivial_imem.txt
 rtds_file_write 0x09952000 trivial_lut.txt
 
+
 REM SPC6 Variable Delay initialization...
 rtds_write 0x09900001 0x0
 
+
 REM SPC6 Output voltage compare mode...
 rtds_write 0x09900005 0x00000000
+
 
 REM SPC6 Matrix multiplier initialization...
 rtds_file_write 0x09800000 SPC6_Com_Word.txt
@@ -928,11 +1052,12 @@ rtds_file_write 0x09880000 SPC6_MAC0.txt
 rtds_file_write 0x09882000 SPC6_MAC1.txt
 rtds_file_write 0x09884000 SPC6_MAC2.txt
 rtds_file_write 0x09886000 SPC6_MAC3.txt
-
 rtds_write 0x09900004 0x00000003
+
+
 REM SPC6 Contactors initialization...
 rtds_write 0x09A40000 0x00000000
-rtds_write 0x09A40080 0x00000007
+rtds_write 0x09A40080 0x00000000
 rtds_write 0x09A40100 0x00000000
 rtds_write 0x09A40180 0x00000000
 rtds_write 0x09A40200 0x00000000
@@ -950,26 +1075,39 @@ rtds_write 0x09A40301 0x00000000
 rtds_write 0x09A40381 0x00000000
 rtds_write 0x09A40401 0x00000001
 
+
 REM SPC6 GDS compensation settings...
-rtds_write 0x098C0000 0x00000001
-rtds_write 0x098C0001 0x00000003
-rtds_write 0x098C0004 0x3BA3D70A
-rtds_write 0x098C0005 0x3D710000
-rtds_write 0x09900000 0x000000C8
+rtds_write 0x098C0000 0x00000000
+rtds_write 0x098C0001 0x00000000
+rtds_write 0x098C0004 0x00000000
+rtds_write 0x098C0005 0x00000000
+rtds_write 0x09900000 0x00000000
+rtds_write 0x09900006 0x00000000
+
 
 REM SPC6 FSM digital input pin assignments...
 
+
 REM SPC6 Comparators initialization...
+
 
 REM SPC6 DTSM initialization...
 
+
+REM SPC6 Time Varying Elements initialization...
+
+
 REM *****************************************:
+
+
 REM * SPC7 entries:
+
+
 REM *****************************************:
+
 
 REM SPC7 Topology Selector (TS) initialization...
 rtds_file_write 0x09D80000 SPC7_red_table.txt
-
 rtds_write 0x09D00020 0x00000001
 rtds_write 0x09D00021 0x00000000
 rtds_write 0x09D00023 0x00000000
@@ -1034,11 +1172,14 @@ rtds_write 0x09D00079 0x00000000
 rtds_file_write 0x09D50000 trivial_imem.txt
 rtds_file_write 0x09D52000 trivial_lut.txt
 
+
 REM SPC7 Variable Delay initialization...
 rtds_write 0x09D00001 0x0
 
+
 REM SPC7 Output voltage compare mode...
 rtds_write 0x09D00005 0x00000000
+
 
 REM SPC7 Matrix multiplier initialization...
 rtds_file_write 0x09C00000 SPC7_Com_Word.txt
@@ -1047,23 +1188,31 @@ rtds_file_write 0x09C80000 SPC7_MAC0.txt
 rtds_file_write 0x09C82000 SPC7_MAC1.txt
 rtds_file_write 0x09C84000 SPC7_MAC2.txt
 rtds_file_write 0x09C86000 SPC7_MAC3.txt
-
 rtds_write 0x09D00004 0x00000000
+
+
 REM SPC7 Contactors initialization...
 
+
 REM SPC7 GDS compensation settings...
-rtds_write 0x09CC0000 0x00000001
+rtds_write 0x09CC0000 0x00000000
 rtds_write 0x09CC0001 0x00000000
-rtds_write 0x09CC0004 0x3BA3D70A
-rtds_write 0x09CC0005 0x3D710000
-rtds_write 0x09D00000 0x000000C8
+rtds_write 0x09CC0004 0x00000000
+rtds_write 0x09CC0005 0x00000000
+rtds_write 0x09D00000 0x00000000
+rtds_write 0x09D00006 0x00000000
+
 
 REM SPC7 FSM digital input pin assignments...
 
+
 REM SPC7 Comparators initialization...
+
 
 REM SPC7 DTSM initialization...
 
+
+REM SPC7 Time Varying Elements initialization...
 *****************************************:
 
 
@@ -1118,7 +1267,8 @@ REM disable can devices
 sys_command 0x2
 
 
-REM ifconfig eth0 up
+REM ifconfig eth0 down and up
+sys_command 0x0
 sys_command 0x1
 
 

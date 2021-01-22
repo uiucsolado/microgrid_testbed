@@ -2881,7 +2881,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Macro code]]></on_start_code_source>
-                <inputValue><![CDATA[Off]]></inputValue>
+                <inputValue><![CDATA[On]]></inputValue>
                 <availableValues><![CDATA[['On', 'Off']]]></availableValues>
                 <unit><![CDATA[]]></unit>
                 <hierarchy_position>1</hierarchy_position>
@@ -4026,8 +4026,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>0.0</x>
-                    <y>384.0</y>
+                    <x>0</x>
+                    <y>400</y>
                     <width>376</width>
                     <height>272</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -4362,7 +4362,7 @@ widgetValue = None
             </component_data>
         <component_data>
                 <id>1c20cfe7dddc11ea9c0ed89ef3221e8e</id>
-                <name><![CDATA[V ref]]></name>
+                <name><![CDATA[E ref]]></name>
                 <type>TextBoxMacro</type>
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
@@ -4404,7 +4404,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValue><![CDATA[0.983]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[pu]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -4946,7 +4946,7 @@ displayValue = []
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Governor.AGC', inputValue)
+hil.set_scada_input_value('Microturbine.Governor.AGC', inputValue)
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
@@ -4992,7 +4992,7 @@ widgetValue = None
             </component_data>
         <component_data>
                 <id>41e0758fdddc11eaac88d89ef3221e8e</id>
-                <name><![CDATA[V ref]]></name>
+                <name><![CDATA[E ref]]></name>
                 <type>TextBoxMacro</type>
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
@@ -5004,7 +5004,8 @@ widgetValue = None
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).Vref', inputValue)]]></on_use_code>
+hil.set_scada_input_value('Microturbine.Exciter.E_ref', inputValue)
+]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
 
@@ -5060,7 +5061,7 @@ widgetValue = None
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine.qd0(PU).wref', inputValue)
+hil.set_scada_input_value('Microturbine.Governor.w_ref', inputValue)
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
@@ -5092,7 +5093,7 @@ widgetValue = None
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
                 <inputValue><![CDATA[1.0]]></inputValue>
                 <inputValueType>float</inputValueType>
-                <unit><![CDATA[rad/s]]></unit>
+                <unit><![CDATA[pu]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
                     <x>48.0</x>
@@ -5639,7 +5640,7 @@ displayValue = []
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine1.qd0(PU).Governor.AGC', inputValue)
+hil.set_scada_input_value('Microturbine1.Governor.AGC', inputValue)
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
@@ -5685,7 +5686,7 @@ widgetValue = None
             </component_data>
         <component_data>
                 <id>7dec68c6dddc11eaad63d89ef3221e8e</id>
-                <name><![CDATA[V ref]]></name>
+                <name><![CDATA[E ref]]></name>
                 <type>TextBoxMacro</type>
                 <description><![CDATA[None]]></description>
                 <on_use_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
@@ -5697,7 +5698,7 @@ widgetValue = None
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine1.qd0(PU).Vref', inputValue)]]></on_use_code>
+hil.set_scada_input_value('Microturbine1.Exciter.E_ref', inputValue)]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
 
@@ -5726,7 +5727,7 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValue><![CDATA[1.000775]]></inputValue>
                 <inputValueType>float</inputValueType>
                 <unit><![CDATA[p.u.]]></unit>
                 <hierarchy_position>3</hierarchy_position>
@@ -5753,7 +5754,7 @@ widgetValue = None
 #------------------------------------------------
 
 # NOTE: entered value is available through variable 'inputValue'
-hil.set_scada_input_value('Microturbine1.qd0(PU).wref', inputValue)
+hil.set_scada_input_value('Microturbine1.Governor.w_ref', inputValue)
 ]]></on_use_code>
                 <on_start_code active="True"><![CDATA[#------------- MANDATORY IMPORTS ---------------
 # HIL Control Panel API
@@ -5783,9 +5784,9 @@ widgetValue = None
 widgetValue = None
 ]]></on_timer_code>
                 <on_start_code_source><![CDATA[Custom code]]></on_start_code_source>
-                <inputValue><![CDATA[1.0]]></inputValue>
+                <inputValue><![CDATA[1.000575]]></inputValue>
                 <inputValueType>float</inputValueType>
-                <unit><![CDATA[rad/s]]></unit>
+                <unit><![CDATA[pu]]></unit>
                 <hierarchy_position>3</hierarchy_position>
                 <widget_settings>
                     <x>48.0</x>
@@ -5832,8 +5833,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>2</hierarchy_position>
                 <widget_settings>
-                    <x>408</x>
-                    <y>408</y>
+                    <x>408.0</x>
+                    <y>408.0</y>
                     <width>480</width>
                     <height>256</height>
                     <appearance><![CDATA[Flat]]></appearance>

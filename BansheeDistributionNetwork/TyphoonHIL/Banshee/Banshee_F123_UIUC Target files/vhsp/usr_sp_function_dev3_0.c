@@ -18,6 +18,7 @@
 // H files from Advanced C Function components
 
 // Header files from additional sources (Advanced C Function)
+
 // ----------------------------------------------------------------------------------------
 // generated using template: VirtualHIL/custom_defines.template----------------------------
 
@@ -387,14 +388,12 @@ double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_coeff[2] = {
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum;
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum;
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
-X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__out;
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_coeff[2] = {0.06283185307, 0.06283185307};
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_coeff[2] = {2.06283185307, -1.93716814693};
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum;
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum;
 double _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in;
-X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
 double _f2_pcc_gain1__out;
 double _f2_pcc_gain2__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__out;
@@ -403,14 +402,12 @@ double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_coeff[2] = {
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
-X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_coeff[2] = {0.06283185307, 0.06283185307};
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_coeff[2] = {2.06283185307, -1.93716814693};
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum;
 double _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in;
-X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
 double _f1_pcc_bus_join1__out[8];
 
 double _f1_pcc_pcc_measurements_three_phase_pll1_normalize__in1;
@@ -462,7 +459,6 @@ double _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_coeff[3] = {1.0, -1.
 double _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum;
 double _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum;
 double _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in;
-X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
 double _f2_pcc_pcc_measurements_three_phase_pll1_pid_kb__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_coeff[1] = {0.024674000736159996};
@@ -470,7 +466,6 @@ double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_coeff[3] = {1.0, -1.
 double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum;
 double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum;
 double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in;
-X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
 double _f1_pcc_pcc_measurements_three_phase_pll1_pid_sum7__out;
 double _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum7__out;
 //@cmp.var.end
@@ -528,6 +523,7 @@ double _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[2];
 
 
 
+
 // generated using template: virtual_hil/custom_functions.template---------------------------------
 void ReInit_user_sp_cpu0_dev3() {
 #if DEBUG_MODE
@@ -576,15 +572,19 @@ void ReInit_user_sp_cpu0_dev3() {
     HIL_OutAO(0x4004, 0.0f);
     HIL_OutAO(0x4005, 0.0f);
     HIL_OutAO(0x4006, 0.0f);
+    X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
     for (_f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0;
     }
+    X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
     for (_f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
         _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i] = 0;
     }
+    X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
     for (_f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i = 0; _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i < 1; _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i++) {
         _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__states[_f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i] = 0;
     }
+    X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
     for (_f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i = 0; _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i < 1; _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i++) {
         _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__states[_f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i] = 0;
     }
@@ -602,9 +602,11 @@ void ReInit_user_sp_cpu0_dev3() {
     _f2_pcc_pcc_measurements_three_phase_pll1_rate_limiter1__first_step = 1;
     _f2_pcc_pcc_measurements_three_phase_pll1_integrator__out = 0;
     _f2_pcc_pcc_measurements_three_phase_pll1_integrator__in = 0;
+    X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
     for (_f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 0; _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i < 2; _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i++) {
         _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] = 0;
     }
+    X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
     for (_f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i = 0; _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i < 2; _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i++) {
         _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__states[_f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i] = 0;
     }
@@ -615,10 +617,11 @@ void ReInit_sp_scope_user_sp_cpu0_dev3() {
     // initialise SP Scope buffer pointer
 }
 
-void user_terminate_fmu_objects_cpu0_dev3(void) {
-    return;
+void load_fmi_libraries_user_sp_cpu0_dev3(void) {
+#if defined(_WIN64)
+#else
+#endif
 }
-
 // generated using template:generic_macros.template-----------------------------------------
 /*********************** Macros (Inline Functions) Definitions ***************************/
 
@@ -1023,6 +1026,7 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     // Generated from the component: F1_PCC.Gain2
     _f1_pcc_gain2__out = 10.0 * _f1_pcc_var____kvar__out;
     // Generated from the component: F1_PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_d
+    X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum = 0.0f;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum = 0.0f;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in = 0.0f;
@@ -1034,6 +1038,7 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum += _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[0] * _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__out = _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum;
     // Generated from the component: F1_PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_q
+    X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum = 0.0f;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum = 0.0f;
     _f1_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in = 0.0f;
@@ -1049,6 +1054,7 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     // Generated from the component: F2_PCC.Gain2
     _f2_pcc_gain2__out = 10.0 * _f2_pcc_var____kvar__out;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_d
+    X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__i;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__a_sum = 0.0f;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum = 0.0f;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in = 0.0f;
@@ -1060,6 +1066,7 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum += _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_coeff[0] * _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__delay_line_in;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__out = _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_d__b_sum;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.abc to dq.LPF_q
+    X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__i;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__a_sum = 0.0f;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__b_sum = 0.0f;
     _f2_pcc_pcc_measurements_three_phase_pll1_abc_to_dq_lpf_q__delay_line_in = 0.0f;
@@ -1201,6 +1208,7 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     // Generated from the component: F1_PCC.PCC Measurements.Three phase PLL1.PID.Kb
     _f1_pcc_pcc_measurements_three_phase_pll1_pid_kb__out = 1.0 * _f1_pcc_pcc_measurements_three_phase_pll1_pid_sum6__out;
     // Generated from the component: F1_PCC.PCC Measurements.Three phase PLL1.LPF.LPF
+    X_UnInt32 _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
     _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum = 0.0f;
     _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum = 0.0f;
     _f1_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in = 0.0f;
@@ -1216,6 +1224,7 @@ void TimerCounterHandler_0_user_sp_cpu0_dev3() {
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.PID.Kb
     _f2_pcc_pcc_measurements_three_phase_pll1_pid_kb__out = 1.0 * _f2_pcc_pcc_measurements_three_phase_pll1_pid_sum6__out;
     // Generated from the component: F2_PCC.PCC Measurements.Three phase PLL1.LPF.LPF
+    X_UnInt32 _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__i;
     _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__a_sum = 0.0f;
     _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__b_sum = 0.0f;
     _f2_pcc_pcc_measurements_three_phase_pll1_lpf_lpf__delay_line_in = 0.0f;
