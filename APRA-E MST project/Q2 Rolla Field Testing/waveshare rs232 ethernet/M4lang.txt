@@ -1,0 +1,158 @@
+;语言文件格式为: 名称|中文|英文，竖线分割，逗号与分号为注释，///为换行 空行自动忽略
+lang_Main_Title|TCP232-M4,E45|TCP232-M4,E45
+lang_Menu_Device|设备(&D)|Device(&D)
+lang_Menu_SetUDPPort|绑定本地1901端口|Bind 1901 port
+lang_rzchckbxBind1901|兼容E45|Compatible with E45
+lang_rzchckbxClsArp|清除ARP表|Clear ARP table
+lang_Menu_UsrPaswd|用户名密码设置|User config
+lang_Menu_Upgrade|固件升级|Firmware upgrade
+lang_Menu_Exit|退出|Exit
+lang_Menu_lang|English(&L)|中文(&L)
+lang_Menu_About|关于(&A)|About(&A)
+lang_Menu_Help|帮助|Help
+lang_Menu_Hint|实时帮助|Real-time Help
+lang_Menu_Version|检查更新|Latest version
+lang_Menu_DownUrl|http://www.usr.cn/Download/90.html|http://www.usriot.com/Download/90.html
+lang_Menu_WorkOrder|提交问题|Work Order
+lang_Menu_WorkOrderUrl|http://h.usr.cn/index.php|http://h.usriot.com/index.php
+lang_Menu_UDPPort|搜索端口号：|Search Port:
+lang_grp_SearchList| 搜索列表 [在搜索列表中单击设备即可读取参数]| Search List [Click a device to read parameters in the Search List]
+lang_grp_BaseSave| 基础设置 | Base Save 
+lang_Lv_DevIP|设备IP|Device IP
+lang_Lv_DevName|设备名称|Device Name
+lang_Lv_MAC|MAC地址|MAC
+lang_Lv_Version|版本|Version
+lang_Btn_SearchDev|搜索设备|Search Device
+lang_Btn_OpenDev|打开网页|Open Device
+lang_Btn_ReadConfig|读取设置|Read Config
+lang_Btn_ReadTempConfig|读取临时配置|Read Temporary
+lang_Btn_Reset|设备重启|Device Restart
+lang_Btn_SaveConfig|储存设置|Save Config
+lang_Btn_Default|恢复出厂|Factory Reset
+lang_Btn_BaseSave|基础设置|Base Save
+lang_Btn_Hide_FullShow|完整显示  +|Full Show  +
+lang_Btn_Hide_TidyShow|精简显示  -|Tidy Show  -
+lang_Btn_SaveCOM0|端口1设置|Save COM1
+lang_Btn_SaveCOM1|端口2设置|Save COM2
+lang_Btn_SaveCOM2|端口3设置|Save COM3
+lang_Btn_SaveCOM3|端口4设置|Save COM4
+lang_Lbl_UPNPPort|Websocket端口：|Websocket Port:
+lang_Lbl_HTTPPort|网页端口：|Web Port:
+lang_Lbl_DevID|设备ID：|Device ID:
+lang_Lbl_DevIDType|设备ID类型：|Device ID Type:
+lang_cbbRegSnd0|不启用|Disable
+lang_cbbRegSnd1|与服务器建立连接时向服务器发送一次设备ID|Send Device ID when socket connects
+lang_cbbRegSnd2|向服务器发送的每个数据包前都加上设备ID|Send Device ID as the head of every data package
+lang_cbbRegSnd3|同时支持以上两种|Support both of above two ways
+lang_Lbl_UserName|用户名：|User Name:
+lang_Lbl_Password|密码：|Password:
+lang_Lbl_DevName|设备名称：|Device Name:
+lang_Lbl_MAC|用户MAC地址：|User MAC:
+lang_Lbl_IPType|IP地址类型：|IP      Type:
+lang_Lbl_StaticIP|模块静态IP：|ModuleStaticIP:
+lang_Lbl_Gateway|网      关：|Gateway:
+lang_Lbl_SubnetMask|子网掩码 ：|SubnetMask:
+lang_Lbl_Baudrate|串口波特率：|Baudrate:
+lang_Lbl_PDS|校验/数据/停止：|Parity/Data/Stop:
+lang_Lbl_FlowControl|串口流控制：|FlowControl:
+lang_Lbl_LocalPort|本地端口：|Local Port:
+lang_Lbl_RemotePort|远程端口：|Remote Port:
+lang_Lbl_WorkMode|工作方式：|Work Mode:
+lang_Lbl_TCPSvrCount|TCP Server 连接数：|Server connect count:
+lang_Lbl_TCPSvrCountInfo|(1~8)|(1~8)
+lang_Lbl_TCPStyle|TCP Server 样式：|TCP Server style:
+lang_Lbl_ModbusTCP|ModbusTCP：|ModbusTCP:
+lang_Lbl_RemoteIP|目标IP/域名：|RemoteIP:
+lang_Lbl_TelnetTimeout|网络重连时间：|Telnet Timeout:
+lang_Lbl_PackTime|串口打包时间：|PackTime:
+lang_Lbl_PackLen|串口打包长度：|PackLen:
+lang_Chkbox_RFC22170|同步波特率(类RFC2217)|Synchronize baudrate(RFC2217 similar)
+lang_Lbl_InfoTimeOut|秒     (<256, 0为不使用)|s  (<256, 0 for no uses)
+lang_Lbl_InfoPackTime|毫秒 (0~255)|ms (0~255)
+lang_Lbl_InfoPackLen|字节 (0~1460)|byte (0~1460)
+lang_Cbb_DHCP|DHCP/动态IP|DHCP/Auto IP
+lang_Cbb_StaticIP|静态IP|Static IP
+lang_Cbb_Transparent|透明传输|Transparent transmission
+lang_Cbb_NoIDDiscard|按ID发送-无ID则丢弃|As ID(No ID discard)
+lang_Cbb_NoIDBroadcast|按ID发送-无ID则群发|As ID(No ID Broadcast)
+lang_rzgrpbxCloudEn|启用透传云|Enable USR Cloud
+lang_lblCloudId|设备编号|Device ID
+lang_lblCloudPswd|通讯密码|Communication Code
+lang_Ts_Port0|  端口1  |  Port1  
+lang_Ts_Port1|  端口2  |  Port2  
+lang_Ts_Port2|  端口3  |  Port3  
+lang_Ts_Port3|  端口4  |  Port4  
+lang_About_Title|关于|About
+lang_About_Version|版本：|Version:
+lang_About_OK|确 认|OK
+lang_About_SoftName|名称：USR-TCP232-M4,E45|Name:  USR-TCP232-M4,E45
+lang_About_Description|说明：本程序由济南有人物联网技术有限公司设计提供，用于对USR-TCP232-/E/-400/-500/-410/-E2/-ED2,USR-N540 产品的配置。本软件使用免费。|Instruction:  This software is design by Jinan usr IOT Technology Co., Ltd. Apply to USR-TCP232-/E/-400/-500/-410/-E2/-ED2,USR-N540 product model .
+lang_About_Contact|联系我们：|Contact Us:
+lang_About_Website|http://www.usr.cn|http://en.usr.cn
+lang_About_Tel|0531-88826739|0531-88826739
+lang_About_Email|tec@usr.cn|tec@usr.cn
+lang_Log_Title|用户名密码设置|User config
+lang_Log_OK|确定|OK
+lang_Log_Cancel|取消|Cancel
+lang_Upgrade_Title|固件升级|Firmware Upgrade
+lang_Upgrade_grpClnt| 目标选择 |Select Client
+lang_Upgrade_grpFileName| 固件选择 |Select .bin file
+lang_Upgrade_btnProgram|升 级|Program
+lang_Upgrade_btnExit|退 出|Exit
+lang_Upgrade_lblClientIP|目标IP地址：|Client IP Address:
+lang_Upgrade_lblClientMAC|目标MAC地址：|Client MAC Address:
+lang_Hint_btn_Search|如果搜不到你的设备，请勾选主菜单///[ 设备 -> 绑定本地1901端口 ]|If less than you want to search the device, please checked Main Menu///[ Device -> Bind 1901 port ]!
+lang_Hint_DevNum| 在线设备数：| On-line Device NUM:
+lang_Hint_ACK| 正确执行。| ACK.
+lang_Hint_CheckErr| 校验错误：| Check Error:
+lang_Hint_ReceiveOther| 接收未知数据：| Receive unknown:
+lang_Hint_PswdErr| 用户名密码错误！请重新输入。| UsrName or Password Error!
+lang_Hint_OtherErr| 其他错误。| Other Error.
+lang_Hint_OverTime| 接收超时！| Receive over time.
+lang_Hint_Sending| 数据已发送。| Data has been sent.
+lang_Hint_BeenRead| 数据读取完毕。| Data has been read.
+lang_Hint_Searching| 搜索在线设备...| Search online Device...
+lang_Hint_UDPPortChange| 搜索端口：| Search Port:
+lang_Hint_UDPPortInUse| 端口被占用！| Port In Use!
+lang_Hint_NoTarget| 请在搜索列表中选择模块。| Please select the module in the search list.
+lang_Hint_UpSearching| 搜索可升级设备...| Searching device...
+lang_Hint_UpReady| 已搜索到设备，发送升级请求...| Find Device,Ready to upgrade...
+lang_Hint_UpProgress| 升级进度...| Upgrade progress...
+lang_Hint_UpSuccess| 升级已完成，请恢复出厂默认。| Upgrade successful.please restore factory default.
+lang_Hint_UpNoClient| 未选择升级目标。| Please Select Client first.
+lang_Hint_UpNoFileName| 未选择升级文件。| Please Select .bin file first.
+lang_Hint_Upfailed| 固件升级失败，请联系厂家！| Upgrade failed!
+lang_Hint_UpTimeOut| 升级超时！| Upgrade time out!
+lang_Hint_BinNotMatch| 固件与硬件不匹配！| Firmware does not match with hardware!
+lang_Hint_UpPleaseUpgrade|本程序支持2002或更高版本，请先升级：设备->固件升级|This program supports version 2002 or higher, please upgrade first:Device->Firmware upgrade
+lang_Hint_UpNoSamNetwork|请先设置模块与计算机在同一网段，否则无法升级。|Please set the module and the computer on the same network segment, otherwise unable to upgrade.
+lang_Hint_VerIncompatible|本程序不支持2002以下版本配置，请先升级至2002或更高。|This program doesn't support version 2002, please upgrade firmware to 2002 or higher
+lang_InputBdTitle|自定义波特率|Diy Baud Rate
+lang_PlsInputBd|请输入波特率：|Please Input your Baud Rate :
+lang_BaudRate_Custom|自定义|Custom
+lang_lbl_H_LocationURLPort| UPNP端口，一般用不着 | LocationURLPort /// In general ，it's useless 
+lang_lbl_H_HTTPServerPort| 网页端口 | Webpage Port 
+lang_lbl_H_Id| 设备ID必须与设备ID类型配合使用 | Device ID must be used with Device ID Type 
+lang_lbl_H_IdType| 设备ID类型必须与设备ID配合使用 | Device ID Type must be used with Device ID 
+lang_lbl_H_username| 网页登录与本软件配置的用户名与密码 | The user name and password for webpage login and the software configuration 
+lang_lbl_H_password| 网页登录与本软件配置的用户名与密码 | The user name and password for webpage login and the software configuration 
+lang_lbl_H_ModName| 设备名称，可修改 | Device Name ,it's revisable 
+lang_lbl_H_UserMAC| MAC地址，可修改 | MAC address ,it's revisable 
+lang_lbl_H_AddrType| 静态IP是使用固定IP地址，DHCP是由路由器分配动态的IP地址 | Static IP :  set a fixed IP address /// DHCP    :  get a dynamic IP address from router 
+lang_lbl_H_StaticIP| 本模块静态IP地址可在指定网段内任意分配，但网内不允许重复 | Assign any IP address  for the module in the network , but the IP address isn't allowed to repeat
+lang_lbl_H_GatewayIP| 网关，可以参看你电脑的网关IP，///一般是192.168.0.1，192.168.1.1，192.168.0.254这类。 | Default Gateway in your lan,/// you can look at pc‘s default getway,///it should be like 192.168.0.1 
+lang_lbl_H_SubnetMask| 子网掩码：通常是255.255.255.0 | Subnet mask, the default is 255.255.255.0 
+lang_lbl_H_BaudRate| 请选择或自定义波特率值，我们确保每个模块都工作OK的波特率是115200 （我们的测试波特率和默认波特率）| Please custom or select standard bandrate number. 
+lang_lbl_H_PDS| 校验/数据/停止： | Parity bits / data bits / stop bits  
+lang_lbl_H_FlowControl| 默认为none，/// RS485代表开启485功能（RTS脚做收发控制），/// Hardware代表使用RTS/CTS硬件流控  | The default is none /// RS485 :use 485(RTS transceiver control) /// Hardware : use RTS/CTS hardware flow control
+lang_lbl_H_LocalPort| 模块工作于UDP或TCP Server模式时将监听此端口 | When work at UDP mod or TCP Server mode, module will listen this port. 
+lang_lbl_H_RemotePort| 服务器上的应用程序监听的端口号 | The port be listen at server software. 
+lang_lbl_H_WorkMode| 模块工作方式选择：///UDP server 是指不验证来源IP地址，///收到UDP数据包后将目标IP改为数据来源IP，///类似TCP server的功能。 | module work mode: ///UDP server is like TCP server,when receive a UDP packet,///change target IP to sorce IP of the received UDP packet ///Does not verify the source IP. 
+lang_lbl_H_TCPSvrCount| TCP Server下允许的最大客户端数量 | The number of allowed client when device is working at ' TCP Server ' WorkMode 
+lang_lbl_H_TCPStyle| 一般选择透明传输 | Generally , please select transparent transmission 
+lang_lbl_H_ModbusTCP| 请选择none，除非使用了Modbus TCP协议 |  , Please select 'none' , unless Modbus TCP is used 
+lang_lbl_H_RemoteIP| 服务器的IP或者你要连接的计算机的IP | RemoteIP is the Server Ip or the PC ip which you want to link. 
+lang_lbl_H_UARTTime| 当串口持续一定时间没有接到数据之后，当前的数据就会被打包发送出去。/// 打包时间跟打包长度共同作用，详见 http://www.usr.cn/Faq/6.html /// ★想禁用此功能，请将该值设为0★| When the serial port has not received a data for a certain time , /// the data will be packed and sent. /// PackTime and PackLen will working together./// More information is on http://www.usr.cn/Faq/6.html ///★ Want the feature disable , set it 0 ★
+lang_lbl_H_UARTLength| 当串口收到的数据长度达到一定数量后，当前的数据就会被打包发送出去。/// 打包时间跟打包长度共同作用，详见 http://www.usr.cn/Faq/6.html /// ★想禁用此功能，请将该值设为0★ | When the data length of received through the serial port achieve the certain value , /// the data will be packed and sent. /// PackLen and PackTime will working together./// More information is on http://www.usr.cn/Faq/6.html ///★ Want the feature disable , set it 0 ★
+lang_chk_H_RFC2217| 默认勾选，配合虚拟串口软件使用，/// 根据您的应用软件，动态改变串口服务器的串口参数。 | Ticked default , use it with 'USR-VCOM Virtual Serial Port Server'  /// Change the configure of Serial server dynamically based on your software 
+lang_lblCloudHelp|http://cloud.usr.cn/|http://cloud.usr.cn/en
