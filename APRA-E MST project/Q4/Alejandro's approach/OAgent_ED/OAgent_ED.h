@@ -115,18 +115,29 @@ class OAgent_ED {
         bool nonleaderED(bool genBus, float step_size, uint8_t iterations);
         bool StandardED(bool genBus);
         bool AcceleratedED(bool genBus,float step_size,uint16_t iterations);
+
+        // ADG's approach
+        float EconomicDispatch2(float step_size,uint16_t iterations) ;
+        float dual_function(float alpha, float beta, float Pmax, float Pmin, float lambda);
+
+        // Additinal Functions
         float _clip(float x, float xmin, float xmax);
         double _clip_double(double x, double xmin, double xmax);
         void _SendPacket(double *vars_ed, float *vars_reg, uint16_t time);
         double* _getPacket_ed();
         float* _getPacket_reg();
-        void _print_(String s,float val,uint8_t precision){
+        void _broadcastEDPacketLo(uint8_t receivedlo,float* lambdalo,float* SumYlo,float *SumZlo,uint8_t num_nodes);
+        void _broadcastEDPacketHi(uint8_t receivedhi,float* lambdahi,float* SumYhi,float *SumZhi,uint8_t num_nodes);
+        float* _getFromEDPacket(uint8_t pos,uint8_t n_var);
+
+        void _print_(String &s,float &val,uint8_t precision){
 
             Serial<<s<<" "; Serial.print(val,precision); Serial<<endl; delay(5);
         }
-        void _print1Darray_(float* a, uint8_t size, uint8_t precision){
+
+        void _print_str_1d_array(String &s, float* a, uint8_t size, uint8_t precision){
             // int n = sizeof(a)/sizeof(a[0]);
-            // Serial<<s<<":"<<endl;
+            Serial<<s<<":"<<endl;
             for (int i=0;i<size;i++){
                 Serial.print(*(a+i),precision);Serial<<" ";
             }

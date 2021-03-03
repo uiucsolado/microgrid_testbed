@@ -1,14 +1,14 @@
 #include <Streaming.h>
 //#include <Dyno.h>
 #include <XBee.h>
-#include <OGraph_OPF.h>
-#include <OAgent_OPF.h>
+#include <OGraph_ED.h>
+#include <OAgent_ED.h>
 #include <MgsModbus.h>
 #include <SPI.h>
 #include <Ethernet.h>
 
 
-//Node 11
+//Node 10 (node id = 2)
 
 long base = 10000;  // not using floating points so need a base number
 
@@ -16,11 +16,10 @@ XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
 
 // address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786A9,12);
+OLocalVertex s = OLocalVertex(0x415786D3,2,0,1,0.08,2.5,3,10);
 LinkedList l = LinkedList();  //#NODE
-OGraph_OPF g = OGraph_OPF(&s,&l);
-OAgent_LinkedList al = OAgent_LinkedList();  //#NODE  
-OAgent_OPF a = OAgent_OPF(&xbee,&rx,&g,&al,false,true);
+OGraph_ED g = OGraph_ED(&s,&l);
+OAgent_ED a = OAgent_ED(&xbee,&rx,&g,false,true);
 
 uint8_t sPin = 7;      // synced led
 uint8_t cPin = 48;     // coordination enabled led pin
@@ -30,23 +29,18 @@ boolean de = false;
 
 //ED variables
 float ED;
-//float alpha_p = 1.3;
-//float beta_p = 3.3;
-//float max_p = 5;
-//float min_p = 0;
-//float u = 0;
-float alpha_p = 0.13;
-float beta_p = 3.3;
-float max_p = 0.5;
-float min_p = 0;
+float alpha = 0.08;
+float beta = 2.5;
+float DER_max_cap = 1;
+float DER_min_cap = 0;
 float u = 0;
 
 //Modbus Communication
 MgsModbus Mb;
 int val;
 // Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBC };
-IPAddress ip(192, 168, 2, 12);
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBA };
+IPAddress ip(192, 168, 2, 10);
 IPAddress gateway(192, 168, 2, 20);
 IPAddress subnet(255, 255,255, 0);
 
@@ -62,9 +56,12 @@ int fc;
 int ref;
 int count=0;
 int pos;
-int16_t load[151]={7500,7461,7511,7473,7501,7556,7603,7595,7609,7609,7606,7625,7653,7636,7630,7600,7611,7645,7679,7665,7708,7746,7755,7726,7783,7830,7804,7839,7868,7874,7929,7896,7866,7876,7890,7927,7890,7901,7920,7943,7904,7891,7906,7897,7881,7846,7861,7823,7823,7798,7800,7852,7880,7902,7937,7899,7952,7936,7925,7926,7928,7895,7945,7984,8009,8010,8046,8064,8034,8009,8065,8096,8097,8137,8154,8188,8163,8163,8125,8181,8233,8209,8232,8259,8292,8301,8266,8311,8338,8349,8375,8429,8411,8434,8409,8420,8405,8461,8424,8470,8487,8544,8508,8485,8528,8551,8581,8639,8695,8688,8709,8736,8774,8821,8823,8881,8896,8955,8950,8987,8956,8935,8986,8967,8928,8905,8953,9002,8971,8933,8908,8874,8882,8859,8853,8820,8844,8865,8874,8882,8904,8912,8883,8860,8840,8885,8932,8902,8908,8920,8971};
+int16_t load[151]={5200,5215,5259,5246,5275,5325,5288,5253,5256,5314,5365,5360,5371,5342,5317,5342,5340,5339,5318,5285,5305,5354,5346,5373,5423,5407,5432,5415,5465,5484,5444,5432,5475,5493,5515,5498,5546,5525,5556,5592,5599,5632,5649,5650,5671,5642,5654,5672,5703,5735,5711,5684,5706,5727,5710,5685,5706,5682,5647,5641,5621,5589,5580,5553,5571,5546,5589,5558,5564,5600,5649,5682,5715,5737,5732,5789,5823,5849,5829,5851,5877,5849,5859,5841,5829,5878,5909,5877,5891,5939,5960,5941,5990,5997,6006,6024,6083,6089,6124,6128,6167,6142,6136,6130,6096,6128,6104,6107,6067,6117,6099,6082,6043,6051,6054,6097,6115,6106,6084,6098,6124,6156,6205,6225,6245,6260,6290,6345,6338,6375,6362,6342,6355,6401,6407,6453,6501,6467,6513,6496,6534,6546,6600,6608,6590,6632,6669,6649,6667,6672,6707};
+//int16_t load[51]={5200,5215,5259,5246,5275,5325,5288,5253,5256,5314,5365,5360,5371,5342,5317,5342,5340,5339,5318,5285,5305,5354,5346,5373,5423,5407,5432,5415,5465,5484,5444,5432,5475,5493,5515,5498,5546,5525,5556,5592,5599,5632,5649,5650,5671,5642,5654,5672,5703,5735,5711};
+//int16_t load[5]={5200,5215,5259,5246,5275};
 unsigned long myTime = 0;
-uint8_t iterations=70; uint8_t period=1000;
+uint16_t num_iters=200;
+float step_size = 0.02;
 
 void setup()  {
   Serial.begin(38400);
@@ -84,11 +81,11 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
-  //g.addInNeighbor(0x415786E1,9,0,0); // node 9
+  g.addInNeighbor(0x415786E1,1,0,0); // node 9
   //g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  g.addInNeighbor(0x415DB670,11,0,0); // node 11
-  //g.addInNeighbor(0x415786A9,12,0,0); // node 12
-  g.addInNeighbor(0x4157847B,13,0,0); // node 13
+  //g.addInNeighbor(0x415DB670,3,0,0); // node 11
+  g.addInNeighbor(0x415786A9,4,0,0); // node 12
+//  g.addInNeighbor(0x4157847B,5,0,0); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14
   //g.addInNeighbor(0x415DB673,15,0,0); // node 15
   //g.addInNeighbor(0x415DB684,19,0,0); // node 19
@@ -177,34 +174,22 @@ void loop() {
           Serial.println(o);
           if (o == 'y')
           {
-            u = float(load[0])/1000.0;
-            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,50,100);
-            Serial.println("ED result");
-            Serial.println(ED,4);
-            
-            delay(5000);
-            
-            u = float(load[75])/1000.0;
-            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,50,100);
-            Serial.println("ED result");
-            Serial.println(ED,4);
-            
-            delay(5000);
-            
-            u = float(load[150])/1000.0;
-            ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,50,100);
-            Serial.println("ED result");
-            Serial.println(ED,4);            
+//            u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
+            s.setActiveDemand(load);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+            Serial.println("Starting Economic Dispatch");
+            a.EconomicDispatch(true,step_size,num_iters);
+                            
           }
         }
       }
       if (!(a.isLeader()))
       {
         if (count==0){
-          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-          ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,iterations,period);
-          Serial.println("ED result");
-          Serial.println(ED,6);
+//          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
+          s.setActiveDemand(load);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+          Serial.println("Starting Economic Dispatch");
+//          a.EconomicDispatch(true, step_size, num_iters);
+          a.EconomicDispatch2(step_size, num_iters);
 
 //          u = float(load[75])/10000.0;Serial.println("load");Serial.println(u,4);
 //          ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,iterations,period);
@@ -248,15 +233,15 @@ void sendConsensusResults()
   //Mb.Build(fc,Ref_high,Ref_low,Count_high,Count_low,Pos_high,Pos_low);
   //Serial.println("Sent Request Packet");
   ////////////////////////////////////////////////////////////////
-  int node4_ip = 64; //part of ip address for node 4 on the HIL side                                                                                                               //change3
-  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,4,0,node4_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)                                              //change1
+  int node2_ip = 62; //part of ip address for node 2 on the HIL side                                                                                                               //change3
+  Mb.Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,4,0,node2_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)                                              //change1
   Mb.MbmRun();
   //SerialUSB.println("Sent Stuff to typhoon");
 }
 
 void receiveTyphoonData()
 {
-  int node4_ip = 64; //part of ip address for node 4 on the HIL side                                                                                                                //change3
-  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,4,0,node4_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)                                                     //change1
+  int node2_ip = 62; //part of ip address for node 2 on the HIL side                                                                                                                //change3
+  Mb.Req(MB_FC_READ_INPUT_REGISTER,0,4,0,node2_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)                                                     //change1
   Mb.MbmRun();
 }

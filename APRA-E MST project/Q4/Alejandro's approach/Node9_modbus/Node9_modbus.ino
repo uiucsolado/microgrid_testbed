@@ -60,7 +60,7 @@ int16_t load[151] = {4137, 4144, 4276, 4457, 4702, 5043, 5319, 5594, 5966, 6256,
 //int16_t load[51] = {4137, 4144, 4276, 4457, 4702, 5043, 5319, 5594, 5966, 6256, 6611, 6916, 7202, 7515, 7792, 8027, 8254, 8404, 8552, 8645, 8751, 8779, 8826, 8827, 8775, 8611, 8508, 8436, 8307, 8188, 8055, 7911, 7751, 7606, 7459, 7401, 7300, 7177, 7063, 6901, 6759, 6606, 6514, 6355, 6265, 6145, 6048, 5924, 5879, 5711, 5521};
 //int16_t load[5] = {4137, 4144, 4276, 4457, 4702};
 unsigned long myTime = 0;
-uint16_t num_iters = 1000;
+uint16_t num_iters = 200;
 float step_size = 0.02;
 
 void setup()  {
@@ -166,7 +166,8 @@ void loop() {
           //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
           s.setActiveDemand(load); s.setDERparams(DER_min_cap, DER_max_cap, alpha, beta);
           Serial.println("Starting Economic Dispatch");
-          a.EconomicDispatch(true, step_size, num_iters);
+//          a.EconomicDispatch(true, step_size, num_iters);
+          a.EconomicDispatch2(step_size, num_iters);
         }
         count++;
         //        Serial.println("Begin economic dispatch? (y/n)"); //let computer know you want to begin economic dispatch
@@ -208,7 +209,8 @@ void loop() {
           //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
           s.setActiveDemand(load); s.setDERparams(DER_min_cap, DER_max_cap, alpha, beta);
           Serial.println("Starting Economic Dispatch");
-          a.EconomicDispatch(true, step_size, num_iters);
+//          a.EconomicDispatch(true, step_size, num_iters);
+          a.EconomicDispatch2(step_size, num_iters);
         }
         count++;
 

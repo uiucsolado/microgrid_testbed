@@ -117,6 +117,9 @@ class OAgent_ED {
         bool AcceleratedED(bool genBus,float step_size,uint16_t iterations);
         float _clip(float x, float xmin, float xmax);
         double _clip_double(double x, double xmin, double xmax);
+        void getSME(uint32_t& s, uint32_t&m, uint32_t&e, float number);
+        void _sender_helper32(float x,uint8_t* sign_y,uint32_t* y);
+        void _sender_helper64(float x,uint8_t* sign_y,uint64_t* y);
         void _SendPacket(double *vars_ed, float *vars_reg, uint16_t time);
         double* _getPacket_ed();
         float* _getPacket_reg();
@@ -124,7 +127,7 @@ class OAgent_ED {
 
             Serial<<s<<" "; Serial.print(val,precision); Serial<<endl; delay(5);
         }
-        void _print1Darray_(float* a, uint8_t size, uint8_t precision){
+        void _print1Darray_(float* a, int size, uint8_t precision){
             // int n = sizeof(a)/sizeof(a[0]);
             // Serial<<s<<":"<<endl;
             for (int i=0;i<size;i++){
@@ -134,10 +137,9 @@ class OAgent_ED {
             delay(5);
         }
 
-        void print_ed_reg_status(uint16_t time_instant, float P, float x, float reg_ratio, uint16_t *count, uint8_t size){
-            Serial<<time_instant<<" ";Serial.print(P,5);Serial<<" ";Serial.print(x,5);Serial<<" ";Serial.print(reg_ratio,5);Serial<<" ";
+        void printCounters(uint16_t *counters, uint8_t size){
             for (int i=0;i<size;i++){
-                Serial.print(*(count+i));Serial<<" ";
+                Serial.print(*(counters+i));Serial<<" ";
             }
             Serial<<endl;
             delay(5);

@@ -55,8 +55,12 @@ int ref;
 int count=0;
 int pos;
 int16_t load[151]={6700,6732,6775,6802,6766,6816,6793,6840,6888,6938,6948,7004,7012,7000,7047,7106,7114,7098,7127,7088,7098,7155,7177,7152,7178,7186,7234,7276,7275,7277,7284,7285,7329,7310,7312,7304,7338,7367,7387,7357,7409,7460,7435,7433,7408,7406,7389,7349,7366,7358,7394,7408,7427,7460,7465,7479,7484,7467,7437,7399,7445,7431,7462,7467,7514,7505,7474,7512,7543,7588,7634,7613,7608,7609,7633,7678,7689,7673,7716,7744,7717,7717,7771,7805,7833,7857,7822,7817,7845,7858,7826,7798,7823,7816,7846,7880,7926,7943,7950,7977,7960,7986,7960,7994,7963,7969,7959,7947,7976,8028,8035,8007,8016,8024,8063,8050,8032,8015,7990,8034,8004,8002,7969,7993,8047,8068,8050,8053,8087,8061,8103,8128,8118,8099,8101,8101,8086,8128,8186,8169,8191,8179,8218,8239,8204,8164,8195,8207,8208,8257,8264};
+//int16_t load[51]={6700,6732,6775,6802,6766,6816,6793,6840,6888,6938,6948,7004,7012,7000,7047,7106,7114,7098,7127,7088,7098,7155,7177,7152,7178,7186,7234,7276,7275,7277,7284,7285,7329,7310,7312,7304,7338,7367,7387,7357,7409,7460,7435,7433,7408,7406,7389,7349,7366,7358,7394};
+//int16_t load[5]={6700,6732,6775,6802,6766};
+
 unsigned long myTime = 0;
-uint8_t iterations=70; uint8_t period=1000;
+uint16_t num_iters=1000;
+float step_size = 0.02;
 
 void setup()  {
   Serial.begin(38400);
@@ -76,11 +80,11 @@ void setup()  {
   //g.addInNeighbor(0x4151C6AB,6,0,0); // node 6
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
-  g.addInNeighbor(0x415786E1,1,0,0); // node 9
-  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
+//  g.addInNeighbor(0x415786E1,1,0,0); // node 9
+//  g.addInNeighbor(0x415786D3,2,0,0); // node 10
+  g.addInNeighbor(0x415DB670,3,0,0); // node 11
   //g.addInNeighbor(0x415786A9,12,0,0); // node 12
-  g.addInNeighbor(0x4157847B,5,0,0); // node 13
+//  g.addInNeighbor(0x4157847B,5,0,0); // node 13
   //g.addInNeighbor(0x415DB664,14,0,0); // node 14
   //g.addInNeighbor(0x415DB673,15,0,0); // node 15
   //g.addInNeighbor(0x415DB684,19,0,0); // node 19
@@ -169,10 +173,10 @@ void loop() {
           Serial.println(o);
           if (o == 'y')
           {
-            u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-            s.setActiveDemand(u);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+              //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
+            s.setActiveDemand(load); s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
             Serial.println("Starting Economic Dispatch");
-            a.EconomicDispatch(true,0.01,100);
+            a.EconomicDispatch(true,step_size,num_iters);
                         
           }
         }
@@ -180,10 +184,10 @@ void loop() {
       if (!(a.isLeader()))
       {
         if (count==0){
-          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-          s.setActiveDemand(u);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+          //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
+          s.setActiveDemand(load); s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
           Serial.println("Starting Economic Dispatch");
-          a.EconomicDispatch(true,0.01,100);
+          a.EconomicDispatch(true,step_size,num_iters);
 
 //          u = float(load[75])/10000.0;Serial.println("load");Serial.println(u,4);
 //          ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,iterations,period);

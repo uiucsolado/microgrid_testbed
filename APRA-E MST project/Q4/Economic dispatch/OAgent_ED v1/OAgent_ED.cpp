@@ -123,13 +123,20 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     LinkedList * l = _G->getLinkedList();
 
-    // uint16_t nodeID = s->getID();
+    uint16_t nodeID = s->getID();
     double out_deg = (double)s->getOutDegree();
     double Pmin = (double)s->getMin(),Pmax = (double)s->getMax(),alpha = (double)s->getAlpha(),beta = (double)s->getBeta();
     uint8_t neighborID;
 
     uint8_t neighbors[_G->getN()-1];
     uint8_t *p = s->getStatusP();
+    // if (genBus){
+    //     Serial<<"Node is generator"<<endl;
+    //     delay(5);}
+    // else
+    //     {Serial<<"Node is load"<<endl;
+    //     delay(5);}
+    // Serial<<"Node has the following neighbors:"<<endl;
     delay(5);
     int j=0;
     for (uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
@@ -145,8 +152,8 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
     // Serial<<"Node has "<<_G->getN()-1<<" neighbors"<<endl;
     // delay(5);
 
-    uint8_t deg = _G->getN()-1;
-    int nei2index[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)nei2index[i]=0;
+    int deg = _G->getN()-1;
+    int nei2index[NUM_REMOTE_VERTICES];
     for (int i=0;i<deg;i++){
         nei2index[neighbors[i]-1] = i;
     } 
@@ -159,37 +166,35 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
     if (isLeader()) y = num_nodes*P;
     else y = num_nodes*(P-Pd);
 
-    double sum_lambda[deg+1]; for (int i=0;i<deg;i++)sum_lambda[i]=0.0;
-    double sum_nu[deg+1]; for (int i=0;i<deg;i++)sum_nu[i]=0.0;
-    double sum_y[deg+1]; for (int i=0;i<deg;i++)sum_y[i]=0.0;
+    double sum_lambda[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)sum_lambda[i]=0.0;
+    double sum_nu[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)sum_nu[i]=0.0;
+    double sum_y[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)sum_y[i]=0.0;
 
-    sum_lambda[deg] = lambda/out_deg;
-    sum_nu[deg] = nu/out_deg;
-    sum_y[deg] = y/out_deg;
+    sum_lambda[nodeID-1] += lambda/out_deg;
+    sum_nu[nodeID-1] += nu/out_deg;
+    sum_y[nodeID-1] += y/out_deg;
 
     float reg_num_var = (float)Pd-(Pmin-Pref), reg_den_var = (float)Pmax-Pmin, reg_num_var_new, reg_den_var_new;
-    float reg_sum_num[deg+1]; for (int i=0;i<deg;i++)reg_sum_num[i]=0.0;
-    float reg_sum_den[deg+1]; for (int i=0;i<deg;i++)reg_sum_den[i]=0.0;
+    float reg_sum_num[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)reg_sum_num[i]=0.0;
+    float reg_sum_den[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)reg_sum_den[i]=0.0;
     double load_change = 0.0;
 
     if (!isLeader()) reg_num_var = -(float)(Pmin-Pref);
-    reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
-    bool received_from[deg]; for (int i=0;i<deg;i++) received_from[i]=false;
+    reg_sum_num[nodeID-1] = reg_num_var/out_deg; reg_sum_den[nodeID-1] = reg_den_var/out_deg;
+    uint8_t received_from[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++) received_from[i]=0.0;
 
     // Serial<<"out_deg="<<out_deg<<" alpha="<<alpha<<" beta="<<beta<<" Pmin="<<Pmin<<" Pmax="<<Pmax<<" Pd="<<Pd<<endl; delay(5);
     unsigned long start, time_read_regD = millis();
     uint16_t leader_time = 0, nonleader_time = 0;
     // unsigned long k = 0; 
     bool run = true;
-    uint16_t count[deg]; for (int i=0;i<deg;i++)count[i]=0;
+    int counters[deg]; for (int i=0;i<deg;i++)counters[i]=0;
     // printCounters(counters,deg);
     // for (int i=0;i<NUM_REMOTE_VERTICES;i++){
-    //     Serial.print(nei2index[i]);Serial<<" ";
+    //     Serial.print(*(nei2index+i));Serial<<" ";
     // }
     // Serial<<endl;
-    // delay(5);
-    uint8_t update_ed = 75;
-    uint16_t stop = 150;
+    delay(5);
     while (1)
     {
         
@@ -197,25 +202,37 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
         if ((millis()-time_read_regD>4000) && isLeader() && run){
 
             time_read_regD = millis();
-            // float data[6] = {float(leader_time),float(Pd),(float)P,(float)x,(float)Pmin-Pref+reg_ratio*(Pmax-Pmin),reg_ratio};
-            // _print1Darray_(data,6,5);
-            // for (int i=0;i<deg;i++){
-            //     Serial.print(count[i]);Serial<<" ";
-            // }
+            float data[6] = {float(leader_time),float(Pd),(float)P,(float)x,(float)Pmin-Pref+reg_ratio*(Pmax-Pmin),reg_ratio};
+            _print1Darray_(data,6,5);
+            for (int i=0;i<deg;i++){
+                Serial.print(counters[i]);Serial<<" ";
+            }
+            Serial<<endl;
+            delay(5);
+            // printCounters(counters,deg);
+            for (int i=0;i<deg;i++)counters[i]=0;
+            if ((leader_time>0) && (leader_time%75==0)) Pref = P;
+            // Serial<<k;
+            // for (uint8_t i:neighbors) Serial<<" "<<counters[i-1];
             // Serial<<endl;
-            // delay(5);
-            print_ed_reg_status(leader_time, float(P), float(x), reg_ratio, count, deg);
-            // printCounters(count,deg);
-            for (int i=0;i<deg;i++)count[i]=0;
-            if ((leader_time>0) && (leader_time%update_ed==0)) Pref = P;
+            // if ((reg_sum_num[nodeID-1]>100) || (reg_sum_den[nodeID-1]>100)){
+            //     _print_("Num run sum ",reg_sum_num[nodeID-1],6);
+            //     _print_("Den run sum ",reg_sum_den[nodeID-1],6);
+
+            // }
+            // if ((sum_lambda[nodeID-1]>1000) || (sum_nu[nodeID-1]>1000) || (sum_y[nodeID-1]>1000)){
+            //     _print_("Sum lambda ",sum_lambda[nodeID-1],6);
+            //     _print_("Sum nu ",sum_nu[nodeID-1],6);
+            //     _print_("Sum y ",sum_y[nodeID-1],6);               
+            // }
                     
             leader_time++;
-            if (leader_time>stop) run = false;
+            if (leader_time>150) run = false;
             else Pd = double((s->getActiveDemand(leader_time))/10000.0); // this is actually a RegD signal
             reg_num_var = (float)Pd-(Pmin-Pref); reg_den_var = (float)Pmax-Pmin;
             // Serial<<reg_num_var<<endl;
-            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
-            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+            reg_sum_num[nodeID-1] = reg_num_var/out_deg; reg_sum_den[nodeID-1] = reg_den_var/out_deg;
+            for (uint8_t i:neighbors) {reg_sum_num[i-1]=0.0;reg_sum_den[i-1]=0.0;}
         }
 
         // if ((k>0) && (k%20==0)){
@@ -227,8 +244,8 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
         // }
         // k++;
 
-        double running_sums_ed[3] = {sum_lambda[deg],sum_nu[deg],sum_y[deg]};
-        float running_sums_reg[2] = {reg_sum_num[deg],reg_sum_den[deg]};
+        double running_sums_ed[3] = {sum_lambda[nodeID-1],sum_nu[nodeID-1],sum_y[nodeID-1]};
+        float running_sums_reg[2] = {reg_sum_num[nodeID-1],reg_sum_den[nodeID-1]};
         new_lambda = 0.0; new_nu = 0.0; new_y = 0.0; reg_den_var_new = 0.0; reg_num_var_new = 0.0;
         start = millis();   // initialize timer
         bool received_msg = false, received_msg2 = false;
@@ -239,56 +256,55 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
             }
             if(_waitForNeighborPacket(neighborID,ED_HEADER,true,50))   
             {
-                int nei_idx = nei2index[neighborID-1];
-                if (!received_from[nei_idx]){
-                    received_from[nei_idx]=true; received_msg = true; //Serial<<neighborID<<endl;
-                    
+                
+                if (!received_from[neighborID-1]){
+
+                    received_from[neighborID-1]=1; received_msg = true; 
                     double* tmp = _getPacket_ed(); float* tmp_reg = _getPacket_reg();
-                    new_lambda += tmp[0] - sum_lambda[nei_idx];
-                    new_nu += tmp[1]- sum_nu[nei_idx];
-                    new_y += tmp[2] - sum_y[nei_idx];
-                    sum_lambda[nei_idx] = tmp[0];sum_nu[nei_idx] = tmp[1];sum_y[nei_idx] = tmp[2];
+                    new_lambda += tmp[0] - sum_lambda[neighborID-1];
+                    new_nu += tmp[1]- sum_nu[neighborID-1];
+                    new_y += tmp[2] - sum_y[neighborID-1];
+                    sum_lambda[neighborID-1] = tmp[0];sum_nu[neighborID-1] = tmp[1];sum_y[neighborID-1] = tmp[2];
                     if (!isLeader() && (nonleader_time<tmp_reg[2])) 
                     {
 
                         // float data[7] = {float(nonleader_time),(float)load_change,float(Pd),(float)P,(float)x,(float)Pmin-Pref+reg_ratio*(Pmax-Pmin),reg_ratio};
                         // _print1Darray_(data,7,5);
                         // for (int i=0;i<deg;i++){
-                        //     Serial.print(count[i]);Serial<<" ";
+                        //     Serial.print(counters[i]);Serial<<" ";
                         // }
-                        // Serial<<count[0]<<endl;
-                        // Serial<<float(nonleader_time)<<" "<<float(Pd)<<endl;
-                        // delay(5);
-                        print_ed_reg_status(nonleader_time, float(P), float(x), reg_ratio, count, deg);
-                        // printCounters(count,deg);
-                        for (int i=0;i<deg;i++)count[i]=0;
+                        Serial<<counters[0]<<endl;
+                        delay(5);
+                        // printCounters(counters,deg);
+                        for (int i=0;i<deg;i++)counters[i]=0;
                         // Serial<<k;
                         // for (uint8_t i:neighbors) Serial<<" "<<counter[i-1];
                         // Serial<<endl;
-                        if ((nonleader_time>0) && (nonleader_time%update_ed==0)) Pref = P;
+                        if ((nonleader_time>0) && (nonleader_time%75==0)) Pref = P;
 
                         nonleader_time = uint16_t(tmp_reg[2]); 
-                        if (nonleader_time>stop) run = false;
+                        if (nonleader_time>150) run = false;
                         else{
                             double tmp2 = double((s->getActiveDemand(nonleader_time))/10000.0); // read active power demand measurement
                             new_y -= num_nodes*(tmp2 - Pd);
-                            if (nonleader_time%update_ed==0) load_change = 0.0;
+                            if (nonleader_time%75==0) load_change = 0.0;
                             else load_change += tmp2-Pd;
                             reg_num_var = (float)load_change-(Pmin-Pref); reg_den_var = Pmax-Pmin;
                             reg_num_var_new = 0.0; reg_den_var_new = 0.0;
-                            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
-                            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+                            reg_sum_num[nodeID-1] = reg_num_var/out_deg; reg_sum_den[nodeID-1] = reg_den_var/out_deg;
+                            for (uint8_t i:neighbors) {reg_sum_num[i-1]=0.0;reg_sum_den[i-1]=0.0;}
                             Pd = tmp2;
                         }
                     }
                     if ((isLeader() && (leader_time==uint16_t(tmp_reg[2]))) || (!isLeader() && (nonleader_time == uint16_t(tmp_reg[2])))){
 
-                        reg_num_var_new += tmp_reg[0] - reg_sum_num[nei_idx];
-                        reg_den_var_new += tmp_reg[1] - reg_sum_den[nei_idx];
-                        reg_sum_num[nei_idx] = tmp_reg[0]; reg_sum_den[nei_idx] = tmp_reg[1];
+                        reg_num_var_new += tmp_reg[0] - reg_sum_num[neighborID-1];
+                        reg_den_var_new += tmp_reg[1] - reg_sum_den[neighborID-1];
+                        reg_sum_num[neighborID-1] = tmp_reg[0]; reg_sum_den[neighborID-1] = tmp_reg[1];
                         received_msg2 = true;
+                        int j = nei2index[neighborID-1];
                         // Serial<<neighborID<<" "<<j<<" "<<counters[j]<<endl;
-                        count[nei_idx] += 1;
+                        if ((j>= 0) && (j<deg)) counters[j] += 1;
                     }
                 }
             }
@@ -304,11 +320,11 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
             y = new_y + y/out_deg + num_nodes*(new_P - P);
             P = new_P;
 
-            sum_lambda[deg] += lambda/out_deg;
-            sum_nu[deg] += nu/out_deg;
-            sum_y[deg] += y/out_deg;
+            sum_lambda[nodeID-1] += lambda/out_deg;
+            sum_nu[nodeID-1] += nu/out_deg;
+            sum_y[nodeID-1] += y/out_deg;
         }
-        for (int i=0;i<deg;i++) {received_from[i]=false;}
+        for (uint8_t i:neighbors) {received_from[i-1]=0;}
         // received_msg2 = false;
         if (received_msg2 && run)
         {
@@ -319,7 +335,7 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
             if ((reg_den_var<1e-6) && (reg_den_var>0)) reg_ratio = reg_num_var/1e-6;
             else if ((reg_den_var>-1e-6) && (reg_den_var<0)) reg_ratio = -reg_num_var/1e-6;
             else reg_ratio = reg_num_var/reg_den_var;
-            reg_sum_num[deg] += reg_num_var/out_deg; reg_sum_den[deg] += reg_den_var/out_deg;
+            reg_sum_num[nodeID-1] += reg_num_var/out_deg; reg_sum_den[nodeID-1] += reg_den_var/out_deg;
         }
 
     }
@@ -342,6 +358,38 @@ double OAgent_ED:: _clip_double(double x, double xmin, double xmax){
         return x;
     }
 
+void OAgent_ED::getSME(uint32_t& s, uint32_t&m, uint32_t&e, float number){
+
+    unsigned int* ptr = (unsigned int*) &number;
+    s = *ptr >> 31;
+    e = *ptr & 0x7f800000;
+    e >>= 23;
+    m = *ptr & 0x007fffff;
+}
+void OAgent_ED::_sender_helper32(float x,uint8_t* sign_y,uint32_t* y){
+        if (x < 0) 
+        {
+            *y = (uint32_t) (-x*BASE32);
+            *sign_y= 0;
+        }
+        else
+        {
+            *y = (uint32_t) (x*BASE32);
+            *sign_y = 1;
+        }
+    }
+void OAgent_ED::_sender_helper64(float x,uint8_t* sign_y,uint64_t* y){
+        if (x < 0) 
+        {
+            *y = (uint64_t) (-x*BASE64);
+            *sign_y= 0;
+        }
+        else
+        {
+            *y = (uint64_t) (x*BASE64);
+            *sign_y = 1;
+        }
+    }
 
 void OAgent_ED::_SendPacket(double* vars_ed,float* vars_reg,uint16_t time) {
 

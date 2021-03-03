@@ -58,7 +58,8 @@ int count=0;
 int pos;
 int16_t load[151]={6100,6147,6115,6078,6069,6057,6034,5997,6019,6012,6028,5991,6042,6088,6062,6037,6082,6070,6124,6126,6096,6120,6100,6130,6187,6226,6224,6270,6274,6236,6206,6232,6226,6228,6261,6301,6295,6333,6363,6366,6385,6369,6424,6462,6486,6535,6530,6545,6567,6545,6560,6522,6578,6568,6543,6530,6548,6567,6612,6585,6588,6639,6620,6657,6706,6720,6708,6731,6713,6770,6774,6773,6821,6874,6933,6902,6910,6965,7022,7006,6971,6987,6948,6973,6933,6926,6952,7003,7054,7091,7150,7146,7188,7192,7231,7242,7206,7262,7241,7216,7188,7219,7240,7201,7162,7153,7139,7132,7151,7198,7239,7251,7307,7286,7274,7321,7371,7412,7404,7384,7436,7457,7494,7495,7539,7577,7569,7564,7527,7495,7538,7551,7598,7572,7559,7593,7606,7583,7633,7625,7591,7572,7596,7560,7618,7650,7668,7711,7718,7747,7765};
 unsigned long myTime = 0;
-uint8_t iterations=70; uint8_t period=1000;
+uint16_t num_iters=1000;
+float step_size = 0.003;
 
 void setup()  {
   Serial.begin(38400);
@@ -79,11 +80,11 @@ void setup()  {
   //g.addInNeighbor(0x4151C6CB,7,0,0); // node 7
   //g.addInNeighbor(0x4151C6AC,8,0,0); // node 8
   //g.addInNeighbor(0x415786E1,9,0,0); // node 9
-  //g.addInNeighbor(0x415786D3,10,0,0); // node 10
-  //g.addInNeighbor(0x415DB670,11,0,0); // node 11
-  g.addInNeighbor(0x415786A9,4,0,0); // node 12
+//  g.addInNeighbor(0x415786D3,2,0,0); // node 10
+  g.addInNeighbor(0x415DB670,3,0,0); // node 11
+//  g.addInNeighbor(0x415786A9,4,0,0); // node 12
   //g.addInNeighbor(0x4157847B,13,0,0); // node 13
-  g.addInNeighbor(0x415DB664,6,0,0); // node 14
+//  g.addInNeighbor(0x415DB664,6,0,0); // node 14
   //g.addInNeighbor(0x415DB673,15,0,0); // node 15
   //g.addInNeighbor(0x415DB684,19,0,0); // node 19
   //g.addInNeighbor(0x41516F0B,20,0,0); // node 20
@@ -171,20 +172,20 @@ void loop() {
           Serial.println(o);
           if (o == 'y')
           {
-            u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-            s.setActiveDemand(u);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+              //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
+            s.setActiveDemand(load); s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
             Serial.println("Starting Economic Dispatch");
-            a.EconomicDispatch(true,0.01,100);           
+            a.EconomicDispatch(true,step_size,num_iters);           
           }
         }
       }
       if (!(a.isLeader()))
       {
         if (count==0){
-          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-          s.setActiveDemand(u);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+          //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
+          s.setActiveDemand(load); s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
           Serial.println("Starting Economic Dispatch");
-          a.EconomicDispatch(true,0.01,100);
+          a.EconomicDispatch(true,step_size,num_iters);
 
 //          u = float(load[75])/10000.0;Serial.println("load");Serial.println(u,4);
 //          ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,iterations,period);
