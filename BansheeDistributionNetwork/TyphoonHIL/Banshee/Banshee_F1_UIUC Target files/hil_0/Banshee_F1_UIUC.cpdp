@@ -418,13 +418,6 @@
 
     <variables>
         <cell>
-            <name>F1_PCC.P</name>
-            <type>generic</type>
-            <address>16385</address>
-            <initial_condition>None</initial_condition>
-            <visible>True</visible>
-        </cell>
-        <cell>
             <name>F1_PCC.Q</name>
             <type>generic</type>
             <address>16386</address>
@@ -435,6 +428,13 @@
             <name>Vrms_grid</name>
             <type>voltage</type>
             <address>16384</address>
+            <initial_condition>None</initial_condition>
+            <visible>True</visible>
+        </cell>
+        <cell>
+            <name>F1_PCC.P</name>
+            <type>generic</type>
+            <address>16385</address>
             <initial_condition>None</initial_condition>
             <visible>True</visible>
         </cell>

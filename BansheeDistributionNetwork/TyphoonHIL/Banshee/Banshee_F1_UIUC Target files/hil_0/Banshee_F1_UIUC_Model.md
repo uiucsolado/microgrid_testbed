@@ -1,4 +1,4 @@
-Model Banshee_F1_UIUC
+Model banshee_f1_uiuc
 
 REM *****************************************:
 REM * Common entries:
