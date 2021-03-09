@@ -167,7 +167,7 @@ void loop() {
           s.setActiveDemand(load); s.setDERparams(DER_min_cap, DER_max_cap, alpha, beta);
           Serial.println("Starting Economic Dispatch");
 //          a.EconomicDispatch(true, step_size, num_iters);
-          a.EconomicDispatch2(step_size, num_iters);
+          a.ed_reg_dispatch2(step_size, num_iters);
         }
         count++;
         //        Serial.println("Begin economic dispatch? (y/n)"); //let computer know you want to begin economic dispatch
@@ -210,7 +210,7 @@ void loop() {
           s.setActiveDemand(load); s.setDERparams(DER_min_cap, DER_max_cap, alpha, beta);
           Serial.println("Starting Economic Dispatch");
 //          a.EconomicDispatch(true, step_size, num_iters);
-          a.EconomicDispatch2(step_size, num_iters);
+          a.ed_reg_dispatch2(step_size, num_iters);
         }
         count++;
 

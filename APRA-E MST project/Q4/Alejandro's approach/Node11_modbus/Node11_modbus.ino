@@ -178,7 +178,7 @@ void loop() {
 //            u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
             s.setActiveDemand(load);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
             Serial.println("Starting Economic Dispatch");
-            a.EconomicDispatch(true,step_size,num_iters);
+            a.ed_reg_dispatch2(step_size,num_iters);
                         
           }
         }
@@ -190,7 +190,7 @@ void loop() {
           s.setActiveDemand(load);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
           Serial.println("Starting Economic Dispatch");
 //          a.EconomicDispatch(true, step_size, num_iters);
-          a.EconomicDispatch2(step_size, num_iters);
+          a.ed_reg_dispatch2(step_size, num_iters);
 
 //          u = float(load[75])/10000.0;Serial.println("load");Serial.println(u,4);
 //          ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,iterations,period);

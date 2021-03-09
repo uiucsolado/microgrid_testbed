@@ -40,86 +40,7 @@ OAgent_ED::OAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader,
 
 
 // Economic Dispatch
-
-bool OAgent_ED::EconomicDispatch(bool genBus, float step_size, uint16_t iterations) {
-    srand(analogRead(7));
-    bool gamma = false;
-    gamma = AcceleratedED(genBus,step_size,iterations);
-    // if(isLeader())
-    // { 
-    //     gamma = leaderED(genBus,step_size,iterations);
-    // }
-    // else
-    // {
-    //     gamma = nonleaderED(genBus,step_size,iterations);
-    // }
-    //     //Serial<<"Sup bro?! "<<getbufferdata(0)<<"\n";
-
-    return gamma;
-
-}
-
-bool OAgent_ED::leaderED(bool genBus, float step_size, uint8_t iterations) {
-    unsigned long t0 = myMillis();
-    unsigned long startTime = t0 + ED_DELAY;
-    bool gamma = false;
-    bool scheduled = _waitForSchedulePacketED(SCHEDULE_TIMEOUT,startTime,iterations);
-    //Serial<<"Schedule done at "<<myMillis()<<"\n";
-    //bool stat = startTime>myMillis();
-
-    //Serial<<"Leader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
-
-    if (!scheduled) 
-    {
-        Serial<<"ED scheduling was a FAIL"<<endl;
-        gamma = false;
-    }
-    else
-    {
-        Serial<<"ED scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
-        {
-            //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
-            // gamma = StandardED(genBus);
-            gamma = AcceleratedED(genBus,step_size,iterations);
-        }
-    }        
-    return gamma;
-}
-
-bool OAgent_ED::nonleaderED(bool genBus, float step_size, uint8_t iterations) {
-    unsigned long startTime = 0;
-    bool gamma = false;
-    //delay(50);
-    bool scheduled = _waitForScheduleFeasibleFlowPacket(startTime,iterations,-1);
-    //Serial<<"Schedule done at "<<myMillis()<<"\n";
-    
-    //bool stat = startTime>myMillis();
-    //Serial<<"Startime > Time? "<<stat<<"\n";
-
-    //Serial<<"NonLeader: Startime= "<<startTime<<", Time= "<<myMillis()<<"\n";
-
-    if(scheduled)
-    {
-        Serial<<"ED scheduling was a SUCCESS"<<endl;
-        if(_waitToStart(startTime,true,10000))
-        {
-            //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
-            // gamma = StandardED(genBus);
-            gamma = AcceleratedED(genBus,step_size,iterations);
-        }
-        //digitalWrite(48,LOW);
-    }
-    else
-    {
-        Serial<<"ED scheduling was a FAIL"<<endl;
-        gamma = false;
-    }
-    return gamma;
-}
-
-
-bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
+void OAgent_ED::ed_reg_dispatch(float step_size,uint16_t iterations) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     LinkedList * l = _G->getLinkedList();
 
@@ -130,7 +51,6 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
 
     uint8_t neighbors[_G->getN()-1];
     uint8_t *p = s->getStatusP();
-    delay(5);
     int j=0;
     for (uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
     {
@@ -234,8 +154,8 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
         bool received_msg = false, received_msg2 = false;
         while (millis()-start<=200){
             if (millis()%2){
-                if (isLeader()) _SendPacket(running_sums_ed,running_sums_reg,leader_time);
-                else _SendPacket(running_sums_ed,running_sums_reg,nonleader_time);
+                if (isLeader()) send_ed_reg_packet(running_sums_ed,running_sums_reg,leader_time);
+                else send_ed_reg_packet(running_sums_ed,running_sums_reg,nonleader_time);
             }
             if(_waitForNeighborPacket(neighborID,ED_HEADER,true,50))   
             {
@@ -243,7 +163,7 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
                 if (!received_from[nei_idx]){
                     received_from[nei_idx]=true; received_msg = true; //Serial<<neighborID<<endl;
                     
-                    double* tmp = _getPacket_ed(); float* tmp_reg = _getPacket_reg();
+                    double* tmp = get_ed_packet(); float* tmp_reg = get_reg_packet();
                     new_lambda += tmp[0] - sum_lambda[nei_idx];
                     new_nu += tmp[1]- sum_nu[nei_idx];
                     new_y += tmp[2] - sum_y[nei_idx];
@@ -299,7 +219,7 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
             lambda = new_lambda-double(step_size)*new_y + lambda/out_deg-double(step_size)*y/out_deg;
             nu = new_nu + nu/out_deg;
 
-            new_P = _clip_double(P-double(step_size)*(P-alpha)/beta+double(step_size)*x,Pmin,Pmax);
+            new_P = clip_double(P-double(step_size)*(P-alpha)/beta+double(step_size)*x,Pmin,Pmax);
             x = lambda/nu;
             y = new_y + y/out_deg + num_nodes*(new_P - P);
             P = new_P;
@@ -324,25 +244,409 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
 
     }
 
-    return true;
 }
 
 
 
+void OAgent_ED::ed_reg_dispatch2(float step_size,uint16_t iterations) {
 
-float OAgent_ED:: _clip(float x, float xmin, float xmax){
+    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
+    LinkedList * l = _G->getLinkedList();
+
+    uint16_t nodeID = s->getID();
+    uint8_t neighborID;
+
+    uint8_t neighbors[_G->getN()-1];
+    uint8_t *p = s->getStatusP();
+    int j=0;
+    for (uint8_t i = 0; i < NUM_REMOTE_VERTICES; i++)
+    {
+        if(*(p+i)>=2)
+        {
+            neighbors[j]=i+1;
+            Serial <<"Neighbor "<<neighbors[j]<<endl;
+            delay(5);
+            j++;
+        }
+    }
+    // Serial<<"Node has "<<_G->getN()-1<<" neighbors"<<endl;
+    // delay(5);
+    uint8_t num_nodes = 5;
+    float out_deg = float(s->getOutDegree());    // store out degree, the +1 is to account for the self loops
+    uint8_t deg = _G->getN()-1;
+    int nei2index[NUM_REMOTE_VERTICES]; for (int i=0;i<NUM_REMOTE_VERTICES;i++)nei2index[i]=0;
+    for (int i=0;i<deg;i++){
+        nei2index[neighbors[i]-1] = i;
+    } 
+
+    float Pmin = s->getMin(),Pmax = s->getMax(),alpha = s->getAlpha(),beta = s->getBeta();
+    float Pref = 2.27/5.0, Pd = (s->getActiveDemand(0))/10000.0, new_P, lambda = 0.0;
+    float P = Pref;
+
+    float lambdalo[num_nodes], lambdahi[num_nodes], Ylo[num_nodes], Yhi[num_nodes], Zlo[num_nodes], Zhi[num_nodes], ratioslo[num_nodes], ratioshi[num_nodes];
+    float SumYlo[1+deg][num_nodes], SumYhi[1+deg][num_nodes], SumZlo[1+deg][num_nodes], SumZhi[1+deg][num_nodes];
+
+    for(int i = 0; i < num_nodes; i++){ratioslo[i] = 0;ratioshi[i] = 0;}    
+    init_ed(0,num_nodes,lambdalo,lambdahi,Ylo,Yhi,Zlo,Zhi);
+    for (int i=0;i<1+deg;i++){
+        for (int j=0;j<num_nodes;j++){
+        	SumYlo[i][j]=0;SumYhi[i][j]=0;SumZlo[i][j]=0;SumZhi[i][j]=0;
+        }
+    }
+	for(int i = 0; i < num_nodes; i++){
+        SumYlo[deg][i]= Ylo[i]/out_deg; SumYhi[deg][i]= Yhi[i]/out_deg;
+        SumZlo[deg][i]= Zlo[i]/out_deg; SumZhi[deg][i]= Zhi[i]/out_deg;
+    }
+
+    float reg_ratio = 0.0;
+    float reg_num_var = Pd-(Pmin-Pref), reg_den_var = Pmax-Pmin, reg_num_var_new, reg_den_var_new;
+    float reg_sum_num[deg+1]; for (int i=0;i<deg;i++)reg_sum_num[i]=0.0;
+    float reg_sum_den[deg+1]; for (int i=0;i<deg;i++)reg_sum_den[i]=0.0;
+    float load_change = 0.0;
+
+    if (!isLeader()) reg_num_var = -(Pmin-Pref);
+    reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
+
+
+    uint8_t receivedlo = 1<<(nodeID-1), receivedhi = 1<<(nodeID-1);
+    uint8_t shiftlo = 0, shifthi = 0;
+    bool received_from[deg]; for (int i=0;i<deg;i++) received_from[i]=false;
+
+    unsigned long start, time_read_regD = millis();
+    uint16_t time_instant = 0;
+
+    bool run = true;
+    uint16_t count[deg]; for (int i=0;i<deg;i++)count[i]=0;
+    uint8_t period_ed = 75;
+    uint16_t stop = 150, next_round_ed = 75;
+    unsigned long k = 30;
+    while (1)
+    {
+        
+        // if (millis()/1000>k) {Serial.print(count[0]);Serial.print(" ");Serial.println(k);k+=30;}
+        // Read next regulation signal
+        if ((millis()-time_read_regD>4000) && isLeader() && run){
+
+            time_read_regD = millis();
+            interpolate(P,lambda,lambdalo,lambdahi,ratioslo,ratioshi,num_nodes);
+            print_ed_reg_status(time_instant, P, lambda, reg_ratio, count, deg);
+            for (int i=0;i<deg;i++)count[i]=0;
+
+            // _print_1d_array(ratioslo,num_nodes,4);
+            // _print_1d_array(ratioshi,num_nodes,4);
+
+            time_instant++;//Serial.println(time_instant);
+            if (time_instant>stop) run = false;
+            else
+                {
+                    Pd = (s->getActiveDemand(time_instant))/10000.0;
+
+                    if ((time_instant>0) && (time_instant>=next_round_ed)) {
+                        Pref = P;
+                        init_ed(next_round_ed,num_nodes,lambdalo,lambdahi,Ylo,Yhi,Zlo,Zhi);
+                        receivedlo = 1<<(nodeID-1); receivedhi = 1<<(nodeID-1);shiftlo = 0; shifthi = 0;
+                        for (int i=0;i<1+deg;i++){
+                            for (int j=0;j<num_nodes;j++){
+                                SumYlo[i][j]=0;SumYhi[i][j]=0;SumZlo[i][j]=0;SumZhi[i][j]=0;
+                            }
+                        }
+                        for(int i = 0; i < num_nodes; i++){
+                            SumYlo[deg][i]= Ylo[i]/out_deg; SumYhi[deg][i]= Yhi[i]/out_deg;
+                            SumZlo[deg][i]= Zlo[i]/out_deg; SumZhi[deg][i]= Zhi[i]/out_deg;
+                        }
+                        next_round_ed += period_ed;
+                    }
+                }
+                    
+            reg_num_var = Pd-(Pmin-Pref); reg_den_var = Pmax-Pmin;
+            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
+            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+        }
+
+        float running_sums_reg[2] = {reg_sum_num[deg],reg_sum_den[deg]};
+        reg_den_var_new = 0.0; reg_num_var_new = 0.0;
+
+        float newYlo[num_nodes], newYhi[num_nodes], newZlo[num_nodes], newZhi[num_nodes];
+        for(int i = 0; i < num_nodes; i++){
+            newYlo[i] = 0;newYhi[i] = 0;newZlo[i] = 0;newZhi[i] = 0;
+        }
+         
+        bool is_comm_neigh_lo = false, is_comm_neigh_hi = false, comm_neighbor_lo[deg], comm_neighbor_hi[deg];
+        for(int i = 0; i < deg; i++){ comm_neighbor_lo[i]=false;comm_neighbor_hi[i]=false;}
+
+        bool send_lo = true; bool received_msg = false;
+        start = millis();
+        while (millis()-start<=200){
+
+            uint8_t broadcastlo = 0; uint8_t packet_size = 0; uint8_t max_size = 1;
+            partition_packet(broadcastlo,receivedlo,max_size,packet_size,shiftlo);
+            unsigned long tmp = millis();
+            if (tmp%4==1) {send_ed_reg_packet2(time_instant,packet_size,0,broadcastlo,lambdalo,SumYlo[deg],SumZlo[deg],running_sums_reg);send_lo = false;}
+
+            uint8_t broadcasthi = 0; packet_size = 0;
+            partition_packet(broadcasthi,receivedhi,max_size,packet_size,shifthi);                   
+            if (tmp%4==2) {send_ed_reg_packet2(time_instant,packet_size,1,broadcasthi,lambdahi,SumYhi[deg],SumZhi[deg],running_sums_reg);send_lo = true;}
+
+            if ( _waitForNeighborPacket(neighborID,ED_HEADER,true,20) )
+            {
+                int nei_idx = nei2index[neighborID-1]; uint8_t avail = _rx->getData(3);
+                bool is_upper = _rx->getData(2) & 1; 
+                uint8_t n_var = 0;
+                for(int i = 0; i < 8; i++){
+                    n_var += uint8_t((avail>>i) & 1);
+                }
+                uint16_t received_time = (uint16_t(_rx->getData(13+12*n_var)) << 8) + uint16_t(_rx->getData(12+12*n_var));
+                // if (millis()/1000>k) {Serial.print(received_time);Serial.print(" ");Serial.println(k);k+=10;delay(10);}
+                if (!received_from[nei_idx]){
+                    received_from[nei_idx]=true; float* tmp_reg = read_packet(4+12*n_var,2);
+                    if (!isLeader() && (time_instant<received_time)&& (received_time-time_instant<1000)) 
+                    {
+                        // Serial.println(received_time);
+                        interpolate(P,lambda,lambdalo,lambdahi,ratioslo,ratioshi,num_nodes);
+                        print_ed_reg_status(time_instant, P, lambda, reg_ratio, count, deg);
+                        for (int i=0;i<deg;i++)count[i]=0;
+                        // _print_1d_array(ratioslo,num_nodes,4);
+                        // _print_1d_array(ratioshi,num_nodes,4);
+                        // if (neighborID!=1) Serial<<neighborID<<endl;
+                        time_instant = received_time; 
+                        if (time_instant>stop) run = false;
+                        else{
+                            float new_load = (s->getActiveDemand(time_instant))/10000.0; // read active power demand measurement
+                            if ((time_instant>0) && (time_instant>=next_round_ed)) 
+                            {
+                                Pref = P;
+                                init_ed(next_round_ed,num_nodes,lambdalo,lambdahi,Ylo,Yhi,Zlo,Zhi);
+                                receivedlo = 1<<(nodeID-1); receivedhi = 1<<(nodeID-1);shiftlo = 0; shifthi = 0;
+                                for (int i=0;i<1+deg;i++){
+                                    for (int j=0;j<num_nodes;j++){
+                                        SumYlo[i][j]=0;SumYhi[i][j]=0;SumZlo[i][j]=0;SumZhi[i][j]=0;
+                                    }
+                                }
+                                for(int i = 0; i < num_nodes; i++){
+                                    SumYlo[deg][i]= Ylo[i]/out_deg; SumYhi[deg][i]= Yhi[i]/out_deg;
+                                    SumZlo[deg][i]= Zlo[i]/out_deg; SumZhi[deg][i]= Zhi[i]/out_deg;
+                                }
+                                load_change = new_load - (s->getActiveDemand(next_round_ed - period_ed))/10000.0;
+                                next_round_ed += period_ed;
+                            }
+                            else load_change += new_load - Pd;
+                            reg_num_var = load_change-(Pmin-Pref); reg_den_var = Pmax-Pmin;
+                            reg_num_var_new = 0.0; reg_den_var_new = 0.0;
+                            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
+                            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+                            Pd = new_load;
+                        }
+                    }
+                    if (time_instant == received_time){
+
+                        reg_num_var_new += tmp_reg[0] - reg_sum_num[nei_idx];
+                        reg_den_var_new += tmp_reg[1] - reg_sum_den[nei_idx];
+                        reg_sum_num[nei_idx] = tmp_reg[0]; reg_sum_den[nei_idx] = tmp_reg[1];
+                        received_msg = true;
+                        count[nei_idx] += 1;
+                    }
+                }
+
+                if (is_upper){
+
+                    if (!comm_neighbor_hi[nei_idx])
+                    {
+                        is_comm_neigh_hi = true; comm_neighbor_hi[nei_idx] = true;
+                        float *inLambdahi = read_packet(4,n_var);               
+                        for(int i = 0,j=0; i < num_nodes; i++)
+                        {
+                            if ((avail>>i) & 1){
+
+                                if (!((receivedhi>>i) & 1)){
+                                    lambdahi[i] = inLambdahi[j];
+                                    Yhi[i] = dual_function(alpha,beta,Pmax,Pmin,lambdahi[i]);
+                                    receivedhi |= 1<<i;
+                                    SumYhi[deg][i]= Yhi[i]/out_deg;
+                                    // Serial<<"New lambda from node "<<i+1<<endl;
+                                    // delay(5);
+                                }
+                                j++;
+                            }
+                            
+                        }
+                        float *inSumYhi = read_packet(4+4*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newYhi[i] += inSumYhi[j] - SumYhi[nei_idx][i];
+                                SumYhi[nei_idx][i] = inSumYhi[j];
+                                j++;
+                            }
+                        }
+                        float *inSumZhi = read_packet(4+8*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newZhi[i] += inSumZhi[j] - SumZhi[nei_idx][i];
+                                SumZhi[nei_idx][i] = inSumZhi[j];
+                                j++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (!comm_neighbor_lo[nei_idx])
+                    {
+                        is_comm_neigh_lo = true; comm_neighbor_lo[nei_idx] = true;
+                        float *inLambdalo = read_packet(4,n_var);             
+                        for(int i = 0,j=0; i < num_nodes; i++)
+                        {
+                            if ((avail>>i) & 1){
+
+                                if (!((receivedlo>>i) & 1)){
+                                    lambdalo[i] = inLambdalo[j];
+                                    Ylo[i] = dual_function(alpha,beta,Pmax,Pmin,lambdalo[i]);
+                                    receivedlo |= 1<<i;
+                                    SumYlo[deg][i]= Ylo[i]/out_deg;
+                                    // Serial<<"New lambda from node "<<i+1<<endl;
+                                    // delay(5);
+                                }
+                                j++;
+                            }
+                            
+                        }
+                        float *inSumYlo = read_packet(4+4*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newYlo[i] += inSumYlo[j] - SumYlo[nei_idx][i];
+                                SumYlo[nei_idx][i] = inSumYlo[j];
+                                j++;
+                            }
+                        }
+                        float *inSumZlo = read_packet(4+8*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newZlo[i] += inSumZlo[j] - SumZlo[nei_idx][i];
+                                SumZlo[nei_idx][i] = inSumZlo[j];
+                                j++;
+                            }
+                        }
+                    }
+                
+                }
+            }
+        }
+        for (int i=0;i<deg;i++) {received_from[i]=false;}
+
+        if (received_msg && run)
+        {
+
+            reg_num_var = reg_num_var_new + reg_num_var/out_deg;
+            reg_den_var = reg_den_var_new + reg_den_var/out_deg;
+
+            if ((reg_den_var<1e-6) && (reg_den_var>0)) reg_ratio = reg_num_var/1e-6;
+            else if ((reg_den_var>-1e-6) && (reg_den_var<0)) reg_ratio = -reg_num_var/1e-6;
+            else reg_ratio = reg_num_var/reg_den_var;
+            reg_sum_num[deg] += reg_num_var/out_deg; reg_sum_den[deg] += reg_den_var/out_deg;
+        }
+
+
+    	for(int i = 0; i < num_nodes; i++){ 
+    		if (((receivedlo>>i) & 1) && is_comm_neigh_lo){
+            	Ylo[i] = newYlo[i] + Ylo[i]/out_deg;SumYlo[deg][i]+= Ylo[i]/out_deg; 
+            	Zlo[i] = newZlo[i] + Zlo[i]/out_deg;SumZlo[deg][i]+= Zlo[i]/out_deg;
+	            ratioslo[i] = Ylo[i]/Zlo[i];
+        	}
+    		if (((receivedhi>>i) & 1) && is_comm_neigh_hi){
+                Yhi[i] = newYhi[i] + Yhi[i]/out_deg;SumYhi[deg][i]+= Yhi[i]/out_deg;
+                Zhi[i] = newZhi[i] + Zhi[i]/out_deg;SumZhi[deg][i]+= Zhi[i]/out_deg;
+	            ratioshi[i] = Yhi[i]/Zhi[i];
+	        }
+        }
+
+    }
+
+}
+
+void OAgent_ED::init_ed(uint16_t time_instant, uint8_t num_nodes, float *lambdalo,float *lambdahi,float *Ylo,float *Yhi,float *Zlo,float *Zhi){
+
+    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
+    uint16_t nodeID = s->getID();
+
+    float Pmin = s->getMin(),Pmax = s->getMax(),alpha = s->getAlpha(),beta = s->getBeta();
+    float Pd = (s->getActiveDemand(time_instant))/10000.0;
+    Serial<<"New load "<<s->getActiveDemand(time_instant)<<endl;
+    for(int i = 0; i < num_nodes; i++){ 
+        Ylo[i] = 0;Yhi[i] = 0;
+        if (!isLeader()) {Zlo[i] = Pd;Zhi[i] = Pd;}
+        else {Zlo[i] = 0;Zhi[i] = 0;}
+        lambdalo[i] = 0;lambdahi[i] = 0;
+    }    
+    lambdalo[nodeID-1] = (Pmin-alpha)/beta; lambdahi[nodeID-1] = (Pmax-alpha)/beta;
+    Ylo[nodeID-1] = dual_function(alpha,beta,Pmax,Pmin,lambdalo[nodeID-1]);
+    Yhi[nodeID-1] = dual_function(alpha,beta,Pmax,Pmin,lambdahi[nodeID-1]);
+
+}
+
+float OAgent_ED:: clip(float x, float xmin, float xmax){
         if (x<xmin) return xmin;
         if (x>xmax) return xmax;
         return x;
     }
 
-double OAgent_ED:: _clip_double(double x, double xmin, double xmax){
+double OAgent_ED::clip_double(double x, double xmin, double xmax){
         if (x<xmin) return xmin;
         if (x>xmax) return xmax;
         return x;
     }
 
-void OAgent_ED::_SendPacket(double* vars_ed,float* vars_reg,uint16_t time) {
+float OAgent_ED::dual_function(float alpha, float beta, float Pmax, float Pmin, float lambda){
+
+    float lambdalo = (Pmin-alpha)/beta; float lambdahi = (Pmax-alpha)/beta;
+    if (lambda<lambdalo) return Pmin;
+    if (lambda>lambdahi) return Pmax;
+    return alpha + lambda*beta;
+
+
+}
+
+void OAgent_ED::interpolate(float &P,float &lambda,float *lambdalo,float *lambdahi,float *ratioslo,float *ratioshi, uint8_t num_nodes){
+
+    OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
+    float Pmin = s->getMin(),Pmax = s->getMax(),alpha = s->getAlpha(),beta = s->getBeta();
+
+    float valueMinPlus[2] = {-100,100};
+    float ratioMinPlus[2] = {-100,100};
+    for(int i = 0; i < num_nodes; i++){
+        if (ratioslo[i]<=1 and 1-ratioMinPlus[0]>1-ratioslo[i]) {
+            ratioMinPlus[0] = ratioslo[i];valueMinPlus[0] = lambdalo[i];
+        }
+        if (ratioslo[i]>=1 and ratioMinPlus[1]-1>ratioslo[i]-1) {
+            ratioMinPlus[1] = ratioslo[i];valueMinPlus[1] = lambdalo[i];
+        }
+        if (ratioshi[i]<=1 and 1-ratioMinPlus[0]>1-ratioshi[i]) {
+            ratioMinPlus[0] = ratioshi[i];valueMinPlus[0] = lambdahi[i];
+        }
+        if (ratioshi[i]>=1 and ratioMinPlus[1]-1>ratioshi[i]-1) {
+            ratioMinPlus[1] = ratioshi[i];valueMinPlus[1] = lambdahi[i];
+        }
+    }
+    lambda = valueMinPlus[1] - ( (ratioMinPlus[1] - 1)*((valueMinPlus[1] - valueMinPlus[0])/(ratioMinPlus[1]-ratioMinPlus[0])) );
+    P = Pmin;           
+    if ( lambda < ((Pmin - alpha)/beta) )
+        P = Pmin;
+    else if  ( lambda > ((Pmax - alpha)/beta) )
+        P = Pmax;
+    else
+        P = alpha + (lambda*beta);
+
+}
+
+void OAgent_ED::partition_packet(uint8_t &broadcastlo,uint8_t &receivedlo,uint8_t max_size,uint8_t &packet_size,uint8_t &shiftlo) {
+        int cnt = 0;
+        while ((packet_size<max_size) and (cnt<8)){
+            if ((receivedlo>>shiftlo) & 1){broadcastlo |= 1<<shiftlo; packet_size++;}
+            shiftlo++; if (shiftlo>7) shiftlo = 0;
+            cnt++;
+        }
+    }
+
+
+void OAgent_ED::send_ed_reg_packet(double* vars_ed,float* vars_reg,uint16_t time) {
 
     union{
         unsigned long a;
@@ -398,8 +702,79 @@ void OAgent_ED::_SendPacket(double* vars_ed,float* vars_reg,uint16_t time) {
     #endif
 }
 
+void OAgent_ED::send_ed_reg_packet2(uint16_t time, uint8_t n_var, uint8_t upper, uint8_t broadcast,float *lambda,float *SumY,float *SumZ, float *vars_reg) {
+    uint8_t payload[14+12*n_var];
 
-double* OAgent_ED::_getPacket_ed() {
+    //construct payload
+    payload[0] = ED_HEADER;
+    payload[1] = ED_HEADER >> 8;
+    payload[2] = upper;
+    payload[3] = broadcast;
+
+    union{
+        unsigned long a;
+        float b;
+    } float2bin;
+    
+
+    for (int i=4,j=0;j<8;j++){
+        if ((broadcast>>j) & 1){
+
+            float2bin.b = lambda[j];
+            payload[i] = float2bin.a;
+            payload[i+1] = float2bin.a >> 8;
+            payload[i+2] = float2bin.a >> 16;
+            payload[i+3] = float2bin.a >> 24;
+
+            float2bin.b = SumY[j];
+            payload[i+4*n_var] = float2bin.a;
+            payload[i+4*n_var+1] = float2bin.a >> 8;
+            payload[i+4*n_var+2] = float2bin.a >> 16;
+            payload[i+4*n_var+3] = float2bin.a >> 24;
+            
+            float2bin.b = SumZ[j];
+            payload[i+8*n_var] = float2bin.a;
+            payload[i+8*n_var+1] = float2bin.a >> 8;
+            payload[i+8*n_var+2] = float2bin.a >> 16;
+            payload[i+8*n_var+3] = float2bin.a >> 24;
+            i+=4;
+        }
+    }
+
+    for (int i=4+12*n_var,j=0;i<12+12*n_var,j<2;i=i+4,j++){
+        float2bin.b = vars_reg[j];
+        payload[i] = float2bin.a;
+        payload[i+1] = float2bin.a>>8;
+        payload[i+2] = float2bin.a >> 16;
+        payload[i+3] = float2bin.a >> 24;
+    }
+
+    payload[12+12*n_var] = time;
+    payload[13+12*n_var] = time >> 8;
+
+    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
+    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
+    #ifdef VERBOSE
+        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
+    #endif
+}
+
+float* OAgent_ED::read_packet(uint8_t pos,uint8_t n_var) {
+
+    // uint8_t num_nodes = 5;
+    static float a[5];
+    unsigned long binary_value; //if ((pos==28) && (_rx->getData(2)>0)) Serial<<"Received hi sums"<<endl;
+    for (int i=pos,j=0;j<n_var;i=i+4,j++){
+        binary_value = ((unsigned long)(_rx->getData(i+3)) << 24) | ((unsigned long)(_rx->getData(i+2)) << 16) | ((unsigned long)(_rx->getData(i+1)) << 8) | (unsigned long)(_rx->getData(i));
+        a[j] = reinterpret_cast<float&>(binary_value);
+        // if ((pos==28) && (_rx->getData(2)>0)){Serial.print(a[j],4);Serial<<" ";}
+    }
+    // if ((pos==28) && (_rx->getData(2)>0)) Serial<<endl;
+
+    return a;
+}
+
+double* OAgent_ED::get_ed_packet() {
 
     static double a[3];
     uint64_t binary_value;
@@ -414,7 +789,7 @@ double* OAgent_ED::_getPacket_ed() {
     return a;
 }
 
-float* OAgent_ED::_getPacket_reg() {
+float* OAgent_ED::get_reg_packet() {
 
     static float a[3];
     uint32_t binary_value;
@@ -430,7 +805,6 @@ float* OAgent_ED::_getPacket_reg() {
 
     return a;
 }
-
 
 
 float OAgent_ED::EconomicDispatch2(float step_size,uint16_t iterations) {
@@ -465,13 +839,13 @@ float OAgent_ED::EconomicDispatch2(float step_size,uint16_t iterations) {
     } 
 
     // for (int i=0;i<NUM_REMOTE_VERTICES;i++){
-    // 	Serial<<nei2index[i]<<" ";
+    //  Serial<<nei2index[i]<<" ";
     // }
     // Serial<<endl;
 
     float Pref = 2.27/5.0, Pd = float((s->getActiveDemand(0))/10000.0), new_P, x = 0.0;
 
-    float Dout = float(s->getOutDegree());    // store out degree, the +1 is to account for the self loops
+    float out_deg = float(s->getOutDegree());    // store out degree, the +1 is to account for the self loops
 
     uint8_t num_nodes = 5;
     uint8_t receivedlo = 1<<(nodeID-1), receivedhi = 1<<(nodeID-1);
@@ -488,7 +862,7 @@ float OAgent_ED::EconomicDispatch2(float step_size,uint16_t iterations) {
 
     String str;
     str = "High lambdas: ";_print_str_1d_array(str,lambdahi,num_nodes,4);
-	str = "Low lambdas: ";_print_str_1d_array(str,lambdalo,num_nodes,4);
+    str = "Low lambdas: ";_print_str_1d_array(str,lambdalo,num_nodes,4);
 
     Ylo[nodeID-1] = dual_function(alpha,beta,Pmax,Pmin,lambdalo[nodeID-1]);
     Yhi[nodeID-1] = dual_function(alpha,beta,Pmax,Pmin,lambdahi[nodeID-1]);
@@ -496,22 +870,23 @@ float OAgent_ED::EconomicDispatch2(float step_size,uint16_t iterations) {
     float SumYlo[1+deg][num_nodes], SumYhi[1+deg][num_nodes], SumZlo[1+deg][num_nodes], SumZhi[1+deg][num_nodes];
     for (int i=0;i<1+deg;i++){
         for (int j=0;j<num_nodes;j++){
-        	SumYlo[i][j]=0;SumYhi[i][j]=0;SumZlo[i][j]=0;SumZhi[i][j]=0;
+            SumYlo[i][j]=0;SumYhi[i][j]=0;SumZlo[i][j]=0;SumZhi[i][j]=0;
         }
     }
-	for(int i = 0; i < num_nodes; i++){
-        SumYlo[deg][i]= Ylo[i]/Dout; SumYhi[deg][i]= Yhi[i]/Dout;
-        SumZlo[deg][i]= Zlo[i]/Dout; SumZhi[deg][i]= Zhi[i]/Dout;
+    for(int i = 0; i < num_nodes; i++){
+        SumYlo[deg][i]= Ylo[i]/out_deg; SumYhi[deg][i]= Yhi[i]/out_deg;
+        SumZlo[deg][i]= Zlo[i]/out_deg; SumZhi[deg][i]= Zhi[i]/out_deg;
     }
-	
+    
+    uint8_t shiftlo = 0, shifthi = 0;
     for(int k = 0; k < 1000; k++)
     {
 
-    	// Serial<<"Iteration "<<k<<" "<<receivedlo<<" ";Serial.print(SumZlo[deg][1],4);Serial<<" "; Serial.print(Zlo[1],4);Serial<<endl;
-    	// for (int i=0;i<deg;i++){
-    	// 	Serial.print(SumZlo[i][1],4);Serial<<" ";Serial.print(SumZlo_prev[i][1],4);Serial<<" ";
-    	// }
-    	// Serial<<endl;
+        // Serial<<"Iteration "<<k<<" "<<receivedlo<<" ";Serial.print(SumZlo[deg][1],4);Serial<<" "; Serial.print(Zlo[1],4);Serial<<endl;
+        // for (int i=0;i<deg;i++){
+        //  Serial.print(SumZlo[i][1],4);Serial<<" ";Serial.print(SumZlo_prev[i][1],4);Serial<<" ";
+        // }
+        // Serial<<endl;
 
         float newYlo[num_nodes], newYhi[num_nodes], newZlo[num_nodes], newZhi[num_nodes];
         for(int i = 0; i < num_nodes; i++){
@@ -523,209 +898,217 @@ float OAgent_ED::EconomicDispatch2(float step_size,uint16_t iterations) {
 
         unsigned long start = millis();   // initialize timer
         // uint8_t next_receivedhi = receivedhi, next_receivedlo = receivedlo;
-    	bool send_lo = true; uint8_t shift = 0;
+        bool send_lo = true;
         while( uint16_t(millis()-start) < 200 )
         {
-        	uint8_t broadcastlo = 0; uint8_t packet_size = 3;
-        	packet_to_broadcast(&broadcastlo,)
-	    	while ((packet_size>0) and ()){
-	    		if ((receivedlo>>shift) & 1){broadcastlo |= 1<<shift; packet_size--;}
-	    		shift++; if (shift>7) shift = 0;
-	    	}
-        	
-        	for
-        	if (send_lo) {_broadcastEDPacketLo(receivedlo,lambdalo,SumYlo[deg],SumZlo[deg],num_nodes);send_lo = false;}
-	        else {_broadcastEDPacketHi(receivedhi,lambdahi,SumYhi[deg],SumZhi[deg],num_nodes);send_lo = true;}
+            uint8_t broadcastlo = 0; uint8_t packet_size = 0; uint8_t max_size = 3;
+            partition_packet(broadcastlo,receivedlo,max_size,packet_size,shiftlo); 
+            if (send_lo) {send_ed_packet(packet_size,0,broadcastlo,lambdalo,SumYlo[deg],SumZlo[deg]);send_lo = false;}
+
+            uint8_t broadcasthi = 0; packet_size = 0;
+            partition_packet(broadcasthi,receivedhi,max_size,packet_size,shifthi);                   
+            if (!send_lo) {send_ed_packet(packet_size,1,broadcasthi,lambdahi,SumYhi[deg],SumZhi[deg]);send_lo = true;}
 
             if ( _waitForNeighborPacket(neighborID,ED_HEADER,true,50) )
             {
-            	int nei_idx = nei2index[neighborID-1]; uint8_t avail = _rx->getData(3);
-            	bool is_upper = _rx->getData(2) & 1;
+                int nei_idx = nei2index[neighborID-1]; uint8_t avail = _rx->getData(3);
+                bool is_upper = _rx->getData(2) & 1;
+                uint8_t n_var = 0;
+                for(int i = 0; i < 8; i++){
+                    n_var += uint8_t((avail>>i) & 1);
+                }
 
-            	if (is_upper){
+                if (is_upper){
 
-	            	if (!comm_neighbor_hi[nei_idx])
-		            {
-	                	is_comm_neigh_hi = true; comm_neighbor_hi[nei_idx] = true;
-		                float *inLambdahi = _getFromEDPacket(4,num_nodes);		       
-		                for(int i = 0; i < num_nodes; i++)
-		                {
-		                    if (((avail>>i) & 1) && !((receivedhi>>i) & 1)){
-		                        // Serial<<"New lambda "<<inLambdahi[i]<<endl;
-		                        // delay(5);
-		                        lambdahi[i] = inLambdahi[i];
-		                        Yhi[i] = dual_function(alpha,beta,Pmax,Pmin,inLambdahi[i]);
-		                        receivedhi |= 1<<i;
-		                        SumYhi[deg][i]= Yhi[i]/Dout;
-		                        // Serial<<"New lambda from node "<<i+1<<endl;
-		                        // delay(5);
-		                    }
-		                    
-			            }
-		                float *inSumYhi = _getFromEDPacket(4+4*num_nodes,num_nodes);
-		                for(int i = 0; i < num_nodes; i++){
-		                	if ((avail>>i) & 1){
-		                        newYhi[i] += inSumYhi[i] - SumYhi[nei_idx][i];
-		                        SumYhi[nei_idx][i] = inSumYhi[i];
-		                    }
-		                }
-		                float *inSumZhi = _getFromEDPacket(4+8*num_nodes,num_nodes);
-		                for(int i = 0; i < num_nodes; i++){
-		                	if ((avail>>i) & 1){
-		                        newZhi[i] += inSumZhi[i] - SumZhi[nei_idx][i];
-		                        SumZhi[nei_idx][i] = inSumZhi[i];
-		                    }
-		                }
-	                }
-	            }
-	            else
-	            {
-	            	if (!comm_neighbor_lo[nei_idx])
-	            	{
-	                	is_comm_neigh_lo = true; comm_neighbor_lo[nei_idx] = true;
-	                	float *inLambdalo = _getFromEDPacket(4,num_nodes);		       
-		                for(int i = 0; i < num_nodes; i++)
-		                {
-		                    if (((avail>>i) & 1) && !((receivedlo>>i) & 1)){
-		                        // Serial<<"New lambda "<<inLambdalo[i]<<endl;
-		                        // delay(5);
-		                        lambdalo[i] = inLambdalo[i];
-		                        Ylo[i] = dual_function(alpha,beta,Pmax,Pmin,inLambdalo[i]);
-		                        receivedlo |= 1<<i;
-		                        SumYlo[deg][i]= Ylo[i]/Dout;
-		                        // Serial<<"Low Y value: "<<Ylo[i]<<endl;
-		                        // delay(5);
-		                    }
-		                    
-			            }
-		                float *inSumYlo = _getFromEDPacket(4+4*num_nodes,num_nodes);
-		                for(int i = 0; i < num_nodes; i++){
-		                	if ((avail>>i) & 1){
-		                        newYlo[i] += inSumYlo[i] - SumYlo[nei_idx][i];
-		                        SumYlo[nei_idx][i] = inSumYlo[i];
-		                    }
-		                }
-		                float *inSumZlo = _getFromEDPacket(4+8*num_nodes,num_nodes);
-		                for(int i = 0; i < num_nodes; i++){
-		                	if ((avail>>i) & 1){
-		                        newZlo[i] += inSumZlo[i] - SumZlo[nei_idx][i];
-		                        SumZlo[nei_idx][i] = inSumZlo[i];
-		                    }
-		                }
-		                // Serial<<"Neighbor "<<neighborID<<" "<<nei_idx<<endl;
-	                }
+                    if (!comm_neighbor_hi[nei_idx])
+                    {
+                        is_comm_neigh_hi = true; comm_neighbor_hi[nei_idx] = true;
+                        float *inLambdahi = read_packet(4,n_var);               
+                        for(int i = 0,j=0; i < num_nodes; i++)
+                        {
+                            if ((avail>>i) & 1){
+
+                                if (!((receivedhi>>i) & 1)){
+                                    lambdahi[i] = inLambdahi[j];
+                                    Yhi[i] = dual_function(alpha,beta,Pmax,Pmin,lambdahi[i]);
+                                    receivedhi |= 1<<i;
+                                    SumYhi[deg][i]= Yhi[i]/out_deg;
+                                    // Serial<<"New lambda from node "<<i+1<<endl;
+                                    // delay(5);
+                                }
+                                j++;
+                            }
+                            
+                        }
+                        float *inSumYhi = read_packet(4+4*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newYhi[i] += inSumYhi[j] - SumYhi[nei_idx][i];
+                                SumYhi[nei_idx][i] = inSumYhi[j];
+                                j++;
+                            }
+                        }
+                        float *inSumZhi = read_packet(4+8*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newZhi[i] += inSumZhi[j] - SumZhi[nei_idx][i];
+                                SumZhi[nei_idx][i] = inSumZhi[j];
+                                j++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (!comm_neighbor_lo[nei_idx])
+                    {
+                        is_comm_neigh_lo = true; comm_neighbor_lo[nei_idx] = true;
+                        float *inLambdalo = read_packet(4,n_var);             
+                        for(int i = 0,j=0; i < num_nodes; i++)
+                        {
+                            if ((avail>>i) & 1){
+
+                                if (!((receivedlo>>i) & 1)){
+                                    lambdalo[i] = inLambdalo[j];
+                                    Ylo[i] = dual_function(alpha,beta,Pmax,Pmin,lambdalo[i]);
+                                    receivedlo |= 1<<i;
+                                    SumYlo[deg][i]= Ylo[i]/out_deg;
+                                    // Serial<<"New lambda from node "<<i+1<<endl;
+                                    // delay(5);
+                                }
+                                j++;
+                            }
+                            
+                        }
+                        float *inSumYlo = read_packet(4+4*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newYlo[i] += inSumYlo[j] - SumYlo[nei_idx][i];
+                                SumYlo[nei_idx][i] = inSumYlo[j];
+                                j++;
+                            }
+                        }
+                        float *inSumZlo = read_packet(4+8*n_var,n_var);
+                        for(int i = 0,j=0; i < num_nodes; i++){
+                            if ((avail>>i) & 1){
+                                newZlo[i] += inSumZlo[j] - SumZlo[nei_idx][i];
+                                SumZlo[nei_idx][i] = inSumZlo[j];
+                                j++;
+                            }
+                        }
+                    }
                 
-	            }
+                }
             }
 
          //    if (millis()%3==1) {_broadcastEDPacketLo(receivedlo,lambdalo,SumYlo[deg],SumZlo[deg],num_nodes);}
-	        // else if (millis()%3==2) {_broadcastEDPacketHi(receivedhi,lambdahi,SumYhi[deg],SumZhi[deg],num_nodes);}
+            // else if (millis()%3==2) {_broadcastEDPacketHi(receivedhi,lambdahi,SumYhi[deg],SumZhi[deg],num_nodes);}
 
         }
 
         // receivedhi = next_receivedhi;
         // receivedlo = next_receivedlo;
         // if (newZlo[1]<0){
-        // 	for(int i = 0; i < deg; i++){
-	       //  	Serial.print(SumZlo[i][1],4);Serial<<" ";Serial.print(SumZlo_prev[i][1],4);;Serial<<" ";
-	       //  }
-	       //  Serial<<endl;
+        //  for(int i = 0; i < deg; i++){
+           //   Serial.print(SumZlo[i][1],4);Serial<<" ";Serial.print(SumZlo_prev[i][1],4);;Serial<<" ";
+           //  }
+           //  Serial<<endl;
         // }
-    	for(int i = 0; i < num_nodes; i++){ 
-    		if (((receivedlo>>i) & 1) && is_comm_neigh_lo){
-            	Ylo[i] = newYlo[i] + Ylo[i]/Dout;SumYlo[deg][i]+= Ylo[i]/Dout; 
-            	Zlo[i] = newZlo[i] + Zlo[i]/Dout;SumZlo[deg][i]+= Zlo[i]/Dout;
-	            ratioslo[i] = Ylo[i]/Zlo[i];
-        	}
-    		if (((receivedhi>>i) & 1) && is_comm_neigh_hi){
-                Yhi[i] = newYhi[i] + Yhi[i]/Dout;SumYhi[deg][i]+= Yhi[i]/Dout;
-                Zhi[i] = newZhi[i] + Zhi[i]/Dout;SumZhi[deg][i]+= Zhi[i]/Dout;
-	            ratioshi[i] = Yhi[i]/Zhi[i];
-	        }
+        for(int i = 0; i < num_nodes; i++){ 
+            if (((receivedlo>>i) & 1) && is_comm_neigh_lo){
+                Ylo[i] = newYlo[i] + Ylo[i]/out_deg;SumYlo[deg][i]+= Ylo[i]/out_deg; 
+                Zlo[i] = newZlo[i] + Zlo[i]/out_deg;SumZlo[deg][i]+= Zlo[i]/out_deg;
+                ratioslo[i] = Ylo[i]/Zlo[i];
+            }
+            if (((receivedhi>>i) & 1) && is_comm_neigh_hi){
+                Yhi[i] = newYhi[i] + Yhi[i]/out_deg;SumYhi[deg][i]+= Yhi[i]/out_deg;
+                Zhi[i] = newZhi[i] + Zhi[i]/out_deg;SumZhi[deg][i]+= Zhi[i]/out_deg;
+                ratioshi[i] = Yhi[i]/Zhi[i];
+            }
         }
 
 
         // String str;
         if (k>0 && k%10==0){
-        	Serial<<"Iteration "<<k<<endl;
-        	// str = "High lambdas: ";_print_str_1d_array(str,lambdahi,num_nodes,4);
-	        // str = "Low lambdas: ";_print_str_1d_array(str,lambdalo,num_nodes,4);
-	        str = "Low ratio values: ";_print_str_1d_array(str,ratioslo,num_nodes,4);
-	        str = "High ratio values: ";_print_str_1d_array(str,ratioshi,num_nodes,4);
-	        // str = "Y hi running sums: ";_print_str_1d_array(str,SumYhi[deg],num_nodes,4);
-	        // str = "Y lo running sums: ";_print_str_1d_array(str,SumYlo[deg],num_nodes,4);;
-	        // str = "Z hi running sums: ";_print_str_1d_array(str,SumZhi[deg],num_nodes,4);
-	        // str = "Z lo running sums: ";_print_str_1d_array(str,SumZlo[deg],num_nodes,4);;
-	        // str = "Z hi: ";_print_str_1d_array(str,Zhi,num_nodes,4);
-	       	// str = "Z lo: ";_print_str_1d_array(str,Zlo,num_nodes,4);
-	        // str = "Y hi running sums: ";_print_str_1d_array(str,SumYhi[deg],num_nodes,4);
-	        // str = "Y lo running sums: ";_print_str_1d_array(str,SumYlo[deg],num_nodes,4);;
-	       	// str = "Y hi: ";_print_str_1d_array(str,Yhi,num_nodes,4);
-	       	// str = "Y lo: ";_print_str_1d_array(str,Ylo,num_nodes,4);
+            Serial<<"Iteration "<<k<<endl;
+            // str = "High lambdas: ";_print_str_1d_array(str,lambdahi,num_nodes,4);
+            // str = "Low lambdas: ";_print_str_1d_array(str,lambdalo,num_nodes,4);
+            str = "Low ratio values: ";_print_str_1d_array(str,ratioslo,num_nodes,4);
+            str = "High ratio values: ";_print_str_1d_array(str,ratioshi,num_nodes,4);
+            // str = "Y hi running sums: ";_print_str_1d_array(str,SumYhi[deg],num_nodes,4);
+            // str = "Y lo running sums: ";_print_str_1d_array(str,SumYlo[deg],num_nodes,4);;
+            // str = "Z hi running sums: ";_print_str_1d_array(str,SumZhi[deg],num_nodes,4);
+            // str = "Z lo running sums: ";_print_str_1d_array(str,SumZlo[deg],num_nodes,4);;
+            // str = "Z hi: ";_print_str_1d_array(str,Zhi,num_nodes,4);
+            // str = "Z lo: ";_print_str_1d_array(str,Zlo,num_nodes,4);
+            // str = "Y hi running sums: ";_print_str_1d_array(str,SumYhi[deg],num_nodes,4);
+            // str = "Y lo running sums: ";_print_str_1d_array(str,SumYlo[deg],num_nodes,4);;
+            // str = "Y hi: ";_print_str_1d_array(str,Yhi,num_nodes,4);
+            // str = "Y lo: ";_print_str_1d_array(str,Ylo,num_nodes,4);
 
-    		float valueMinPlus[2] = {-100,100};
-		    float ratioMinPlus[2] = {-100,100};
-		    for(int i = 0; i < num_nodes; i++){
-			    if ((receivedhi>>i) & 1) {
-			        if (ratioslo[i]<=1 and 1-ratioMinPlus[0]>1-ratioslo[i]) {
-			            ratioMinPlus[0] = ratioslo[i];valueMinPlus[0] = lambdalo[i];
-			        }
-			        if (ratioslo[i]>=1 and ratioMinPlus[1]-1>ratioslo[i]-1) {
-			            ratioMinPlus[1] = ratioslo[i];valueMinPlus[1] = lambdalo[i];
-			        }
-			        if (ratioshi[i]<=1 and 1-ratioMinPlus[0]>1-ratioshi[i]) {
-			            ratioMinPlus[0] = ratioshi[i];valueMinPlus[0] = lambdahi[i];
-			        }
-			        if (ratioshi[i]>=1 and ratioMinPlus[1]-1>ratioshi[i]-1) {
-			            ratioMinPlus[1] = ratioshi[i];valueMinPlus[1] = lambdahi[i];
-			        }
-			    }
+            float valueMinPlus[2] = {-100,100};
+            float ratioMinPlus[2] = {-100,100};
+            for(int i = 0; i < num_nodes; i++){
+                if ((receivedhi>>i) & 1) {
+                    if (ratioslo[i]<=1 and 1-ratioMinPlus[0]>1-ratioslo[i]) {
+                        ratioMinPlus[0] = ratioslo[i];valueMinPlus[0] = lambdalo[i];
+                    }
+                    if (ratioslo[i]>=1 and ratioMinPlus[1]-1>ratioslo[i]-1) {
+                        ratioMinPlus[1] = ratioslo[i];valueMinPlus[1] = lambdalo[i];
+                    }
+                    if (ratioshi[i]<=1 and 1-ratioMinPlus[0]>1-ratioshi[i]) {
+                        ratioMinPlus[0] = ratioshi[i];valueMinPlus[0] = lambdahi[i];
+                    }
+                    if (ratioshi[i]>=1 and ratioMinPlus[1]-1>ratioshi[i]-1) {
+                        ratioMinPlus[1] = ratioshi[i];valueMinPlus[1] = lambdahi[i];
+                    }
+                }
 
-		    }
-		    Serial<<"Low ratio value : "<<valueMinPlus[0]<<" "<<ratioMinPlus[0]<<endl;
-			delay(5);
-			Serial<<"High ratio value : "<<valueMinPlus[1]<<" "<<ratioMinPlus[1]<<endl;
-			delay(5);
-		    float lambda = valueMinPlus[1] - ( (ratioMinPlus[1] - 1)*((valueMinPlus[1] - valueMinPlus[0])/(ratioMinPlus[1]-ratioMinPlus[0])) );
-		    Serial<<"lambda : "<<lambda<<endl;
-			delay(5);
-		    float setpoint = Pmin;
-		    
-		    if ( lambda < ((Pmin - alpha)/beta) )
-		        setpoint = Pmin;
-		    else if  ( lambda > ((Pmax - alpha)/beta) )
-		        setpoint = Pmax;
-		    else
-		        setpoint = alpha + (lambda*beta);
+            }
+         //    Serial<<"Low ratio value : "<<valueMinPlus[0]<<" "<<ratioMinPlus[0]<<endl;
+            // delay(5);
+            // Serial<<"High ratio value : "<<valueMinPlus[1]<<" "<<ratioMinPlus[1]<<endl;
+            // delay(5);
+            float lambda = valueMinPlus[1] - ( (ratioMinPlus[1] - 1)*((valueMinPlus[1] - valueMinPlus[0])/(ratioMinPlus[1]-ratioMinPlus[0])) );
+            Serial<<"lambda : "<<lambda<<endl;
+            delay(5);
+            float setpoint = Pmin;
+            
+            if ( lambda < ((Pmin - alpha)/beta) )
+                setpoint = Pmin;
+            else if  ( lambda > ((Pmax - alpha)/beta) )
+                setpoint = Pmax;
+            else
+                setpoint = alpha + (lambda*beta);
 
-			String str = "setpoint";
-			_print_(str,setpoint,6);
+            String str = "setpoint";
+            _print_(str,setpoint,6);
 
-    	}
+        }
 
     }
     float valueMinPlus[2] = {-100,100};
     float ratioMinPlus[2] = {-100,100};
     for(int i = 0; i < num_nodes; i++){
-    	if ((receivedhi>>i) & 1) {
-	        if (ratioslo[i]<=1 and 1-ratioMinPlus[0]>1-ratioslo[i]) {
-	            ratioMinPlus[0] = ratioslo[i];valueMinPlus[0] = lambdalo[i];
-	        }
-	        if (ratioslo[i]>=1 and ratioMinPlus[1]-1>ratioslo[i]-1) {
-	            ratioMinPlus[1] = ratioslo[i];valueMinPlus[1] = lambdalo[i];
-	        }
-	        if (ratioshi[i]<=1 and 1-ratioMinPlus[0]>1-ratioshi[i]) {
-	            ratioMinPlus[0] = ratioshi[i];valueMinPlus[0] = lambdahi[i];
-	        }
-	        if (ratioshi[i]>=1 and ratioMinPlus[1]-1>ratioshi[i]-1) {
-	            ratioMinPlus[1] = ratioshi[i];valueMinPlus[1] = lambdahi[i];
-	        }
-	    }
+        if ((receivedhi>>i) & 1) {
+            if (ratioslo[i]<=1 and 1-ratioMinPlus[0]>1-ratioslo[i]) {
+                ratioMinPlus[0] = ratioslo[i];valueMinPlus[0] = lambdalo[i];
+            }
+            if (ratioslo[i]>=1 and ratioMinPlus[1]-1>ratioslo[i]-1) {
+                ratioMinPlus[1] = ratioslo[i];valueMinPlus[1] = lambdalo[i];
+            }
+            if (ratioshi[i]<=1 and 1-ratioMinPlus[0]>1-ratioshi[i]) {
+                ratioMinPlus[0] = ratioshi[i];valueMinPlus[0] = lambdahi[i];
+            }
+            if (ratioshi[i]>=1 and ratioMinPlus[1]-1>ratioshi[i]-1) {
+                ratioMinPlus[1] = ratioshi[i];valueMinPlus[1] = lambdahi[i];
+            }
+        }
     }
 
     float lambda = valueMinPlus[1] - ( (ratioMinPlus[1] - 1)*((valueMinPlus[1] - valueMinPlus[0])/(ratioMinPlus[1]-ratioMinPlus[0])) );
  //    Serial<<"lambda : "<<lambda<<endl;
-	// delay(5);
+    // delay(5);
     float setpoint = Pmin;
     
     if ( lambda < ((Pmin - alpha)/beta) )
@@ -738,25 +1121,16 @@ float OAgent_ED::EconomicDispatch2(float step_size,uint16_t iterations) {
     return setpoint;
 }
 
-float OAgent_ED::dual_function(float alpha, float beta, float Pmax, float Pmin, float lambda){
-
-    float lambdalo = (Pmin-alpha)/beta; float lambdahi = (Pmax-alpha)/beta;
-    if (lambda<lambdalo) return Pmin;
-    if (lambda>lambdahi) return Pmax;
-    return alpha + lambda*beta;
 
 
-}
-
-
-void OAgent_ED::_broadcastEDPacketLo(uint8_t receivedlo,float *lambdalo,float *SumYlo,float *SumZlo,uint8_t num_nodes) {
-    uint8_t payload[4+12*num_nodes];
+void OAgent_ED::send_ed_packet(uint8_t n_var, uint8_t upper, uint8_t broadcast,float *lambda,float *SumY,float *SumZ) {
+    uint8_t payload[4+12*n_var];
 
     //construct payload
     payload[0] = ED_HEADER;
     payload[1] = ED_HEADER >> 8;
-    payload[2] = 0;
-    payload[3] = receivedlo;
+    payload[2] = upper;
+    payload[3] = broadcast;
 
     union{
         unsigned long a;
@@ -764,31 +1138,28 @@ void OAgent_ED::_broadcastEDPacketLo(uint8_t receivedlo,float *lambdalo,float *S
     } float2bin;
     
 
-    for (int i=4,j=0;i<4+4*num_nodes,j<num_nodes;i=i+4,j++){
-    	float2bin.b = lambdalo[j];
-        payload[i] = float2bin.a;
-        payload[i+1] = float2bin.a >> 8;
-        payload[i+2] = float2bin.a >> 16;
-        payload[i+3] = float2bin.a >> 24;
-    }
+    for (int i=4,j=0;j<8;j++){
+        if ((broadcast>>j) & 1){
 
-    // Serial<<"Sent lo sums"<<endl;
-    for (int i=4+4*num_nodes,j=0;i<4+8*num_nodes,j<num_nodes;i=i+4,j++){
-    	float2bin.b = SumYlo[j];
-        payload[i] = float2bin.a;
-        payload[i+1] = float2bin.a >> 8;
-        payload[i+2] = float2bin.a >> 16;
-        payload[i+3] = float2bin.a >> 24;
-    	// Serial.print(lambdahi[j],4);Serial<<" ";
-    }
-    // Serial<<endl;
+            float2bin.b = lambda[j];
+            payload[i] = float2bin.a;
+            payload[i+1] = float2bin.a >> 8;
+            payload[i+2] = float2bin.a >> 16;
+            payload[i+3] = float2bin.a >> 24;
 
-    for (int i=4+8*num_nodes,j=0;i<4+12*num_nodes,j<num_nodes;i=i+4,j++){
-    	float2bin.b = SumZlo[j];
-        payload[i] = float2bin.a;
-        payload[i+1] = float2bin.a >> 8;
-        payload[i+2] = float2bin.a >> 16;
-        payload[i+3] = float2bin.a >> 24;
+        	float2bin.b = SumY[j];
+            payload[i+4*n_var] = float2bin.a;
+            payload[i+4*n_var+1] = float2bin.a >> 8;
+            payload[i+4*n_var+2] = float2bin.a >> 16;
+            payload[i+4*n_var+3] = float2bin.a >> 24;
+            
+            float2bin.b = SumZ[j];
+            payload[i+8*n_var] = float2bin.a;
+            payload[i+8*n_var+1] = float2bin.a >> 8;
+            payload[i+8*n_var+2] = float2bin.a >> 16;
+            payload[i+8*n_var+3] = float2bin.a >> 24;
+            i+=4;
+        }
     }
 
 
@@ -799,69 +1170,7 @@ void OAgent_ED::_broadcastEDPacketLo(uint8_t receivedlo,float *lambdalo,float *S
     #endif
 }
 
-void OAgent_ED::_broadcastEDPacketHi(uint8_t receivedhi,float* lambdahi,float* SumYhi,float *SumZhi,uint8_t num_nodes) {
-    uint8_t payload[4+12*num_nodes];
 
-    //construct payload
-    payload[0] = ED_HEADER;
-    payload[1] = ED_HEADER >> 8;
-    payload[2] = 1;
-    payload[3] = receivedhi;
-
-    union{
-        unsigned long a;
-        float b;
-    } float2bin;    
-
-    // Serial<<"Sent hi sums"<<endl;
-    for (int i=4,j=0;i<4+4*num_nodes,j<num_nodes;i=i+4,j++){
-    	float2bin.b = lambdahi[j];
-        payload[i] = float2bin.a;
-        payload[i+1] = float2bin.a >> 8;
-        payload[i+2] = float2bin.a >> 16;
-        payload[i+3] = float2bin.a >> 24;
-        // Serial.print(float2bin.a,HEX);Serial<< " ";Serial.print(lambdahi[j],4);Serial<<endl;
-    }
-
-    for (int i=4+4*num_nodes,j=0;i<4+8*num_nodes,j<num_nodes;i=i+4,j++){
-    	float2bin.b = SumYhi[j];
-        payload[i] = float2bin.a;
-        payload[i+1] = float2bin.a >> 8;
-        payload[i+2] = float2bin.a >> 16;
-        payload[i+3] = float2bin.a >> 24;
-        // Serial.print(float2bin.b,4);Serial<<" ";
-    }
-    // Serial<<endl;
-
-    for (int i=4+8*num_nodes,j=0;i<4+12*num_nodes,j<num_nodes;i=i+4,j++){
-    	float2bin.b = SumZhi[j];
-        payload[i] = float2bin.a;
-        payload[i+1] = float2bin.a >> 8;
-        payload[i+2] = float2bin.a >> 16;
-        payload[i+3] = float2bin.a >> 24;
-    }
-
-    _zbTx = ZBTxRequest(_broadcastAddress, ((uint8_t * )(&payload)), sizeof(payload)); // create zigbee transmit class
-    unsigned long txTime = _xbee->sendTwo(_zbTx,false,true); // transmit with time stamp
-    #ifdef VERBOSE
-        Serial << _MEM(PSTR("Transmit time: ")) << txTime << endl;
-    #endif
-}
-
-float* OAgent_ED::_getFromEDPacket(uint8_t pos,uint8_t n_var) {
-
-	// uint8_t num_nodes = 5;
-    static float a[5];
-    unsigned long binary_value; //if ((pos==28) && (_rx->getData(2)>0)) Serial<<"Received hi sums"<<endl;
-    for (int i=pos,j=0;j<n_var;i=i+4,j++){
-        binary_value = ((unsigned long)(_rx->getData(i+3)) << 24) | ((unsigned long)(_rx->getData(i+2)) << 16) | ((unsigned long)(_rx->getData(i+1)) << 8) | (unsigned long)(_rx->getData(i));
-        a[j] = reinterpret_cast<float&>(binary_value);
-        // if ((pos==28) && (_rx->getData(2)>0)){Serial.print(a[j],4);Serial<<" ";}
-    }
-    // if ((pos==28) && (_rx->getData(2)>0)) Serial<<endl;
-
-    return a;
-}
 
 
 /// Synchronization methods

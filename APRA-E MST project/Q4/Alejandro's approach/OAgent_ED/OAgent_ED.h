@@ -109,30 +109,39 @@ class OAgent_ED {
         long nonleaderMaxMinConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
         long maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
         
-        // Primal Dual methods
-        bool EconomicDispatch(bool genBus, float step_size, uint16_t iterations);
-        bool leaderED(bool genBus, float step_size, uint8_t iterations);
-        bool nonleaderED(bool genBus, float step_size, uint8_t iterations);
-        bool StandardED(bool genBus);
-        bool AcceleratedED(bool genBus,float step_size,uint16_t iterations);
 
-        // ADG's approach
-        float EconomicDispatch2(float step_size,uint16_t iterations) ;
+        void ed_reg_dispatch(float step_size,uint16_t iterations);
+        void ed_reg_dispatch2(float step_size,uint16_t iterations);
+        void init_ed(uint16_t time_instant, uint8_t num_nodes, float *lambdalo,float *lambdahi,float *Ylo,float *Yhi,float *Zlo,float *Zhi);
+
+        float EconomicDispatch2(float step_size,uint16_t iterations);
         float dual_function(float alpha, float beta, float Pmax, float Pmin, float lambda);
 
         // Additinal Functions
-        float _clip(float x, float xmin, float xmax);
-        double _clip_double(double x, double xmin, double xmax);
-        void _SendPacket(double *vars_ed, float *vars_reg, uint16_t time);
-        double* _getPacket_ed();
-        float* _getPacket_reg();
-        void _broadcastEDPacketLo(uint8_t receivedlo,float* lambdalo,float* SumYlo,float *SumZlo,uint8_t num_nodes);
-        void _broadcastEDPacketHi(uint8_t receivedhi,float* lambdahi,float* SumYhi,float *SumZhi,uint8_t num_nodes);
-        float* _getFromEDPacket(uint8_t pos,uint8_t n_var);
+        float clip(float x, float xmin, float xmax);
+        double clip_double(double x, double xmin, double xmax);
+        void interpolate(float &P,float &lambda,float *lambdalo,float *lambdahi,float *ratioslo,float *ratioshi, uint8_t num_nodes);
 
+        void partition_packet(uint8_t &broadcastlo,uint8_t &receivedlo,uint8_t max_size,uint8_t &packet_size,uint8_t &shiftlo);
+        void send_ed_packet(uint8_t n_var, uint8_t upper, uint8_t broadcast,float *lambda,float *SumY,float *SumZ);
+        void send_ed_reg_packet(double *vars_ed, float *vars_reg, uint16_t time);
+        void send_ed_reg_packet2(uint16_t time_instant, uint8_t n_var, uint8_t upper, uint8_t broadcast,float *lambda,float *SumY,float *SumZ,float *vars_reg);
+
+        float* read_packet(uint8_t pos,uint8_t n_var);
+        double* get_ed_packet();
+        float* get_reg_packet();
+        
         void _print_(String &s,float &val,uint8_t precision){
 
             Serial<<s<<" "; Serial.print(val,precision); Serial<<endl; delay(5);
+        }
+
+        void _print_1d_array(float* a, uint8_t size, uint8_t precision){
+            for (int i=0;i<size;i++){
+                Serial.print(*(a+i),precision);Serial<<" ";
+            }
+            Serial<<endl;
+            delay(5);
         }
 
         void _print_str_1d_array(String &s, float* a, uint8_t size, uint8_t precision){
@@ -146,12 +155,12 @@ class OAgent_ED {
         }
 
         void print_ed_reg_status(uint16_t time_instant, float P, float x, float reg_ratio, uint16_t *count, uint8_t size){
-            Serial<<time_instant<<" ";Serial.print(P,5);Serial<<" ";Serial.print(x,5);Serial<<" ";Serial.print(reg_ratio,5);Serial<<" ";
+            Serial.print(time_instant);Serial.print(" ");Serial.print(P,5);Serial.print(" ");Serial.print(x,5);Serial.print(" ");Serial.print(reg_ratio,5);Serial.print(" ");
             for (int i=0;i<size;i++){
-                Serial.print(*(count+i));Serial<<" ";
+                Serial.print(*(count+i));Serial.print(" ");
             }
-            Serial<<endl;
-            delay(5);
+            Serial.println();
+            delay(10);
         }
 
         // communication link activation methods
