@@ -12,27 +12,28 @@
 
 #include "OAgent_ED.h"
 #include "Streaming.h"
+#include <MgsModbus.h>
 //#define VERBOSE
 
 //// Public methods
 /// Constructors
-OAgent_ED::OAgent_ED() {
+// OAgent_ED::OAgent_ED() {
 
-    XBee temp1 = XBee();
-    ZBRxResponse temp2 = ZBRxResponse();
-    OGraph_ED temp3 = OGraph_ED();
-    _prepareOAgent_ED(&temp1,&temp2,&temp3);
-    //setRS(0);
-}
+//     XBee temp1 = XBee();
+//     ZBRxResponse temp2 = ZBRxResponse();
+//     OGraph_ED temp3 = OGraph_ED();
+//     _prepareOAgent_ED(&temp1,&temp2,&temp3);
+//     //setRS(0);
+// }
 
-OAgent_ED::OAgent_ED(XBee * xbee, OGraph_ED * G, bool leader, bool quiet) {
-     ZBRxResponse temp = ZBRxResponse();
-    _prepareOAgent_ED(xbee,&temp,G,leader,quiet);
-    //setRS(0);
-}
+// OAgent_ED::OAgent_ED(XBee * xbee, OGraph_ED * G, bool leader, bool quiet) {
+//      ZBRxResponse temp = ZBRxResponse();
+//     _prepareOAgent_ED(xbee,&temp,G,leader,quiet);
+//     //setRS(0);
+// }
 
-OAgent_ED::OAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader, bool quiet) {
-    _prepareOAgent_ED(xbee,rx,G,leader,quiet);
+OAgent_ED::OAgent_ED(XBee * xbee, ZBRxResponse * rx, MgsModbus *Mb, OGraph_ED * G, bool leader, bool quiet) {
+    _prepareOAgent_ED(xbee,rx,Mb,G,leader,quiet);
     //setRS(0);
 }
 
@@ -41,10 +42,10 @@ OAgent_ED::OAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader,
 
 // Economic Dispatch
 
-bool OAgent_ED::EconomicDispatch(bool genBus, float step_size, uint16_t iterations) {
+bool OAgent_ED::EconomicDispatch(uint8_t node_ip, float step_size, uint16_t iterations) {
     srand(analogRead(7));
     bool gamma = false;
-    gamma = AcceleratedED(genBus,step_size,iterations);
+    gamma = AcceleratedED(node_ip,step_size,iterations);
     // if(isLeader())
     // { 
     //     gamma = leaderED(genBus,step_size,iterations);
@@ -59,7 +60,7 @@ bool OAgent_ED::EconomicDispatch(bool genBus, float step_size, uint16_t iteratio
 
 }
 
-bool OAgent_ED::leaderED(bool genBus, float step_size, uint8_t iterations) {
+bool OAgent_ED::leaderED(uint8_t node_ip, float step_size, uint8_t iterations) {
     unsigned long t0 = myMillis();
     unsigned long startTime = t0 + ED_DELAY;
     bool gamma = false;
@@ -81,13 +82,13 @@ bool OAgent_ED::leaderED(bool genBus, float step_size, uint8_t iterations) {
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = StandardED(genBus);
-            gamma = AcceleratedED(genBus,step_size,iterations);
+            gamma = AcceleratedED(node_ip,step_size,iterations);
         }
     }        
     return gamma;
 }
 
-bool OAgent_ED::nonleaderED(bool genBus, float step_size, uint8_t iterations) {
+bool OAgent_ED::nonleaderED(uint8_t node_ip, float step_size, uint8_t iterations) {
     unsigned long startTime = 0;
     bool gamma = false;
     //delay(50);
@@ -106,7 +107,7 @@ bool OAgent_ED::nonleaderED(bool genBus, float step_size, uint8_t iterations) {
         {
             //Serial << "Correct Startime is " <<startTime<< ". My startime is "<< myMillis() <<endl;
             // gamma = StandardED(genBus);
-            gamma = AcceleratedED(genBus,step_size,iterations);
+            gamma = AcceleratedED(node_ip,step_size,iterations);
         }
         //digitalWrite(48,LOW);
     }
@@ -119,12 +120,12 @@ bool OAgent_ED::nonleaderED(bool genBus, float step_size, uint8_t iterations) {
 }
 
 
-bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
+bool OAgent_ED::AcceleratedED(uint8_t node_ip,float step_size,uint16_t iterations) {
     OLocalVertex * s = _G->getLocalVertex();                                                    // store pointer to local vertex
     LinkedList * l = _G->getLinkedList();
 
     // uint16_t nodeID = s->getID();
-    double out_deg = (double)s->getOutDegree();
+    uint8_t out_deg = s->getOutDegree();
     double Pmin = (double)s->getMin(),Pmax = (double)s->getMax(),alpha = (double)s->getAlpha(),beta = (double)s->getBeta();
     uint8_t neighborID;
 
@@ -151,10 +152,27 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
         nei2index[neighbors[i]-1] = i;
     } 
 
-    double num_nodes = 5.0; 
-    double Pref = 2.27/5.0, Pd = double((s->getActiveDemand(0))/10000.0), new_P, x = 0.0;
+    uint8_t num_nodes = 5; 
+    uint16_t time_instant = 0;
+    uint8_t update_ed = 75, offset = 0;
+    
+    double Pref_ed, new_P, x = 0.0;
+    float Pref_reg = 0, base = 1000.0;
+
+    if(isLeader())_Mb->Req(MB_FC_READ_INPUT_REGISTER,0,3,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)
+    else _Mb->Req(MB_FC_READ_INPUT_REGISTER,0,2,0,node_ip);
+  	_Mb->MbmRun();
+
+  	Serial<<"Read load "<<_Mb->MbData[0]<<endl;
+    delay(5);
+
+  	double Pd =  double(_Mb->MbData[0]/base);
+  	if(isLeader()) {Pref_ed =  double(_Mb->MbData[2]/base); time_instant = _Mb->MbData[1]; offset = _Mb->MbData[1];}
+  	else Pref_ed =  double(_Mb->MbData[1]/base); 	
+  	
     float reg_ratio = 0.0;
-    double P = Pref;
+    double P = Pref_ed;
+    
     double lambda = 0.0, new_lambda, y, new_y, nu = 1.0, new_nu;
     if (isLeader()) y = num_nodes*P;
     else y = num_nodes*(P-Pd);
@@ -167,77 +185,57 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
     sum_nu[deg] = nu/out_deg;
     sum_y[deg] = y/out_deg;
 
-    float reg_num_var = (float)Pd-(Pmin-Pref), reg_den_var = (float)Pmax-Pmin, reg_num_var_new, reg_den_var_new;
+    float reg_num_var = (float)Pd-(Pmin-Pref_ed), reg_den_var = (float)Pmax-Pmin, reg_num_var_new, reg_den_var_new;
     float reg_sum_num[deg+1]; for (int i=0;i<deg;i++)reg_sum_num[i]=0.0;
     float reg_sum_den[deg+1]; for (int i=0;i<deg;i++)reg_sum_den[i]=0.0;
     double load_change = 0.0;
 
-    if (!isLeader()) reg_num_var = -(float)(Pmin-Pref);
+    if (!isLeader()) reg_num_var = -(float)(Pmin-Pref_ed);
     reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
     bool received_from[deg]; for (int i=0;i<deg;i++) received_from[i]=false;
 
     // Serial<<"out_deg="<<out_deg<<" alpha="<<alpha<<" beta="<<beta<<" Pmin="<<Pmin<<" Pmax="<<Pmax<<" Pd="<<Pd<<endl; delay(5);
-    unsigned long start, time_read_regD = millis();
-    uint16_t leader_time = 0, nonleader_time = 0;
+    unsigned long start = millis();
     // unsigned long k = 0; 
-    bool run = true;
     uint16_t count[deg]; for (int i=0;i<deg;i++)count[i]=0;
-    // printCounters(counters,deg);
-    // for (int i=0;i<NUM_REMOTE_VERTICES;i++){
-    //     Serial.print(nei2index[i]);Serial<<" ";
-    // }
-    // Serial<<endl;
-    // delay(5);
-    uint8_t update_ed = 75;
-    uint16_t stop = 150;
+   
     while (1)
     {
         
         // Read next regulation signal
-        if ((millis()-time_read_regD>4000) && isLeader() && run){
+        if (isLeader()){
 
-            time_read_regD = millis();
-            // float data[6] = {float(leader_time),float(Pd),(float)P,(float)x,(float)Pmin-Pref+reg_ratio*(Pmax-Pmin),reg_ratio};
-            // _print1Darray_(data,6,5);
-            // for (int i=0;i<deg;i++){
-            //     Serial.print(count[i]);Serial<<" ";
-            // }
-            // Serial<<endl;
-            // delay(5);
-            print_ed_reg_status(leader_time, float(P), float(x), reg_ratio, count, deg);
-            // printCounters(count,deg);
-            for (int i=0;i<deg;i++)count[i]=0;
-            if ((leader_time>0) && (leader_time%update_ed==0)) Pref = P;
-                    
-            leader_time++;
-            if (leader_time>stop) run = false;
-            else Pd = double((s->getActiveDemand(leader_time))/10000.0); // this is actually a RegD signal
-            reg_num_var = (float)Pd-(Pmin-Pref); reg_den_var = (float)Pmax-Pmin;
-            // Serial<<reg_num_var<<endl;
-            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
-            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+        	_Mb->Req(MB_FC_READ_INPUT_REGISTER,0,2,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)
+		  	_Mb->MbmRun();
+	      	if (time_instant<_Mb->MbData[1]){
+
+	      		print_ed_reg_status(time_instant-offset, float(P), float(x), Pref_reg, reg_ratio, count, deg);
+	      		time_instant = _Mb->MbData[1]; 
+	      		Pd =  double(_Mb->MbData[0]/base); //Pd = double((s->getActiveDemand(time_instant))/base); // this is actually a RegD signal
+	            Serial.println(_Mb->MbData[0]); delay(5);
+
+	            for (int i=0;i<deg;i++)count[i]=0;
+	            if ((time_instant>0) && (time_instant-offset>=update_ed)) {Pref_ed = P;update_ed+=75;init_ed(lambda,nu,y,sum_lambda,sum_nu,sum_y,num_nodes,out_deg,deg,P,Pd);}
+
+		        _Mb->MbData[0] = int16_t(Pref_ed*base);
+		        _Mb->MbData[1] = int16_t(Pref_reg*base);
+	            _Mb->Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+				_Mb->MbmRun();
+
+				reg_num_var = (float)Pd-(Pmin-Pref_ed); reg_den_var = (float)Pmax-Pmin;
+	            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
+	            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+		    }
         }
-
-        // if ((k>0) && (k%20==0)){
-
-        //     Serial<<k<<endl;
-        //     for (uint8_t i:neighbors) Serial<<counters[i-1]<<endl;
-        //     Serial.print(lambda,10);Serial<<endl;
-        //     Serial.print(nu,10); Serial<<endl; delay(5);
-        // }
-        // k++;
 
         double running_sums_ed[3] = {sum_lambda[deg],sum_nu[deg],sum_y[deg]};
         float running_sums_reg[2] = {reg_sum_num[deg],reg_sum_den[deg]};
         new_lambda = 0.0; new_nu = 0.0; new_y = 0.0; reg_den_var_new = 0.0; reg_num_var_new = 0.0;
-        start = millis();   // initialize timer
+        start = millis();
         bool received_msg = false, received_msg2 = false;
         while (millis()-start<=200){
-            if (millis()%2){
-                if (isLeader()) _SendPacket(running_sums_ed,running_sums_reg,leader_time);
-                else _SendPacket(running_sums_ed,running_sums_reg,nonleader_time);
-            }
-            if(_waitForNeighborPacket(neighborID,ED_HEADER,true,50))   
+            if (millis()%2)_SendPacket(running_sums_ed,running_sums_reg,time_instant-offset);
+            if(_waitForNeighborPacket(neighborID,ED_HEADER,true,20))   
             {
                 int nei_idx = nei2index[neighborID-1];
                 if (!received_from[nei_idx]){
@@ -248,40 +246,37 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
                     new_nu += tmp[1]- sum_nu[nei_idx];
                     new_y += tmp[2] - sum_y[nei_idx];
                     sum_lambda[nei_idx] = tmp[0];sum_nu[nei_idx] = tmp[1];sum_y[nei_idx] = tmp[2];
-                    if (!isLeader() && (nonleader_time<tmp_reg[2])) 
+                    if (!isLeader() && (time_instant<tmp_reg[2])) 
                     {
 
-                        // float data[7] = {float(nonleader_time),(float)load_change,float(Pd),(float)P,(float)x,(float)Pmin-Pref+reg_ratio*(Pmax-Pmin),reg_ratio};
-                        // _print1Darray_(data,7,5);
-                        // for (int i=0;i<deg;i++){
-                        //     Serial.print(count[i]);Serial<<" ";
-                        // }
-                        // Serial<<count[0]<<endl;
-                        // Serial<<float(nonleader_time)<<" "<<float(Pd)<<endl;
-                        // delay(5);
-                        print_ed_reg_status(nonleader_time, float(P), float(x), reg_ratio, count, deg);
-                        // printCounters(count,deg);
+                        _Mb->Req(MB_FC_READ_INPUT_REGISTER,0,1,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)
+					  	_Mb->MbmRun();
+                        Serial.println(_Mb->MbData[0]); delay(5);
+			            
+			            double tmp2 = double(_Mb->MbData[0]/base);
+			            print_ed_reg_status(time_instant, float(P), float(x), Pref_reg, reg_ratio, count, deg);
+			            
+			            _Mb->MbData[0] = int16_t(Pref_ed*base);
+				        _Mb->MbData[1] = int16_t(Pref_reg*base);
+			            _Mb->Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+						_Mb->MbmRun();                       
+                        
                         for (int i=0;i<deg;i++)count[i]=0;
-                        // Serial<<k;
-                        // for (uint8_t i:neighbors) Serial<<" "<<counter[i-1];
-                        // Serial<<endl;
-                        if ((nonleader_time>0) && (nonleader_time%update_ed==0)) Pref = P;
+                        if ((time_instant>0) && (time_instant>=update_ed)) {Pref_ed = P;update_ed+=75;init_ed(lambda,nu,y,sum_lambda,sum_nu,sum_y,num_nodes,out_deg,deg,P,Pd);}
 
-                        nonleader_time = uint16_t(tmp_reg[2]); 
-                        if (nonleader_time>stop) run = false;
-                        else{
-                            double tmp2 = double((s->getActiveDemand(nonleader_time))/10000.0); // read active power demand measurement
-                            new_y -= num_nodes*(tmp2 - Pd);
-                            if (nonleader_time%update_ed==0) load_change = 0.0;
-                            else load_change += tmp2-Pd;
-                            reg_num_var = (float)load_change-(Pmin-Pref); reg_den_var = Pmax-Pmin;
-                            reg_num_var_new = 0.0; reg_den_var_new = 0.0;
-                            reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
-                            for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
-                            Pd = tmp2;
-                        }
+                        time_instant = uint16_t(tmp_reg[2]); 
+                        // double tmp2 = double((s->getActiveDemand(time_instant))/base); // read active power demand measurement
+                        new_y -= num_nodes*(tmp2 - Pd);
+                        if (time_instant>=update_ed) load_change = 0.0;
+                        else load_change = 0.0;//load_change += tmp2-Pd;
+                        reg_num_var = (float)load_change-(Pmin-Pref_ed); reg_den_var = Pmax-Pmin;
+                        reg_num_var_new = 0.0; reg_den_var_new = 0.0;
+                        reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
+                        for (int i=0;i<deg;i++) {reg_sum_num[i]=0.0;reg_sum_den[i]=0.0;}
+                        Pd = tmp2;
+                        
                     }
-                    if ((isLeader() && (leader_time==uint16_t(tmp_reg[2]))) || (!isLeader() && (nonleader_time == uint16_t(tmp_reg[2])))){
+                    if ((time_instant-offset == uint16_t(tmp_reg[2]))){
 
                         reg_num_var_new += tmp_reg[0] - reg_sum_num[nei_idx];
                         reg_den_var_new += tmp_reg[1] - reg_sum_den[nei_idx];
@@ -294,7 +289,7 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
             }
         }
         // received_msg = false;
-        if (received_msg && run)
+        if (received_msg)
         {
             lambda = new_lambda-double(step_size)*new_y + lambda/out_deg-double(step_size)*y/out_deg;
             nu = new_nu + nu/out_deg;
@@ -310,7 +305,7 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
         }
         for (int i=0;i<deg;i++) {received_from[i]=false;}
         // received_msg2 = false;
-        if (received_msg2 && run)
+        if (received_msg2)
         {
 
             reg_num_var = reg_num_var_new + reg_num_var/out_deg;
@@ -320,6 +315,7 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
             else if ((reg_den_var>-1e-6) && (reg_den_var<0)) reg_ratio = -reg_num_var/1e-6;
             else reg_ratio = reg_num_var/reg_den_var;
             reg_sum_num[deg] += reg_num_var/out_deg; reg_sum_den[deg] += reg_den_var/out_deg;
+            Pref_reg = float(Pmin-Pref_ed+reg_ratio*(Pmax-Pmin));
         }
 
     }
@@ -328,7 +324,20 @@ bool OAgent_ED::AcceleratedED(bool genBus,float step_size,uint16_t iterations) {
 }
 
 
+void OAgent_ED::init_ed(double &lambda,double &nu,double &y,double *sum_lambda,double *sum_nu,double *sum_y,uint8_t num_nodes,uint8_t out_deg,uint8_t deg,double P,double Pd){
 
+    lambda = 0.0; nu = 1.0;
+    if (isLeader()) y = num_nodes*P;
+    else y = num_nodes*(P-Pd);
+
+    for (int i=0;i<deg;i++)sum_lambda[i]=0.0;
+    for (int i=0;i<deg;i++)sum_nu[i]=0.0;
+    for (int i=0;i<deg;i++)sum_y[i]=0.0;
+
+    sum_lambda[deg] = lambda/out_deg;
+    sum_nu[deg] = nu/out_deg;
+    sum_y[deg] = y/out_deg;
+}
 
 float OAgent_ED:: _clip(float x, float xmin, float xmax){
         if (x<xmin) return xmin;
@@ -1668,9 +1677,10 @@ uint8_t OAgent_ED::_addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8
 /// End synchronization helper functions
 /// General helper functions
 
-void OAgent_ED::_prepareOAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader, bool quiet) {
+void OAgent_ED::_prepareOAgent_ED(XBee * xbee, ZBRxResponse * rx, MgsModbus *Mb, OGraph_ED * G, bool leader, bool quiet) {
     _xbee = xbee;
     _G = G;
+    _Mb = Mb;
     _leader = leader;
     _quiet = quiet;
     _synced = false;

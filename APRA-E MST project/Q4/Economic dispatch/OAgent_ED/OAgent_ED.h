@@ -11,6 +11,7 @@
 #ifndef OAgent_ED_h
 #define OAgent_ED_h
 #include "Streaming.h"
+#include <MgsModbus.h>
 
 //#define VERBOSE
 
@@ -70,9 +71,9 @@
 class OAgent_ED {
 	public:
         /// Constructors
-		OAgent_ED();
-        OAgent_ED(XBee * xbee, OGraph_ED * G, bool leader = false, bool quiet = true);
-        OAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader = false, bool quiet = true);
+		// OAgent_ED();
+        // OAgent_ED(XBee * xbee, OGraph_ED * G, bool leader = false, bool quiet = true);
+        OAgent_ED(XBee * xbee, ZBRxResponse * rx, MgsModbus *Mb, OGraph_ED * G, bool leader = false, bool quiet = true);
         //OAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader = false, bool quiet = true, int RS = 0);
         
         /// Methods
@@ -110,11 +111,12 @@ class OAgent_ED {
         long maxminConsensus(bool isMax, long max, long min, uint8_t iterations, uint16_t period);
         
         // Primal Dual methods
-        bool EconomicDispatch(bool genBus, float step_size, uint16_t iterations);
-        bool leaderED(bool genBus, float step_size, uint8_t iterations);
-        bool nonleaderED(bool genBus, float step_size, uint8_t iterations);
-        bool StandardED(bool genBus);
-        bool AcceleratedED(bool genBus,float step_size,uint16_t iterations);
+        bool EconomicDispatch(uint8_t node_ip, float step_size, uint16_t iterations);
+        bool leaderED(uint8_t node_ip, float step_size, uint8_t iterations);
+        bool nonleaderED(uint8_t node_ip, float step_size, uint8_t iterations);
+        bool StandardED();
+        bool AcceleratedED(uint8_t node_ip,float step_size,uint16_t iterations);
+        void init_ed(double &lambda,double &nu,double &y,double *sum_lambda,double *sum_nu,double *sum_y,uint8_t num_nodes,uint8_t out_deg,uint8_t deg,double P,double Pd);
         float _clip(float x, float xmin, float xmax);
         double _clip_double(double x, double xmin, double xmax);
         void _SendPacket(double *vars_ed, float *vars_reg, uint16_t time);
@@ -134,8 +136,8 @@ class OAgent_ED {
             delay(5);
         }
 
-        void print_ed_reg_status(uint16_t time_instant, float P, float x, float reg_ratio, uint16_t *count, uint8_t size){
-            Serial<<time_instant<<" ";Serial.print(P,5);Serial<<" ";Serial.print(x,5);Serial<<" ";Serial.print(reg_ratio,5);Serial<<" ";
+        void print_ed_reg_status(uint16_t time_instant, float P, float x, float Pref_reg, float reg_ratio, uint16_t *count, uint8_t size){
+            Serial<<time_instant<<" ";Serial.print(P,5);Serial<<" ";Serial.print(x,5);Serial<<" ";Serial.print(Pref_reg,5);Serial<<" ";Serial.print(reg_ratio,5);Serial<<" ";
             for (int i=0;i<size;i++){
                 Serial.print(*(count+i));Serial<<" ";
             }
@@ -159,11 +161,6 @@ class OAgent_ED {
         //Sid
         inline long getbuffer2() {return _buffer2; }
         uint8_t getStatusData(uint8_t neighborID);
-        //Olaolu
-        //inline void setneighborY0(int index, float y) { _neighborY0[index] = y; }
-        //inline void setneighborZ0(int index, float z) { _neighborZ0[index] = z; }
-        //inline float getneighborY0(int index){ return _neighborY0[index]; }
-        //inline float getneighborZ0(int index){ return _neighborZ0[index]; }
                
 
 	private:
@@ -176,6 +173,9 @@ class OAgent_ED {
         XBeeAddress64 _broadcastAddress;
         uint32_t _aMsb;
         uint32_t _availableAgentLsb[8];
+
+
+        MgsModbus *_Mb;
         
         //Graph
         OGraph_ED * _G;
@@ -200,12 +200,6 @@ class OAgent_ED {
         float _bufferZ[200];
         //Sid
         long _buffer2;
-
-        //Olaolu's addition
-        float _buffer_fP[2000];
-        
-        float _buffer_P[2000];
-        float _buffer_bP[2000];
 
         int node_counter[NUM_REMOTE_VERTICES];          //a counter for each neighbor (defined based on max number) which increments when data is NOT received at a ratio-consensus iteration and resets when data is received
         //Methods
@@ -371,7 +365,7 @@ class OAgent_ED {
         uint8_t _addUint32_tToPayload(uint32_t data, uint8_t payload[], uint8_t ptr);
         
         // Constructor helper function
-        void _prepareOAgent_ED(XBee * xbee, ZBRxResponse * rx, OGraph_ED * G, bool leader = false, bool quiet = true);
+        void _prepareOAgent_ED(XBee * xbee, ZBRxResponse * rx, MgsModbus *Mb, OGraph_ED * G, bool leader = false, bool quiet = true);
 };
 
 #endif // OAgent_ED_h

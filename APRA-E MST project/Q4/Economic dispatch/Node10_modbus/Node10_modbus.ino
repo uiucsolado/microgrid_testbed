@@ -15,11 +15,21 @@ long base = 10000;  // not using floating points so need a base number
 XBee xbee = XBee();                  // create an XBee object
 ZBRxResponse rx = ZBRxResponse();
 
-// address, min, max, alpha, beta, out-degree, base
-OLocalVertex s = OLocalVertex(0x415786D3,2,0,1,0.08,2.5,3,10);
+//Modbus Communication
+MgsModbus Mb;
+int val;
+// Ethernet settings (depending on MAC and Local network)
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBA };
+IPAddress ip(192, 168, 2, 10);
+IPAddress gateway(192, 168, 2, 20);
+IPAddress subnet(255, 255,255, 0);
+uint8_t node_ip = 70;
+
+// address, ID, min, max, alpha, beta, out-degree, base
+OLocalVertex s = OLocalVertex(0x415786D3,2,0,7.5,0.08,2.5,3,10);
 LinkedList l = LinkedList();  //#NODE
 OGraph_ED g = OGraph_ED(&s,&l);
-OAgent_ED a = OAgent_ED(&xbee,&rx,&g,false,true);
+OAgent_ED a = OAgent_ED(&xbee,&rx,&Mb,&g,false,true);
 
 uint8_t sPin = 7;      // synced led
 uint8_t cPin = 48;     // coordination enabled led pin
@@ -31,18 +41,9 @@ boolean de = false;
 float ED;
 float alpha = 0.08;
 float beta = 2.5;
-float DER_max_cap = 1;
+float DER_max_cap = 7.5;
 float DER_min_cap = 0;
 float u = 0;
-
-//Modbus Communication
-MgsModbus Mb;
-int val;
-// Ethernet settings (depending on MAC and Local network)
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0x94, 0xBA };
-IPAddress ip(192, 168, 2, 10);
-IPAddress gateway(192, 168, 2, 20);
-IPAddress subnet(255, 255,255, 0);
 
 uint16_t state_high;
 uint16_t state_low;
@@ -56,7 +57,7 @@ int fc;
 int ref;
 int count=0;
 int pos;
-int16_t load[151]={5200,5215,5259,5246,5275,5325,5288,5253,5256,5314,5365,5360,5371,5342,5317,5342,5340,5339,5318,5285,5305,5354,5346,5373,5423,5407,5432,5415,5465,5484,5444,5432,5475,5493,5515,5498,5546,5525,5556,5592,5599,5632,5649,5650,5671,5642,5654,5672,5703,5735,5711,5684,5706,5727,5710,5685,5706,5682,5647,5641,5621,5589,5580,5553,5571,5546,5589,5558,5564,5600,5649,5682,5715,5737,5732,5789,5823,5849,5829,5851,5877,5849,5859,5841,5829,5878,5909,5877,5891,5939,5960,5941,5990,5997,6006,6024,6083,6089,6124,6128,6167,6142,6136,6130,6096,6128,6104,6107,6067,6117,6099,6082,6043,6051,6054,6097,6115,6106,6084,6098,6124,6156,6205,6225,6245,6260,6290,6345,6338,6375,6362,6342,6355,6401,6407,6453,6501,6467,6513,6496,6534,6546,6600,6608,6590,6632,6669,6649,6667,6672,6707};
+//int16_t load[151]={5200,5215,5259,5246,5275,5325,5288,5253,5256,5314,5365,5360,5371,5342,5317,5342,5340,5339,5318,5285,5305,5354,5346,5373,5423,5407,5432,5415,5465,5484,5444,5432,5475,5493,5515,5498,5546,5525,5556,5592,5599,5632,5649,5650,5671,5642,5654,5672,5703,5735,5711,5684,5706,5727,5710,5685,5706,5682,5647,5641,5621,5589,5580,5553,5571,5546,5589,5558,5564,5600,5649,5682,5715,5737,5732,5789,5823,5849,5829,5851,5877,5849,5859,5841,5829,5878,5909,5877,5891,5939,5960,5941,5990,5997,6006,6024,6083,6089,6124,6128,6167,6142,6136,6130,6096,6128,6104,6107,6067,6117,6099,6082,6043,6051,6054,6097,6115,6106,6084,6098,6124,6156,6205,6225,6245,6260,6290,6345,6338,6375,6362,6342,6355,6401,6407,6453,6501,6467,6513,6496,6534,6546,6600,6608,6590,6632,6669,6649,6667,6672,6707};
 //int16_t load[51]={5200,5215,5259,5246,5275,5325,5288,5253,5256,5314,5365,5360,5371,5342,5317,5342,5340,5339,5318,5285,5305,5354,5346,5373,5423,5407,5432,5415,5465,5484,5444,5432,5475,5493,5515,5498,5546,5525,5556,5592,5599,5632,5649,5650,5671,5642,5654,5672,5703,5735,5711};
 //int16_t load[5]={5200,5215,5259,5246,5275};
 unsigned long myTime = 0;
@@ -175,9 +176,10 @@ void loop() {
           if (o == 'y')
           {
 //            u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-            s.setActiveDemand(load);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+//            s.setActiveDemand(load);
+            s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
             Serial.println("Starting Economic Dispatch");
-            a.EconomicDispatch(true,step_size,num_iters);
+            a.EconomicDispatch(node_ip,step_size,num_iters);
                             
           }
         }
@@ -186,9 +188,10 @@ void loop() {
       {
         if (count==0){
 //          u = float(load[0])/10000.0;Serial.println("load");Serial.println(u,4);
-          s.setActiveDemand(load);s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
+//          s.setActiveDemand(load);
+          s.setDERparams(DER_min_cap,DER_max_cap,alpha,beta);
           Serial.println("Starting Economic Dispatch");
-          a.EconomicDispatch(true,step_size,num_iters);
+          a.EconomicDispatch(node_ip,step_size,num_iters);
 
 //          u = float(load[75])/10000.0;Serial.println("load");Serial.println(u,4);
 //          ED = a.economicDispatchAlgorithm(alpha_p,beta_p,max_p,min_p,u,iterations,period);

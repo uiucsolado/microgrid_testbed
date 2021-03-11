@@ -18,6 +18,7 @@
 // H files from Advanced C Function components
 
 // Header files from additional sources (Advanced C Function)
+
 // ----------------------------------------------------------------------------------------
 // generated using template: VirtualHIL/custom_defines.template----------------------------
 
@@ -347,6 +348,7 @@ float _solar_house_4_measurement_vrms_rms_calc_fast__var_filt;
 
 
 
+
 // generated using template: virtual_hil/custom_functions.template---------------------------------
 void ReInit_sys_sp_cpu0_dev0() {
 #if DEBUG_MODE
@@ -464,9 +466,10 @@ void ReInit_sp_scope_sys_sp_cpu0_dev0() {
     // initialise SP Scope buffer pointer
 }
 
-
-void sys_terminate_fmu_objects_cpu0_dev0(void) {
-    return;
+void load_fmi_libraries_sys_sp_cpu0_dev0(void) {
+#if defined(_WIN64)
+#else
+#endif
 }
 // generated using template:generic_macros.template-----------------------------------------
 /*********************** Macros (Inline Functions) Definitions ***************************/
@@ -509,13 +512,13 @@ void TimerCounterHandler_0_sys_sp_cpu0_dev0() {
     // Generated from the component: ESS.Inverter.Vrms.Vinst.Va1
     _ess_inverter_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0xf));
     // Generated from the component: ESS.Measurement.Vrms.Vinst.Va1
-    _ess_measurement_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x12));
+    _ess_measurement_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x13));
     // Generated from the component: EV Charging Station.Inverter.Vrms.Vinst.Va1
     _ev_charging_station_inverter_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x40e));
     // Generated from the component: EV Charging Station.Measurement.Vrms.Vinst.Va1
-    _ev_charging_station_measurement_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x410));
+    _ev_charging_station_measurement_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x413));
     // Generated from the component: Measurement.Vrms.Vinst.Va1
-    _measurement_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x14));
+    _measurement_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x15));
     // Generated from the component: Solar house 1.Inverter.Vrms.Vinst.Va1
     _solar_house_1_inverter_vrms_vinst_va1__out = (HIL_InFloat(0xc80000 + 0x807));
     // Generated from the component: Solar house 1.Measurement.Vrms.Vinst.Va1
