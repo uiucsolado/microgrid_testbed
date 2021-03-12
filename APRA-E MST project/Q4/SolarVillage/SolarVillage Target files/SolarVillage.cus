@@ -207,8 +207,8 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 <updateRate>250</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>696.0</x>
-                    <y>832.0</y>
+                    <x>1216.0</x>
+                    <y>1000.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -244,8 +244,8 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 <updateRate>250</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>856.0</x>
-                    <y>832.0</y>
+                    <x>1072.0</x>
+                    <y>944.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -332,93 +332,6 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 </advance_widget_settings>
             </component_data>
         <component_data>
-                <id>52025874813b11eba4c8d89ef3221e8e</id>
-                <name><![CDATA[ESS Pref_reg]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing values
-# that will be displayed
-# specify data (one pairs of "names" and "values" parts are mandatory)
-data = {
-    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
-    "analog_names": [],
-    
-    # analog data values: [aVal1,aVal2,aVal3]
-    "analog_values": [],
-    
-    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
-    "digital_names": [],
-    
-    # digital data values: [dVal1,dVal2,aVal3]
-    "digital_values": [],
-    }
-displayValue = data
-]]></code>
-                <analog_signals><![CDATA[['ESS.Pref_reg']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>250</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>664.0</x>
-                    <y>1144.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
                 <id>32481345814111eb817fd89ef3221e8e</id>
                 <name><![CDATA[Solar house 1 Vrms]]></name>
                 <type>DigitalDisplay</type>
@@ -435,15 +348,15 @@ referenceCurves = [refCurveData1]
 displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
 
 ]]></code>
-                <signal_name><![CDATA[SolarHouse1.Measurement.Vrms]]></signal_name>
+                <signal_name><![CDATA[SolarHouse1.Inverter.Vrms]]></signal_name>
                 <unit><![CDATA[V]]></unit>
                 <automatic_unit>True</automatic_unit>
                 <decimals><![CDATA[2]]></decimals>
                 <updateRate>1000</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1304.0</x>
-                    <y>936.0</y>
+                    <x>1040.0</x>
+                    <y>672.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -590,8 +503,8 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 <updateRate>250</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1016.0</x>
-                    <y>832.0</y>
+                    <x>1072.0</x>
+                    <y>1000.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -627,8 +540,8 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 <updateRate>250</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1160.0</x>
-                    <y>832.0</y>
+                    <x>1072.0</x>
+                    <y>1056.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -664,8 +577,8 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 <updateRate>250</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1304.0</x>
-                    <y>832.0</y>
+                    <x>1208.0</x>
+                    <y>944.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -701,8 +614,8 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                 <updateRate>250</updateRate>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>1112.0</x>
-                    <y>936.0</y>
+                    <x>848.0</x>
+                    <y>672.0</y>
                     <width>128</width>
                     <height>48</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -712,93 +625,6 @@ displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
                     <green_range>(0, 0, 0, 0)</green_range>
                     <orange_range>(0, 0, 0, 0)</orange_range>
                     <red_range>(0, 0, 0, 0)</red_range>
-                </advance_widget_settings>
-            </component_data>
-        <component_data>
-                <id>95c053e781b811eba485d89ef3221e8e</id>
-                <name><![CDATA[Solar House 1 Pref_reg]]></name>
-                <type>TraceDisplay</type>
-                <description><![CDATA[]]></description>
-                <data_type>Signals</data_type>
-                <code><![CDATA[# HIL API is imported as 'hil'
-# NOTE: Only read functions are available from the HIL API
-
-# mandatory variable used for storing values
-# that will be displayed
-# specify data (one pairs of "names" and "values" parts are mandatory)
-data = {
-    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
-    "analog_names": [],
-    
-    # analog data values: [aVal1,aVal2,aVal3]
-    "analog_values": [],
-    
-    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
-    "digital_names": [],
-    
-    # digital data values: [dVal1,dVal2,aVal3]
-    "digital_values": [],
-    }
-displayValue = data
-]]></code>
-                <analog_signals><![CDATA[['SolarHouse1.Pref_reg']]]></analog_signals>
-                <digital_signals><![CDATA[[]]]></digital_signals>
-                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
-                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
-                <update_rate>250</update_rate>
-                <execution_rate>None</execution_rate>
-                <background_color>white</background_color>
-                <hierarchy_position>1</hierarchy_position>
-                <widget_settings>
-                    <x>1120.0</x>
-                    <y>1144.0</y>
-                    <width>400</width>
-                    <height>200</height>
-                    <appearance><![CDATA[Flat]]></appearance>
-                </widget_settings>
-                <advance_widget_settings>
-                    <x_title><![CDATA[x axes]]></x_title>
-                    <y_title><![CDATA[y axes]]></y_title>
-                    <y_range_min>-100.0</y_range_min>
-                    <y_range_max>100.0</y_range_max>
-                    <time_window>10</time_window>
-                    <auto_scale_enabled>True</auto_scale_enabled>
-                    <legend_enabled>True</legend_enabled>
-                    <x_axis_title_enabled>False</x_axis_title_enabled>
-                    <y_axis_title_enabled>False</y_axis_title_enabled>
-                    <use_reference_curve>False</use_reference_curve>
-                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
-# Selected time window is available through variable 'timeWindow'
-# Selected update rate is available through variable 'updateRate'
-
-# reference curve data point
-curveData = 12.0
-
-# specify curve options ('data' part is mandatory)
-refCurveData1 = {
-    # reference curve data point
-    "data": curveData,
-
-    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
-    "line_style": "dashed",
-
-    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
-    "line_color": 'red',
-
-    # curve line width: float number
-    "line_width": 2.0,
-    
-    # reference curve title
-    "title": "Reference curve",
-
-    # show a title in the legend
-    "show_in_legend": True
-}
-
-# list of reference curves data: [ref1, ref2,...refN]
-referenceCurves = [refCurveData1]
-
-]]></reference_curve_code>
                 </advance_widget_settings>
             </component_data>
         <component_data>
@@ -815,13 +641,16 @@ referenceCurves = [refCurveData1]
 # specify data (one pairs of "names" and "values" parts are mandatory)
 
 RegD = hil.read_analog_signal(name = 'ESS.Modbus.RegD_probe')
+# Tie_power = hil.read_analog_signal(name = 'Measurement.P')
 Pref_reg = hil.read_analog_signal(name = 'ESS.Pref_reg')
 Pref_reg1 = hil.read_analog_signal(name = 'SolarHouse1.Pref_reg')
 Pref_reg2 = hil.read_analog_signal(name = 'SolarHouse2.Pref_reg')
 Pref_reg3 = hil.read_analog_signal(name = 'SolarHouse3.Pref_reg')
 Pref_reg4 = hil.read_analog_signal(name = 'SolarHouse4.Pref_reg')
-
-displayValue = [ [RegD,Pref_reg+Pref_reg1+Pref_reg2+Pref_reg3+Pref_reg4], ['RegD [W]','Tie Power [W]'] ]
+P = hil.read_analog_signal(name = 'ESS.Inverter.P') + hil.read_analog_signal(name = 'SolarHouse1.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse2.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse3.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse4.Inverter.P')
+Load = hil.read_analog_signal(name = 'SolarHouse1.Modbus.P_probe')+hil.read_analog_signal(name = 'SolarHouse2.Modbus.P_probe')+hil.read_analog_signal(name = 'SolarHouse3.Modbus.P_probe')+hil.read_analog_signal(name = 'SolarHouse4.Modbus.P_probe')
+Tie_power = P-Load
+displayValue = [ [RegD,Tie_power,Pref_reg+Pref_reg1+Pref_reg2+Pref_reg3+Pref_reg4], ['RegD [W]','Tie Power [W]','Total Pref [W]'] ]
 ]]></code>
                 <analog_signals><![CDATA[['ESS.Pref_reg']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
@@ -910,7 +739,7 @@ data = {
     }
 displayValue = data
 ]]></code>
-                <analog_signals><![CDATA[['ESS.Inverter.P']]]></analog_signals>
+                <analog_signals><![CDATA[['ESS.Inverter.P', 'ESS.Inverter.Pref_probe']]]></analog_signals>
                 <digital_signals><![CDATA[[]]]></digital_signals>
                 <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
                 <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
@@ -919,8 +748,8 @@ displayValue = data
                 <background_color>white</background_color>
                 <hierarchy_position>1</hierarchy_position>
                 <widget_settings>
-                    <x>680.0</x>
-                    <y>1360.0</y>
+                    <x>672.0</x>
+                    <y>1136.0</y>
                     <width>400</width>
                     <height>200</height>
                     <appearance><![CDATA[Flat]]></appearance>
@@ -969,6 +798,766 @@ referenceCurves = [refCurveData1]
 
 ]]></reference_curve_code>
                 </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>a85a9c66828b11eb8776d89ef3221e8e</id>
+                <name><![CDATA[ESS Pout]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Signals</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+data = {
+    # analog like signals/data names: ["Analog 1 name","Analog 2 name","Analog N name"]
+    "analog_names": [],
+    
+    # analog data values: [aVal1,aVal2,aVal3]
+    "analog_values": [],
+    
+    # digital like signals/data names: ["Digital 1 name","Digital 2 name","Digital 3 name"]
+    "digital_names": [],
+    
+    # digital data values: [dVal1,dVal2,aVal3]
+    "digital_values": [],
+    }
+displayValue = data
+]]></code>
+                <analog_signals><![CDATA[['SolarHouse3.Inverter.P', 'SolarHouse3.Inverter.Pref_probe']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>250</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1096.0</x>
+                    <y>1152.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>30</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>True</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>b666d776829d11eb8e3dd89ef3221e8e</id>
+                <name><![CDATA[Signal data logger]]></name>
+                <type>SignalDataLogger</type>
+                <description><![CDATA[]]></description>
+                <data_type>Expression</data_type>
+                <expression_code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values that will be logged into the data file
+# specify logging data ("names" and "values" parts are mandatory)
+
+RegD = hil.read_analog_signal(name = 'ESS.Modbus.RegD_probe')
+Pref_reg = hil.read_analog_signal(name = 'ESS.Pref_reg')
+Pref_reg1 = hil.read_analog_signal(name = 'SolarHouse1.Pref_reg')
+Pref_reg2 = hil.read_analog_signal(name = 'SolarHouse2.Pref_reg')
+Pref_reg3 = hil.read_analog_signal(name = 'SolarHouse3.Pref_reg')
+Pref_reg4 = hil.read_analog_signal(name = 'SolarHouse4.Pref_reg')
+
+Pref_ed = hil.read_analog_signal(name = 'ESS.Pref_ed')
+Pref_ed1 = hil.read_analog_signal(name = 'SolarHouse1.Pref_ed')
+Pref_ed2 = hil.read_analog_signal(name = 'SolarHouse2.Pref_ed')
+Pref_ed3 = hil.read_analog_signal(name = 'SolarHouse3.Pref_ed')
+Pref_ed4 = hil.read_analog_signal(name = 'SolarHouse4.Pref_ed')
+
+data = {
+    # signals/data names: ["Signal 1 name","Signal 2 name","Signal 3 name"]
+    "names": ['RegD','Pref_reg','Pref_reg1','Pref_reg2','Pref_reg3','Pref_reg4','Pref_ed','Pref_ed1','Pref_ed2','Pref_ed3','Pref_ed4'],
+
+    # signals/data values: [sigVal1,sigVal2,sigVal3]
+    "values": [RegD,Pref_reg,Pref_reg1,Pref_reg2,Pref_reg3,Pref_reg4,Pref_ed,Pref_ed1,Pref_ed2,Pref_ed3,Pref_ed4],
+    }
+]]></expression_code>
+                <analog_signals><![CDATA[[]]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <update_rate>250</update_rate>
+                <use_slower_update_rate>False</use_slower_update_rate>
+                <slower_update_rate>2</slower_update_rate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1184</x>
+                    <y>600</y>
+                    <width>120</width>
+                    <height>120</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <data_file_settings>
+                    <data_file_dir><![CDATA[None]]></data_file_dir>
+                    <data_file_name><![CDATA[ed_reg_setpoints]]></data_file_name>
+                    <use_panel_file_dir>True</use_panel_file_dir>
+                    <data_file_format><![CDATA[csv]]></data_file_format>
+                    <use_file_name_suffix><![CDATA[True]]></use_file_name_suffix>
+                    <start_logging_on_sim_start><![CDATA[True]]></start_logging_on_sim_start>
+                </data_file_settings>
+            </component_data>
+        <component_data>
+                <id>4351563682b311ebb169d89ef3221e8e</id>
+                <name><![CDATA[Solar house 2 Pref]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse2.Inverter.Pref_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1000.0</x>
+                    <y>792.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>4351563782b311eb8c0cd89ef3221e8e</id>
+                <name><![CDATA[Solar house 3 Pref]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse3.Inverter.Pref_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1152.0</x>
+                    <y>792.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>4351563882b311eb9437d89ef3221e8e</id>
+                <name><![CDATA[Solar house 4 Pref]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse4.Inverter.Pref_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1312.0</x>
+                    <y>792.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>4351563982b311eb84f9d89ef3221e8e</id>
+                <name><![CDATA[ESS Pout]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[ESS.Inverter.P]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>688.0</x>
+                    <y>864.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>4351563a82b311eba44cd89ef3221e8e</id>
+                <name><![CDATA[Solar house 1 Pref]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse1.Inverter.Pref_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>840.0</x>
+                    <y>792.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>9316fb9082b311eb8a06d89ef3221e8e</id>
+                <name><![CDATA[Solar house 1 Pout]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse1.Inverter.P]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>840.0</x>
+                    <y>864.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>9316fb9182b311eb9e9ed89ef3221e8e</id>
+                <name><![CDATA[Solar house 4 Pout]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse4.Inverter.P]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1312.0</x>
+                    <y>864.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>9316fb9282b311eb8fb6d89ef3221e8e</id>
+                <name><![CDATA[Solar house 2 Pout]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse2.Inverter.P]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1000.0</x>
+                    <y>864.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>9316fb9382b311eb91e8d89ef3221e8e</id>
+                <name><![CDATA[Solar house 3 Pout]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[SolarHouse3.Inverter.P]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1152.0</x>
+                    <y>864.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>9316fb9482b311eb9e96d89ef3221e8e</id>
+                <name><![CDATA[ESS Pref]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[ESS.Inverter.Pref_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>688.0</x>
+                    <y>792.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>9c7b7fb882b411ebb5a3d89ef3221e8e</id>
+                <name><![CDATA[Tie_power meas]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Analog signal</data_type>
+                <code><![CDATA[#----------------------- MANDATORY IMPORT --------------------------
+# HIL Control Panel API
+
+# NOTE: Only read functions are available from HIL Control Panel API
+#-------------------------------------------------------------------
+
+# mandatory variable used for storing value
+# that will be displayed
+displayValue = hil.read_analog_signal(name = 'PCC.P')/1000.0
+
+]]></code>
+                <signal_name><![CDATA[Measurement.P]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1360.0</x>
+                    <y>944.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>f3035c5182b511eba062d89ef3221e8e</id>
+                <name><![CDATA[Total Power]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+
+displayValue = hil.read_analog_signal(name = 'ESS.Inverter.P') + hil.read_analog_signal(name = 'SolarHouse1.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse2.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse3.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse4.Inverter.P')
+]]></code>
+                <signal_name><![CDATA[SolarHouse3.Modbus.P_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1072.0</x>
+                    <y>1112.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>709ed06c82b611eb8033d89ef3221e8e</id>
+                <name><![CDATA[Tie power]]></name>
+                <type>DigitalDisplay</type>
+                <description><![CDATA[None]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+
+P = hil.read_analog_signal(name = 'ESS.Inverter.P') + hil.read_analog_signal(name = 'SolarHouse1.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse2.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse3.Inverter.P')+hil.read_analog_signal(name = 'SolarHouse4.Inverter.P')
+Load = hil.read_analog_signal(name = 'SolarHouse1.Modbus.P_probe')+hil.read_analog_signal(name = 'SolarHouse2.Modbus.P_probe')+hil.read_analog_signal(name = 'SolarHouse3.Modbus.P_probe')+hil.read_analog_signal(name = 'SolarHouse4.Modbus.P_probe')
+displayValue = P-Load]]></code>
+                <signal_name><![CDATA[SolarHouse3.Modbus.P_probe]]></signal_name>
+                <unit><![CDATA[]]></unit>
+                <automatic_unit>True</automatic_unit>
+                <decimals><![CDATA[2]]></decimals>
+                <updateRate>250</updateRate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>1216.0</x>
+                    <y>1056.0</y>
+                    <width>128</width>
+                    <height>48</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <color_range>False</color_range>
+                    <green_range>(0, 0, 0, 0)</green_range>
+                    <orange_range>(0, 0, 0, 0)</orange_range>
+                    <red_range>(0, 0, 0, 0)</red_range>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>7587f7a482b711ebbb15d89ef3221e8e</id>
+                <name><![CDATA[RegD]]></name>
+                <type>TraceDisplay</type>
+                <description><![CDATA[]]></description>
+                <data_type>Expression</data_type>
+                <code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values
+# that will be displayed
+# specify data (one pairs of "names" and "values" parts are mandatory)
+
+RegD = hil.read_analog_signal(name = 'ESS.Modbus.RegD_probe')
+Tie_power = hil.read_analog_signal(name = 'Measurement.P')
+Pref_reg = hil.read_analog_signal(name = 'ESS.Pref_reg')
+Pref_reg1 = hil.read_analog_signal(name = 'SolarHouse1.Pref_reg')
+Pref_reg2 = hil.read_analog_signal(name = 'SolarHouse2.Pref_reg')
+Pref_reg3 = hil.read_analog_signal(name = 'SolarHouse3.Pref_reg')
+Pref_reg4 = hil.read_analog_signal(name = 'SolarHouse4.Pref_reg')
+
+displayValue = [ [RegD,Tie_power,Pref_reg+Pref_reg1+Pref_reg2+Pref_reg3+Pref_reg4], ['RegD [W]','Tie Power [W]','Total Pref [W]'] ]
+]]></code>
+                <analog_signals><![CDATA[['ESS.Pref_reg']]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <streaming_analog_signals><![CDATA[[]]]></streaming_analog_signals>
+                <streaming_digital_signals><![CDATA[[]]]></streaming_digital_signals>
+                <update_rate>250</update_rate>
+                <execution_rate>None</execution_rate>
+                <background_color>white</background_color>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>256.0</x>
+                    <y>920.0</y>
+                    <width>400</width>
+                    <height>200</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <advance_widget_settings>
+                    <x_title><![CDATA[x axes]]></x_title>
+                    <y_title><![CDATA[y axes]]></y_title>
+                    <y_range_min>-100.0</y_range_min>
+                    <y_range_max>100.0</y_range_max>
+                    <time_window>30</time_window>
+                    <auto_scale_enabled>True</auto_scale_enabled>
+                    <legend_enabled>False</legend_enabled>
+                    <x_axis_title_enabled>False</x_axis_title_enabled>
+                    <y_axis_title_enabled>False</y_axis_title_enabled>
+                    <use_reference_curve>False</use_reference_curve>
+                    <reference_curve_code><![CDATA[# NOTE: Global namespace variables are available
+# Selected time window is available through variable 'timeWindow'
+# Selected update rate is available through variable 'updateRate'
+
+# reference curve data point
+curveData = 12.0
+
+# specify curve options ('data' part is mandatory)
+refCurveData1 = {
+    # reference curve data point
+    "data": curveData,
+
+    # curve line style: 'solid', 'dashed', 'dashdot', 'dotted'
+    "line_style": "dashed",
+
+    # curve line color: 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow'
+    "line_color": 'red',
+
+    # curve line width: float number
+    "line_width": 2.0,
+    
+    # reference curve title
+    "title": "Reference curve",
+
+    # show a title in the legend
+    "show_in_legend": True
+}
+
+# list of reference curves data: [ref1, ref2,...refN]
+referenceCurves = [refCurveData1]
+
+]]></reference_curve_code>
+                </advance_widget_settings>
+            </component_data>
+        <component_data>
+                <id>248e015c82cf11ebb46bd89ef3221e8e</id>
+                <name><![CDATA[Signal data logger]]></name>
+                <type>SignalDataLogger</type>
+                <description><![CDATA[]]></description>
+                <data_type>Expression</data_type>
+                <expression_code><![CDATA[# HIL API is imported as 'hil'
+# NOTE: Only read functions are available from the HIL API
+
+# mandatory variable used for storing values that will be logged into the data file
+# specify logging data ("names" and "values" parts are mandatory)
+
+
+Tie_power = hil.read_analog_signal(name = 'Measurement.P')
+L1 = hil.read_analog_signal(name = 'SolarHouse1.Modbus.P_probe')
+L2 = hil.read_analog_signal(name = 'SolarHouse2.Modbus.P_probe')
+L3 = hil.read_analog_signal(name = 'SolarHouse3.Modbus.P_probe')
+L4 = hil.read_analog_signal(name = 'SolarHouse4.Modbus.P_probe')
+
+Pess = hil.read_analog_signal(name = 'ESS.Inverter.P')
+P1 = hil.read_analog_signal(name = 'SolarHouse1.Inverter.P')
+P2 = hil.read_analog_signal(name = 'SolarHouse2.Inverter.P')
+P3 = hil.read_analog_signal(name = 'SolarHouse3.Inverter.P')
+P4 = hil.read_analog_signal(name = 'SolarHouse4.Inverter.P')
+
+
+
+data = {
+    # signals/data names: ["Signal 1 name","Signal 2 name","Signal 3 name"]
+    "names": ['Tie_Power','L1','L2','L3','L4','Pess','P1','P2','P3','P4'],
+
+    # signals/data values: [sigVal1,sigVal2,sigVal3]
+    "values": [Tie_power,L1,L2,L3,L4,Pess,P1,P2,P3,P4],
+    }
+]]></expression_code>
+                <analog_signals><![CDATA[[]]]></analog_signals>
+                <digital_signals><![CDATA[[]]]></digital_signals>
+                <update_rate>250</update_rate>
+                <use_slower_update_rate>False</use_slower_update_rate>
+                <slower_update_rate>2</slower_update_rate>
+                <hierarchy_position>1</hierarchy_position>
+                <widget_settings>
+                    <x>488</x>
+                    <y>664</y>
+                    <width>120</width>
+                    <height>120</height>
+                    <appearance><![CDATA[Flat]]></appearance>
+                </widget_settings>
+                <data_file_settings>
+                    <data_file_dir><![CDATA[None]]></data_file_dir>
+                    <data_file_name><![CDATA[measurements]]></data_file_name>
+                    <use_panel_file_dir>True</use_panel_file_dir>
+                    <data_file_format><![CDATA[csv]]></data_file_format>
+                    <use_file_name_suffix><![CDATA[True]]></use_file_name_suffix>
+                    <start_logging_on_sim_start><![CDATA[True]]></start_logging_on_sim_start>
+                </data_file_settings>
             </component_data>
         </components>
 </ui_settings>

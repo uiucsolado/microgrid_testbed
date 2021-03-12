@@ -154,7 +154,7 @@ bool OAgent_ED::AcceleratedED(uint8_t node_ip,float step_size,uint16_t iteration
 
     uint8_t num_nodes = 5; 
     uint16_t time_instant = 0;
-    uint8_t update_ed = 75, offset = 0;
+    uint16_t update_ed = 75, offset = 0;
     
     double Pref_ed, new_P, x = 0.0;
     float Pref_reg = 0, base = 1000.0;
@@ -163,12 +163,19 @@ bool OAgent_ED::AcceleratedED(uint8_t node_ip,float step_size,uint16_t iteration
     else _Mb->Req(MB_FC_READ_INPUT_REGISTER,0,2,0,node_ip);
   	_Mb->MbmRun();
 
-  	Serial<<"Read load "<<_Mb->MbData[0]<<endl;
+  	Serial<<"Read load "<<int16_t(_Mb->MbData[0])<<endl;
     delay(5);
 
-  	double Pd =  double(_Mb->MbData[0]/base);
-  	if(isLeader()) {Pref_ed =  double(_Mb->MbData[2]/base); time_instant = _Mb->MbData[1]; offset = _Mb->MbData[1];}
-  	else Pref_ed =  double(_Mb->MbData[1]/base); 	
+  	double Pd =  double(int16_t(_Mb->MbData[0])/base);
+  	// if(isLeader()) {Pref_ed =  double(_Mb->MbData[2]/base); Pref_reg = Pd; time_instant = _Mb->MbData[1]; offset = _Mb->MbData[1];}
+  	// else Pref_ed =  double(_Mb->MbData[1]/base);
+  	if(isLeader()) {Pref_ed =  0.0; Pref_reg = Pd; time_instant = _Mb->MbData[1]; offset = _Mb->MbData[1];}
+  	else Pref_ed =  Pd; 
+
+  	_Mb->MbData[0] = int16_t(Pref_ed*base);
+	_Mb->MbData[1] = int16_t(Pref_reg*base);
+	_Mb->Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
+	_Mb->MbmRun();	
   	
     float reg_ratio = 0.0;
     double P = Pref_ed;
@@ -210,12 +217,13 @@ bool OAgent_ED::AcceleratedED(uint8_t node_ip,float step_size,uint16_t iteration
 	      	if (time_instant<_Mb->MbData[1]){
 
 	      		print_ed_reg_status(time_instant-offset, float(P), float(x), Pref_reg, reg_ratio, count, deg);
-	      		time_instant = _Mb->MbData[1]; 
-	      		Pd =  double(_Mb->MbData[0]/base); //Pd = double((s->getActiveDemand(time_instant))/base); // this is actually a RegD signal
-	            Serial.println(_Mb->MbData[0]); delay(5);
+	      		for (int i=0;i<deg;i++)count[i]=0;
 
-	            for (int i=0;i<deg;i++)count[i]=0;
-	            if ((time_instant>0) && (time_instant-offset>=update_ed)) {Pref_ed = P;update_ed+=75;init_ed(lambda,nu,y,sum_lambda,sum_nu,sum_y,num_nodes,out_deg,deg,P,Pd);}
+	      		Pd =  double(int16_t(_Mb->MbData[0])/base); //Pd = double((s->getActiveDemand(time_instant))/base); // this is actually a RegD signal
+	            Serial.println(int16_t(_Mb->MbData[0])); delay(5);
+
+	            if ((time_instant>0) && (time_instant-offset>=update_ed)) {Pref_ed = P;update_ed+=75;}//init_ed(lambda,nu,y,sum_lambda,sum_nu,sum_y,num_nodes,out_deg,deg,P,Pd);}
+	        	time_instant = _Mb->MbData[1];
 
 		        _Mb->MbData[0] = int16_t(Pref_ed*base);
 		        _Mb->MbData[1] = int16_t(Pref_reg*base);
@@ -249,26 +257,28 @@ bool OAgent_ED::AcceleratedED(uint8_t node_ip,float step_size,uint16_t iteration
                     if (!isLeader() && (time_instant<tmp_reg[2])) 
                     {
 
-                        _Mb->Req(MB_FC_READ_INPUT_REGISTER,0,1,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)
-					  	_Mb->MbmRun();
-                        Serial.println(_Mb->MbData[0]); delay(5);
-			            
-			            double tmp2 = double(_Mb->MbData[0]/base);
-			            print_ed_reg_status(time_instant, float(P), float(x), Pref_reg, reg_ratio, count, deg);
-			            
+                    	print_ed_reg_status(time_instant, float(P), float(x), Pref_reg, reg_ratio, count, deg);			            
+			            for (int i=0;i<deg;i++)count[i]=0;
+          
+                        if ((time_instant>0) && (time_instant>=update_ed)) {Pref_ed = P;update_ed+=75;}
+
 			            _Mb->MbData[0] = int16_t(Pref_ed*base);
 				        _Mb->MbData[1] = int16_t(Pref_reg*base);
 			            _Mb->Req(MB_FC_WRITE_MULTIPLE_REGISTERS,0,2,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos - arduino, int nodeip)
 						_Mb->MbmRun();                       
                         
-                        for (int i=0;i<deg;i++)count[i]=0;
-                        if ((time_instant>0) && (time_instant>=update_ed)) {Pref_ed = P;update_ed+=75;init_ed(lambda,nu,y,sum_lambda,sum_nu,sum_y,num_nodes,out_deg,deg,P,Pd);}
-
-                        time_instant = uint16_t(tmp_reg[2]); 
                         // double tmp2 = double((s->getActiveDemand(time_instant))/base); // read active power demand measurement
+                        _Mb->Req(MB_FC_READ_INPUT_REGISTER,0,1,0,node_ip); //(MB_FC FC, word Ref - typhoon, word Count, word Pos -arduino, int nodeip)
+					  	_Mb->MbmRun();
+                        Serial.println(_Mb->MbData[0]); delay(5);
+			            
+			            // if ((time_instant>0) && (time_instant>=update_ed)) {update_ed+=75;init_ed(lambda,nu,y,sum_lambda,sum_nu,sum_y,num_nodes,out_deg,deg,P,Pd);}
+                        time_instant = uint16_t(tmp_reg[2]); 
+
+			            double tmp2 = double(_Mb->MbData[0]/base);
                         new_y -= num_nodes*(tmp2 - Pd);
                         if (time_instant>=update_ed) load_change = 0.0;
-                        else load_change = 0.0;//load_change += tmp2-Pd;
+                        else load_change += tmp2-Pd;
                         reg_num_var = (float)load_change-(Pmin-Pref_ed); reg_den_var = Pmax-Pmin;
                         reg_num_var_new = 0.0; reg_den_var_new = 0.0;
                         reg_sum_num[deg] = reg_num_var/out_deg; reg_sum_den[deg] = reg_den_var/out_deg;
@@ -302,6 +312,9 @@ bool OAgent_ED::AcceleratedED(uint8_t node_ip,float step_size,uint16_t iteration
             sum_lambda[deg] += lambda/out_deg;
             sum_nu[deg] += nu/out_deg;
             sum_y[deg] += y/out_deg;
+            if ((sum_lambda[deg]>1e9) || (sum_nu[deg]>1e9) || (sum_y[deg]>1e9)){
+            	Serial.print(sum_lambda[deg]);Serial.print(" ");Serial.print(sum_nu[deg]);Serial.print(" ");Serial.println(sum_y[deg]);
+            }
         }
         for (int i=0;i<deg;i++) {received_from[i]=false;}
         // received_msg2 = false;
